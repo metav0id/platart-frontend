@@ -1,0 +1,18 @@
+<div>
+  <h1>Stock in warehouse component</h1>
+  <p>stock-in-warehouse works!</p>
+
+   <div *ngIf="warehouseData">
+     <ul class="stock-in-warehouse-display" *ngFor="let warehouseObject of warehouseData">
+       <li>
+         <span class="stock-in-warehouse" >{{warehouseObject.category}}</span>
+         <span class="stock-in-warehouse" >{{warehouseObject.pricePerUnit}}</span>
+         <span class="stock-in-warehouse" >{{warehouseObject.quantitiy}}</span>
+       </li>
+     </ul>
+   </div>
+
+
+</div>
+
+
