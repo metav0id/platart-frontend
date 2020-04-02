@@ -1,5 +1,5 @@
 export interface WarehouseGetAllItemsDTO {
   category: string;
-  quantitiy: number;
+  quantity: number;
   pricePerUnit: number;
 }
