@@ -7,34 +7,39 @@
        <li>
          <span class="stock-in-warehouse" >{{warehouseObject.category}}</span>
          <span class="stock-in-warehouse" >{{warehouseObject.pricePerUnit}}</span>
-         <span class="stock-in-warehouse" >{{warehouseObject.quantitiy}}</span>
+         <span class="stock-in-warehouse" >{{warehouseObject.quantity}}</span>
        </li>
      </ul>
    </div>
 
-  <table cdk-table [dataSource]="warehouseData">
-    <!-- User name Definition -->
-    <ng-container cdkColumnDef="username">
-      <th cdk-header-cell *cdkHeaderCellDef> User name </th>
-      <td cdk-cell *cdkCellDef="let row"> {{row.category}} </td>
+  <table mat-table [dataSource]="warehouseData" class="mat-elevation-z8">
+
+    <!--- Note that these columns can be defined in any order.
+          The actual rendered columns are set as a property on the row definition" -->
+
+    <!-- Position Column -->
+    <ng-container matColumnDef="category">
+      <th mat-header-cell *matHeaderCellDef> No. </th>
+      <td mat-cell *matCellDef="let element"> {{element.category}} </td>
     </ng-container>
 
-    <!-- Age Definition -->
-    <ng-container cdkColumnDef="age">
-      <th cdk-header-cell *cdkHeaderCellDef> Age </th>
-      <td cdk-cell *cdkCellDef="let row"> {{row.pricePerUnit}} </td>
+    <!-- Name Column -->
+    <ng-container matColumnDef="pricePerUnit">
+      <th mat-header-cell *matHeaderCellDef> Name </th>
+      <td mat-cell *matCellDef="let element"> {{element.pricePerUnit}} </td>
     </ng-container>
 
-    <!-- Title Definition -->
-    <ng-container cdkColumnDef="title">
-      <th cdk-header-cell *cdkHeaderCellDef> Title </th>
-      <td cdk-cell *cdkCellDef="let row"> {{row.quantitiy}} </td>
+    <!-- Weight Column -->
+    <ng-container matColumnDef="quantity">
+      <th mat-header-cell *matHeaderCellDef> Weight </th>
+      <td mat-cell *matCellDef="let element"> {{element.quantity}} </td>
     </ng-container>
 
-    <!-- Header and Row Declarations -->
-    <tr cdk-header-row *cdkHeaderRowDef="['category', 'pricePerUnit', 'quantitiy']"></tr>
-    <tr cdk-row *cdkRowDef="let row; columns: ['category', 'pricePerUnit', 'quantitiy']"></tr>
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
   </table>
+
+
 
 </div>
 

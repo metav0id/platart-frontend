@@ -10,6 +10,7 @@ import {Observable} from 'rxjs';
   styleUrls: ['./stock-in-warehouse.component.css']
 })
 export class StockInWarehouseComponent implements OnInit {
+  displayedColumns: string[] = ['category', 'pricePerUnit', 'quantity'];
   public warehouseData: WarehouseGetAllItemsDTO[] = [];
 
   constructor(private http: HttpClient, private stockInWarehouseService: StockInWarehouseService ) {
@@ -27,5 +28,7 @@ export class StockInWarehouseComponent implements OnInit {
         console.log(this.warehouseData);
       });
   }
+
+
 
 }
