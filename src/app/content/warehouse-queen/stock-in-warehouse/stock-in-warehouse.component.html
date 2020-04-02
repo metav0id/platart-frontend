@@ -12,6 +12,29 @@
      </ul>
    </div>
 
+  <table cdk-table [dataSource]="warehouseData">
+    <!-- User name Definition -->
+    <ng-container cdkColumnDef="username">
+      <th cdk-header-cell *cdkHeaderCellDef> User name </th>
+      <td cdk-cell *cdkCellDef="let row"> {{row.category}} </td>
+    </ng-container>
+
+    <!-- Age Definition -->
+    <ng-container cdkColumnDef="age">
+      <th cdk-header-cell *cdkHeaderCellDef> Age </th>
+      <td cdk-cell *cdkCellDef="let row"> {{row.pricePerUnit}} </td>
+    </ng-container>
+
+    <!-- Title Definition -->
+    <ng-container cdkColumnDef="title">
+      <th cdk-header-cell *cdkHeaderCellDef> Title </th>
+      <td cdk-cell *cdkCellDef="let row"> {{row.quantitiy}} </td>
+    </ng-container>
+
+    <!-- Header and Row Declarations -->
+    <tr cdk-header-row *cdkHeaderRowDef="['category', 'pricePerUnit', 'quantitiy']"></tr>
+    <tr cdk-row *cdkRowDef="let row; columns: ['category', 'pricePerUnit', 'quantitiy']"></tr>
+  </table>
 
 </div>
 
