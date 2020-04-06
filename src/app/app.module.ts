@@ -8,19 +8,23 @@ import {HttpClientModule} from '@angular/common/http';
 import {CdkTableModule} from '@angular/cdk/table';
 import {MatTableModule} from '@angular/material/table';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { NewDeliveryOrderComponent } from './content/warehouse-queen/new-delivery-order/new-delivery-order.component';
+import {FormsModule} from '@angular/forms';
 
 @NgModule({
   declarations: [
     AppComponent,
     WarehouseQueenComponent,
-    StockInWarehouseComponent
+    StockInWarehouseComponent,
+    NewDeliveryOrderComponent
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
     CdkTableModule,
     MatTableModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

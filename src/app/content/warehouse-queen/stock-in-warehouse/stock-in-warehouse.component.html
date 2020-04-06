@@ -1,16 +1,5 @@
 <div>
   <h1>Stock in warehouse component</h1>
-  <p>stock-in-warehouse works!</p>
-
-   <div *ngIf="warehouseData">
-     <ul class="stock-in-warehouse-display" *ngFor="let warehouseObject of warehouseData">
-       <li>
-         <span class="stock-in-warehouse" >{{warehouseObject.category}}</span>
-         <span class="stock-in-warehouse" >{{warehouseObject.pricePerUnit}}</span>
-         <span class="stock-in-warehouse" >{{warehouseObject.quantity}}</span>
-       </li>
-     </ul>
-   </div>
 
   <table mat-table [dataSource]="warehouseData" class="mat-elevation-z8">
 
@@ -19,24 +8,24 @@
 
     <!-- Position Column -->
     <ng-container matColumnDef="category">
-      <th mat-header-cell *matHeaderCellDef> No. </th>
+      <th mat-header-cell *matHeaderCellDef> Category </th>
       <td mat-cell *matCellDef="let element"> {{element.category}} </td>
     </ng-container>
 
     <!-- Name Column -->
     <ng-container matColumnDef="pricePerUnit">
-      <th mat-header-cell *matHeaderCellDef> Name </th>
+      <th mat-header-cell *matHeaderCellDef> Price per Unit </th>
       <td mat-cell *matCellDef="let element"> {{element.pricePerUnit}} </td>
     </ng-container>
 
     <!-- Weight Column -->
     <ng-container matColumnDef="quantity">
-      <th mat-header-cell *matHeaderCellDef> Weight </th>
+      <th mat-header-cell *matHeaderCellDef> Quantity </th>
       <td mat-cell *matCellDef="let element"> {{element.quantity}} </td>
     </ng-container>
 
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    <tr mat-row *matRowDef="let element; columns: displayedColumns;"></tr>
   </table>
 
 
