@@ -1,22 +1,29 @@
-import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import {BrowserModule} from '@angular/platform-browser';
+import {NgModule} from '@angular/core';
 
-import { AppComponent } from './app.component';
-import { WarehouseQueenComponent } from './content/warehouse-queen/warehouse-queen.component';
-import { StockInWarehouseComponent } from './content/warehouse-queen/stock-in-warehouse/stock-in-warehouse.component';
+import {AppComponent} from './app.component';
 import {HttpClientModule} from '@angular/common/http';
+import {AppRoutingModule} from './app-routing.module';
+import {SalesPrincessComponent} from './content/sales-princess/sales-princess.component';
+import {ManagerKingComponent} from './content/manager-king/manager-king.component';
+import {PageNotFoundComponent} from './content/page-not-found/page-not-found.component';
+import {WarehouseQueenModule} from './content/warehouse-queen/warehouse-queen.module';
 
 @NgModule({
   declarations: [
     AppComponent,
-    WarehouseQueenComponent,
-    StockInWarehouseComponent
+    SalesPrincessComponent,
+    ManagerKingComponent,
+    PageNotFoundComponent
   ],
   imports: [
     BrowserModule,
-    HttpClientModule
+    HttpClientModule,
+    WarehouseQueenModule,
+    AppRoutingModule
   ],
   providers: [],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+}

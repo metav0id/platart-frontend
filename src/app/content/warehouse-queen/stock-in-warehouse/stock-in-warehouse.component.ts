@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {WarehouseGetAllItemsDTO} from './WarehouseGetAllItemsDTO';
 import {HttpClient} from '@angular/common/http';
 import {StockInWarehouseService} from './stock-in-warehouse.service';
 import {Observable} from 'rxjs';
+import {Location} from '@angular/common';
 
 @Component({
   selector: 'app-stock-in-warehouse',
@@ -12,7 +13,8 @@ import {Observable} from 'rxjs';
 export class StockInWarehouseComponent implements OnInit {
   public warehouseData: WarehouseGetAllItemsDTO[] = [];
 
-  constructor(private http: HttpClient, private stockInWarehouseService: StockInWarehouseService ) {
+  constructor(private http: HttpClient, private stockInWarehouseService: StockInWarehouseService,
+              private location: Location) {
   }
 
   ngOnInit(): void {
@@ -26,6 +28,10 @@ export class StockInWarehouseComponent implements OnInit {
         console.log('Test');
         console.log(this.warehouseData);
       });
+  }
+
+  goBack(): void{
+    this.location.back();
   }
 
 }
