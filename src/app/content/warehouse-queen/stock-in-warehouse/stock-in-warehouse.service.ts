@@ -7,11 +7,11 @@ import {HttpClient} from '@angular/common/http';
   providedIn: 'root'
 })
 export class StockInWarehouseService {
-
+  private readonly getAllWarehouseItemsURL = 'http://localhost:8081/warehouse/getallitems';
   constructor(private http: HttpClient) { }
 
   getAllItems(): Observable<WarehouseGetAllItemsDTO[]> {
-    return this.http.post<WarehouseGetAllItemsDTO[]>('http://localhost:8081/warehouse/getallitems', null);
+    return this.http.post<WarehouseGetAllItemsDTO[]>(this.getAllWarehouseItemsURL, null);
   }
 
 }

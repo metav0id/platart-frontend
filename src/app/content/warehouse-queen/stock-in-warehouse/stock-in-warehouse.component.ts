@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import {WarehouseGetAllItemsDTO} from './WarehouseGetAllItemsDTO';
 import {HttpClient} from '@angular/common/http';
 import {StockInWarehouseService} from './stock-in-warehouse.service';
-import {Observable} from 'rxjs';
 
 @Component({
   selector: 'app-stock-in-warehouse',
@@ -26,7 +25,6 @@ export class StockInWarehouseComponent implements OnInit {
     this.stockInWarehouseService.getAllItems()
       .subscribe(JsonDto => {
         this.warehouseData = JsonDto;
-        console.log('Test');
         console.log(this.warehouseData);
       });
   }

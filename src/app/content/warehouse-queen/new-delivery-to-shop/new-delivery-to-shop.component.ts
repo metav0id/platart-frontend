@@ -2,10 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import {WarehouseGetAllItemsDTO} from '../stock-in-warehouse/WarehouseGetAllItemsDTO';
 @Component({
   selector: 'app-new-delivery-order',
-  templateUrl: './new-delivery-order.component.html',
-  styleUrls: ['./new-delivery-order.component.css']
+  templateUrl: './new-delivery-to-shop.component.html',
+  styleUrls: ['./new-delivery-to-shop.component.css']
 })
-export class NewDeliveryOrderComponent implements OnInit {
+export class NewDeliveryToShopComponent implements OnInit {
 
   displayedColumns: string[] = ['category', 'pricePerUnit', 'quantity', 'price'];
   public newOrderData: WarehouseGetAllItemsDTO[] = [];

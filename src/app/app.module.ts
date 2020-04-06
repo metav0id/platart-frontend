@@ -10,8 +10,8 @@ import {PageNotFoundComponent} from './content/page-not-found/page-not-found.com
 import {WarehouseQueenModule} from './content/warehouse-queen/warehouse-queen.module';
 import {CdkTableModule} from '@angular/cdk/table';
 import {MatTableModule} from '@angular/material/table';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { NewDeliveryOrderComponent } from './content/warehouse-queen/new-delivery-order/new-delivery-order.component';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {NewDeliveryToShopComponent} from './content/warehouse-queen/new-delivery-to-shop/new-delivery-to-shop.component';
 import {FormsModule} from '@angular/forms';
 
 @NgModule({
@@ -20,18 +20,12 @@ import {FormsModule} from '@angular/forms';
     SalesPrincessComponent,
     ManagerKingComponent,
     PageNotFoundComponent
-    WarehouseQueenComponent
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
     WarehouseQueenModule,
     AppRoutingModule
-    HttpClientModule,
-    CdkTableModule,
-    MatTableModule,
-    BrowserAnimationsModule,
-    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
