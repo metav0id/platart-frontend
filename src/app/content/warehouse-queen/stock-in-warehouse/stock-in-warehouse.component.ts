@@ -10,7 +10,10 @@ import {Observable} from 'rxjs';
   styleUrls: ['./stock-in-warehouse.component.css']
 })
 export class StockInWarehouseComponent implements OnInit {
+  displayedColumns: string[] = ['category', 'pricePerUnit', 'quantity', 'value'];
   public warehouseData: WarehouseGetAllItemsDTO[] = [];
+  private totalCost: number;
+  private totalQuantity: number;
 
   constructor(private http: HttpClient, private stockInWarehouseService: StockInWarehouseService ) {
   }
@@ -26,6 +29,22 @@ export class StockInWarehouseComponent implements OnInit {
         console.log('Test');
         console.log(this.warehouseData);
       });
+  }
+
+  getTotalCost(): number {
+    this.totalCost = 0;
+    for (const elem of this.warehouseData) {
+      this.totalCost += elem.quantity * elem.pricePerUnit;
+    }
+    return this.totalCost;
+  }
+
+  getSumQuantity(): number {
+    this.totalQuantity = 0;
+    for (const elem of this.warehouseData) {
+      this.totalQuantity += elem.quantity;
+    }
+    return this.totalQuantity;
   }
 
 }
