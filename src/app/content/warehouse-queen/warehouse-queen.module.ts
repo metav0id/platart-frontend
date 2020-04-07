@@ -9,6 +9,7 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {FormsModule} from '@angular/forms';
 import {NewDeliveryToShopComponent} from './new-delivery-to-shop/new-delivery-to-shop.component';
 import { NewDeliveryToWarehouseComponent } from './new-delivery-to-warehouse/new-delivery-to-warehouse.component';
+import {MatCheckboxModule} from '@angular/material/checkbox';
 
 
 @NgModule({
@@ -23,7 +24,8 @@ import { NewDeliveryToWarehouseComponent } from './new-delivery-to-warehouse/new
     CdkTableModule,
     MatTableModule,
     BrowserAnimationsModule,
-    FormsModule
+    FormsModule,
+    MatCheckboxModule
   ]
 })
 export class WarehouseQueenModule { }
