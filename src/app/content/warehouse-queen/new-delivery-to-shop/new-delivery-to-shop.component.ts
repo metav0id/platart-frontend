@@ -23,7 +23,7 @@ export class NewDeliveryToShopComponent implements OnInit {
   displayedColumns: string[] = ['select', 'category', 'deliveryDisplayPricePerUnit', 'deliveryQuantity', 'deliveryDiscount', 'deliveryFinalPricePerUnit'];
   public listNewItemsToShops: PeriodicElement[] = [];
   private totalCost: number;
-  private totalItems: number
+  private totalItems: number;
 
   newOrderElement: PeriodicElement = {
     position: 0,
@@ -58,11 +58,11 @@ export class NewDeliveryToShopComponent implements OnInit {
             deliveryFinalPricePerUnit: tempNewOrderItemDTO.deliveryFinalPricePerUnit,
             deliveryQuantity: tempNewOrderItemDTO.deliveryQuantity
           };
-
           counter++;
           this.listNewItemsToShops.push(newPeriodicElement);
         }
       });
+    this.table.renderRows();
   }
 
   setNewItemOrder() {
@@ -101,11 +101,38 @@ export class NewDeliveryToShopComponent implements OnInit {
   }
 
   saveCurrentOrder() {
-    console.log('Save current order----> implement new functionality!;')
-    //this.newDeliveryToShopService.setAllNewOrderItems(this.listNewItemsToShops);
+    console.log('Save current order----> implement new functionality!;');
+    let tempNewOrderItemDTOList: NewOrderItemDTO[] = [];
+    for(const tempPeriodicElement of this.listNewItemsToShops) {
+      let newOrderItemDTO: NewOrderItemDTO = {
+        id: tempPeriodicElement.position,
+        category: tempPeriodicElement.category,
+        deliveryDiscount: tempPeriodicElement.deliveryDiscount,
+        deliveryDisplayPricePerUnit: tempPeriodicElement.deliveryDisplayPricePerUnit,
+        deliveryFinalPricePerUnit: tempPeriodicElement.deliveryFinalPricePerUnit,
+        deliveryQuantity: tempPeriodicElement.deliveryQuantity
+      };
+      tempNewOrderItemDTOList.push(newOrderItemDTO);
+    }
+    this.newDeliveryToShopService.setAllNewOrderItems(tempNewOrderItemDTOList);
+    this.table.renderRows();
   }
 
   clearCurrentOrder() {
+    console.log(this.listNewItemsToShops);
+    console.log(this.selection.selected);
+
+    for(let elem of this.selection.selected){
+      console.log(elem.position);
+      let currentIndex: number = elem.position;
+      for (let i = 0; i < this.listNewItemsToShops.length; i++) {
+        console.log(this.listNewItemsToShops[i].position);
+        if (this.listNewItemsToShops[i].position === currentIndex){
+          this.listNewItemsToShops.splice(i, 1);
+        }
+      }
+    }
+    this.table.renderRows();
   }
 
   /** Whether the number of selected elements matches the total number of rows. */
