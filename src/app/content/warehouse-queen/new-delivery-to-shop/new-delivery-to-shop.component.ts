@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import {WarehouseGetAllItemsDTO} from '../stock-in-warehouse/WarehouseGetAllItemsDTO';
+import {NewOrderItemDTO} from "./NewOrderItemDTO";
+import {HttpClient} from "@angular/common/http";
+import {NewDeliveryToShopService} from "./new-delivery-to-shop.service";
+
 @Component({
   selector: 'app-new-delivery-order',
   templateUrl: './new-delivery-to-shop.component.html',
@@ -7,58 +10,41 @@ import {WarehouseGetAllItemsDTO} from '../stock-in-warehouse/WarehouseGetAllItem
 })
 export class NewDeliveryToShopComponent implements OnInit {
 
-  displayedColumns: string[] = ['category', 'pricePerUnit', 'quantity', 'price'];
-  public newOrderData: WarehouseGetAllItemsDTO[] = [];
+  displayedColumns: string[] = ['category', 'deliveryQuantity', 'deliveryPricePerUnit','deliveryDiscount','deliveryFinalPricePerUnit'];
+  public newOrderData: NewOrderItemDTO[] = [];
   totalCost: 0;
 
-  newOrderElement: WarehouseGetAllItemsDTO = {
-    category: '',
-    pricePerUnit: 0,
-    quantity: 0
+  newOrderElement: NewOrderItemDTO = {
+    id: 0,
+    category: 'itemCategory',
+    deliveryQuantity: 10,
+    deliveryFinalPricePerUnit: 8,
+    deliveryDiscount: 20,
+    deliveryPricePerUnit: 10
   };
 
-  constructor() {
-    this.newOrderData.push(
-      {
-          category: 'zapato',
-          quantity: 15,
-          pricePerUnit: 25
-      }
-    );
-    this.newOrderData.push(
-      {
-        category: 'cadena',
-        quantity: 10,
-        pricePerUnit: 17
-      }
-    );
-    this.newOrderData.push(
-      {
-        category: 'cadena2',
-        quantity: 11,
-        pricePerUnit: 2
-      }
-    );
+  constructor(private http: HttpClient, private newDeliveryToShopService: NewDeliveryToShopService) {
   }
 
   ngOnInit(): void {
+    this.initData();
   }
 
+  initData(): void{
+    this.newDeliveryToShopService.getAllNewOrderItems()
+      .subscribe(JsonDto => this.newOrderData = JsonDto);
+  }
 
   setNewOrder() {
-    if (this.newOrderElement.pricePerUnit > 0 &&
+    if (
         this.newOrderElement.category !== '' &&
-        this.newOrderElement.quantity > 0) {
+        this.newOrderElement.deliveryQuantity > 0 &&
+        this.newOrderElement.deliveryPricePerUnit > 0 &&
+        this.newOrderElement.deliveryDiscount < 100 &&
+        this.newOrderElement.deliveryFinalPricePerUnit >0) {
       this.newOrderData.push(this.newOrderElement);
       console.log(this.newOrderData);
     }
   }
 
-  getTotalCost(): number {
-    this.totalCost = 0;
-    for (const orderElem of this.newOrderData) {
-      this.totalCost += orderElem.quantity * orderElem.pricePerUnit;
-    }
-    return this.totalCost;
-  }
 }
