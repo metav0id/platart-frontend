@@ -4,4 +4,3 @@ export interface WarehouseGetAllItemsDTO {
   pricePerUnit: number;
 }
 
-//TODO i would write an interface instead of a class. Interfaces are more appropriate for DTOs ;-)
