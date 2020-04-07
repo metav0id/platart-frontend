@@ -7,7 +7,7 @@ import {WarehouseGetAllItemsDTO} from '../stock-in-warehouse/WarehouseGetAllItem
 })
 export class NewDeliveryToShopComponent implements OnInit {
 
-  displayedColumns: string[] = ['category', 'pricePerUnit', 'quantity', 'price'];
+  displayedColumns: string[] = ['category', 'pricePerUnit', 'quantity', 'price', ];
   public newOrderData: WarehouseGetAllItemsDTO[] = [];
   totalCost: 0;
 

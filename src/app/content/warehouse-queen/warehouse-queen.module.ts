@@ -8,12 +8,14 @@ import {MatTableModule} from '@angular/material/table';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {FormsModule} from '@angular/forms';
 import {NewDeliveryToShopComponent} from './new-delivery-to-shop/new-delivery-to-shop.component';
+import { NewDeliveryToWarehouseComponent } from './new-delivery-to-warehouse/new-delivery-to-warehouse.component';
 
 
 @NgModule({
   declarations: [
     StockInWarehouseComponent,
-    NewDeliveryToShopComponent
+    NewDeliveryToShopComponent,
+    NewDeliveryToWarehouseComponent
   ],
   imports: [
     CommonModule,

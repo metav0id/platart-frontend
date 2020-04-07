@@ -8,11 +8,6 @@ import {SalesPrincessComponent} from './content/sales-princess/sales-princess.co
 import {ManagerKingComponent} from './content/manager-king/manager-king.component';
 import {PageNotFoundComponent} from './content/page-not-found/page-not-found.component';
 import {WarehouseQueenModule} from './content/warehouse-queen/warehouse-queen.module';
-import {CdkTableModule} from '@angular/cdk/table';
-import {MatTableModule} from '@angular/material/table';
-import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {NewDeliveryToShopComponent} from './content/warehouse-queen/new-delivery-to-shop/new-delivery-to-shop.component';
-import {FormsModule} from '@angular/forms';
 
 @NgModule({
   declarations: [
