@@ -2,8 +2,12 @@ import {Component, OnInit, ViewChild} from '@angular/core';
 import {MatTable} from '@angular/material/table';
 import {SelectionModel} from '@angular/cdk/collections';
 import {FormControl, Validators} from '@angular/forms';
+import {PeriodicElement} from './periodic-element';
+import {NewDeliveryToWarehouseService} from './new-delivery-to-warehouse.service';
 
 /** Is used for table elements */
+
+/*
 export interface PeriodicElement {
   position: number;
   category: string;
@@ -12,6 +16,7 @@ export interface PeriodicElement {
   price: number;
   supplierName: string;
 }
+*/
 
 /** Is used for Category Drop Down */
 export interface Category {
@@ -36,6 +41,7 @@ export class NewDeliveryToWarehouseComponent implements OnInit {
     supplierName: ''
   };
 
+  /**  */
   public selection = new SelectionModel<PeriodicElement>(true, []);
 
   /** Is used to increase position attribute of list elements constantly */
@@ -52,7 +58,7 @@ export class NewDeliveryToWarehouseComponent implements OnInit {
 
   @ViewChild('myCheckinProductsTable') table: MatTable<any>;
 
-  constructor() {
+  constructor(private newDeliveryToWarehouseService: NewDeliveryToWarehouseService) {
   }
 
   ngOnInit(): void {
@@ -120,4 +126,9 @@ export class NewDeliveryToWarehouseComponent implements OnInit {
     return `${this.selection.isSelected(row) ? 'deselect' : 'select'} row ${row.position + 1}`;
   }
 
+  saveList(): void {
+    this.newDeliveryToWarehouseService.saveList(this.listNewItemsFromSuppliers);
+    this.listNewItemsFromSuppliers = [];
+    this.table.renderRows();
+  }
 }
