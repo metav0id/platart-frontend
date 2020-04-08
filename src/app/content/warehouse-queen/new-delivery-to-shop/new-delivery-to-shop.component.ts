@@ -115,7 +115,6 @@ export class NewDeliveryToShopComponent implements OnInit {
   }
 
   saveCurrentOrder() {
-    console.log('Save current order----> implement new functionality!;');
     let tempNewOrderItemDTOList: NewOrderItemDTO[] = [];
     for(const tempPeriodicElement of this.listNewItemsToShops) {
       let newOrderItemDTO: NewOrderItemDTO = {
