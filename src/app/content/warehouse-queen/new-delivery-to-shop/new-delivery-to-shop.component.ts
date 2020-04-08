@@ -26,7 +26,7 @@ export interface Category {
   styleUrls: ['./new-delivery-to-shop.component.css']
 })
 export class NewDeliveryToShopComponent implements OnInit {
-  displayedColumns: string[] = ['select', 'category', 'deliveryDisplayPricePerUnit', 'deliveryQuantity', 'deliveryDiscount', 'deliveryFinalPricePerUnit'];
+  displayedColumns: string[] = ['select', 'category', 'deliveryDisplayPricePerUnit', 'deliveryQuantity', 'deliveryDiscount', 'deliveryFinalPricePerUnit', 'updateItem'];
   public listNewItemsToShops: PeriodicElement[] = [];
   private totalCost: number;
   private totalItems: number;
@@ -133,20 +133,21 @@ export class NewDeliveryToShopComponent implements OnInit {
   }
 
   clearCurrentOrder() {
-    console.log(this.listNewItemsToShops);
-    console.log(this.selection.selected);
-
     for(let elem of this.selection.selected){
-      console.log(elem.position);
+
       let currentIndex: number = elem.position;
-      for (let i = 0; i < this.listNewItemsToShops.length; i++) {
-        console.log(this.listNewItemsToShops[i].position);
-        if (this.listNewItemsToShops[i].position === currentIndex){
-          this.listNewItemsToShops.splice(i, 1);
-        }
+      this.removeCurrentItem(currentIndex);
+    }
+    console.log(this.listNewItemsToShops);
+    this.table.renderRows();
+  }
+
+  removeCurrentItem(currentIndex: number){
+    for (let i = 0; i < this.listNewItemsToShops.length; i++) {
+      if (this.listNewItemsToShops[i].position === currentIndex){
+        this.listNewItemsToShops.splice(i, 1);
       }
     }
-    this.table.renderRows();
   }
 
   /** Whether the number of selected elements matches the total number of rows. */
@@ -172,5 +173,20 @@ export class NewDeliveryToShopComponent implements OnInit {
       return `${this.isAllSelected() ? 'select' : 'deselect'} all`;
     }
     return `${this.selection.isSelected(row) ? 'deselect' : 'select'} row ${row.position + 1}`;
+  }
+
+  updateButton(periodicElement: PeriodicElement) {
+    console.log('print button');
+    console.log(periodicElement);
+    this.newOrderElement.position = periodicElement.position;
+    this.newOrderElement.category = periodicElement.category;
+    this.newOrderElement.deliveryQuantity = periodicElement.deliveryQuantity;
+    this.newOrderElement.deliveryDisplayPricePerUnit = periodicElement.deliveryDisplayPricePerUnit;
+    this.newOrderElement.deliveryDiscount = periodicElement.deliveryDiscount;
+    this.newOrderElement.deliveryFinalPricePerUnit = periodicElement.deliveryFinalPricePerUnit;
+
+    //function to remove the current element
+    this.removeCurrentItem(periodicElement.position);
+    this.table.renderRows();
   }
 }

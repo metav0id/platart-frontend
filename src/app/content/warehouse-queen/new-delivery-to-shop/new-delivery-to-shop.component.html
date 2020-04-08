@@ -85,30 +85,39 @@
 
     <!-- Name Column -->
     <ng-container matColumnDef="deliveryQuantity">
-      <th mat-header-cell *matHeaderCellDef> deliveryQuantity </th>
+      <th mat-header-cell *matHeaderCellDef> *deliveryQuantity* </th>
       <td mat-cell *matCellDef="let element"> {{element.deliveryQuantity}}# </td>
       <td mat-footer-cell *matFooterCellDef> {{getTotalItems()}}# </td>
     </ng-container>
 
     <!-- deliveryPricePerUnit Column -->
     <ng-container matColumnDef="deliveryDisplayPricePerUnit">
-      <th mat-header-cell *matHeaderCellDef> deliveryPricePerUnit </th>
+      <th mat-header-cell *matHeaderCellDef> *deliveryPricePerUnit* </th>
       <td mat-cell *matCellDef="let element"> {{element.deliveryDisplayPricePerUnit}}$ </td>
       <td mat-footer-cell *matFooterCellDef> Total items: </td>
     </ng-container>
 
     <!-- deliveryDiscount Column -->
     <ng-container matColumnDef="deliveryDiscount">
-      <th mat-header-cell *matHeaderCellDef> Price per Unit </th>
+      <th mat-header-cell *matHeaderCellDef> *Price per Unit* </th>
       <td mat-cell *matCellDef="let element"> {{element.deliveryDiscount}}%</td>
       <td mat-footer-cell *matFooterCellDef> Total value: </td>
     </ng-container>
 
     <!-- deliveryFinalPricePerUnit Column -->
     <ng-container matColumnDef="deliveryFinalPricePerUnit">
-      <th mat-header-cell *matHeaderCellDef> deliveryFinalPricePerUnit </th>
+      <th mat-header-cell *matHeaderCellDef> *deliveryFinalPricePerUnit* </th>
       <td mat-cell *matCellDef="let element"> {{element.deliveryFinalPricePerUnit}}$</td>
       <td mat-footer-cell *matFooterCellDef> {{getTotalValue()}}$ </td>
+    </ng-container>
+
+    <!-- updateItem Column -->
+    <ng-container matColumnDef="updateItem">
+      <th mat-header-cell *matHeaderCellDef> *updateItem* </th>
+      <td mat-cell *matCellDef="let element">
+        <button (click)="updateButton(element)">correct items</button>
+      </td>
+      <td mat-footer-cell *matFooterCellDef> - </td>
     </ng-container>
 
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
