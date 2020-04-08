@@ -3,6 +3,7 @@ import {NewOrderItemDTO} from "./NewOrderItemDTO";
 import {NewDeliveryToShopService} from "./new-delivery-to-shop.service";
 import {MatTable} from "@angular/material/table";
 import {SelectionModel} from "@angular/cdk/collections";
+import {FormControl, Validators} from "@angular/forms";
 
 /** Is used for table elements */
 export interface PeriodicElement {
@@ -12,6 +13,11 @@ export interface PeriodicElement {
   deliveryQuantity: number;
   deliveryDiscount: number;
   deliveryFinalPricePerUnit: number;
+}
+
+/** Is used for Category Drop Down */
+export interface Category {
+  name: string;
 }
 
 @Component({
@@ -35,6 +41,14 @@ export class NewDeliveryToShopComponent implements OnInit {
   };
 
   selection = new SelectionModel<PeriodicElement>(true, []);
+  /** Category selection */
+  public categoryControl = new FormControl('', Validators.required);
+  public categoryItems: Category[] = [
+    {name: 'pulsera'},
+    {name: 'cadena'},
+    {name: 'anillo'},
+    {name: 'arete'}
+  ];
 
   @ViewChild('myShopCheckinProductsTable') table: MatTable<any>;
   constructor(private newDeliveryToShopService: NewDeliveryToShopService) {
