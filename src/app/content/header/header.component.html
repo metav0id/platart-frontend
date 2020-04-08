@@ -1,5 +1,5 @@
 <nav class="navbar navbar-expand-lg navbar-dark navbar-custom">
-  <a class="navbar-brand" href="#"> HALLO </a>
+  <a class="navbar-brand " href="#"> HALLO </a>
   <!-- creates gurber menu for mobile version with all elements in the menu -->
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
@@ -9,31 +9,35 @@
 
       <!-- ....... -->
       <li class="nav-item" routerLinkActive="active">
-        <a class="nav-link" routerLink="">
-          <button mat-button [matMenuTriggerFor]="aboveMenu">User</button>
+        <a class="nav-link " >
+          <button mat-button [matMenuTriggerFor]="aboveMenu">Warehouse</button>
         </a>
         <mat-menu #aboveMenu="matMenu" yPosition="below">
-          <a class="nav-link" routerLink="manager">
-            Warehouse Queen
+          <a class="nav-link a" routerLink="stockinwarehouse">
+            Stock in warehouse
 <!--          <button mat-menu-item>Warehouse Queen</button>-->
           </a>
-          <a class="nav-link" routerLink="sales">
-            Sales
+          <a class="nav-link a" routerLink="newdeliverytoshop">
+            New delivery to shop
 <!--          <button mat-menu-item>Sales</button>-->
           </a>
+          <a class="nav-link a" routerLink="newdeliverytowarehouse">
+            New delivery to warehouse
+            <!--          <button mat-menu-item>Sales</button>-->
+          </a>
         </mat-menu>
       </li>
 
 
       <li class="nav-item" routerLinkActive="active">
-        <a class="nav-link" routerLink="#">
-          <button mat-button [matMenuTriggerFor]="belowMenu">Stores</button>
+        <a class="nav-link" routerLink="manager">
+          <button mat-button [matMenuTriggerFor]="belowMenu">Manager</button>
         </a>
         <mat-menu #belowMenu="matMenu" yPosition="below">
-          <a class="nav-link" routerLink="manager">
+          <a class="nav-link a" routerLink="manager">
            Place Holder
           </a>
-          <a class="nav-link" routerLink="manager">
+          <a class="nav-link a" routerLink="manager">
             Place Holder
           </a>
         </mat-menu>
@@ -41,30 +45,30 @@
 
 
       <li class="nav-item" routerLinkActive="active">
-        <a class="nav-link" routerLink="#">
+        <a class="nav-link" routerLink="sales">
 
-          <button mat-button [matMenuTriggerFor]="beforeMenu">Before</button>
+          <button mat-button [matMenuTriggerFor]="beforeMenu">Sales</button>
         </a>
         <mat-menu #beforeMenu="matMenu" xPosition="before">
-          <a class="nav-link" routerLink="manager">
+          <a class="nav-link a" routerLink="manager">
             Place Holder
           </a>
-          <a class="nav-link" routerLink="manager">
+          <a class="nav-link a" routerLink="manager">
             Place Holder
           </a>
         </mat-menu>
       </li>
 
       <li class="nav-item" routerLinkActive="active">
-        <a class="nav-link" routerLink="#">
+        <a class="nav-link" >
 
           <button mat-button [matMenuTriggerFor]="afterMenu">After</button>
         </a>
         <mat-menu #afterMenu="matMenu" xPosition="after">
-          <a class="nav-link" routerLink="manager">
+          <a class="nav-link a" routerLink="manager">
             Place Holder
           </a>
-          <a class="nav-link" routerLink="manager">
+          <a class="nav-link a" routerLink="manager">
             Place Holder
           </a>
         </mat-menu>
