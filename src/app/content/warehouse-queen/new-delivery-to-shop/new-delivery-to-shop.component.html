@@ -7,15 +7,36 @@
     <div>
       <p>category:<input [(ngModel)]="newOrderElement.category" #it="ngModel" required></p>
       <p>deliveryQuantity:<input [(ngModel)]="newOrderElement.deliveryQuantity" #it="ngModel" required></p>
-      <p>deliveryPricePerUnit:<input [(ngModel)]="newOrderElement.deliveryPricePerUnit" #it="ngModel" required></p>
+      <p>deliveryPricePerUnit:<input [(ngModel)]="newOrderElement.deliveryDisplayPricePerUnit" #it="ngModel" required></p>
       <p>deliveryDiscount:<input [(ngModel)]="newOrderElement.deliveryDiscount" #it="ngModel" required></p>
       <p>deliveryFinalPricePerUnit:<input [(ngModel)]="newOrderElement.deliveryFinalPricePerUnit" #it="ngModel" required></p>
-      <button (click)="setNewOrder()">Add new order item</button>
+      <button (click)="setNewItemOrder()">Add new order item</button>
+      <button (click)="saveCurrentOrder()">Save current order items</button>
+      <button (click)="clearCurrentOrder()">Clear current order items</button>
     </div>
   </div>
 
 
-  <table mat-table [dataSource]="newOrderData" class="mat-elevation-z8">
+  <table #myShopCheckinProductsTable mat-table [dataSource]="listNewItemsToShops" class="mat-elevation-z8">
+
+    <!-- Checkbox Column -->
+    <ng-container matColumnDef="select">
+      <th mat-header-cell *matHeaderCellDef>
+        <mat-checkbox (change)="$event ? masterToggle() : null"
+                      [checked]="selection.hasValue() && isAllSelected()"
+                      [indeterminate]="selection.hasValue() && !isAllSelected()"
+                      [aria-label]="checkboxLabel()">
+        </mat-checkbox>
+      </th>
+      <td mat-cell *matCellDef="let row">
+        <mat-checkbox (click)="$event.stopPropagation()"
+                      (change)="$event ? selection.toggle(row) : null"
+                      [checked]="selection.isSelected(row)"
+                      [aria-label]="checkboxLabel(row)">
+        </mat-checkbox>
+      </td>
+      <td mat-footer-cell *matFooterCellDef> - </td>
+    </ng-container>
 
     <!-- Position Column -->
     <ng-container matColumnDef="category">
@@ -28,28 +49,28 @@
     <ng-container matColumnDef="deliveryQuantity">
       <th mat-header-cell *matHeaderCellDef> deliveryQuantity </th>
       <td mat-cell *matCellDef="let element"> {{element.deliveryQuantity}}# </td>
-      <td mat-footer-cell *matFooterCellDef> - </td>
+      <td mat-footer-cell *matFooterCellDef> {{getTotalItems()}}# </td>
     </ng-container>
 
     <!-- deliveryPricePerUnit Column -->
-    <ng-container matColumnDef="deliveryPricePerUnit">
+    <ng-container matColumnDef="deliveryDisplayPricePerUnit">
       <th mat-header-cell *matHeaderCellDef> deliveryPricePerUnit </th>
-      <td mat-cell *matCellDef="let element"> {{element.deliveryPricePerUnit}}$ </td>
-      <td mat-footer-cell *matFooterCellDef> - </td>
+      <td mat-cell *matCellDef="let element"> {{element.deliveryDisplayPricePerUnit}}$ </td>
+      <td mat-footer-cell *matFooterCellDef> Total items: </td>
     </ng-container>
 
     <!-- deliveryDiscount Column -->
     <ng-container matColumnDef="deliveryDiscount">
       <th mat-header-cell *matHeaderCellDef> Price per Unit </th>
       <td mat-cell *matCellDef="let element"> {{element.deliveryDiscount}}%</td>
-      <td mat-footer-cell *matFooterCellDef> - </td>
+      <td mat-footer-cell *matFooterCellDef> Total value: </td>
     </ng-container>
 
     <!-- deliveryFinalPricePerUnit Column -->
     <ng-container matColumnDef="deliveryFinalPricePerUnit">
       <th mat-header-cell *matHeaderCellDef> deliveryFinalPricePerUnit </th>
       <td mat-cell *matCellDef="let element"> {{element.deliveryFinalPricePerUnit}}$</td>
-      <td mat-footer-cell *matFooterCellDef> - </td>
+      <td mat-footer-cell *matFooterCellDef> {{getTotalValue()}}$ </td>
     </ng-container>
 
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>

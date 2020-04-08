@@ -2,7 +2,7 @@ export interface NewOrderItemDTO {
   id: number;
   category: string;
   deliveryQuantity: number;
-  deliveryPricePerUnit: number;
+  deliveryDisplayPricePerUnit: number;
   deliveryDiscount: number;
   deliveryFinalPricePerUnit: number;
 }

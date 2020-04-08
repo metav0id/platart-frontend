@@ -15,8 +15,9 @@ export class NewDeliveryToShopService {
     return this.http.post<NewOrderItemDTO[]>(this.getAllNewOrderItemsURL, null);
   }
 
-  setAllNewOrderItems(newOrderItemDTO: NewOrderItemDTO[]): void {
-    this.http.post<NewOrderItemDTO[]>(this.setAllNewOrderItemsURL, newOrderItemDTO);
+  setAllNewOrderItems(newOrderItemDTOList: NewOrderItemDTO[]): void {
+    console.log(newOrderItemDTOList);
+    this.http.post<NewOrderItemDTO[]>(this.setAllNewOrderItemsURL, newOrderItemDTOList).subscribe();
   }
 
 }

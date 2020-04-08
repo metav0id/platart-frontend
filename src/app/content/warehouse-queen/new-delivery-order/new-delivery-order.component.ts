@@ -1,0 +1,46 @@
+import {Component, OnInit, ViewChild} from '@angular/core';
+import {WarehouseGetAllItemsDTO} from '../stock-in-warehouse/WarehouseGetAllItemsDTO';
+import {MatTable} from "@angular/material/table";
+@Component({
+  selector: 'app-new-delivery-order',
+  templateUrl: './new-delivery-order.component.html',
+  styleUrls: ['./new-delivery-order.component.css']
+})
+export class NewDeliveryOrderComponent implements OnInit {
+
+  displayedColumns: string[] = ['category', 'pricePerUnit', 'quantity', 'price'];
+  public newOrderData: WarehouseGetAllItemsDTO[] = [];
+  totalCost: 0;
+
+  newOrderElement: WarehouseGetAllItemsDTO = {
+    category: '',
+    pricePerUnit: 0,
+    quantity: 0
+  };
+
+  @ViewChild('#myCheckoutProductsTable') table: MatTable<any>;
+
+  constructor() {
+  }
+
+  ngOnInit(): void {
+  }
+
+
+  setNewOrder() {
+    if (this.newOrderElement.pricePerUnit > 0 &&
+        this.newOrderElement.category !== '' &&
+        this.newOrderElement.quantity > 0) {
+      this.newOrderData.push(this.newOrderElement);
+      console.log(this.newOrderData);
+    }
+  }
+
+  getTotalCost(): number {
+    this.totalCost = 0;
+    for (const orderElem of this.newOrderData) {
+      this.totalCost += orderElem.quantity * orderElem.pricePerUnit;
+    }
+    return this.totalCost;
+  }
+}
