@@ -1,0 +1,61 @@
+<nav class="navbar navbar-expand-lg navbar-dark navbar-custom">
+  <a class="navbar-brand" href="#"> HALLO </a>
+  <!-- creates gurber menu for mobile version with all elements in the menu -->
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+
+      <!-- ....... -->
+      <li class="nav-item" routerLinkActive="active">
+        <a class="nav-link" routerLink="">
+          <button mat-button [matMenuTriggerFor]="aboveMenu">User</button>
+        </a>
+        <mat-menu #aboveMenu="matMenu" yPosition="below">
+          <a class="nav-link" routerLink="manager">
+          <button mat-menu-item>Warehouse Queen</button>
+          </a>
+          <a class="nav-link" routerLink="sales">
+          <button mat-menu-item>Sales</button>
+          </a>
+        </mat-menu>
+      </li>
+
+
+      <li class="nav-item" routerLinkActive="active">
+        <a class="nav-link" routerLink="#">
+          <button mat-button [matMenuTriggerFor]="belowMenu">Stores</button>
+        </a>
+        <mat-menu #belowMenu="matMenu" yPosition="below">
+          <button mat-menu-item>Store 1</button>
+          <button mat-menu-item>Store 2</button>
+        </mat-menu>
+      </li>
+
+
+      <li class="nav-item" routerLinkActive="active">
+        <a class="nav-link" routerLink="#">
+
+          <button mat-button [matMenuTriggerFor]="beforeMenu">Before</button>
+        </a>
+        <mat-menu #beforeMenu="matMenu" xPosition="before">
+          <button mat-menu-item>Item 1</button>
+          <button mat-menu-item>Item 2</button>
+        </mat-menu>
+      </li>
+
+      <li class="nav-item" routerLinkActive="active">
+        <a class="nav-link" routerLink="#">
+
+          <button mat-button [matMenuTriggerFor]="afterMenu">After</button>
+        </a>
+        <mat-menu #afterMenu="matMenu" xPosition="after">
+          <button mat-menu-item>Item 1</button>
+          <button mat-menu-item>Item 2</button>
+        </mat-menu>
+      </li>
+
+    </ul>
+  </div>
+</nav>
