@@ -1,6 +1,7 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {MatTable} from '@angular/material/table';
 import {SelectionModel} from '@angular/cdk/collections';
+import {FormControl, Validators} from '@angular/forms';
 
 /** Is used for table elements */
 export interface PeriodicElement {
@@ -10,6 +11,11 @@ export interface PeriodicElement {
   pricePerUnit: number;
   price: number;
   supplierName: string;
+}
+
+/** Is used for Category Drop Down */
+export interface Category {
+  name: string;
 }
 
 @Component({
@@ -35,6 +41,15 @@ export class NewDeliveryToWarehouseComponent implements OnInit {
   /** Is used to increase position attribute of list elements constantly */
   private counter = 1;
 
+  /** Category selection */
+  public categoryControl = new FormControl('', Validators.required);
+  public categoryItems: Category[] = [
+    {name: 'Bracelet'},
+    {name: 'Necklace'},
+    {name: 'Ring'},
+    {name: 'Earring'}
+  ];
+
   @ViewChild('myCheckinProductsTable') table: MatTable<any>;
 
   constructor() {
@@ -53,8 +68,7 @@ export class NewDeliveryToWarehouseComponent implements OnInit {
       quantity: this.newItemFromSupplier.quantity,
       supplierName: this.newItemFromSupplier.supplierName
     };
-
-    const isCategoryNotEmpty = newItem.category !== '';
+    const isCategoryNotEmpty = !this.categoryControl.hasError('required');
     const isPricePerUnitNotEmpty = newItem.pricePerUnit > 0;
     const isQuantityNotEmpty = newItem.quantity > 0;
     const isSupplierNotEmpty = newItem.supplierName !== '';
