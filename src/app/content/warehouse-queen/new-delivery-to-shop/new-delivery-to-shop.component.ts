@@ -4,6 +4,7 @@ import {NewDeliveryToShopService} from "./new-delivery-to-shop.service";
 import {MatTable} from "@angular/material/table";
 import {SelectionModel} from "@angular/cdk/collections";
 import {FormControl, Validators} from "@angular/forms";
+import {VerifyAmountItemsOnStockDTO} from "./VerifyAmountItemsOnStockDTO";
 
 /** Is used for table elements */
 export interface PeriodicElement {
@@ -50,6 +51,7 @@ export class NewDeliveryToShopComponent implements OnInit {
     {name: 'arete'}
   ];
 
+  availableItems: number = 0;
   @ViewChild('myShopCheckinProductsTable') table: MatTable<any>;
   constructor(private newDeliveryToShopService: NewDeliveryToShopService) {
   }
@@ -187,5 +189,21 @@ export class NewDeliveryToShopComponent implements OnInit {
     //function to remove the current element
     this.removeCurrentItem(periodicElement.position);
     this.table.renderRows();
+  }
+
+  verifyAvailability() {
+    let requestTest: VerifyAmountItemsOnStockDTO = {
+      category: 'anillo',
+      quantity: 15,
+      pricePerUnit: 15
+    };
+
+    //update the amount of items on stock
+    this.newDeliveryToShopService.verifyAmountItemsOnStock(
+            this.newOrderElement.category,
+            this.newOrderElement.deliveryQuantity,
+            this.newOrderElement.deliveryFinalPricePerUnit)
+      .subscribe(JsonDto => {console.log(JsonDto); this.availableItems = JsonDto.quantity; console.log(this.availableItems)});
+
   }
 }

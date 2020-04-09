@@ -25,6 +25,21 @@
         </mat-form-field>
       </div>
 
+      <div class="newOrderInputFieldsDeliveryFinalPricePerUnit">
+        <mat-form-field hintLabel="Max 10 characters" appearance="fill">
+          <mat-label>Enter deliveryFinalPricePerUnit</mat-label>
+          <input matInput #input [(ngModel)]="newOrderElement.deliveryFinalPricePerUnit" maxlength="10" placeholder="Ex. deliveryFinalPricePerUnit">
+          <mat-hint align="end">{{input.value?.length || 0}}/10</mat-hint>
+        </mat-form-field>
+      </div>
+
+
+
+      <div class="availabilityAmount">
+        <button mat-button (click)="verifyAvailability()">Check available</button>
+        <a>{{availableItems}} items</a>
+      </div>
+
       <div class="newOrderInputFieldsDeliveryDisplayPricePerUnit">
         <mat-form-field hintLabel="Max 10 characters" appearance="fill">
           <mat-label>Enter deliveryDisplayPricePerUnit</mat-label>
@@ -41,16 +56,9 @@
         </mat-form-field>
       </div>
 
-      <div class="newOrderInputFieldsDeliveryFinalPricePerUnit">
-        <mat-form-field hintLabel="Max 10 characters" appearance="fill">
-          <mat-label>Enter eliveryFinalPricePerUnit</mat-label>
-          <input matInput #input [(ngModel)]="newOrderElement.deliveryFinalPricePerUnit" maxlength="10" placeholder="Ex. deliveryFinalPricePerUnit">
-          <mat-hint align="end">{{input.value?.length || 0}}/10</mat-hint>
-        </mat-form-field>
-      </div>
-      <button (click)="setNewItemOrder()">Add new order item</button>
-      <button (click)="saveCurrentOrder()">Save current order items</button>
-      <button (click)="clearCurrentOrder()">Clear current order items</button>
+      <button mat-button (click)="setNewItemOrder()">Add new order item</button>
+      <button mat-button (click)="saveCurrentOrder()">Save current order items</button>
+      <button mat-button (click)="clearCurrentOrder()">Clear current order items</button>
     </div>
   </div>
 
