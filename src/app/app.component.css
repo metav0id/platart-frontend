@@ -2,3 +2,17 @@ body{
   background-color: #eaf6ff;
 
 }
+
+
+html, body {
+  height: 100%;
+}
+
+container {
+  min-height: 100%;
+}
+
+main {
+  overflow: auto;
+
+}
