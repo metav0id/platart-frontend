@@ -32,11 +32,11 @@
         </mat-form-field>
       </div>
 
-      <div class="availabilityAmount">
+      <div class="availabilityAmount space">
         <button mat-button (click)="verifyAvailability()">Check available</button>
         <a>{{availableItems}} items</a>
       </div>
-
+<div class="space"></div>
       <div class="newOrderInputFieldsDeliveryDisplayPricePerUnit">
         <mat-form-field hintLabel="Max 10 characters" appearance="fill">
           <mat-label>Enter deliveryDisplayPricePerUnit</mat-label>
@@ -62,8 +62,9 @@
 <div class="space">
 
 </div>
+<div class=" table-responsive">
 
-  <table #myShopCheckinProductsTable mat-table [dataSource]="listNewItemsToShops" class="mat-elevation-z8">
+  <table mat-table #myShopCheckinProductsTable [dataSource]="listNewItemsToShops" class="mat-elevation-z8" >
 
     <!-- Checkbox Column -->
     <ng-container matColumnDef="select">
@@ -132,7 +133,7 @@
     <tr mat-row *matRowDef="let element; columns: displayedColumns;"></tr>
     <tr mat-footer-row *matFooterRowDef="displayedColumns"></tr>
   </table>
-
+</div>
 </div>
 
 <!--'deliveryDiscount','']-->
