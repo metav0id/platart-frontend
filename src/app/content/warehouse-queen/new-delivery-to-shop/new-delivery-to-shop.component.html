@@ -12,7 +12,6 @@
           <mat-select [formControl]="categoryControl" [(value)]="newOrderElement.category">
             <mat-option>--</mat-option>
             <mat-option *ngFor="let entry of categoryItems" [value]="entry.name">{{ entry.name }}</mat-option>
-            <mat-option value="option">Option</mat-option>
           </mat-select>
         </mat-form-field>
       </div>
@@ -25,9 +24,17 @@
         </mat-form-field>
       </div>
 
-      <div class="verifyAmount">
-        <button mat-button (click)="verifyAvailability()">Items available</button>
-        <a>{{availableItems}}</a>
+      <div class="newOrderInputFieldsDeliveryFinalPricePerUnit">
+        <mat-form-field hintLabel="Max 10 characters" appearance="fill">
+          <mat-label>FinalPrice/Unit</mat-label>
+          <input matInput #input [(ngModel)]="newOrderElement.deliveryFinalPricePerUnit" maxlength="10" placeholder="Ex. deliveryDisplayPricePerUnit">
+          <mat-hint align="end">{{input.value?.length || 0}}/10</mat-hint>
+        </mat-form-field>
+      </div>
+
+      <div class="availabilityAmount">
+        <button mat-button (click)="verifyAvailability()">Check available</button>
+        <a>{{availableItems}} items</a>
       </div>
 
       <div class="newOrderInputFieldsDeliveryDisplayPricePerUnit">
