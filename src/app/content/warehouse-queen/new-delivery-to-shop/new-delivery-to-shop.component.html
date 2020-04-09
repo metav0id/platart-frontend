@@ -25,6 +25,11 @@
         </mat-form-field>
       </div>
 
+      <div class="verifyAmount">
+        <button mat-button (click)="verifyAvailability()">Items available</button>
+        <a>{{availableItems}}</a>
+      </div>
+
       <div class="newOrderInputFieldsDeliveryDisplayPricePerUnit">
         <mat-form-field hintLabel="Max 10 characters" appearance="fill">
           <mat-label>Enter deliveryDisplayPricePerUnit</mat-label>
