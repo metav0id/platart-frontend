@@ -1,0 +1,16 @@
+table {
+  width: 50%;
+  margin-left:auto;
+  margin-right:auto;
+}
+th{
+  font-family: Raleway /* Replace with your custom font */, sans-serif !important;
+  /* Add !important to overwrite all elements */
+  color: #0056b3;
+  font-size:15px
+}
+
+hi{
+
+}
+
