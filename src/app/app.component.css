@@ -1,18 +1,23 @@
-body{
+*{
+  margin: 0px;
+  padding: 0px;
+}
+
+body {
   background-color: #eaf6ff;
 
 }
-
 
 html, body {
   height: 100%;
 }
 
-container {
+#container {
   min-height: 100%;
 }
 
 main {
+  min-height: 100%;
   overflow: auto;
 
 }
