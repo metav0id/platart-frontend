@@ -1,4 +1,4 @@
-<div>
+<div class="box">
   <h1>New delivery order</h1>
 
   <div>
@@ -40,6 +40,7 @@
           <mat-hint align="end">{{input.value?.length || 0}}/10</mat-hint>
         </mat-form-field>
       </div>
+      <div class="space"></div>
 
       <button mat-button (click)="setNewItemOrder()">Add new order item</button>
       <button mat-button (click)="saveCurrentOrder()">Save current order items</button>
