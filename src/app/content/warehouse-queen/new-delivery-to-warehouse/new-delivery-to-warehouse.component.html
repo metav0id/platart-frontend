@@ -1,4 +1,4 @@
-<div>
+<div class="box">
   <h1>New delivery for warehouse</h1>
   <h2>Check-in new products</h2>
   <div>
@@ -17,76 +17,101 @@
       </mat-form-field>
 
       <!--User Input fields-->
-      <label>Quantity: </label>
-      <input [(ngModel)]="newItemFromSupplier.quantity" #it="ngModel" required>
-      <label>Price per Unit: </label>
-      <input [(ngModel)]="newItemFromSupplier.pricePerUnit" #it="ngModel" required>
-      <label>Supplier: </label>
-      <input [(ngModel)]="newItemFromSupplier.supplierName" #it="ngModel" required>
-      <button (click)="addNewItemToList()">Add new product to inventory</button>
-      <button (click)="deleteItem()">Delete selected</button>
-      <button (click)="saveList()">Save List</button>
+      <div class="deliveryToWarehouseQuantity">
+        <mat-form-field hintLabel="Max 10 characters" appearance="fill">
+          <mat-label>Enter Quantity</mat-label>
+          <input matInput #input [(ngModel)]="newItemFromSupplier.quantity" maxlength="10" placeholder="Quantity">
+          <mat-hint align="end">{{input.value?.length || 0}}/10</mat-hint>
+        </mat-form-field>
+      </div>
+      <!--User Input fields-->
+      <div class="deliveryToWarehousePricePerUnit">
+        <mat-form-field hintLabel="Max 10 characters" appearance="fill">
+          <mat-label>Enter PricePerUnit</mat-label>
+          <input matInput #input [(ngModel)]="newItemFromSupplier.pricePerUnit" maxlength="10" placeholder="PricePerUnit">
+          <mat-hint align="end">{{input.value?.length || 0}}/10</mat-hint>
+        </mat-form-field>
+      </div>
+      <!--User Input fields-->
+      <div class="deliveryToWarehousePricePerUnit">
+        <mat-form-field hintLabel="Max 10 characters" appearance="fill">
+          <mat-label>Enter SupplierName</mat-label>
+          <input matInput #input [(ngModel)]="newItemFromSupplier.supplierName" maxlength="10" placeholder="SupplierName">
+          <mat-hint align="end">{{input.value?.length || 0}}/10</mat-hint>
+        </mat-form-field>
+      </div>
 
+      <div>
+        <button mat-button (click)="addNewItemToList()">Add new product to inventory</button>
+        <button mat-button (click)="deleteItem()">Delete selected</button>
+        <button mat-button (click)="saveList()">Save List</button>
+      </div>
     </div>
   </div>
 
-<!--  Table for added items-->
-  <table #myCheckinProductsTable mat-table [dataSource]="listNewItemsFromSuppliers" class="mat-elevation-z8">
+  <div class="space">
 
-    <!-- Checkbox Column -->
-    <ng-container matColumnDef="select">
-      <th mat-header-cell *matHeaderCellDef>
-        <mat-checkbox (change)="$event ? masterToggle() : null"
-                      [checked]="selection.hasValue() && isAllSelected()"
-                      [indeterminate]="selection.hasValue() && !isAllSelected()"
-                      [aria-label]="checkboxLabel()">
-        </mat-checkbox>
-      </th>
-      <td mat-cell *matCellDef="let row">
-        <mat-checkbox (click)="$event.stopPropagation()"
-                      (change)="$event ? selection.toggle(row) : null"
-                      [checked]="selection.isSelected(row)"
-                      [aria-label]="checkboxLabel(row)">
-        </mat-checkbox>
-      </td>
-    </ng-container>
+  </div>
 
-    <!-- Category Column -->
-    <ng-container matColumnDef="category">
-      <th mat-header-cell *matHeaderCellDef> Category </th>
-      <td mat-cell *matCellDef="let element"> {{element.category}} </td>
-      <td mat-footer-cell *matFooterCellDef> - </td>
-    </ng-container>
+  <!--  Table for added items-->
+  <div class=" table-responsive">
+    <table #myCheckinProductsTable mat-table [dataSource]="listNewItemsFromSuppliers" class="mat-elevation-z8">
 
-    <!-- Price Per Unit Column -->
-    <ng-container matColumnDef="pricePerUnit">
-      <th mat-header-cell *matHeaderCellDef> Price per Unit </th>
-      <td mat-cell *matCellDef="let element"> {{element.pricePerUnit}} </td>
-      <td mat-footer-cell *matFooterCellDef> - </td>
-    </ng-container>
+      <!-- Checkbox Column -->
+      <ng-container matColumnDef="select">
+        <th mat-header-cell *matHeaderCellDef>
+          <mat-checkbox (change)="$event ? masterToggle() : null"
+                        [checked]="selection.hasValue() && isAllSelected()"
+                        [indeterminate]="selection.hasValue() && !isAllSelected()"
+                        [aria-label]="checkboxLabel()">
+          </mat-checkbox>
+        </th>
+        <td mat-cell *matCellDef="let row">
+          <mat-checkbox (click)="$event.stopPropagation()"
+                        (change)="$event ? selection.toggle(row) : null"
+                        [checked]="selection.isSelected(row)"
+                        [aria-label]="checkboxLabel(row)">
+          </mat-checkbox>
+        </td>
+      </ng-container>
 
-    <!-- Quantity Column -->
-    <ng-container matColumnDef="quantity">
-      <th mat-header-cell *matHeaderCellDef> Quantity </th>
-      <td mat-cell *matCellDef="let element"> {{element.quantity}} </td>
-      <td mat-footer-cell *matFooterCellDef> Total </td>
-    </ng-container>
+      <!-- Category Column -->
+      <ng-container matColumnDef="category">
+        <th mat-header-cell *matHeaderCellDef> Category </th>
+        <td mat-cell *matCellDef="let element"> {{element.category}} </td>
+        <td mat-footer-cell *matFooterCellDef> - </td>
+      </ng-container>
 
-    <!-- Price column -->
-    <ng-container matColumnDef="price">
-      <th mat-header-cell *matHeaderCellDef> Price </th>
-      <td mat-cell *matCellDef="let element"> {{(element.pricePerUnit)*(element.quantity)}} </td>
-    </ng-container>
+      <!-- Price Per Unit Column -->
+      <ng-container matColumnDef="pricePerUnit">
+        <th mat-header-cell *matHeaderCellDef> Price per Unit </th>
+        <td mat-cell *matCellDef="let element"> {{element.pricePerUnit}} </td>
+        <td mat-footer-cell *matFooterCellDef> - </td>
+      </ng-container>
 
-    <!-- SupplierName column -->
-    <ng-container matColumnDef="supplierName">
-      <th mat-header-cell *matHeaderCellDef> Supplier </th>
-      <td mat-cell *matCellDef="let element"> {{element.supplierName}} </td>
-    </ng-container>
+      <!-- Quantity Column -->
+      <ng-container matColumnDef="quantity">
+        <th mat-header-cell *matHeaderCellDef> Quantity </th>
+        <td mat-cell *matCellDef="let element"> {{element.quantity}} </td>
+        <td mat-footer-cell *matFooterCellDef> Total </td>
+      </ng-container>
 
-    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-    <tr mat-row *matRowDef="let element; columns: displayedColumns;"></tr>
-  </table>
+      <!-- Price column -->
+      <ng-container matColumnDef="price">
+        <th mat-header-cell *matHeaderCellDef> Price </th>
+        <td mat-cell *matCellDef="let element"> {{(element.pricePerUnit)*(element.quantity)}} </td>
+      </ng-container>
+
+      <!-- SupplierName column -->
+      <ng-container matColumnDef="supplierName">
+        <th mat-header-cell *matHeaderCellDef> Supplier </th>
+        <td mat-cell *matCellDef="let element"> {{element.supplierName}} </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let element; columns: displayedColumns;"></tr>
+    </table>
+  </div>
 
 </div>
 

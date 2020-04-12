@@ -6,5 +6,3 @@ export interface NewOrderItemDTO {
   deliveryDiscount: number;
   deliveryFinalPricePerUnit: number;
 }
-
-//TODO i would write an interface instead of a class. Interfaces are more appropriate for DTOs ;-)
