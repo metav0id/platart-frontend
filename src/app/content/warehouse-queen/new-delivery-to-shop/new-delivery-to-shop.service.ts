@@ -11,6 +11,7 @@ export class NewDeliveryToShopService {
   private readonly getAllNewOrderItemsURL = 'http://localhost:8081/warehouse/getAllNewOrderItems';
   private readonly setAllNewOrderItemsURL = 'http://localhost:8081/warehouse/setAllNewOrderItems';
   private readonly verifyAmountItemsOnStockURL = 'http://localhost:8081/warehouse/verifyAmountItemsOnStock';
+  private readonly  sendDeliveryOrderURL = 'http://localhost:8081/warehouse/sendDeliveryOrder';
 
   constructor(private http: HttpClient) {
   }
@@ -24,7 +25,6 @@ export class NewDeliveryToShopService {
     this.http.post<NewOrderItemDTO[]>(this.setAllNewOrderItemsURL, newOrderItemDTOList).subscribe();
   }
 
-  //verifyAmountItemsOnStock(verifyAmountItemsOnStockDTO: VerifyAmountItemsOnStockDTO): void {
   verifyAmountItemsOnStock(categoryInput: string, quantityInput: number, pricePerQuantityInput: number): Observable<VerifyAmountItemsOnStockDTO> {
     console.log('verifyAmountItemsOnStock');
     let requestTest: VerifyAmountItemsOnStockDTO = {
@@ -33,7 +33,12 @@ export class NewDeliveryToShopService {
       pricePerUnit: pricePerQuantityInput
     };
 
-    return  this.http.post<VerifyAmountItemsOnStockDTO>(this.verifyAmountItemsOnStockURL, requestTest);
+    return this.http.post<VerifyAmountItemsOnStockDTO>(this.verifyAmountItemsOnStockURL, requestTest);
+  }
+
+  sendFinalizedOrder(): void {
+    console.log('Order was send');
+    this.http.post<null>(this.sendDeliveryOrderURL, null).subscribe();
   }
 
 }

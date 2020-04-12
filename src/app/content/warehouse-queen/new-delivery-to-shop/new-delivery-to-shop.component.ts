@@ -206,4 +206,8 @@ export class NewDeliveryToShopComponent implements OnInit {
       .subscribe(JsonDto => {console.log(JsonDto); this.availableItems = JsonDto.quantity; console.log(this.availableItems)});
 
   }
+
+  sendCurrentOrder() {
+    this.newDeliveryToShopService.sendFinalizedOrder();
+  }
 }

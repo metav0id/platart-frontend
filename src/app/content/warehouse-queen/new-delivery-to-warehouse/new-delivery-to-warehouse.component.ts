@@ -50,10 +50,10 @@ export class NewDeliveryToWarehouseComponent implements OnInit {
   /** Category selection */
   public categoryControl = new FormControl('', Validators.required);
   public categoryItems: Category[] = [
-    {name: 'Bracelet'},
-    {name: 'Necklace'},
-    {name: 'Ring'},
-    {name: 'Earring'}
+    {name: 'pulsera'},
+    {name: 'cadena'},
+    {name: 'anillo'},
+    {name: 'arete'}
   ];
 
   @ViewChild('myCheckinProductsTable') table: MatTable<any>;
