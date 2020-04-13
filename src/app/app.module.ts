@@ -21,7 +21,21 @@ import {MatIconModule} from '@angular/material/icon';
 import {MatListModule} from '@angular/material/list';
 import {MatMenuModule} from '@angular/material/menu';
 import {FooterComponent} from './content/footer/footer.component';
+import { AngularFireModule } from '@angular/fire';
+import { AngularFirestoreModule } from '@angular/fire/firestore';
+import { AngularFireStorageModule } from '@angular/fire/storage';
+import { AngularFireAuthModule } from '@angular/fire/auth';
 
+const config = {
+  apiKey: "AIzaSyBK7tbndrpAk-1PN_Fx1bqx6SRsBS4gwCE",
+  authDomain: "platart-2020.firebaseapp.com",
+  databaseURL: "https://platart-2020.firebaseio.com",
+  projectId: "platart-2020",
+  storageBucket: "platart-2020.appspot.com",
+  messagingSenderId: "411465839168",
+  appId: "1:411465839168:web:4c40d11b6d0914f29925a5",
+  measurementId: "G-1WW0W7H2TY"
+};
 
 @NgModule({
   declarations: [
@@ -34,6 +48,10 @@ import {FooterComponent} from './content/footer/footer.component';
   ],
   imports: [
     BrowserModule,
+    AngularFireModule.initializeApp(config),
+    AngularFirestoreModule, // firestore
+    AngularFireAuthModule, // auth
+    AngularFireStorageModule, // storage
     HttpClientModule,
     WarehouseQueenModule,
     AppRoutingModule,
