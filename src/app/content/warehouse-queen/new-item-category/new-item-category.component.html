@@ -1,0 +1,72 @@
+<div class="box">
+  <h1>New delivery order</h1>
+
+  <div>
+    <h3>Create new category:</h3>
+    <div class="newOrderInputFieldsDeliveryFinalPricePerUnit">
+      <mat-form-field hintLabel="Max 10 characters" appearance="fill">
+        <mat-label>Enter item category</mat-label>
+        <input matInput #input [(ngModel)]="newCategoryElement.category" maxlength="10" placeholder="Ex. deliveryQuantity">
+      </mat-form-field>
+    </div>
+
+    <div class="verifyCategoryExistant">
+      <button mat-button (click)="verifyCategoryExistant()">Check available</button>
+      <br>
+      <a>{{availableItems}}</a>
+      <br>
+    </div>
+
+    <div>
+      <button mat-button (click)="createNewCategory()">create new category</button>
+      <button mat-button (click)="deleteSelectedCategory()">delete selected</button>
+    </div>
+
+    <div class="space">
+
+    </div>
+    <div class=" table-responsive">
+
+      <table mat-table #myShopCheckinProductsTable [dataSource]="listCategories" class="mat-elevation-z8" >
+
+        <!-- Checkbox Column -->
+        <ng-container matColumnDef="select">
+          <th mat-header-cell *matHeaderCellDef>
+            <mat-checkbox (change)="$event ? masterToggle() : null"
+                          [checked]="selection.hasValue() && isAllSelected()"
+                          [indeterminate]="selection.hasValue() && !isAllSelected()"
+                          [aria-label]="checkboxLabel()">
+            </mat-checkbox>
+          </th>
+          <td mat-cell *matCellDef="let row">
+            <mat-checkbox (click)="$event.stopPropagation()"
+                          (change)="$event ? selection.toggle(row) : null"
+                          [checked]="selection.isSelected(row)"
+                          [aria-label]="checkboxLabel(row)">
+            </mat-checkbox>
+          </td>
+        </ng-container>
+
+        <!-- Position Column -->
+        <ng-container matColumnDef="category">
+          <th mat-header-cell *matHeaderCellDef> Category </th>
+          <td mat-cell *matCellDef="let element"> {{element.category}} </td>
+        </ng-container>
+
+        <!-- updateItem Column -->
+        <ng-container matColumnDef="updateItem">
+          <th mat-header-cell *matHeaderCellDef> *updateItem* </th>
+          <td mat-cell *matCellDef="let element">
+            <button (click)="updateButton(element)">correct category</button>
+          </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let element; columns: displayedColumns;"></tr>
+
+      </table>
+    </div>
+
+
+  </div>
+</div>

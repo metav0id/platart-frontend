@@ -1,9 +1,9 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
+import {FormControl, Validators} from "@angular/forms";
+import {SelectionModel} from "@angular/cdk/collections";
+import {MatTable} from "@angular/material/table";
 import {NewOrderItemDTO} from "./NewOrderItemDTO";
 import {NewDeliveryToShopService} from "./new-delivery-to-shop.service";
-import {MatTable} from "@angular/material/table";
-import {SelectionModel} from "@angular/cdk/collections";
-import {FormControl, Validators} from "@angular/forms";
 import {VerifyAmountItemsOnStockDTO} from "./VerifyAmountItemsOnStockDTO";
 
 /** Is used for table elements */
