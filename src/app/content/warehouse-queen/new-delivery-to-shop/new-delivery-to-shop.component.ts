@@ -209,5 +209,8 @@ export class NewDeliveryToShopComponent implements OnInit {
 
   sendCurrentOrder() {
     this.newDeliveryToShopService.sendFinalizedOrder();
+    listNewItemsToShops: [];
+    //todo: nice automatic refresh
+    this.table.renderRows();
   }
 }
