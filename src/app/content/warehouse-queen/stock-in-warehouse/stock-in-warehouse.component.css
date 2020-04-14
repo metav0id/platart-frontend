@@ -10,7 +10,40 @@ th{
   font-size:15px
 }
 
-hi{
 
+.cont-bg{
+  background-color: #eed6ec;
+  border-radius: 25px;
 }
 
+.cont-bg2{
+  background-color: #dbf1cf;
+  border-radius: 25px;
+}
+
+h1{
+  text-shadow: 2px 5px 5px #403f3f;
+  font-weight: bolder;
+  font-family: sans-serif;
+  color: #3d0949;
+}
+h2{
+
+  font-weight: bolder;
+  font-family: sans-serif;
+  color: #091249;
+}
+h3{
+
+  font-weight: bolder;
+  font-family: sans-serif;
+  color: #490927;
+}
+
+.punkt{
+  border-style: dotted;
+}
+
+.space{
+  height: 20px;
+}
