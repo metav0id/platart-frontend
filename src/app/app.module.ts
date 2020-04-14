@@ -12,7 +12,7 @@ import {CdkTableModule} from '@angular/cdk/table';
 import {MatTableModule} from '@angular/material/table';
 import {BrowserAnimationsModule, NoopAnimationsModule} from '@angular/platform-browser/animations';
 import {NewDeliveryToShopComponent} from './content/warehouse-queen/new-delivery-to-shop/new-delivery-to-shop.component';
-import {FormsModule} from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {HeaderComponent} from './content/header/header.component';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatButtonModule} from '@angular/material/button';
@@ -21,6 +21,10 @@ import {MatIconModule} from '@angular/material/icon';
 import {MatListModule} from '@angular/material/list';
 import {MatMenuModule} from '@angular/material/menu';
 import {FooterComponent} from './content/footer/footer.component';
+import { NewItemCategoryComponent } from './content/warehouse-queen/new-item-category/new-item-category.component';
+import {MatSelectModule} from "@angular/material/select";
+import {MatInputModule} from "@angular/material/input";
+import {MatCheckboxModule} from "@angular/material/checkbox";
 
 
 @NgModule({
@@ -30,7 +34,8 @@ import {FooterComponent} from './content/footer/footer.component';
     ManagerKingComponent,
     PageNotFoundComponent,
     HeaderComponent,
-    FooterComponent
+    FooterComponent,
+    NewItemCategoryComponent
   ],
   imports: [
     BrowserModule,
@@ -43,7 +48,13 @@ import {FooterComponent} from './content/footer/footer.component';
     MatListModule,
     MatButtonModule,
     MatSidenavModule,
-    NoopAnimationsModule
+    ReactiveFormsModule,
+    MatSelectModule,
+    FormsModule,
+    MatInputModule,
+    BrowserAnimationsModule,
+    MatCheckboxModule,
+    MatTableModule
   ],
   providers: [],
   bootstrap: [AppComponent]
