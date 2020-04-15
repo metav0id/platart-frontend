@@ -1,7 +1,7 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
-import {SelectionModel} from "@angular/cdk/collections";
-import {MatTable} from "@angular/material/table";
-  import {NewitemcategoryService} from "./new-item-category.service";
+import {SelectionModel} from '@angular/cdk/collections';
+import {MatTable} from '@angular/material/table';
+import {NewitemcategoryService} from './new-item-category.service';
 
 
 /** Is used for table elements */
@@ -27,6 +27,7 @@ export class NewItemCategoryComponent implements OnInit {
   availableItems: string = 'check existance';
 
   @ViewChild('myShopCheckinProductsTable') table: MatTable<any>;
+
   constructor(private newitemcategoryService: NewitemcategoryService) {
   }
 
@@ -37,8 +38,8 @@ export class NewItemCategoryComponent implements OnInit {
 
   verifyCategoryExistant(): boolean {
     this.availableItems = 'category element is new';
-    for(let categoryElement of this.listCategories ){
-      if(categoryElement.category.toString().toUpperCase() === this.newCategoryElement.category.toString().toUpperCase()){
+    for (let categoryElement of this.listCategories) {
+      if (categoryElement.category.toString().toUpperCase() === this.newCategoryElement.category.toString().toUpperCase()) {
         console.log('element already in list');
         this.availableItems = 'element already in list';
 
@@ -49,7 +50,7 @@ export class NewItemCategoryComponent implements OnInit {
   }
 
   createNewCategory() {
-    if(!this.verifyCategoryExistant()) {
+    if (!this.verifyCategoryExistant()) {
       this.newCategoryElement.category = this.newCategoryElement.category.toLowerCase();
       this.listCategories.push(this.newCategoryElement);
 
@@ -96,11 +97,11 @@ export class NewItemCategoryComponent implements OnInit {
     this.newitemcategoryService.getAllCategories().subscribe(JsonDto => {
       let counter: number = 1;
       this.listCategories = [];
-      for (const item of JsonDto){
+      for (const item of JsonDto) {
         this.listCategories.push({position: counter, category: item.category});
         counter++;
       }
-    })
+    });
   }
 
 }

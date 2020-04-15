@@ -4,24 +4,13 @@ import {SelectionModel} from '@angular/cdk/collections';
 import {FormControl, Validators} from '@angular/forms';
 import {PeriodicElement} from './periodic-element';
 import {NewDeliveryToWarehouseService} from './new-delivery-to-warehouse.service';
-
-/** Is used for table elements */
-
-/*
-export interface PeriodicElement {
-  position: number;
-  category: string;
-  quantity: number;
-  pricePerUnit: number;
-  price: number;
-  supplierName: string;
-}
-*/
+import {HttpClient} from '@angular/common/http';
+import {WarehouseItemCategoryDTO} from '../warehouseDTOs/warehouse-item-category-DTO';
 
 /** Is used for Category Drop Down */
-export interface Category {
+/*export interface Category {
   name: string;
-}
+}*/
 
 @Component({
   selector: 'app-new-delivery-to-warehouse',
@@ -49,12 +38,13 @@ export class NewDeliveryToWarehouseComponent implements OnInit {
 
   /** Category selection */
   public categoryControl = new FormControl('', Validators.required);
-  public categoryItems: Category[] = [
+  /*public categoryItems: Category[] = [
     {name: 'pulsera'},
     {name: 'cadena'},
     {name: 'anillo'},
     {name: 'arete'}
-  ];
+  ];*/
+  public categoryItems: WarehouseItemCategoryDTO[] = [];
 
   @ViewChild('myCheckinProductsTable') table: MatTable<any>;
 
@@ -62,6 +52,7 @@ export class NewDeliveryToWarehouseComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.newDeliveryToWarehouseService.getAllCategories().subscribe(JsonDto => this.categoryItems = JsonDto);
   }
 
   /** Add a new item to table */
