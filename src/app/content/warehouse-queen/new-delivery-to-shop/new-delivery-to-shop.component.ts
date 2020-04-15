@@ -99,7 +99,8 @@ export class NewDeliveryToShopComponent implements OnInit {
   setNewItemOrder() {
     if (this.newOrderElement.deliveryFinalPricePerUnit > 0 &&
         this.newOrderElement.category !== '' &&
-        this.newOrderElement.deliveryQuantity > 0) {
+        this.newOrderElement.deliveryQuantity > 0 &&
+        this.newOrderElement.deliveryShop !== null) {
 
       const newItem: PeriodicElement = {
         position: this.listNewItemsToShops.length +1,
