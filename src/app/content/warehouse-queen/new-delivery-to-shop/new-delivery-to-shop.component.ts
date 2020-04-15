@@ -5,6 +5,9 @@ import {MatTable} from "@angular/material/table";
 import {NewOrderItemDTO} from "./NewOrderItemDTO";
 import {NewDeliveryToShopService} from "./new-delivery-to-shop.service";
 import {VerifyAmountItemsOnStockDTO} from "./VerifyAmountItemsOnStockDTO";
+import {WarehouseItemCategoryDTO} from "../warehouseCategory/warehouse-item-category-DTO";
+import {WarehouseCategoryService} from "../warehouseCategory/warehouseCategory.service";
+import {NewDeliveryToWarehouseService} from "../new-delivery-to-warehouse/new-delivery-to-warehouse.service";
 
 /** Is used for table elements */
 export interface PeriodicElement {
@@ -29,6 +32,7 @@ export interface Category {
 export class NewDeliveryToShopComponent implements OnInit {
   displayedColumns: string[] = ['select', 'category', 'deliveryDisplayPricePerUnit', 'deliveryQuantity', 'deliveryDiscount', 'deliveryFinalPricePerUnit', 'updateItem'];
   public listNewItemsToShops: PeriodicElement[] = [];
+  public categoryItems: WarehouseItemCategoryDTO[] = [];
   private totalCost: number;
   private totalItems: number;
 
@@ -44,19 +48,14 @@ export class NewDeliveryToShopComponent implements OnInit {
   selection = new SelectionModel<PeriodicElement>(true, []);
   /** Category selection */
   public categoryControl = new FormControl('', Validators.required);
-  public categoryItems: Category[] = [
-    {name: 'pulsera'},
-    {name: 'cadena'},
-    {name: 'anillo'},
-    {name: 'arete'}
-  ];
 
   availableItems: number = 0;
   @ViewChild('myShopCheckinProductsTable') table: MatTable<any>;
-  constructor(private newDeliveryToShopService: NewDeliveryToShopService) {
+  constructor(private newDeliveryToShopService: NewDeliveryToShopService, private warehouseCategoryService: WarehouseCategoryService) {
   }
 
   ngOnInit(): void {
+    this.fetchCategoyItems();
     this.fetchNewOrderData();
   }
 
@@ -76,9 +75,13 @@ export class NewDeliveryToShopComponent implements OnInit {
           };
           counter++;
           this.listNewItemsToShops.push(newPeriodicElement);
+          this.table.renderRows();
         }
       });
-    this.table.renderRows();
+  }
+
+  fetchCategoyItems(): void {
+    this.warehouseCategoryService.getAllCategories().subscribe(JsonDto =>{ this.categoryItems = JsonDto});
   }
 
   setNewItemOrder() {
@@ -143,12 +146,50 @@ export class NewDeliveryToShopComponent implements OnInit {
     this.table.renderRows();
   }
 
+  updateButton(periodicElement: PeriodicElement) {
+    console.log('print button');
+    console.log(periodicElement);
+    this.newOrderElement.position = periodicElement.position;
+    this.newOrderElement.category = periodicElement.category;
+    this.newOrderElement.deliveryQuantity = periodicElement.deliveryQuantity;
+    this.newOrderElement.deliveryDisplayPricePerUnit = periodicElement.deliveryDisplayPricePerUnit;
+    this.newOrderElement.deliveryDiscount = periodicElement.deliveryDiscount;
+    this.newOrderElement.deliveryFinalPricePerUnit = periodicElement.deliveryFinalPricePerUnit;
+
+    //function to remove the current element
+    this.removeCurrentItem(periodicElement.position);
+    this.table.renderRows();
+  }
+
   removeCurrentItem(currentIndex: number){
     for (let i = 0; i < this.listNewItemsToShops.length; i++) {
       if (this.listNewItemsToShops[i].position === currentIndex){
         this.listNewItemsToShops.splice(i, 1);
       }
     }
+  }
+
+  verifyAvailability() {
+    let requestTest: VerifyAmountItemsOnStockDTO = {
+      category: 'anillo',
+      quantity: 15,
+      pricePerUnit: 15
+    };
+
+    //update the amount of items on stock
+    this.newDeliveryToShopService.verifyAmountItemsOnStock(
+      this.newOrderElement.category,
+      this.newOrderElement.deliveryQuantity,
+      this.newOrderElement.deliveryFinalPricePerUnit)
+      .subscribe(JsonDto => {console.log(JsonDto); this.availableItems = JsonDto.quantity; console.log(this.availableItems)});
+
+  }
+
+  sendCurrentOrder() {
+    this.newDeliveryToShopService.sendFinalizedOrder();
+    listNewItemsToShops: [];
+    //todo: nice automatic refresh
+    this.table.renderRows();
   }
 
   /** Whether the number of selected elements matches the total number of rows. */
@@ -174,43 +215,5 @@ export class NewDeliveryToShopComponent implements OnInit {
       return `${this.isAllSelected() ? 'select' : 'deselect'} all`;
     }
     return `${this.selection.isSelected(row) ? 'deselect' : 'select'} row ${row.position + 1}`;
-  }
-
-  updateButton(periodicElement: PeriodicElement) {
-    console.log('print button');
-    console.log(periodicElement);
-    this.newOrderElement.position = periodicElement.position;
-    this.newOrderElement.category = periodicElement.category;
-    this.newOrderElement.deliveryQuantity = periodicElement.deliveryQuantity;
-    this.newOrderElement.deliveryDisplayPricePerUnit = periodicElement.deliveryDisplayPricePerUnit;
-    this.newOrderElement.deliveryDiscount = periodicElement.deliveryDiscount;
-    this.newOrderElement.deliveryFinalPricePerUnit = periodicElement.deliveryFinalPricePerUnit;
-
-    //function to remove the current element
-    this.removeCurrentItem(periodicElement.position);
-    this.table.renderRows();
-  }
-
-  verifyAvailability() {
-    let requestTest: VerifyAmountItemsOnStockDTO = {
-      category: 'anillo',
-      quantity: 15,
-      pricePerUnit: 15
-    };
-
-    //update the amount of items on stock
-    this.newDeliveryToShopService.verifyAmountItemsOnStock(
-            this.newOrderElement.category,
-            this.newOrderElement.deliveryQuantity,
-            this.newOrderElement.deliveryFinalPricePerUnit)
-      .subscribe(JsonDto => {console.log(JsonDto); this.availableItems = JsonDto.quantity; console.log(this.availableItems)});
-
-  }
-
-  sendCurrentOrder() {
-    this.newDeliveryToShopService.sendFinalizedOrder();
-    listNewItemsToShops: [];
-    //todo: nice automatic refresh
-    this.table.renderRows();
   }
 }

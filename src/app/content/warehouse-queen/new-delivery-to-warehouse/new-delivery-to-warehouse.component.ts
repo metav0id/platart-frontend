@@ -5,7 +5,7 @@ import {FormControl, Validators} from '@angular/forms';
 import {PeriodicElement} from './periodic-element';
 import {NewDeliveryToWarehouseService} from './new-delivery-to-warehouse.service';
 import {HttpClient} from '@angular/common/http';
-import {WarehouseItemCategoryDTO} from '../warehouseDTOs/warehouse-item-category-DTO';
+import {WarehouseItemCategoryDTO} from '../warehouseCategory/warehouse-item-category-DTO';
 
 /** Is used for Category Drop Down */
 /*export interface Category {

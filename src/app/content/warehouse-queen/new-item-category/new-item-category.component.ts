@@ -32,9 +32,36 @@ export class NewItemCategoryComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.loadAllCategories();
+    this.fetchAllCategoriesData();
   }
 
+  fetchAllCategoriesData(): void {
+    this.newitemcategoryService.getAllCategories().subscribe(JsonDto => {
+      let counter: number = 1;
+      this.listCategories = [];
+      for (const item of JsonDto) {
+        this.listCategories.push({position: counter, category: item.category});
+        counter++;
+      }
+    });
+  }
+
+  createNewCategory() {
+    if (!this.verifyCategoryExistant()) {
+      this.newCategoryElement.category = this.newCategoryElement.category.toLowerCase();
+
+      let newCategoryElementToList: PeriodicElement = {
+        position: this.newCategoryElement.position,
+        category: this.newCategoryElement.category
+      };
+      this.listCategories.push(newCategoryElementToList);
+
+      this.newitemcategoryService.saveNewCategory(this.newCategoryElement.category);
+
+
+      this.table.renderRows();
+    }
+  }
 
   verifyCategoryExistant(): boolean {
     this.availableItems = 'category element is new';
@@ -47,17 +74,6 @@ export class NewItemCategoryComponent implements OnInit {
       }
     }
     return false;
-  }
-
-  createNewCategory() {
-    if (!this.verifyCategoryExistant()) {
-      this.newCategoryElement.category = this.newCategoryElement.category.toLowerCase();
-      this.listCategories.push(this.newCategoryElement);
-
-      this.newitemcategoryService.saveNewCategory(this.newCategoryElement.category);
-      this.loadAllCategories();
-      this.table.renderRows();
-    }
   }
 
   /** Whether the number of selected elements matches the total number of rows. */
@@ -89,25 +105,27 @@ export class NewItemCategoryComponent implements OnInit {
     console.log('implement periodic element');
   }
 
-  loadAllCategories(): void {
-    this.newitemcategoryService.getAllCategories().subscribe(JsonDto => {
-      let counter: number = 1;
-      this.listCategories = [];
-      for (const item of JsonDto) {
-        this.listCategories.push({position: counter, category: item.category});
-        counter++;
-      }
-    });
-  }
-
   deleteSelectedCategory() {
     console.log('delete selected categories');
+
     for(let elem of this.selection.selected){
 
       let currentCategory: string = elem.category;
+      let currentCategoryIndex: number = elem.position;
+      this.removeCurrentIndex(currentCategoryIndex);
+
       this.newitemcategoryService.deleteCategory(currentCategory);
     }
+
     this.table.renderRows();
+  }
+
+  removeCurrentIndex(currentIndex: number){
+    for(let i=0; i<this.listCategories.length; i++){
+      if(this.listCategories[i].position===currentIndex){
+        this.listCategories.splice(i, 1);
+      }
+    }
   }
 
 }

@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
-import {WarehouseItemCategoryDTO} from '../warehouseDTOs/warehouse-item-category-DTO';
+import {WarehouseItemCategoryDTO} from '../warehouseCategory/warehouse-item-category-DTO';
 
 @Injectable({
   providedIn: 'root'

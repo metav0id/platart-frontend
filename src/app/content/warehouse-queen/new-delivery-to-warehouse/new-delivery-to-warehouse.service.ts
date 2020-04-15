@@ -3,7 +3,7 @@ import {HttpClient} from '@angular/common/http';
 import {PeriodicElement} from './periodic-element';
 import {WarehouseCheckInNewItemDTO} from './warehouse-check-in-new-item-DTO';
 import {Observable} from 'rxjs';
-import {WarehouseItemCategoryDTO} from '../warehouseDTOs/warehouse-item-category-DTO';
+import {WarehouseItemCategoryDTO} from '../warehouseCategory/warehouse-item-category-DTO';
 
 @Injectable({
   providedIn: 'root'
