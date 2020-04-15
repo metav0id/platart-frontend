@@ -2,3 +2,10 @@ agm-map{
   height: 600px;
 width: 80%;
 }
+mat-card-title{
+
+  text-shadow: 2px 5px 5px #403f3f;
+  font-weight: bolder;
+  font-family: sans-serif;
+  color: #54528e;
+}
