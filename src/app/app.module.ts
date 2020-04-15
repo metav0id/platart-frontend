@@ -25,6 +25,7 @@ import { NewItemCategoryComponent } from './content/warehouse-queen/new-item-cat
 import {MatSelectModule} from "@angular/material/select";
 import {MatInputModule} from "@angular/material/input";
 import {MatCheckboxModule} from "@angular/material/checkbox";
+import {MatDatepickerModule} from "@angular/material/datepicker";
 
 
 @NgModule({
@@ -54,7 +55,8 @@ import {MatCheckboxModule} from "@angular/material/checkbox";
     MatInputModule,
     BrowserAnimationsModule,
     MatCheckboxModule,
-    MatTableModule
+    MatTableModule,
+    MatDatepickerModule
   ],
   providers: [],
   bootstrap: [AppComponent]

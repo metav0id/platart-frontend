@@ -1,7 +1,7 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {SelectionModel} from "@angular/cdk/collections";
 import {MatTable} from "@angular/material/table";
-import {isElementScrolledOutsideView} from "@angular/cdk/overlay/position/scroll-clip";
+  import {NewitemcategoryService} from "./new-item-category.service";
 
 
 /** Is used for table elements */
@@ -27,15 +27,11 @@ export class NewItemCategoryComponent implements OnInit {
   availableItems: string = 'check existance';
 
   @ViewChild('myShopCheckinProductsTable') table: MatTable<any>;
-  constructor() {
-    this.listCategories.push({position: 1, category: 'pulsera'});
-    this.listCategories.push({position: 2 ,category: 'cadena'});
-    this.listCategories.push({position: 3 ,category: 'anillo'});
-    this.listCategories.push({position: 4 ,category: 'arete'});
-
+  constructor(private newitemcategoryService: NewitemcategoryService) {
   }
 
   ngOnInit(): void {
+    this.loadAllCategories();
   }
 
 
@@ -56,6 +52,9 @@ export class NewItemCategoryComponent implements OnInit {
     if(!this.verifyCategoryExistant()) {
       this.newCategoryElement.category = this.newCategoryElement.category.toLowerCase();
       this.listCategories.push(this.newCategoryElement);
+
+      this.newitemcategoryService.saveNewCategory(this.newCategoryElement.category);
+      this.loadAllCategories();
       this.table.renderRows();
     }
   }
@@ -92,4 +91,16 @@ export class NewItemCategoryComponent implements OnInit {
   deleteSelectedCategory() {
     console.log('delete selected categories');
   }
+
+  loadAllCategories(): void {
+    this.newitemcategoryService.getAllCategories().subscribe(JsonDto => {
+      let counter: number = 1;
+      this.listCategories = [];
+      for (const item of JsonDto){
+        this.listCategories.push({position: counter, category: item.category});
+        counter++;
+      }
+    })
+  }
+
 }
