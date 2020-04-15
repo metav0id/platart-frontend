@@ -38,6 +38,7 @@ export class NewDeliveryToShopService {
 
   sendFinalizedOrder(sendOrderItemDTOList: NewOrderItemDTO[]): void {
     console.log('Order was send');
+    console.log(sendOrderItemDTOList);
     this.http.post<null>(this.sendDeliveryOrderURL, sendOrderItemDTOList).subscribe();
   }
 

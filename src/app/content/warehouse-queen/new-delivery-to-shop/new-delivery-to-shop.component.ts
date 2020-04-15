@@ -34,7 +34,12 @@ export class NewDeliveryToShopComponent implements OnInit {
   displayedColumns: string[] = ['select', 'category', 'deliveryDisplayPricePerUnit', 'deliveryQuantity', 'deliveryDiscount', 'deliveryFinalPricePerUnit', 'updateItem'];
   public listNewItemsToShops: PeriodicElement[] = [];
   public categoryItems: WarehouseItemCategoryDTO[] = [];
-  public shopsList: Shop[] = [];
+  public shopsList: Shop[] = [
+    {name: 'shop1'},
+    {name: 'shop2'},
+    {name: 'shop3'},
+    {name: 'shop4'}
+  ];
   private totalCost: number;
   private totalItems: number;
 
@@ -45,12 +50,15 @@ export class NewDeliveryToShopComponent implements OnInit {
     deliveryDisplayPricePerUnit: 0,
     deliveryDiscount: 0,
     deliveryFinalPricePerUnit: 0,
-    deliveryShop: 'shopo'
+    deliveryShop: 'chooseShop'
   };
 
   selection = new SelectionModel<PeriodicElement>(true, []);
   /** Category selection */
   public categoryControl = new FormControl('', Validators.required);
+
+  /** Shop selection */
+  public shopControll = new FormControl('', Validators.required)
 
   availableItems: number = 0;
   @ViewChild('myShopCheckinProductsTable') table: MatTable<any>;
@@ -75,7 +83,7 @@ export class NewDeliveryToShopComponent implements OnInit {
             deliveryDisplayPricePerUnit: tempNewOrderItemDTO.deliveryDisplayPricePerUnit,
             deliveryFinalPricePerUnit: tempNewOrderItemDTO.deliveryFinalPricePerUnit,
             deliveryQuantity: tempNewOrderItemDTO.deliveryQuantity,
-            deliveryShop: 'ShopComponent'
+            deliveryShop: tempNewOrderItemDTO.deliveryShop
           };
           counter++;
           this.listNewItemsToShops.push(newPeriodicElement);
@@ -100,7 +108,7 @@ export class NewDeliveryToShopComponent implements OnInit {
         deliveryDisplayPricePerUnit: this.newOrderElement.deliveryDisplayPricePerUnit,
         deliveryDiscount: this.newOrderElement.deliveryDiscount,
         deliveryFinalPricePerUnit: this.newOrderElement.deliveryFinalPricePerUnit,
-        deliveryShop: 'ShopComponent'
+        deliveryShop: this.newOrderElement.deliveryShop
       };
       this.listNewItemsToShops.push(newItem);
       this.table.renderRows();
@@ -141,7 +149,7 @@ export class NewDeliveryToShopComponent implements OnInit {
         deliveryDisplayPricePerUnit: tempPeriodicElement.deliveryDisplayPricePerUnit,
         deliveryFinalPricePerUnit: tempPeriodicElement.deliveryFinalPricePerUnit,
         deliveryQuantity: tempPeriodicElement.deliveryQuantity,
-        deliveryShop: 'ShopComponent'
+        deliveryShop: tempPeriodicElement.deliveryShop
       };
       tempNewOrderItemDTOList.push(newOrderItemDTO);
     }
@@ -167,6 +175,7 @@ export class NewDeliveryToShopComponent implements OnInit {
     this.newOrderElement.deliveryDisplayPricePerUnit = periodicElement.deliveryDisplayPricePerUnit;
     this.newOrderElement.deliveryDiscount = periodicElement.deliveryDiscount;
     this.newOrderElement.deliveryFinalPricePerUnit = periodicElement.deliveryFinalPricePerUnit;
+    this.newOrderElement.deliveryShop = periodicElement.deliveryShop;
 
     //function to remove the current element
     this.removeCurrentItem(periodicElement.position);
