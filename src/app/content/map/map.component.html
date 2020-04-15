@@ -1,0 +1,56 @@
+
+<mat-card>
+  <mat-card-title>Mapa</mat-card-title>
+  <mat-card-content>x y z
+    <agm-map [latitude]= "lat" [longitude] = "lng" [zoom] ="15">
+
+
+<!--      warehousemarker-->
+      <agm-marker [latitude]= "lat" [longitude] = "lng">
+        <agm-info-window>
+
+          <strong>Warehouse</strong>
+          <p>Center of distribution</p>
+          <div>
+            <a href="stockinwarehouse">
+              <button mat-raised-button color="primary"> Go to warehouse
+              </button>
+            </a>
+          </div>
+        </agm-info-window>
+      </agm-marker>
+
+<!--      warehouse marker-->
+
+      <!--      store1 marker-->
+
+      <agm-marker [latitude]= "lat2" [longitude] = "lng2">
+        <agm-info-window>
+
+          <strong>Titutlo</strong>
+          <p>
+            parrafo
+          </p>
+          <div>
+            <a href="#">
+              <button> Go to warehouse
+              </button>
+            </a>
+          </div>
+        </agm-info-window>
+      </agm-marker>
+
+
+      <!--      store1 marker-->
+      <!--      store2 marker-->
+
+
+
+      <!--      store2 marker-->
+
+
+    </agm-map>
+
+  </mat-card-content>
+
+</mat-card>

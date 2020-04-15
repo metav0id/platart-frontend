@@ -26,7 +26,11 @@ import {MatSelectModule} from "@angular/material/select";
 import {MatInputModule} from "@angular/material/input";
 import {MatCheckboxModule} from "@angular/material/checkbox";
 import {MatDatepickerModule} from "@angular/material/datepicker";
-
+import { MapComponent } from './content/map/map.component';
+import { MatSliderModule } from '@angular/material/slider';
+import {MatProgressBarModule} from '@angular/material/progress-bar';
+import {MatCardModule} from '@angular/material/card';
+import { AgmCoreModule} from '@agm/core';
 
 @NgModule({
   declarations: [
@@ -36,7 +40,8 @@ import {MatDatepickerModule} from "@angular/material/datepicker";
     PageNotFoundComponent,
     HeaderComponent,
     FooterComponent,
-    NewItemCategoryComponent
+    NewItemCategoryComponent,
+    MapComponent
   ],
   imports: [
     BrowserModule,
@@ -56,7 +61,10 @@ import {MatDatepickerModule} from "@angular/material/datepicker";
     BrowserAnimationsModule,
     MatCheckboxModule,
     MatTableModule,
-    MatDatepickerModule
+    MatDatepickerModule,
+    MatSliderModule,
+    AgmCoreModule.forRoot({apiKey: 'AIzaSyDNOu2JQ001PxZY-GVwFvVou0_6h_Sj-14'}),
+    MatCardModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
