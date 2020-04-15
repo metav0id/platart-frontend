@@ -77,3 +77,8 @@ h3{
 .punkt{
   border-style: dotted;
 }
+
+.cont-bg3{
+  background-color: #f1d4cf;
+  border-radius: 25px;
+}

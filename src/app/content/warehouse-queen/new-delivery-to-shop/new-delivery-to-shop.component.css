@@ -13,6 +13,10 @@ table {
 .space{
   height: 20px;
 }
+
+.space2{
+  width: 20px;
+}
 button {
   transition-duration: 0.4s;
   display: inline-block;
@@ -54,6 +58,11 @@ th{
 
 .cont-bg2{
   background-color: #dbf1cf;
+  border-radius: 25px;
+}
+
+.cont-bg3{
+  background-color: #f1d4cf;
   border-radius: 25px;
 }
 
