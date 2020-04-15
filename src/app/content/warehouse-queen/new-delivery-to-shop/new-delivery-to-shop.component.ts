@@ -17,10 +17,11 @@ export interface PeriodicElement {
   deliveryQuantity: number;
   deliveryDiscount: number;
   deliveryFinalPricePerUnit: number;
+  deliveryShop: string;
 }
 
-/** Is used for Category Drop Down */
-export interface Category {
+/** Is used for Shops Drop Down */
+export interface Shop {
   name: string;
 }
 
@@ -33,6 +34,7 @@ export class NewDeliveryToShopComponent implements OnInit {
   displayedColumns: string[] = ['select', 'category', 'deliveryDisplayPricePerUnit', 'deliveryQuantity', 'deliveryDiscount', 'deliveryFinalPricePerUnit', 'updateItem'];
   public listNewItemsToShops: PeriodicElement[] = [];
   public categoryItems: WarehouseItemCategoryDTO[] = [];
+  public shopsList: Shop[] = [];
   private totalCost: number;
   private totalItems: number;
 
@@ -42,7 +44,8 @@ export class NewDeliveryToShopComponent implements OnInit {
     deliveryQuantity: 0,
     deliveryDisplayPricePerUnit: 0,
     deliveryDiscount: 0,
-    deliveryFinalPricePerUnit: 0
+    deliveryFinalPricePerUnit: 0,
+    deliveryShop: 'shopo'
   };
 
   selection = new SelectionModel<PeriodicElement>(true, []);
@@ -71,7 +74,8 @@ export class NewDeliveryToShopComponent implements OnInit {
             deliveryDiscount: tempNewOrderItemDTO.deliveryDiscount,
             deliveryDisplayPricePerUnit: tempNewOrderItemDTO.deliveryDisplayPricePerUnit,
             deliveryFinalPricePerUnit: tempNewOrderItemDTO.deliveryFinalPricePerUnit,
-            deliveryQuantity: tempNewOrderItemDTO.deliveryQuantity
+            deliveryQuantity: tempNewOrderItemDTO.deliveryQuantity,
+            deliveryShop: 'ShopComponent'
           };
           counter++;
           this.listNewItemsToShops.push(newPeriodicElement);
@@ -95,7 +99,8 @@ export class NewDeliveryToShopComponent implements OnInit {
         deliveryQuantity: this.newOrderElement.deliveryQuantity,
         deliveryDisplayPricePerUnit: this.newOrderElement.deliveryDisplayPricePerUnit,
         deliveryDiscount: this.newOrderElement.deliveryDiscount,
-        deliveryFinalPricePerUnit: this.newOrderElement.deliveryFinalPricePerUnit
+        deliveryFinalPricePerUnit: this.newOrderElement.deliveryFinalPricePerUnit,
+        deliveryShop: 'ShopComponent'
       };
       this.listNewItemsToShops.push(newItem);
       this.table.renderRows();
@@ -120,6 +125,13 @@ export class NewDeliveryToShopComponent implements OnInit {
   }
 
   saveCurrentOrder() {
+    let tempNewOrderItemDTOList: NewOrderItemDTO[] = this.mapPeriodicElementListToDTO();
+
+    this.newDeliveryToShopService.setAllNewOrderItems(tempNewOrderItemDTOList);
+    this.table.renderRows();
+  }
+
+  mapPeriodicElementListToDTO(): NewOrderItemDTO[] {
     let tempNewOrderItemDTOList: NewOrderItemDTO[] = [];
     for(const tempPeriodicElement of this.listNewItemsToShops) {
       let newOrderItemDTO: NewOrderItemDTO = {
@@ -128,12 +140,12 @@ export class NewDeliveryToShopComponent implements OnInit {
         deliveryDiscount: tempPeriodicElement.deliveryDiscount,
         deliveryDisplayPricePerUnit: tempPeriodicElement.deliveryDisplayPricePerUnit,
         deliveryFinalPricePerUnit: tempPeriodicElement.deliveryFinalPricePerUnit,
-        deliveryQuantity: tempPeriodicElement.deliveryQuantity
+        deliveryQuantity: tempPeriodicElement.deliveryQuantity,
+        deliveryShop: 'ShopComponent'
       };
       tempNewOrderItemDTOList.push(newOrderItemDTO);
     }
-    this.newDeliveryToShopService.setAllNewOrderItems(tempNewOrderItemDTOList);
-    this.table.renderRows();
+    return tempNewOrderItemDTOList;
   }
 
   clearCurrentOrder() {
@@ -170,12 +182,6 @@ export class NewDeliveryToShopComponent implements OnInit {
   }
 
   verifyAvailability() {
-    let requestTest: VerifyAmountItemsOnStockDTO = {
-      category: 'anillo',
-      quantity: 15,
-      pricePerUnit: 15
-    };
-
     //update the amount of items on stock
     this.newDeliveryToShopService.verifyAmountItemsOnStock(
       this.newOrderElement.category,
@@ -186,9 +192,9 @@ export class NewDeliveryToShopComponent implements OnInit {
   }
 
   sendCurrentOrder() {
-    this.newDeliveryToShopService.sendFinalizedOrder();
-    listNewItemsToShops: [];
-    //todo: nice automatic refresh
+    let tempNewOrderItemDTOList: NewOrderItemDTO[] = this.mapPeriodicElementListToDTO();
+
+    this.newDeliveryToShopService.sendFinalizedOrder(tempNewOrderItemDTOList);
     this.table.renderRows();
   }
 

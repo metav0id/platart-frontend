@@ -5,4 +5,5 @@ export interface NewOrderItemDTO {
   deliveryDisplayPricePerUnit: number;
   deliveryDiscount: number;
   deliveryFinalPricePerUnit: number;
+  deliveryShop: string;
 }
