@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ManagerKingComponent } from './manager-king.component';
+import { ManageShopsInfoComponent } from './manage-shops-info.component';
 
-describe('ManagerQueenComponent', () => {
-  let component: ManagerKingComponent;
-  let fixture: ComponentFixture<ManagerKingComponent>;
+describe('ManageShopsInfoComponent', () => {
+  let component: ManageShopsInfoComponent;
+  let fixture: ComponentFixture<ManageShopsInfoComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ManagerKingComponent ]
+      declarations: [ ManageShopsInfoComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ManagerKingComponent);
+    fixture = TestBed.createComponent(ManageShopsInfoComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

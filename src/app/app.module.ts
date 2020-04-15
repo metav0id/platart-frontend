@@ -4,8 +4,6 @@ import {NgModule} from '@angular/core';
 import {AppComponent} from './app.component';
 import {HttpClientModule} from '@angular/common/http';
 import {AppRoutingModule} from './app-routing.module';
-import {SalesPrincessComponent} from './content/sales-princess/sales-princess.component';
-import {ManagerKingComponent} from './content/manager-king/manager-king.component';
 import {PageNotFoundComponent} from './content/page-not-found/page-not-found.component';
 import {WarehouseQueenModule} from './content/warehouse-queen/warehouse-queen.module';
 import {CdkTableModule} from '@angular/cdk/table';
@@ -31,12 +29,12 @@ import { MatSliderModule } from '@angular/material/slider';
 import {MatProgressBarModule} from '@angular/material/progress-bar';
 import {MatCardModule} from '@angular/material/card';
 import { AgmCoreModule} from '@agm/core';
+import {SalesPrincessModule} from "./content/sales-princess/sales-princess.module";
+import {ManagerKingModule} from "./content/manager-king/manager-king.module";
 
 @NgModule({
   declarations: [
     AppComponent,
-    SalesPrincessComponent,
-    ManagerKingComponent,
     PageNotFoundComponent,
     HeaderComponent,
     FooterComponent,
@@ -47,6 +45,8 @@ import { AgmCoreModule} from '@agm/core';
     BrowserModule,
     HttpClientModule,
     WarehouseQueenModule,
+    ManagerKingModule,
+    SalesPrincessModule,
     AppRoutingModule,
     MatMenuModule,
     MatToolbarModule,
