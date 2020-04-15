@@ -35,10 +35,10 @@ export class NewDeliveryToShopComponent implements OnInit {
   newOrderElement: PeriodicElement = {
     position: 0,
     category: 'chooseCategory',
-    deliveryQuantity: 11,
-    deliveryDisplayPricePerUnit: 10,
-    deliveryDiscount: 20,
-    deliveryFinalPricePerUnit: 8
+    deliveryQuantity: 0,
+    deliveryDisplayPricePerUnit: 0,
+    deliveryDiscount: 0,
+    deliveryFinalPricePerUnit: 0
   };
 
   selection = new SelectionModel<PeriodicElement>(true, []);

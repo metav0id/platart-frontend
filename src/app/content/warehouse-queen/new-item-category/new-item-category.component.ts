@@ -89,10 +89,6 @@ export class NewItemCategoryComponent implements OnInit {
     console.log('implement periodic element');
   }
 
-  deleteSelectedCategory() {
-    console.log('delete selected categories');
-  }
-
   loadAllCategories(): void {
     this.newitemcategoryService.getAllCategories().subscribe(JsonDto => {
       let counter: number = 1;
@@ -102,6 +98,16 @@ export class NewItemCategoryComponent implements OnInit {
         counter++;
       }
     });
+  }
+
+  deleteSelectedCategory() {
+    console.log('delete selected categories');
+    for(let elem of this.selection.selected){
+
+      let currentCategory: string = elem.category;
+      this.newitemcategoryService.deleteCategory(currentCategory);
+    }
+    this.table.renderRows();
   }
 
 }
