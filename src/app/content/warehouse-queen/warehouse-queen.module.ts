@@ -14,6 +14,7 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatSelectModule} from '@angular/material/select';
 import {MatInputModule} from "@angular/material/input";
 import {MatIconModule} from "@angular/material/icon";
+import {MatRadioModule} from "@angular/material/radio";
 
 
 @NgModule({
@@ -34,7 +35,8 @@ import {MatIconModule} from "@angular/material/icon";
         ReactiveFormsModule,
         MatSelectModule,
         MatInputModule,
-        MatIconModule
+        MatIconModule,
+        MatRadioModule
     ]
 })
 export class WarehouseQueenModule { }
