@@ -36,9 +36,10 @@ export class NewDeliveryToShopService {
     return this.http.post<VerifyAmountItemsOnStockDTO>(this.verifyAmountItemsOnStockURL, requestTest);
   }
 
-  sendFinalizedOrder(): void {
+  sendFinalizedOrder(sendOrderItemDTOList: NewOrderItemDTO[]): void {
     console.log('Order was send');
-    this.http.post<null>(this.sendDeliveryOrderURL, null).subscribe();
+    console.log(sendOrderItemDTOList);
+    this.http.post<null>(this.sendDeliveryOrderURL, sendOrderItemDTOList).subscribe();
   }
 
 }
