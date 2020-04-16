@@ -31,6 +31,8 @@ import {MatCardModule} from '@angular/material/card';
 import { AgmCoreModule} from '@agm/core';
 import {SalesPrincessModule} from "./content/sales-princess/sales-princess.module";
 import {ManagerKingModule} from "./content/manager-king/manager-king.module";
+import {MatDialogModule} from '@angular/material/dialog';
+
 
 @NgModule({
   declarations: [
@@ -65,6 +67,7 @@ import {ManagerKingModule} from "./content/manager-king/manager-king.module";
     MatSliderModule,
     AgmCoreModule.forRoot({apiKey: 'AIzaSyDNOu2JQ001PxZY-GVwFvVou0_6h_Sj-14'}),
     MatCardModule,
+    MatDialogModule
   ],
   providers: [],
   bootstrap: [AppComponent]

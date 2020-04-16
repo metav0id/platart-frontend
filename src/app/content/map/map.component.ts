@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import {Marcador} from "./components/marker.class";
+import {MARKERS} from "./components/marker";
 
 @Component({
   selector: 'app-map',
@@ -8,13 +10,19 @@ import { Component, OnInit } from '@angular/core';
 export class MapComponent implements OnInit {
   lat: number = 51.678418;
   lng: number = 7.809007;
-  lat1: number = 51.679418;
-  lng1: number = 7.809007;
-  lat2: number = 51.676418;
-  lng2: number = 7.809007;
-  constructor() { }
+  marcadores: Marcador[] = MARKERS;
+
+  constructor() {
+    // const nuevoMarcador = new Marcador(51.678418, 7.809007);
+    // this.marcadores.push(nuevoMarcador);
+  }
 
   ngOnInit(): void {
   }
-
+  agregarMarcador(evento){
+    console.log(evento.coords.lat);
+    const coords: { lat: number, lng: number } = evento.coords;
+    const nuevoMarcador = new Marcador(coords.lat, coords.lng);
+    this.marcadores.push(nuevoMarcador);
+  }
 }

@@ -2,20 +2,21 @@
 <mat-card>
   <mat-card-title>Select the location you want to manage:</mat-card-title>
   <mat-card-content>
-    <agm-map [latitude]= "lat" [longitude] = "lng" [zoom] ="15">
-
-
+    <agm-map  [latitude]= "lat" [longitude] = "lng" [zoom] ="15">
+<!--method to add a marker by clicking should be inserted in line above after agm-map-->
+<!--    (mapClick)="agregarMarcador($event)"-->
+    <!--method to add a marker-->
 <!--      warehousemarker-->
-      <agm-marker [latitude]= "lat" [longitude] = "lng">
-        <agm-info-window>
+      <agm-marker *ngFor="let marcador of marcadores" [latitude]= "marcador.lat" [longitude] = "marcador.lng">
+        <agm-info-window >
 
-          <strong>Warehouse</strong>
-          <p>Center of distribution</p>
+          <strong>{{marcador.titulo}}</strong>
+          <p>{{marcador.desc}}</p>
           <div>
-            <a href="stockinwarehouse">
-              <button mat-raised-button color="primary"> Go to warehouse
-              </button>
+            <a href="{{marcador.link}}">
+              <button mat-raised-button color="primary"> Go to {{marcador.titulo}}</button>
             </a>
+<!--            <button mat-raised-button color="warn"> Edit marker</button>-->
           </div>
         </agm-info-window>
       </agm-marker>
@@ -24,18 +25,7 @@
 
       <!--      store1 marker-->
 
-      <agm-marker [latitude]= "lat2" [longitude] = "lng2">
-        <agm-info-window>
 
-          <strong>Store 1</strong>
-          <p>Selling point</p>
-          <div>
-            <a href="newdeliverytoshop">
-              <button mat-raised-button color="primary"> Go to store 1</button>
-            </a>
-          </div>
-        </agm-info-window>
-      </agm-marker>
 
 
       <!--      store1 marker-->
