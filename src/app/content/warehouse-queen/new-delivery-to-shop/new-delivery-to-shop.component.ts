@@ -34,6 +34,10 @@ export class NewDeliveryToShopComponent implements OnInit {
   displayedColumns: string[] = ['select', 'category', 'deliveryDisplayPricePerUnit', 'deliveryQuantity', 'deliveryDiscount', 'deliveryFinalPricePerUnit', 'updateItem'];
   public listNewItemsToShops: PeriodicElement[] = [];
   public categoryItems: WarehouseItemCategoryDTO[] = [];
+
+  public discountMethod: string;
+  public discountMethodList: string[] = ['percent', 'displayPrice'];
+
   public shopsList: Shop[] = [
     {name: 'shop1'},
     {name: 'shop2'},
@@ -100,7 +104,7 @@ export class NewDeliveryToShopComponent implements OnInit {
     if (this.newOrderElement.deliveryFinalPricePerUnit > 0 &&
         this.newOrderElement.category !== '' &&
         this.newOrderElement.deliveryQuantity > 0 &&
-        this.newOrderElement.deliveryShop !== null) {
+        this.newOrderElement.deliveryShop !== '') {
 
       const newItem: PeriodicElement = {
         position: this.listNewItemsToShops.length +1,
@@ -111,6 +115,19 @@ export class NewDeliveryToShopComponent implements OnInit {
         deliveryFinalPricePerUnit: this.newOrderElement.deliveryFinalPricePerUnit,
         deliveryShop: this.newOrderElement.deliveryShop
       };
+
+      if(newItem.deliveryDiscount===0 && newItem.deliveryFinalPricePerUnit!==0){
+        newItem.deliveryDiscount = Math.round(newItem.deliveryFinalPricePerUnit/newItem.deliveryDisplayPricePerUnit);
+      }
+
+      if(newItem.deliveryDiscount!==0 && newItem.deliveryFinalPricePerUnit===0){
+        newItem.deliveryFinalPricePerUnit = Math.round(newItem.deliveryDisplayPricePerUnit*newItem.deliveryDiscount/100);
+      }
+
+      if(newItem.deliveryDiscount === 0 && newItem.deliveryFinalPricePerUnit === 0){
+        newItem.deliveryDisplayPricePerUnit = newItem.deliveryFinalPricePerUnit;
+      }
+
       this.listNewItemsToShops.push(newItem);
       this.table.renderRows();
       console.log(this.listNewItemsToShops);
@@ -198,7 +215,6 @@ export class NewDeliveryToShopComponent implements OnInit {
       this.newOrderElement.deliveryQuantity,
       this.newOrderElement.deliveryFinalPricePerUnit)
       .subscribe(JsonDto => {console.log(JsonDto); this.availableItems = JsonDto.quantity; console.log(this.availableItems)});
-
   }
 
   sendCurrentOrder() {

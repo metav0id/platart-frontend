@@ -202,7 +202,21 @@
               <a>{{availableItems}} items</a>
             </div>
             <div class="space"></div>
-            <div class="newOrderInputFieldsDeliveryDisplayPricePerUnit">
+
+            <div class="discountSelectionRadioButton">
+              <label id="example-radio-group-label">Pick discount type:</label>
+              <div class="space"></div>
+              <mat-radio-group
+                aria-labelledby="example-radio-group-label"
+                class="example-radio-group"
+                [(ngModel)]="discountMethod">
+                <mat-radio-button class="example-radio-button" *ngFor="let discount of discountMethodList" [value]="discount">
+                  {{discount}}
+                </mat-radio-button>
+              </mat-radio-group>
+            </div>
+
+            <div *ngIf="discountMethod==='displayPrice'" class="newOrderInputFieldsDeliveryDisplayPricePerUnit">
               <mat-form-field hintLabel="Max 10 characters" appearance="fill">
                 <mat-label>Enter deliveryDisplayPricePerUnit</mat-label>
                 <input matInput #input [(ngModel)]="newOrderElement.deliveryDisplayPricePerUnit" maxlength="10" placeholder="Ex. deliveryDisplayPricePerUnit">
@@ -210,7 +224,7 @@
               </mat-form-field>
             </div>
 
-            <div class="newOrderInputFieldsDeliveryDeliveryDiscount">
+            <div *ngIf="discountMethod==='percent'" class="newOrderInputFieldsDeliveryDeliveryDiscount">
               <mat-form-field hintLabel="Max 10 characters" appearance="fill">
                 <mat-label>Enter deliveryDiscount</mat-label>
                 <input matInput #input [(ngModel)]="newOrderElement.deliveryDiscount" maxlength="10" placeholder="Ex. deliveryDiscount">
