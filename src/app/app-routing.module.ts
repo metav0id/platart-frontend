@@ -4,7 +4,7 @@ import {PageNotFoundComponent} from './content/page-not-found/page-not-found.com
 import { MapComponent } from './content/map/map.component';
 const routes: Routes = [
   //{path: '', redirectTo: 'warehouse', pathMatch: 'full'},
-  {path: '**', component: MapComponent}
+    {path: '**', component: MapComponent}
 ];
 
 @NgModule({
