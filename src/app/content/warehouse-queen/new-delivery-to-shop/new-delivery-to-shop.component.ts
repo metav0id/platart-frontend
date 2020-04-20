@@ -8,6 +8,7 @@ import {VerifyAmountItemsOnStockDTO} from "./VerifyAmountItemsOnStockDTO";
 import {WarehouseItemCategoryDTO} from "../warehouseCategory/warehouse-item-category-DTO";
 import {WarehouseCategoryService} from "../warehouseCategory/warehouseCategory.service";
 import {NewDeliveryToWarehouseService} from "../new-delivery-to-warehouse/new-delivery-to-warehouse.service";
+import {Observable} from "rxjs";
 
 /** Is used for table elements */
 export interface PeriodicElement {
@@ -36,7 +37,11 @@ export class NewDeliveryToShopComponent implements OnInit {
   public categoryItems: WarehouseItemCategoryDTO[] = [];
 
   public discountMethod: string;
-  public discountMethodList: string[] = ['percent', 'displayPrice'];
+  private readonly DISCOUNT_METHOD_PERCENT = 'percent';
+  private readonly DISCOUNT_METHOD_DISPLAY_PRICE = 'displayPrice';
+  public discountMethodList: string[] = [ this.DISCOUNT_METHOD_PERCENT , this.DISCOUNT_METHOD_DISPLAY_PRICE];
+  private readonly INITIALIZE_CATEGORY = 'chooseCategory';
+  private readonly INITIALIZE_SHOP = 'chooseShop';
 
   public shopsList: Shop[] = [
     {name: 'shop1'},
@@ -49,12 +54,12 @@ export class NewDeliveryToShopComponent implements OnInit {
 
   newOrderElement: PeriodicElement = {
     position: 0,
-    category: 'chooseCategory',
+    category: this.INITIALIZE_CATEGORY,
     deliveryQuantity: 0,
     deliveryDisplayPricePerUnit: 0,
     deliveryDiscount: 0,
     deliveryFinalPricePerUnit: 0,
-    deliveryShop: 'chooseShop'
+    deliveryShop: this.INITIALIZE_SHOP
   };
 
   selection = new SelectionModel<PeriodicElement>(true, []);
@@ -101,36 +106,43 @@ export class NewDeliveryToShopComponent implements OnInit {
   }
 
   setNewItemOrder() {
-    if (this.newOrderElement.deliveryFinalPricePerUnit > 0 &&
-        this.newOrderElement.category !== '' &&
+
+    this.verifyAvailability();
+    if (this.availableItems >= this.newOrderElement.deliveryQuantity) {
+
+      if (this.newOrderElement.deliveryFinalPricePerUnit > 0 &&
+        this.newOrderElement.category !== this.INITIALIZE_CATEGORY &&
         this.newOrderElement.deliveryQuantity > 0 &&
-        this.newOrderElement.deliveryShop !== '') {
+        this.newOrderElement.deliveryShop !== this.INITIALIZE_SHOP &&
+        true) {
 
-      const newItem: PeriodicElement = {
-        position: this.listNewItemsToShops.length +1,
-        category: this.newOrderElement.category,
-        deliveryQuantity: this.newOrderElement.deliveryQuantity,
-        deliveryDisplayPricePerUnit: this.newOrderElement.deliveryDisplayPricePerUnit,
-        deliveryDiscount: this.newOrderElement.deliveryDiscount,
-        deliveryFinalPricePerUnit: this.newOrderElement.deliveryFinalPricePerUnit,
-        deliveryShop: this.newOrderElement.deliveryShop
-      };
+        const newItem: PeriodicElement = {
+          position: this.listNewItemsToShops.length + 1,
+          category: this.newOrderElement.category,
+          deliveryQuantity: this.newOrderElement.deliveryQuantity,
+          deliveryDisplayPricePerUnit: this.newOrderElement.deliveryDisplayPricePerUnit,
+          deliveryDiscount: this.newOrderElement.deliveryDiscount,
+          deliveryFinalPricePerUnit: this.newOrderElement.deliveryFinalPricePerUnit,
+          deliveryShop: this.newOrderElement.deliveryShop
+        };
 
-      // if(newItem.deliveryDiscount === 0 && newItem.deliveryFinalPricePerUnit === 0){
-      //   newItem.deliveryDisplayPricePerUnit = newItem.deliveryFinalPricePerUnit;
-      // }
-      //
-      // if(newItem.deliveryDiscount===0 && newItem.deliveryDisplayPricePerUnit!==0){
-      //   newItem.deliveryDiscount = Math.round(newItem.deliveryFinalPricePerUnit/newItem.deliveryDisplayPricePerUnit)*100;
-      //
-      // }
-      // if(newItem.deliveryDiscount!==0 && newItem.deliveryFinalPricePerUnit===0){
-      //   newItem.deliveryFinalPricePerUnit = Math.round(newItem.deliveryDisplayPricePerUnit*newItem.deliveryDiscount/100);
-      // }
+        console.log('before if : discount ' + newItem.deliveryDiscount + ' final price: ' + newItem.deliveryFinalPricePerUnit + ' display price: ' + newItem.deliveryDisplayPricePerUnit)
 
-      this.listNewItemsToShops.push(newItem);
-      this.table.renderRows();
-      console.log(this.listNewItemsToShops);
+        console.log('discount method flag:' + this.discountMethod)
+
+        if (this.discountMethod === undefined) {
+          newItem.deliveryDisplayPricePerUnit = newItem.deliveryFinalPricePerUnit;
+        } else if (this.discountMethod === this.DISCOUNT_METHOD_DISPLAY_PRICE) {
+          newItem.deliveryDiscount = Math.round((1 - (newItem.deliveryDisplayPricePerUnit / newItem.deliveryFinalPricePerUnit)) * 100);
+        } else if (this.discountMethod === this.DISCOUNT_METHOD_PERCENT) {
+          newItem.deliveryDisplayPricePerUnit = Math.round(newItem.deliveryFinalPricePerUnit * (1 - newItem.deliveryDiscount / 100));
+        }
+
+        console.log('After If : discount ' + newItem.deliveryDiscount + ' final price: ' + newItem.deliveryFinalPricePerUnit + ' display price: ' + newItem.deliveryDisplayPricePerUnit)
+
+        this.listNewItemsToShops.push(newItem);
+        this.table.renderRows();
+      }
     }
   }
 
@@ -209,12 +221,23 @@ export class NewDeliveryToShopComponent implements OnInit {
   }
 
   verifyAvailability() {
+
     //update the amount of items on stock
     this.newDeliveryToShopService.verifyAmountItemsOnStock(
       this.newOrderElement.category,
       this.newOrderElement.deliveryQuantity,
       this.newOrderElement.deliveryFinalPricePerUnit)
-      .subscribe(JsonDto => {console.log(JsonDto); this.availableItems = JsonDto.quantity; console.log(this.availableItems)});
+      .subscribe(JsonDto => {
+        console.log(JsonDto);
+        this.availableItems = JsonDto.quantity;
+
+        for (const orderElem of this.listNewItemsToShops) {
+          if(orderElem.category === this.newOrderElement.category && orderElem.deliveryFinalPricePerUnit === this.newOrderElement.deliveryFinalPricePerUnit)
+          this.availableItems -= orderElem.deliveryQuantity;
+        }
+
+        console.log(this.availableItems);
+      });
   }
 
   sendCurrentOrder() {
