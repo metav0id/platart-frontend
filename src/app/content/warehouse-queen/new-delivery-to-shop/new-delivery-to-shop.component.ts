@@ -106,44 +106,52 @@ export class NewDeliveryToShopComponent implements OnInit {
   }
 
   setNewItemOrder() {
+    //this.verifyAvailability();
+    console.log('set new Item Value');
 
-    this.verifyAvailability();
-    if (this.availableItems >= this.newOrderElement.deliveryQuantity) {
+    this.verifyAvailabilityObservale().subscribe(obs => {
+      this.availableItems = obs;
 
-      if (this.newOrderElement.deliveryFinalPricePerUnit > 0 &&
-        this.newOrderElement.category !== this.INITIALIZE_CATEGORY &&
-        this.newOrderElement.deliveryQuantity > 0 &&
-        this.newOrderElement.deliveryShop !== this.INITIALIZE_SHOP &&
-        true) {
+      console.log( 'obs value' + obs);
 
-        const newItem: PeriodicElement = {
-          position: this.listNewItemsToShops.length + 1,
-          category: this.newOrderElement.category,
-          deliveryQuantity: this.newOrderElement.deliveryQuantity,
-          deliveryDisplayPricePerUnit: this.newOrderElement.deliveryDisplayPricePerUnit,
-          deliveryDiscount: this.newOrderElement.deliveryDiscount,
-          deliveryFinalPricePerUnit: this.newOrderElement.deliveryFinalPricePerUnit,
-          deliveryShop: this.newOrderElement.deliveryShop
-        };
+      if (this.availableItems >= this.newOrderElement.deliveryQuantity) {
 
-        console.log('before if : discount ' + newItem.deliveryDiscount + ' final price: ' + newItem.deliveryFinalPricePerUnit + ' display price: ' + newItem.deliveryDisplayPricePerUnit)
+        if (this.newOrderElement.deliveryFinalPricePerUnit > 0 &&
+          this.newOrderElement.category !== this.INITIALIZE_CATEGORY &&
+          this.newOrderElement.deliveryQuantity > 0 &&
+          this.newOrderElement.deliveryShop !== this.INITIALIZE_SHOP &&
+          true) {
 
-        console.log('discount method flag:' + this.discountMethod)
+          const newItem: PeriodicElement = {
+            position: this.listNewItemsToShops.length + 1,
+            category: this.newOrderElement.category,
+            deliveryQuantity: this.newOrderElement.deliveryQuantity,
+            deliveryDisplayPricePerUnit: this.newOrderElement.deliveryDisplayPricePerUnit,
+            deliveryDiscount: this.newOrderElement.deliveryDiscount,
+            deliveryFinalPricePerUnit: this.newOrderElement.deliveryFinalPricePerUnit,
+            deliveryShop: this.newOrderElement.deliveryShop
+          };
 
-        if (this.discountMethod === undefined) {
-          newItem.deliveryDisplayPricePerUnit = newItem.deliveryFinalPricePerUnit;
-        } else if (this.discountMethod === this.DISCOUNT_METHOD_DISPLAY_PRICE) {
-          newItem.deliveryDiscount = Math.round((1 - (newItem.deliveryDisplayPricePerUnit / newItem.deliveryFinalPricePerUnit)) * 100);
-        } else if (this.discountMethod === this.DISCOUNT_METHOD_PERCENT) {
-          newItem.deliveryDisplayPricePerUnit = Math.round(newItem.deliveryFinalPricePerUnit * (1 - newItem.deliveryDiscount / 100));
+          console.log('before if : discount ' + newItem.deliveryDiscount + ' final price: ' + newItem.deliveryFinalPricePerUnit + ' display price: ' + newItem.deliveryDisplayPricePerUnit)
+
+          console.log('discount method flag:' + this.discountMethod)
+
+          if (this.discountMethod === undefined) {
+            newItem.deliveryDisplayPricePerUnit = newItem.deliveryFinalPricePerUnit;
+          } else if (this.discountMethod === this.DISCOUNT_METHOD_DISPLAY_PRICE) {
+            newItem.deliveryDiscount = Math.round((1 - (newItem.deliveryDisplayPricePerUnit / newItem.deliveryFinalPricePerUnit)) * 100);
+          } else if (this.discountMethod === this.DISCOUNT_METHOD_PERCENT) {
+            newItem.deliveryDisplayPricePerUnit = Math.round(newItem.deliveryFinalPricePerUnit * (1 - newItem.deliveryDiscount / 100));
+          }
+
+          console.log('After If : discount ' + newItem.deliveryDiscount + ' final price: ' + newItem.deliveryFinalPricePerUnit + ' display price: ' + newItem.deliveryDisplayPricePerUnit)
+
+          this.listNewItemsToShops.push(newItem);
+          this.table.renderRows();
         }
-
-        console.log('After If : discount ' + newItem.deliveryDiscount + ' final price: ' + newItem.deliveryFinalPricePerUnit + ' display price: ' + newItem.deliveryDisplayPricePerUnit)
-
-        this.listNewItemsToShops.push(newItem);
-        this.table.renderRows();
       }
-    }
+    });
+
   }
 
   getTotalValue(): number {
@@ -221,7 +229,6 @@ export class NewDeliveryToShopComponent implements OnInit {
   }
 
   verifyAvailability() {
-
     //update the amount of items on stock
     this.newDeliveryToShopService.verifyAmountItemsOnStock(
       this.newOrderElement.category,
@@ -236,8 +243,36 @@ export class NewDeliveryToShopComponent implements OnInit {
           this.availableItems -= orderElem.deliveryQuantity;
         }
 
-        console.log(this.availableItems);
+        console.log(this.availableItems)
       });
+  }
+
+  verifyAvailabilityObservale(): Observable<number> {
+
+    return new Observable( (observer) => {
+      let localAvailableItems: number = 0;
+
+      //update the amount of items on stock
+      this.newDeliveryToShopService.verifyAmountItemsOnStock(
+        this.newOrderElement.category,
+        this.newOrderElement.deliveryQuantity,
+        this.newOrderElement.deliveryFinalPricePerUnit)
+        .subscribe(JsonDto => {
+          console.log(JsonDto);
+          localAvailableItems = JsonDto.quantity;
+
+          for (const orderElem of this.listNewItemsToShops) {
+            if(orderElem.category === this.newOrderElement.category && orderElem.deliveryFinalPricePerUnit === this.newOrderElement.deliveryFinalPricePerUnit)
+              localAvailableItems -= orderElem.deliveryQuantity;
+          }
+
+          console.log(localAvailableItems);
+          console.log('end of inner request');
+
+          observer.next(localAvailableItems);
+        });
+      console.log('outer observable');
+    });
   }
 
   sendCurrentOrder() {
