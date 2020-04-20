@@ -2,12 +2,12 @@
 <mat-card>
   <mat-card-title>Select the location you want to manage:</mat-card-title>
   <mat-card-content>
-    <agm-map  [latitude]= "lat" [longitude] = "lng" [zoom] ="15">
+    <agm-map (mapClick)="agregarMarcador($event)" [latitude]= "lat" [longitude] = "lng" [zoom] ="15">
 <!--method to add a marker by clicking should be inserted in line above after agm-map-->
 <!--    (mapClick)="agregarMarcador($event)"-->
     <!--method to add a marker-->
 <!--      warehousemarker-->
-      <agm-marker *ngFor="let marcador of marcadores" [latitude]= "marcador.lat" [longitude] = "marcador.lng">
+      <agm-marker *ngFor="let marcador of marcadores; let i = index" [latitude]= "marcador.lat" [longitude] = "marcador.lng">
         <agm-info-window >
 
           <strong>{{marcador.titulo}}</strong>
@@ -15,6 +15,7 @@
           <div>
             <a href="{{marcador.link}}">
               <button mat-raised-button color="primary"> Go to {{marcador.titulo}}</button>
+              <button (click)="borrarMarcador(i)" mat-raised-button color="primary"> Borrar</button>
             </a>
 <!--            <button mat-raised-button color="warn"> Edit marker</button>-->
           </div>

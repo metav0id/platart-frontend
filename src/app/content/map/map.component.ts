@@ -1,6 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import {Marcador} from "./components/marker.class";
 import {MARKERS} from "./components/marker";
+import {
+  HttpClient,
+  HttpHeaders
+} from "@angular/common/http";
+import {Marker} from "@agm/core";
+import {Observable} from "rxjs";
+import {MapService} from "./map.service";
 
 @Component({
   selector: 'app-map',
@@ -12,17 +19,20 @@ export class MapComponent implements OnInit {
   lng: number = 7.809007;
   marcadores: Marcador[] = MARKERS;
 
-  constructor() {
+
+  constructor(private mapService: MapService) {
     // const nuevoMarcador = new Marcador(51.678418, 7.809007);
     // this.marcadores.push(nuevoMarcador);
   }
 
+  //use this variable when the connetion with BE is completed
+    allMarkers: Marcador[];
+
+
+
   ngOnInit(): void {
+    this.mapService.readAllMarkers().subscribe(response => this.allMarkers = response);
   }
-  agregarMarcador(evento){
-    console.log(evento.coords.lat);
-    const coords: { lat: number, lng: number } = evento.coords;
-    const nuevoMarcador = new Marcador(coords.lat, coords.lng);
-    this.marcadores.push(nuevoMarcador);
-  }
+
+
 }
