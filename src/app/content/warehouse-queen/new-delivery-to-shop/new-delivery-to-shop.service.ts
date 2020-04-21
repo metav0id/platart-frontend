@@ -1,8 +1,9 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
-import {Observable} from 'rxjs';
+import {observable, Observable} from 'rxjs';
 import {NewOrderItemDTO} from './NewOrderItemDTO';
 import {VerifyAmountItemsOnStockDTO} from "./VerifyAmountItemsOnStockDTO";
+import {WarehouseNewDeliveryPersistanceResponseDTO} from "./WarehouseNewDeliveryPersistanceResponseDTO";
 
 @Injectable({
   providedIn: 'root'
@@ -36,10 +37,16 @@ export class NewDeliveryToShopService {
     return this.http.post<VerifyAmountItemsOnStockDTO>(this.verifyAmountItemsOnStockURL, requestTest);
   }
 
-  sendFinalizedOrder(sendOrderItemDTOList: NewOrderItemDTO[]): void {
+  sendFinalizedOrder(sendOrderItemDTOList: NewOrderItemDTO[]): Observable<WarehouseNewDeliveryPersistanceResponseDTO> {
     console.log('Order was send');
     console.log(sendOrderItemDTOList);
-    this.http.post<null>(this.sendDeliveryOrderURL, sendOrderItemDTOList).subscribe();
+    return new Observable( (observer) =>{
+      let persistanceResponseList: WarehouseNewDeliveryPersistanceResponseDTO;
+      this.http.post<WarehouseNewDeliveryPersistanceResponseDTO>(this.sendDeliveryOrderURL, sendOrderItemDTOList).subscribe(JsonDto => {
+        persistanceResponseList = JsonDto;
+        observer.next(persistanceResponseList);
+      });
+    } );
   }
 
 }
