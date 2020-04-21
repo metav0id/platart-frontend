@@ -8,7 +8,8 @@ import {VerifyAmountItemsOnStockDTO} from "./VerifyAmountItemsOnStockDTO";
 import {WarehouseItemCategoryDTO} from "../warehouseCategory/warehouse-item-category-DTO";
 import {WarehouseCategoryService} from "../warehouseCategory/warehouseCategory.service";
 import {NewDeliveryToWarehouseService} from "../new-delivery-to-warehouse/new-delivery-to-warehouse.service";
-import {Observable} from "rxjs";
+import {observable, Observable} from "rxjs";
+import {WarehouseNewDeliveryPersistanceResponseDTO} from "./WarehouseNewDeliveryPersistanceResponseDTO";
 
 /** Is used for table elements */
 export interface PeriodicElement {
@@ -83,6 +84,7 @@ export class NewDeliveryToShopComponent implements OnInit {
     this.newDeliveryToShopService.getAllNewOrderItems().subscribe(
       JsonDto =>
       {
+        this.listNewItemsToShops  = [];
         let counter = 0;
         for(const tempNewOrderItemDTO of JsonDto){
           let newPeriodicElement: PeriodicElement  = {
@@ -96,8 +98,8 @@ export class NewDeliveryToShopComponent implements OnInit {
           };
           counter++;
           this.listNewItemsToShops.push(newPeriodicElement);
-          this.table.renderRows();
         }
+        this.table.renderRows();
       });
   }
 
@@ -151,7 +153,7 @@ export class NewDeliveryToShopComponent implements OnInit {
         }
       }
     });
-
+    this.verifyAvailability();
   }
 
   getTotalValue(): number {
@@ -242,8 +244,6 @@ export class NewDeliveryToShopComponent implements OnInit {
           if(orderElem.category === this.newOrderElement.category && orderElem.deliveryFinalPricePerUnit === this.newOrderElement.deliveryFinalPricePerUnit)
           this.availableItems -= orderElem.deliveryQuantity;
         }
-
-        console.log(this.availableItems)
       });
   }
 
@@ -265,21 +265,23 @@ export class NewDeliveryToShopComponent implements OnInit {
             if(orderElem.category === this.newOrderElement.category && orderElem.deliveryFinalPricePerUnit === this.newOrderElement.deliveryFinalPricePerUnit)
               localAvailableItems -= orderElem.deliveryQuantity;
           }
-
-          console.log(localAvailableItems);
-          console.log('end of inner request');
-
           observer.next(localAvailableItems);
         });
-      console.log('outer observable');
     });
   }
 
   sendCurrentOrder() {
     let tempNewOrderItemDTOList: NewOrderItemDTO[] = this.mapPeriodicElementListToDTO();
 
-    this.newDeliveryToShopService.sendFinalizedOrder(tempNewOrderItemDTOList);
-    this.table.renderRows();
+    let persistanceResponseList: WarehouseNewDeliveryPersistanceResponseDTO;
+
+    this.newDeliveryToShopService.sendFinalizedOrder(tempNewOrderItemDTOList).subscribe( observer => {
+      persistanceResponseList = observer;
+      console.log("after everything");
+      console.log(persistanceResponseList);
+
+      this.fetchNewOrderData();
+    });
   }
 
   /** Whether the number of selected elements matches the total number of rows. */

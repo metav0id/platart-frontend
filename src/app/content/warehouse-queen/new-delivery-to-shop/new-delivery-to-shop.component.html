@@ -250,19 +250,23 @@
       <div class="container cont-bg punkt">
         <div class="space"></div>
         <div class="container cont-bg3  justify-content-center punkt ">
-        <div class="space"></div>
-        <div class="d-flex justify-content-around" >
-<!--          <button mat-button (click)="setNewItemOrder()">Add new order item</button>-->
-          <button mat-button (click)="saveCurrentOrder()">Save current order items</button>
-          <button mat-button (click)="clearCurrentOrder()">Clear current order items</button>
-          <button mat-button (click)="sendCurrentOrder()">Send order</button>
-        </div >
+          <div class="space"></div>
+            <div class="d-flex justify-content-around" >
+              <button mat-button (click)="saveCurrentOrder()">Save current order items</button>
+              <button mat-button (click)="clearCurrentOrder()">Clear current order items</button>
+              <button mat-button (click)="sendCurrentOrder()">Send order</button>
+            </div >
           <div class="space"></div>
         </div>
-        <div class="space"></div>
 
+        <div class="container cont-bg3  justify-content-center punkt ">
+          <div class="space"></div>
+          <div class="d-flex justify-content-around" >
+            <h3><u>Delivery list to:</u> {{newOrderElement.deliveryShop}}</h3>
+          </div >
+        </div>
         <div>
-          <b>Delivery list to: </b>{{newOrderElement.deliveryShop}}.
+
         </div>
 
         <div class="table-responsive">
