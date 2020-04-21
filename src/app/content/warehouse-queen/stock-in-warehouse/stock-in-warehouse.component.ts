@@ -25,6 +25,15 @@ export class StockInWarehouseComponent implements OnInit {
   dataSource = new MatTableDataSource();
   private totalCost: number;
   private totalQuantity: number;
+  updateQuantityState: boolean = false;
+  updateResponsiblePerson: string = 'somePerson';
+
+  updateWarehouseItem: WarehouseItem = {
+    position: -1,
+    category: 'someCategory',
+    pricePerUnit: -1,
+    quantity: -1
+  };
 
   @ViewChild('myWarehouseItemsTable') table: MatTable<any>;
   constructor(private http: HttpClient, private stockInWarehouseService: StockInWarehouseService ) {
@@ -80,6 +89,17 @@ export class StockInWarehouseComponent implements OnInit {
   }
 
   updateQuantityButton(element: WarehouseItem) {
-    console.log('Update Item')
+    console.log('Update Item' + element.category + ' ' + element.pricePerUnit + ' ' + element.quantity)
+    this.updateWarehouseItem.position = element.position;
+    this.updateWarehouseItem.category = element.category;
+    this.updateWarehouseItem.quantity = element.quantity;
+    this.updateWarehouseItem.pricePerUnit = element.pricePerUnit;
+
+    this.updateQuantityState = true;
+  }
+
+  saveUpdateQuantityButton() {
+    this.updateQuantityState = false;
+
   }
 }
