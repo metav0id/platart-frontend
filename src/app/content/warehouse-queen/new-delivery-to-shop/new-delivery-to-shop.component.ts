@@ -279,7 +279,6 @@ export class NewDeliveryToShopComponent implements OnInit {
       persistanceResponseList = observer;
       console.log("after everything");
       console.log(persistanceResponseList);
-
       this.fetchNewOrderData();
     });
   }

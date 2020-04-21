@@ -41,14 +41,9 @@ export class NewDeliveryToShopService {
     console.log('Order was send');
     console.log(sendOrderItemDTOList);
     return new Observable( (observer) =>{
-
       let persistanceResponseList: WarehouseNewDeliveryPersistanceResponseDTO;
-
       this.http.post<WarehouseNewDeliveryPersistanceResponseDTO>(this.sendDeliveryOrderURL, sendOrderItemDTOList).subscribe(JsonDto => {
         persistanceResponseList = JsonDto;
-        for (let item of persistanceResponseList.itemPersistanceErrorDtoList) {
-          console.log(item);
-        }
         observer.next(persistanceResponseList);
       });
     } );
