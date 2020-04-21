@@ -1,7 +1,16 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {WarehouseGetAllItemsDTO} from './WarehouseGetAllItemsDTO';
 import {HttpClient} from '@angular/common/http';
 import {StockInWarehouseService} from './stock-in-warehouse.service';
+import {MatTable, MatTableDataSource} from "@angular/material/table";
+
+/** Is used for table elements */
+export interface WarehouseItem {
+  position: number;
+  category: string;
+  pricePerUnit: number;
+  quantity: number;
+}
 
 @Component({
   selector: 'app-stock-in-warehouse',
@@ -9,11 +18,15 @@ import {StockInWarehouseService} from './stock-in-warehouse.service';
   styleUrls: ['./stock-in-warehouse.component.css']
 })
 export class StockInWarehouseComponent implements OnInit {
-  displayedColumns: string[] = ['category', 'pricePerUnit', 'quantity', 'value'];
-  public warehouseData: WarehouseGetAllItemsDTO[] = [];
+  displayedColumns: string[] = ['category', 'pricePerUnit', 'quantity', 'value', 'correctQuantity'];
+
+  //public warehouseData: WarehouseGetAllItemsDTO[] = [];
+  public warehouseData: WarehouseItem[] = [];
+  dataSource = new MatTableDataSource();
   private totalCost: number;
   private totalQuantity: number;
 
+  @ViewChild('myWarehouseItemsTable') table: MatTable<any>;
   constructor(private http: HttpClient, private stockInWarehouseService: StockInWarehouseService ) {
   }
 
@@ -24,8 +37,24 @@ export class StockInWarehouseComponent implements OnInit {
   getAllItems(): void {
     this.stockInWarehouseService.getAllItems()
       .subscribe(JsonDto => {
-        this.warehouseData = JsonDto;
-        console.log(this.warehouseData);
+        this.warehouseData = [];
+        let counter = 0;
+        for (const item of JsonDto){
+          let newWarehouseItem: WarehouseItem = {
+            position: counter,
+            category: item.category,
+            pricePerUnit: item.pricePerUnit,
+            quantity: item.quantity
+          };
+          counter++;
+          this.warehouseData.push(newWarehouseItem);
+        }
+        this.table.renderRows();
+
+        this.dataSource = new MatTableDataSource(this.warehouseData);
+
+        // this.warehouseData = JsonDto;
+        // console.log(this.warehouseData);
       });
   }
 
@@ -45,4 +74,12 @@ export class StockInWarehouseComponent implements OnInit {
     return this.totalQuantity;
   }
 
+  applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+  }
+
+  updateQuantityButton(element: WarehouseItem) {
+    console.log('Update Item')
+  }
 }

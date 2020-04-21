@@ -6,17 +6,30 @@
   <div class=" d-flex justify-content-center align-items-end ">
     <h1>Stock in warehouse component!</h1>
   </div>
+
+
+
   <div class="container-fluid cont-bg2 punkt">
     <div class="space"></div>
-<div class=" table-responsive">
-  <table mat-table [dataSource]="warehouseData" class="mat-elevation-z8" >
+  <div class=" table-responsive">
 
+    <div class="container cont-bg3  justify-content-center punkt ">
+      <div class="space"></div>
+      <div class="d-flex justify-content-around" >
+        <mat-form-field>
+          <mat-label>Filter</mat-label>
+          <input matInput (keyup)="applyFilter($event)" placeholder="Ex. ium">
+        </mat-form-field>
+      </div >
+      <div class="space"></div>
+    </div>
+
+    <table mat-table #myWarehouseItemsTable [dataSource]="dataSource" class="mat-elevation-z8" >
 
     <!--- Note that these columns can be defined in any order.
           The actual rendered columns are set as a property on the row definition" -->
 
     <!-- Position Column -->
-
     <ng-container matColumnDef="category">
       <th mat-header-cell *matHeaderCellDef> Category </th>
       <td mat-cell *matCellDef="let element"> {{element.category}} </td>
@@ -36,6 +49,15 @@
       <td mat-cell *matCellDef="let element"> {{element.quantity}} </td>
       <td mat-footer-cell *matFooterCellDef> {{getSumQuantity()}} </td>
     </ng-container>
+
+      <!-- Correct Quantity -->
+      <ng-container matColumnDef="correctQuantity">
+        <th mat-header-cell *matHeaderCellDef> Quantity </th>
+        <td mat-cell *matCellDef="let element">
+          <button (click)="updateQuantityButton(element)">changeQty</button>
+        </td>
+        <td mat-footer-cell *matFooterCellDef> - </td>
+      </ng-container>
 
     <!-- Weight UnitPrice*quantity -->
     <ng-container matColumnDef="value">

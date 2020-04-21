@@ -63,14 +63,13 @@ export class NewDeliveryToShopComponent implements OnInit {
     deliveryShop: this.INITIALIZE_SHOP
   };
 
-  selection = new SelectionModel<PeriodicElement>(true, []);
   /** Category selection */
   public categoryControl = new FormControl('', Validators.required);
-
   /** Shop selection */
   public shopControll = new FormControl('', Validators.required)
 
   availableItems: number = 0;
+  selection = new SelectionModel<PeriodicElement>(true, []);
   @ViewChild('myShopCheckinProductsTable') table: MatTable<any>;
   constructor(private newDeliveryToShopService: NewDeliveryToShopService, private warehouseCategoryService: WarehouseCategoryService) {
   }
