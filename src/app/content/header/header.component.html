@@ -1,5 +1,6 @@
+<ng-template transloco let-t>
 <nav class="navbar navbar-expand-lg navbar-dark navbar-custom">
-  <a class="navbar-brand " href="#"> Administracion </a>
+  <a class="navbar-brand " href="#"> {{ t('header.administration') }} </a>
   <!-- creates gurber menu for mobile version with all elements in the menu -->
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
@@ -9,23 +10,23 @@
       <!-- ....... -->
       <li class="nav-item" routerLinkActive="active">
         <a class="nav-link " >
-          <button mat-button [matMenuTriggerFor]="aboveMenu">Warehouse</button>
+          <button mat-button [matMenuTriggerFor]="aboveMenu"> {{ t('header.warehouse') }} </button>
         </a>
         <mat-menu #aboveMenu="matMenu" yPosition="below">
           <a class="nav-link a" routerLink="stockinwarehouse">
-            Stock in warehouse
+            {{ t('header.Stock-in-warehouse') }}
 <!--          <button mat-menu-item>Warehouse Queen</button>-->
           </a>
           <a class="nav-link a" routerLink="newdeliverytoshop">
-            New delivery to shop
+            {{ t('header.New-delivery-to-shop') }}
 <!--          <button mat-menu-item>Sales</button>-->
           </a>
           <a class="nav-link a" routerLink="newdeliverytowarehouse">
-            New delivery to warehouse
+            {{ t('header.New-delivery-to-warehouse') }}
             <!--          <button mat-menu-item>Sales</button>-->
           </a>
           <a class="nav-link a" routerLink="newitemcategory">
-            Add new category to warehouse
+            {{ t('header.Add-new-category-to-warehouse') }}
             <!--          <button mat-menu-item>Sales</button>-->
           </a>
         </mat-menu>
@@ -34,11 +35,11 @@
 
       <li class="nav-item" routerLinkActive="active">
         <a class="nav-link" routerLink="manager">
-          <button mat-button [matMenuTriggerFor]="belowMenu">Manager</button>
+          <button mat-button [matMenuTriggerFor]="belowMenu">{{ t('header.Manager') }}</button>
         </a>
         <mat-menu #belowMenu="matMenu" yPosition="below">
           <a class="nav-link a" routerLink="manageshopsinfo">
-           Manage Shops Information
+            {{ t('header.Manage-Shops-Information') }}
           </a>
           <a class="nav-link a" routerLink="newdeliveryfromwarehouse">
             Place Holder
@@ -50,7 +51,7 @@
       <li class="nav-item" routerLinkActive="active">
         <a class="nav-link" routerLink="sales">
 
-          <button mat-button [matMenuTriggerFor]="beforeMenu">Sales</button>
+          <button mat-button [matMenuTriggerFor]="beforeMenu">{{ t('header.Sales') }}</button>
         </a>
         <mat-menu #beforeMenu="matMenu" xPosition="before">
           <a class="nav-link a" routerLink="newdeliveryfromwarehouse">
@@ -65,7 +66,7 @@
       <li class="nav-item" routerLinkActive="active">
         <a class="nav-link" >
 
-          <button mat-button [matMenuTriggerFor]="afterMenu">After</button>
+          <button mat-button [matMenuTriggerFor]="afterMenu">{{ t('header.After') }}</button>
         </a>
         <mat-menu #afterMenu="matMenu" xPosition="after">
           <a class="nav-link a" routerLink="newdeliveryfromwarehouse">
@@ -86,6 +87,6 @@
     </ul>
   </div>
 </nav>
-
+</ng-template>
 
 

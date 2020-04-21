@@ -20,18 +20,19 @@ import {MatListModule} from '@angular/material/list';
 import {MatMenuModule} from '@angular/material/menu';
 import {FooterComponent} from './content/footer/footer.component';
 import { NewItemCategoryComponent } from './content/warehouse-queen/new-item-category/new-item-category.component';
-import {MatSelectModule} from "@angular/material/select";
-import {MatInputModule} from "@angular/material/input";
-import {MatCheckboxModule} from "@angular/material/checkbox";
-import {MatDatepickerModule} from "@angular/material/datepicker";
+import {MatSelectModule} from '@angular/material/select';
+import {MatInputModule} from '@angular/material/input';
+import {MatCheckboxModule} from '@angular/material/checkbox';
+import {MatDatepickerModule} from '@angular/material/datepicker';
 import { MapComponent } from './content/map/map.component';
 import { MatSliderModule } from '@angular/material/slider';
 import {MatProgressBarModule} from '@angular/material/progress-bar';
 import {MatCardModule} from '@angular/material/card';
 import { AgmCoreModule} from '@agm/core';
-import {SalesPrincessModule} from "./content/sales-princess/sales-princess.module";
-import {ManagerKingModule} from "./content/manager-king/manager-king.module";
+import {SalesPrincessModule} from './content/sales-princess/sales-princess.module';
+import {ManagerKingModule} from './content/manager-king/manager-king.module';
 import {MatDialogModule} from '@angular/material/dialog';
+import { TranslocoRootModule } from './transloco-root.module';
 
 
 @NgModule({
@@ -67,7 +68,8 @@ import {MatDialogModule} from '@angular/material/dialog';
     MatSliderModule,
     AgmCoreModule.forRoot({apiKey: 'AIzaSyDNOu2JQ001PxZY-GVwFvVou0_6h_Sj-14'}),
     MatCardModule,
-    MatDialogModule
+    MatDialogModule,
+    TranslocoRootModule
   ],
   providers: [],
   bootstrap: [AppComponent]
