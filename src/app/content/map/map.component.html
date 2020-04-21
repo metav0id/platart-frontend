@@ -10,11 +10,11 @@
       <agm-marker *ngFor="let marcador of marcadores; let i = index" [latitude]= "marcador.lat" [longitude] = "marcador.lng">
         <agm-info-window >
 
-          <strong>{{marcador.titulo}}</strong>
-          <p>{{marcador.desc}}</p>
+          <strong>{{marcador.name}}</strong>
+          <p>{{marcador.address}}</p>
           <div>
             <a href="{{marcador.link}}">
-              <button mat-raised-button color="primary"> Go to {{marcador.titulo}}</button>
+              <button mat-raised-button color="primary"> Go to {{marcador.name}}</button>
               <button (click)="borrarMarcador(i)" mat-raised-button color="primary"> Borrar</button>
             </a>
 <!--            <button mat-raised-button color="warn"> Edit marker</button>-->

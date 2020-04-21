@@ -54,10 +54,10 @@ export class MapService {
 //
 //   agregarMarcador(evento):Observable<Marcador>{
 //     console.log(evento.coords.lat);
-//     const coords: { lat: number, lng: number } = evento.coords;
+//     const coords: { lat: string, lng: string } = evento.coords;
 //     const nuevoMarcador = new Marcador(coords.lat, coords.lng);
-//     return this.httpClient.post<Marcador>(this.urlEndPoint1,evento,{headers:this.httpHeader})
 //     this.marcadores.push(nuevoMarcador);
+//     console.log(evento.coords.lat);
 //   }
 //
 //

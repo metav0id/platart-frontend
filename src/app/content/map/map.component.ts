@@ -34,5 +34,16 @@ export class MapComponent implements OnInit {
     this.mapService.readAllMarkers().subscribe(response => this.allMarkers = response);
   }
 
+  agregarMarcador(evento){
+    console.log(evento.coords.lat);
+    const coords: { lat: string, lng: string } = evento.coords;
+    const nuevoMarcador = new Marcador(coords.lat, coords.lng);
+    this.marcadores.push(nuevoMarcador);
+    console.log(evento.coords.lat);
+  }
 
+  borrarMarcador(i: number){
+    console.log(i);
+    this.marcadores.splice(i,1);
+  }
 }
