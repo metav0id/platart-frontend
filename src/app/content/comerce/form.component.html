@@ -1,0 +1,111 @@
+
+<!--<body class="newOffer">-->
+<!--<form class="form">-->
+<!--  <div class="container-fluid">-->
+
+<!--    <h1 mat-dialog-title>Enter Comerce Data</h1>-->
+<!--    <div mat-dialog-content>-->
+
+<!--    <mat-card>-->
+<!--      <mat-card-header>-->
+<!--        <mat-card-title>-->
+<!--          <mat-icon>public</mat-icon>-->
+<!--          New Comerce-->
+<!--        </mat-card-title>-->
+<!--      </mat-card-header>-->
+<!--      <div class="form-container">-->
+<!--        <div>-->
+<!--          <mat-form-field appearance="legacy">-->
+<!--            <mat-label>Name</mat-label>-->
+<!--            <p>Name</p>-->
+<!--            <input type="text" class="form-control"[(ngModel)]="comerce.name" name= "name" >-->
+<!--          </mat-form-field>-->
+<!--        </div>-->
+<!--        <div>-->
+<!--          <mat-form-field appearance="legacy">-->
+<!--            <mat-label>Category</mat-label>-->
+<!--            <p>Category</p>-->
+<!--            <input type="text" class="form-control"[(ngModel)]="comerce.category" name= "category" >-->
+<!--          </mat-form-field>-->
+<!--        </div>-->
+<!--        <div>-->
+<!--          <mat-form-field appearance="legacy" >-->
+<!--            <mat-label>Address</mat-label>-->
+<!--            <p>Address</p>-->
+<!--            <input type="text" class="form-control"[(ngModel)]="comerce.address" name= "address" >-->
+<!--          </mat-form-field>-->
+<!--        </div>-->
+
+<!--      </div>-->
+<!--      <div>-->
+<!--        <button mat-button [mat-dialog-close]="" cdkFocusInitial class = "btn btn-primary" role="button" (click)="create()">Save!</button>-->
+<!--        <button mat-button class = "btn btn-primary" role="button" (click)="onNoClick()">No Thanks</button>-->
+<!--      </div>-->
+<!--    </mat-card>-->
+
+<!--  </div>-->
+<!--  </div>-->
+<!--</form>-->
+<!--</body>-->
+
+<div class="box">
+  <div class="container cont-bg punkt">
+    <div class="space"></div>
+    <h1>Enter Comerce Data</h1>
+
+    <div class="container cont-bg2">
+      <div class="space"></div>
+      <div>
+        <!--Pre-defined categories-->
+        <body class="cont-bg2 ">
+        <form class="form ">
+          <div class="container-fluid cont-bg2">
+
+            <div mat-dialog-content>
+
+              <mat-card>
+                <mat-card-header>
+                  <mat-card-title>
+                    <mat-icon>public</mat-icon>
+                    New Comerce
+                  </mat-card-title>
+                </mat-card-header>
+                <div class="form-container">
+                  <div>
+                    <mat-form-field appearance="legacy">
+                      <mat-label>Name</mat-label>
+                      <p>Name</p>
+                      <input type="text" class="form-control"[(ngModel)]="comerce.name" name= "name" >
+                    </mat-form-field>
+                  </div>
+                  <div>
+                    <mat-form-field appearance="legacy">
+                      <mat-label>Category</mat-label>
+                      <p>Category</p>
+                      <input type="text" class="form-control"[(ngModel)]="comerce.category" name= "category" >
+                    </mat-form-field>
+                  </div>
+                  <div>
+                    <mat-form-field appearance="legacy" >
+                      <mat-label>Address</mat-label>
+                      <p>Address</p>
+                      <input type="text" class="form-control"[(ngModel)]="comerce.address" name= "address" >
+                    </mat-form-field>
+                  </div>
+
+                </div>
+                <div>
+                  <button mat-button [mat-dialog-close]="" cdkFocusInitial class = "btn btn-primary" role="button" (click)="create()">Save!</button>
+                  <button mat-button class = "btn btn-primary" role="button" (click)="onNoClick()">No Thanks</button>
+                </div>
+              </mat-card>
+
+            </div>
+          </div>
+        </form>
+        </body>
+        <div class="space"></div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -8,6 +8,8 @@ import {
 import {Marker} from "@agm/core";
 import {Observable} from "rxjs";
 import {MapService} from "./map.service";
+import {MatDialog} from "@angular/material/dialog";
+import {FormComponent} from "../comerce/form.component";
 
 @Component({
   selector: 'app-map',
@@ -20,9 +22,21 @@ export class MapComponent implements OnInit {
   marcadores: Marcador[] = MARKERS;
 
 
-  constructor(private mapService: MapService) {
+  constructor(private mapService: MapService, public dialog: MatDialog) {
     // const nuevoMarcador = new Marcador(51.678418, 7.809007);
     // this.marcadores.push(nuevoMarcador);
+  }
+
+  openDialog(): void {
+    const dialogRef = this.dialog.open(FormComponent, {
+      width: '600px',
+      // data: {name: this.name, animal: this.animal}
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+      // this.animal = result;
+    });
   }
 
   //use this variable when the connetion with BE is completed

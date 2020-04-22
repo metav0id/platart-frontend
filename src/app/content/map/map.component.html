@@ -1,6 +1,14 @@
 
 <mat-card>
   <mat-card-title>Select the location you want to manage:</mat-card-title>
+
+<!--  <a href="comerce">-->
+
+<!--    <button mat-raised-button color="primary"> Create new comerce</button>-->
+<!--  </a>-->
+  <a>
+    <button mat-raised-button color="primary" (click)="openDialog()">Create comerce </button>
+  </a>
   <mat-card-content>
     <agm-map (mapClick)="agregarMarcador($event)" [latitude]= "lat" [longitude] = "lng" [zoom] ="15">
 <!--method to add a marker by clicking should be inserted in line above after agm-map-->

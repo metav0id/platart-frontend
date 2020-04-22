@@ -33,6 +33,8 @@ import {SalesPrincessModule} from './content/sales-princess/sales-princess.modul
 import {ManagerKingModule} from './content/manager-king/manager-king.module';
 import {MatDialogModule} from '@angular/material/dialog';
 import { TranslocoRootModule } from './transloco-root.module';
+import {ComerceComponent} from './content/comerce/comerce.component';
+import {FormComponent} from './content/comerce/form.component';
 
 
 @NgModule({
@@ -42,7 +44,9 @@ import { TranslocoRootModule } from './transloco-root.module';
     HeaderComponent,
     FooterComponent,
     NewItemCategoryComponent,
-    MapComponent
+    MapComponent,
+    ComerceComponent,
+    FormComponent
   ],
   imports: [
     BrowserModule,
@@ -69,7 +73,7 @@ import { TranslocoRootModule } from './transloco-root.module';
     AgmCoreModule.forRoot({apiKey: 'AIzaSyDNOu2JQ001PxZY-GVwFvVou0_6h_Sj-14'}),
     MatCardModule,
     MatDialogModule,
-    TranslocoRootModule
+    TranslocoRootModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
