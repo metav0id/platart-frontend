@@ -2,7 +2,7 @@
 <mat-card>
   <mat-card-title>Select the location you want to manage:</mat-card-title>
   <mat-card-content>
-    <agm-map (mapClick)="agregarMarcador($event)" [latitude]= "lat" [longitude] = "lng" [zoom] ="15">
+      <agm-map (mapClick)="agregarMarcador($event)" [latitude]= "lat" [longitude] = "lng" [zoom] ="15">
 <!--method to add a marker by clicking should be inserted in line above after agm-map-->
 <!--    (mapClick)="agregarMarcador($event)"-->
     <!--method to add a marker-->
@@ -15,7 +15,7 @@
           <div>
             <a href="{{marcador.link}}">
               <button mat-raised-button color="primary"> Go to {{marcador.name}}</button>
-              <button (click)="borrarMarcador(i)" mat-raised-button color="primary"> Borrar</button>
+<!--              <button (click)="borrarMarcador(i)" mat-raised-button color="primary"> Borrar</button>-->
             </a>
 <!--            <button mat-raised-button color="warn"> Edit marker</button>-->
           </div>

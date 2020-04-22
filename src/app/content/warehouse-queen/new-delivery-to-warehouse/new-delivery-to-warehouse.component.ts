@@ -4,13 +4,7 @@ import {SelectionModel} from '@angular/cdk/collections';
 import {FormControl, Validators} from '@angular/forms';
 import {PeriodicElement} from './periodic-element';
 import {NewDeliveryToWarehouseService} from './new-delivery-to-warehouse.service';
-import {HttpClient} from '@angular/common/http';
 import {WarehouseItemCategoryDTO} from '../warehouseCategory/warehouse-item-category-DTO';
-
-/** Is used for Category Drop Down */
-/*export interface Category {
-  name: string;
-}*/
 
 @Component({
   selector: 'app-new-delivery-to-warehouse',
@@ -38,12 +32,7 @@ export class NewDeliveryToWarehouseComponent implements OnInit {
 
   /** Category selection */
   public categoryControl = new FormControl('', Validators.required);
-  /*public categoryItems: Category[] = [
-    {name: 'pulsera'},
-    {name: 'cadena'},
-    {name: 'anillo'},
-    {name: 'arete'}
-  ];*/
+
   public categoryItems: WarehouseItemCategoryDTO[] = [];
 
   @ViewChild('myCheckinProductsTable') table: MatTable<any>;

@@ -1,6 +1,6 @@
-import { NgModule } from '@angular/core';
-import {RouterModule, Routes} from "@angular/router";
-import {NewDeliveryFromWarehouseComponent} from "./new-delivery-from-warehouse/new-delivery-from-warehouse.component";
+import {NgModule} from '@angular/core';
+import {RouterModule, Routes} from '@angular/router';
+import {NewDeliveryFromWarehouseComponent} from './new-delivery-from-warehouse/new-delivery-from-warehouse.component';
 
 const routes: Routes = [
   {path: 'newdeliveryfromwarehouse', component: NewDeliveryFromWarehouseComponent}
@@ -12,4 +12,5 @@ const routes: Routes = [
   ],
   exports: [RouterModule]
 })
-export class SalesPrincessRoutingModule { }
+export class SalesPrincessRoutingModule {
+}
