@@ -4,10 +4,8 @@ import {SelectionModel} from "@angular/cdk/collections";
 import {MatTable} from "@angular/material/table";
 import {NewOrderItemDTO} from "./NewOrderItemDTO";
 import {NewDeliveryToShopService} from "./new-delivery-to-shop.service";
-import {VerifyAmountItemsOnStockDTO} from "./VerifyAmountItemsOnStockDTO";
 import {WarehouseItemCategoryDTO} from "../warehouseCategory/warehouse-item-category-DTO";
 import {WarehouseCategoryService} from "../warehouseCategory/warehouseCategory.service";
-import {NewDeliveryToWarehouseService} from "../new-delivery-to-warehouse/new-delivery-to-warehouse.service";
 import {observable, Observable} from "rxjs";
 import {WarehouseNewDeliveryPersistanceResponseDTO} from "./WarehouseNewDeliveryPersistanceResponseDTO";
 
@@ -71,7 +69,8 @@ export class NewDeliveryToShopComponent implements OnInit {
   availableItems: number = 0;
   selection = new SelectionModel<PeriodicElement>(true, []);
   @ViewChild('myShopCheckinProductsTable') table: MatTable<any>;
-  constructor(private newDeliveryToShopService: NewDeliveryToShopService, private warehouseCategoryService: WarehouseCategoryService) {
+  constructor(private newDeliveryToShopService: NewDeliveryToShopService,
+              private warehouseCategoryService: WarehouseCategoryService) {
   }
 
   ngOnInit(): void {
