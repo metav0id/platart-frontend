@@ -29,7 +29,7 @@ export class MapComponent implements OnInit {
 
   openDialog(): void {
     const dialogRef = this.dialog.open(FormComponent, {
-      width: '600px',
+      width: '600px'
       // data: {name: this.name, animal: this.animal}
     });
 
