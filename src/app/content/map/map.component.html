@@ -6,9 +6,11 @@
 
 <!--    <button mat-raised-button color="primary"> Create new comerce</button>-->
 <!--  </a>-->
+  <div class="space"></div>
   <a>
-    <button mat-raised-button color="primary" (click)="openDialog()">Create comerce </button>
+    <button mat-raised-button  (click)="openDialog()">Create comerce </button>
   </a>
+  <div class="space"></div>
   <mat-card-content>
     <agm-map (mapClick)="agregarMarcador($event)" [latitude]= "lat" [longitude] = "lng" [zoom] ="15">
 <!--method to add a marker by clicking should be inserted in line above after agm-map-->
