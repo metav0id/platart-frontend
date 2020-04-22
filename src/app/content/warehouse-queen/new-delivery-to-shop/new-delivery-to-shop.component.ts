@@ -8,6 +8,7 @@ import {WarehouseItemCategoryDTO} from "../warehouseCategory/warehouse-item-cate
 import {WarehouseCategoryService} from "../warehouseCategory/warehouseCategory.service";
 import {observable, Observable} from "rxjs";
 import {WarehouseNewDeliveryPersistanceResponseDTO} from "./WarehouseNewDeliveryPersistanceResponseDTO";
+import {MatSnackBar} from "@angular/material/snack-bar";
 
 /** Is used for table elements */
 export interface PeriodicElement {
@@ -70,7 +71,8 @@ export class NewDeliveryToShopComponent implements OnInit {
   selection = new SelectionModel<PeriodicElement>(true, []);
   @ViewChild('myShopCheckinProductsTable') table: MatTable<any>;
   constructor(private newDeliveryToShopService: NewDeliveryToShopService,
-              private warehouseCategoryService: WarehouseCategoryService) {
+              private warehouseCategoryService: WarehouseCategoryService,
+              private _snackBar: MatSnackBar) {
   }
 
   ngOnInit(): void {
@@ -152,6 +154,8 @@ export class NewDeliveryToShopComponent implements OnInit {
       }
     });
     this.verifyAvailability();
+
+    let snackBarItemAdded =  this._snackBar.open('Item added to list!!','ok',{duration: 2000,});
   }
 
   getTotalValue(): number {
@@ -175,6 +179,7 @@ export class NewDeliveryToShopComponent implements OnInit {
 
     this.newDeliveryToShopService.setAllNewOrderItems(tempNewOrderItemDTOList);
     this.table.renderRows();
+    let snackBarOrderSaved =  this._snackBar.open('Order send!','ok',{duration: 2000,});
   }
 
   mapPeriodicElementListToDTO(): NewOrderItemDTO[] {
@@ -202,6 +207,8 @@ export class NewDeliveryToShopComponent implements OnInit {
     }
     console.log(this.listNewItemsToShops);
     this.table.renderRows();
+
+    let snackBarItemsDeleted =  this._snackBar.open('Sale send!','ok',{duration: 2000,});
   }
 
   updateButton(periodicElement: PeriodicElement) {
@@ -218,6 +225,8 @@ export class NewDeliveryToShopComponent implements OnInit {
     //function to remove the current element
     this.removeCurrentItem(periodicElement.position);
     this.table.renderRows();
+
+    let snackBarUpdateItem =  this._snackBar.open('Update item','ok',{duration: 2000,});
   }
 
   removeCurrentItem(currentIndex: number){
@@ -266,19 +275,24 @@ export class NewDeliveryToShopComponent implements OnInit {
           observer.next(localAvailableItems);
         });
     });
+
+    let snackBarItemVerification =  this._snackBar.open('Verification complete!','ok',{duration: 2000,});
   }
 
   sendCurrentOrder() {
+    let snackBarOrderSendStart =  this._snackBar.open('Order was send. Wait for response.','ok',{duration: 2000,});
     let tempNewOrderItemDTOList: NewOrderItemDTO[] = this.mapPeriodicElementListToDTO();
-
     let persistanceResponseList: WarehouseNewDeliveryPersistanceResponseDTO;
 
     this.newDeliveryToShopService.sendFinalizedOrder(tempNewOrderItemDTOList).subscribe( observer => {
+
       persistanceResponseList = observer;
       console.log("after everything");
       console.log(persistanceResponseList);
       this.fetchNewOrderData();
     });
+
+    let snackBarOrderSendEnd =  this._snackBar.open('Order response has arrived.','ok',{duration: 2000,});
   }
 
   /** Whether the number of selected elements matches the total number of rows. */

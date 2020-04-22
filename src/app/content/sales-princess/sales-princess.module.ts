@@ -11,6 +11,7 @@ import {MatInputModule} from "@angular/material/input";
 import {CdkTableModule} from "@angular/cdk/table";
 import {MatTableModule} from "@angular/material/table";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
+import {MatSnackBarModule} from "@angular/material/snack-bar";
 
 
 
@@ -28,6 +29,7 @@ import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
     CdkTableModule,
     MatTableModule,
     BrowserAnimationsModule,
+    MatSnackBarModule
   ]
 })
 export class SalesPrincessModule { }

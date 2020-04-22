@@ -3,6 +3,9 @@ import {SelectionModel} from "@angular/cdk/collections";
 import {MatTable} from "@angular/material/table";
 import {WarehouseItemCategoryDTO} from "../../warehouse-queen/warehouseCategory/warehouse-item-category-DTO";
 import {FormControl, Validators} from "@angular/forms";
+import {MatSnackBar} from '@angular/material/snack-bar';
+import {CheckoutSoldItemsService} from "./checkout-sold-items.service";
+
 
 /** Is used for table elements */
 export interface PeriodicElement {
@@ -64,12 +67,18 @@ export class CheckoutSoldItemsComponent implements OnInit {
   availableItems: number = 0;
   selection = new SelectionModel<PeriodicElement>(true, []);
   @ViewChild('myShopCheckinProductsTable') table: MatTable<any>;
-  constructor() { }
+  constructor(private _snackBar: MatSnackBar,
+              private checkoutSoldItemsService: CheckoutSoldItemsService) { }
 
   ngOnInit(): void {
   }
 
   loremIpsumMethod() {
     console.log('implement loremIpsumMethod!')
+
+    // Simple message.
+    let snackBarRef =  this._snackBar.open('Sale send!','ok',{duration: 2000,});
+    this.checkoutSoldItemsService.getAllItemsAllShops();
   }
+
 }
