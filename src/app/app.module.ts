@@ -34,7 +34,6 @@ import {ManagerKingModule} from './content/manager-king/manager-king.module';
 import {MatDialogModule} from '@angular/material/dialog';
 import {TranslocoRootModule} from './transloco-root.module';
 
-
 @NgModule({
   declarations: [
     AppComponent,
@@ -69,7 +68,7 @@ import {TranslocoRootModule} from './transloco-root.module';
     AgmCoreModule.forRoot({apiKey: 'AIzaSyDNOu2JQ001PxZY-GVwFvVou0_6h_Sj-14'}),
     MatCardModule,
     MatDialogModule,
-    TranslocoRootModule
+    TranslocoRootModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

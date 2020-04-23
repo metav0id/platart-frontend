@@ -75,8 +75,7 @@ export class NewDeliveryToShopComponent implements OnInit {
   availableItems: number = 0;
   @ViewChild('myShopCheckinProductsTable') table: MatTable<any>;
 
-  constructor(private newDeliveryToShopService: NewDeliveryToShopService, private warehouseCategoryService: WarehouseCategoryService,
-              private _snackBar: MatSnackBar) {
+  constructor(private newDeliveryToShopService: NewDeliveryToShopService, private warehouseCategoryService: WarehouseCategoryService) {
   }
 
   ngOnInit(): void {
@@ -160,8 +159,8 @@ export class NewDeliveryToShopComponent implements OnInit {
       }
     });
     this.verifyAvailability();
-
-    let snackBarItemAdded = this._snackBar.open('Item added to list!!', 'ok', {duration: 2000,});
+/*
+    let snackBarItemAdded = this._snackBar.open('Item added to list!!', 'ok', {duration: 2000,});*/
   }
 
   getTotalValue(): number {
@@ -185,7 +184,7 @@ export class NewDeliveryToShopComponent implements OnInit {
 
     this.newDeliveryToShopService.setAllNewOrderItems(tempNewOrderItemDTOList);
     this.table.renderRows();
-    let snackBarOrderSaved = this._snackBar.open('Order send!', 'ok', {duration: 2000,});
+    // let snackBarOrderSaved = this._snackBar.open('Order send!', 'ok', {duration: 2000,});
   }
 
   mapPeriodicElementListToDTO(): NewOrderItemDTO[] {
@@ -214,7 +213,7 @@ export class NewDeliveryToShopComponent implements OnInit {
     console.log(this.listNewItemsToShops);
     this.table.renderRows();
 
-    let snackBarItemsDeleted = this._snackBar.open('Sale send!', 'ok', {duration: 2000,});
+    // let snackBarItemsDeleted = this._snackBar.open('Sale send!', 'ok', {duration: 2000,});
   }
 
   updateButton(periodicElement: PeriodicElement) {
@@ -232,7 +231,7 @@ export class NewDeliveryToShopComponent implements OnInit {
     this.removeCurrentItem(periodicElement.position);
     this.table.renderRows();
 
-    let snackBarUpdateItem = this._snackBar.open('Update item', 'ok', {duration: 2000,});
+    // let snackBarUpdateItem = this._snackBar.open('Update item', 'ok', {duration: 2000,});
   }
 
   removeCurrentItem(currentIndex: number) {
@@ -285,13 +284,13 @@ export class NewDeliveryToShopComponent implements OnInit {
         });
     });
 
-    let snackBarItemVerification = this._snackBar.open('Verification complete!', 'ok', {duration: 2000,});
+    // let snackBarItemVerification = this._snackBar.open('Verification complete!', 'ok', {duration: 2000,});
   }
 
   sendCurrentOrder() {
-    let tempNewOrderItemDTOList: NewOrderItemDTO[] = this.mapPeriodicElementListToDTO();
+    const tempNewOrderItemDTOList: NewOrderItemDTO[] = this.mapPeriodicElementListToDTO();
 
-    let snackBarOrderSendStart = this._snackBar.open('Order was send. Wait for response.', 'ok', {duration: 2000,});
+    // let snackBarOrderSendStart = this._snackBar.open('Order was send. Wait for response.', 'ok', {duration: 2000,});
 
     let persistanceResponseList: WarehouseNewDeliveryPersistanceResponseDTO;
 
@@ -302,7 +301,7 @@ export class NewDeliveryToShopComponent implements OnInit {
       this.fetchNewOrderData();
     });
 
-    let snackBarOrderSendEnd = this._snackBar.open('Order response has arrived.', 'ok', {duration: 2000,});
+    // let snackBarOrderSendEnd = this._snackBar.open('Order response has arrived.', 'ok', {duration: 2000,});
   }
 
   /** Whether the number of selected elements matches the total number of rows. */
