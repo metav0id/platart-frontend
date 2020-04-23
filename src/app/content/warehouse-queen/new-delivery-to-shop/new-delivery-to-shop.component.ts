@@ -1,24 +1,24 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
-import {FormControl, Validators} from "@angular/forms";
-import {SelectionModel} from "@angular/cdk/collections";
-import {MatTable} from "@angular/material/table";
-import {NewOrderItemDTO} from "./NewOrderItemDTO";
-import {NewDeliveryToShopService} from "./new-delivery-to-shop.service";
-import {VerifyAmountItemsOnStockDTO} from "./VerifyAmountItemsOnStockDTO";
-import {WarehouseItemCategoryDTO} from "../warehouseCategory/warehouse-item-category-DTO";
-import {WarehouseCategoryService} from "../warehouseCategory/warehouseCategory.service";
-import {NewDeliveryToWarehouseService} from "../new-delivery-to-warehouse/new-delivery-to-warehouse.service";
-import {observable, Observable} from "rxjs";
-import {WarehouseNewDeliveryPersistanceResponseDTO} from "./WarehouseNewDeliveryPersistanceResponseDTO";
+import {FormControl, Validators} from '@angular/forms';
+import {SelectionModel} from '@angular/cdk/collections';
+import {MatTable} from '@angular/material/table';
+import {NewOrderItemDTO} from './NewOrderItemDTO';
+import {NewDeliveryToShopService} from './new-delivery-to-shop.service';
+import {VerifyAmountItemsOnStockDTO} from './VerifyAmountItemsOnStockDTO';
+import {WarehouseItemCategoryDTO} from '../warehouseCategory/warehouse-item-category-DTO';
+import {WarehouseCategoryService} from '../warehouseCategory/warehouseCategory.service';
+import {NewDeliveryToWarehouseService} from '../new-delivery-to-warehouse/new-delivery-to-warehouse.service';
+import {observable, Observable} from 'rxjs';
+import {WarehouseNewDeliveryPersistanceResponseDTO} from './WarehouseNewDeliveryPersistanceResponseDTO';
 
 /** Is used for table elements */
 export interface PeriodicElement {
   position: number;
   category: string;
-  deliveryDisplayPricePerUnit: number;
-  deliveryQuantity: number;
-  deliveryDiscount: number;
-  deliveryFinalPricePerUnit: number;
+  priceSalesPerUnit: number;
+  quantity: number;
+  discountPercent: number;
+  priceListPerUnit: number;
   deliveryShop: string;
 }
 
@@ -33,14 +33,15 @@ export interface Shop {
   styleUrls: ['./new-delivery-to-shop.component.css']
 })
 export class NewDeliveryToShopComponent implements OnInit {
-  displayedColumns: string[] = ['select', 'category', 'deliveryDisplayPricePerUnit', 'deliveryQuantity', 'deliveryDiscount', 'deliveryFinalPricePerUnit', 'updateItem'];
+  displayedColumns: string[] = ['select', 'category', 'priceListPerUnit', 'quantity',
+                                'discountPercent', 'priceSalesPerUnit', 'updateItem'];
   public listNewItemsToShops: PeriodicElement[] = [];
   public categoryItems: WarehouseItemCategoryDTO[] = [];
 
   public discountMethod: string;
   private readonly DISCOUNT_METHOD_PERCENT = 'percent';
   private readonly DISCOUNT_METHOD_DISPLAY_PRICE = 'displayPrice';
-  public discountMethodList: string[] = [ this.DISCOUNT_METHOD_PERCENT , this.DISCOUNT_METHOD_DISPLAY_PRICE];
+  public discountMethodList: string[] = [this.DISCOUNT_METHOD_PERCENT, this.DISCOUNT_METHOD_DISPLAY_PRICE];
   private readonly INITIALIZE_CATEGORY = 'chooseCategory';
   private readonly INITIALIZE_SHOP = 'chooseShop';
 
@@ -56,10 +57,10 @@ export class NewDeliveryToShopComponent implements OnInit {
   newOrderElement: PeriodicElement = {
     position: 0,
     category: this.INITIALIZE_CATEGORY,
-    deliveryQuantity: 0,
-    deliveryDisplayPricePerUnit: 0,
-    deliveryDiscount: 0,
-    deliveryFinalPricePerUnit: 0,
+    quantity: 0,
+    priceSalesPerUnit: 0,
+    discountPercent: 0,
+    priceListPerUnit: 0,
     deliveryShop: this.INITIALIZE_SHOP
   };
 
@@ -68,10 +69,11 @@ export class NewDeliveryToShopComponent implements OnInit {
   public categoryControl = new FormControl('', Validators.required);
 
   /** Shop selection */
-  public shopControll = new FormControl('', Validators.required)
+  public shopControl = new FormControl('', Validators.required);
 
   availableItems: number = 0;
   @ViewChild('myShopCheckinProductsTable') table: MatTable<any>;
+
   constructor(private newDeliveryToShopService: NewDeliveryToShopService, private warehouseCategoryService: WarehouseCategoryService) {
   }
 
@@ -82,18 +84,17 @@ export class NewDeliveryToShopComponent implements OnInit {
 
   fetchNewOrderData(): void {
     this.newDeliveryToShopService.getAllNewOrderItems().subscribe(
-      JsonDto =>
-      {
-        this.listNewItemsToShops  = [];
+      JsonDto => {
+        this.listNewItemsToShops = [];
         let counter = 0;
-        for(const tempNewOrderItemDTO of JsonDto){
-          let newPeriodicElement: PeriodicElement  = {
+        for (const tempNewOrderItemDTO of JsonDto) {
+          const newPeriodicElement: PeriodicElement = {
             position: counter,
             category: tempNewOrderItemDTO.category,
-            deliveryDiscount: tempNewOrderItemDTO.deliveryDiscount,
-            deliveryDisplayPricePerUnit: tempNewOrderItemDTO.deliveryDisplayPricePerUnit,
-            deliveryFinalPricePerUnit: tempNewOrderItemDTO.deliveryFinalPricePerUnit,
-            deliveryQuantity: tempNewOrderItemDTO.deliveryQuantity,
+            discountPercent: tempNewOrderItemDTO.discountPercent,
+            priceSalesPerUnit: tempNewOrderItemDTO.priceSalesPerUnit,
+            priceListPerUnit: tempNewOrderItemDTO.priceListPerUnit,
+            quantity: tempNewOrderItemDTO.quantity,
             deliveryShop: tempNewOrderItemDTO.deliveryShop
           };
           counter++;
@@ -104,49 +105,52 @@ export class NewDeliveryToShopComponent implements OnInit {
   }
 
   fetchCategoyItems(): void {
-    this.warehouseCategoryService.getAllCategories().subscribe(JsonDto =>{ this.categoryItems = JsonDto});
+    this.warehouseCategoryService.getAllCategories().subscribe(JsonDto => {
+      this.categoryItems = JsonDto;
+    });
   }
 
   setNewItemOrder() {
-    //this.verifyAvailability();
     console.log('set new Item Value');
 
     this.verifyAvailabilityObservale().subscribe(obs => {
       this.availableItems = obs;
 
-      console.log( 'obs value' + obs);
+      console.log('obs value' + obs);
 
-      if (this.availableItems >= this.newOrderElement.deliveryQuantity) {
+      if (this.availableItems >= this.newOrderElement.quantity) {
 
-        if (this.newOrderElement.deliveryFinalPricePerUnit > 0 &&
+        if (this.newOrderElement.priceListPerUnit > 0 &&
           this.newOrderElement.category !== this.INITIALIZE_CATEGORY &&
-          this.newOrderElement.deliveryQuantity > 0 &&
+          this.newOrderElement.quantity > 0 &&
           this.newOrderElement.deliveryShop !== this.INITIALIZE_SHOP &&
           true) {
 
           const newItem: PeriodicElement = {
             position: this.listNewItemsToShops.length + 1,
             category: this.newOrderElement.category,
-            deliveryQuantity: this.newOrderElement.deliveryQuantity,
-            deliveryDisplayPricePerUnit: this.newOrderElement.deliveryDisplayPricePerUnit,
-            deliveryDiscount: this.newOrderElement.deliveryDiscount,
-            deliveryFinalPricePerUnit: this.newOrderElement.deliveryFinalPricePerUnit,
+            quantity: this.newOrderElement.quantity,
+            priceSalesPerUnit: this.newOrderElement.priceSalesPerUnit,
+            discountPercent: this.newOrderElement.discountPercent,
+            priceListPerUnit: this.newOrderElement.priceListPerUnit,
             deliveryShop: this.newOrderElement.deliveryShop
           };
 
-          console.log('before if : discount ' + newItem.deliveryDiscount + ' final price: ' + newItem.deliveryFinalPricePerUnit + ' display price: ' + newItem.deliveryDisplayPricePerUnit)
+          console.log('before if : discount ' + newItem.discountPercent + ' final price: ' + newItem.priceListPerUnit +
+            ' display price: ' + newItem.priceSalesPerUnit);
 
-          console.log('discount method flag:' + this.discountMethod)
+          console.log('discount method flag:' + this.discountMethod);
 
           if (this.discountMethod === undefined) {
-            newItem.deliveryDisplayPricePerUnit = newItem.deliveryFinalPricePerUnit;
+            newItem.priceSalesPerUnit = newItem.priceListPerUnit;
           } else if (this.discountMethod === this.DISCOUNT_METHOD_DISPLAY_PRICE) {
-            newItem.deliveryDiscount = Math.round((1 - (newItem.deliveryDisplayPricePerUnit / newItem.deliveryFinalPricePerUnit)) * 100);
+            newItem.discountPercent = Math.round((1 - (newItem.priceSalesPerUnit / newItem.priceListPerUnit)) * 100);
           } else if (this.discountMethod === this.DISCOUNT_METHOD_PERCENT) {
-            newItem.deliveryDisplayPricePerUnit = Math.round(newItem.deliveryFinalPricePerUnit * (1 - newItem.deliveryDiscount / 100));
+            newItem.priceSalesPerUnit = Math.round(newItem.priceListPerUnit * (1 - newItem.discountPercent / 100));
           }
 
-          console.log('After If : discount ' + newItem.deliveryDiscount + ' final price: ' + newItem.deliveryFinalPricePerUnit + ' display price: ' + newItem.deliveryDisplayPricePerUnit)
+          console.log('After If : discount ' + newItem.discountPercent + ' final price: ' + newItem.priceListPerUnit +
+            ' display price: ' + newItem.priceSalesPerUnit);
 
           this.listNewItemsToShops.push(newItem);
           this.table.renderRows();
@@ -159,7 +163,7 @@ export class NewDeliveryToShopComponent implements OnInit {
   getTotalValue(): number {
     this.totalCost = 0;
     for (const orderElem of this.listNewItemsToShops) {
-      this.totalCost += orderElem.deliveryQuantity * orderElem.deliveryFinalPricePerUnit;
+      this.totalCost += orderElem.quantity * orderElem.priceListPerUnit;
     }
     return this.totalCost;
   }
@@ -167,28 +171,28 @@ export class NewDeliveryToShopComponent implements OnInit {
   getTotalItems(): number {
     this.totalItems = 0;
     for (const orderElem of this.listNewItemsToShops) {
-      this.totalItems += Number( orderElem.deliveryQuantity );
+      this.totalItems += Number(orderElem.quantity);
     }
     return this.totalItems;
   }
 
   saveCurrentOrder() {
-    let tempNewOrderItemDTOList: NewOrderItemDTO[] = this.mapPeriodicElementListToDTO();
+    const tempNewOrderItemDTOList: NewOrderItemDTO[] = this.mapPeriodicElementListToDTO();
 
     this.newDeliveryToShopService.setAllNewOrderItems(tempNewOrderItemDTOList);
     this.table.renderRows();
   }
 
   mapPeriodicElementListToDTO(): NewOrderItemDTO[] {
-    let tempNewOrderItemDTOList: NewOrderItemDTO[] = [];
-    for(const tempPeriodicElement of this.listNewItemsToShops) {
-      let newOrderItemDTO: NewOrderItemDTO = {
+    const tempNewOrderItemDTOList: NewOrderItemDTO[] = [];
+    for (const tempPeriodicElement of this.listNewItemsToShops) {
+      const newOrderItemDTO: NewOrderItemDTO = {
         id: tempPeriodicElement.position,
         category: tempPeriodicElement.category,
-        deliveryDiscount: tempPeriodicElement.deliveryDiscount,
-        deliveryDisplayPricePerUnit: tempPeriodicElement.deliveryDisplayPricePerUnit,
-        deliveryFinalPricePerUnit: tempPeriodicElement.deliveryFinalPricePerUnit,
-        deliveryQuantity: tempPeriodicElement.deliveryQuantity,
+        discountPercent: tempPeriodicElement.discountPercent,
+        priceSalesPerUnit: tempPeriodicElement.priceSalesPerUnit,
+        priceListPerUnit: tempPeriodicElement.priceListPerUnit,
+        quantity: tempPeriodicElement.quantity,
         deliveryShop: tempPeriodicElement.deliveryShop
       };
       tempNewOrderItemDTOList.push(newOrderItemDTO);
@@ -197,9 +201,9 @@ export class NewDeliveryToShopComponent implements OnInit {
   }
 
   clearCurrentOrder() {
-    for(let elem of this.selection.selected){
+    for (const elem of this.selection.selected) {
 
-      let currentIndex: number = elem.position;
+      const currentIndex: number = elem.position;
       this.removeCurrentItem(currentIndex);
     }
     console.log(this.listNewItemsToShops);
@@ -211,10 +215,10 @@ export class NewDeliveryToShopComponent implements OnInit {
     console.log(periodicElement);
     this.newOrderElement.position = periodicElement.position;
     this.newOrderElement.category = periodicElement.category;
-    this.newOrderElement.deliveryQuantity = periodicElement.deliveryQuantity;
-    this.newOrderElement.deliveryDisplayPricePerUnit = periodicElement.deliveryDisplayPricePerUnit;
-    this.newOrderElement.deliveryDiscount = periodicElement.deliveryDiscount;
-    this.newOrderElement.deliveryFinalPricePerUnit = periodicElement.deliveryFinalPricePerUnit;
+    this.newOrderElement.quantity = periodicElement.quantity;
+    this.newOrderElement.priceSalesPerUnit = periodicElement.priceSalesPerUnit;
+    this.newOrderElement.discountPercent = periodicElement.discountPercent;
+    this.newOrderElement.priceListPerUnit = periodicElement.priceListPerUnit;
     this.newOrderElement.deliveryShop = periodicElement.deliveryShop;
 
     //function to remove the current element
@@ -222,9 +226,9 @@ export class NewDeliveryToShopComponent implements OnInit {
     this.table.renderRows();
   }
 
-  removeCurrentItem(currentIndex: number){
+  removeCurrentItem(currentIndex: number) {
     for (let i = 0; i < this.listNewItemsToShops.length; i++) {
-      if (this.listNewItemsToShops[i].position === currentIndex){
+      if (this.listNewItemsToShops[i].position === currentIndex) {
         this.listNewItemsToShops.splice(i, 1);
       }
     }
@@ -234,36 +238,39 @@ export class NewDeliveryToShopComponent implements OnInit {
     //update the amount of items on stock
     this.newDeliveryToShopService.verifyAmountItemsOnStock(
       this.newOrderElement.category,
-      this.newOrderElement.deliveryQuantity,
-      this.newOrderElement.deliveryFinalPricePerUnit)
+      this.newOrderElement.quantity,
+      this.newOrderElement.priceListPerUnit)
       .subscribe(JsonDto => {
         console.log(JsonDto);
         this.availableItems = JsonDto.quantity;
 
         for (const orderElem of this.listNewItemsToShops) {
-          if(orderElem.category === this.newOrderElement.category && orderElem.deliveryFinalPricePerUnit === this.newOrderElement.deliveryFinalPricePerUnit)
-          this.availableItems -= orderElem.deliveryQuantity;
+          if (orderElem.category === this.newOrderElement.category &&
+            orderElem.priceListPerUnit === this.newOrderElement.priceListPerUnit) {
+            this.availableItems -= orderElem.quantity;
+          }
         }
       });
   }
 
   verifyAvailabilityObservale(): Observable<number> {
 
-    return new Observable( (observer) => {
+    return new Observable((observer) => {
       let localAvailableItems: number = 0;
 
-      //update the amount of items on stock
       this.newDeliveryToShopService.verifyAmountItemsOnStock(
         this.newOrderElement.category,
-        this.newOrderElement.deliveryQuantity,
-        this.newOrderElement.deliveryFinalPricePerUnit)
+        this.newOrderElement.quantity,
+        this.newOrderElement.priceListPerUnit)
         .subscribe(JsonDto => {
           console.log(JsonDto);
           localAvailableItems = JsonDto.quantity;
 
           for (const orderElem of this.listNewItemsToShops) {
-            if(orderElem.category === this.newOrderElement.category && orderElem.deliveryFinalPricePerUnit === this.newOrderElement.deliveryFinalPricePerUnit)
-              localAvailableItems -= orderElem.deliveryQuantity;
+            if (orderElem.category === this.newOrderElement.category &&
+              orderElem.priceListPerUnit === this.newOrderElement.priceListPerUnit) {
+              localAvailableItems -= orderElem.quantity;
+            }
           }
           observer.next(localAvailableItems);
         });
@@ -271,13 +278,13 @@ export class NewDeliveryToShopComponent implements OnInit {
   }
 
   sendCurrentOrder() {
-    let tempNewOrderItemDTOList: NewOrderItemDTO[] = this.mapPeriodicElementListToDTO();
+    const tempNewOrderItemDTOList: NewOrderItemDTO[] = this.mapPeriodicElementListToDTO();
 
     let persistanceResponseList: WarehouseNewDeliveryPersistanceResponseDTO;
 
-    this.newDeliveryToShopService.sendFinalizedOrder(tempNewOrderItemDTOList).subscribe( observer => {
+    this.newDeliveryToShopService.sendFinalizedOrder(tempNewOrderItemDTOList).subscribe(observer => {
       persistanceResponseList = observer;
-      console.log("after everything");
+      console.log('after everything');
       console.log(persistanceResponseList);
       this.fetchNewOrderData();
     });

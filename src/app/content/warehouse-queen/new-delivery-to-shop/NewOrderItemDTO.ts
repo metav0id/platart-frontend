@@ -1,9 +1,9 @@
 export interface NewOrderItemDTO {
   id: number;
   category: string;
-  deliveryQuantity: number;
-  deliveryDisplayPricePerUnit: number;
-  deliveryDiscount: number;
-  deliveryFinalPricePerUnit: number;
+  quantity: number;
+  priceSalesPerUnit: number;
+  discountPercent: number;
+  priceListPerUnit: number;
   deliveryShop: string;
 }

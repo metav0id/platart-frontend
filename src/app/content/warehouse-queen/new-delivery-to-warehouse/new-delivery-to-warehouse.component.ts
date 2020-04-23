@@ -13,13 +13,13 @@ import {WarehouseItemCategoryDTO} from '../warehouseCategory/warehouse-item-cate
 })
 
 export class NewDeliveryToWarehouseComponent implements OnInit {
-  public displayedColumns: string[] = ['select', 'category', 'pricePerUnit', 'quantity', 'price', 'supplierName'];
+  public displayedColumns: string[] = ['select', 'category', 'priceListPerUnit', 'quantity', 'priceSupplierPerUnit', 'supplierName'];
   public listNewItemsFromSuppliers: PeriodicElement[] = [];
   public newItemFromSupplier: PeriodicElement = {
     position: 0,
     category: '',
-    pricePerUnit: 0,
-    price: 0,
+    priceListPerUnit: 0,
+    priceSupplierPerUnit: 0,
     quantity: 0,
     supplierName: ''
   };
@@ -49,13 +49,13 @@ export class NewDeliveryToWarehouseComponent implements OnInit {
     const newItem: PeriodicElement = {
       position: this.counter++,
       category: this.newItemFromSupplier.category,
-      pricePerUnit: this.newItemFromSupplier.pricePerUnit,
-      price: this.newItemFromSupplier.pricePerUnit * this.newItemFromSupplier.quantity,
+      priceListPerUnit: this.newItemFromSupplier.priceListPerUnit,
+      priceSupplierPerUnit: this.newItemFromSupplier.priceSupplierPerUnit,
       quantity: this.newItemFromSupplier.quantity,
       supplierName: this.newItemFromSupplier.supplierName
     };
     const isCategoryNotEmpty = !this.categoryControl.hasError('required');
-    const isPricePerUnitNotEmpty = newItem.pricePerUnit > 0;
+    const isPricePerUnitNotEmpty = newItem.priceListPerUnit > 0 && newItem.priceSupplierPerUnit > 0;
     const isQuantityNotEmpty = newItem.quantity > 0;
     const isSupplierNotEmpty = newItem.supplierName !== '';
     if (isCategoryNotEmpty && isPricePerUnitNotEmpty && isQuantityNotEmpty && isSupplierNotEmpty) {

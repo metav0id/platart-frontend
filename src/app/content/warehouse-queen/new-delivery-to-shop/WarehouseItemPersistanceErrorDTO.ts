@@ -1,5 +1,5 @@
 export interface WarehouseItemPersistanceErrorDTO {
   category: string ;
-  deliveryFinalPricePerUnit: number;
+  priceListPerUnit: number;
   errorQuantity: number;
 }

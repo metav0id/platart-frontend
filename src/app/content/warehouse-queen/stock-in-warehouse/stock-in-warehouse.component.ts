@@ -32,7 +32,7 @@ export class StockInWarehouseComponent implements OnInit {
   getTotalCost(): number {
     this.totalCost = 0;
     for (const elem of this.warehouseData) {
-      this.totalCost += elem.quantity * elem.pricePerUnit;
+      this.totalCost += elem.quantity * elem.priceListPerUnit;
     }
     return this.totalCost;
   }
