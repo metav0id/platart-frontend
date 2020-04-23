@@ -68,7 +68,8 @@ import {TranslocoRootModule} from './transloco-root.module';
     MatSliderModule,
     AgmCoreModule.forRoot({apiKey: 'AIzaSyDNOu2JQ001PxZY-GVwFvVou0_6h_Sj-14'}),
     MatCardModule,
-    MatDialogModule
+    MatDialogModule,
+    TranslocoRootModule
   ],
   providers: [],
   bootstrap: [AppComponent]
