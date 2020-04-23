@@ -1,0 +1,21 @@
+<h1 mat-dialog-title>Detail View</h1>
+<div mat-dialog-content>
+  <label>Category:</label>
+  <p>{{ data.category }}</p>
+  <label>List Price:</label>
+  <p>{{ data.listPrice }}</p>
+  <label>Sales Price:</label>
+  <p>{{ data.salesPrice }}</p>
+  <label>Quantity:</label><button (click)="onEditClick()" mat-icon-button><mat-icon>edit</mat-icon></button>
+  <input [(ngModel)]="data.quantity" [disabled]="toogleInput">
+  <br>
+  <label>Timestamp:</label>
+  <p>{{ data.timestamp }}</p>
+  <label>Comment:</label>
+  <textarea [(ngModel)]="data.comment">{{ data.comment }}</textarea>
+</div>
+<mat-dialog-actions>
+  <button mat-raised-button mat-dialog-close>Close</button>
+</mat-dialog-actions>
+
+

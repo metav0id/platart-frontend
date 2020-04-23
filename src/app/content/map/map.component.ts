@@ -1,13 +1,13 @@
-import { Component, OnInit } from '@angular/core';
-import {Marcador} from "./components/marker.class";
-import {MARKERS} from "./components/marker";
+import {Component, OnInit} from '@angular/core';
+import {Marcador} from './components/marker.class';
+import {MARKERS} from './components/marker';
 import {
   HttpClient,
   HttpHeaders
-} from "@angular/common/http";
-import {Marker} from "@agm/core";
-import {Observable} from "rxjs";
-import {MapService} from "./map.service";
+} from '@angular/common/http';
+import {Marker} from '@agm/core';
+import {Observable} from 'rxjs';
+import {MapService} from './map.service';
 
 @Component({
   selector: 'app-map',
@@ -26,8 +26,7 @@ export class MapComponent implements OnInit {
   }
 
   //use this variable when the connetion with BE is completed
-    allMarkers: Marcador[];
-
+  allMarkers: Marcador[];
 
 
   ngOnInit(): void {

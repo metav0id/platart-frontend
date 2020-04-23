@@ -8,13 +8,13 @@ import {WarehouseItemCategoryDTO} from '../warehouseCategory/warehouse-item-cate
 })
 export class WarehouseCategoryService {
 
-  private readonly getAllCategoriesURL = 'http://localhost:8081/warehouse/getAllCategories';
+  private readonly URL_GET_ALL_CATEGORIES = 'http://localhost:8081/warehouse/getAllCategories';
 
   constructor(private http: HttpClient) {
   }
 
   getAllCategories(): Observable<WarehouseItemCategoryDTO[]> {
-    return this.http.post<WarehouseItemCategoryDTO[]>(this.getAllCategoriesURL, null);
+    return this.http.post<WarehouseItemCategoryDTO[]>(this.URL_GET_ALL_CATEGORIES, null);
   }
 
 }

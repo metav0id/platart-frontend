@@ -9,7 +9,7 @@
     <div>
       <a>Category:<input [(ngModel)]="newOrderElement.category" #it="ngModel" required></a>
       <a>Quantity:<input [(ngModel)]="newOrderElement.quantity" #it="ngModel" required></a>
-      <a>Price per Unit:<input [(ngModel)]="newOrderElement.pricePerUnit" #it="ngModel" required></a>
+      <a>Price per Unit:<input [(ngModel)]="newOrderElement.priceListPerUnit" #it="ngModel" required></a>
       <button (click)="setNewOrder()">Add new order item</button>
     </div>
   </div>

@@ -26,7 +26,7 @@
               <mat-hint>{{ categoryControl.value?.sound }}</mat-hint>
             </mat-form-field>
 
-            <!--User Input fields-->
+            <!--Input Quantity-->
             <div class="deliveryToWarehouseQuantity">
               <mat-form-field hintLabel="Max 10 characters" appearance="fill">
                 <mat-label>Enter Quantity</mat-label>
@@ -34,15 +34,25 @@
                 <mat-hint align="end">{{input.value?.length || 0}}/10</mat-hint>
               </mat-form-field>
             </div>
-            <!--User Input fields-->
-            <div class="deliveryToWarehousePricePerUnit">
+
+            <!--Input Price Supplier Per Unit-->
+            <div class="deliveryToWarehouseQuantity">
               <mat-form-field hintLabel="Max 10 characters" appearance="fill">
-                <mat-label>Enter PricePerUnit</mat-label>
-                <input matInput #input [(ngModel)]="newItemFromSupplier.pricePerUnit" maxlength="10" placeholder="PricePerUnit">
+                <mat-label>Enter Supplier Price</mat-label>
+                <input matInput #input [(ngModel)]="newItemFromSupplier.priceSupplierPerUnit" maxlength="10" placeholder="Quantity">
                 <mat-hint align="end">{{input.value?.length || 0}}/10</mat-hint>
               </mat-form-field>
             </div>
-            <!--User Input fields-->
+
+            <!--Input Price List Per Unit-->
+            <div class="deliveryToWarehousePricePerUnit">
+              <mat-form-field hintLabel="Max 10 characters" appearance="fill">
+                <mat-label>Enter List Price</mat-label>
+                <input matInput #input [(ngModel)]="newItemFromSupplier.priceListPerUnit" maxlength="10" placeholder="PricePerUnit">
+                <mat-hint align="end">{{input.value?.length || 0}}/10</mat-hint>
+              </mat-form-field>
+            </div>
+            <!--Input Supplier Name-->
             <div class="deliveryToWarehousePricePerUnit">
               <mat-form-field hintLabel="Max 10 characters" appearance="fill">
                 <mat-label>Enter SupplierName</mat-label>
@@ -105,11 +115,17 @@
             <td mat-footer-cell *matFooterCellDef> - </td>
           </ng-container>
 
-          <!-- Price Per Unit Column -->
-          <ng-container matColumnDef="pricePerUnit">
-            <th mat-header-cell *matHeaderCellDef> Price per Unit </th>
-            <td mat-cell *matCellDef="let element"> {{element.pricePerUnit}} </td>
+          <!-- List Price Per Unit Column -->
+          <ng-container matColumnDef="priceListPerUnit">
+            <th mat-header-cell *matHeaderCellDef> List Price </th>
+            <td mat-cell *matCellDef="let element"> {{element.priceListPerUnit}} </td>
             <td mat-footer-cell *matFooterCellDef> - </td>
+          </ng-container>
+
+          <!-- Supplier Price Per Unit column -->
+          <ng-container matColumnDef="priceSupplierPerUnit">
+            <th mat-header-cell *matHeaderCellDef> Supplier Price </th>
+            <td mat-cell *matCellDef="let element"> {{(element.priceSupplierPerUnit)}} </td>
           </ng-container>
 
           <!-- Quantity Column -->
@@ -117,12 +133,6 @@
             <th mat-header-cell *matHeaderCellDef> Quantity </th>
             <td mat-cell *matCellDef="let element"> {{element.quantity}} </td>
             <td mat-footer-cell *matFooterCellDef> Total </td>
-          </ng-container>
-
-          <!-- Price column -->
-          <ng-container matColumnDef="price">
-            <th mat-header-cell *matHeaderCellDef> Price </th>
-            <td mat-cell *matCellDef="let element"> {{(element.pricePerUnit)*(element.quantity)}} </td>
           </ng-container>
 
           <!-- SupplierName column -->

@@ -108,7 +108,7 @@ export class NewItemCategoryComponent implements OnInit {
   deleteSelectedCategory() {
     console.log('delete selected categories');
 
-    for(let elem of this.selection.selected){
+    for (let elem of this.selection.selected) {
 
       let currentCategory: string = elem.category;
       let currentCategoryIndex: number = elem.position;
@@ -120,9 +120,9 @@ export class NewItemCategoryComponent implements OnInit {
     this.table.renderRows();
   }
 
-  removeCurrentIndex(currentIndex: number){
-    for(let i=0; i<this.listCategories.length; i++){
-      if(this.listCategories[i].position===currentIndex){
+  removeCurrentIndex(currentIndex: number) {
+    for (let i = 0; i < this.listCategories.length; i++) {
+      if (this.listCategories[i].position === currentIndex) {
         this.listCategories.splice(i, 1);
       }
     }

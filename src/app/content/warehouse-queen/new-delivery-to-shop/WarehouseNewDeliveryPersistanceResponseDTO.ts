@@ -1,4 +1,4 @@
-import {WarehouseItemPersistanceErrorDTO} from "./WarehouseItemPersistanceErrorDTO";
+import {WarehouseItemPersistanceErrorDTO} from './WarehouseItemPersistanceErrorDTO';
 
 export interface WarehouseNewDeliveryPersistanceResponseDTO {
   persistanceInitialized: boolean;
