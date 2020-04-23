@@ -18,7 +18,7 @@ export interface WarehouseItem {
   styleUrls: ['./stock-in-warehouse.component.css']
 })
 export class StockInWarehouseComponent implements OnInit {
-  displayedColumns: string[] = ['category', 'priceListPerUnit', 'quantity', 'value', 'action'];
+  displayedColumns: string[] = ['category', 'priceListPerUnit', 'quantity', 'value'];
 
   //public warehouseData: WarehouseGetAllItemsDTO[] = [];
   public warehouseData: WarehouseItem[] = [];

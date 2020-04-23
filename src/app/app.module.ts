@@ -32,6 +32,7 @@ import {AgmCoreModule} from '@agm/core';
 import {SalesPrincessModule} from './content/sales-princess/sales-princess.module';
 import {ManagerKingModule} from './content/manager-king/manager-king.module';
 import {MatDialogModule} from '@angular/material/dialog';
+import {TranslocoRootModule} from './transloco-root.module';
 
 
 @NgModule({
