@@ -2,13 +2,13 @@ import {Component, OnInit, ViewChild} from '@angular/core';
 import {WarehouseGetAllItemsDTO} from './WarehouseGetAllItemsDTO';
 import {HttpClient} from '@angular/common/http';
 import {StockInWarehouseService} from './stock-in-warehouse.service';
-import {MatTable, MatTableDataSource} from "@angular/material/table";
+import {MatTable, MatTableDataSource} from '@angular/material/table';
 
 /** Is used for table elements */
 export interface WarehouseItem {
   position: number;
   category: string;
-  pricePerUnit: number;
+  priceListPerUnit: number;
   quantity: number;
 }
 
@@ -18,7 +18,7 @@ export interface WarehouseItem {
   styleUrls: ['./stock-in-warehouse.component.css']
 })
 export class StockInWarehouseComponent implements OnInit {
-  displayedColumns: string[] = ['category', 'pricePerUnit', 'quantity', 'value', 'correctQuantity'];
+  displayedColumns: string[] = ['category', 'priceListPerUnit', 'quantity', 'value', 'action'];
 
   //public warehouseData: WarehouseGetAllItemsDTO[] = [];
   public warehouseData: WarehouseItem[] = [];
@@ -31,12 +31,13 @@ export class StockInWarehouseComponent implements OnInit {
   updateWarehouseItem: WarehouseItem = {
     position: -1,
     category: 'someCategory',
-    pricePerUnit: -1,
+    priceListPerUnit: -1,
     quantity: -1
   };
 
   @ViewChild('myWarehouseItemsTable') table: MatTable<any>;
-  constructor(private http: HttpClient, private stockInWarehouseService: StockInWarehouseService ) {
+
+  constructor(private http: HttpClient, private stockInWarehouseService: StockInWarehouseService) {
   }
 
   ngOnInit(): void {
@@ -48,11 +49,11 @@ export class StockInWarehouseComponent implements OnInit {
       .subscribe(JsonDto => {
         this.warehouseData = [];
         let counter = 0;
-        for (const item of JsonDto){
-          let newWarehouseItem: WarehouseItem = {
+        for (const item of JsonDto) {
+          const newWarehouseItem: WarehouseItem = {
             position: counter,
             category: item.category,
-            pricePerUnit: item.pricePerUnit,
+            priceListPerUnit: item.priceListPerUnit,
             quantity: item.quantity
           };
           counter++;
@@ -89,11 +90,11 @@ export class StockInWarehouseComponent implements OnInit {
   }
 
   updateQuantityButton(element: WarehouseItem) {
-    console.log('Update Item' + element.category + ' ' + element.pricePerUnit + ' ' + element.quantity)
+    console.log('Update Item' + element.category + ' ' + element.priceListPerUnit + ' ' + element.quantity);
     this.updateWarehouseItem.position = element.position;
     this.updateWarehouseItem.category = element.category;
     this.updateWarehouseItem.quantity = element.quantity;
-    this.updateWarehouseItem.pricePerUnit = element.pricePerUnit;
+    this.updateWarehouseItem.priceListPerUnit = element.priceListPerUnit;
 
     this.updateQuantityState = true;
   }
