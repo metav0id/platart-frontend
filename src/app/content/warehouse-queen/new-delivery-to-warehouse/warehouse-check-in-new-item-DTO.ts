@@ -1,7 +1,9 @@
 export interface WarehouseCheckInNewItemDTO {
   category: string;
   quantity: number;
-  pricePerUnit: number;
-  price: number;
+  priceListPerUnit: number;
+  priceSupplierPerUnit: number;
   supplierName: string;
+  // pricePerUnit: number;
+  // price: number;
 }
