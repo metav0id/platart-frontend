@@ -66,7 +66,7 @@ export class CheckoutSoldItemsComponent implements OnInit {
 
   availableItems: number = 0;
   selection = new SelectionModel<PeriodicElement>(true, []);
-  @ViewChild('myShopCheckinProductsTable') table: MatTable<any>;
+  @ViewChild('myShopCheckoutProductsTable') table: MatTable<any>;
   constructor(private _snackBar: MatSnackBar,
               private checkoutSoldItemsService: CheckoutSoldItemsService) { }
 
