@@ -5,11 +5,13 @@ import {FormControl, Validators} from '@angular/forms';
 import {PeriodicElement} from './periodic-element';
 import {NewDeliveryToWarehouseService} from './new-delivery-to-warehouse.service';
 import {WarehouseItemCategoryDTO} from '../warehouseCategory/warehouse-item-category-DTO';
+import {TRANSLOCO_SCOPE} from '@ngneat/transloco';
 
 @Component({
   selector: 'app-new-delivery-to-warehouse',
   templateUrl: './new-delivery-to-warehouse.component.html',
-  styleUrls: ['./new-delivery-to-warehouse.component.css']
+  styleUrls: ['./new-delivery-to-warehouse.component.css'],
+  providers: [{provide: TRANSLOCO_SCOPE, useValue: { scope: 'warehouseQueen/newDeliveryToWarehouse', alias: 'translate' }}]
 })
 
 export class NewDeliveryToWarehouseComponent implements OnInit {

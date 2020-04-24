@@ -9,12 +9,13 @@ import {TRANSLOCO_SCOPE, TranslocoService} from '@ngneat/transloco';
 })
 export class HeaderComponent implements OnInit {
 
-  constructor(private transloco: TranslocoService) { }
-
-  ngOnInit(): void {
-  }
+  constructor(private transloco: TranslocoService) {}
 
   public setActiveLang(lang: string) {
     this.transloco.setActiveLang(lang);
   }
+
+  ngOnInit(): void {
+  }
+
 }
