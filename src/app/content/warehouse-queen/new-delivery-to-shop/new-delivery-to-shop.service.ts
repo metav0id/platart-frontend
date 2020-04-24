@@ -2,28 +2,28 @@ import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {observable, Observable} from 'rxjs';
 import {NewOrderItemDTO} from './NewOrderItemDTO';
-import {VerifyAmountItemsOnStockDTO} from "./VerifyAmountItemsOnStockDTO";
-import {WarehouseNewDeliveryPersistanceResponseDTO} from "./WarehouseNewDeliveryPersistanceResponseDTO";
+import {VerifyAmountItemsOnStockDTO} from './VerifyAmountItemsOnStockDTO';
+import {WarehouseNewDeliveryPersistanceResponseDTO} from './WarehouseNewDeliveryPersistanceResponseDTO';
 
 @Injectable({
   providedIn: 'root'
 })
 export class NewDeliveryToShopService {
-  private readonly getAllNewOrderItemsURL = 'http://localhost:8081/warehouse/getAllNewOrderItems';
-  private readonly setAllNewOrderItemsURL = 'http://localhost:8081/warehouse/setAllNewOrderItems';
-  private readonly verifyAmountItemsOnStockURL = 'http://localhost:8081/warehouse/verifyAmountItemsOnStock';
-  private readonly  sendDeliveryOrderURL = 'http://localhost:8081/warehouse/sendDeliveryOrder';
+  private readonly URL_GET_ALL_NEW_ORDER_ITEMS = 'http://localhost:8081/warehouse/getAllNewOrderItems';
+  private readonly URL_SET_ALL_NEW_ORDER_ITEMS = 'http://localhost:8081/warehouse/setAllNewOrderItems';
+  private readonly URL_VERIFY_AMOUNT_ITEMS_ON_STOCK = 'http://localhost:8081/warehouse/verifyAmountItemsOnStock';
+  private readonly URL_SEND_DELIVERY_ORDER = 'http://localhost:8081/warehouse/sendDeliveryOrder';
 
   constructor(private http: HttpClient) {
   }
 
   getAllNewOrderItems(): Observable<NewOrderItemDTO[]> {
-    return this.http.post<NewOrderItemDTO[]>(this.getAllNewOrderItemsURL, null);
+    return this.http.post<NewOrderItemDTO[]>(this.URL_GET_ALL_NEW_ORDER_ITEMS, null);
   }
 
   setAllNewOrderItems(newOrderItemDTOList: NewOrderItemDTO[]): void {
     console.log('Persist the order to database.');
-    this.http.post<NewOrderItemDTO[]>(this.setAllNewOrderItemsURL, newOrderItemDTOList).subscribe();
+    this.http.post<NewOrderItemDTO[]>(this.URL_SET_ALL_NEW_ORDER_ITEMS, newOrderItemDTOList).subscribe();
   }
 
   verifyAmountItemsOnStock(categoryInput: string, quantityInput: number, pricePerQuantityInput: number): Observable<VerifyAmountItemsOnStockDTO> {
@@ -31,22 +31,22 @@ export class NewDeliveryToShopService {
     let requestTest: VerifyAmountItemsOnStockDTO = {
       category: categoryInput,
       quantity: quantityInput,
-      pricePerUnit: pricePerQuantityInput
+      priceListPerUnit: pricePerQuantityInput
     };
 
-    return this.http.post<VerifyAmountItemsOnStockDTO>(this.verifyAmountItemsOnStockURL, requestTest);
+    return this.http.post<VerifyAmountItemsOnStockDTO>(this.URL_VERIFY_AMOUNT_ITEMS_ON_STOCK, requestTest);
   }
 
   sendFinalizedOrder(sendOrderItemDTOList: NewOrderItemDTO[]): Observable<WarehouseNewDeliveryPersistanceResponseDTO> {
     console.log('Order was send');
     console.log(sendOrderItemDTOList);
-    return new Observable( (observer) =>{
+    return new Observable((observer) => {
       let persistanceResponseList: WarehouseNewDeliveryPersistanceResponseDTO;
-      this.http.post<WarehouseNewDeliveryPersistanceResponseDTO>(this.sendDeliveryOrderURL, sendOrderItemDTOList).subscribe(JsonDto => {
+      this.http.post<WarehouseNewDeliveryPersistanceResponseDTO>(this.URL_SEND_DELIVERY_ORDER, sendOrderItemDTOList).subscribe(JsonDto => {
         persistanceResponseList = JsonDto;
         observer.next(persistanceResponseList);
       });
-    } );
+    });
   }
 
 }

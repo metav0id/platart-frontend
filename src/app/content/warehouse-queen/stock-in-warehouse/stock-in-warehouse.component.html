@@ -35,9 +35,9 @@
     </ng-container>
 
     <!-- Name Column -->
-    <ng-container matColumnDef="pricePerUnit">
-      <th mat-header-cell *matHeaderCellDef> Price per Unit </th>
-      <td mat-cell *matCellDef="let element"> {{element.pricePerUnit}} </td>
+    <ng-container matColumnDef="priceListPerUnit">
+      <th mat-header-cell *matHeaderCellDef> List Price </th>
+      <td mat-cell *matCellDef="let element"> {{element.priceListPerUnit}} </td>
       <td mat-footer-cell *matFooterCellDef> Sum </td>
     </ng-container>
 
@@ -61,7 +61,7 @@
     <!-- Weight UnitPrice*quantity -->
     <ng-container matColumnDef="value">
       <th mat-header-cell *matHeaderCellDef> CategoryValue </th>
-      <td mat-cell *matCellDef="let element"> {{(element.quantity)*(element.pricePerUnit)}} </td>
+      <td mat-cell *matCellDef="let element"> {{(element.quantity)*(element.priceListPerUnit)}} </td>
       <td mat-footer-cell *matFooterCellDef> {{getTotalCost()}} </td>
     </ng-container>
 
@@ -78,7 +78,7 @@
       <div class="space"></div>
       <div class="d-flex justify-content-around" >
 
-        <h3>Update {{updateWarehouseItem.category}} for {{updateWarehouseItem.pricePerUnit}}$</h3>
+        <h3>Update {{updateWarehouseItem.category}} for {{updateWarehouseItem.priceListPerUnit}}$</h3>
         <h4>Correct the current quantity from {{updateWarehouseItem.quantity}} to:</h4>
 
         <div class="newQuantity">

@@ -14,7 +14,7 @@ export class NewDeliveryOrderComponent implements OnInit {
 
   newOrderElement: WarehouseGetAllItemsDTO = {
     category: '',
-    pricePerUnit: 0,
+    priceListPerUnit: 0,
     quantity: 0
   };
 
@@ -28,7 +28,7 @@ export class NewDeliveryOrderComponent implements OnInit {
 
 
   setNewOrder() {
-    if (this.newOrderElement.pricePerUnit > 0 &&
+    if (this.newOrderElement.priceListPerUnit > 0 &&
         this.newOrderElement.category !== '' &&
         this.newOrderElement.quantity > 0) {
       this.newOrderData.push(this.newOrderElement);
@@ -39,7 +39,7 @@ export class NewDeliveryOrderComponent implements OnInit {
   getTotalCost(): number {
     this.totalCost = 0;
     for (const orderElem of this.newOrderData) {
-      this.totalCost += orderElem.quantity * orderElem.pricePerUnit;
+      this.totalCost += orderElem.quantity * orderElem.priceListPerUnit;
     }
     return this.totalCost;
   }

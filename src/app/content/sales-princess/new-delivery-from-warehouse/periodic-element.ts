@@ -3,9 +3,8 @@ export interface PeriodicElement {
   position: number;
   category: string;
   quantity: number;
-  priceListPerUnit: number;
-  priceSupplierPerUnit: number;
-  supplierName: string;
-  // pricePerUnit: number;
-  // price: number;
+  listPrice: number;
+  salesPrice: number;
+  timestamp: string;
+  comment: string;
 }

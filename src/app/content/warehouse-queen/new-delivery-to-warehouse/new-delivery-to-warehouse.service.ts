@@ -9,8 +9,8 @@ import {WarehouseItemCategoryDTO} from '../warehouseCategory/warehouse-item-cate
   providedIn: 'root'
 })
 export class NewDeliveryToWarehouseService {
-  private readonly saveListDeliverySupplierURL = 'http://localhost:8081/warehouse/savelistdeliverysupplier';
-  private readonly getAllCategoriesURL = 'http://localhost:8081/warehouse/getAllCategories';
+  private readonly URL_SAVE_LIST_DELIVERY_SUPPLIER = 'http://localhost:8081/warehouse/savelistdeliverysupplier';
+  private readonly URL_GET_ALL_CATEGORIES = 'http://localhost:8081/warehouse/getAllCategories';
 
   constructor(private http: HttpClient) {
   }
@@ -21,16 +21,16 @@ export class NewDeliveryToWarehouseService {
       const itemDTO: WarehouseCheckInNewItemDTO = {
         category: item.category,
         quantity: item.quantity,
-        pricePerUnit: item.pricePerUnit,
-        price: item.price,
+        priceListPerUnit: item.priceListPerUnit,
+        priceSupplierPerUnit: item.priceSupplierPerUnit,
         supplierName: item.supplierName
       };
       listDTO.push(itemDTO);
     }
-    this.http.post(this.saveListDeliverySupplierURL, listDeliveryItems).subscribe();
+    this.http.post(this.URL_SAVE_LIST_DELIVERY_SUPPLIER, listDeliveryItems).subscribe();
   }
 
   getAllCategories(): Observable<WarehouseItemCategoryDTO[]> {
-    return this.http.post<WarehouseItemCategoryDTO[]>(this.getAllCategoriesURL, null);
+    return this.http.post<WarehouseItemCategoryDTO[]>(this.URL_GET_ALL_CATEGORIES, null);
   }
 }
