@@ -1,6 +1,6 @@
-
+<ng-template transloco let-t>
 <mat-card>
-  <mat-card-title>Select the location you want to manage:</mat-card-title>
+  <mat-card-title>{{ t('translate.selectlocation') }}:</mat-card-title>
   <mat-card-content>
     <agm-map (mapClick)="agregarMarcador($event)" [latitude]= "lat" [longitude] = "lng" [zoom] ="15">
 <!--method to add a marker by clicking should be inserted in line above after agm-map-->
@@ -42,3 +42,4 @@
   </mat-card-content>
 
 </mat-card>
+</ng-template>

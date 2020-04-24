@@ -1,10 +1,12 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {WarehouseGetAllItemsDTO} from '../stock-in-warehouse/WarehouseGetAllItemsDTO';
 import {MatTable} from "@angular/material/table";
+import {TRANSLOCO_SCOPE} from '@ngneat/transloco';
 @Component({
   selector: 'app-new-delivery-order',
   templateUrl: './new-delivery-order.component.html',
-  styleUrls: ['./new-delivery-order.component.css']
+  styleUrls: ['./new-delivery-order.component.css'],
+  providers: [{provide: TRANSLOCO_SCOPE, useValue: { scope: 'warehouseQueen/newDeliveryOrder', alias: 'translate' }}]
 })
 export class NewDeliveryOrderComponent implements OnInit {
 

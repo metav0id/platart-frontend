@@ -2,11 +2,13 @@ import { Component, OnInit } from '@angular/core';
 import {WarehouseGetAllItemsDTO} from './WarehouseGetAllItemsDTO';
 import {HttpClient} from '@angular/common/http';
 import {StockInWarehouseService} from './stock-in-warehouse.service';
+import {TRANSLOCO_SCOPE} from '@ngneat/transloco';
 
 @Component({
   selector: 'app-stock-in-warehouse',
   templateUrl: './stock-in-warehouse.component.html',
-  styleUrls: ['./stock-in-warehouse.component.css']
+  styleUrls: ['./stock-in-warehouse.component.css'],
+  providers: [{provide: TRANSLOCO_SCOPE, useValue: { scope: 'warehouseQueen/stockInWarehouse', alias: 'translate' }}]
 })
 export class StockInWarehouseComponent implements OnInit {
   displayedColumns: string[] = ['category', 'pricePerUnit', 'quantity', 'value'];
