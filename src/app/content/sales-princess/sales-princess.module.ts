@@ -16,10 +16,18 @@ import {NewDeliveryFromWarehouseDetailsComponent} from './new-delivery-from-ware
 import {MatDialogModule} from '@angular/material/dialog';
 import {MatButtonModule} from '@angular/material/button';
 import {CheckoutSoldItemsComponent} from "./checkout-sold-items/checkout-sold-items.component";
+import {MatDatepickerInputEvent, MatDatepickerModule} from "@angular/material/datepicker";
+import {MatNativeDateModule} from "@angular/material/core";
+import { CheckoutSoldItemsDetailsComponent } from './checkout-sold-items/checkout-sold-items-details/checkout-sold-items-details.component';
+import {MatCardModule} from "@angular/material/card";
 
 
 @NgModule({
-  declarations: [NewDeliveryFromWarehouseComponent, NewDeliveryFromWarehouseDetailsComponent,CheckoutSoldItemsComponent],
+  declarations: [
+    NewDeliveryFromWarehouseComponent,
+    NewDeliveryFromWarehouseDetailsComponent,
+    CheckoutSoldItemsComponent,
+    CheckoutSoldItemsDetailsComponent],
   imports: [
     CommonModule,
     SalesPrincessRoutingModule,
@@ -35,10 +43,14 @@ import {CheckoutSoldItemsComponent} from "./checkout-sold-items/checkout-sold-it
     MatIconModule,
     MatRadioModule,
     MatDialogModule,
-    MatButtonModule
+    MatButtonModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    MatCardModule
   ],
   entryComponents: [
-    NewDeliveryFromWarehouseDetailsComponent
+    NewDeliveryFromWarehouseComponent,
+    CheckoutSoldItemsComponent
   ]
 })
 export class SalesPrincessModule {
