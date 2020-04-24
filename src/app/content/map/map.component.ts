@@ -15,11 +15,13 @@ import {
   Validators
 } from "@angular/forms";
 import {MarkerFormComponent} from "./components/marker-form.component";
+import {TRANSLOCO_SCOPE} from '@ngneat/transloco';
 
 @Component({
   selector: 'app-map',
   templateUrl: './map.component.html',
-  styleUrls: ['./map.component.css']
+  styleUrls: ['./map.component.css'],
+  providers: [{provide: TRANSLOCO_SCOPE, useValue: { scope: 'map', alias: 'translate' }}]
 })
 export class MapComponent implements OnInit {
   lat: number = 51.678418;

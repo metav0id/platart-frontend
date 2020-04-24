@@ -11,6 +11,7 @@ import {NewDeliveryToWarehouseService} from '../new-delivery-to-warehouse/new-de
 import {observable, Observable} from 'rxjs';
 import {WarehouseNewDeliveryPersistanceResponseDTO} from './WarehouseNewDeliveryPersistanceResponseDTO';
 import {MatSnackBar} from '@angular/material/snack-bar';
+import {TRANSLOCO_SCOPE} from '@ngneat/transloco';
 
 /** Is used for table elements */
 export interface PeriodicElement {
@@ -31,7 +32,8 @@ export interface Shop {
 @Component({
   selector: 'app-new-delivery-order',
   templateUrl: './new-delivery-to-shop.component.html',
-  styleUrls: ['./new-delivery-to-shop.component.css']
+  styleUrls: ['./new-delivery-to-shop.component.css'],
+  providers: [{provide: TRANSLOCO_SCOPE, useValue: { scope: 'warehouseQueen/newDeliveryToShop', alias: 'translate' }}]
 })
 export class NewDeliveryToShopComponent implements OnInit {
   displayedColumns: string[] = ['select', 'category', 'priceListPerUnit', 'quantity',
