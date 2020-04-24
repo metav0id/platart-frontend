@@ -15,11 +15,12 @@ import {MatRadioModule} from '@angular/material/radio';
 import {NewDeliveryFromWarehouseDetailsComponent} from './new-delivery-from-warehouse/new-delivery-from-warehouse-details/new-delivery-from-warehouse-details.component';
 import {MatDialogModule} from '@angular/material/dialog';
 import {MatButtonModule} from '@angular/material/button';
-import {CheckoutSoldItemsComponent} from "./checkout-sold-items/checkout-sold-items.component";
+import {CheckoutSoldItemsComponent} from './checkout-sold-items/checkout-sold-items.component';
+import {MatCardModule} from '@angular/material/card';
 
 
 @NgModule({
-  declarations: [NewDeliveryFromWarehouseComponent, NewDeliveryFromWarehouseDetailsComponent,CheckoutSoldItemsComponent],
+  declarations: [NewDeliveryFromWarehouseComponent, NewDeliveryFromWarehouseDetailsComponent, CheckoutSoldItemsComponent],
   imports: [
     CommonModule,
     SalesPrincessRoutingModule,
@@ -35,7 +36,8 @@ import {CheckoutSoldItemsComponent} from "./checkout-sold-items/checkout-sold-it
     MatIconModule,
     MatRadioModule,
     MatDialogModule,
-    MatButtonModule
+    MatButtonModule,
+    MatCardModule
   ],
   entryComponents: [
     NewDeliveryFromWarehouseDetailsComponent

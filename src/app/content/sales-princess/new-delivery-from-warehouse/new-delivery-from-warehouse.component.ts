@@ -7,7 +7,9 @@ import {NewDeliveryToWarehouseService} from '../../warehouse-queen/new-delivery-
 import {SalesItemCategoryDTO} from './sales-item-category-dto';
 import {PeriodicElement} from './periodic-element';
 import {MatDialog} from '@angular/material/dialog';
-import {NewDeliveryFromWarehouseDetailsComponent} from './new-delivery-from-warehouse-details/new-delivery-from-warehouse-details.component';
+import {NewDeliveryFromWarehouseDetailsComponent} from
+    './new-delivery-from-warehouse-details/new-delivery-from-warehouse-details.component';
+import {cloneDeep} from 'lodash';
 
 @Component({
   selector: 'app-new-delivery-from-warehouse',
@@ -16,13 +18,15 @@ import {NewDeliveryFromWarehouseDetailsComponent} from './new-delivery-from-ware
 })
 export class NewDeliveryFromWarehouseComponent implements OnInit {
   public displayedColumns: string[] = ['select', 'category', 'salesPrice', 'quantity', 'action'];
-  public listNewItemsFromWarehouse: PeriodicElement[] = [];
+  private listNewItemsFromWarehouse: PeriodicElement[] = [];
+  public listItemsToShopInventory = [];
   public newItemFromWarehouse: PeriodicElement = {
     position: 0,
     category: '',
     listPrice: 0,
     salesPrice: 0,
     quantity: 0,
+    originalQuantity: 100,
     timestamp: '',
     comment: ''
   };
@@ -34,6 +38,7 @@ export class NewDeliveryFromWarehouseComponent implements OnInit {
     listPrice: 25,
     salesPrice: 15,
     quantity: 100,
+    originalQuantity: 100,
     timestamp: '22.04.2020',
     comment: ''
   };
@@ -43,6 +48,7 @@ export class NewDeliveryFromWarehouseComponent implements OnInit {
     listPrice: 25,
     salesPrice: 15,
     quantity: 100,
+    originalQuantity: 100,
     timestamp: '22.04.2020',
     comment: ''
   };
@@ -52,6 +58,7 @@ export class NewDeliveryFromWarehouseComponent implements OnInit {
     listPrice: 25,
     salesPrice: 15,
     quantity: 100,
+    originalQuantity: 100,
     timestamp: '22.04.2020',
     comment: ''
   };
@@ -78,50 +85,16 @@ export class NewDeliveryFromWarehouseComponent implements OnInit {
   ngOnInit(): void {
     // this.newDeliveryToWarehouseService.getAllCategories().subscribe(JsonDto => this.categoryItems = JsonDto);
     this.listNewItemsFromWarehouse = [this.newItemOnList1, this.newItemOnList2, this.newItemOnList3];
+
+    // TODO check if reference is copied or new object is created
+    this.listItemsToShopInventory = cloneDeep(this.listNewItemsFromWarehouse);
+    console.log('List Copy: ' + this.listItemsToShopInventory.toString());
   }
-
-  /** Add a new item to table */
-
-  /*addNewItemToList(): void {
-    const newItem: PeriodicElement = {
-      position: this.counter++,
-      category: this.newItemFromWarehouse.category,
-      pricePerUnit: this.newItemFromWarehouse.pricePerUnit,
-      price: this.newItemFromWarehouse.pricePerUnit * this.newItemFromWarehouse.quantity,
-      quantity: this.newItemFromWarehouse.quantity,
-      supplierName: this.newItemFromWarehouse.supplierName
-    };
-    const isCategoryNotEmpty = !this.categoryControl.hasError('required');
-    const isPricePerUnitNotEmpty = newItem.pricePerUnit > 0;
-    const isQuantityNotEmpty = newItem.quantity > 0;
-    const isSupplierNotEmpty = newItem.supplierName !== '';
-    if (isCategoryNotEmpty && isPricePerUnitNotEmpty && isQuantityNotEmpty && isSupplierNotEmpty) {
-      this.listNewItemsFromWarehouse.push(newItem);
-      console.log(this.listNewItemsFromWarehouse);
-      this.table.renderRows();
-    } else {
-      console.log('Please insert valid parameters');
-    }
-  }
-
-  /!** Delete all selected items *!/
-  deleteItem(): void {
-    for (const selectedItem of this.selection.selected) {
-
-      const removeIndex = this.listNewItemsFromWarehouse.map((item) => {
-        return item.position;
-      }).indexOf(selectedItem.position);
-
-      this.listNewItemsFromWarehouse.splice(removeIndex, 1);
-    }
-    this.table.renderRows();
-    this.selection.clear();
-  }*/
 
   /** Whether the number of selected elements matches the total number of rows. */
   isAllSelected() {
     const numSelected = this.selection.selected.length;
-    const numRows = this.listNewItemsFromWarehouse.length;
+    const numRows = this.listItemsToShopInventory.length;
     return numSelected === numRows;
   }
 
@@ -131,7 +104,7 @@ export class NewDeliveryFromWarehouseComponent implements OnInit {
       this.selection.clear();
     } else {
       console.log('All lines are selected');
-      this.listNewItemsFromWarehouse.forEach(row => this.selection.select(row));
+      this.listItemsToShopInventory.forEach(row => this.selection.select(row));
     }
   }
 
@@ -145,7 +118,7 @@ export class NewDeliveryFromWarehouseComponent implements OnInit {
 
   saveList(): void {
     // this.newDeliveryToWarehouseService.saveList(this.listNewItemsFromWarehouse);
-    this.listNewItemsFromWarehouse = [];
+    this.listItemsToShopInventory = [];
     this.table.renderRows();
   }
 

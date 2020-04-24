@@ -1,6 +1,8 @@
 import {Component, Inject, OnInit} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
 import {PeriodicElement} from '../periodic-element';
+import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
+import {validateQuantity} from './check-quantity.validator';
 
 @Component({
   selector: 'app-new-delivery-from-warehouse-details',
@@ -8,7 +10,8 @@ import {PeriodicElement} from '../periodic-element';
   styleUrls: ['./new-delivery-from-warehouse-details.component.css']
 })
 export class NewDeliveryFromWarehouseDetailsComponent implements OnInit {
-  public toogleInput: boolean = true;
+  public quantityFormControl: FormControl;
+  public myForm: FormGroup;
 
   constructor(
     public dialogRef: MatDialogRef<NewDeliveryFromWarehouseDetailsComponent>,
@@ -16,16 +19,29 @@ export class NewDeliveryFromWarehouseDetailsComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.createFormControls();
+    this.createForm();
   }
 
-  onNoClick(): void {
-    console.log('Comment: ' + this.data.comment);
-    this.dialogRef.close();
+  createFormControls() {
+    this.quantityFormControl = new FormControl('', [
+      Validators.required
+    ]);
   }
 
-  onEditClick(){
-    this.toogleInput = false;
-    console.log(this.toogleInput);
+  createForm() {
+    this.myForm = new FormGroup({
+      quantity: this.quantityFormControl
+    });
   }
 
+  onSubmit() {
+    if (this.myForm.valid) {
+      console.log('Form submitted');
+      //this.myForm.reset();
+      this.dialogRef.close();
+    } else {
+      console.log('Error by input');
+    }
+  }
 }
