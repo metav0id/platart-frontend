@@ -12,7 +12,7 @@
   </a>
   <div class="space"></div>
   <mat-card-content>
-    <agm-map (mapClick)="agregarMarcador($event)" [latitude]= "lat" [longitude] = "lng" [zoom] ="15">
+    <agm-map (mapClick)="agregarMarcador($event)"  [latitude]= "lat" [longitude] = "lng" [zoom] ="15">
 <!--method to add a marker by clicking should be inserted in line above after agm-map-->
 <!--    (mapClick)="agregarMarcador($event)"-->
     <!--method to add a marker-->
@@ -23,10 +23,18 @@
           <strong>{{marcador.name}}</strong>
           <p>{{marcador.address}}</p>
           <div>
-            <a href="{{marcador.link}}">
+
+<!--opens pop up select comerce if empty-->
+              <div *ngIf="marcador.name==null" >
+                <button mat-raised-button color="primary" (click)="openDialog2()" >Select a comerce</button>
+              </div>
+            <!--opens managing service of asigned comerce-->
+              <div *ngIf="marcador.name!=null">
+              <a href="{{marcador.link}}">
               <button mat-raised-button color="primary"> Go to {{marcador.name}}</button>
+              </a>
               <button (click)="borrarMarcador(i)" mat-raised-button color="primary"> Borrar</button>
-            </a>
+          </div>
 <!--            <button mat-raised-button color="warn"> Edit marker</button>-->
           </div>
         </agm-info-window>

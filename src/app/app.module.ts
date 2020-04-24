@@ -35,6 +35,7 @@ import {MatDialogModule} from '@angular/material/dialog';
 import { TranslocoRootModule } from './transloco-root.module';
 import {ComerceComponent} from './content/comerce/comerce.component';
 import {FormComponent} from './content/comerce/form.component';
+import { MarkerFormComponent } from './content/map/components/marker-form.component';
 
 
 @NgModule({
@@ -46,7 +47,8 @@ import {FormComponent} from './content/comerce/form.component';
     NewItemCategoryComponent,
     MapComponent,
     ComerceComponent,
-    FormComponent
+    FormComponent,
+    MarkerFormComponent
   ],
   imports: [
     BrowserModule,

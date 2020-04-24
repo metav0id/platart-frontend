@@ -94,3 +94,7 @@ h3{
   background-color: #f1d4cf;
   border-radius: 25px;
 }
+
+mat-card{
+  background-color: #ffffff;
+}

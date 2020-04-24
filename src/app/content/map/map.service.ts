@@ -15,6 +15,8 @@ export class MapService {
 //the string connects with the service from backend that will gett all offers aviable
   private urlEndPoint: string ="http://localhost:8081/marker/getallmarkers";
   private urlEndPoint1: string ="http://localhost:8081/marker/savemarker";
+  private urlEndPoint2: string ="http://localhost:8081/marker/update/{id}";
+
 
   //this adds the header needed in case the method calls for one
   private httpHeader= new HttpHeaders({'Content-Type': 'application/json'});
@@ -40,7 +42,7 @@ export class MapService {
   }
 
   update (marcador: Marcador): Observable<Marcador>{
-    return this.httpClient.post<Marcador>(`$ {this.urlEndPoint}\${id}`,marcador,{headers: this.httpHeader})
+    return this.httpClient.post<Marcador>(`$ {this.urlEndPoint2}\${id}`,marcador,{headers: this.httpHeader})
   }
 
 
