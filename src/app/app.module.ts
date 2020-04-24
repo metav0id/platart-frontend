@@ -32,7 +32,11 @@ import {AgmCoreModule} from '@agm/core';
 import {SalesPrincessModule} from './content/sales-princess/sales-princess.module';
 import {ManagerKingModule} from './content/manager-king/manager-king.module';
 import {MatDialogModule} from '@angular/material/dialog';
-import {TranslocoRootModule} from './transloco-root.module';
+import { TranslocoRootModule } from './transloco-root.module';
+import {ComerceComponent} from './content/comerce/comerce.component';
+import {FormComponent} from './content/comerce/form.component';
+import { MarkerFormComponent } from './content/map/components/marker-form.component';
+
 
 @NgModule({
   declarations: [
@@ -41,7 +45,10 @@ import {TranslocoRootModule} from './transloco-root.module';
     HeaderComponent,
     FooterComponent,
     NewItemCategoryComponent,
-    MapComponent
+    MapComponent,
+    ComerceComponent,
+    FormComponent,
+    MarkerFormComponent
   ],
   imports: [
     BrowserModule,
