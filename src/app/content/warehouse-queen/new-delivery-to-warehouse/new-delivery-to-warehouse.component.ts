@@ -38,7 +38,6 @@ export class NewDeliveryToWarehouseComponent implements OnInit {
   public categoryItems: WarehouseItemCategoryDTO[] = [];
 
   @ViewChild('myCheckinProductsTable') table: MatTable<any>;
-
   constructor(private newDeliveryToWarehouseService: NewDeliveryToWarehouseService) {
   }
 

@@ -1,0 +1,21 @@
+<h1 mat-dialog-title>{{data[0].category}} for {{data[0].priceListPerUnit}}$</h1>
+<h2 mat-dialog-title></h2>
+<div mat-dialog-content *ngFor="let item of data">
+  <mat-card class="example-card">
+    <mat-card-header>
+      <mat-card-title>Sell-price: {{item.priceListPerUnit}}</mat-card-title>
+      <mat-card-subtitle>Quantity sold: {{item.quantity}}</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+      <p>Discount: {{item.quantity}}</p>
+      <p>Comment: {{item.quantity}}</p>
+    </mat-card-content>
+    <mat-card-actions>
+      <button mat-button (click)="deleteItemList(item)"><mat-icon>delete</mat-icon></button>
+    </mat-card-actions>
+  </mat-card>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="onNoClick()">No Thanks</button>
+  <button mat-button [mat-dialog-close]="data[0].position" cdkFocusInitial>Ok</button>
+</div>

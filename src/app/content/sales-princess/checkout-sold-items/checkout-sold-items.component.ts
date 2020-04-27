@@ -1,4 +1,4 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
+import {Component, Inject, OnInit, ViewChild} from '@angular/core';
 import {SelectionModel} from "@angular/cdk/collections";
 import {MatTable} from "@angular/material/table";
 import {WarehouseItemCategoryDTO} from "../../warehouse-queen/warehouseCategory/warehouse-item-category-DTO";
@@ -7,9 +7,14 @@ import {CheckoutSoldItemsService} from "./checkout-sold-items.service";
 import {CheckoutTableItems} from "./checkout-sold-items-DTOs/CheckoutTableItems";
 import {ShopDropDownItem} from "./checkout-sold-items-DTOs/ShopDropDownItem";
 import {MatDatepickerInputEvent} from "@angular/material/datepicker";
-import {MatDialog} from "@angular/material/dialog";
-import {NewDeliveryFromWarehouseDetailsComponent} from "../new-delivery-from-warehouse/new-delivery-from-warehouse-details/new-delivery-from-warehouse-details.component";
+import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from "@angular/material/dialog";
 import {CheckoutSoldItemsDetailsComponent} from "./checkout-sold-items-details/checkout-sold-items-details.component";
+import {CheckoutTableCategoryItems} from "./checkout-sold-items-DTOs/CheckoutTableCategoryItems";
+
+export interface DialogData {
+  animal: string;
+  name: string;
+}
 
 @Component({
   selector: 'app-checkout-sold-items',
@@ -22,8 +27,15 @@ export class CheckoutSoldItemsComponent implements OnInit {
   public discountMethod: string;
   private readonly DISCOUNT_METHOD_PERCENT = 'percent';
   private readonly DISCOUNT_METHOD_DISPLAY_PRICE = 'displayPrice';
+  private readonly DISCOUNT_METHOD_NO_DISCOUNT = 'noDiscount';
   private readonly DISCOUNT_METHOD_OTHER = 'other';
-  public discountMethodList: string[] = [ this.DISCOUNT_METHOD_PERCENT , this.DISCOUNT_METHOD_DISPLAY_PRICE, this.DISCOUNT_METHOD_OTHER];
+  public discountMethodList: string[] = [ this.DISCOUNT_METHOD_PERCENT , this.DISCOUNT_METHOD_DISPLAY_PRICE, this.DISCOUNT_METHOD_NO_DISCOUNT, this.DISCOUNT_METHOD_OTHER];
+
+  private readonly COMMENT_YES_NECESSARY = 'Comment';
+  private readonly COMMENT_NO_NECESSARY = 'No Comment';
+  public commentNecessaryList: string[] = [this.COMMENT_YES_NECESSARY, this.COMMENT_NO_NECESSARY];
+  public commentNessesary: string = this.COMMENT_NO_NECESSARY;
+
   private readonly INITIALIZE_CATEGORY = 'chooseCategory';
   private readonly INITIALIZE_SHOP = 'chooseShop';
 
@@ -46,6 +58,7 @@ export class CheckoutSoldItemsComponent implements OnInit {
   private totalCost: number;
   private totalItems: number;
   public listNewItemsToShops: CheckoutTableItems[] = [];
+  public listNewItemsCategories: CheckoutTableCategoryItems[] = [];
   availableItems: number = 0;
   selection = new SelectionModel<CheckoutTableItems>(true, []);
   newCheckoutItem: CheckoutTableItems;
@@ -103,8 +116,57 @@ export class CheckoutSoldItemsComponent implements OnInit {
       comment: this.newCheckoutItem.comment,
     }
     this.listNewItemsToShops.push(newSoldItemForTable);
+    console.log(this.listNewItemsToShops);
+
+    // update listNewItemsCategories
+    this.listNewItemsCategories = this.updateListNewItemsCategories();
+    //console.log(this.listNewItemsCategories);
+
     this.table.renderRows();
   }
+
+  updateListNewItemsCategories(): CheckoutTableCategoryItems[] {
+    let newTableItems: CheckoutTableCategoryItems[] = [];
+    let positionCounter: number = 0;
+
+    for(let tableItem of this.listNewItemsToShops) {
+
+      let newItemForTable: CheckoutTableCategoryItems = {
+        position: positionCounter,
+        category: tableItem.category,
+        quantity: tableItem.quantity,
+        priceListPerUnit: tableItem.priceListPerUnit,
+      }
+
+      if(newTableItems.length === 0){
+        newTableItems.push(newItemForTable);
+        positionCounter++;
+      } else {
+        let createNewCategory: boolean = true;
+
+        for(let newCategotyItem of newTableItems){
+          if(newCategotyItem.category === newItemForTable.category && newCategotyItem.priceListPerUnit === newItemForTable.priceListPerUnit) {
+            //update quantity, if createNewCategory has not been updated yet
+            if(createNewCategory === true){
+              console.log('amount will be updated once');
+              newCategotyItem.quantity = Number(newCategotyItem.quantity) + Number(newItemForTable.quantity);
+            }
+
+            createNewCategory = false;
+          }
+        }
+
+        if(createNewCategory === true){
+          newTableItems.push(newItemForTable);
+          positionCounter++;
+        }
+      }
+    }
+
+    console.log(newTableItems);
+    return newTableItems;
+  }
+
   // Date input
   eventsTime: string[] = [];
   dateSelection($event: MatDatepickerInputEvent<Date>) {
@@ -114,14 +176,21 @@ export class CheckoutSoldItemsComponent implements OnInit {
     console.log(this.eventsTime);
   }
 
-  openDialogSoldItems(element: CheckoutTableItems): void {
+  // Dialog Popup
+  animal: string;
+  name: string;
+
+  openDialog(element: CheckoutTableItems): void {
+    console.log(element);
+
     const dialogRef = this.dialog.open(CheckoutSoldItemsDetailsComponent, {
       width: '250px',
-      data: element
+      data: this.listNewItemsToShops
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log('Dialog closed');
+      console.log('The dialog was closed');
+      this.animal = result;
     });
   }
 

@@ -11,7 +11,6 @@ import {
   FormControl,
   Validators
 } from "@angular/forms";
-import {Shop} from "../../sales-princess/checkout-sold-items/checkout-sold-items.component";
 import {MapComponent} from "../map.component";
 
 

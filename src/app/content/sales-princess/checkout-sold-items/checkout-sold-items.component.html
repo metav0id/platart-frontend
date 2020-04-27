@@ -65,11 +65,13 @@
                   aria-labelledby="example-radio-group-label"
                   class="example-radio-group"
                   [(ngModel)]="discountMethod">
-                  <td mat-cell *matCellDef="let element"><button mat-icon-button (click)="openDialogSoldItems(element)"><mat-icon>open_in_new</mat-icon></button></td>
+                  <mat-radio-button class="example-radio-button" *ngFor="let discount of discountMethodList" [value]="discount">
+                    {{discount}}
+                  </mat-radio-button>
                 </mat-radio-group>
               </div>
 
-              <div class="itemCheckoutSoldItemPricePerUnit">
+              <div *ngIf="discountMethod==='displayPrice'" class="itemCheckoutSoldItemPricePerUnit">
                 <mat-form-field hintLabel="Max 10 characters" appearance="fill">
                   <mat-label>Enter deliveryDisplayPricePerUnit</mat-label>
                   <input matInput #input [(ngModel)]="newCheckoutItem.priceSalesPerUnit" maxlength="10" placeholder="Ex. deliveryDisplayPricePerUnit">
@@ -77,8 +79,7 @@
                 </mat-form-field>
               </div>
 
-
-              <div class="itemCheckoutSoldItemDeliveryDiscount">
+              <div *ngIf="discountMethod==='percent'" class="itemCheckoutSoldItemDeliveryDiscount">
                 <mat-form-field hintLabel="Max 10 characters" appearance="fill">
                   <mat-label>Enter deliveryDiscount</mat-label>
                   <input matInput #input [(ngModel)]="newCheckoutItem.discountPercent" maxlength="10" placeholder="Ex. deliveryDiscount">
@@ -86,7 +87,20 @@
                 </mat-form-field>
               </div>
 
-              <div class="itemCheckoutSoldItemComment">
+              <div class="discountSelectionRadioButton">
+                <label id="example-radio-group-label">Comment:</label>
+                <div class="space"></div>
+                <mat-radio-group
+                  aria-labelledby="example-radio-group-label"
+                  class="example-radio-group"
+                  [(ngModel)]="commentNessesary">
+                  <mat-radio-button class="example-radio-button" *ngFor="let comment of commentNecessaryList" [value]="comment">
+                    {{comment}}
+                  </mat-radio-button>
+                </mat-radio-group>
+              </div>
+
+              <div *ngIf="commentNessesary==='Comment'" class="itemCheckoutSoldItemComment">
                 <mat-form-field hintLabel="Max 10 characters" appearance="fill">
                   <mat-label>Comment</mat-label>
                   <input matInput #input [(ngModel)]="newCheckoutItem.comment" maxlength="10" placeholder="Ex. deliveryDiscount">
@@ -108,7 +122,7 @@
       <div class="box">
         <h3>Sold Items:</h3>
         <div class="table-responsive">
-          <table mat-table #myShopCheckoutProductsTable [dataSource]="listNewItemsToShops">
+          <table mat-table #myShopCheckoutProductsTable [dataSource]="listNewItemsCategories">
 
             <!-- Position column-->
             <ng-container matColumnDef="position">
@@ -133,7 +147,7 @@
                       </p>
                     </mat-card-content>
                     <mat-card-actions>
-                    <button mat-button (click)="loremIpsumMethod()"><mat-icon>list_alt</mat-icon></button>
+                    <button mat-button (click)="openDialog(element)"><mat-icon>list_alt</mat-icon></button>
                     </mat-card-actions>
                   </mat-card>
                 </div>

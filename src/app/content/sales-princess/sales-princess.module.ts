@@ -21,13 +21,13 @@ import {MatNativeDateModule} from "@angular/material/core";
 import { CheckoutSoldItemsDetailsComponent } from './checkout-sold-items/checkout-sold-items-details/checkout-sold-items-details.component';
 import {MatCardModule} from "@angular/material/card";
 
-
 @NgModule({
   declarations: [
     NewDeliveryFromWarehouseComponent,
     NewDeliveryFromWarehouseDetailsComponent,
     CheckoutSoldItemsComponent,
-    CheckoutSoldItemsDetailsComponent],
+    CheckoutSoldItemsDetailsComponent
+  ],
   imports: [
     CommonModule,
     SalesPrincessRoutingModule,
