@@ -2,6 +2,7 @@ import {Component, OnInit, ViewChild} from '@angular/core';
 import {SelectionModel} from '@angular/cdk/collections';
 import {MatTable} from '@angular/material/table';
 import {NewitemcategoryService} from './new-item-category.service';
+import {TRANSLOCO_SCOPE} from '@ngneat/transloco';
 
 
 /** Is used for table elements */
@@ -13,7 +14,8 @@ export interface PeriodicElement {
 @Component({
   selector: 'app-new-item-category',
   templateUrl: './new-item-category.component.html',
-  styleUrls: ['./new-item-category.component.css']
+  styleUrls: ['./new-item-category.component.css'],
+  providers: [{provide: TRANSLOCO_SCOPE, useValue: { scope: 'warehouseQueen/newItemCategory', alias: 'translate' }}]
 })
 export class NewItemCategoryComponent implements OnInit {
   displayedColumns: string[] = ['select', 'category', 'updateItem'];
