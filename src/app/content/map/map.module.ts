@@ -16,11 +16,14 @@ import {MatSelectModule} from "@angular/material/select";
 import {MatInputModule} from "@angular/material/input";
 import {MatIconModule} from "@angular/material/icon";
 import {MatRadioModule} from "@angular/material/radio";
+import {MarkerFormComponent} from "./marker-form.component";
 
 
 
 @NgModule({
-  declarations: [],
+  declarations: [
+    MarkerFormComponent
+  ],
   imports: [
     CommonModule,
     WarehouseQueenRoutingModule,

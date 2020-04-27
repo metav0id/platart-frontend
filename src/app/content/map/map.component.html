@@ -25,15 +25,15 @@
           <div>
 
 <!--opens pop up select comerce if empty-->
-              <div *ngIf="marcador.name==null" >
-                <button mat-raised-button color="primary" (click)="openDialog2()" >Select a comerce</button>
-              </div>
+<!--              <div *ngIf="marcador.name==null" >-->
+<!--                <button mat-raised-button color="primary" (click)="openDialog2()" >Select a comerce</button>-->
+<!--              </div>-->
             <!--opens managing service of asigned comerce-->
               <div *ngIf="marcador.name!=null">
               <a href="{{marcador.link}}">
               <button mat-raised-button color="primary"> Go to {{marcador.name}}</button>
               </a>
-              <button (click)="borrarMarcador(i)" mat-raised-button color="primary"> Borrar</button>
+              <button (click)="borrarMarcador(i,marcador)" mat-raised-button color="primary"> Borrar</button>
           </div>
 <!--            <button mat-raised-button color="warn"> Edit marker</button>-->
           </div>

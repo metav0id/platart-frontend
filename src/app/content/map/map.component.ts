@@ -15,6 +15,12 @@ import {
   Validators
 } from "@angular/forms";
 import {MarkerFormComponent} from "./components/marker-form.component";
+import {Router, ActivatedRoute} from "@angular/router";
+import {Comerce} from "../comerce/comerce";
+export interface DialogData {
+  markerToEdit: Marcador;
+  markerToGetCoords: Marcador;
+}
 
 @Component({
   selector: 'app-map',
@@ -24,13 +30,23 @@ import {MarkerFormComponent} from "./components/marker-form.component";
 export class MapComponent implements OnInit {
   lat: number = 51.678418;
   lng: number = 7.809007;
-  marcadores: Marcador[] = MARKERS;
+  marcadores: Marcador[];
   marker: Marcador;
+  markerToEdit: Marcador;
+  markerToGetCoords: Marcador;
+  markersToEdit: Marcador[] = new Array();
 
-  constructor(private mapService: MapService, public dialog: MatDialog) {
+
+  ngOnInit(): void {
+    this.mapService.readAllMarkers().subscribe(response => this.marcadores = response);
+  }
+
+  constructor(private mapService: MapService, public dialog: MatDialog, private activatedRoute: ActivatedRoute, private router: Router) {
     // const nuevoMarcador = new Marcador(51.678418, 7.809007);
     // this.marcadores.push(nuevoMarcador);
   }
+
+  public markerControl = new FormControl('', Validators.required)
 
   openDialog(): void {
     const dialogRef = this.dialog.open(FormComponent, {
@@ -55,30 +71,64 @@ export class MapComponent implements OnInit {
     });
   }
 
+
+  cargarCliente(): void{
+    this.activatedRoute.params.subscribe(params=>{
+      let id = params['id']
+      if(id){
+        this.mapService.getMarker(id).subscribe( (marcador) => this.marker = marcador)
+      }
+    })
+
+
+  }
+
   //use this variable when the connetion with BE is completed
     allMarkers: Marcador[];
 
-  public markerControl = new FormControl('', Validators.required)
 
-  ngOnInit(): void {
-    this.mapService.readAllMarkers().subscribe(response => this.allMarkers = response);
-  }
 
   agregarMarcador(evento): Marcador{
-    console.log(evento.coords.lat);
     const coords: { lat: string, lng: string } = evento.coords;
-    const nuevoMarcador = new Marcador(coords.lat, coords.lng);
+    // const nuevoMarcador = new Marcador(coords.lat, coords.lng);
+    const nuevoMarcador = {lat: coords.lat, lng: coords.lng, name: '', address:"", link:'',category:''}
     this.marcadores.push(nuevoMarcador);
-    console.log(evento.coords.lat);
+    console.log(nuevoMarcador.lat,nuevoMarcador.lng);
+    // opens dialog window
+
+    const dialogRef = this.dialog.open(MarkerFormComponent, {
+      width: '600px',
+      data: {selectedComerce: this.markerToEdit, coordMarker: nuevoMarcador}
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+      this.markerToEdit = result;
+
+      this.markersToEdit.push(this.markerToEdit)
+      this.markersToEdit.push(nuevoMarcador)
+      console.log(this.markersToEdit.length)
+
+      //send array to backend
+      this.mapService.update(this.markersToEdit)
+    });
+    //opens dialog window
+
+
+    // this.mapService.create(nuevoMarcador).subscribe(response => this.marker = response);
+
     return this.marker = nuevoMarcador;
 
   }
 
-  public edit():void{
-    console.log(this.marker.name);
-    this.mapService.update(this.marker);
-
-  }
+  // public edit():void {
+  //   this.cargarCliente()
+  //   console.log(this.marker.name);
+  //   // const updatedMarcador = new Marcador(this.marker.lat,this.marker.lng);
+  //   // this.mapService.update(this.marker).subscribe(response=> this.updatemarker = response);
+  //   // return
+  //
+  // }
 
 
 
@@ -90,8 +140,9 @@ export class MapComponent implements OnInit {
   // }
 
 
-  borrarMarcador(i: number){
+  borrarMarcador(i: number, marker: Marcador){
     console.log(i);
     this.marcadores.splice(i,1);
+    this.mapService.delete(marker);
   }
 }

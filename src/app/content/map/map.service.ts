@@ -6,6 +6,7 @@ import {
 
 import {Observable} from "rxjs";
 import {Marcador} from "./components/marker.class";
+import {Comerce} from "../comerce/comerce";
 
 @Injectable({
   providedIn: 'root'
@@ -15,7 +16,10 @@ export class MapService {
 //the string connects with the service from backend that will gett all offers aviable
   private urlEndPoint: string ="http://localhost:8081/marker/getallmarkers";
   private urlEndPoint1: string ="http://localhost:8081/marker/savemarker";
-  private urlEndPoint2: string ="http://localhost:8081/marker/update/{id}";
+  private urlEndPoint3: string ="http://localhost:8081/comerce/find";
+  private urlEndPoint4: string ="http://localhost:8081/marker/find";
+  private urlEndPoint2: string ="http://localhost:8081/marker/update";
+  private urlEndPoint5: string ="http://localhost:8081/marker/delete";
 
 
   //this adds the header needed in case the method calls for one
@@ -33,16 +37,31 @@ export class MapService {
 
   create(marcador: Marcador) : Observable<Marcador> {
 
-    return this.httpClient.post<Marcador>(this.urlEndPoint1, marcador, {headers: this.httpHeader})
+    return this.httpClient.post<Marcador>(this.urlEndPoint1, marcador, {headers: this.httpHeader});
+    console.log(marcador.lng,marcador.lat)
   }
 
-  getMarker(id): Observable<Marcador>{
+  delete(marcador: Marcador) : Observable<Marcador> {
 
-    return this.httpClient.get<Marcador>(`${this.urlEndPoint}/${id}`);
+    return this.httpClient.post<Marcador>(this.urlEndPoint5, marcador,{headers: this.httpHeader});
   }
 
-  update (marcador: Marcador): Observable<Marcador>{
-    return this.httpClient.post<Marcador>(`$ {this.urlEndPoint2}\${id}`,marcador,{headers: this.httpHeader})
+
+  getMarker(marker: Marcador): Observable<Marcador>{
+
+    return this.httpClient.post<Marcador>(this.urlEndPoint4, marker, {headers: this.httpHeader});
+
+  }
+
+  update (marcador: Marcador[]= new Array()): Observable<Marcador>{
+    console.log(marcador);
+    // return this.httpClient.post<Marcador>(`$ {this.urlEndPoint2}\${id}`,marcador,{headers: this.httpHeader})
+    return this.httpClient.post<Marcador>(this.urlEndPoint2, marcador,{headers: this.httpHeader});
+  }
+
+  getComerce (comerce: Comerce): Observable<Comerce>{
+
+    return this.httpClient.post<Comerce>(this.urlEndPoint3, comerce, {headers: this.httpHeader});
   }
 
 
