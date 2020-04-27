@@ -24,5 +24,9 @@ export class CheckoutSoldItemsDetailsComponent implements OnInit {
 
   deleteItemList(item: CheckoutTableCategoryItems) {
     console.log('delete: '+ item.category + ' - ' + item.priceListPerUnit);
+    const index: number = this.data.indexOf(item);
+    console.log('index: ' +index);
+    this.data.splice(index, 1);
+    console.log(this.data);
   }
 }
