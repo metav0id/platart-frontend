@@ -91,7 +91,7 @@ export class MapComponent implements OnInit {
   agregarMarcador(evento): Marcador{
     const coords: { lat: string, lng: string } = evento.coords;
     // const nuevoMarcador = new Marcador(coords.lat, coords.lng);
-    const nuevoMarcador = {lat: coords.lat, lng: coords.lng, name: '', address:"", link:'',category:''}
+    const nuevoMarcador = {lat: coords.lat, lng: coords.lng, name: '', address:"", link:'',category:'',id: null}
     this.marcadores.push(nuevoMarcador);
     console.log(nuevoMarcador.lat,nuevoMarcador.lng);
     // opens dialog window
@@ -142,7 +142,7 @@ export class MapComponent implements OnInit {
 
   borrarMarcador(i: number, marker: Marcador){
     console.log(i);
-    this.marcadores.splice(i,1);
     this.mapService.delete(marker);
+    this.marcadores.splice(i,1);
   }
 }

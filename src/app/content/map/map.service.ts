@@ -41,9 +41,9 @@ export class MapService {
     console.log(marcador.lng,marcador.lat)
   }
 
-  delete(marcador: Marcador) : Observable<Marcador> {
+  delete(marcador: Marcador) : void {
 
-    return this.httpClient.post<Marcador>(this.urlEndPoint5, marcador,{headers: this.httpHeader});
+   this.httpClient.post<null>(this.urlEndPoint5, marcador).subscribe();
   }
 
 
@@ -53,11 +53,16 @@ export class MapService {
 
   }
 
-  update (marcador: Marcador[]= new Array()): Observable<Marcador>{
+  update (marcador: Marcador[]= new Array()): void{
     console.log(marcador);
     // return this.httpClient.post<Marcador>(`$ {this.urlEndPoint2}\${id}`,marcador,{headers: this.httpHeader})
-    return this.httpClient.post<Marcador>(this.urlEndPoint2, marcador,{headers: this.httpHeader});
+    this.httpClient.post<null>(this.urlEndPoint2, marcador).subscribe();;
   }
+  // update (marcador: Marcador[]= new Array()): Observable<Marcador>{
+  //   console.log(marcador);
+  //   // return this.httpClient.post<Marcador>(`$ {this.urlEndPoint2}\${id}`,marcador,{headers: this.httpHeader})
+  //   return this.httpClient.post<Marcador>(this.urlEndPoint2, marcador,{headers: this.httpHeader});
+  // }
 
   getComerce (comerce: Comerce): Observable<Comerce>{
 
