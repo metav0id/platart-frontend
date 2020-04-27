@@ -1,5 +1,5 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
-import {SelectionModel} from "@angular/cdk/collections";
+import {SelectionModel} from '@angular/cdk/collections';
 import {MatTable} from "@angular/material/table";
 import {WarehouseItemCategoryDTO} from "../../warehouse-queen/warehouseCategory/warehouse-item-category-DTO";
 import {FormControl, Validators} from "@angular/forms";
@@ -36,7 +36,7 @@ export class CheckoutSoldItemsComponent implements OnInit {
   public discountMethod: string;
   private readonly DISCOUNT_METHOD_PERCENT = 'percent';
   private readonly DISCOUNT_METHOD_DISPLAY_PRICE = 'displayPrice';
-  public discountMethodList: string[] = [ this.DISCOUNT_METHOD_PERCENT , this.DISCOUNT_METHOD_DISPLAY_PRICE];
+  public discountMethodList: string[] = [this.DISCOUNT_METHOD_PERCENT, this.DISCOUNT_METHOD_DISPLAY_PRICE];
   private readonly INITIALIZE_CATEGORY = 'chooseCategory';
   private readonly INITIALIZE_SHOP = 'chooseShop';
 
@@ -67,8 +67,10 @@ export class CheckoutSoldItemsComponent implements OnInit {
   availableItems: number = 0;
   selection = new SelectionModel<PeriodicElement>(true, []);
   @ViewChild('myShopCheckinProductsTable') table: MatTable<any>;
+
   constructor(private _snackBar: MatSnackBar,
-              private checkoutSoldItemsService: CheckoutSoldItemsService) { }
+              private checkoutSoldItemsService: CheckoutSoldItemsService) {
+  }
 
   ngOnInit(): void {
   }
@@ -77,7 +79,7 @@ export class CheckoutSoldItemsComponent implements OnInit {
     console.log('implement loremIpsumMethod!')
 
     // Simple message.
-    let snackBarRef =  this._snackBar.open('Sale send!','ok',{duration: 2000,});
+    let snackBarRef = this._snackBar.open('Sale send!', 'ok', {duration: 2000,});
     this.checkoutSoldItemsService.getAllItemsAllShops();
   }
 
