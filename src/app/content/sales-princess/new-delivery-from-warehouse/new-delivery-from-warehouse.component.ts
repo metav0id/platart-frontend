@@ -1,4 +1,4 @@
-import {TRANSLOCO_SCOPE} from '@ngneat/transloco';
+import {TRANSLOCO_SCOPE, TranslocoService} from '@ngneat/transloco';
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {SelectionModel} from '@angular/cdk/collections';
 import {FormControl, Validators} from '@angular/forms';
@@ -8,6 +8,7 @@ import {NewDeliveryToWarehouseService} from '../../warehouse-queen/new-delivery-
 import {SalesItemCategoryDTO} from './sales-item-category-dto';
 import {PeriodicElement} from './periodic-element';
 import {MatDialog} from '@angular/material/dialog';
+// tslint:disable-next-line:max-line-length
 import {NewDeliveryFromWarehouseDetailsComponent} from './new-delivery-from-warehouse-details/new-delivery-from-warehouse-details.component';
 
 @Component({
@@ -74,7 +75,7 @@ export class NewDeliveryFromWarehouseComponent implements OnInit {
 
   // constructor(private newDeliveryToWarehouseService: NewDeliveryToWarehouseService) {
   // }
-  constructor(public dialog: MatDialog) {
+  constructor(public dialog: MatDialog, private transloco: TranslocoService) {
   }
 
   ngOnInit(): void {

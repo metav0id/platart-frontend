@@ -20,6 +20,8 @@ import {MatDatepickerInputEvent, MatDatepickerModule} from "@angular/material/da
 import {MatNativeDateModule} from "@angular/material/core";
 import { CheckoutSoldItemsDetailsComponent } from './checkout-sold-items/checkout-sold-items-details/checkout-sold-items-details.component';
 import {MatCardModule} from "@angular/material/card";
+import {TranslocoRootModule} from "../../transloco-root.module";
+
 
 @NgModule({
   declarations: [
@@ -43,6 +45,8 @@ import {MatCardModule} from "@angular/material/card";
     MatIconModule,
     MatRadioModule,
     MatDialogModule,
+    MatButtonModule,
+    TranslocoRootModule,
     MatButtonModule,
     MatDatepickerModule,
     MatNativeDateModule,

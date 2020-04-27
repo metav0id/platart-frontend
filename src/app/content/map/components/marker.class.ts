@@ -6,6 +6,7 @@ export class Marcador{
   public name: string;
   public address: string;
   public link: string;
+  public id: number;
 
   constructor(lat: string, lng: string) {
     this.lat = lat;

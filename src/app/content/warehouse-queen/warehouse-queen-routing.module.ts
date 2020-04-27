@@ -1,10 +1,10 @@
-import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
+import {NgModule} from '@angular/core';
+import {Routes, RouterModule} from '@angular/router';
 import {StockInWarehouseComponent} from './stock-in-warehouse/stock-in-warehouse.component';
 import {NewDeliveryToShopComponent} from './new-delivery-to-shop/new-delivery-to-shop.component';
 import {NewDeliveryToWarehouseComponent} from './new-delivery-to-warehouse/new-delivery-to-warehouse.component';
-import {NewItemCategoryComponent} from "./new-item-category/new-item-category.component";
-import {FormComponent} from "../comerce/form.component";
+import {NewItemCategoryComponent} from './new-item-category/new-item-category.component';
+import {FormComponent} from '../comerce/form.component';
 
 const routes: Routes = [
   {path: 'stockinwarehouse', component: StockInWarehouseComponent},
@@ -18,4 +18,5 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]
 })
-export class WarehouseQueenRoutingModule { }
+export class WarehouseQueenRoutingModule {
+}
