@@ -1,21 +1,54 @@
 <h1 mat-dialog-title>Detail View</h1>
 <div mat-dialog-content>
-  <label>Category:</label>
-  <p>{{ data.category }}</p>
-  <label>List Price:</label>
-  <p>{{ data.listPrice }}</p>
-  <label>Sales Price:</label>
-  <p>{{ data.salesPrice }}</p>
-  <label>Quantity:</label><button (click)="onEditClick()" mat-icon-button><mat-icon>edit</mat-icon></button>
-  <input [(ngModel)]="data.quantity" [disabled]="toogleInput">
-  <br>
-  <label>Timestamp:</label>
-  <p>{{ data.timestamp }}</p>
-  <label>Comment:</label>
-  <textarea [(ngModel)]="data.comment">{{ data.comment }}</textarea>
+  <mat-card>
+    <mat-card-subtitle>Category:</mat-card-subtitle>
+    <mat-card-content>{{ data.category }}</mat-card-content>
+  </mat-card>
+
+  <mat-card>
+    <mat-card-subtitle>List Price:</mat-card-subtitle>
+    <mat-card-content>{{ data.listPrice }}</mat-card-content>
+  </mat-card>
+
+  <mat-card>
+    <mat-card-subtitle>Sales Price:</mat-card-subtitle>
+    <mat-card-content>{{ data.salesPrice }}</mat-card-content>
+  </mat-card>
+
+  <!--<mat-form-field appearance="fill">
+    <mat-label>Quantity</mat-label>
+    <input #inputQuantity matInput [value]="data.quantity" [(ngModel)]="data.quantity" [formControl]="quantityFormControl">
+    <mat-icon matPrefix>edit</mat-icon>
+    <mat-hint *ngIf="inputQuantity.value != data.originalQuantity" style="color: red">Original: {{ data.originalQuantity }}</mat-hint>
+    <mat-error *ngIf="quantityFormControl.hasError('required')">
+      Quantity is <strong>required</strong>
+    </mat-error>
+  </mat-form-field>-->
+
+  <mat-form-field appearance="fill" [formGroup]="myForm" (ngSubmit)="onSubmit()">
+    <mat-label>Quantity</mat-label>
+    <input #inputQuantity matInput [value]="data.quantity" [(ngModel)]="data.quantity" [formControl]="quantityFormControl">
+    <mat-icon matPrefix>edit</mat-icon>
+    <mat-hint *ngIf="inputQuantity.value != data.originalQuantity" style="color: red">Original: {{ data.originalQuantity }}</mat-hint>
+    <mat-error *ngIf="quantityFormControl.hasError('required')">
+      Quantity is <strong>required</strong>
+    </mat-error>
+  </mat-form-field>
+
+  <mat-card>
+    <mat-card-subtitle>Timestamp:</mat-card-subtitle>
+    <mat-card-content>{{ data.timestamp }}</mat-card-content>
+  </mat-card>
+
+  <mat-form-field appearance="fill">
+    <mat-label>Comments</mat-label>
+    <textarea matInput [(ngModel)]="data.comment">{{ data.comment }}</textarea>
+    <mat-icon matPrefix>edit</mat-icon>
+  </mat-form-field>
+
 </div>
 <mat-dialog-actions>
-  <button mat-raised-button mat-dialog-close>Close</button>
+  <button mat-raised-button (click)="onSubmit()">Close</button>
 </mat-dialog-actions>
 
 

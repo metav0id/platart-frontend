@@ -16,7 +16,8 @@ import {NewDeliveryFromWarehouseDetailsComponent} from './new-delivery-from-ware
 import {MatDialogModule} from '@angular/material/dialog';
 import {MatButtonModule} from '@angular/material/button';
 import {CheckoutSoldItemsComponent} from './checkout-sold-items/checkout-sold-items.component';
-import {TranslocoRootModule} from "../../transloco-root.module";
+import {TranslocoRootModule} from '../../transloco-root.module';
+import {MatCardModule} from '@angular/material/card';
 
 
 @NgModule({
@@ -38,6 +39,7 @@ import {TranslocoRootModule} from "../../transloco-root.module";
     MatDialogModule,
     MatButtonModule,
     TranslocoRootModule,
+    MatCardModule,
   ],
   entryComponents: [
     NewDeliveryFromWarehouseDetailsComponent

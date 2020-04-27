@@ -65,6 +65,7 @@ export class NewDeliveryFromWarehouseService {
         listPrice: entry.listPrice,
         salesPrice: entry.salesPrice,
         quantity: entry.quantity,
+        originalQuantity: entry.quantity,
         timestamp: entry.timestamp,
         comment: entry.comment
       };
