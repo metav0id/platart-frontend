@@ -17,6 +17,7 @@ import {
 import {MarkerFormComponent} from "./components/marker-form.component";
 import {Router, ActivatedRoute} from "@angular/router";
 import {Comerce} from "../comerce/comerce";
+import {TRANSLOCO_SCOPE} from "@ngneat/transloco";
 export interface DialogData {
   markerToEdit: Marcador;
   markerToGetCoords: Marcador;
@@ -25,7 +26,8 @@ export interface DialogData {
 @Component({
   selector: 'app-map',
   templateUrl: './map.component.html',
-  styleUrls: ['./map.component.css']
+  styleUrls: ['./map.component.css'],
+  providers: [{provide: TRANSLOCO_SCOPE, useValue: { scope: 'map', alias: 'translate' }}]
 })
 export class MapComponent implements OnInit {
   lat: number = 51.678418;
@@ -113,7 +115,6 @@ export class MapComponent implements OnInit {
       this.mapService.update(this.markersToEdit)
     });
     //opens dialog window
-
 
     // this.mapService.create(nuevoMarcador).subscribe(response => this.marker = response);
 

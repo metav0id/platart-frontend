@@ -36,6 +36,7 @@ import { TranslocoRootModule } from './transloco-root.module';
 import {ComerceComponent} from './content/comerce/comerce.component';
 import {FormComponent} from './content/comerce/form.component';
 import { MarkerFormComponent } from './content/map/components/marker-form.component';
+import { MDBBootstrapModule } from 'angular-bootstrap-md';
 
 
 @NgModule({
@@ -76,6 +77,7 @@ import { MarkerFormComponent } from './content/map/components/marker-form.compon
     MatCardModule,
     MatDialogModule,
     TranslocoRootModule,
+    MDBBootstrapModule.forRoot()
   ],
   providers: [],
   bootstrap: [AppComponent]

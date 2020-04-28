@@ -1,25 +1,126 @@
+<!--<ng-template transloco let-t>-->
+<!--  <nav class="navbar navbar-expand-lg navbar-dark navbar-custom">-->
+
+
+
+<!--  <a class="navbar-brand " href="#"> {{ t('header.administration') }} </a>-->
+<!--  &lt;!&ndash; creates gurber menu for mobile version with all elements in the menu &ndash;&gt;-->
+<!--  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">-->
+<!--    <span class="navbar-toggler-icon"></span>-->
+<!--  </button>-->
+<!--  <div class="collapse navbar-collapse" id="navbarSupportedContent">-->
+<!--    <ul class="navbar-nav mr-auto">-->
+<!--      &lt;!&ndash; ....... &ndash;&gt;-->
+<!--      <li class="nav-item" routerLinkActive="active">-->
+<!--        <a class="nav-link " >-->
+<!--          <button mat-button [matMenuTriggerFor]="aboveMenu"> {{ t('header.warehouse') }} </button>-->
+<!--        </a>-->
+<!--        <mat-menu #aboveMenu="matMenu" yPosition="below">-->
+<!--          <a class="nav-link a" routerLink="stockinwarehouse">-->
+<!--            {{ t('header.Stock-in-warehouse') }}-->
+<!--&lt;!&ndash;          <button mat-menu-item>Warehouse Queen</button>&ndash;&gt;-->
+<!--          </a>-->
+<!--          <a class="nav-link a" routerLink="newdeliverytoshop">-->
+<!--            {{ t('header.New-delivery-to-shop') }}-->
+<!--&lt;!&ndash;          <button mat-menu-item>Sales</button>&ndash;&gt;-->
+<!--          </a>-->
+<!--          <a class="nav-link a" routerLink="newdeliverytowarehouse">-->
+<!--            {{ t('header.New-delivery-to-warehouse') }}-->
+<!--            &lt;!&ndash;          <button mat-menu-item>Sales</button>&ndash;&gt;-->
+<!--          </a>-->
+<!--          <a class="nav-link a" routerLink="newitemcategory">-->
+<!--            {{ t('header.Add-new-category-to-warehouse') }}-->
+<!--            &lt;!&ndash;          <button mat-menu-item>Sales</button>&ndash;&gt;-->
+<!--          </a>-->
+<!--        </mat-menu>-->
+<!--      </li>-->
+
+
+<!--      <li class="nav-item" routerLinkActive="active">-->
+<!--        <a class="nav-link" routerLink="manager">-->
+<!--          <button mat-button [matMenuTriggerFor]="belowMenu">{{ t('header.Manager') }}</button>-->
+<!--        </a>-->
+<!--        <mat-menu #belowMenu="matMenu" yPosition="below">-->
+<!--          <a class="nav-link a" routerLink="manageshopsinfo">-->
+<!--            {{ t('header.Manage-Shops-Information') }}-->
+<!--          </a>-->
+<!--          <a class="nav-link a" routerLink="newdeliveryfromwarehouse">-->
+<!--            Place Holder-->
+<!--          </a>-->
+<!--        </mat-menu>-->
+<!--      </li>-->
+
+
+<!--      <li class="nav-item" routerLinkActive="active">-->
+<!--        <a class="nav-link" routerLink="sales">-->
+
+<!--          <button mat-button [matMenuTriggerFor]="beforeMenu">{{ t('header.Sales') }}</button>-->
+<!--        </a>-->
+<!--        <mat-menu #beforeMenu="matMenu" xPosition="before">-->
+<!--          <a class="nav-link a" routerLink="checkoutsolditems">-->
+<!--            Checkout sold items-->
+<!--          </a>-->
+<!--          <a class="nav-link a" routerLink="newdeliveryfromwarehouse">-->
+<!--            Place Holder-->
+<!--          </a>-->
+<!--        </mat-menu>-->
+<!--      </li>-->
+
+<!--      <li class="nav-item" routerLinkActive="active">-->
+<!--        <a class="nav-link" >-->
+
+<!--          <button mat-button [matMenuTriggerFor]="afterMenu">{{ t('header.After') }}</button>-->
+<!--        </a>-->
+<!--        <mat-menu #afterMenu="matMenu" xPosition="after">-->
+<!--          <a class="nav-link a" routerLink="newdeliveryfromwarehouse">-->
+<!--            Place Holder-->
+<!--          </a>-->
+<!--          <a class="nav-link a" routerLink="newdeliveryfromwarehouse">-->
+<!--            Place Holder-->
+<!--          </a>-->
+<!--        </mat-menu>-->
+<!--      </li>-->
+<!--      &lt;!&ndash; Search form &ndash;&gt;-->
+<!--&lt;!&ndash;      <form class="form-inline waves-light" mdbWavesEffect>&ndash;&gt;-->
+<!--&lt;!&ndash;        <div class="md-form my-0">&ndash;&gt;-->
+<!--&lt;!&ndash;          <input class="form-control mr-sm-2" type="text" placeholder="Search">&ndash;&gt;-->
+<!--&lt;!&ndash;        </div>&ndash;&gt;-->
+<!--&lt;!&ndash;      </form>&ndash;&gt;-->
+<!--      &lt;!&ndash; Collapsible content &ndash;&gt;-->
+
+<!--    </ul>-->
+<!--    <button id="en" (click)="setActiveLang('en')">en</button>-->
+<!--    <button id="es" (click)="setActiveLang('es')">es</button>-->
+<!--  </div>-->
+<!--</nav>-->
+<!--</ng-template>-->
+
+
+<!--NUEVA NAVBAR-->
+
+
 <ng-template transloco let-t>
-<nav class="navbar navbar-expand-lg navbar-dark navbar-custom">
-  <a class="navbar-brand " href="#"> {{ t('header.administration') }} </a>
-  <!-- creates gurber menu for mobile version with all elements in the menu -->
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+<!--Navbar-->
+<mdb-navbar SideClass="navbar navbar-expand-lg navbar-dark indigo">
+
+  <!-- Navbar brand -->
+  <mdb-navbar-brand><a class="navbar-brand" href="#">{{ t('header.administration') }}</a></mdb-navbar-brand>
+
+  <!-- Collapsible content -->
+  <links>
+
+    <!-- Links -->
     <ul class="navbar-nav mr-auto">
-      <!-- ....... -->
-      <li class="nav-item" routerLinkActive="active">
-        <a class="nav-link " >
-          <button mat-button [matMenuTriggerFor]="aboveMenu"> {{ t('header.warehouse') }} </button>
-        </a>
+      <li class="nav-item active">
+        <a class="nav-link waves-light" [matMenuTriggerFor]="aboveMenu" mdbWavesEffect>{{ t('header.warehouse') }}<span class="sr-only">(current)</span></a>
         <mat-menu #aboveMenu="matMenu" yPosition="below">
           <a class="nav-link a" routerLink="stockinwarehouse">
             {{ t('header.Stock-in-warehouse') }}
-<!--          <button mat-menu-item>Warehouse Queen</button>-->
+            <!--          <button mat-menu-item>Warehouse Queen</button>-->
           </a>
           <a class="nav-link a" routerLink="newdeliverytoshop">
             {{ t('header.New-delivery-to-shop') }}
-<!--          <button mat-menu-item>Sales</button>-->
+            <!--          <button mat-menu-item>Sales</button>-->
           </a>
           <a class="nav-link a" routerLink="newdeliverytowarehouse">
             {{ t('header.New-delivery-to-warehouse') }}
@@ -31,12 +132,8 @@
           </a>
         </mat-menu>
       </li>
-
-
-      <li class="nav-item" routerLinkActive="active">
-        <a class="nav-link" routerLink="manager">
-          <button mat-button [matMenuTriggerFor]="belowMenu">{{ t('header.Manager') }}</button>
-        </a>
+      <li class="nav-item">
+        <a class="nav-link waves-light" mdbWavesEffect [matMenuTriggerFor]="belowMenu">{{ t('header.Manager') }}</a>
         <mat-menu #belowMenu="matMenu" yPosition="below">
           <a class="nav-link a" routerLink="manageshopsinfo">
             {{ t('header.Manage-Shops-Information') }}
@@ -46,13 +143,8 @@
           </a>
         </mat-menu>
       </li>
-
-
-      <li class="nav-item" routerLinkActive="active">
-        <a class="nav-link" routerLink="sales">
-
-          <button mat-button [matMenuTriggerFor]="beforeMenu">{{ t('header.Sales') }}</button>
-        </a>
+      <li class="nav-item">
+        <a class="nav-link waves-light" mdbWavesEffect [matMenuTriggerFor]="beforeMenu">{{ t('header.Sales') }}</a>
         <mat-menu #beforeMenu="matMenu" xPosition="before">
           <a class="nav-link a" routerLink="checkoutsolditems">
             Checkout sold items
@@ -63,11 +155,8 @@
         </mat-menu>
       </li>
 
-      <li class="nav-item" routerLinkActive="active">
-        <a class="nav-link" >
-
-          <button mat-button [matMenuTriggerFor]="afterMenu">{{ t('header.After') }}</button>
-        </a>
+      <li class="nav-item">
+        <a class="nav-link waves-light" mdbWavesEffect [matMenuTriggerFor]="afterMenu">{{ t('header.After') }}</a>
         <mat-menu #afterMenu="matMenu" xPosition="after">
           <a class="nav-link a" routerLink="newdeliveryfromwarehouse">
             Place Holder
@@ -77,19 +166,34 @@
           </a>
         </mat-menu>
       </li>
-      <!-- Search form -->
-<!--      <form class="form-inline waves-light" mdbWavesEffect>-->
-<!--        <div class="md-form my-0">-->
-<!--          <input class="form-control mr-sm-2" type="text" placeholder="Search">-->
-<!--        </div>-->
-<!--      </form>-->
-      <!-- Collapsible content -->
+
+      <!-- Dropdown -->
+      <li class="nav-item dropdown" dropdown>
+        <a dropdownToggle mdbWavesEffect type="button" class="nav-link dropdown-toggle waves-light" mdbWavesEffect>
+          Basic dropdown<span class="caret"></span></a>
+        <div *dropdownMenu class="dropdown-menu dropdown dropdown-primary" role="menu">
+          <a class="dropdown-item waves-light" mdbWavesEffect href="#">Action</a>
+          <a class="dropdown-item waves-light" mdbWavesEffect href="#">Another action</a>
+          <a class="dropdown-item waves-light" mdbWavesEffect href="#">Something else here</a>
+          <div class="divider dropdown-divider"></div>
+          <a class="dropdown-item waves-light" mdbWavesEffect href="#">Separated link</a>
+        </div>
+      </li>
 
     </ul>
+    <!-- Links -->
+
+    <!-- Search form -->
+    <form class="form-inline waves-light" mdbWavesEffect>
+      <div class="md-form my-0">
+        <input class="form-control mr-sm-2" type="text" placeholder="Search">
+      </div>
+    </form>
     <button id="en" (click)="setActiveLang('en')">en</button>
     <button id="es" (click)="setActiveLang('es')">es</button>
-  </div>
-</nav>
+  </links>
+  <!-- Collapsible content -->
+
+</mdb-navbar>
+<!--/.Navbar-->
 </ng-template>
-
-
