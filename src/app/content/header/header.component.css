@@ -3,20 +3,20 @@
   color: #212529;
   background-color: #70d0ec;
 }
-button {
-  transition-duration: 0.4s;
-  display: inline-block;
-  font-size: 15px;
-  cursor: pointer;
-  text-align: center;
-  text-decoration: none;
-  outline: none;
-  color: #fff;
-  background-color: #ff9abc;
-  border: none;
-  border-radius: 15px;
-  box-shadow: 0 9px #999;
-}
+/*button {*/
+/*  transition-duration: 0.4s;*/
+/*  display: inline-block;*/
+/*  font-size: 15px;*/
+/*  cursor: pointer;*/
+/*  text-align: center;*/
+/*  text-decoration: none;*/
+/*  outline: none;*/
+/*  color: #fff;*/
+/*  background-color: #ff9abc;*/
+/*  border: none;*/
+/*  border-radius: 15px;*/
+/*  box-shadow: 0 9px #999;*/
+/*}*/
 
 button:hover {
   background-color: #4CAF50; /* Green */
