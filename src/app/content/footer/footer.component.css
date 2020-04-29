@@ -8,7 +8,7 @@ footer {
 .footer, .push {
   position: sticky;
   bottom: 0px;
-  height: 60px;
+  height: 50px;
   width:100%;
   margin-top: 0px;
 }
@@ -16,7 +16,7 @@ footer {
 
 
 .footer-custom {
-  color: #70d0ec;
-  background-color: #70d0ec;
+  color: #ffffff;
+  background-color: #212e3e;
 }
 

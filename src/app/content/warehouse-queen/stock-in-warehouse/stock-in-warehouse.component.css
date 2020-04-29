@@ -31,10 +31,10 @@ button {
   text-decoration: none;
   outline: none;
   color: #fff;
-  background-color: #ff9abc;
+  background-color: #212e3e;
   border: none;
   border-radius: 15px;
-  box-shadow: 0 9px #999;
+  /*box-shadow: 0 5px #999;*/
 }
 
 button:hover {
@@ -57,7 +57,7 @@ th{
 }
 
 .cont-bg{
-  background-color: #eed6ec;
+  background-color: #ffffff;
   border-radius: 25px;
 }
 
@@ -66,13 +66,13 @@ th{
   border-radius: 25px;
 }
 .cont-bg4{
-  background-color: #dfe9f3;
+  background-color: #c9c9c9;
 
 }
 
 .cont-bg3{
   background-color: #f1d4cf;
-  border-radius: 25px;
+
 }
 
 
@@ -86,7 +86,7 @@ h2{
 
   font-weight: bolder;
   font-family: sans-serif;
-  color: #212e3e;
+  color: #000000;
 
 }
 h3{

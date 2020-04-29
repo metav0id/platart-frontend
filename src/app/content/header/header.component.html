@@ -101,10 +101,16 @@
 
 <ng-template transloco let-t>
   <div >
-<mdb-navbar SideClass="navbar navbar-expand-lg navbar-dark indigo">
+<mdb-navbar class="navbar navbar-expand-lg navbar-light bg2 ">
+
 
   <!-- Navbar brand -->
   <mdb-navbar-brand><a class="navbar-brand" href="#">{{ t('header.administration') }}</a></mdb-navbar-brand>
+    <!-- creates gurber menu for mobile version with all elements in the menu -->
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
 
   <!-- Collapsible content -->
   <links>
@@ -185,7 +191,7 @@
 
     <!-- Search form -->
     <form class="form-inline waves-light" mdbWavesEffect>
-      <div class="md-form my-0">
+      <div class="md-form my-0 ">
         <input class="form-control mr-sm-2" type="text" placeholder="Search">
       </div>
     </form>
@@ -194,6 +200,7 @@
     <button class="bg" mat-mini-fab id="es" (click)="setActiveLang('es')">es</button>
     </div>
   </links>
+    </div>
   <!-- Collapsible content -->
 
 </mdb-navbar>
