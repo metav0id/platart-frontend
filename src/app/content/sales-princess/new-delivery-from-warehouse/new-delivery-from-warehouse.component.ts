@@ -10,57 +10,21 @@ import {PeriodicElement} from './periodic-element';
 import {MatDialog} from '@angular/material/dialog';
 // tslint:disable-next-line:max-line-length
 import {NewDeliveryFromWarehouseDetailsComponent} from './new-delivery-from-warehouse-details/new-delivery-from-warehouse-details.component';
+import {NewDeliveryFromWarehouseService} from "./new-delivery-from-warehouse.service";
 
 @Component({
   selector: 'app-new-delivery-from-warehouse',
   templateUrl: './new-delivery-from-warehouse.component.html',
   styleUrls: ['./new-delivery-from-warehouse.component.css'],
-  providers: [{provide: TRANSLOCO_SCOPE, useValue: { scope: 'salesPrincess/newDeliveryFromWarehouse', alias: 'translate' }}]
+  providers: [{
+    provide: TRANSLOCO_SCOPE,
+    useValue: {scope: 'salesPrincess/newDeliveryFromWarehouse', alias: 'translate'}
+  }]
 })
 export class NewDeliveryFromWarehouseComponent implements OnInit {
   public displayedColumns: string[] = ['select', 'category', 'salesPrice', 'quantity', 'action'];
   public listNewItemsFromWarehouse: PeriodicElement[] = [];
-  public newItemFromWarehouse: PeriodicElement = {
-    position: 0,
-    category: '',
-    listPrice: 0,
-    salesPrice: 0,
-    quantity: 0,
-    timestamp: '',
-    comment: ''
-  };
 
-  // TEST-DATA
-  private newItemOnList1 = {
-    position: 1,
-    category: 'Kette',
-    listPrice: 25,
-    salesPrice: 15,
-    quantity: 100,
-    timestamp: '22.04.2020',
-    comment: ''
-  };
-  private newItemOnList2 = {
-    position: 1,
-    category: 'Ring',
-    listPrice: 25,
-    salesPrice: 15,
-    quantity: 100,
-    timestamp: '22.04.2020',
-    comment: ''
-  };
-  private newItemOnList3 = {
-    position: 1,
-    category: 'Kette',
-    listPrice: 25,
-    salesPrice: 15,
-    quantity: 100,
-    timestamp: '22.04.2020',
-    comment: ''
-  };
-
-
-  /**  */
   public selection = new SelectionModel<PeriodicElement>(true, []);
 
   /** Is used to increase position attribute of list elements constantly */
@@ -73,53 +37,14 @@ export class NewDeliveryFromWarehouseComponent implements OnInit {
 
   @ViewChild('myCheckinProductsTable') table: MatTable<any>;
 
-  // constructor(private newDeliveryToWarehouseService: NewDeliveryToWarehouseService) {
-  // }
-  constructor(public dialog: MatDialog, private transloco: TranslocoService) {
-  }
+  constructor(public dialog: MatDialog,
+              private transloco: TranslocoService,
+              private newDeliveryFromWarehouseService: NewDeliveryFromWarehouseService) {}
 
   ngOnInit(): void {
-    // this.newDeliveryToWarehouseService.getAllCategories().subscribe(JsonDto => this.categoryItems = JsonDto);
-    this.listNewItemsFromWarehouse = [this.newItemOnList1, this.newItemOnList2, this.newItemOnList3];
+    this.newDeliveryFromWarehouseService.getNewDeliveryForShop()
+      .subscribe(JsonDto => this.listNewItemsFromWarehouse = JsonDto);
   }
-
-  /** Add a new item to table */
-
-  /*addNewItemToList(): void {
-    const newItem: PeriodicElement = {
-      position: this.counter++,
-      category: this.newItemFromWarehouse.category,
-      pricePerUnit: this.newItemFromWarehouse.pricePerUnit,
-      price: this.newItemFromWarehouse.pricePerUnit * this.newItemFromWarehouse.quantity,
-      quantity: this.newItemFromWarehouse.quantity,
-      supplierName: this.newItemFromWarehouse.supplierName
-    };
-    const isCategoryNotEmpty = !this.categoryControl.hasError('required');
-    const isPricePerUnitNotEmpty = newItem.pricePerUnit > 0;
-    const isQuantityNotEmpty = newItem.quantity > 0;
-    const isSupplierNotEmpty = newItem.supplierName !== '';
-    if (isCategoryNotEmpty && isPricePerUnitNotEmpty && isQuantityNotEmpty && isSupplierNotEmpty) {
-      this.listNewItemsFromWarehouse.push(newItem);
-      console.log(this.listNewItemsFromWarehouse);
-      this.table.renderRows();
-    } else {
-      console.log('Please insert valid parameters');
-    }
-  }
-
-  /!** Delete all selected items *!/
-  deleteItem(): void {
-    for (const selectedItem of this.selection.selected) {
-
-      const removeIndex = this.listNewItemsFromWarehouse.map((item) => {
-        return item.position;
-      }).indexOf(selectedItem.position);
-
-      this.listNewItemsFromWarehouse.splice(removeIndex, 1);
-    }
-    this.table.renderRows();
-    this.selection.clear();
-  }*/
 
   /** Whether the number of selected elements matches the total number of rows. */
   isAllSelected() {
