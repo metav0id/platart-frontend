@@ -1,111 +1,372 @@
 
 <div class="space"></div>
 
-<div class="container cont-bg punkt">
+<div class="container-fluid d-flex justify-content-center">
+
+<!--BOX -->
+  <div class="demo-card-wide mdl-card mdl-shadow--2dp cont-bg4 justi ">
+    <div class="container d-flex justify-content-left mdl-card__title ">
+      <h2 class="mdl-card__title-text">Stock in warehouse component!</h2>
+    </div>
+    <div class="mdl-card__supporting-text">
+<!--      CONTENIDO-->
+
+
+
+      <div class="container-fluid mdl-shadow--2dp d-flex justify-content-center cont-bg2 ">
+
+        <div class=" table-responsive ">
+          <div class="space"></div>
+          <div class="container cont-bg3 mdl-shadow--2dp justify-content-center  ">
+
+            <div class="d-flex justify-content-around" >
+              <mat-form-field>
+                <mat-label>Filter</mat-label>
+                <input matInput (keyup)="applyFilter($event)" placeholder="Ex. ium">
+              </mat-form-field>
+            </div >
+          </div>
+          <div class="space"></div>
+          <table mat-table #myWarehouseItemsTable [dataSource]="dataSource" class="mat-elevation-z8" >
+
+            <!--- Note that these columns can be defined in any order.
+                  The actual rendered columns are set as a property on the row definition" -->
+
+            <!-- Position Column -->
+            <ng-container matColumnDef="category">
+              <th mat-header-cell *matHeaderCellDef> Category </th>
+              <td mat-cell *matCellDef="let element"> {{element.category}} </td>
+              <td mat-footer-cell *matFooterCellDef> - </td>
+            </ng-container>
+
+            <!-- Name Column -->
+            <ng-container matColumnDef="priceListPerUnit">
+              <th mat-header-cell *matHeaderCellDef> List Price </th>
+              <td mat-cell *matCellDef="let element"> {{element.priceListPerUnit}} </td>
+              <td mat-footer-cell *matFooterCellDef> Sum </td>
+            </ng-container>
+
+            <!-- Quantity Column -->
+            <ng-container matColumnDef="quantity">
+              <th mat-header-cell *matHeaderCellDef> Quantity </th>
+              <td mat-cell *matCellDef="let element"> {{element.quantity}} </td>
+              <td mat-footer-cell *matFooterCellDef> {{getSumQuantity()}} </td>
+            </ng-container>
+
+            <!-- Correct Quantity -->
+            <ng-container matColumnDef="correctQuantity">
+              <th mat-header-cell *matHeaderCellDef> Quantity </th>
+              <td mat-cell *matCellDef="let element">
+                <button *ngIf="!updateQuantityState" (click)="updateQuantityButton(element)">changeQty</button>
+                <button *ngIf="updateQuantityState" >changeQty</button>
+              </td>
+              <td mat-footer-cell *matFooterCellDef> - </td>
+            </ng-container>
+
+            <!-- Weight UnitPrice*quantity -->
+            <ng-container matColumnDef="value">
+              <th mat-header-cell *matHeaderCellDef> CategoryValue </th>
+              <td mat-cell *matCellDef="let element"> {{(element.quantity)*(element.priceListPerUnit)}} </td>
+              <td mat-footer-cell *matFooterCellDef> {{getTotalCost()}} </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let element; columns: displayedColumns;"></tr>
+            <tr mat-footer-row *matFooterRowDef="displayedColumns"></tr>
+
+          </table>
+          <div class="space"></div>
+        </div>
+
+        <div *ngIf="updateQuantityState">
+          <div class="container cont-bg3  justify-content-center punkt ">
+            <div class="space"></div>
+            <div class="d-flex justify-content-around" >
+
+              <h3>Update {{updateWarehouseItem.category}} for {{updateWarehouseItem.priceListPerUnit}}$</h3>
+              <h4>Correct the current quantity from {{updateWarehouseItem.quantity}} to:</h4>
+
+              <div class="newQuantity">
+                <mat-form-field hintLabel="Max 10 characters" appearance="fill">
+                  <mat-label>New Quantity</mat-label>
+                  <input matInput #input [(ngModel)]="updateWarehouseItem.quantity" maxlength="10" placeholder="Ex. deliveryQuantity">
+                  <mat-hint align="end">{{input.value?.length || 0}}/10</mat-hint>
+                </mat-form-field>
+              </div>
+
+              <div class="updateResponsiblePerson">
+                <mat-form-field hintLabel="Max 10 characters" appearance="fill">
+                  <mat-label>Responsible employee:</mat-label>
+                  <input matInput #input [(ngModel)]="updateResponsiblePerson" maxlength="10" placeholder="Ex. deliveryQuantity">
+                  <mat-hint align="end">{{input.value?.length || 0}}/10</mat-hint>
+                </mat-form-field>
+              </div>
+
+              <button (click)="saveUpdateQuantityButton()">changeQty</button>
+            </div >
+            <div class="space"></div>
+          </div>
+        </div>
+
+
+
+
+
+
+<!--      CONTENIDO-->
+    </div>
+<!--    <div class="mdl-card__actions mdl-card&#45;&#45;border">-->
+<!--      <a class="mdl-button mdl-button&#45;&#45;colored mdl-js-button mdl-js-ripple-effect">-->
+<!--        Get Started-->
+<!--      </a>-->
+<!--    </div>-->
+    <div class="mdl-card__menu">
+      <button class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect">
+        <i class="material-icons">share</i>
+      </button>
+    </div>
+  </div>
+<!--BOX-->
   <div class="space"></div>
 <div>
-  <div class=" d-flex justify-content-center align-items-end ">
-    <h1>Stock in warehouse component!</h1>
-  </div>
+<!--  <div class=" d-flex justify-content-center align-items-end ">-->
+<!--    <h1>Stock in warehouse component!</h1>-->
+<!--  </div>-->
 
-  <div class="container-fluid cont-bg2 punkt">
-    <div class="space"></div>
-  <div class=" table-responsive">
+<!--  <div class="container-fluid cont-bg2 punkt">-->
+<!--    <div class="space"></div>-->
+<!--  <div class=" table-responsive">-->
 
-    <div class="container cont-bg3  justify-content-center punkt ">
-      <div class="space"></div>
-      <div class="d-flex justify-content-around" >
-        <mat-form-field>
-          <mat-label>Filter</mat-label>
-          <input matInput (keyup)="applyFilter($event)" placeholder="Ex. ium">
-        </mat-form-field>
-      </div >
-      <div class="space"></div>
-    </div>
+<!--    <div class="container cont-bg3  justify-content-center punkt ">-->
+<!--      <div class="space"></div>-->
+<!--      <div class="d-flex justify-content-around" >-->
+<!--        <mat-form-field>-->
+<!--          <mat-label>Filter</mat-label>-->
+<!--          <input matInput (keyup)="applyFilter($event)" placeholder="Ex. ium">-->
+<!--        </mat-form-field>-->
+<!--      </div >-->
+<!--      <div class="space"></div>-->
+<!--    </div>-->
 
-    <table mat-table #myWarehouseItemsTable [dataSource]="dataSource" class="mat-elevation-z8" >
+<!--    <table mat-table #myWarehouseItemsTable [dataSource]="dataSource" class="mat-elevation-z8" >-->
 
-    <!--- Note that these columns can be defined in any order.
-          The actual rendered columns are set as a property on the row definition" -->
+<!--    &lt;!&ndash;- Note that these columns can be defined in any order.-->
+<!--          The actual rendered columns are set as a property on the row definition" &ndash;&gt;-->
 
-    <!-- Position Column -->
-    <ng-container matColumnDef="category">
-      <th mat-header-cell *matHeaderCellDef> Category </th>
-      <td mat-cell *matCellDef="let element"> {{element.category}} </td>
-      <td mat-footer-cell *matFooterCellDef> - </td>
-    </ng-container>
+<!--    &lt;!&ndash; Position Column &ndash;&gt;-->
+<!--    <ng-container matColumnDef="category">-->
+<!--      <th mat-header-cell *matHeaderCellDef> Category </th>-->
+<!--      <td mat-cell *matCellDef="let element"> {{element.category}} </td>-->
+<!--      <td mat-footer-cell *matFooterCellDef> - </td>-->
+<!--    </ng-container>-->
 
-    <!-- Name Column -->
-    <ng-container matColumnDef="priceListPerUnit">
-      <th mat-header-cell *matHeaderCellDef> List Price </th>
-      <td mat-cell *matCellDef="let element"> {{element.priceListPerUnit}} </td>
-      <td mat-footer-cell *matFooterCellDef> Sum </td>
-    </ng-container>
+<!--    &lt;!&ndash; Name Column &ndash;&gt;-->
+<!--    <ng-container matColumnDef="priceListPerUnit">-->
+<!--      <th mat-header-cell *matHeaderCellDef> List Price </th>-->
+<!--      <td mat-cell *matCellDef="let element"> {{element.priceListPerUnit}} </td>-->
+<!--      <td mat-footer-cell *matFooterCellDef> Sum </td>-->
+<!--    </ng-container>-->
 
-    <!-- Quantity Column -->
-    <ng-container matColumnDef="quantity">
-      <th mat-header-cell *matHeaderCellDef> Quantity </th>
-      <td mat-cell *matCellDef="let element"> {{element.quantity}} </td>
-      <td mat-footer-cell *matFooterCellDef> {{getSumQuantity()}} </td>
-    </ng-container>
+<!--    &lt;!&ndash; Quantity Column &ndash;&gt;-->
+<!--    <ng-container matColumnDef="quantity">-->
+<!--      <th mat-header-cell *matHeaderCellDef> Quantity </th>-->
+<!--      <td mat-cell *matCellDef="let element"> {{element.quantity}} </td>-->
+<!--      <td mat-footer-cell *matFooterCellDef> {{getSumQuantity()}} </td>-->
+<!--    </ng-container>-->
 
-      <!-- Correct Quantity -->
-      <ng-container matColumnDef="correctQuantity">
-        <th mat-header-cell *matHeaderCellDef> Quantity </th>
-        <td mat-cell *matCellDef="let element">
-          <button *ngIf="!updateQuantityState" (click)="updateQuantityButton(element)">changeQty</button>
-          <button *ngIf="updateQuantityState" >changeQty</button>
-        </td>
-        <td mat-footer-cell *matFooterCellDef> - </td>
-      </ng-container>
+<!--      &lt;!&ndash; Correct Quantity &ndash;&gt;-->
+<!--      <ng-container matColumnDef="correctQuantity">-->
+<!--        <th mat-header-cell *matHeaderCellDef> Quantity </th>-->
+<!--        <td mat-cell *matCellDef="let element">-->
+<!--          <button *ngIf="!updateQuantityState" (click)="updateQuantityButton(element)">changeQty</button>-->
+<!--          <button *ngIf="updateQuantityState" >changeQty</button>-->
+<!--        </td>-->
+<!--        <td mat-footer-cell *matFooterCellDef> - </td>-->
+<!--      </ng-container>-->
 
-    <!-- Weight UnitPrice*quantity -->
-    <ng-container matColumnDef="value">
-      <th mat-header-cell *matHeaderCellDef> CategoryValue </th>
-      <td mat-cell *matCellDef="let element"> {{(element.quantity)*(element.priceListPerUnit)}} </td>
-      <td mat-footer-cell *matFooterCellDef> {{getTotalCost()}} </td>
-    </ng-container>
+<!--    &lt;!&ndash; Weight UnitPrice*quantity &ndash;&gt;-->
+<!--    <ng-container matColumnDef="value">-->
+<!--      <th mat-header-cell *matHeaderCellDef> CategoryValue </th>-->
+<!--      <td mat-cell *matCellDef="let element"> {{(element.quantity)*(element.priceListPerUnit)}} </td>-->
+<!--      <td mat-footer-cell *matFooterCellDef> {{getTotalCost()}} </td>-->
+<!--    </ng-container>-->
 
-    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-    <tr mat-row *matRowDef="let element; columns: displayedColumns;"></tr>
-    <tr mat-footer-row *matFooterRowDef="displayedColumns"></tr>
+<!--    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>-->
+<!--    <tr mat-row *matRowDef="let element; columns: displayedColumns;"></tr>-->
+<!--    <tr mat-footer-row *matFooterRowDef="displayedColumns"></tr>-->
 
-  </table>
-  <div class="space"></div>
+<!--  </table>-->
+<!--  <div class="space"></div>-->
+<!--</div>-->
+
+<!--  <div *ngIf="updateQuantityState">-->
+<!--    <div class="container cont-bg3  justify-content-center punkt ">-->
+<!--      <div class="space"></div>-->
+<!--      <div class="d-flex justify-content-around" >-->
+
+<!--        <h3>Update {{updateWarehouseItem.category}} for {{updateWarehouseItem.priceListPerUnit}}$</h3>-->
+<!--        <h4>Correct the current quantity from {{updateWarehouseItem.quantity}} to:</h4>-->
+
+<!--        <div class="newQuantity">-->
+<!--          <mat-form-field hintLabel="Max 10 characters" appearance="fill">-->
+<!--            <mat-label>New Quantity</mat-label>-->
+<!--            <input matInput #input [(ngModel)]="updateWarehouseItem.quantity" maxlength="10" placeholder="Ex. deliveryQuantity">-->
+<!--            <mat-hint align="end">{{input.value?.length || 0}}/10</mat-hint>-->
+<!--          </mat-form-field>-->
+<!--        </div>-->
+
+<!--        <div class="updateResponsiblePerson">-->
+<!--          <mat-form-field hintLabel="Max 10 characters" appearance="fill">-->
+<!--            <mat-label>Responsible employee:</mat-label>-->
+<!--            <input matInput #input [(ngModel)]="updateResponsiblePerson" maxlength="10" placeholder="Ex. deliveryQuantity">-->
+<!--            <mat-hint align="end">{{input.value?.length || 0}}/10</mat-hint>-->
+<!--          </mat-form-field>-->
+<!--        </div>-->
+
+<!--        <button (click)="saveUpdateQuantityButton()">changeQty</button>-->
+<!--      </div >-->
+<!--      <div class="space"></div>-->
+<!--    </div>-->
+<!--  </div>-->
+
+
+</div>
+</div>
 </div>
 
-  <div *ngIf="updateQuantityState">
-    <div class="container cont-bg3  justify-content-center punkt ">
-      <div class="space"></div>
-      <div class="d-flex justify-content-around" >
+<!--RESPALDO-->
 
-        <h3>Update {{updateWarehouseItem.category}} for {{updateWarehouseItem.priceListPerUnit}}$</h3>
-        <h4>Correct the current quantity from {{updateWarehouseItem.quantity}} to:</h4>
+<!--<div class="space"></div>-->
 
-        <div class="newQuantity">
-          <mat-form-field hintLabel="Max 10 characters" appearance="fill">
-            <mat-label>New Quantity</mat-label>
-            <input matInput #input [(ngModel)]="updateWarehouseItem.quantity" maxlength="10" placeholder="Ex. deliveryQuantity">
-            <mat-hint align="end">{{input.value?.length || 0}}/10</mat-hint>
-          </mat-form-field>
-        </div>
+<!--<div class="container cont-bg punkt">-->
 
-        <div class="updateResponsiblePerson">
-          <mat-form-field hintLabel="Max 10 characters" appearance="fill">
-            <mat-label>Responsible employee:</mat-label>
-            <input matInput #input [(ngModel)]="updateResponsiblePerson" maxlength="10" placeholder="Ex. deliveryQuantity">
-            <mat-hint align="end">{{input.value?.length || 0}}/10</mat-hint>
-          </mat-form-field>
-        </div>
+<!--  &lt;!&ndash;BOX &ndash;&gt;-->
+<!--  <div class="demo-card-wide mdl-card mdl-shadow&#45;&#45;2dp ">-->
+<!--    <div class="mdl-card__title">-->
+<!--      <h2 class="mdl-card__title-text">Stock in warehouse component!</h2>-->
+<!--    </div>-->
+<!--    <div class="mdl-card__supporting-text">-->
+<!--      &lt;!&ndash;      CONTENIDO&ndash;&gt;-->
+<!--      Lorem ipsum dolor sit amet, consectetur adipiscing elit.-->
+<!--      Mauris sagittis pellentesque lacus eleifend lacinia...-->
+<!--      &lt;!&ndash;      CONTENIDO&ndash;&gt;-->
+<!--    </div>-->
+<!--    <div class="mdl-card__actions mdl-card&#45;&#45;border">-->
+<!--      <a class="mdl-button mdl-button&#45;&#45;colored mdl-js-button mdl-js-ripple-effect">-->
+<!--        Get Started-->
+<!--      </a>-->
+<!--    </div>-->
+<!--    <div class="mdl-card__menu">-->
+<!--      <button class="mdl-button mdl-button&#45;&#45;icon mdl-js-button mdl-js-ripple-effect">-->
+<!--        <i class="material-icons">share</i>-->
+<!--      </button>-->
+<!--    </div>-->
+<!--  </div>-->
+<!--  &lt;!&ndash;BOX&ndash;&gt;-->
+<!--  <div class="space"></div>-->
+<!--  <div>-->
+<!--    <div class=" d-flex justify-content-center align-items-end ">-->
+<!--      <h1>Stock in warehouse component!</h1>-->
+<!--    </div>-->
 
-        <button (click)="saveUpdateQuantityButton()">changeQty</button>
-      </div >
-      <div class="space"></div>
-    </div>
-  </div>
+<!--    <div class="container-fluid cont-bg2 punkt">-->
+<!--      <div class="space"></div>-->
+<!--      <div class=" table-responsive">-->
+
+<!--        <div class="container cont-bg3  justify-content-center punkt ">-->
+<!--          <div class="space"></div>-->
+<!--          <div class="d-flex justify-content-around" >-->
+<!--            <mat-form-field>-->
+<!--              <mat-label>Filter</mat-label>-->
+<!--              <input matInput (keyup)="applyFilter($event)" placeholder="Ex. ium">-->
+<!--            </mat-form-field>-->
+<!--          </div >-->
+<!--          <div class="space"></div>-->
+<!--        </div>-->
+
+<!--        <table mat-table #myWarehouseItemsTable [dataSource]="dataSource" class="mat-elevation-z8" >-->
+
+<!--          &lt;!&ndash;- Note that these columns can be defined in any order.-->
+<!--                The actual rendered columns are set as a property on the row definition" &ndash;&gt;-->
+
+<!--          &lt;!&ndash; Position Column &ndash;&gt;-->
+<!--          <ng-container matColumnDef="category">-->
+<!--            <th mat-header-cell *matHeaderCellDef> Category </th>-->
+<!--            <td mat-cell *matCellDef="let element"> {{element.category}} </td>-->
+<!--            <td mat-footer-cell *matFooterCellDef> - </td>-->
+<!--          </ng-container>-->
+
+<!--          &lt;!&ndash; Name Column &ndash;&gt;-->
+<!--          <ng-container matColumnDef="priceListPerUnit">-->
+<!--            <th mat-header-cell *matHeaderCellDef> List Price </th>-->
+<!--            <td mat-cell *matCellDef="let element"> {{element.priceListPerUnit}} </td>-->
+<!--            <td mat-footer-cell *matFooterCellDef> Sum </td>-->
+<!--          </ng-container>-->
+
+<!--          &lt;!&ndash; Quantity Column &ndash;&gt;-->
+<!--          <ng-container matColumnDef="quantity">-->
+<!--            <th mat-header-cell *matHeaderCellDef> Quantity </th>-->
+<!--            <td mat-cell *matCellDef="let element"> {{element.quantity}} </td>-->
+<!--            <td mat-footer-cell *matFooterCellDef> {{getSumQuantity()}} </td>-->
+<!--          </ng-container>-->
+
+<!--          &lt;!&ndash; Correct Quantity &ndash;&gt;-->
+<!--          <ng-container matColumnDef="correctQuantity">-->
+<!--            <th mat-header-cell *matHeaderCellDef> Quantity </th>-->
+<!--            <td mat-cell *matCellDef="let element">-->
+<!--              <button *ngIf="!updateQuantityState" (click)="updateQuantityButton(element)">changeQty</button>-->
+<!--              <button *ngIf="updateQuantityState" >changeQty</button>-->
+<!--            </td>-->
+<!--            <td mat-footer-cell *matFooterCellDef> - </td>-->
+<!--          </ng-container>-->
+
+<!--          &lt;!&ndash; Weight UnitPrice*quantity &ndash;&gt;-->
+<!--          <ng-container matColumnDef="value">-->
+<!--            <th mat-header-cell *matHeaderCellDef> CategoryValue </th>-->
+<!--            <td mat-cell *matCellDef="let element"> {{(element.quantity)*(element.priceListPerUnit)}} </td>-->
+<!--            <td mat-footer-cell *matFooterCellDef> {{getTotalCost()}} </td>-->
+<!--          </ng-container>-->
+
+<!--          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>-->
+<!--          <tr mat-row *matRowDef="let element; columns: displayedColumns;"></tr>-->
+<!--          <tr mat-footer-row *matFooterRowDef="displayedColumns"></tr>-->
+
+<!--        </table>-->
+<!--        <div class="space"></div>-->
+<!--      </div>-->
+
+<!--      <div *ngIf="updateQuantityState">-->
+<!--        <div class="container cont-bg3  justify-content-center punkt ">-->
+<!--          <div class="space"></div>-->
+<!--          <div class="d-flex justify-content-around" >-->
+
+<!--            <h3>Update {{updateWarehouseItem.category}} for {{updateWarehouseItem.priceListPerUnit}}$</h3>-->
+<!--            <h4>Correct the current quantity from {{updateWarehouseItem.quantity}} to:</h4>-->
+
+<!--            <div class="newQuantity">-->
+<!--              <mat-form-field hintLabel="Max 10 characters" appearance="fill">-->
+<!--                <mat-label>New Quantity</mat-label>-->
+<!--                <input matInput #input [(ngModel)]="updateWarehouseItem.quantity" maxlength="10" placeholder="Ex. deliveryQuantity">-->
+<!--                <mat-hint align="end">{{input.value?.length || 0}}/10</mat-hint>-->
+<!--              </mat-form-field>-->
+<!--            </div>-->
+
+<!--            <div class="updateResponsiblePerson">-->
+<!--              <mat-form-field hintLabel="Max 10 characters" appearance="fill">-->
+<!--                <mat-label>Responsible employee:</mat-label>-->
+<!--                <input matInput #input [(ngModel)]="updateResponsiblePerson" maxlength="10" placeholder="Ex. deliveryQuantity">-->
+<!--                <mat-hint align="end">{{input.value?.length || 0}}/10</mat-hint>-->
+<!--              </mat-form-field>-->
+<!--            </div>-->
+
+<!--            <button (click)="saveUpdateQuantityButton()">changeQty</button>-->
+<!--          </div >-->
+<!--          <div class="space"></div>-->
+<!--        </div>-->
+<!--      </div>-->
 
 
-</div>
-</div>
-</div>
-
+<!--    </div>-->
+<!--  </div>-->
+<!--</div>-->
+<!--RESPALDO-->

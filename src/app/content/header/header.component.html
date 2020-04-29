@@ -100,7 +100,7 @@
 
 
 <ng-template transloco let-t>
-<!--Navbar-->
+  <div >
 <mdb-navbar SideClass="navbar navbar-expand-lg navbar-dark indigo">
 
   <!-- Navbar brand -->
@@ -190,12 +190,13 @@
       </div>
     </form>
     <div class="example-button-row">
-    <button mat-mini-fab id="en" (click)="setActiveLang('en')">en</button>
-    <button mat-mini-fab id="es" (click)="setActiveLang('es')">es</button>
+    <button class="bg" mat-mini-fab id="en" (click)="setActiveLang('en')">en</button>
+    <button class="bg" mat-mini-fab id="es" (click)="setActiveLang('es')">es</button>
     </div>
   </links>
   <!-- Collapsible content -->
 
 </mdb-navbar>
+  </div>
 <!--/.Navbar-->
 </ng-template>
