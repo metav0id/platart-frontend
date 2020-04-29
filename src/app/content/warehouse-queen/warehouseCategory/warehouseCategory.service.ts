@@ -8,7 +8,7 @@ import {WarehouseItemCategoryDTO} from '../warehouseCategory/warehouse-item-cate
 })
 export class WarehouseCategoryService {
 
-  private readonly URL_GET_ALL_CATEGORIES = 'http://localhost:8081/warehouse/getAllCategories';
+  private readonly URL_GET_ALL_CATEGORIES = 'http://161.35.4.253:8081/warehouse/getAllCategories';
 
   constructor(private http: HttpClient) {
   }
