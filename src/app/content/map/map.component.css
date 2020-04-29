@@ -1,12 +1,20 @@
 agm-map{
   height: 600px;
 width: 80%;
+
 }
 mat-card-title{
 
   font-weight: bolder;
   font-family: sans-serif;
   color: #212e3e;
+}
+mat-card{
+  background-color: #f5f5f5;
+
+}
+mat-card[_ngcontent-acc-c179] {
+  background-color: #f5f5f5;
 }
 
 /*.box{*/
@@ -94,9 +102,7 @@ mat-card-title{
 /*  border-radius: 25px;*/
 /*}*/
 
-mat-card{
-  background-color: #ffffff;
-}
+
 
 .box{
   text-align: center;

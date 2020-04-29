@@ -6,7 +6,7 @@
 <div class="container-fluid d-flex justify-content-center">
 
 
-<div class="demo-card-wide mdl-card mdl-shadow--2dp cont-bg4 justi">
+<div class="demo-card-wide mdl-card mdl-shadow--2dp cont-bg justi">
   <div class="container d-flex justify-content-left mdl-card__title">
     <h2 class="mdl-card__title-text">New delivery order</h2>
   </div>
@@ -28,7 +28,7 @@
 
             <div>
               <h3>Insert new order element:</h3>
-              <div class="container cont-bg3  ">
+              <div class="container cont-bg4  ">
                 <div class="space"></div>
                 <div class="box">
                 <div class="newOrderInputFields">
@@ -145,7 +145,7 @@
 <!--SEGUNDA TABLA-->
 
 
-  <div class="demo-card-wide2 mdl-card mdl-shadow--2dp cont-bg4 justi">
+  <div class="demo-card-wide2 mdl-card mdl-shadow--2dp cont-bg justi">
 <!--    <div class="mdl-card__title">-->
 <!--      <h2 class="mdl-card__title-text">Welcome</h2>-->
 <!--    </div>-->
@@ -158,7 +158,7 @@
 <!--        <div class="space"></div>-->
         <div class="container cont-bg2 ">
           <div class="space"></div>
-          <div class="container cont-bg3  justify-content-center ">
+          <div class="container cont-bg4  justify-content-center ">
             <div class="space"></div>
             <div class="d-flex justify-content-around" >
               <button mat-button mat-stroked-button (click)="saveCurrentOrder()">Save current order items</button>
@@ -169,8 +169,7 @@
 
             <div class="space"></div>
           </div>
-
-          <div class="container cont-bg2  justify-content-center  ">
+          <div class="container cont-bg4  justify-content-center  ">
             <div class="space"></div>
             <div class="d-flex justify-content-around" >
               <h3><u>Delivery list to:</u> {{newOrderElement.deliveryShop}}</h3>
@@ -178,7 +177,7 @@
           </div>
           <div>
           </div>
-
+          <div class="space"></div>
           <div class="table-responsive">
 
             <table mat-table #myShopCheckinProductsTable [dataSource]="listNewItemsToShops" class="mat-elevation-z8" >
