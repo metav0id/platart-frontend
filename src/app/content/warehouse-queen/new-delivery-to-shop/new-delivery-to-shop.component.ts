@@ -76,7 +76,6 @@ export class NewDeliveryToShopComponent implements OnInit {
 
   availableItems: number = 0;
   @ViewChild('myShopCheckinProductsTable') table: MatTable<any>;
-
   constructor(private newDeliveryToShopService: NewDeliveryToShopService, private warehouseCategoryService: WarehouseCategoryService) {
   }
 

@@ -3,6 +3,7 @@ export interface PeriodicElement {
   position: number;
   category: string;
   quantity: number;
+  originalQuantity: number;
   listPrice: number;
   salesPrice: number;
   timestamp: string;
