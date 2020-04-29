@@ -24,15 +24,6 @@ import {NewDeliveryFromWarehouseService} from "./new-delivery-from-warehouse.ser
 export class NewDeliveryFromWarehouseComponent implements OnInit {
   public displayedColumns: string[] = ['select', 'category', 'salesPrice', 'quantity', 'action'];
   public listNewItemsFromWarehouse: PeriodicElement[] = [];
-  // public newItemFromWarehouse: PeriodicElement = {
-  //   position: 0,
-  //   category: '',
-  //   listPrice: 0,
-  //   salesPrice: 0,
-  //   quantity: 0,
-  //   timestamp: '',
-  //   comment: ''
-  // };
 
   public selection = new SelectionModel<PeriodicElement>(true, []);
 
