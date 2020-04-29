@@ -17,93 +17,6 @@ mat-card[_ngcontent-acc-c179] {
   background-color: #f5f5f5;
 }
 
-/*.box{*/
-/*  text-align: center;*/
-/*  display: flex;*/
-/*  flex-direction: column;*/
-/*  justify-content: center;*/
-/*}*/
-
-/*table {*/
-/*  width: 100%;*/
-/*  margin-left:auto;*/
-/*  margin-right:auto;*/
-/*}*/
-/*.space{*/
-/*  height: 20px;*/
-/*}*/
-/*button {*/
-/*  transition-duration: 0.4s;*/
-/*  display: inline-block;*/
-/*  font-size: 15px;*/
-/*  cursor: pointer;*/
-/*  text-align: center;*/
-/*  text-decoration: none;*/
-/*  outline: none;*/
-/*  color: #fff;*/
-/*  background-color: #5d9993;*/
-/*  border: none;*/
-/*  border-radius: 15px;*/
-/*  box-shadow: 0 9px #999;*/
-/*}*/
-
-/*button:hover {*/
-/*  background-color: #9d4caf; !* Green *!*/
-/*  color: white;*/
-/*  box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);*/
-/*}*/
-
-/*.button:active {*/
-/*  background-color: #3e8e41;*/
-/*  box-shadow: 0 5px #666;*/
-/*  transform: translateY(4px);*/
-/*}*/
-/*th{*/
-/*  font-family: Raleway !* Replace with your custom font *!, sans-serif !important;*/
-/*  !* Add !important to overwrite all elements *!*/
-/*  color: #0056b3;*/
-/*}*/
-
-/*.cont-bg{*/
-/*  background-color: #eed6ec;*/
-/*  border-radius: 25px;*/
-/*}*/
-
-/*.cont-bg2{*/
-/*  background-color: #dbf1cf;*/
-/*  border-radius: 25px;*/
-/*}*/
-
-/*h1{*/
-/*  text-shadow: 2px 5px 5px #403f3f;*/
-/*  font-weight: bolder;*/
-/*  font-family: sans-serif;*/
-/*  color: #3d0949;*/
-/*}*/
-/*h2{*/
-
-/*  font-weight: bolder;*/
-/*  font-family: sans-serif;*/
-/*  color: #091249;*/
-/*}*/
-/*h3{*/
-
-/*  font-weight: bolder;*/
-/*  font-family: sans-serif;*/
-/*  color: #490927;*/
-/*}*/
-
-/*.punkt{*/
-/*  border-style: dotted;*/
-/*}*/
-
-/*.cont-bg3{*/
-/*  background-color: #f1d4cf;*/
-/*  border-radius: 25px;*/
-/*}*/
-
-
-
 .box{
   text-align: center;
   display: flex;
@@ -124,9 +37,9 @@ table {
   width: 20px;
 }
 .justi{
-
+  display: flex;
   align-items: center;
-
+  justify-content: center
 }
 button {
   transition-duration: 0.4s;
@@ -137,14 +50,14 @@ button {
   text-decoration: none;
   outline: none;
   color: #fff;
-  background-color:  #212e3e;
+  background-color: #212e3e;
   border: none;
   border-radius: 15px;
   /*box-shadow: 0 5px #999;*/
 }
 
 button:hover {
-  background-color:#f1d4cf; /* Green #4caf50 */
+  background-color: #f1d4cf; /* Green */
   color: white;
   box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
 }
@@ -163,79 +76,45 @@ th{
 }
 
 .cont-bg{
-  background-color: #eed6ec;
-  border-radius: 25px;
-}
-
-.cont-bg2{
-  background-color: #90a1b3;
-  border-radius: 25px;
-}
-.cont-bg4{
-  background-color: #c9c9c9;
-
-}
-
-.cont-bg3{
   background-color: #ffffff;
   border-radius: 25px;
 }
 
+.cont-bg2{
+  background-color: #ffffff;
+  border-radius: 25px;
+}
+.cont-bg4{
+  background-color: #f5f5f5;
+
+}
+
+.cont-bg3{
+  background-color: #f1d4cf;
+
+}
+
 
 h1{
-
+  text-shadow: 2px 5px 5px #403f3f;
   font-weight: bolder;
   font-family: sans-serif;
-  color: #ffffff;
+  color: #3d0949;
 }
 h2{
 
   font-weight: bolder;
   font-family: sans-serif;
-  color: #212e3e;
+  color: #000000;
 
 }
 h3{
 
   font-weight: bolder;
   font-family: sans-serif;
-  color: #ffffff;
+  color: #490927;
 }
 
 .punkt{
   border-style: dotted;
-}
-
-
-.demo-card-wide.mdl-card {
-  width: 50%;
-
-}
-.demo-card-wide > .mdl-card__title {
-  color: #fff;
-  height: 100px;
-
-
-  /*background: url('../assets/demos/welcome_card.jpg') center / cover;*/
-}
-.demo-card-wide > .mdl-card__menu {
-  color: #fff;
-}
-
-
-
-.demo-card-wide2.mdl-card {
-  width: 80%;
-  height:50%
-
-}
-.demo-card-wide2 > .mdl-card__title {
-  color: #fff;
-  height: 100px;
-
-
-  /*background: url('../assets/demos/welcome_card.jpg') center / cover;*/
-}
-.demo-card-wide2 > .mdl-card__menu {
-  color: #fff;
 }
