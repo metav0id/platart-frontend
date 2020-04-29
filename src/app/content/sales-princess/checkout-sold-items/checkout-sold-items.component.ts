@@ -10,6 +10,7 @@ import {MatDatepickerInputEvent} from "@angular/material/datepicker";
 import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from "@angular/material/dialog";
 import {CheckoutSoldItemsDetailsComponent} from "./checkout-sold-items-details/checkout-sold-items-details.component";
 import {CheckoutTableCategoryItems} from "./checkout-sold-items-DTOs/CheckoutTableCategoryItems";
+import {TRANSLOCO_SCOPE, TranslocoService} from "@ngneat/transloco";
 
 export interface DialogData {
   animal: string;
