@@ -1,99 +1,3 @@
-<!--<ng-template transloco let-t>-->
-<!--  <nav class="navbar navbar-expand-lg navbar-dark navbar-custom">-->
-
-
-
-<!--  <a class="navbar-brand " href="#"> {{ t('header.administration') }} </a>-->
-<!--  &lt;!&ndash; creates gurber menu for mobile version with all elements in the menu &ndash;&gt;-->
-<!--  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">-->
-<!--    <span class="navbar-toggler-icon"></span>-->
-<!--  </button>-->
-<!--  <div class="collapse navbar-collapse" id="navbarSupportedContent">-->
-<!--    <ul class="navbar-nav mr-auto">-->
-<!--      &lt;!&ndash; ....... &ndash;&gt;-->
-<!--      <li class="nav-item" routerLinkActive="active">-->
-<!--        <a class="nav-link " >-->
-<!--          <button mat-button [matMenuTriggerFor]="aboveMenu"> {{ t('header.warehouse') }} </button>-->
-<!--        </a>-->
-<!--        <mat-menu #aboveMenu="matMenu" yPosition="below">-->
-<!--          <a class="nav-link a" routerLink="stockinwarehouse">-->
-<!--            {{ t('header.Stock-in-warehouse') }}-->
-<!--&lt;!&ndash;          <button mat-menu-item>Warehouse Queen</button>&ndash;&gt;-->
-<!--          </a>-->
-<!--          <a class="nav-link a" routerLink="newdeliverytoshop">-->
-<!--            {{ t('header.New-delivery-to-shop') }}-->
-<!--&lt;!&ndash;          <button mat-menu-item>Sales</button>&ndash;&gt;-->
-<!--          </a>-->
-<!--          <a class="nav-link a" routerLink="newdeliverytowarehouse">-->
-<!--            {{ t('header.New-delivery-to-warehouse') }}-->
-<!--            &lt;!&ndash;          <button mat-menu-item>Sales</button>&ndash;&gt;-->
-<!--          </a>-->
-<!--          <a class="nav-link a" routerLink="newitemcategory">-->
-<!--            {{ t('header.Add-new-category-to-warehouse') }}-->
-<!--            &lt;!&ndash;          <button mat-menu-item>Sales</button>&ndash;&gt;-->
-<!--          </a>-->
-<!--        </mat-menu>-->
-<!--      </li>-->
-
-
-<!--      <li class="nav-item" routerLinkActive="active">-->
-<!--        <a class="nav-link" routerLink="manager">-->
-<!--          <button mat-button [matMenuTriggerFor]="belowMenu">{{ t('header.Manager') }}</button>-->
-<!--        </a>-->
-<!--        <mat-menu #belowMenu="matMenu" yPosition="below">-->
-<!--          <a class="nav-link a" routerLink="manageshopsinfo">-->
-<!--            {{ t('header.Manage-Shops-Information') }}-->
-<!--          </a>-->
-<!--          <a class="nav-link a" routerLink="newdeliveryfromwarehouse">-->
-<!--            Place Holder-->
-<!--          </a>-->
-<!--        </mat-menu>-->
-<!--      </li>-->
-
-
-<!--      <li class="nav-item" routerLinkActive="active">-->
-<!--        <a class="nav-link" routerLink="sales">-->
-
-<!--          <button mat-button [matMenuTriggerFor]="beforeMenu">{{ t('header.Sales') }}</button>-->
-<!--        </a>-->
-<!--        <mat-menu #beforeMenu="matMenu" xPosition="before">-->
-<!--          <a class="nav-link a" routerLink="checkoutsolditems">-->
-<!--            Checkout sold items-->
-<!--          </a>-->
-<!--          <a class="nav-link a" routerLink="newdeliveryfromwarehouse">-->
-<!--            Place Holder-->
-<!--          </a>-->
-<!--        </mat-menu>-->
-<!--      </li>-->
-
-<!--      <li class="nav-item" routerLinkActive="active">-->
-<!--        <a class="nav-link" >-->
-
-<!--          <button mat-button [matMenuTriggerFor]="afterMenu">{{ t('header.After') }}</button>-->
-<!--        </a>-->
-<!--        <mat-menu #afterMenu="matMenu" xPosition="after">-->
-<!--          <a class="nav-link a" routerLink="newdeliveryfromwarehouse">-->
-<!--            Place Holder-->
-<!--          </a>-->
-<!--          <a class="nav-link a" routerLink="newdeliveryfromwarehouse">-->
-<!--            Place Holder-->
-<!--          </a>-->
-<!--        </mat-menu>-->
-<!--      </li>-->
-<!--      &lt;!&ndash; Search form &ndash;&gt;-->
-<!--&lt;!&ndash;      <form class="form-inline waves-light" mdbWavesEffect>&ndash;&gt;-->
-<!--&lt;!&ndash;        <div class="md-form my-0">&ndash;&gt;-->
-<!--&lt;!&ndash;          <input class="form-control mr-sm-2" type="text" placeholder="Search">&ndash;&gt;-->
-<!--&lt;!&ndash;        </div>&ndash;&gt;-->
-<!--&lt;!&ndash;      </form>&ndash;&gt;-->
-<!--      &lt;!&ndash; Collapsible content &ndash;&gt;-->
-
-<!--    </ul>-->
-<!--    <button id="en" (click)="setActiveLang('en')">en</button>-->
-<!--    <button id="es" (click)="setActiveLang('es')">es</button>-->
-<!--  </div>-->
-<!--</nav>-->
-<!--</ng-template>-->
 
 
 <!--NUEVA NAVBAR-->
@@ -191,7 +95,7 @@
 
     <!-- Search form -->
     <form class="form-inline waves-light" mdbWavesEffect>
-      <div class="md-form my-0 ">
+      <div class="container d-flex justify-content-end md-form my-0 ">
         <input class="form-control mr-sm-2" type="text" placeholder="Search">
       </div>
     </form>
