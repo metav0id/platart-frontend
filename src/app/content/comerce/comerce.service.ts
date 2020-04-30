@@ -33,7 +33,7 @@ export class ComerceService {
 
   create(comerce: Comerce): Observable<Comerce> {
 //this method uses post to create an offer . parameters are an url for the method, the DTO and a header if necessary
-    return this.httpClient.post<Comerce>(environment.urlEndPoint, comerce, {headers: this.httpHeader})
+    return this.httpClient.post<Comerce>(environment.saveCommerce, comerce, {headers: this.httpHeader});
   }
 
 

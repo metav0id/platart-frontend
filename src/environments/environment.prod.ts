@@ -1,10 +1,20 @@
 export const environment = {
   production: true,
-  urlEndPoint: 'http://161.35.4.253/:8081/comerce/savecomerce',
+  saveCommerce: 'http://161.35.4.253/:8081/comerce/savecomerce',
   getAllMarkers: 'http://161.35.4.253:8081/marker/getallmarkers',
   saveMarker: 'http://161.35.4.253:8081/marker/savemarker',
   findCommerce: 'http://161.35.4.253:8081/comerce/find',
   findMarker: 'http://161.35.4.253:8081/marker/find',
   updateMarker: 'http://161.35.4.253:8081/marker/update',
   deleteMarker: 'http://161.35.4.253:8081/marker/delete',
+  getAllShops: 'http://161.35.4.253:8081/shops/getAllItemsAllShops',
+  getAllCategories: 'http://161.35.4.253:8081/warehouse/getAllCategories',
+  getAllNewOrderItems: 'http://161.35.4.253:8081/warehouse/getAllNewOrderItems',
+  setAllNewOrderItems: 'http://161.35.4.253:8081/warehouse/setAllNewOrderItems',
+  verifyAmountItemsOnStock: 'http://161.35.4.253:8081/warehouse/verifyAmountItemsOnStock',
+  saveDeliveryOrder: 'http://161.35.4.253:8081/warehouse/sendDeliveryOrder',
+  saveListDeliverySupplier: 'http://161.35.4.253:8081/warehouse/savelistdeliverysupplier',
+  saveNewCategory: 'http://161.35.4.253:8081/warehouse/saveNewCategory',
+  deleteCategory: 'http://161.35.4.253:8081/warehouse/deleteCategory',
+  getAllItemsInStock: 'http://161.35.4.253:8081/warehouse/getallitems'
 };

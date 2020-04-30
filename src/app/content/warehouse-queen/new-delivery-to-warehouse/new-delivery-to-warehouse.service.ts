@@ -4,13 +4,14 @@ import {PeriodicElement} from './periodic-element';
 import {WarehouseCheckInNewItemDTO} from './warehouse-check-in-new-item-DTO';
 import {Observable} from 'rxjs';
 import {WarehouseItemCategoryDTO} from '../warehouseCategory/warehouse-item-category-DTO';
+import {environment} from '../../../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class NewDeliveryToWarehouseService {
-  private readonly URL_SAVE_LIST_DELIVERY_SUPPLIER = 'http://161.35.4.253:8081/warehouse/savelistdeliverysupplier';
-  private readonly URL_GET_ALL_CATEGORIES = 'http://161.35.4.253:8081/warehouse/getAllCategories';
+  // private readonly URL_SAVE_LIST_DELIVERY_SUPPLIER = 'http://161.35.4.253:8081/warehouse/savelistdeliverysupplier';
+  // private readonly URL_GET_ALL_CATEGORIES = 'http://161.35.4.253:8081/warehouse/getAllCategories';
 
   constructor(private http: HttpClient) {
   }
@@ -27,10 +28,10 @@ export class NewDeliveryToWarehouseService {
       };
       listDTO.push(itemDTO);
     }
-    this.http.post(this.URL_SAVE_LIST_DELIVERY_SUPPLIER, listDeliveryItems).subscribe();
+    this.http.post(environment.saveListDeliverySupplier, listDeliveryItems).subscribe();
   }
 
   getAllCategories(): Observable<WarehouseItemCategoryDTO[]> {
-    return this.http.post<WarehouseItemCategoryDTO[]>(this.URL_GET_ALL_CATEGORIES, null);
+    return this.http.post<WarehouseItemCategoryDTO[]>(environment.getAllCategories, null);
   }
 }

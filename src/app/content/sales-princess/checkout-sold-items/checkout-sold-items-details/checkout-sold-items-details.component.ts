@@ -13,7 +13,8 @@ export class CheckoutSoldItemsDetailsComponent implements OnInit {
 
   constructor(
     public dialogRef: MatDialogRef<CheckoutSoldItemsDetailsComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: CheckoutTableCategoryItems[]) {}
+    @Inject(MAT_DIALOG_DATA) public data: CheckoutTableCategoryItems[]) {
+  }
 
   ngOnInit(): void {
   }
@@ -23,9 +24,9 @@ export class CheckoutSoldItemsDetailsComponent implements OnInit {
   }
 
   deleteItemList(item: CheckoutTableCategoryItems) {
-    console.log('delete: '+ item.category + ' - ' + item.priceListPerUnit);
+    console.log('delete: ' + item.category + ' - ' + item.priceListPerUnit);
     const index: number = this.data.indexOf(item);
-    console.log('index: ' +index);
+    console.log('index: ' + index);
     this.data.splice(index, 1);
     console.log(this.data);
   }

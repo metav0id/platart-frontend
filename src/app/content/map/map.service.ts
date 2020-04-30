@@ -15,13 +15,6 @@ import {environment} from '../../../environments/environment';
 export class MapService {
 
 // the string connects with the service from backend that will gett all offers aviable
- /* private urlEndPoint: string = "http://161.35.4.253:8081/marker/getallmarkers";
-  private urlEndPoint1: string = "http://161.35.4.253:8081/marker/savemarker";
-  private urlEndPoint3: string = "http://161.35.4.253:8081/comerce/find";
-  private urlEndPoint4: string = "http://161.35.4.253:8081/marker/find";
-  private urlEndPoint2: string = "http://161.35.4.253:8081/marker/update";
-  private urlEndPoint5: string = "http://161.35.4.253:8081/marker/delete";*/
-
 
   // this adds the header needed in case the method calls for one
   private httpHeader = new HttpHeaders({'Content-Type': 'application/json'});
