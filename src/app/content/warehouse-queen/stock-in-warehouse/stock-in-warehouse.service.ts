@@ -8,7 +8,6 @@ import {environment} from '../../../../environments/environment';
   providedIn: 'root'
 })
 export class StockInWarehouseService {
-  // private readonly getAllWarehouseItemsURL = 'http://161.35.4.253:8081/warehouse/getallitems';
   constructor(private http: HttpClient) { }
 
   getAllItems(): Observable<WarehouseGetAllItemsDTO[]> {

@@ -10,10 +10,6 @@ import {environment} from '../../../../environments/environment';
 })
 export class CheckoutSoldItemsService {
 
-  // private readonly URL_GET_ALL_ITEMS_ALL_SHOPS: string = 'http://161.35.4.253:8081/shops/getAllItemsAllShops';
-  // private readonly URL_GET_ALL_CATEGORIES = 'http://161.35.4.253:8081/warehouse/getAllCategories';
-
-
   constructor(private http: HttpClient) {
   }
 

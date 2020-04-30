@@ -10,8 +10,6 @@ import {environment} from '../../../../environments/environment';
   providedIn: 'root'
 })
 export class NewDeliveryToWarehouseService {
-  // private readonly URL_SAVE_LIST_DELIVERY_SUPPLIER = 'http://161.35.4.253:8081/warehouse/savelistdeliverysupplier';
-  // private readonly URL_GET_ALL_CATEGORIES = 'http://161.35.4.253:8081/warehouse/getAllCategories';
 
   constructor(private http: HttpClient) {
   }

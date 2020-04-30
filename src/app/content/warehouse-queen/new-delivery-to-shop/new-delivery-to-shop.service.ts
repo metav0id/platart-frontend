@@ -10,10 +10,6 @@ import {environment} from '../../../../environments/environment';
   providedIn: 'root'
 })
 export class NewDeliveryToShopService {
-  // private readonly URL_GET_ALL_NEW_ORDER_ITEMS = 'http://161.35.4.253:8081/warehouse/getAllNewOrderItems';
-  // private readonly URL_SET_ALL_NEW_ORDER_ITEMS = 'http://161.35.4.253:8081/warehouse/setAllNewOrderItems';
-  // private readonly URL_VERIFY_AMOUNT_ITEMS_ON_STOCK = 'http://161.35.4.253:8081/warehouse/verifyAmountItemsOnStock';
-  // private readonly URL_SEND_DELIVERY_ORDER = 'http://161.35.4.253:8081/warehouse/sendDeliveryOrder';
 
   constructor(private http: HttpClient) {
   }

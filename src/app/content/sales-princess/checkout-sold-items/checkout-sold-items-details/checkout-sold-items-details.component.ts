@@ -1,8 +1,6 @@
 import {Component, Inject, OnInit} from '@angular/core';
-import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
-import {PeriodicElement} from "../../new-delivery-from-warehouse/periodic-element";
-import {CheckoutTableItems} from "../checkout-sold-items-DTOs/CheckoutTableItems";
-import {CheckoutTableCategoryItems} from "../checkout-sold-items-DTOs/CheckoutTableCategoryItems";
+import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
+import {CheckoutTableCategoryItems} from '../checkout-sold-items-DTOs/CheckoutTableCategoryItems';
 
 @Component({
   selector: 'app-checkout-sold-items-details',
