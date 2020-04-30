@@ -53,8 +53,16 @@ a{
   background-color: #212e3e
 }
 .bg2{
-  background-color: #ffffff
+  background-color: #ffffff;
+
 }
 mdb-navbar{
+
   background-color: black;
 }
+
+.wiwi{
+  width: 1480px;
+}
+
+

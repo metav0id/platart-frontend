@@ -4,110 +4,123 @@
 
 
 <ng-template transloco let-t>
-  <div >
-<mdb-navbar class="navbar navbar-expand-lg navbar-light bg2 ">
 
+    <mdb-navbar SideClass="navbar navbar-expand-lg navbar-light bg2 " >
+
+<!--  <div class="container-fluid ">-->
+<!--    <div class="row">-->
+<!--      <div class="col ">-->
 
   <!-- Navbar brand -->
-  <mdb-navbar-brand><a class="navbar-brand" href="#">{{ t('header.administration') }}</a></mdb-navbar-brand>
-    <!-- creates gurber menu for mobile version with all elements in the menu -->
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <mdb-navbar-brand><a class="navbar-brand" href="#">{{ t('header.administration') }}</a></mdb-navbar-brand>
+        <!-- creates gurber menu for mobile version with all elements in the menu -->
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
 
-  <!-- Collapsible content -->
-  <links>
+      <!-- Collapsible content -->
+          <div class="container-fluid justify-content-between">
+          <links>
 
-    <!-- Links -->
-    <ul class="navbar-nav mr-auto">
-      <li class="nav-item active">
-        <a class="nav-link waves-light" [matMenuTriggerFor]="aboveMenu" mdbWavesEffect>{{ t('header.warehouse') }}<span class="sr-only">(current)</span></a>
-        <mat-menu #aboveMenu="matMenu" yPosition="below">
-          <a class="nav-link a" routerLink="stockinwarehouse">
-            {{ t('header.Stock-in-warehouse') }}
-            <!--          <button mat-menu-item>Warehouse Queen</button>-->
-          </a>
-          <a class="nav-link a" routerLink="newdeliverytoshop">
-            {{ t('header.New-delivery-to-shop') }}
-            <!--          <button mat-menu-item>Sales</button>-->
-          </a>
-          <a class="nav-link a" routerLink="newdeliverytowarehouse">
-            {{ t('header.New-delivery-to-warehouse') }}
-            <!--          <button mat-menu-item>Sales</button>-->
-          </a>
-          <a class="nav-link a" routerLink="newitemcategory">
-            {{ t('header.Add-new-category-to-warehouse') }}
-            <!--          <button mat-menu-item>Sales</button>-->
-          </a>
-        </mat-menu>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link waves-light" mdbWavesEffect [matMenuTriggerFor]="belowMenu">{{ t('header.Manager') }}</a>
-        <mat-menu #belowMenu="matMenu" yPosition="below">
-          <a class="nav-link a" routerLink="manageshopsinfo">
-            {{ t('header.Manage-Shops-Information') }}
-          </a>
-          <a class="nav-link a" routerLink="newdeliveryfromwarehouse">
-            Place Holder
-          </a>
-        </mat-menu>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link waves-light" mdbWavesEffect [matMenuTriggerFor]="beforeMenu">{{ t('header.Sales') }}</a>
-        <mat-menu #beforeMenu="matMenu" xPosition="before">
-          <a class="nav-link a" routerLink="checkoutsolditems">
-            Checkout sold items
-          </a>
-          <a class="nav-link a" routerLink="newdeliveryfromwarehouse">
-            Checkin new Delivery to Shop
-          </a>
-        </mat-menu>
-      </li>
+        <!-- Links -->
+            <ul class="navbar-nav mr-auto">
 
-      <li class="nav-item">
-        <a class="nav-link waves-light" mdbWavesEffect [matMenuTriggerFor]="afterMenu">{{ t('header.After') }}</a>
-        <mat-menu #afterMenu="matMenu" xPosition="after">
-          <a class="nav-link a" routerLink="newdeliveryfromwarehouse">
-            Place Holder
-          </a>
-          <a class="nav-link a" routerLink="newdeliveryfromwarehouse">
-            Place Holder
-          </a>
-        </mat-menu>
-      </li>
+              <li class="nav-item active">
+                <a class="nav-link waves-light" [matMenuTriggerFor]="aboveMenu" mdbWavesEffect>{{ t('header.warehouse') }}<span class="sr-only">(current)</span></a>
+                <mat-menu #aboveMenu="matMenu" yPosition="below">
+                <a class="nav-link a" routerLink="stockinwarehouse">
+                {{ t('header.Stock-in-warehouse') }}
+                <!--          <button mat-menu-item>Warehouse Queen</button>-->
+                </a>
+                <a class="nav-link a" routerLink="newdeliverytoshop">
+                {{ t('header.New-delivery-to-shop') }}
+                <!--          <button mat-menu-item>Sales</button>-->
+                </a>
+               <a class="nav-link a" routerLink="newdeliverytowarehouse">
+                {{ t('header.New-delivery-to-warehouse') }}
+                <!--          <button mat-menu-item>Sales</button>-->
+                </a>
+                <a class="nav-link a" routerLink="newitemcategory">
+                {{ t('header.Add-new-category-to-warehouse') }}
+                <!--          <button mat-menu-item>Sales</button>-->
+                </a>
+                </mat-menu>
+              </li>
 
-      <!-- Dropdown -->
-      <li class="nav-item dropdown" dropdown>
-        <a dropdownToggle mdbWavesEffect type="button" class="nav-link dropdown-toggle waves-light" mdbWavesEffect>
-          Basic dropdown<span class="caret"></span></a>
-        <div *dropdownMenu class="dropdown-menu dropdown dropdown-primary" role="menu">
-          <a class="dropdown-item waves-light" mdbWavesEffect href="#">Action</a>
-          <a class="dropdown-item waves-light" mdbWavesEffect href="#">Another action</a>
-          <a class="dropdown-item waves-light" mdbWavesEffect href="#">Something else here</a>
-          <div class="divider dropdown-divider"></div>
-          <a class="dropdown-item waves-light" mdbWavesEffect href="#">Separated link</a>
+              <li class="nav-item">
+               <a class="nav-link waves-light" mdbWavesEffect [matMenuTriggerFor]="belowMenu">{{ t('header.Manager') }}</a>
+               <mat-menu #belowMenu="matMenu" yPosition="below">
+                   <a class="nav-link a" routerLink="manageshopsinfo">
+                  {{ t('header.Manage-Shops-Information') }}
+                  </a>
+                  <a class="nav-link a" routerLink="newdeliveryfromwarehouse">
+                 Place Holder
+                </a>
+              </mat-menu>
+               </li>
+              <li class="nav-item">
+              <a class="nav-link waves-light" mdbWavesEffect [matMenuTriggerFor]="beforeMenu">{{ t('header.Sales') }}</a>
+              <mat-menu #beforeMenu="matMenu" xPosition="before">
+                <a class="nav-link a" routerLink="checkoutsolditems">
+                Checkout sold items
+                </a>
+                 <a class="nav-link a" routerLink="newdeliveryfromwarehouse">
+                Checkin new Delivery to Shop
+                </a>
+              </mat-menu>
+              </li>
+
+              <li class="nav-item">
+              <a class="nav-link waves-light" mdbWavesEffect [matMenuTriggerFor]="afterMenu">{{ t('header.After') }}</a>
+              <mat-menu #afterMenu="matMenu" xPosition="after">
+              <a class="nav-link a" routerLink="newdeliveryfromwarehouse">
+                Place Holder
+              </a>
+              <a class="nav-link a" routerLink="newdeliveryfromwarehouse">
+                Place Holder
+              </a>
+              </mat-menu>
+             </li>
+
+          <!-- Dropdown -->
+              <li class="nav-item dropdown" dropdown>
+              <a dropdownToggle mdbWavesEffect type="button" class="nav-link dropdown-toggle waves-light" mdbWavesEffect>
+              Basic dropdown<span class="caret"></span></a>
+              <div *dropdownMenu class="dropdown-menu dropdown dropdown-primary" role="menu">
+              <a class="dropdown-item waves-light" mdbWavesEffect href="#">Action</a>
+              <a class="dropdown-item waves-light" mdbWavesEffect href="#">Another action</a>
+              <a class="dropdown-item waves-light" mdbWavesEffect href="#">Something else here</a>
+              <div class="divider dropdown-divider"></div>
+              <a class="dropdown-item waves-light" mdbWavesEffect href="#">Separated link</a>
+              </div>
+              </li>
+            </ul>
+        <!-- Links -->
+<!--          </links>-->
+<!--      </div>-->
+<!--      <div class="col">-->
+<!--          <links>-->
+        <!-- Search form -->
+              <form class="form-inline waves-light" mdbWavesEffect>
+                <div class=" md-form my-0 ">
+                <input class="form-control mr-sm-2" type="text" placeholder="Search">
+                </div>
+              </form>
+            <div class="example-button-row">
+              <button class="bg" mat-mini-fab id="en" (click)="setActiveLang('en')">en</button>
+               <button class="bg" mat-mini-fab id="es" (click)="setActiveLang('es')">es</button>
+             </div>
+          </links>
         </div>
-      </li>
+          </div>
+<!--      </div>-->
+<!--    </div>-->
+<!--  </div>-->
 
-    </ul>
-    <!-- Links -->
+        <!-- Collapsible content -->
 
-    <!-- Search form -->
-    <form class="form-inline waves-light" mdbWavesEffect>
-      <div class="container d-flex justify-content-end md-form my-0 ">
-        <input class="form-control mr-sm-2" type="text" placeholder="Search">
-      </div>
-    </form>
-    <div class="example-button-row">
-    <button class="bg" mat-mini-fab id="en" (click)="setActiveLang('en')">en</button>
-    <button class="bg" mat-mini-fab id="es" (click)="setActiveLang('es')">es</button>
-    </div>
-  </links>
-    </div>
-  <!-- Collapsible content -->
+  </mdb-navbar>
 
-</mdb-navbar>
-  </div>
 <!--/.Navbar-->
-</ng-template>
+  </ng-template>

@@ -23,7 +23,7 @@ import {MarkerFormComponent} from "./components/marker-form.component";
 
 @NgModule({
   declarations: [
-    MarkerFormComponent
+    // MarkerFormComponent
   ],
   imports: [
     CommonModule,
