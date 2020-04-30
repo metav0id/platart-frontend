@@ -10,7 +10,7 @@ import {PeriodicElement} from './periodic-element';
 import {MatDialog} from '@angular/material/dialog';
 // tslint:disable-next-line:max-line-length
 import {NewDeliveryFromWarehouseDetailsComponent} from './new-delivery-from-warehouse-details/new-delivery-from-warehouse-details.component';
-import {NewDeliveryFromWarehouseService} from "./new-delivery-from-warehouse.service";
+import {NewDeliveryFromWarehouseService} from './new-delivery-from-warehouse.service';
 
 @Component({
   selector: 'app-new-delivery-from-warehouse',
