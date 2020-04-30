@@ -8,9 +8,9 @@ import {WarehouseItemCategoryDTO} from '../warehouseCategory/warehouse-item-cate
 })
 export class NewitemcategoryService {
 
-  private readonly URL_GET_ALL_CATEGORIES = 'http://localhost:8081/warehouse/getAllCategories';
-  private readonly URL_SAVE_NEW_CATEGORY = 'http://localhost:8081/warehouse/saveNewCategory';
-  private readonly URL_DELETE_CATEGORY = 'http://localhost:8081/warehouse/deleteCategory';
+  private readonly URL_GET_ALL_CATEGORIES = 'http://161.35.4.253:8081/warehouse/getAllCategories';
+  private readonly URL_SAVE_NEW_CATEGORY = 'http://161.35.4.253:8081/warehouse/saveNewCategory';
+  private readonly URL_DELETE_CATEGORY = 'http://161.35.4.253:8081/warehouse/deleteCategory';
 
   constructor(private http: HttpClient) {
   }
