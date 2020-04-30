@@ -1,75 +1,77 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {
   HttpClient,
   HttpHeaders
 } from '@angular/common/http';
 
-import {Observable} from "rxjs";
-import {Marcador} from "./components/marker.class";
-import {Comerce} from "../comerce/comerce";
+import {Observable} from 'rxjs';
+import {Marcador} from './components/marker.class';
+import {Comerce} from '../comerce/comerce';
+import {environment} from '../../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class MapService {
 
-//the string connects with the service from backend that will gett all offers aviable
-  private urlEndPoint: string ="http://161.35.4.253:8081/marker/getallmarkers";
-  private urlEndPoint1: string ="http://161.35.4.253:8081/marker/savemarker";
-  private urlEndPoint3: string ="http://161.35.4.253:8081/comerce/find";
-  private urlEndPoint4: string ="http://161.35.4.253:8081/marker/find";
-  private urlEndPoint2: string ="http://161.35.4.253:8081/marker/update";
-  private urlEndPoint5: string ="http://161.35.4.253:8081/marker/delete";
+// the string connects with the service from backend that will gett all offers aviable
+ /* private urlEndPoint: string = "http://161.35.4.253:8081/marker/getallmarkers";
+  private urlEndPoint1: string = "http://161.35.4.253:8081/marker/savemarker";
+  private urlEndPoint3: string = "http://161.35.4.253:8081/comerce/find";
+  private urlEndPoint4: string = "http://161.35.4.253:8081/marker/find";
+  private urlEndPoint2: string = "http://161.35.4.253:8081/marker/update";
+  private urlEndPoint5: string = "http://161.35.4.253:8081/marker/delete";*/
 
 
-  //this adds the header needed in case the method calls for one
-  private httpHeader= new HttpHeaders({'Content-Type': 'application/json'});
+  // this adds the header needed in case the method calls for one
+  private httpHeader = new HttpHeaders({'Content-Type': 'application/json'});
+
   // contructor must have an HTTPclient
-  constructor(private httpClient: HttpClient) { }
+  constructor(private httpClient: HttpClient) {
+  }
 
 
-//this method is called readAllMarkers and gets an observable type back that becomes an array of offers.
+// this method is called readAllMarkers and gets an observable type back that becomes an array of offers.
 
   public readAllMarkers(): Observable<Marcador[]> {
-    //this returns the list provided from the backend link.
-    return this.httpClient.get<Marcador[]>(this.urlEndPoint);
+    // this returns the list provided from the backend link.
+    return this.httpClient.get<Marcador[]>(environment.getAllMarkers);
   }
 
-  create(marcador: Marcador) : Observable<Marcador> {
+  create(marcador: Marcador): Observable<Marcador> {
 
-    return this.httpClient.post<Marcador>(this.urlEndPoint1, marcador, {headers: this.httpHeader});
-    console.log(marcador.lng,marcador.lat)
+    return this.httpClient.post<Marcador>(environment.saveMarker, marcador, {headers: this.httpHeader});
+    console.log(marcador.lng, marcador.lat);
   }
 
-  delete(marcador: Marcador) : void {
+  delete(marcador: Marcador): void {
 
-   this.httpClient.post<null>(this.urlEndPoint5, marcador).subscribe();
+    this.httpClient.post<null>(environment.deleteMarker, marcador).subscribe();
   }
 
 
-  getMarker(marker: Marcador): Observable<Marcador>{
+  getMarker(marker: Marcador): Observable<Marcador> {
 
-    return this.httpClient.post<Marcador>(this.urlEndPoint4, marker, {headers: this.httpHeader});
+    return this.httpClient.post<Marcador>(environment.findMarker, marker, {headers: this.httpHeader});
 
   }
 
-  update (marcador: Marcador[]= new Array()): void{
+  update(marcador: Marcador[] = new Array()): void {
     console.log(marcador);
     // return this.httpClient.post<Marcador>(`$ {this.urlEndPoint2}\${id}`,marcador,{headers: this.httpHeader})
-    this.httpClient.post<null>(this.urlEndPoint2, marcador).subscribe();;
+    this.httpClient.post<null>(environment.findMarker, marcador).subscribe();
   }
+
   // update (marcador: Marcador[]= new Array()): Observable<Marcador>{
   //   console.log(marcador);
   //   // return this.httpClient.post<Marcador>(`$ {this.urlEndPoint2}\${id}`,marcador,{headers: this.httpHeader})
   //   return this.httpClient.post<Marcador>(this.urlEndPoint2, marcador,{headers: this.httpHeader});
   // }
 
-  getComerce (comerce: Comerce): Observable<Comerce>{
+  getComerce(comerce: Comerce): Observable<Comerce> {
 
-    return this.httpClient.post<Comerce>(this.urlEndPoint3, comerce, {headers: this.httpHeader});
+    return this.httpClient.post<Comerce>(environment.findCommerce, comerce, {headers: this.httpHeader});
   }
-
-
 
 
 //   create(offer: OffeerToSend):Observable<OffeerToSend>{
@@ -91,7 +93,6 @@ export class MapService {
 //     console.log(i);
 //     this.marcadores.splice(i,1);
 //   }
-
 
 
 }
