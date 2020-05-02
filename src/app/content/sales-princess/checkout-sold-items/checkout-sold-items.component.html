@@ -26,8 +26,12 @@
                     <mat-option>--</mat-option>
                     <mat-option *ngFor="let entry of shopsList" [value]="entry.name">{{ entry.name}}</mat-option>
                   </mat-select>
+                  <mat-error *ngIf="newCheckoutItem.shop===null">
+                    select a shop!
+                  </mat-error>
                 </mat-form-field>
               </div>
+
               <div class="itemCheckoutSoldItemCategory">
                 <mat-form-field appearance="fill">
                   <mat-label>category</mat-label>
@@ -37,64 +41,76 @@
                   </mat-select>
                 </mat-form-field>
               </div>
+
               <div class="itemCheckoutSoldItemQuantity">
-                <mat-form-field hintLabel="Max 10 characters" appearance="fill">
-                  <mat-label>Enter deliveryQuantity</mat-label>
-                  <input matInput #input [(ngModel)]="newCheckoutItem.quantity" maxlength="10" placeholder="Ex. deliveryQuantity">
-                  <mat-hint align="end">{{input.value?.length || 0}}/10</mat-hint>
+                <mat-form-field appearance="fill">
+                  <mat-label>sold quantity</mat-label>
+                  <input matInput #input [(ngModel)]="newCheckoutItem.quantity" maxlength="3" placeholder="number of sold items">
                 </mat-form-field>
+                <mat-error *ngIf="newCheckoutItem.quantity<=0">
+                  enter sold quantity of items !
+                </mat-error>
               </div>
               <div class="itemCheckoutSoldItemFinalPricePerUnit">
-                <mat-form-field hintLabel="Max 10 characters" appearance="fill">
+                <mat-form-field appearance="fill">
                   <mat-label>FinalPrice/Unit</mat-label>
                   <input matInput #input [(ngModel)]="newCheckoutItem.priceListPerUnit" maxlength="10" placeholder="Ex. deliveryDisplayPricePerUnit">
-                  <mat-hint align="end">{{input.value?.length || 0}}/10</mat-hint>
                 </mat-form-field>
+                <mat-error *ngIf="newCheckoutItem.priceListPerUnit<=0" >
+                  Entered list price not valid !
+                </mat-error>
               </div>
-              <div class="discountSelectionRadioButton">
-                <label>Pick discount type:</label>
-                <div class="space"></div>
-                <mat-radio-group
-                  aria-labelledby="example-radio-group-label"
-                  class="example-radio-group"
-                  [(ngModel)]="discountMethod">
-                  <mat-radio-button class="example-radio-button" *ngFor="let discount of discountMethodList" [value]="discount">
-                    {{discount}}
-                  </mat-radio-button>
-                </mat-radio-group>
+
+              <div class=" container cont-bg punkt">
+                <div class="discountSelectionRadioButton">
+                  <label>Pick discount type:</label>
+                  <div class="space"></div>
+                  <mat-radio-group
+                    aria-labelledby="example-radio-group-label"
+                    class="example-radio-group"
+                    [(ngModel)]="discountMethod">
+                    <mat-radio-button class="example-radio-button" *ngFor="let discount of discountMethodList" [value]="discount">
+                      {{discount}}
+                    </mat-radio-button>
+                  </mat-radio-group>
+                </div>
+                <div *ngIf="discountMethod==='displayPrice'" class="itemCheckoutSoldItemPricePerUnit">
+                  <mat-form-field hintLabel="Max 10 characters" appearance="fill">
+                    <mat-label>Enter deliveryDisplayPricePerUnit</mat-label>
+                    <input matInput #input [(ngModel)]="newCheckoutItem.priceSalesPerUnit" maxlength="10" placeholder="Ex. deliveryDisplayPricePerUnit">
+                  </mat-form-field>
+                </div>
+                <div *ngIf="discountMethod==='percent'" class="itemCheckoutSoldItemDeliveryDiscount">
+                  <mat-form-field hintLabel="Max 10 characters" appearance="fill">
+                    <mat-label>discount percent</mat-label>
+                    <input matInput #input [(ngModel)]="newCheckoutItem.discountPercent" maxlength="4" placeholder="discount percent">
+                    <mat-error *ngIf="newCheckoutItem.discountPercent<0 || newCheckoutItem.discountPercent >= 100">
+                      Invalid discount percent
+                    </mat-error>
+                  </mat-form-field>
+                </div>
               </div>
-              <div *ngIf="discountMethod==='displayPrice'" class="itemCheckoutSoldItemPricePerUnit">
-                <mat-form-field hintLabel="Max 10 characters" appearance="fill">
-                  <mat-label>Enter deliveryDisplayPricePerUnit</mat-label>
-                  <input matInput #input [(ngModel)]="newCheckoutItem.priceSalesPerUnit" maxlength="10" placeholder="Ex. deliveryDisplayPricePerUnit">
-                  <mat-hint align="end">{{input.value?.length || 0}}/10</mat-hint>
-                </mat-form-field>
-              </div>
-              <div *ngIf="discountMethod==='percent'" class="itemCheckoutSoldItemDeliveryDiscount">
-                <mat-form-field hintLabel="Max 10 characters" appearance="fill">
-                  <mat-label>Enter deliveryDiscount</mat-label>
-                  <input matInput #input [(ngModel)]="newCheckoutItem.discountPercent" maxlength="10" placeholder="Ex. deliveryDiscount">
-                  <mat-hint align="end">{{input.value?.length || 0}}/10</mat-hint>
-                </mat-form-field>
-              </div>
-              <div class="discountSelectionRadioButton">
-                <label id="example-radio-group-label">Comment:</label>
-                <div class="space"></div>
-                <mat-radio-group
-                  aria-labelledby="example-radio-group-label"
-                  class="example-radio-group"
-                  [(ngModel)]="commentNessesary">
-                  <mat-radio-button class="example-radio-button" *ngFor="let comment of commentNecessaryList" [value]="comment">
-                    {{comment}}
-                  </mat-radio-button>
-                </mat-radio-group>
-              </div>
-              <div *ngIf="commentNessesary==='Comment'" class="itemCheckoutSoldItemComment">
-                <mat-form-field hintLabel="Max 10 characters" appearance="fill">
-                  <mat-label>Comment</mat-label>
-                  <input matInput #input [(ngModel)]="newCheckoutItem.comment" maxlength="10" placeholder="Ex. deliveryDiscount">
-                  <mat-hint align="end">{{input.value?.length || 0}}/10</mat-hint>
-                </mat-form-field>
+
+              <div class=" container cont-bg punkt">
+                <div class="discountSelectionRadioButton">
+                  <label id="example-radio-group-label">Comment:</label>
+                  <div class="space"></div>
+                  <mat-radio-group
+                    aria-labelledby="example-radio-group-label"
+                    class="example-radio-group"
+                    [(ngModel)]="commentNessesary">
+                    <mat-radio-button class="example-radio-button" *ngFor="let comment of commentNecessaryList" [value]="comment">
+                      {{comment}}
+                    </mat-radio-button>
+                  </mat-radio-group>
+                </div>
+                <div *ngIf="commentNessesary==='Comment'" class="itemCheckoutSoldItemComment">
+                  <mat-form-field hintLabel="Max 10 characters" appearance="fill">
+                    <mat-label>Comment</mat-label>
+                    <input matInput #input [(ngModel)]="newCheckoutItem.comment" maxlength="250" placeholder="Comment on the order.">
+                    <mat-hint align="end">{{input.value?.length || 0}}/250</mat-hint>
+                  </mat-form-field>
+                </div>
               </div>
               <div class="space"></div>
               <div>
@@ -106,17 +122,10 @@
         </div>
       </div>
 
-      <div class="box">
+      <div class="categoryItemsList container cont-bg punkt">
         <h3>Sold Items:</h3>
         <div class="table-responsive">
           <table mat-table #myShopCheckoutProductsTable [dataSource]="categoryLists">
-
-            <!-- Position column-->
-            <ng-container matColumnDef="position">
-              <th mat-header-cell *matHeaderCellDef> position </th>
-              <td mat-cell *matCellDef="let element"> {{element.position}} </td>
-              <td mat-footer-cell *matFooterCellDef> - </td>
-            </ng-container>
 
             <!-- category column-->
             <ng-container matColumnDef="sale">
@@ -142,12 +151,23 @@
               </td>
               <td mat-footer-cell *matFooterCellDef> - </td>
             </ng-container>
+
             <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
             <tr mat-row *matRowDef="let element; columns: displayedColumns;"></tr>
             <tr mat-footer-row *matFooterRowDef="displayedColumns"></tr>
           </table>
         </div>
       </div>
+
+      <div class="sendSaveSoldItemsList container cont-bg punkt">
+        <div>
+          <button mat-button matTooltip="save sold items list" (click)="saveSoldItemList()"><mat-icon>save</mat-icon></button>
+          <button mat-button matTooltip="send sold items list" (click)="sendSoldItemList()"><mat-icon>send</mat-icon></button>
+          <button mat-button matTooltip="save sold items list"   (click)="deleteSoldItemList()"><mat-icon>delete</mat-icon></button>
+        </div>
+      </div>
+
+
     </div>
   </div>
 </div>

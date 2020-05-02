@@ -23,9 +23,8 @@ export class CheckoutSoldItemsComponent implements OnInit {
   public discountMethod: string;
   private readonly DISCOUNT_METHOD_PERCENT = 'percent';
   private readonly DISCOUNT_METHOD_DISPLAY_PRICE = 'displayPrice';
-  private readonly DISCOUNT_METHOD_NO_DISCOUNT = 'noDiscount';
   private readonly DISCOUNT_METHOD_OTHER = 'other';
-  public discountMethodList: string[] = [ this.DISCOUNT_METHOD_PERCENT , this.DISCOUNT_METHOD_DISPLAY_PRICE, this.DISCOUNT_METHOD_NO_DISCOUNT, this.DISCOUNT_METHOD_OTHER];
+  public discountMethodList: string[] = [ this.DISCOUNT_METHOD_PERCENT , this.DISCOUNT_METHOD_DISPLAY_PRICE, this.DISCOUNT_METHOD_OTHER];
 
   private readonly COMMENT_YES_NECESSARY = 'Comment';
   private readonly COMMENT_NO_NECESSARY = 'No Comment';
@@ -49,9 +48,9 @@ export class CheckoutSoldItemsComponent implements OnInit {
   public categoryControl = new FormControl('', Validators.required);
   public categoryItems: WarehouseItemCategoryDTO[] = [];
   // fields for table
-  displayedColumns: string[] = ['position', 'sale'];
+  displayedColumns: string[] = ['sale'];
 
-  private totalCost: number;
+  private totalAmountSold: number;
   private totalItems: number;
   public listNewItemsToShops: CheckoutTableItems[] = [];
   public listNewItemsCategories: CheckoutTableCategoryItems[] = [];
@@ -112,13 +111,24 @@ export class CheckoutSoldItemsComponent implements OnInit {
       itemLastSold: this.newCheckoutItem.itemLastSold,
       comment: this.newCheckoutItem.comment,
     }
-    this.listNewItemsToShops.push(newSoldItemForTable);
-    console.log(this.listNewItemsToShops);
 
-    // update listNewItemsCategories
-    this.rebuildListCategories();
+    if( newSoldItemForTable.quantity>0 &&
+        newSoldItemForTable.quantity<100 &&
+        newSoldItemForTable.priceListPerUnit>0 &&
+        newSoldItemForTable.category !== null){
 
-    this.table.renderRows();
+      // TODO: implement automatic setting price of salesPrice and percent
+
+
+      this.listNewItemsToShops.push(newSoldItemForTable);
+      console.log(this.listNewItemsToShops);
+
+      // update listNewItemsCategories
+      this.rebuildListCategories();
+      this.table.renderRows();
+    } else {
+      console.log('item can not be added, since its fields are unvalid.')
+    }
   }
 
   rebuildListCategories(): void {
@@ -200,20 +210,69 @@ export class CheckoutSoldItemsComponent implements OnInit {
     // open the dialogue
     const dialogRef = this.dialog.open(CheckoutSoldItemsDetailsComponent, {
       width: '250px',
-      //data: this.listNewItemsToShops
       data: checkoutCategory.items
     });
 
-    // update data, once dialoge is closed
-    console.log('Old size: ' + checkoutCategory.items.length)
+    // listNewItemsCategories and render table, once dialoge is closed
     dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed: ');
-      console.log('New size: ' + checkoutCategory.items.length)
 
-      // update listNewItemsCategories
-
+      this.updateAmountListCategories();
       this.table.renderRows();
+      this.updateListNewItemsToShops();
     });
+  }
 
+  // updates the category list and renders table
+  updateAmountListCategories(): void {
+    for(let item of this.categoryLists){
+      let newQuantity: number = 0;
+      for(let subItem of item.items){
+        newQuantity += Number(subItem.quantity);
+      }
+      item.quantity = newQuantity;
+
+      // remove category if empty
+      if(item.quantity === 0){
+        const indexItem: number = this.categoryLists.indexOf(item);
+        this.categoryLists.splice(indexItem, 1);
+      }
+    }
+  }
+
+  // update the listNewItemsToShops from updated category list
+  updateListNewItemsToShops(): void {
+    // reset the listNewItemsToShops list
+    this.listNewItemsToShops = [];
+
+    // refill with category items
+    for(let categoryItem of this.categoryLists){
+      for(let item of categoryItem.items){
+        const newItem: CheckoutTableItems = {
+          position: item.position,
+          category: item.category,
+          quantity: item.quantity,
+          priceListPerUnit: item.priceListPerUnit,
+          priceSalesPerUnit: item.priceSalesPerUnit,
+          discountPercent: item.discountPercent,
+          shop: item.shop,
+          deliverySending: item.deliverySending,
+          itemLastSold: item.itemLastSold,
+          comment: item.comment
+        };
+        this.listNewItemsToShops.push(newItem);
+      }
+    }
+  }
+
+  saveSoldItemList() {
+    console.log('implement saving sold items list');
+  }
+
+  sendSoldItemList() {
+    console.log('implement sending sold items list');
+  }
+
+  deleteSoldItemList() {
+    console.log('implement deleting sold items list');
   }
 }
