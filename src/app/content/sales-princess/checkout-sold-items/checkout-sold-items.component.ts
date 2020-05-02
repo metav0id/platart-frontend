@@ -10,11 +10,7 @@ import {MatDatepickerInputEvent} from "@angular/material/datepicker";
 import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from "@angular/material/dialog";
 import {CheckoutSoldItemsDetailsComponent} from "./checkout-sold-items-details/checkout-sold-items-details.component";
 import {CheckoutTableCategoryItems} from "./checkout-sold-items-DTOs/CheckoutTableCategoryItems";
-
-export interface DialogData {
-  animal: string;
-  name: string;
-}
+import {CheckoutCategories} from "./checkout-sold-items-DTOs/CheckoutCategories";
 
 @Component({
   selector: 'app-checkout-sold-items',
@@ -52,13 +48,14 @@ export class CheckoutSoldItemsComponent implements OnInit {
   /** Category selection */
   public categoryControl = new FormControl('', Validators.required);
   public categoryItems: WarehouseItemCategoryDTO[] = [];
-
   // fields for table
   displayedColumns: string[] = ['position', 'sale'];
+
   private totalCost: number;
   private totalItems: number;
   public listNewItemsToShops: CheckoutTableItems[] = [];
   public listNewItemsCategories: CheckoutTableCategoryItems[] = [];
+  public categoryLists: CheckoutCategories[] = [];
   availableItems: number = 0;
   selection = new SelectionModel<CheckoutTableItems>(true, []);
   newCheckoutItem: CheckoutTableItems;
@@ -119,52 +116,71 @@ export class CheckoutSoldItemsComponent implements OnInit {
     console.log(this.listNewItemsToShops);
 
     // update listNewItemsCategories
-    this.listNewItemsCategories = this.updateListNewItemsCategories();
-    //console.log(this.listNewItemsCategories);
+    this.rebuildListCategories();
 
     this.table.renderRows();
   }
 
-  updateListNewItemsCategories(): CheckoutTableCategoryItems[] {
-    let newTableItems: CheckoutTableCategoryItems[] = [];
+  rebuildListCategories(): void {
     let positionCounter: number = 0;
+    let newCategoryLists: CheckoutCategories[] = [];
 
-    for(let tableItem of this.listNewItemsToShops) {
-
-      let newItemForTable: CheckoutTableCategoryItems = {
+    // create categories
+    for(let item of this.listNewItemsToShops){
+      let newCategory: CheckoutCategories = {
         position: positionCounter,
-        category: tableItem.category,
-        quantity: tableItem.quantity,
-        priceListPerUnit: tableItem.priceListPerUnit,
+        category: item.category,
+        priceListPerUnit: item.priceListPerUnit,
+        quantity: 0,
+        items: []
       }
 
-      if(newTableItems.length === 0){
-        newTableItems.push(newItemForTable);
-        positionCounter++;
+      if(newCategoryLists.length === 0){
+        newCategoryLists.push(newCategory);
       } else {
-        let createNewCategory: boolean = true;
+        let createNewCategoryFlag: boolean = true;
 
-        for(let newCategotyItem of newTableItems){
-          if(newCategotyItem.category === newItemForTable.category && newCategotyItem.priceListPerUnit === newItemForTable.priceListPerUnit) {
-            //update quantity, if createNewCategory has not been updated yet
-            if(createNewCategory === true){
-              console.log('amount will be updated once');
-              newCategotyItem.quantity = Number(newCategotyItem.quantity) + Number(newItemForTable.quantity);
-            }
-
-            createNewCategory = false;
+        // check if category already exists
+        for(let categoryItem of newCategoryLists){
+          if( categoryItem.category === newCategory.category &&
+              categoryItem.priceListPerUnit === newCategory.priceListPerUnit) {
+            createNewCategoryFlag = false;
           }
         }
 
-        if(createNewCategory === true){
-          newTableItems.push(newItemForTable);
+        // create new category
+        if(createNewCategoryFlag){
+          newCategoryLists.push(newCategory);
           positionCounter++;
         }
       }
     }
 
-    console.log(newTableItems);
-    return newTableItems;
+    // Add items by category
+    for(let categoryItem of newCategoryLists){
+      for(let item of this.listNewItemsToShops){
+        const newItem: CheckoutTableItems = {
+          position: item.position,
+          category: item.category,
+          quantity: item.quantity,
+          priceListPerUnit: item.priceListPerUnit,
+          priceSalesPerUnit: item.priceSalesPerUnit,
+          discountPercent: item.discountPercent,
+          shop: item.shop,
+          deliverySending: item.deliverySending,
+          itemLastSold: item.itemLastSold,
+          comment: item.comment
+        };
+        if( categoryItem.category === newItem.category &&
+            categoryItem.priceListPerUnit === categoryItem.priceListPerUnit){
+          categoryItem.quantity += Number(newItem.quantity);
+          categoryItem.items.push(newItem);
+        }
+      }
+    }
+    this.categoryLists = newCategoryLists;
+    console.log('new Categories Json:');
+    console.log(this.categoryLists);
   }
 
   // Date input
@@ -176,22 +192,28 @@ export class CheckoutSoldItemsComponent implements OnInit {
     console.log(this.eventsTime);
   }
 
-  // Dialog Popup
-  animal: string;
-  name: string;
+  openDialogCategory(checkoutCategory: CheckoutCategories) {
+    console.log('open category Dialog');
 
-  openDialog(element: CheckoutTableItems): void {
-    console.log(element);
+    console.log(checkoutCategory);
 
+    // open the dialogue
     const dialogRef = this.dialog.open(CheckoutSoldItemsDetailsComponent, {
       width: '250px',
-      data: this.listNewItemsToShops
+      //data: this.listNewItemsToShops
+      data: checkoutCategory.items
     });
 
+    // update data, once dialoge is closed
+    console.log('Old size: ' + checkoutCategory.items.length)
     dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
-      this.animal = result;
-    });
-  }
+      console.log('The dialog was closed: ');
+      console.log('New size: ' + checkoutCategory.items.length)
 
+      // update listNewItemsCategories
+
+      this.table.renderRows();
+    });
+
+  }
 }
