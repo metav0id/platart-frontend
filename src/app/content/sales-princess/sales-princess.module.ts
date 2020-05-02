@@ -21,6 +21,7 @@ import {MatNativeDateModule} from "@angular/material/core";
 import { CheckoutSoldItemsDetailsComponent } from './checkout-sold-items/checkout-sold-items-details/checkout-sold-items-details.component';
 import {MatCardModule} from "@angular/material/card";
 import {TranslocoRootModule} from "../../transloco-root.module";
+import { CheckoutSoldItemsSendVerificationComponent } from './checkout-sold-items/checkout-sold-items-send-verification/checkout-sold-items-send-verification.component';
 
 
 @NgModule({
@@ -28,7 +29,8 @@ import {TranslocoRootModule} from "../../transloco-root.module";
     NewDeliveryFromWarehouseComponent,
     NewDeliveryFromWarehouseDetailsComponent,
     CheckoutSoldItemsComponent,
-    CheckoutSoldItemsDetailsComponent
+    CheckoutSoldItemsDetailsComponent,
+    CheckoutSoldItemsSendVerificationComponent
   ],
   imports: [
     CommonModule,

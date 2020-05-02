@@ -22,8 +22,8 @@ export class CheckoutSoldItemsComponent implements OnInit {
   // Fields for input-form
   public discountMethod: string;
   private readonly DISCOUNT_METHOD_PERCENT = 'percent';
-  private readonly DISCOUNT_METHOD_DISPLAY_PRICE = 'displayPrice';
-  private readonly DISCOUNT_METHOD_OTHER = 'other';
+  private readonly DISCOUNT_METHOD_DISPLAY_PRICE = 'display price';
+  private readonly DISCOUNT_METHOD_OTHER = 'no discount';
   public discountMethodList: string[] = [ this.DISCOUNT_METHOD_PERCENT , this.DISCOUNT_METHOD_DISPLAY_PRICE, this.DISCOUNT_METHOD_OTHER];
 
   private readonly COMMENT_YES_NECESSARY = 'Comment';
@@ -99,26 +99,46 @@ export class CheckoutSoldItemsComponent implements OnInit {
   }
 
   addSoldItem() {
-    let newSoldItemForTable: CheckoutTableItems ={
-      position: this.newCheckoutItem.position,
-      category: this.newCheckoutItem.category,
-      quantity: this.newCheckoutItem.quantity,
-      priceListPerUnit: this.newCheckoutItem.priceListPerUnit,
-      priceSalesPerUnit: this.newCheckoutItem.priceSalesPerUnit,
-      discountPercent: this.newCheckoutItem.discountPercent,
-      shop: this.newCheckoutItem.shop,
-      deliverySending: this.newCheckoutItem.deliverySending,
-      itemLastSold: this.newCheckoutItem.itemLastSold,
-      comment: this.newCheckoutItem.comment,
-    }
 
-    if( newSoldItemForTable.quantity>0 &&
-        newSoldItemForTable.quantity<100 &&
-        newSoldItemForTable.priceListPerUnit>0 &&
-        newSoldItemForTable.category !== null){
+    // do if values of this.newCheckoutItem are valid
+    if( this.newCheckoutItem.quantity>0 &&
+        this.newCheckoutItem.quantity<100 &&
+        this.newCheckoutItem.priceListPerUnit>0 &&
+        this.newCheckoutItem.category !== null){
 
-      // TODO: implement automatic setting price of salesPrice and percent
+      let priceSalesPerUnitBefore: number = 0;
+      let discountPercentBefore: number = 0;
+      if(this.discountMethod === this.DISCOUNT_METHOD_PERCENT ) {
+        discountPercentBefore = this.newCheckoutItem.discountPercent;
+        priceSalesPerUnitBefore = this.newCheckoutItem.priceListPerUnit * (100-this.newCheckoutItem.discountPercent)/100;
+      } else if ( this.discountMethod === this.DISCOUNT_METHOD_DISPLAY_PRICE ) {
+        priceSalesPerUnitBefore = this.newCheckoutItem.priceSalesPerUnit;
+        discountPercentBefore = 100 - (this.newCheckoutItem.discountPercent * 100 / this.newCheckoutItem.priceListPerUnit);
+      } else if ( this.discountMethod === this.DISCOUNT_METHOD_OTHER) {
+        priceSalesPerUnitBefore = this.newCheckoutItem.priceListPerUnit;
+        discountPercentBefore = this.newCheckoutItem.discountPercent;
+      }
 
+      let commentBefore: string;
+      if(this.commentNessesary === "No Comment"){
+        commentBefore = "No Comment";
+      } else {
+        commentBefore = this.newCheckoutItem.comment;
+      }
+
+
+      let newSoldItemForTable: CheckoutTableItems ={
+        position: this.newCheckoutItem.position,
+        category: this.newCheckoutItem.category,
+        quantity: this.newCheckoutItem.quantity,
+        priceListPerUnit: this.newCheckoutItem.priceListPerUnit,
+        priceSalesPerUnit: priceSalesPerUnitBefore,
+        discountPercent: discountPercentBefore,
+        shop: this.newCheckoutItem.shop,
+        deliverySending: this.newCheckoutItem.deliverySending,
+        itemLastSold: this.newCheckoutItem.itemLastSold,
+        comment: commentBefore,
+      }
 
       this.listNewItemsToShops.push(newSoldItemForTable);
       console.log(this.listNewItemsToShops);
