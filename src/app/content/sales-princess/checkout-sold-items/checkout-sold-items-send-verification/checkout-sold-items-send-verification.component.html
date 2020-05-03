@@ -1,1 +1,23 @@
-<p>checkout-sold-items-send-verification works!</p>
+<h1 mat-dialog-title>Confirm list of sold items.</h1>
+<h2 mat-dialog-title></h2>
+<div mat-dialog-content>
+  <div *ngFor="let item of data">
+    <mat-card class="example-card">
+      <mat-card-header>
+        <mat-card-title>List-price: {{item.priceListPerUnit}}</mat-card-title>
+        <mat-card-title>Sell-price: {{item.priceSalesPerUnit}}</mat-card-title>
+        <mat-card-subtitle>Quantity sold: {{item.quantity}}</mat-card-subtitle>
+      </mat-card-header>
+      <mat-card-content>
+        <p>Date: {{item.shop}}</p>
+        <p>Shop: {{item.shop}}</p>
+        <p>Discount: {{item.discountPercent}} %</p>
+        <p>Comment: {{item.comment}}</p>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="onNoClick()">No Thanks</button>
+  <button mat-button (click)="onSendClick()">Send</button>
+</div>

@@ -1,4 +1,4 @@
-import {Component, Inject, OnInit, ViewChild} from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {SelectionModel} from "@angular/cdk/collections";
 import {MatTable} from "@angular/material/table";
 import {WarehouseItemCategoryDTO} from "../../warehouse-queen/warehouseCategory/warehouse-item-category-DTO";
@@ -7,10 +7,11 @@ import {CheckoutSoldItemsService} from "./checkout-sold-items.service";
 import {CheckoutTableItems} from "./checkout-sold-items-DTOs/CheckoutTableItems";
 import {ShopDropDownItem} from "./checkout-sold-items-DTOs/ShopDropDownItem";
 import {MatDatepickerInputEvent} from "@angular/material/datepicker";
-import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from "@angular/material/dialog";
+import {MatDialog} from "@angular/material/dialog";
 import {CheckoutSoldItemsDetailsComponent} from "./checkout-sold-items-details/checkout-sold-items-details.component";
 import {CheckoutTableCategoryItems} from "./checkout-sold-items-DTOs/CheckoutTableCategoryItems";
 import {CheckoutCategories} from "./checkout-sold-items-DTOs/CheckoutCategories";
+import {CheckoutSoldItemsSendVerificationComponent} from "./checkout-sold-items-send-verification/checkout-sold-items-send-verification.component";
 
 @Component({
   selector: 'app-checkout-sold-items',
@@ -36,7 +37,7 @@ export class CheckoutSoldItemsComponent implements OnInit {
 
   // Fields for input-form - Drop-Down-Selection
   /** Shop selection */
-  public shopControll = new FormControl('', Validators.required)
+  public shopControll = new FormControl('', Validators.required);
   public shopsList: ShopDropDownItem[] = [
     {name: 'shop1'},
     {name: 'shop2'},
@@ -138,7 +139,7 @@ export class CheckoutSoldItemsComponent implements OnInit {
         deliverySending: this.newCheckoutItem.deliverySending,
         itemLastSold: this.newCheckoutItem.itemLastSold,
         comment: commentBefore,
-      }
+      };
 
       this.listNewItemsToShops.push(newSoldItemForTable);
       console.log(this.listNewItemsToShops);
@@ -163,7 +164,7 @@ export class CheckoutSoldItemsComponent implements OnInit {
         priceListPerUnit: item.priceListPerUnit,
         quantity: 0,
         items: []
-      }
+      };
 
       if(newCategoryLists.length === 0){
         newCategoryLists.push(newCategory);
@@ -224,9 +225,6 @@ export class CheckoutSoldItemsComponent implements OnInit {
 
   openDialogCategory(checkoutCategory: CheckoutCategories) {
     console.log('open category Dialog');
-
-    console.log(checkoutCategory);
-
     // open the dialogue
     const dialogRef = this.dialog.open(CheckoutSoldItemsDetailsComponent, {
       width: '250px',
@@ -234,7 +232,7 @@ export class CheckoutSoldItemsComponent implements OnInit {
     });
 
     // listNewItemsCategories and render table, once dialoge is closed
-    dialogRef.afterClosed().subscribe(result => {
+    dialogRef.afterClosed().subscribe(() => {
 
       this.updateAmountListCategories();
       this.table.renderRows();
@@ -290,6 +288,15 @@ export class CheckoutSoldItemsComponent implements OnInit {
 
   sendSoldItemList() {
     console.log('implement sending sold items list');
+
+    // open dialoge window
+    const dialogRef = this.dialog.open(CheckoutSoldItemsSendVerificationComponent, {
+      width: '250px',
+      data: this.listNewItemsToShops
+    });
+
+    // once confirmed, send delivery order
+
   }
 
   deleteSoldItemList() {
