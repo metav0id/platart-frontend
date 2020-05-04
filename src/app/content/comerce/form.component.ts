@@ -24,7 +24,6 @@ import {MatFormFieldControl} from "@angular/material/form-field";
 })
 export class FormComponent implements OnInit {
 
-  public comerceControll = new FormControl('', Validators.required)
   comerce: Comerce= new Comerce();
   constructor(private comerceService : ComerceService, private router: Router, public dialogRef: MatDialogRef<FormComponent>,
               ) { }
