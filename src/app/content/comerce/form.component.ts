@@ -27,15 +27,18 @@ export class FormComponent implements OnInit {
   comerce: Comerce= new Comerce();
   constructor(private comerceService : ComerceService, private router: Router, public dialogRef: MatDialogRef<FormComponent>,
               ) { }
+
+  //This method will close the dialog window.
   onNoClick(): void {
     this.dialogRef.close();
   }
 
   ngOnInit(): void {
   }
+
+  //This method create is summoned in the form.component.html class. this will create an offer and save it in DB. then will redirect to the offer page.
   public create(): void{
     console.log(this.comerce);
-//the method create is summoned in the form.component.html class. this will create an offer and save it in DB. then will redirect to the offer page.
     this.comerceService.create(this.comerce).subscribe(response=>this.router.navigate(['/sales']))
   }
 

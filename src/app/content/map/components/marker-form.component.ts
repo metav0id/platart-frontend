@@ -38,36 +38,19 @@ export class MarkerFormComponent implements OnInit {
   allMarkers: Marcador[];
 
 
-
-
   public shopControll = new FormControl('', Validators.required)
 
   constructor(
     public dialogRef: MatDialogRef<MarkerFormComponent>,
     @Inject(MAT_DIALOG_DATA) public data: DialogData, private mapService: MapService, private activatedRoute: ActivatedRoute, private router: Router) { }
 
-
+//When the component is started it gives a list with all markers back.
   ngOnInit(): void {
     this.mapService.readAllMarkers().subscribe(response => this.allMarkers = response);
   }
 
-// edit(marker: Marcador): void{
-//
-//   console.log(marker.name);
-//
-//   this.mapService.getMarker(marker).subscribe( marker => this.marker = marker)
-//   //add markers to array
-//   this.markersToEdit.push(this.marker)
-//   this.markersToEdit.push(this.marker2)
-//   console.log(this.markersToEdit)
-//
-//   //send array to backend
-//   this.mapService.update(this.markersToEdit)
-//   console.log(this.marker.name)
-//
-// }
 
-
+  //This method will close the dialog window.
   onNoClick(): void {
     this.dialogRef.close();
   }

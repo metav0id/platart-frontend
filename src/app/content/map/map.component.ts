@@ -37,19 +37,19 @@ export class MapComponent implements OnInit {
   markerToEdit: Marcador;
   markerToGetCoords: Marcador;
   markersToEdit: Marcador[] = new Array();
+  //use this variable when the connetion with BE is completed
+  allMarkers: Marcador[];
+  public markerControl = new FormControl('', Validators.required);
 
-
+//When the component is started it gives a list with all markers back.
   ngOnInit(): void {
     this.mapService.readAllMarkers().subscribe(response => this.marcadores = response);
   }
 
   constructor(private mapService: MapService, public dialog: MatDialog, private activatedRoute: ActivatedRoute, private router: Router) {
-    // const nuevoMarcador = new Marcador(51.678418, 7.809007);
-    // this.marcadores.push(nuevoMarcador);
   }
 
-  public markerControl = new FormControl('', Validators.required)
-
+  //This method is the guide to follow when wanting to open a dialog window
   openDialog(): void {
     const dialogRef = this.dialog.open(FormComponent, {
       width: '600px'
@@ -61,19 +61,9 @@ export class MapComponent implements OnInit {
       // this.animal = result;
     });
   }
-  openDialog2(): void {
-    const dialogRef = this.dialog.open(MarkerFormComponent, {
-      width: '600px'
-      // data: {name: this.name, animal: this.animal}
-    });
-
-    dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
-      // this.animal = result;
-    });
-  }
 
 
+//This method finds a client when an id is provided
   cargarCliente(): void{
     this.activatedRoute.params.subscribe(params=>{
       let id = params['id']
@@ -81,23 +71,21 @@ export class MapComponent implements OnInit {
         this.mapService.getMarker(id).subscribe( (marcador) => this.marker = marcador)
       }
     })
-
-
   }
 
-  //use this variable when the connetion with BE is completed
-    allMarkers: Marcador[];
 
 
 
+//This methods adds a new marker to the map, opens a dialog window to asign it to a comerce and saves the connection in data base.
   agregarMarcador(evento): Marcador{
+    //Creates marker with coords
     const coords: { lat: string, lng: string } = evento.coords;
     // const nuevoMarcador = new Marcador(coords.lat, coords.lng);
     const nuevoMarcador = {lat: coords.lat, lng: coords.lng, name: '', address:"", link:'',category:'',id: null}
     this.marcadores.push(nuevoMarcador);
     console.log(nuevoMarcador.lat,nuevoMarcador.lng);
-    // opens dialog window
 
+    // opens dialog window
     const dialogRef = this.dialog.open(MarkerFormComponent, {
       width: '600px',
       data: {selectedComerce: this.markerToEdit, coordMarker: nuevoMarcador}
@@ -114,7 +102,7 @@ export class MapComponent implements OnInit {
       //send array to backend
       this.mapService.update(this.markersToEdit)
     });
-    //opens dialog window
+
 
     // this.mapService.create(nuevoMarcador).subscribe(response => this.marker = response);
 
@@ -122,25 +110,8 @@ export class MapComponent implements OnInit {
 
   }
 
-  // public edit():void {
-  //   this.cargarCliente()
-  //   console.log(this.marker.name);
-  //   // const updatedMarcador = new Marcador(this.marker.lat,this.marker.lng);
-  //   // this.mapService.update(this.marker).subscribe(response=> this.updatemarker = response);
-  //   // return
-  //
-  // }
 
-
-
-
-  //
-  // readAllMarkers(): void{
-  //
-  //   this.mapService.readAllMarkers().subscribe(response => this.allMarkers = response);
-  // }
-
-
+//This methods deletes the marker from the map and the data base.
   borrarMarcador(i: number, marker: Marcador){
     console.log(i);
     this.mapService.delete(marker);
