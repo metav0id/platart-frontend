@@ -30,6 +30,6 @@ Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protrac
 
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
 
-## To use MDBootsrap install the next packages
+## To use MDBootstrap install the next packages
 
 Run `ng set defaults.styleExt scss`,  `npm install @angular/cdk --save`, `npm install angular-bootstrap-md --save` AND `npm install -–save chart.js@2.5.0 @types/chart.js @fortawesome/fontawesome-free hammerjs animate.css`.
