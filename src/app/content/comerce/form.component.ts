@@ -11,6 +11,11 @@ import {
   MAT_DIALOG_DATA,
   MatDialogRef
 } from "@angular/material/dialog";
+import {
+  FormControl,
+  Validators
+} from "@angular/forms";
+import {MatFormFieldControl} from "@angular/material/form-field";
 
 @Component({
   selector: 'app-form',
@@ -18,6 +23,8 @@ import {
   styleUrls: ['./form.component.css']
 })
 export class FormComponent implements OnInit {
+
+  public comerceControll = new FormControl('', Validators.required)
   comerce: Comerce= new Comerce();
   constructor(private comerceService : ComerceService, private router: Router, public dialogRef: MatDialogRef<FormComponent>,
               ) { }

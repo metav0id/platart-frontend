@@ -1,7 +1,7 @@
 <p>Select the comerce you want to locate in this position</p>
 <mat-form-field appearance="fill">
   <mat-label>Select</mat-label>
-  <mat-select   [formControl]="shopControll" [(ngModel)]="data.markerToEdit" >
+  <mat-select    [(ngModel)]="data.markerToEdit" >
     <mat-option  *ngFor="let comerce of allMarkers" [value]="comerce" >{{comerce.name}}
     </mat-option>
   </mat-select>
