@@ -3,7 +3,24 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  saveCommerce: 'http://localhost:8081/comerce/savecomerce',
+  getAllMarkers: 'http://localhost:8081/marker/getallmarkers',
+  saveMarker: 'http://localhost:8081/marker/savemarker',
+  findCommerce: 'http://localhost:8081/comerce/find',
+  findMarker: 'http://localhost:8081/marker/find',
+  updateMarker: 'http://localhost:8081/marker/update',
+  deleteMarker: 'http://localhost:8081/marker/delete',
+  getAllShops: 'http://localhost:8081/shops/getAllItemsAllShops',
+  getAllCategories: 'http://localhost:8081/warehouse/getAllCategories',
+  getAllNewOrderItems: 'http://localhost:8081/warehouse/getAllNewOrderItems',
+  setAllNewOrderItems: 'http://localhost:8081/warehouse/setAllNewOrderItems',
+  verifyAmountItemsOnStock: 'http://localhost:8081/warehouse/verifyAmountItemsOnStock',
+  saveDeliveryOrder: 'http://localhost:8081/warehouse/sendDeliveryOrder',
+  saveListDeliverySupplier: 'http://localhost:8081/warehouse/savelistdeliverysupplier',
+  saveNewCategory: 'http://localhost:8081/warehouse/saveNewCategory',
+  deleteCategory: 'http://localhost:8081/warehouse/deleteCategory',
+  getAllItemsInStock: 'http://localhost:8081/warehouse/getallitems',
 };
 
 /*

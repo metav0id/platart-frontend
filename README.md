@@ -4,7 +4,9 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 
 ## Before you run the server for the first time
 
-Run `npm install -g @angular/cli`
+Run `npm install -g @angular/cli` 
+
+Run `npm install bootstrap`
 
 ## Development server
 
