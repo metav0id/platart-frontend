@@ -21,6 +21,7 @@ export const environment = {
   saveNewCategory: 'http://localhost:8081/warehouse/saveNewCategory',
   deleteCategory: 'http://localhost:8081/warehouse/deleteCategory',
   getAllItemsInStock: 'http://localhost:8081/warehouse/getallitems',
+  getDeliveryItemsFromWarehouseByShop: 'http://localhost:8081/shops/getalldeliveriesnotinstock'
 };
 
 /*

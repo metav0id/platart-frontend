@@ -11,6 +11,7 @@ import {MatDialog} from '@angular/material/dialog';
 // tslint:disable-next-line:max-line-length
 import {NewDeliveryFromWarehouseDetailsComponent} from './new-delivery-from-warehouse-details/new-delivery-from-warehouse-details.component';
 import {NewDeliveryFromWarehouseService} from './new-delivery-from-warehouse.service';
+import {Shop} from '../../commonDTOs/shop';
 
 @Component({
   selector: 'app-new-delivery-from-warehouse',
@@ -21,29 +22,34 @@ import {NewDeliveryFromWarehouseService} from './new-delivery-from-warehouse.ser
     useValue: {scope: 'salesPrincess/newDeliveryFromWarehouse', alias: 'translate'}
   }]
 })
+
 export class NewDeliveryFromWarehouseComponent implements OnInit {
   public displayedColumns: string[] = ['select', 'category', 'salesPrice', 'quantity', 'action'];
   public listNewItemsFromWarehouse: PeriodicElement[] = [];
-
   public selection = new SelectionModel<PeriodicElement>(true, []);
 
   /** Is used to increase position attribute of list elements constantly */
   private counter = 1;
 
   /** Category selection */
-  public categoryControl = new FormControl('', Validators.required);
+  public shopControl = new FormControl('', Validators.required);
 
   public categoryItems: SalesItemCategoryDTO[] = [{category: 'Kette'}, {category: 'Ring'}];
+
+  /** List of available shops */
+  public listShops: Shop[] = [{name: 'shop1'}, {name: 'shop2'}];
+  public selectedShopToFilterOnList = '';
 
   @ViewChild('myCheckinProductsTable') table: MatTable<any>;
 
   constructor(public dialog: MatDialog,
               private transloco: TranslocoService,
-              private newDeliveryFromWarehouseService: NewDeliveryFromWarehouseService) {}
+              private newDeliveryFromWarehouseService: NewDeliveryFromWarehouseService) {
+  }
 
   ngOnInit(): void {
-    this.newDeliveryFromWarehouseService.getNewDeliveryForShop()
-      .subscribe(JsonDto => this.listNewItemsFromWarehouse = JsonDto);
+
+    // TODO implment method to get all Shops
   }
 
   /** Whether the number of selected elements matches the total number of rows. */
@@ -86,6 +92,16 @@ export class NewDeliveryFromWarehouseComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       console.log('Dialog closed');
     });
+  }
+
+  getDeliveryItemList(shop: string) {
+    console.log('Loading data for ' + shop);
+    this.newDeliveryFromWarehouseService.getNewDeliveryForShop(shop)
+      .subscribe(JsonDto => {
+        this.listNewItemsFromWarehouse = JsonDto;
+        console.log(this.listNewItemsFromWarehouse);
+        this.table.renderRows();
+      });
   }
 
 }
