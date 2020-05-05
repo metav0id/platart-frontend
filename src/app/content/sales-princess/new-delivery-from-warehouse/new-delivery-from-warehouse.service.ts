@@ -1,7 +1,10 @@
-import {Injectable, OnInit} from '@angular/core';
+import {Injectable} from '@angular/core';
 import {Observable} from 'rxjs';
-import {DeliveryItemFromWarehouseDTO} from '../sales-princess-DTOs/delivery-item-from-warehouse-dto';
+import {DeliveryItemFromWarehouseDTO} from './delivery-item-from-warehouse-dto';
 import {PeriodicElement} from './periodic-element';
+import {HttpClient} from '@angular/common/http';
+import {environment} from '../../../../environments/environment';
+import {map} from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -39,23 +42,20 @@ export class NewDeliveryFromWarehouseService {
 
   private listItems: DeliveryItemFromWarehouseDTO[] = [];
 
-  constructor() {
+  constructor(private http: HttpClient) {
   }
 
-  public getNewDeliveryForShop(): Observable<PeriodicElement[]> {
-    return new Observable<PeriodicElement[]>(observer => {
-      // TODO implement selection of shop maybe by name or ID. Will see when created database
-      // TODO implement httpRequest
-      this.listItems.push(this.newItemOnList1);
-      this.listItems.push(this.newItemOnList2);
-      this.listItems.push(this.newItemOnList3);
-      const listItemsPeriodicElements = this.convertDtoToPeriodicElement(this.listItems);
-      console.log(listItemsPeriodicElements);
-      observer.next(listItemsPeriodicElements);
-    });
+  public getNewDeliveryForShop(shop: string): Observable<PeriodicElement[]> {
+
+    const shopDTO = {shop: shop};
+
+    return this.http.post<PeriodicElement[]>(environment.getDeliveryItemsFromWarehouseByShop, shopDTO).
+      pipe(map(Json => {
+        return this.convertDtoToPeriodicElement(Json);
+    }));
   }
 
-  private convertDtoToPeriodicElement(listItems: DeliveryItemFromWarehouseDTO[]): PeriodicElement[] {
+  private convertDtoToPeriodicElement(listItems): PeriodicElement[] {
     const listItemsPeriodicElements: PeriodicElement[] = [];
     let counter = 0;
     listItems.forEach(entry => {
