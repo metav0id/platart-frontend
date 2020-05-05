@@ -26,15 +26,14 @@ export class NewDeliveryToWarehouseComponent implements OnInit {
     supplierName: ''
   };
 
-  /**  */
+  /** Is used to enable selection in table */
   public selection = new SelectionModel<PeriodicElement>(true, []);
 
   /** Is used to increase position attribute of list elements constantly */
   private counter = 1;
 
-  /** Category selection */
+  /** Category selection with form control for empty selection */
   public categoryControl = new FormControl('', Validators.required);
-
   public categoryItems: WarehouseItemCategoryDTO[] = [];
 
   @ViewChild('myCheckinProductsTable') table: MatTable<any>;
@@ -43,6 +42,32 @@ export class NewDeliveryToWarehouseComponent implements OnInit {
 
   ngOnInit(): void {
     this.newDeliveryToWarehouseService.getAllCategories().subscribe(JsonDto => this.categoryItems = JsonDto);
+  }
+
+
+  /** Whether the number of selected elements matches the total number of rows. */
+  isAllSelected() {
+    const numSelected = this.selection.selected.length;
+    const numRows = this.listNewItemsFromSuppliers.length;
+    return numSelected === numRows;
+  }
+
+  /** Selects all rows if they are not all selected; otherwise clear selection. */
+  masterToggle() {
+    if (this.isAllSelected()) {
+      this.selection.clear();
+    } else {
+      console.log('All lines are selected');
+      this.listNewItemsFromSuppliers.forEach(row => this.selection.select(row));
+    }
+  }
+
+  /** The label for the checkbox on the passed row */
+  checkboxLabel(row?: PeriodicElement): string {
+    if (!row) {
+      return `${this.isAllSelected() ? 'select' : 'deselect'} all`;
+    }
+    return `${this.selection.isSelected(row) ? 'deselect' : 'select'} row ${row.position + 1}`;
   }
 
   /** Add a new item to table */
@@ -80,31 +105,6 @@ export class NewDeliveryToWarehouseComponent implements OnInit {
     }
     this.table.renderRows();
     this.selection.clear();
-  }
-
-  /** Whether the number of selected elements matches the total number of rows. */
-  isAllSelected() {
-    const numSelected = this.selection.selected.length;
-    const numRows = this.listNewItemsFromSuppliers.length;
-    return numSelected === numRows;
-  }
-
-  /** Selects all rows if they are not all selected; otherwise clear selection. */
-  masterToggle() {
-    if (this.isAllSelected()) {
-      this.selection.clear();
-    } else {
-      console.log('All lines are selected');
-      this.listNewItemsFromSuppliers.forEach(row => this.selection.select(row));
-    }
-  }
-
-  /** The label for the checkbox on the passed row */
-  checkboxLabel(row?: PeriodicElement): string {
-    if (!row) {
-      return `${this.isAllSelected() ? 'select' : 'deselect'} all`;
-    }
-    return `${this.selection.isSelected(row) ? 'deselect' : 'select'} row ${row.position + 1}`;
   }
 
   saveList(): void {
