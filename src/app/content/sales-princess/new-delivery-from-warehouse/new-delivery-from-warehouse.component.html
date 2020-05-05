@@ -1,27 +1,111 @@
+<!--<ng-template transloco let-t>-->
+<!--<div class="container">-->
+<!--  <div class="col-sm-4">-->
+<!--    <div class="space">-->
+
+<!--    </div>-->
+<!--    <div class="box">-->
+<!--      <div class="container cont-bg punkt">-->
+<!--        <div class="space"></div>-->
+<!--        <h1>New Delivery for Shop</h1>-->
+<!--        <h2>Check list of new products</h2>-->
+<!--      </div>-->
+<!--    </div>-->
+<!--  </div>-->
+
+<!--  <div class="col-sm-8">-->
+<!--    <div class="space"></div>-->
+<!--    <div class="container cont-bg punkt">-->
+<!--      <div class="space"></div>-->
+<!--      <div class="container cont-bg3  punkt ">-->
+<!--        <div class="space"></div>-->
+<!--      </div>-->
+<!--      <div class="space"></div>-->
+<!--      <div class= "table-responsive">-->
+
+<!--        <table #myCheckinProductsTable mat-table [dataSource]="listNewItemsFromWarehouse" class="mat-elevation-z8">-->
+
+<!--          &lt;!&ndash; Checkbox Column &ndash;&gt;-->
+<!--          <ng-container matColumnDef="select">-->
+<!--            <th mat-header-cell *matHeaderCellDef>-->
+<!--              <mat-checkbox (change)="$event ? masterToggle() : null"-->
+<!--                            [checked]="selection.hasValue() && isAllSelected()"-->
+<!--                            [indeterminate]="selection.hasValue() && !isAllSelected()"-->
+<!--                            [aria-label]="checkboxLabel()">-->
+<!--              </mat-checkbox>-->
+<!--            </th>-->
+<!--            <td mat-cell *matCellDef="let row">-->
+<!--              <mat-checkbox (click)="$event.stopPropagation()"-->
+<!--                            (change)="$event ? selection.toggle(row) : null"-->
+<!--                            [checked]="selection.isSelected(row)"-->
+<!--                            [aria-label]="checkboxLabel(row)">-->
+<!--              </mat-checkbox>-->
+<!--            </td>-->
+<!--          </ng-container>-->
+
+<!--          &lt;!&ndash; Category Column &ndash;&gt;-->
+<!--          <ng-container matColumnDef="category">-->
+<!--            <th mat-header-cell *matHeaderCellDef> Category </th>-->
+<!--            <td mat-cell *matCellDef="let element" (click)="openDialog(element)"> {{element.category}} </td>-->
+<!--            <td mat-footer-cell *matFooterCellDef> - </td>-->
+<!--          </ng-container>-->
+
+<!--          &lt;!&ndash; Sales Price &ndash;&gt;-->
+<!--          <ng-container matColumnDef="salesPrice">-->
+<!--            <th mat-header-cell *matHeaderCellDef> Sales Price </th>-->
+<!--            <td mat-cell *matCellDef="let element"> {{element.salesPrice}} </td>-->
+<!--            <td mat-footer-cell *matFooterCellDef> - </td>-->
+<!--          </ng-container>-->
+
+<!--          &lt;!&ndash; Quantity Column &ndash;&gt;-->
+<!--          <ng-container matColumnDef="quantity">-->
+<!--            <th mat-header-cell *matHeaderCellDef> Quantity </th>-->
+<!--            <td mat-cell *matCellDef="let element"> {{element.quantity}} </td>-->
+<!--            <td mat-footer-cell *matFooterCellDef> - </td>-->
+<!--          </ng-container>-->
+
+<!--          &lt;!&ndash; Action Column &ndash;&gt;-->
+<!--          <ng-container matColumnDef="action">-->
+<!--            <th mat-header-cell *matHeaderCellDef> Action </th>-->
+<!--            <td mat-cell *matCellDef="let element"><button mat-icon-button (click)="openDialog(element)"><mat-icon>open_in_new</mat-icon></button></td>-->
+<!--            <td mat-footer-cell *matFooterCellDef> - </td>-->
+<!--          </ng-container>-->
+
+<!--          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>-->
+<!--          <tr mat-row *matRowDef="let element; columns: displayedColumns;"></tr>-->
+<!--        </table>-->
+<!--        <div class="space"></div>-->
+<!--        <button mat-fab><mat-icon>save</mat-icon></button>-->
+<!--      </div>-->
+<!--    </div>-->
+<!--  </div>-->
+<!--</div>-->
+<!--</ng-template>-->
+
+
+
+
+
+
+<!--NEW TABLE -->
 <ng-template transloco let-t>
-<div class="container">
-  <div class="col-sm-4">
-    <div class="space">
 
-    </div>
-    <div class="box">
-      <div class="container cont-bg punkt">
-        <div class="space"></div>
-        <h1>New Delivery for Shop</h1>
-        <h2>Check list of new products</h2>
-      </div>
-    </div>
-  </div>
 
-  <div class="col-sm-8">
-    <div class="space"></div>
-    <div class="container cont-bg punkt">
-      <div class="space"></div>
-      <div class="container cont-bg3  punkt ">
-        <div class="space"></div>
+  <!--NEW TABLE 1-->
+  <!-- Wide card with share menu button -->
+  <div class="space"></div>
+  <div class="container-fluid d-flex justify-content-center">
+
+
+    <div class="demo-card-wide mdl-card mdl-shadow--2dp cont-bg justi">
+      <div class="container d-flex justify-content-left mdl-card__title">
+        <h2 class="mdl-card__title-text">New delivery order</h2>
       </div>
-      <div class="space"></div>
-      <div class= "table-responsive">
+      <div class="mdl-card__supporting-text">
+
+
+        <!--    CONTENT-->
+
 
         <table #myCheckinProductsTable mat-table [dataSource]="listNewItemsFromWarehouse" class="mat-elevation-z8">
 
@@ -77,8 +161,23 @@
         <div class="space"></div>
         <button mat-fab><mat-icon>save</mat-icon></button>
       </div>
-    </div>
-  </div>
-</div>
-</ng-template>
 
+        <!--    CONTENT-->
+
+
+
+
+
+
+
+      </div>
+
+      <div class="mdl-card__menu">
+        <button class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect">
+          <i class="material-icons">share</i>
+        </button>
+      </div>
+    </div>
+
+
+</ng-template>

@@ -23,7 +23,7 @@ import {MatFormFieldControl} from "@angular/material/form-field";
   styleUrls: ['./form.component.css']
 })
 export class FormComponent implements OnInit {
-
+  colorControl = new FormControl('primary');
   comerce: Comerce= new Comerce();
   constructor(private comerceService : ComerceService, private router: Router, public dialogRef: MatDialogRef<FormComponent>,
               ) { }
