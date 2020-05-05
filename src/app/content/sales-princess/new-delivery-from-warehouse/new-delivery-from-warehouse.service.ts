@@ -1,8 +1,8 @@
-import {Injectable, OnInit} from '@angular/core';
+import {Injectable} from '@angular/core';
 import {Observable} from 'rxjs';
 import {DeliveryItemFromWarehouseDTO} from './delivery-item-from-warehouse-dto';
 import {PeriodicElement} from './periodic-element';
-import {HttpClient, HttpParams} from '@angular/common/http';
+import {HttpClient} from '@angular/common/http';
 import {environment} from '../../../../environments/environment';
 import {map} from 'rxjs/operators';
 
@@ -51,8 +51,7 @@ export class NewDeliveryFromWarehouseService {
 
     return this.http.post<PeriodicElement[]>(environment.getDeliveryItemsFromWarehouseByShop, shopDTO).
       pipe(map(Json => {
-        const listItemsPeriodicElements = this.convertDtoToPeriodicElement(Json);
-        return listItemsPeriodicElements;
+        return this.convertDtoToPeriodicElement(Json);
     }));
   }
 
