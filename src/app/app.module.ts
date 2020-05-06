@@ -37,7 +37,7 @@ import {ComerceComponent} from './content/comerce/comerce.component';
 import {FormComponent} from './content/comerce/form.component';
 import { MarkerFormComponent } from './content/map/components/marker-form.component';
 import { MDBBootstrapModule } from 'angular-bootstrap-md';
-
+import {MatFormFieldModule} from '@angular/material/form-field';
 
 
 
@@ -79,6 +79,7 @@ import { MDBBootstrapModule } from 'angular-bootstrap-md';
     MatCardModule,
     MatDialogModule,
     TranslocoRootModule,
+    MatFormFieldModule,
     MDBBootstrapModule.forRoot()
   ],
   providers: [],

@@ -51,9 +51,10 @@
                   enter sold quantity of items !
                 </mat-error>
               </div>
+
               <div class="itemCheckoutSoldItemFinalPricePerUnit">
                 <mat-form-field appearance="fill">
-                  <mat-label>FinalPrice/Unit</mat-label>
+                  <mat-label>List Price</mat-label>
                   <input matInput #input [(ngModel)]="newCheckoutItem.priceListPerUnit" maxlength="10" placeholder="Ex. deliveryDisplayPricePerUnit">
                 </mat-form-field>
                 <mat-error *ngIf="newCheckoutItem.priceListPerUnit<=0" >
@@ -61,26 +62,34 @@
                 </mat-error>
               </div>
 
+              <div class="itemCheckoutSoldItemFinalPricePerUnit">
+                <mat-form-field appearance="fill">
+                  <mat-label>Sales Price</mat-label>
+                  <input matInput #input [(ngModel)]="newCheckoutItem.priceSalesPerUnit" maxlength="10" placeholder="Ex. deliveryDisplayPricePerUnit">
+                </mat-form-field>
+                <mat-error *ngIf="newCheckoutItem.priceListPerUnit<=0" >
+                  Entered sales price not valid !
+                </mat-error>
+              </div>
+
               <div class=" container cont-bg punkt">
                 <div class="discountSelectionRadioButton">
-                  <label>Pick discount type:</label>
-                  <div class="space"></div>
-                  <mat-radio-group
-                    aria-labelledby="example-radio-group-label"
-                    class="example-radio-group"
-                    [(ngModel)]="discountMethod">
-                    <mat-radio-button class="example-radio-button" *ngFor="let discount of discountMethodList" [value]="discount">
-                      {{discount}}
-                    </mat-radio-button>
-                  </mat-radio-group>
+                  <mat-form-field appearance="fill">
+                    <mat-label>Discount type:</mat-label>
+                    <mat-select [formControl]="discountControll" [(value)]="discountType">
+                      <mat-option>--</mat-option>
+                      <mat-option *ngFor="let entry of discountList" [value]="entry.name">{{ entry.name}}</mat-option>
+                    </mat-select>
+                  </mat-form-field>
                 </div>
-                <div *ngIf="discountMethod==='display price'" class="itemCheckoutSoldItemPricePerUnit">
+
+                <div *ngIf="discountType==='display price'" class="itemCheckoutSoldItemPricePerUnit">
                   <mat-form-field hintLabel="Max 10 characters" appearance="fill">
                     <mat-label>Enter deliveryDisplayPricePerUnit</mat-label>
                     <input matInput #input [(ngModel)]="newCheckoutItem.priceSalesPerUnit" maxlength="10" placeholder="Ex. deliveryDisplayPricePerUnit">
                   </mat-form-field>
                 </div>
-                <div *ngIf="discountMethod==='percent'" class="itemCheckoutSoldItemDeliveryDiscount">
+                <div *ngIf="discountType==='percent'" class="itemCheckoutSoldItemDeliveryDiscount">
                   <mat-form-field hintLabel="Max 10 characters" appearance="fill">
                     <mat-label>discount percent</mat-label>
                     <input matInput #input [(ngModel)]="newCheckoutItem.discountPercent" maxlength="4" placeholder="discount percent">
