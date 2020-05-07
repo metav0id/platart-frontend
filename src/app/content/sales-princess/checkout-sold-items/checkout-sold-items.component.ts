@@ -22,16 +22,14 @@ export class CheckoutSoldItemsComponent implements OnInit {
   // Fields for input-form
   public discountControll = new FormControl('', Validators.required);
 
-  public discountMethod: string;
   private readonly DISCOUNT_METHOD_PERCENT = 'percent';
-  private readonly DISCOUNT_METHOD_DISPLAY_PRICE = 'display price';
-  private readonly DISCOUNT_METHOD_OTHER = 'no discount';
-  public discountMethodList: string[] = [ this.DISCOUNT_METHOD_PERCENT , this.DISCOUNT_METHOD_DISPLAY_PRICE, this.DISCOUNT_METHOD_OTHER];
-  public discountType: string = this.DISCOUNT_METHOD_OTHER;
+  private readonly DISCOUNT_METHOD_REVENUE = 'revenue';
+  private readonly DISCOUNT_METHOD_NO_DISCOUNT = 'no discount';
+  public discountType: string = this.DISCOUNT_METHOD_NO_DISCOUNT;
   public discountList: DropDownItem[] = [
     {name: this.DISCOUNT_METHOD_PERCENT},
-    {name: this.DISCOUNT_METHOD_DISPLAY_PRICE},
-    {name: this.DISCOUNT_METHOD_OTHER},
+    {name: this.DISCOUNT_METHOD_REVENUE},
+    {name: this.DISCOUNT_METHOD_NO_DISCOUNT},
   ];
 
 
@@ -114,19 +112,20 @@ export class CheckoutSoldItemsComponent implements OnInit {
     if( this.newCheckoutItem.quantity>0 &&
         this.newCheckoutItem.quantity<100 &&
         this.newCheckoutItem.priceListPerUnit>0 &&
+        this.newCheckoutItem.priceSalesPerUnit>0 &&
         this.newCheckoutItem.category !== null){
 
-      let priceSalesPerUnitBefore: number = 0;
-      let discountPercentBefore: number = 0;
-      if(this.discountMethod === this.DISCOUNT_METHOD_PERCENT ) {
-        discountPercentBefore = this.newCheckoutItem.discountPercent;
-        priceSalesPerUnitBefore = this.newCheckoutItem.priceListPerUnit * (100-this.newCheckoutItem.discountPercent)/100;
-      } else if ( this.discountMethod === this.DISCOUNT_METHOD_DISPLAY_PRICE ) {
-        priceSalesPerUnitBefore = this.newCheckoutItem.priceSalesPerUnit;
-        discountPercentBefore = 100 - (this.newCheckoutItem.discountPercent * 100 / this.newCheckoutItem.priceListPerUnit);
-      } else if ( this.discountMethod === this.DISCOUNT_METHOD_OTHER) {
-        priceSalesPerUnitBefore = this.newCheckoutItem.priceListPerUnit;
-        discountPercentBefore = this.newCheckoutItem.discountPercent;
+      let revenueCalculation: number = 0;
+      let discountPercentCalculation: number = 0;
+      if(this.discountType === this.DISCOUNT_METHOD_PERCENT ) {
+        discountPercentCalculation = this.newCheckoutItem.discountPercent;
+        revenueCalculation = this.newCheckoutItem.priceListPerUnit * (100-this.newCheckoutItem.discountPercent)/100;
+      } else if ( this.discountType === this.DISCOUNT_METHOD_REVENUE ) {
+        revenueCalculation = this.newCheckoutItem.revenuePerUnit;
+        discountPercentCalculation = 100 - (this.newCheckoutItem.revenuePerUnit * 100 / this.newCheckoutItem.priceListPerUnit);
+      } else if ( this.discountType === this.DISCOUNT_METHOD_NO_DISCOUNT) {
+        revenueCalculation = this.newCheckoutItem.priceListPerUnit;
+        discountPercentCalculation = this.newCheckoutItem.discountPercent;
       }
 
       let commentBefore: string;
@@ -141,9 +140,9 @@ export class CheckoutSoldItemsComponent implements OnInit {
         category: this.newCheckoutItem.category,
         quantity: this.newCheckoutItem.quantity,
         priceListPerUnit: this.newCheckoutItem.priceListPerUnit,
-        priceSalesPerUnit: priceSalesPerUnitBefore,
-        revenuePerUnit: priceSalesPerUnitBefore,
-        discountPercent: discountPercentBefore,
+        priceSalesPerUnit: this.newCheckoutItem.priceSalesPerUnit,
+        revenuePerUnit: revenueCalculation,
+        discountPercent: discountPercentCalculation,
         shop: this.newCheckoutItem.shop,
         deliverySending: this.newCheckoutItem.deliverySending,
         itemLastSold: this.newCheckoutItem.itemLastSold,
