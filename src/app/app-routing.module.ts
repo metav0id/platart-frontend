@@ -7,7 +7,6 @@ import {RegistroComponent} from "./content/pages/registro/registro.component";
 import {LoginComponent} from "./content/pages/login/login.component";
 
 
-
 const routes: Routes = [
   //{path: '', redirectTo: 'warehouse', pathMatch: 'full'},
   {path: 'pendiente', component: MapComponent},
