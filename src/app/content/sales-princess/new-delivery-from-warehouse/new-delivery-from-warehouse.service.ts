@@ -10,36 +10,6 @@ import {map} from 'rxjs/operators';
   providedIn: 'root'
 })
 export class NewDeliveryFromWarehouseService {
-
-  // TEST-DATA
-  private newItemOnList1 = {
-    position: 1,
-    category: 'Kette',
-    listPrice: 25,
-    salesPrice: 15,
-    quantity: 100,
-    timestamp: '22.04.2020',
-    comment: ''
-  };
-  private newItemOnList2 = {
-    position: 1,
-    category: 'Ring',
-    listPrice: 25,
-    salesPrice: 15,
-    quantity: 100,
-    timestamp: '22.04.2020',
-    comment: ''
-  };
-  private newItemOnList3 = {
-    position: 1,
-    category: 'Kette',
-    listPrice: 25,
-    salesPrice: 15,
-    quantity: 100,
-    timestamp: '22.04.2020',
-    comment: ''
-  };
-
   private listItems: DeliveryItemFromWarehouseDTO[] = [];
 
   constructor(private http: HttpClient) {
@@ -49,9 +19,8 @@ export class NewDeliveryFromWarehouseService {
 
     const shopDTO = {shop: shop};
 
-    return this.http.post<PeriodicElement[]>(environment.getDeliveryItemsFromWarehouseByShop, shopDTO).
-      pipe(map(Json => {
-        return this.convertDtoToPeriodicElement(Json);
+    return this.http.post<PeriodicElement[]>(environment.getDeliveryItemsFromWarehouseByShop, shopDTO).pipe(map(Json => {
+      return this.convertDtoToPeriodicElement(Json);
     }));
   }
 
