@@ -68,4 +68,8 @@ export class AuthService {
     }
     return this.userToken;
   }
+  authStatus(): boolean{
+    return this.userToken.length > 2;
+
+  }
 }

@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {TRANSLOCO_SCOPE, TranslocoService} from '@ngneat/transloco';
+import {AuthService} from "../services/auth.service";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-header',
@@ -9,7 +11,7 @@ import {TRANSLOCO_SCOPE, TranslocoService} from '@ngneat/transloco';
 })
 export class HeaderComponent implements OnInit {
 
-  constructor(private transloco: TranslocoService) {}
+  constructor(private transloco: TranslocoService, private auth: AuthService, private router: Router) {}
 
   public setActiveLang(lang: string) {
     this.transloco.setActiveLang(lang);
@@ -17,5 +19,9 @@ export class HeaderComponent implements OnInit {
 
   ngOnInit(): void {
   }
+  out(){
+    this.auth.logOut();
+    this.router.navigateByUrl('/login');
 
+  }
 }
