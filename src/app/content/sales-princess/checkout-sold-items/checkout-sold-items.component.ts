@@ -113,7 +113,9 @@ export class CheckoutSoldItemsComponent implements OnInit {
         this.newCheckoutItem.quantity<100 &&
         this.newCheckoutItem.priceListPerUnit>0 &&
         this.newCheckoutItem.priceSalesPerUnit>0 &&
-        this.newCheckoutItem.category !== null){
+        this.newCheckoutItem.category !== null &&
+        this.newCheckoutItem.itemLastSold !== null
+    ){
 
       let revenueCalculation: number = 0;
       let discountPercentCalculation: number = 0;
@@ -229,7 +231,6 @@ export class CheckoutSoldItemsComponent implements OnInit {
     let newDate: Date = $event.value;
     this.newCheckoutItem.itemLastSold = newDate.toISOString();
     this.eventsTime.push( newDate.toISOString() );
-    console.log(this.eventsTime);
   }
 
   openDialogCategory(checkoutCategory: CheckoutCategories) {
@@ -310,6 +311,8 @@ export class CheckoutSoldItemsComponent implements OnInit {
       this.checkoutSoldItemsService.sendAllSoldItemsList(this.listNewItemsToShops).subscribe( JsonDto => {
           console.log(JsonDto);
 
+          this.listNewItemsToShops = JsonDto;
+          this.rebuildListCategories();
         }
       );
     });
