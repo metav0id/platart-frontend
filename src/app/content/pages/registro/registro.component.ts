@@ -11,8 +11,9 @@ import {Router} from "@angular/router";
   styleUrls: ['./registro.component.css']
 })
 export class RegistroComponent implements OnInit {
-
   user: UserComponent;
+  rememberUser = false;
+
   constructor(private auth: AuthService, private router: Router) { }
 
   ngOnInit() {
@@ -33,8 +34,9 @@ export class RegistroComponent implements OnInit {
     console.log(form);
     this.auth.register(this.user).subscribe(resp => {console.log(resp);
         Swal.close();
-
-      this.router.navigateByUrl('/home');
+      this.rememberUser = true;
+        if (this.rememberUser) {localStorage.setItem('email', this.user.email) }
+        this.router.navigateByUrl('/home');
       }, (err) => {
         console.log(err.error.error.message);
         Swal.fire({
@@ -46,5 +48,4 @@ export class RegistroComponent implements OnInit {
       }
     );
   }
-
 }
