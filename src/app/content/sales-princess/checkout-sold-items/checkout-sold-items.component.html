@@ -55,7 +55,7 @@
 
               <div class="itemCheckoutSoldItemFinalPricePerUnit">
                 <mat-form-field appearance="fill">
-                  <mat-label>List Price</mat-label>
+                  <mat-label>FinalPrice/Unit</mat-label>
                   <input matInput #input [(ngModel)]="newCheckoutItem.priceListPerUnit" maxlength="10" placeholder="Ex. deliveryDisplayPricePerUnit">
                 </mat-form-field>
                 <mat-error *ngIf="newCheckoutItem.priceListPerUnit<=0" >
@@ -176,7 +176,17 @@
         </div>
       </div>
 
+        <!--      CONTENT-->
 
+
+
+      </div>
+
+      <div class="mdl-card__menu">
+        <button class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect">
+          <i class="material-icons">share</i>
+        </button>
+      </div>
     </div>
   </div>
 </div>

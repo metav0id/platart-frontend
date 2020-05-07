@@ -16,5 +16,6 @@ export const environment = {
   saveListDeliverySupplier: 'http://161.35.4.253:8081/warehouse/savelistdeliverysupplier',
   saveNewCategory: 'http://161.35.4.253:8081/warehouse/saveNewCategory',
   deleteCategory: 'http://161.35.4.253:8081/warehouse/deleteCategory',
-  getAllItemsInStock: 'http://161.35.4.253:8081/warehouse/getallitems'
+  getAllItemsInStock: 'http://161.35.4.253:8081/warehouse/getallitems',
+  getDeliveryItemsFromWarehouseByShop: 'http://161.35.4.253:8081/shops/getalldeliveriesnotinstock'
 };
