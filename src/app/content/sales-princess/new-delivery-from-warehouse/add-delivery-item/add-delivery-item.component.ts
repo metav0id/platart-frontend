@@ -17,7 +17,7 @@ export class AddDeliveryItemComponent implements OnInit {
   public myForm: FormGroup;
 
   public newItem: PeriodicElement = {
-    identifierOnDeliveryList: null,
+    identifierOnDeliveryList: -1,
     category: '',
     quantity: 0,
     originalQuantity: 0,

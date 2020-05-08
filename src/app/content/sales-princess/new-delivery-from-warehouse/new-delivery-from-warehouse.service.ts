@@ -45,8 +45,9 @@ export class NewDeliveryFromWarehouseService {
   }
 
   public saveList(shop: string, listTable: PeriodicElement[]) {
-    console.log(this.convertPeridicElementToDTO(shop, listTable));
-    //TODO http request
+    const listDTO: ShopCheckInNewItemsDTO[] = this.convertPeridicElementToDTO(shop, listTable);
+    console.log(listDTO);
+    this.http.post(environment.saveDeliveryItemsToShopStock, listDTO).subscribe(answer => console.log('Saved successfully? ' + answer));
   }
 
   private convertPeridicElementToDTO(shop: string, listTable: PeriodicElement[]): ShopCheckInNewItemsDTO[] {
@@ -54,7 +55,7 @@ export class NewDeliveryFromWarehouseService {
     for (const item of listTable) {
       const itemDTO: ShopCheckInNewItemsDTO = {
         identifierOnDeliveryList: item.identifierOnDeliveryList,
-        shop: shop,
+        shop,
         category: item.category,
         priceListPerUnit: item.priceListPerUnit,
         priceSalesPerUnit: item.priceSalesPerUnit,
