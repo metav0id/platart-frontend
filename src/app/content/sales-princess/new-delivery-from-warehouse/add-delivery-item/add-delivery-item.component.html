@@ -32,7 +32,7 @@
     <mat-form-field hintLabel="Max 10 characters" appearance="fill">
       <mat-label>Enter List Price</mat-label>
       <input matInput #input maxlength="10" placeholder="List Price per Unit" formControlName="priceListPerUnit"
-             [value]="newItem.listPrice">
+             [value]="newItem.priceListPerUnit">
       <mat-hint align="end">{{input.value?.length || 0}}/10</mat-hint>
       <mat-error *ngIf="myForm.controls['priceListPerUnit'].hasError('required')">Please insert List Price per Unit
       </mat-error>
@@ -43,7 +43,7 @@
     <mat-form-field hintLabel="Max 10 characters" appearance="fill">
       <mat-label>Enter Sales Price</mat-label>
       <input matInput #input maxlength="10" placeholder="Sales price Per Unit" formControlName="priceSalesPerUnit"
-             [value]="newItem.salesPrice">
+             [value]="newItem.priceSalesPerUnit">
       <mat-hint align="end">{{input.value?.length || 0}}/10</mat-hint>
       <mat-error *ngIf="myForm.controls['priceSalesPerUnit'].hasError('required')">Please insert Sales Price per Unit
       </mat-error>

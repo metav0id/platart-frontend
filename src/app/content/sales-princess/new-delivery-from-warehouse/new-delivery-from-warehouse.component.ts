@@ -73,11 +73,11 @@ export class NewDeliveryFromWarehouseComponent implements OnInit {
     if (!row) {
       return `${this.isAllSelected() ? 'select' : 'deselect'} all`;
     }
-    return `${this.selection.isSelected(row) ? 'deselect' : 'select'} row ${row.position + 1}`;
+    return `${this.selection.isSelected(row) ? 'deselect' : 'select'} row ${row.identifierOnDeliveryList + 1}`;
   }
 
   saveList(): void {
-    // this.newDeliveryToWarehouseService.saveList(this.listNewItemsFromWarehouse);
+    this.newDeliveryFromWarehouseService.saveList(this.selectedShopToFilterOnList, this.listNewItemsFromWarehouse);
     this.listNewItemsFromWarehouse = [];
     this.table.renderRows();
   }
@@ -93,6 +93,9 @@ export class NewDeliveryFromWarehouseComponent implements OnInit {
     });
   }
 
+  /**
+   * Whole list is passed to dialog. There new elements are added to list.
+   */
   openDialogAddItem(): void {
     const dialogRef = this.dialog.open(AddDeliveryItemComponent, {
       width: '250px',
