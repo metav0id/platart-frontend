@@ -37,6 +37,9 @@ import {ComerceComponent} from './content/comerce/comerce.component';
 import {FormComponent} from './content/comerce/form.component';
 import { MarkerFormComponent } from './content/map/components/marker-form.component';
 import { MDBBootstrapModule } from 'angular-bootstrap-md';
+import {UserComponent} from "./content/pages/models/user.component";
+import {RegistroComponent} from "./content/pages/registro/registro.component";
+import {LoginComponent} from "./content/pages/login/login.component";
 
 
 
@@ -51,7 +54,10 @@ import { MDBBootstrapModule } from 'angular-bootstrap-md';
     MapComponent,
     ComerceComponent,
     FormComponent,
-    MarkerFormComponent
+    MarkerFormComponent,
+    UserComponent,
+    RegistroComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,

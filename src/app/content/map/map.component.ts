@@ -44,6 +44,7 @@ export class MapComponent implements OnInit {
 //When the component is started it gives a list with all markers back.
   ngOnInit(): void {
     this.mapService.readAllMarkers().subscribe(response => this.marcadores = response);
+
   }
 
   constructor(private mapService: MapService, public dialog: MatDialog, private activatedRoute: ActivatedRoute, private router: Router) {

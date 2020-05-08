@@ -5,13 +5,14 @@ import {NewDeliveryToShopComponent} from './new-delivery-to-shop/new-delivery-to
 import {NewDeliveryToWarehouseComponent} from './new-delivery-to-warehouse/new-delivery-to-warehouse.component';
 import {NewItemCategoryComponent} from './new-item-category/new-item-category.component';
 import {FormComponent} from '../comerce/form.component';
+import {AuthGuard} from "../guards/auth.guard";
 
 const routes: Routes = [
-  {path: 'stockinwarehouse', component: StockInWarehouseComponent},
-  {path: 'newdeliverytoshop', component: NewDeliveryToShopComponent},
-  {path: 'newdeliverytowarehouse', component: NewDeliveryToWarehouseComponent},
-  {path: 'newitemcategory', component: NewItemCategoryComponent},
-  {path: 'comerce', component: FormComponent}
+  {path: 'stockinwarehouse', component: StockInWarehouseComponent, canActivate: [AuthGuard] },
+  {path: 'newdeliverytoshop', component: NewDeliveryToShopComponent, canActivate: [AuthGuard] },
+  {path: 'newdeliverytowarehouse', component: NewDeliveryToWarehouseComponent, canActivate: [AuthGuard] },
+  {path: 'newitemcategory', component: NewItemCategoryComponent, canActivate: [AuthGuard] },
+  {path: 'comerce', component: FormComponent, canActivate: [AuthGuard] }
 ];
 
 @NgModule({

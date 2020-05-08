@@ -43,6 +43,9 @@ a{
 .space{
   height: 20px;
 }
+.space2{
+  width: 20px;
+}
 
 .takeSpace{
   width: 100%;
