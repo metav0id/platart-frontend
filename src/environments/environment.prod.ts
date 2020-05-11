@@ -1,6 +1,6 @@
 export const environment = {
   production: true,
-  saveCommerce: 'http://161.35.4.253/:8081/comerce/savecomerce',
+  saveCommerce: 'http://161.35.4.253:8081/comerce/savecomerce',
   getAllMarkers: 'http://161.35.4.253:8081/marker/getallmarkers',
   saveMarker: 'http://161.35.4.253:8081/marker/savemarker',
   findCommerce: 'http://161.35.4.253:8081/comerce/find',
