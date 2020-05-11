@@ -1,0 +1,29 @@
+<div class="text">
+<h4>{{ label }} </h4>
+
+<span>
+    <mat-icon color="primary">trending_up</mat-icon>
+</span>
+
+<span>Totals (USD)</span>
+
+</div>
+<div class="widget">
+  <div class="chart-wrapper">
+    <ngx-charts-bar-vertical
+
+      [scheme]="colorScheme"
+      [results]="vbarData"
+      [gradient]="gradient"
+      [xAxis]="showXAxis"
+      [yAxis]="showYAxis"
+      [legend]="showLegend"
+      [showXAxisLabel]="showXAxisLabel"
+      [showYAxisLabel]="showYAxisLabel"
+      [xAxisLabel]="xAxisLabel"
+      [yAxisLabel]="yAxisLabel">
+
+    </ngx-charts-bar-vertical>
+
+  </div>
+</div>

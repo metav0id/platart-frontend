@@ -1,0 +1,23 @@
+<div class="text">
+  <h4>{{ label}} </h4>
+   <span>
+    <mat-icon color="primary">trending_up</mat-icon>
+  </span>
+
+  <span>{{unit}}</span>
+
+</div>
+<div class="widget">
+  <ngx-gauge [type] = "gaugeType"
+              [thick]="13"
+             [value]="gaugeValue"
+             [label]="gaugeLabel"
+             [append]="gaugeAppendText"
+             [min]="gaugeMin"
+             [max]="gaugeMax"
+             [cap]="gaugeCap"
+             [thresholds]="thresholdConfig">
+
+  </ngx-gauge>
+</div>
+

@@ -37,7 +37,9 @@ import {ComerceComponent} from './content/comerce/comerce.component';
 import {FormComponent} from './content/comerce/form.component';
 import { MarkerFormComponent } from './content/map/components/marker-form.component';
 import { MDBBootstrapModule } from 'angular-bootstrap-md';
-
+import { ChartsModule} from 'ng2-charts';
+import { NgxGaugeModule} from 'ngx-gauge';
+import {NgxChartsModule} from '@swimlane/ngx-charts';
 
 
 
@@ -79,7 +81,8 @@ import { MDBBootstrapModule } from 'angular-bootstrap-md';
     MatCardModule,
     MatDialogModule,
     TranslocoRootModule,
-    MDBBootstrapModule.forRoot()
+    MDBBootstrapModule.forRoot(),
+    NgxChartsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

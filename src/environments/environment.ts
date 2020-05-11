@@ -21,7 +21,13 @@ export const environment = {
   saveNewCategory: 'http://localhost:8081/warehouse/saveNewCategory',
   deleteCategory: 'http://localhost:8081/warehouse/deleteCategory',
   getAllItemsInStock: 'http://localhost:8081/warehouse/getallitems',
-  getDeliveryItemsFromWarehouseByShop: 'http://localhost:8081/shops/getalldeliveriesnotinstock'
+  getDeliveryItemsFromWarehouseByShop: 'http://localhost:8081/shops/getalldeliveriesnotinstock',
+  vBarDataURL: 'http://localhost:8081/dashboard/getVbarData',
+  hBarDataURL: 'http://localhost:8081/dashboard/getHbarData',
+  dataLastMonthURL: 'http://localhost:8081/dashboard/getLastMonthData',
+  dataCurrentMonthURL: 'http://localhost:8081/dashboard/getCurrentMonthDAta',
+  yesterdaysDataURL: 'http://localhost:8081/dashboard/getYesterdaysData',
+  actualsDataURL: 'http://localhost:8081/dashboard/getActualsData'
 };
 
 /*
