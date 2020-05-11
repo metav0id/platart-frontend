@@ -1,0 +1,10 @@
+.mat-icon,
+.description {
+  color: grey;
+  font-size: 2em;
+}
+
+mat-icon {
+  position: relative;
+  padding: 0;
+}
