@@ -1,209 +1,17 @@
-<!--<div class="container">-->
-<!--  <div class="row">-->
-<!--    <div class="col-sm-12">-->
-<!--      <div class="space"></div>-->
-<!--first table starts-->
-<!--      <div class="box">-->
-<!--        <div class="container cont-bg punkt">-->
-<!--          <div class="space"></div>-->
-<!--          <h1>Items sold today</h1>-->
-<!--          <div>-->
-<!--            <h3>Please type in the items sold today:</h3>-->
-<!--            <div class="container cont-bg2 punkt">-->
-<!--              <div class="space"></div>-->
-<!--              <div class="newOrderInputFieldsDate">-->
-<!--                <mat-form-field>-->
-<!--                  <mat-label>Choose a date</mat-label>-->
-<!--                  <input matInput [matDatepicker]="picker" (dateInput)="dateSelection($event)">-->
-<!--                  <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>-->
-<!--                  <mat-datepicker touchUi #picker></mat-datepicker>-->
-<!--                </mat-form-field>-->
-<!--              </div>-->
-<!--              <div class="newOrderInputFieldsShop">-->
-<!--                <mat-form-field appearance="fill">-->
-<!--                  <mat-label>shop</mat-label>-->
-<!--                  <mat-select [formControl]="shopControll" [(value)]="newCheckoutItem.shop">-->
-<!--                    <mat-option>&#45;&#45;</mat-option>-->
-<!--                    <mat-option *ngFor="let entry of shopsList" [value]="entry.name">{{ entry.name}}</mat-option>-->
-<!--                  </mat-select>-->
-<!--                  <mat-error *ngIf="newCheckoutItem.shop===null">-->
-<!--                    select a shop!-->
-<!--                  </mat-error>-->
-<!--                </mat-form-field>-->
-<!--              </div>-->
-
-<!--              <div class="itemCheckoutSoldItemCategory">-->
-<!--                <mat-form-field appearance="fill">-->
-<!--                  <mat-label>category</mat-label>-->
-<!--                  <mat-select [formControl]="categoryControl" [(value)]="newCheckoutItem.category">-->
-<!--                    <mat-option>&#45;&#45;</mat-option>-->
-<!--                    <mat-option *ngFor="let entry of categoryItems" [value]="entry.category">{{ entry.category}}</mat-option>-->
-<!--                  </mat-select>-->
-<!--                </mat-form-field>-->
-<!--              </div>-->
-
-<!--              <div class="itemCheckoutSoldItemQuantity">-->
-<!--                <mat-form-field appearance="fill">-->
-<!--                  <mat-label>sold quantity</mat-label>-->
-<!--                  <input matInput #input [(ngModel)]="newCheckoutItem.quantity" maxlength="3" placeholder="number of sold items">-->
-<!--                </mat-form-field>-->
-<!--                <mat-error *ngIf="newCheckoutItem.quantity<=0">-->
-<!--                  enter sold quantity of items !-->
-<!--                </mat-error>-->
-<!--              </div>-->
-<!--              <div class="itemCheckoutSoldItemFinalPricePerUnit">-->
-<!--                <mat-form-field appearance="fill">-->
-<!--                  <mat-label>FinalPrice/Unit</mat-label>-->
-<!--                  <input matInput #input [(ngModel)]="newCheckoutItem.priceListPerUnit" maxlength="10" placeholder="Ex. deliveryDisplayPricePerUnit">-->
-<!--                </mat-form-field>-->
-<!--                <mat-error *ngIf="newCheckoutItem.priceListPerUnit<=0" >-->
-<!--                  Entered list price not valid !-->
-<!--                </mat-error>-->
-<!--              </div>-->
-
-<!--              <div class=" container cont-bg punkt">-->
-<!--                <div class="discountSelectionRadioButton">-->
-<!--                  <label>Pick discount type:</label>-->
-<!--                  <div class="space"></div>-->
-<!--                  <mat-radio-group-->
-<!--                    aria-labelledby="example-radio-group-label"-->
-<!--                    class="example-radio-group"-->
-<!--                    [(ngModel)]="discountMethod">-->
-<!--                    <mat-radio-button class="example-radio-button" *ngFor="let discount of discountMethodList" [value]="discount">-->
-<!--                      {{discount}}-->
-<!--                    </mat-radio-button>-->
-<!--                  </mat-radio-group>-->
-<!--                </div>-->
-<!--                <div *ngIf="discountMethod==='display price'" class="itemCheckoutSoldItemPricePerUnit">-->
-<!--                  <mat-form-field hintLabel="Max 10 characters" appearance="fill">-->
-<!--                    <mat-label>Enter deliveryDisplayPricePerUnit</mat-label>-->
-<!--                    <input matInput #input [(ngModel)]="newCheckoutItem.priceSalesPerUnit" maxlength="10" placeholder="Ex. deliveryDisplayPricePerUnit">-->
-<!--                  </mat-form-field>-->
-<!--                </div>-->
-<!--                <div *ngIf="discountMethod==='percent'" class="itemCheckoutSoldItemDeliveryDiscount">-->
-<!--                  <mat-form-field hintLabel="Max 10 characters" appearance="fill">-->
-<!--                    <mat-label>discount percent</mat-label>-->
-<!--                    <input matInput #input [(ngModel)]="newCheckoutItem.discountPercent" maxlength="4" placeholder="discount percent">-->
-<!--                    <mat-error *ngIf="newCheckoutItem.discountPercent<0 || newCheckoutItem.discountPercent >= 100">-->
-<!--                      Invalid discount percent-->
-<!--                    </mat-error>-->
-<!--                  </mat-form-field>-->
-<!--                </div>-->
-<!--              </div>-->
-
-<!--              <div class=" container cont-bg punkt">-->
-<!--                <div class="discountSelectionRadioButton">-->
-<!--                  <label id="example-radio-group-label">Comment:</label>-->
-<!--                  <div class="space"></div>-->
-<!--                  <mat-radio-group-->
-<!--                    aria-labelledby="example-radio-group-label"-->
-<!--                    class="example-radio-group"-->
-<!--                    [(ngModel)]="commentNessesary">-->
-<!--                    <mat-radio-button class="example-radio-button" *ngFor="let comment of commentNecessaryList" [value]="comment">-->
-<!--                      {{comment}}-->
-<!--                    </mat-radio-button>-->
-<!--                  </mat-radio-group>-->
-<!--                </div>-->
-<!--                <div *ngIf="commentNessesary==='Comment'" class="itemCheckoutSoldItemComment">-->
-<!--                  <mat-form-field hintLabel="Max 10 characters" appearance="fill">-->
-<!--                    <mat-label>Comment</mat-label>-->
-<!--                    <input matInput #input [(ngModel)]="newCheckoutItem.comment" maxlength="250" placeholder="Comment on the order.">-->
-<!--                    <mat-hint align="end">{{input.value?.length || 0}}/250</mat-hint>-->
-<!--                  </mat-form-field>-->
-<!--                </div>-->
-<!--              </div>-->
-<!--              <div class="space"></div>-->
-<!--              <div>-->
-<!--                <button mat-button (click)="addSoldItem()"><mat-icon>library_add</mat-icon></button>-->
-<!--              </div>-->
-<!--              <div class="space"></div>-->
-<!--            </div>-->
-<!--          </div>-->
-<!--        </div>-->
-<!--      </div>-->
-      <!--first table ends-->
-
-
-<!--DIVISION BETWEEN TABLES-->
-
-
-<!--      second table starts-->
-
-<!--      <div class="categoryItemsList container cont-bg punkt">-->
-<!--        <h3>Sold Items:</h3>-->
-<!--        <div class="table-responsive">-->
-<!--          <table mat-table #myShopCheckoutProductsTable [dataSource]="categoryLists">-->
-
-<!--            &lt;!&ndash; category column&ndash;&gt;-->
-<!--            <ng-container matColumnDef="sale">-->
-<!--              <th mat-header-cell *matHeaderCellDef> category </th>-->
-<!--              <td mat-cell *matCellDef="let element">-->
-<!--                <div>-->
-<!--                  <mat-card>-->
-<!--                    <mat-card-header>-->
-<!--                      <mat-card-title>{{element.category}}</mat-card-title>-->
-<!--                      <mat-card-subtitle>{{element.priceListPerUnit}}$List</mat-card-subtitle>-->
-<!--                    </mat-card-header>-->
-<!--                    <mat-card-content>-->
-<!--                      <p>-->
-<!--                        {{element.quantity}} Items-->
-<!--                      </p>-->
-<!--                    </mat-card-content>-->
-<!--                    <mat-card-actions>-->
-<!--&lt;!&ndash;                    <button mat-button (click)="openDialog(element)"><mat-icon>list_alt</mat-icon></button>&ndash;&gt;-->
-<!--                    <button mat-button (click)="openDialogCategory(element)"><mat-icon>list_alt</mat-icon></button>-->
-<!--                    </mat-card-actions>-->
-<!--                  </mat-card>-->
-<!--                </div>-->
-<!--              </td>-->
-<!--              <td mat-footer-cell *matFooterCellDef> - </td>-->
-<!--            </ng-container>-->
-
-<!--            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>-->
-<!--            <tr mat-row *matRowDef="let element; columns: displayedColumns;"></tr>-->
-<!--            <tr mat-footer-row *matFooterRowDef="displayedColumns"></tr>-->
-<!--          </table>-->
-<!--        </div>-->
-<!--      </div>-->
-
-<!--      <div class="sendSaveSoldItemsList container cont-bg punkt">-->
-<!--        <div>-->
-<!--          <button mat-button matTooltip="save sold items list" (click)="saveSoldItemList()"><mat-icon>save</mat-icon></button>-->
-<!--          <button mat-button matTooltip="send sold items list" (click)="sendSoldItemList()"><mat-icon>send</mat-icon></button>-->
-<!--          <button mat-button matTooltip="save sold items list"   (click)="deleteSoldItemList()"><mat-icon>delete</mat-icon></button>-->
-<!--        </div>-->
-<!--      </div>-->
-      <!--      second table ends-->
-
-<!--    </div>-->
-<!--  </div>-->
-<!--</div>-->
-
-
 <div class="container">
   <div class="row">
-    <div class="col-sm-12">
+    <div class="col-sm-4">
       <div class="space"></div>
 
-<!--fIRST TABLA-->
-<div class="container-fluid d-flex justify-content-center">
-
-  <div class="demo-card-wide mdl-card mdl-shadow--2dp cont-bg justi">
-
-    <div class="mdl-card__supporting-text">
-
-
-
-      <!--      CONTENT-->
-
       <div class="box">
-        <div class="container cont-bg1">
+        <div class="container cont-bg punkt">
           <div class="space"></div>
           <h1>Items sold today</h1>
           <div>
             <h3>Please type in the items sold today:</h3>
-            <div class="container cont-bg4">
+            <div class="container cont-bg2 punkt">
               <div class="space"></div>
+
               <div class="newOrderInputFieldsDate">
                 <mat-form-field>
                   <mat-label>Choose a date</mat-label>
@@ -244,6 +52,7 @@
                   enter sold quantity of items !
                 </mat-error>
               </div>
+
               <div class="itemCheckoutSoldItemFinalPricePerUnit">
                 <mat-form-field appearance="fill">
                   <mat-label>FinalPrice/Unit</mat-label>
@@ -254,26 +63,34 @@
                 </mat-error>
               </div>
 
-              <div class=" container cont-bg2">
+              <div class="itemCheckoutSoldItemFinalPricePerUnit">
+                <mat-form-field appearance="fill">
+                  <mat-label>Display Price</mat-label>
+                  <input matInput #input [(ngModel)]="newCheckoutItem.priceSalesPerUnit" maxlength="10" placeholder="Ex. deliveryDisplayPricePerUnit">
+                </mat-form-field>
+                <mat-error *ngIf="newCheckoutItem.priceListPerUnit<=0" >
+                  Entered sales price not valid !
+                </mat-error>
+              </div>
+
+              <div class=" container cont-bg punkt">
                 <div class="discountSelectionRadioButton">
-                  <label>Pick discount type:</label>
-                  <div class="space"></div>
-                  <mat-radio-group
-                    aria-labelledby="example-radio-group-label"
-                    class="example-radio-group"
-                    [(ngModel)]="discountMethod">
-                    <mat-radio-button class="example-radio-button" *ngFor="let discount of discountMethodList" [value]="discount">
-                      {{discount}}
-                    </mat-radio-button>
-                  </mat-radio-group>
-                </div>
-                <div *ngIf="discountMethod==='display price'" class="itemCheckoutSoldItemPricePerUnit">
-                  <mat-form-field hintLabel="Max 10 characters" appearance="fill">
-                    <mat-label>Enter deliveryDisplayPricePerUnit</mat-label>
-                    <input matInput #input [(ngModel)]="newCheckoutItem.priceSalesPerUnit" maxlength="10" placeholder="Ex. deliveryDisplayPricePerUnit">
+                  <mat-form-field appearance="fill">
+                    <mat-label>Revenue type:</mat-label>
+                    <mat-select [formControl]="discountControll" [(value)]="discountType">
+                      <mat-option>--</mat-option>
+                      <mat-option *ngFor="let entry of discountList" [value]="entry.name">{{ entry.name}}</mat-option>
+                    </mat-select>
                   </mat-form-field>
                 </div>
-                <div *ngIf="discountMethod==='percent'" class="itemCheckoutSoldItemDeliveryDiscount">
+
+                <div *ngIf="discountType==='revenue'" class="itemCheckoutSoldItemPricePerUnit">
+                  <mat-form-field hintLabel="Max 10 characters" appearance="fill">
+                    <mat-label>revenue</mat-label>
+                    <input matInput #input [(ngModel)]="newCheckoutItem.revenuePerUnit" maxlength="10" placeholder="Ex. deliveryDisplayPricePerUnit">
+                  </mat-form-field>
+                </div>
+                <div *ngIf="discountType==='percent'" class="itemCheckoutSoldItemDeliveryDiscount">
                   <mat-form-field hintLabel="Max 10 characters" appearance="fill">
                     <mat-label>discount percent</mat-label>
                     <input matInput #input [(ngModel)]="newCheckoutItem.discountPercent" maxlength="4" placeholder="discount percent">
@@ -284,7 +101,7 @@
                 </div>
               </div>
 
-              <div class=" container cont-bg2">
+              <div class=" container cont-bg punkt">
                 <div class="discountSelectionRadioButton">
                   <label id="example-radio-group-label">Comment:</label>
                   <div class="space"></div>
@@ -315,41 +132,7 @@
         </div>
       </div>
 
-        <!--      CONTENT-->
-
-
-
-      </div>
-
-      <div class="mdl-card__menu">
-        <button class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect">
-          <i class="material-icons">share</i>
-        </button>
-      </div>
-    </div>
-  </div>
-
-</div>
-
-
-
-
-<!--SECOND TABLE-->
-
-
-<!--SEGUNDA TABLA-->
-<div class="container-fluid d-flex justify-content-center">
-
-  <div class="demo-card-wide mdl-card mdl-shadow--2dp cont-bg justi">
-
-    <div class="mdl-card__supporting-text">
-
-
-
-      <!--      CONTENT-->
-
-
-      <div class="categoryItemsList container ">
+      <div class="categoryItemsList container cont-bg punkt">
         <h3>Sold Items:</h3>
         <div class="table-responsive">
           <table mat-table #myShopCheckoutProductsTable [dataSource]="categoryLists">
@@ -370,8 +153,7 @@
                       </p>
                     </mat-card-content>
                     <mat-card-actions>
-                      <!--                    <button mat-button (click)="openDialog(element)"><mat-icon>list_alt</mat-icon></button>-->
-                      <button mat-button (click)="openDialogCategory(element)"><mat-icon>list_alt</mat-icon></button>
+                    <button mat-button (click)="openDialogCategory(element)"><mat-icon>list_alt</mat-icon></button>
                     </mat-card-actions>
                   </mat-card>
                 </div>
@@ -386,11 +168,11 @@
         </div>
       </div>
 
-      <div class="sendSaveSoldItemsList container cont-bg4">
+      <div class="sendSaveSoldItemsList container cont-bg punkt">
         <div>
           <button mat-button matTooltip="save sold items list" (click)="saveSoldItemList()"><mat-icon>save</mat-icon></button>
           <button mat-button matTooltip="send sold items list" (click)="sendSoldItemList()"><mat-icon>send</mat-icon></button>
-          <button mat-button matTooltip="save sold items list"   (click)="deleteSoldItemList()"><mat-icon>delete</mat-icon></button>
+          <button mat-button matTooltip="save sold items list" (click)="deleteSoldItemList()"><mat-icon>delete</mat-icon></button>
         </div>
       </div>
 
@@ -407,7 +189,3 @@
       </div>
     </div>
   </div>
-
-</div>
-
-</div>

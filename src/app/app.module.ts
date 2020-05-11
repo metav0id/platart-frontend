@@ -26,6 +26,7 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MapComponent} from './content/map/map.component';
 import {MatSliderModule} from '@angular/material/slider';
+import {MatProgressBarModule} from '@angular/material/progress-bar';
 import {MatCardModule} from '@angular/material/card';
 import {AgmCoreModule} from '@agm/core';
 import {SalesPrincessModule} from './content/sales-princess/sales-princess.module';
@@ -36,6 +37,11 @@ import {ComerceComponent} from './content/comerce/comerce.component';
 import {FormComponent} from './content/comerce/form.component';
 import { MarkerFormComponent } from './content/map/components/marker-form.component';
 import { MDBBootstrapModule } from 'angular-bootstrap-md';
+import {UserComponent} from "./content/pages/models/user.component";
+import {RegistroComponent} from "./content/pages/registro/registro.component";
+import {LoginComponent} from "./content/pages/login/login.component";
+
+import {MatFormFieldModule} from '@angular/material/form-field';
 import {NgxChartsModule} from '@swimlane/ngx-charts';
 import {FlexLayoutModule} from '@angular/flex-layout';
 
@@ -51,7 +57,10 @@ import {FlexLayoutModule} from '@angular/flex-layout';
     MapComponent,
     ComerceComponent,
     FormComponent,
-    MarkerFormComponent
+    MarkerFormComponent,
+    UserComponent,
+    RegistroComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
@@ -79,6 +88,8 @@ import {FlexLayoutModule} from '@angular/flex-layout';
     MatCardModule,
     MatDialogModule,
     TranslocoRootModule,
+    MatFormFieldModule,
+    MDBBootstrapModule.forRoot()
     MDBBootstrapModule.forRoot(),
     NgxChartsModule,
     FlexLayoutModule

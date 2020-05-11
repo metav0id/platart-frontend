@@ -4,12 +4,11 @@ import {MatTable} from "@angular/material/table";
 import {WarehouseItemCategoryDTO} from "../../warehouse-queen/warehouseCategory/warehouse-item-category-DTO";
 import {FormControl, Validators} from "@angular/forms";
 import {CheckoutSoldItemsService} from "./checkout-sold-items.service";
-import {CheckoutTableItems} from "./checkout-sold-items-DTOs/CheckoutTableItems";
-import {ShopDropDownItem} from "./checkout-sold-items-DTOs/ShopDropDownItem";
+import {ShopsCheckoutSoldItemsDTO} from "./checkout-sold-items-DTOs/ShopsCheckoutSoldItemsDTO";
+import {DropDownItem} from "./checkout-sold-items-DTOs/DropDownItem";
 import {MatDatepickerInputEvent} from "@angular/material/datepicker";
 import {MatDialog} from "@angular/material/dialog";
 import {CheckoutSoldItemsDetailsComponent} from "./checkout-sold-items-details/checkout-sold-items-details.component";
-import {CheckoutTableCategoryItems} from "./checkout-sold-items-DTOs/CheckoutTableCategoryItems";
 import {CheckoutCategories} from "./checkout-sold-items-DTOs/CheckoutCategories";
 import {CheckoutSoldItemsSendVerificationComponent} from "./checkout-sold-items-send-verification/checkout-sold-items-send-verification.component";
 
@@ -21,11 +20,18 @@ import {CheckoutSoldItemsSendVerificationComponent} from "./checkout-sold-items-
 export class CheckoutSoldItemsComponent implements OnInit {
 
   // Fields for input-form
-  public discountMethod: string;
+  public discountControll = new FormControl('', Validators.required);
+
   private readonly DISCOUNT_METHOD_PERCENT = 'percent';
-  private readonly DISCOUNT_METHOD_DISPLAY_PRICE = 'display price';
-  private readonly DISCOUNT_METHOD_OTHER = 'no discount';
-  public discountMethodList: string[] = [ this.DISCOUNT_METHOD_PERCENT , this.DISCOUNT_METHOD_DISPLAY_PRICE, this.DISCOUNT_METHOD_OTHER];
+  private readonly DISCOUNT_METHOD_REVENUE = 'revenue';
+  private readonly DISCOUNT_METHOD_NO_DISCOUNT = 'no discount';
+  public discountType: string = this.DISCOUNT_METHOD_NO_DISCOUNT;
+  public discountList: DropDownItem[] = [
+    {name: this.DISCOUNT_METHOD_PERCENT},
+    {name: this.DISCOUNT_METHOD_REVENUE},
+    {name: this.DISCOUNT_METHOD_NO_DISCOUNT},
+  ];
+
 
   private readonly COMMENT_YES_NECESSARY = 'Comment';
   private readonly COMMENT_NO_NECESSARY = 'No Comment';
@@ -38,7 +44,7 @@ export class CheckoutSoldItemsComponent implements OnInit {
   // Fields for input-form - Drop-Down-Selection
   /** Shop selection */
   public shopControll = new FormControl('', Validators.required);
-  public shopsList: ShopDropDownItem[] = [
+  public shopsList: DropDownItem[] = [
     {name: 'shop1'},
     {name: 'shop2'},
     {name: 'shop3'},
@@ -53,12 +59,11 @@ export class CheckoutSoldItemsComponent implements OnInit {
 
   private totalAmountSold: number;
   private totalItems: number;
-  public listNewItemsToShops: CheckoutTableItems[] = [];
-  public listNewItemsCategories: CheckoutTableCategoryItems[] = [];
+  public listNewItemsToShops: ShopsCheckoutSoldItemsDTO[] = [];
   public categoryLists: CheckoutCategories[] = [];
   availableItems: number = 0;
-  selection = new SelectionModel<CheckoutTableItems>(true, []);
-  newCheckoutItem: CheckoutTableItems;
+  selection = new SelectionModel<ShopsCheckoutSoldItemsDTO>(true, []);
+  newCheckoutItem: ShopsCheckoutSoldItemsDTO;
 
   @ViewChild('myShopCheckoutProductsTable') table: MatTable<any>;
   constructor(/*private _snackBar: MatSnackBar,*/
@@ -66,6 +71,7 @@ export class CheckoutSoldItemsComponent implements OnInit {
               public dialog: MatDialog) { }
 
   ngOnInit(): void {
+    this.loadSoldItemList();
     this.initNewOrderElement();
     this.fetchCategories();
   }
@@ -83,6 +89,7 @@ export class CheckoutSoldItemsComponent implements OnInit {
       quantity: 0,
       priceListPerUnit: 0,
       priceSalesPerUnit: 0,
+      revenuePerUnit: 0,
       discountPercent: 0,
       shop: this.INITIALIZE_SHOP,
       deliverySending: null,
@@ -105,19 +112,22 @@ export class CheckoutSoldItemsComponent implements OnInit {
     if( this.newCheckoutItem.quantity>0 &&
         this.newCheckoutItem.quantity<100 &&
         this.newCheckoutItem.priceListPerUnit>0 &&
-        this.newCheckoutItem.category !== null){
+        this.newCheckoutItem.priceSalesPerUnit>0 &&
+        this.newCheckoutItem.category !== null &&
+        this.newCheckoutItem.itemLastSold !== null
+    ){
 
-      let priceSalesPerUnitBefore: number = 0;
-      let discountPercentBefore: number = 0;
-      if(this.discountMethod === this.DISCOUNT_METHOD_PERCENT ) {
-        discountPercentBefore = this.newCheckoutItem.discountPercent;
-        priceSalesPerUnitBefore = this.newCheckoutItem.priceListPerUnit * (100-this.newCheckoutItem.discountPercent)/100;
-      } else if ( this.discountMethod === this.DISCOUNT_METHOD_DISPLAY_PRICE ) {
-        priceSalesPerUnitBefore = this.newCheckoutItem.priceSalesPerUnit;
-        discountPercentBefore = 100 - (this.newCheckoutItem.discountPercent * 100 / this.newCheckoutItem.priceListPerUnit);
-      } else if ( this.discountMethod === this.DISCOUNT_METHOD_OTHER) {
-        priceSalesPerUnitBefore = this.newCheckoutItem.priceListPerUnit;
-        discountPercentBefore = this.newCheckoutItem.discountPercent;
+      let revenueCalculation: number = 0;
+      let discountPercentCalculation: number = 0;
+      if(this.discountType === this.DISCOUNT_METHOD_PERCENT ) {
+        discountPercentCalculation = this.newCheckoutItem.discountPercent;
+        revenueCalculation = this.newCheckoutItem.priceListPerUnit * (100-this.newCheckoutItem.discountPercent)/100;
+      } else if ( this.discountType === this.DISCOUNT_METHOD_REVENUE ) {
+        revenueCalculation = this.newCheckoutItem.revenuePerUnit;
+        discountPercentCalculation = 100 - (this.newCheckoutItem.revenuePerUnit * 100 / this.newCheckoutItem.priceListPerUnit);
+      } else if ( this.discountType === this.DISCOUNT_METHOD_NO_DISCOUNT) {
+        revenueCalculation = this.newCheckoutItem.priceListPerUnit;
+        discountPercentCalculation = this.newCheckoutItem.discountPercent;
       }
 
       let commentBefore: string;
@@ -127,14 +137,14 @@ export class CheckoutSoldItemsComponent implements OnInit {
         commentBefore = this.newCheckoutItem.comment;
       }
 
-
-      let newSoldItemForTable: CheckoutTableItems ={
+      let newSoldItemForTable: ShopsCheckoutSoldItemsDTO ={
         position: this.newCheckoutItem.position,
         category: this.newCheckoutItem.category,
         quantity: this.newCheckoutItem.quantity,
         priceListPerUnit: this.newCheckoutItem.priceListPerUnit,
-        priceSalesPerUnit: priceSalesPerUnitBefore,
-        discountPercent: discountPercentBefore,
+        priceSalesPerUnit: this.newCheckoutItem.priceSalesPerUnit,
+        revenuePerUnit: revenueCalculation,
+        discountPercent: discountPercentCalculation,
         shop: this.newCheckoutItem.shop,
         deliverySending: this.newCheckoutItem.deliverySending,
         itemLastSold: this.newCheckoutItem.itemLastSold,
@@ -190,12 +200,13 @@ export class CheckoutSoldItemsComponent implements OnInit {
     // Add items by category
     for(let categoryItem of newCategoryLists){
       for(let item of this.listNewItemsToShops){
-        const newItem: CheckoutTableItems = {
+        const newItem: ShopsCheckoutSoldItemsDTO = {
           position: item.position,
           category: item.category,
           quantity: item.quantity,
           priceListPerUnit: item.priceListPerUnit,
           priceSalesPerUnit: item.priceSalesPerUnit,
+          revenuePerUnit: item.revenuePerUnit,
           discountPercent: item.discountPercent,
           shop: item.shop,
           deliverySending: item.deliverySending,
@@ -220,7 +231,6 @@ export class CheckoutSoldItemsComponent implements OnInit {
     let newDate: Date = $event.value;
     this.newCheckoutItem.itemLastSold = newDate.toISOString();
     this.eventsTime.push( newDate.toISOString() );
-    console.log(this.eventsTime);
   }
 
   openDialogCategory(checkoutCategory: CheckoutCategories) {
@@ -233,7 +243,6 @@ export class CheckoutSoldItemsComponent implements OnInit {
 
     // listNewItemsCategories and render table, once dialoge is closed
     dialogRef.afterClosed().subscribe(() => {
-
       this.updateAmountListCategories();
       this.table.renderRows();
       this.updateListNewItemsToShops();
@@ -265,12 +274,13 @@ export class CheckoutSoldItemsComponent implements OnInit {
     // refill with category items
     for(let categoryItem of this.categoryLists){
       for(let item of categoryItem.items){
-        const newItem: CheckoutTableItems = {
+        const newItem: ShopsCheckoutSoldItemsDTO = {
           position: item.position,
           category: item.category,
           quantity: item.quantity,
           priceListPerUnit: item.priceListPerUnit,
           priceSalesPerUnit: item.priceSalesPerUnit,
+          revenuePerUnit: item.revenuePerUnit,
           discountPercent: item.discountPercent,
           shop: item.shop,
           deliverySending: item.deliverySending,
@@ -284,6 +294,7 @@ export class CheckoutSoldItemsComponent implements OnInit {
 
   saveSoldItemList() {
     console.log('implement saving sold items list');
+    this.checkoutSoldItemsService.saveAllSoldItemsList(this.listNewItemsToShops).subscribe();
   }
 
   sendSoldItemList() {
@@ -296,10 +307,28 @@ export class CheckoutSoldItemsComponent implements OnInit {
     });
 
     // once confirmed, send delivery order
+    dialogRef.afterClosed().subscribe(() => {
+      this.checkoutSoldItemsService.sendAllSoldItemsList(this.listNewItemsToShops).subscribe( JsonDto => {
+          console.log(JsonDto);
 
+          this.listNewItemsToShops = JsonDto;
+          this.rebuildListCategories();
+        }
+      );
+    });
   }
 
   deleteSoldItemList() {
     console.log('implement deleting sold items list');
+    this.checkoutSoldItemsService.deleteCurrentSoldItemsList().subscribe();
+  }
+
+  loadSoldItemList() {
+    console.log('implement loading sold items list');
+    this.checkoutSoldItemsService.getAllSoldItemsList().subscribe( JsonDto => {
+      this.listNewItemsToShops = JsonDto;
+      this.rebuildListCategories();
+    }
+  );
   }
 }

@@ -1,0 +1,13 @@
+button {
+  transition-duration: 0.4s;
+  display: inline-block;
+  font-size: 15px;
+  cursor: pointer;
+  text-align: center;
+  text-decoration: none;
+  outline: none;
+  color: #fff;
+  background-color: #212e3e;
+  border: none;
+  /*box-shadow: 0 5px #999;*/
+}

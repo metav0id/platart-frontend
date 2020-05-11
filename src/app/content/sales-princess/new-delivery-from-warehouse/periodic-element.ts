@@ -1,11 +1,11 @@
 export interface PeriodicElement {
   /** Is used for table elements */
-  position: number;
+  identifierOnDeliveryList: number;
   category: string;
   quantity: number;
   originalQuantity: number;
-  listPrice: number;
-  salesPrice: number;
+  priceListPerUnit: number;
+  priceSalesPerUnit: number;
   timestamp: string;
   comment: string;
 }

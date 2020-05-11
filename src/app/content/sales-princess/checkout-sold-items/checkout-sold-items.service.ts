@@ -4,6 +4,7 @@ import {ShopsCurrentInventoryDTO} from '../sales-princess-DTOs/ShopsCurrentInven
 import {WarehouseItemCategoryDTO} from '../../warehouse-queen/warehouseCategory/warehouse-item-category-DTO';
 import {Observable} from 'rxjs';
 import {environment} from '../../../../environments/environment';
+import {ShopsCheckoutSoldItemsDTO} from "./checkout-sold-items-DTOs/ShopsCheckoutSoldItemsDTO";
 
 @Injectable({
   providedIn: 'root'
@@ -12,9 +13,6 @@ export class CheckoutSoldItemsService {
 
   constructor(private http: HttpClient) {
   }
-
-  private readonly saveAllSoldItemsListURL: string = 'http://localhost:8081/shops/saveAllSoldItemsList';
-  private readonly sendAllSoldItemsListURL: string = 'http://localhost:8081/shops/sendAllSoldItemsList';
 
   public getAllCategories(): Observable<WarehouseItemCategoryDTO[]> {
     return this.http.post<WarehouseItemCategoryDTO[]>(environment.getAllCategories, null);
@@ -28,15 +26,26 @@ export class CheckoutSoldItemsService {
   }
 
   // save all sold items
-  public saveAllSoldItemsList(soldItemList: WarehouseItemCategoryDTO[]): Observable<null> {
-    return this.http.post<null>(this.saveAllSoldItemsListURL, soldItemList);
+  public getAllSoldItemsList(): Observable<ShopsCheckoutSoldItemsDTO[]> {
+    return this.http.post<null>(environment.getAllSoldItemsListURL, null);
+  }
+
+  // save all sold items
+  public saveAllSoldItemsList(soldItemList: ShopsCheckoutSoldItemsDTO[]): Observable<null> {
+    return this.http.post<null>(environment.saveAllSoldItemsListURL, soldItemList);
   }
 
   // send all sold items
-  public sendAllSoldItemsList(soldItemList: WarehouseItemCategoryDTO[]): Observable<null> {
-    return this.http.post<null>(this.sendAllSoldItemsListURL, soldItemList);
+  public sendAllSoldItemsList(soldItemList: ShopsCheckoutSoldItemsDTO[]): Observable<ShopsCheckoutSoldItemsDTO[]> {
+    return this.http.post<null>(environment.sendAllSoldItemsListURL, soldItemList);
   }
 
+// delete current sold items list
+  public deleteCurrentSoldItemsList(): Observable<null> {
+    return this.http.post<null>(environment.deleteCurrentSoldItemsListURL, null);
+  }
 
-
+  public loadCurrentSoldItemsList(): Observable<ShopsCheckoutSoldItemsDTO[]> {
+    return this.http.post<null>(environment.loadAllSoldItemsListURL, null);
+  }
 }

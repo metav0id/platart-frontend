@@ -5,41 +5,12 @@ import {PeriodicElement} from './periodic-element';
 import {HttpClient} from '@angular/common/http';
 import {environment} from '../../../../environments/environment';
 import {map} from 'rxjs/operators';
+import {ShopCheckInNewItemsDTO} from './shop-check-in-new-items-dto';
 
 @Injectable({
   providedIn: 'root'
 })
 export class NewDeliveryFromWarehouseService {
-
-  // TEST-DATA
-  private newItemOnList1 = {
-    position: 1,
-    category: 'Kette',
-    listPrice: 25,
-    salesPrice: 15,
-    quantity: 100,
-    timestamp: '22.04.2020',
-    comment: ''
-  };
-  private newItemOnList2 = {
-    position: 1,
-    category: 'Ring',
-    listPrice: 25,
-    salesPrice: 15,
-    quantity: 100,
-    timestamp: '22.04.2020',
-    comment: ''
-  };
-  private newItemOnList3 = {
-    position: 1,
-    category: 'Kette',
-    listPrice: 25,
-    salesPrice: 15,
-    quantity: 100,
-    timestamp: '22.04.2020',
-    comment: ''
-  };
-
   private listItems: DeliveryItemFromWarehouseDTO[] = [];
 
   constructor(private http: HttpClient) {
@@ -47,23 +18,22 @@ export class NewDeliveryFromWarehouseService {
 
   public getNewDeliveryForShop(shop: string): Observable<PeriodicElement[]> {
 
-    const shopDTO = {shop: shop};
+    const shopDTO = {shop};
 
-    return this.http.post<PeriodicElement[]>(environment.getDeliveryItemsFromWarehouseByShop, shopDTO).
-      pipe(map(Json => {
-        return this.convertDtoToPeriodicElement(Json);
+    return this.http.post<PeriodicElement[]>(environment.getDeliveryItemsFromWarehouseByShop, shopDTO).pipe(map(Json => {
+      return this.convertDtoToPeriodicElement(Json);
     }));
   }
 
   private convertDtoToPeriodicElement(listItems): PeriodicElement[] {
     const listItemsPeriodicElements: PeriodicElement[] = [];
-    let counter = 0;
+
     listItems.forEach(entry => {
       const entryPeriodicElement: PeriodicElement = {
-        position: counter++,
+        identifierOnDeliveryList: entry.identifierOnDeliveryList,
         category: entry.category,
-        listPrice: entry.listPrice,
-        salesPrice: entry.salesPrice,
+        priceListPerUnit: entry.listPrice,
+        priceSalesPerUnit: entry.salesPrice,
         quantity: entry.quantity,
         originalQuantity: entry.quantity,
         timestamp: entry.timestamp,
@@ -72,5 +42,30 @@ export class NewDeliveryFromWarehouseService {
       listItemsPeriodicElements.push(entryPeriodicElement);
     });
     return listItemsPeriodicElements;
+  }
+
+  public saveList(shop: string, listTable: PeriodicElement[]) {
+    const listDTO: ShopCheckInNewItemsDTO[] = this.convertPeridicElementToDTO(shop, listTable);
+    console.log(listDTO);
+    this.http.post(environment.saveDeliveryItemsToShopStock, listDTO).subscribe(answer => console.log('Saved successfully? ' + answer));
+  }
+
+  private convertPeridicElementToDTO(shop: string, listTable: PeriodicElement[]): ShopCheckInNewItemsDTO[] {
+    const listDTO: ShopCheckInNewItemsDTO[] = [];
+    for (const item of listTable) {
+      const itemDTO: ShopCheckInNewItemsDTO = {
+        identifierOnDeliveryList: item.identifierOnDeliveryList,
+        shop,
+        category: item.category,
+        priceListPerUnit: item.priceListPerUnit,
+        priceSalesPerUnit: item.priceSalesPerUnit,
+        quantity: item.quantity,
+        originalQuantity: item.originalQuantity,
+        timestamp: item.timestamp,
+        comment: item.comment
+      };
+      listDTO.push(itemDTO);
+    }
+    return listDTO;
   }
 }
