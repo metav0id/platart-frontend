@@ -17,12 +17,12 @@ export class AddDeliveryItemComponent implements OnInit {
   public myForm: FormGroup;
 
   public newItem: PeriodicElement = {
-    position: 0,
+    identifierOnDeliveryList: -1,
     category: '',
     quantity: 0,
     originalQuantity: 0,
-    listPrice: 0,
-    salesPrice: 0,
+    priceListPerUnit: 0,
+    priceSalesPerUnit: 0,
     timestamp: '',
     comment: ''
   };
@@ -71,8 +71,8 @@ export class AddDeliveryItemComponent implements OnInit {
     this.newItem.category = userData.category;
     this.newItem.timestamp = userData.timestamp;
     this.newItem.quantity = userData.quantity;
-    this.newItem.listPrice = userData.priceListPerUnit;
-    this.newItem.salesPrice = userData.priceSalesPerUnit;
+    this.newItem.priceListPerUnit = userData.priceListPerUnit;
+    this.newItem.priceSalesPerUnit = userData.priceSalesPerUnit;
     this.newItem.comment = userData.comment;
     this.newItem.originalQuantity = userData.quantity;
     this.data.push(this.newItem);
