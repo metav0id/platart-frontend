@@ -14,12 +14,6 @@ export class CheckoutSoldItemsService {
   constructor(private http: HttpClient) {
   }
 
-  private readonly getAllSoldItemsListURL: string = 'http://localhost:8081/shops/getAllSoldItemsList';
-  private readonly saveAllSoldItemsListURL: string = 'http://localhost:8081/shops/saveAllSoldItemsList';
-  private readonly sendAllSoldItemsListURL: string = 'http://localhost:8081/shops/sendAllSoldItemsList';
-  private readonly deleteCurrentSoldItemsListURL: string = 'http://localhost:8081/shops/deleteCurrentSoldItemsList';
-  private readonly loadAllSoldItemsListURL: string = 'http://localhost:8081/shops/loadAllCurrentSoldItemsList';
-
   public getAllCategories(): Observable<WarehouseItemCategoryDTO[]> {
     return this.http.post<WarehouseItemCategoryDTO[]>(environment.getAllCategories, null);
   }
@@ -33,25 +27,25 @@ export class CheckoutSoldItemsService {
 
   // save all sold items
   public getAllSoldItemsList(): Observable<ShopsCheckoutSoldItemsDTO[]> {
-    return this.http.post<null>(this.getAllSoldItemsListURL, null);
+    return this.http.post<null>(environment.getAllSoldItemsListURL, null);
   }
 
   // save all sold items
   public saveAllSoldItemsList(soldItemList: ShopsCheckoutSoldItemsDTO[]): Observable<null> {
-    return this.http.post<null>(this.saveAllSoldItemsListURL, soldItemList);
+    return this.http.post<null>(environment.saveAllSoldItemsListURL, soldItemList);
   }
 
   // send all sold items
   public sendAllSoldItemsList(soldItemList: ShopsCheckoutSoldItemsDTO[]): Observable<ShopsCheckoutSoldItemsDTO[]> {
-    return this.http.post<null>(this.sendAllSoldItemsListURL, soldItemList);
+    return this.http.post<null>(environment.sendAllSoldItemsListURL, soldItemList);
   }
 
 // delete current sold items list
   public deleteCurrentSoldItemsList(): Observable<null> {
-    return this.http.post<null>(this.deleteCurrentSoldItemsListURL, null);
+    return this.http.post<null>(environment.deleteCurrentSoldItemsListURL, null);
   }
 
   public loadCurrentSoldItemsList(): Observable<ShopsCheckoutSoldItemsDTO[]> {
-    return this.http.post<null>(this.loadAllSoldItemsListURL, null);
+    return this.http.post<null>(environment.loadAllSoldItemsListURL, null);
   }
 }

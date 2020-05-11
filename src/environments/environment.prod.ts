@@ -18,5 +18,10 @@ export const environment = {
   deleteCategory: 'http://161.35.4.253:8081/warehouse/deleteCategory',
   getAllItemsInStock: 'http://161.35.4.253:8081/warehouse/getallitems',
   getDeliveryItemsFromWarehouseByShop: 'http://161.35.4.253:8081/shops/getalldeliveriesnotinstock',
-  saveDeliveryItemsToShopStock: 'http://161.35.4.253:8081/shops/saveNewDeliveryFromWarehouse'
+  saveDeliveryItemsToShopStock: 'http://161.35.4.253:8081/shops/saveNewDeliveryFromWarehouse',
+  getAllSoldItemsListURL:  'http://161.35.4.253:8081/shops/getAllSoldItemsList',
+  saveAllSoldItemsListURL:  'http://161.35.4.253:8081/shops/saveAllSoldItemsList',
+  sendAllSoldItemsListURL:  'http://161.35.4.253:8081/shops/sendAllSoldItemsList',
+  deleteCurrentSoldItemsListURL:  'http://161.35.4.253:8081/shops/deleteCurrentSoldItemsList',
+  loadAllSoldItemsListURL: 'http://161.35.4.253:8081/shops/loadAllCurrentSoldItemsList',
 };
