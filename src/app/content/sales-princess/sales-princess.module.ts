@@ -33,7 +33,7 @@ import { AddDeliveryItemComponent } from './new-delivery-from-warehouse/add-deli
     CheckoutSoldItemsComponent,
     CheckoutSoldItemsDetailsComponent,
     CheckoutSoldItemsSendVerificationComponent,
-    ViewShopInventoryComponent
+    ViewShopInventoryComponent,
     CheckoutSoldItemsSendVerificationComponent,
     AddDeliveryItemComponent
   ],

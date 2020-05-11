@@ -13,8 +13,10 @@ import {AuthService} from "../services/auth.service";
   providedIn: 'root'
 })
 export class AuthGuard implements CanActivate {
+
   constructor(private auth: AuthService, private router: Router) {
   }
+
   canActivate(): boolean {
     if (this.auth.authStatus()) {
       return  true;
@@ -22,7 +24,6 @@ export class AuthGuard implements CanActivate {
       this.router.navigateByUrl('/login');
       return false;
     }
-
   }
 
 }

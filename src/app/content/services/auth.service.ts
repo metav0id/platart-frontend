@@ -41,6 +41,7 @@ export class AuthService {
     );
 
   }
+
   register(user: UserComponent) {
     const authData = {
       ...user,
@@ -61,6 +62,7 @@ export class AuthService {
     this.userToken = idToken;
     localStorage.setItem('token', idToken);
   }
+
   readToken() {
     if (localStorage.getItem('token') ) {
       this.userToken = localStorage.getItem('token');
@@ -69,8 +71,8 @@ export class AuthService {
     }
     return this.userToken;
   }
+
   authStatus(): boolean{
     return this.userToken.length > 2;
-
   }
 }
