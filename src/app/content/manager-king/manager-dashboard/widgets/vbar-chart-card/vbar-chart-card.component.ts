@@ -1,6 +1,4 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {ChartDataSets, ChartOptions, ChartType} from 'chart.js';
-import {Color, Label} from 'ng2-charts';
 import {ManagerDashboardService} from '../../manager-dashboard.service';
 
 

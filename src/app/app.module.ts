@@ -26,7 +26,6 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MapComponent} from './content/map/map.component';
 import {MatSliderModule} from '@angular/material/slider';
-import {MatProgressBarModule} from '@angular/material/progress-bar';
 import {MatCardModule} from '@angular/material/card';
 import {AgmCoreModule} from '@agm/core';
 import {SalesPrincessModule} from './content/sales-princess/sales-princess.module';
@@ -37,9 +36,8 @@ import {ComerceComponent} from './content/comerce/comerce.component';
 import {FormComponent} from './content/comerce/form.component';
 import { MarkerFormComponent } from './content/map/components/marker-form.component';
 import { MDBBootstrapModule } from 'angular-bootstrap-md';
-import { ChartsModule} from 'ng2-charts';
-import { NgxGaugeModule} from 'ngx-gauge';
 import {NgxChartsModule} from '@swimlane/ngx-charts';
+import {FlexLayoutModule} from '@angular/flex-layout';
 
 
 
@@ -83,6 +81,7 @@ import {NgxChartsModule} from '@swimlane/ngx-charts';
     TranslocoRootModule,
     MDBBootstrapModule.forRoot(),
     NgxChartsModule,
+    FlexLayoutModule
   ],
   providers: [],
   bootstrap: [AppComponent]
