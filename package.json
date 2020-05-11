@@ -27,6 +27,7 @@
     "@ngneat/transloco": "^2.16.0",
     "@swimlane/ngx-charts": "^14.0.0",
     "@types/chart.js": "^2.9.20",
+    "ally": "^0.2.13",
     "angular-bootstrap-md": "^9.2.0",
     "animate.css": "^3.7.2",
     "bootstrap": "^4.4.1",
