@@ -41,6 +41,7 @@ import {UserComponent} from "./content/pages/models/user.component";
 import {RegistroComponent} from "./content/pages/registro/registro.component";
 import {LoginComponent} from "./content/pages/login/login.component";
 
+import {MatFormFieldModule} from '@angular/material/form-field';
 
 
 
@@ -85,6 +86,7 @@ import {LoginComponent} from "./content/pages/login/login.component";
     MatCardModule,
     MatDialogModule,
     TranslocoRootModule,
+    MatFormFieldModule,
     MDBBootstrapModule.forRoot()
   ],
   providers: [],

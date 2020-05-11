@@ -1,8 +1,7 @@
 import {Component, Inject, OnInit} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
-import {CheckoutTableCategoryItems} from '../checkout-sold-items-DTOs/CheckoutTableCategoryItems';
 import {FormControl, FormGroup, Validators} from "@angular/forms";
-import {CheckoutTableItems} from "../checkout-sold-items-DTOs/CheckoutTableItems";
+import {ShopsCheckoutSoldItemsDTO} from "../checkout-sold-items-DTOs/ShopsCheckoutSoldItemsDTO";
 
 @Component({
   selector: 'app-checkout-sold-items-details',
@@ -15,7 +14,7 @@ export class CheckoutSoldItemsDetailsComponent implements OnInit {
 
   constructor(
     public dialogRef: MatDialogRef<CheckoutSoldItemsDetailsComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: CheckoutTableItems[]) {
+    @Inject(MAT_DIALOG_DATA) public data: ShopsCheckoutSoldItemsDTO[]) {
   }
 
   ngOnInit(): void {
@@ -39,7 +38,7 @@ export class CheckoutSoldItemsDetailsComponent implements OnInit {
     });
   }
 
-  deleteItemList(item: CheckoutTableItems) {
+  deleteItemList(item: ShopsCheckoutSoldItemsDTO) {
     console.log('delete: ' + item.category + ' - ' + item.priceListPerUnit);
     const index: number = this.data.indexOf(item);
     console.log('index: ' + index);

@@ -1,7 +1,7 @@
 import {Component, Inject, OnInit} from '@angular/core';
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
-import {CheckoutTableItems} from "../checkout-sold-items-DTOs/CheckoutTableItems";
+import {ShopsCheckoutSoldItemsDTO} from "../checkout-sold-items-DTOs/ShopsCheckoutSoldItemsDTO";
 
 @Component({
   selector: 'app-checkout-sold-items-send-verification',
@@ -15,7 +15,7 @@ export class CheckoutSoldItemsSendVerificationComponent implements OnInit {
 
   constructor(
     public dialogRef: MatDialogRef<CheckoutSoldItemsSendVerificationComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: CheckoutTableItems[]
+    @Inject(MAT_DIALOG_DATA) public data: ShopsCheckoutSoldItemsDTO[]
   ) { }
 
   ngOnInit(): void {
@@ -26,9 +26,7 @@ export class CheckoutSoldItemsSendVerificationComponent implements OnInit {
   onNoClick(): void {
     this.dialogRef.close();
   }
-  onSendClick(): void {
-    this.dialogRef.close();
-  }
+
 
   createFormControls(): void {
     this.quantityFormControl = new FormControl('', [
@@ -42,7 +40,7 @@ export class CheckoutSoldItemsSendVerificationComponent implements OnInit {
     });
   }
 
-  onSubmit() {
+  onSendClick() {
     if (this.myForm.valid) {
       console.log('Form submitted');
       //this.myForm.reset();
