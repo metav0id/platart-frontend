@@ -27,8 +27,7 @@ export const environment = {
   dataLastMonthURL: 'http://localhost:8081/dashboard/getLastMonthData',
   dataCurrentMonthURL: 'http://localhost:8081/dashboard/getCurrentMonthDAta',
   yesterdaysDataURL: 'http://localhost:8081/dashboard/getYesterdaysData',
-  actualsDataURL: 'http://localhost:8081/dashboard/getActualsData'
-  getDeliveryItemsFromWarehouseByShop: 'http://localhost:8081/shops/getalldeliveriesnotinstock',
+  actualsDataURL: 'http://localhost:8081/dashboard/getActualsData',
   saveDeliveryItemsToShopStock: 'http://localhost:8081/shops/saveNewDeliveryFromWarehouse',
   getAllSoldItemsListURL:  'http://localhost:8081/shops/getAllSoldItemsList',
   saveAllSoldItemsListURL:  'http://localhost:8081/shops/saveAllSoldItemsList',
