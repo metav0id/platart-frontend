@@ -24,4 +24,10 @@ export const environment = {
   sendAllSoldItemsListURL:  'http://161.35.4.253:8081/shops/sendAllSoldItemsList',
   deleteCurrentSoldItemsListURL:  'http://161.35.4.253:8081/shops/deleteCurrentSoldItemsList',
   loadAllSoldItemsListURL: 'http://161.35.4.253:8081/shops/loadAllCurrentSoldItemsList',
+  vBarDataURL: 'http://161.35.4.253:8081/dashboard/getVbarData',
+  hBarDataURL: 'http://161.35.4.253:8081/dashboard/getHbarData',
+  dataLastMonthURL: 'http://161.35.4.253:8081/dashboard/getLastMonthData',
+  dataCurrentMonthURL: 'http://161.35.4.253:8081/dashboard/getCurrentMonthDAta',
+  yesterdaysDataURL: 'http://161.35.4.253:8081/dashboard/getYesterdaysData',
+  actualsDataURL: 'http://161.35.4.253:8081/dashboard/getActualsData',
 };
