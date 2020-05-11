@@ -12,6 +12,7 @@ import {MatDialog} from '@angular/material/dialog';
 import {NewDeliveryFromWarehouseDetailsComponent} from './new-delivery-from-warehouse-details/new-delivery-from-warehouse-details.component';
 import {NewDeliveryFromWarehouseService} from './new-delivery-from-warehouse.service';
 import {Shop} from '../../commonDTOs/shop';
+import {AddDeliveryItemComponent} from "./add-delivery-item/add-delivery-item.component";
 
 @Component({
   selector: 'app-new-delivery-from-warehouse',
@@ -33,8 +34,6 @@ export class NewDeliveryFromWarehouseComponent implements OnInit {
 
   /** Category selection */
   public shopControl = new FormControl('', Validators.required);
-
-  public categoryItems: SalesItemCategoryDTO[] = [{category: 'Kette'}, {category: 'Ring'}];
 
   /** List of available shops */
   public listShops: Shop[] = [{name: 'shop1'}, {name: 'shop2'}];
@@ -83,7 +82,7 @@ export class NewDeliveryFromWarehouseComponent implements OnInit {
     this.table.renderRows();
   }
 
-  openDialog(element: PeriodicElement): void {
+  openDialogDeliveryDetails(element: PeriodicElement): void {
     const dialogRef = this.dialog.open(NewDeliveryFromWarehouseDetailsComponent, {
       width: '250px',
       data: element
@@ -91,6 +90,18 @@ export class NewDeliveryFromWarehouseComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(result => {
       console.log('Dialog closed');
+    });
+  }
+
+  openDialogAddItem(): void {
+    const dialogRef = this.dialog.open(AddDeliveryItemComponent, {
+      width: '250px',
+      data: this.listNewItemsFromWarehouse
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('Dialog closed');
+      this.table.renderRows();
     });
   }
 
