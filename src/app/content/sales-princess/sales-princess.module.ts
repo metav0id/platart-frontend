@@ -22,6 +22,7 @@ import { CheckoutSoldItemsDetailsComponent } from './checkout-sold-items/checkou
 import {MatCardModule} from "@angular/material/card";
 import {TranslocoRootModule} from "../../transloco-root.module";
 import { CheckoutSoldItemsSendVerificationComponent } from './checkout-sold-items/checkout-sold-items-send-verification/checkout-sold-items-send-verification.component';
+import { ViewShopInventoryComponent } from './view-shop-inventory/view-shop-inventory.component';
 
 
 @NgModule({
@@ -30,7 +31,8 @@ import { CheckoutSoldItemsSendVerificationComponent } from './checkout-sold-item
     NewDeliveryFromWarehouseDetailsComponent,
     CheckoutSoldItemsComponent,
     CheckoutSoldItemsDetailsComponent,
-    CheckoutSoldItemsSendVerificationComponent
+    CheckoutSoldItemsSendVerificationComponent,
+    ViewShopInventoryComponent
   ],
   imports: [
     CommonModule,
