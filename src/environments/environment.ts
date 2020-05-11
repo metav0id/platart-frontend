@@ -28,7 +28,6 @@ export const environment = {
   sendAllSoldItemsListURL:  'http://localhost:8081/shops/sendAllSoldItemsList',
   deleteCurrentSoldItemsListURL:  'http://localhost:8081/shops/deleteCurrentSoldItemsList',
   loadAllSoldItemsListURL: 'http://localhost:8081/shops/loadAllCurrentSoldItemsList',
-
 };
 
 /*
