@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {UserComponent} from "../pages/models/user.component";
 import {map} from "rxjs/operators";
-
+import {id} from "@swimlane/ngx-charts";
 
 @Injectable({
   providedIn: 'root'
@@ -11,6 +11,7 @@ export class AuthService {
   private url = 'https://identitytoolkit.googleapis.com/v1';
   private apiKey = 'AIzaSyCqV2cjIUIeQ_zpFCfbGWT11pNdI7Lka3k';
   userToken: string;
+  savedToken: String;
 
   // create new user
   // https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=[API_KEY]
@@ -35,7 +36,10 @@ export class AuthService {
     ).pipe(
       map(resp => {
         console.log('In RXJS');
+        this.savedToken = ( resp ['idToken'] );
+        console.log("savedtoken" + this.savedToken)
         this.saveToken( resp ['idToken'] );
+        console.log("usertoken" + this.userToken)
         return resp;
       })
     );
@@ -51,6 +55,8 @@ export class AuthService {
     ).pipe(
       map(resp => {
         console.log('In RXJS');
+        this.savedToken = ( resp ['idToken'] );
+        console.log("savedtoken" + this.savedToken)
         this.saveToken( resp ['idToken'] );
         return resp;
       })
@@ -61,6 +67,9 @@ export class AuthService {
   private saveToken(idToken: string) {
     this.userToken = idToken;
     localStorage.setItem('token', idToken);
+    let today = new Date();
+    today.setSeconds(3600);
+    localStorage.setItem('expires', today.getTime().toString());
   }
 
   readToken() {
@@ -72,7 +81,24 @@ export class AuthService {
     return this.userToken;
   }
 
+
+
   authStatus(): boolean{
-    return this.userToken.length > 2;
+    if (this.userToken.length < 2) {
+      return false;
+    }
+    const expires = Number(localStorage.getItem('expires'));
+    const expDate = new Date();
+    expDate.setTime(expires);
+    if (expDate > new Date() && this.userToken == this.savedToken ) {
+      return true;
+    } else {
+      return false;
+    }
   }
+
+
+
+
+
 }

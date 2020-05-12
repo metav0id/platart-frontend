@@ -4,6 +4,10 @@ import {UserComponent} from "../models/user.component";
 import {AuthService} from "../../services/auth.service";
 import Swal from 'sweetalert2';
 import {Router} from "@angular/router";
+import { AngularFireModule } from '@angular/fire';
+import { AngularFirestoreModule } from '@angular/fire/firestore';
+import { AngularFireStorageModule } from '@angular/fire/storage';
+import { AngularFireAuthModule } from '@angular/fire/auth';
 
 @Component({
   selector: 'app-login',
@@ -14,7 +18,7 @@ export class LoginComponent implements OnInit {
   user: UserComponent = new UserComponent();
   rememberUser = false;
 
-  constructor(private auth: AuthService, private router: Router) {
+  constructor(private auth: AuthService, private router: Router, public af: AngularFireModule) {
   }
 
   ngOnInit() {
@@ -22,6 +26,7 @@ export class LoginComponent implements OnInit {
       this.user.email = localStorage.getItem('email');
       this.rememberUser = true
     }
+
   }
 
   login(form: NgForm) {

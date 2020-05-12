@@ -47,6 +47,8 @@ import {FlexLayoutModule} from '@angular/flex-layout';
 
 
 
+
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -91,7 +93,7 @@ import {FlexLayoutModule} from '@angular/flex-layout';
     MatFormFieldModule,
     MDBBootstrapModule.forRoot(),
     NgxChartsModule,
-    FlexLayoutModule
+    FlexLayoutModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
