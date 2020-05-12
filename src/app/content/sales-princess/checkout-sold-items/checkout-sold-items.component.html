@@ -4,12 +4,12 @@
       <div class="space"></div>
 
       <div class="box">
-        <div class="container cont-bg punkt">
+        <div class="container cont-bg">
           <div class="space"></div>
           <h1>Items sold today</h1>
           <div>
             <h3>Please type in the items sold today:</h3>
-            <div class="container cont-bg2 punkt">
+            <div class="container cont-bg2 ">
               <div class="space"></div>
 
               <div class="newOrderInputFieldsDate">
@@ -55,7 +55,7 @@
 
               <div class="itemCheckoutSoldItemFinalPricePerUnit">
                 <mat-form-field appearance="fill">
-                  <mat-label>FinalPrice/Unit</mat-label>
+                  <mat-label>List Price</mat-label>
                   <input matInput #input [(ngModel)]="newCheckoutItem.priceListPerUnit" maxlength="10" placeholder="Ex. deliveryDisplayPricePerUnit">
                 </mat-form-field>
                 <mat-error *ngIf="newCheckoutItem.priceListPerUnit<=0" >
@@ -73,7 +73,7 @@
                 </mat-error>
               </div>
 
-              <div class=" container cont-bg punkt">
+              <div class=" container cont-bg">
                 <div class="discountSelectionRadioButton">
                   <mat-form-field appearance="fill">
                     <mat-label>Revenue type:</mat-label>
@@ -101,7 +101,7 @@
                 </div>
               </div>
 
-              <div class=" container cont-bg punkt">
+              <div class=" container cont-bg">
                 <div class="discountSelectionRadioButton">
                   <label id="example-radio-group-label">Comment:</label>
                   <div class="space"></div>
@@ -132,8 +132,8 @@
         </div>
       </div>
 
-      <div class="categoryItemsList container cont-bg punkt">
-        <h3>Sold Items:</h3>
+      <div class="categoryItemsList container cont-bg">
+        <h3>Sold Items by Category:</h3>
         <div class="table-responsive">
           <table mat-table #myShopCheckoutProductsTable [dataSource]="categoryLists">
 
@@ -168,7 +168,7 @@
         </div>
       </div>
 
-      <div class="sendSaveSoldItemsList container cont-bg punkt">
+      <div class="sendSaveSoldItemsList container cont-bg">
         <div>
           <button mat-button matTooltip="save sold items list" (click)="saveSoldItemList()"><mat-icon>save</mat-icon></button>
           <button mat-button matTooltip="send sold items list" (click)="sendSoldItemList()"><mat-icon>send</mat-icon></button>
