@@ -1,3 +1,19 @@
+<div class="space"></div>
+
+<div class="container-fluid d-flex justify-content-center">
+  <!--BOX -->
+  <div class="demo-card-wide mdl-card mdl-shadow--2dp justi ">
+    <div class="container d-flex justify-content-left mdl-card__title ">
+      <h1>Items sold today</h1>
+    </div>
+    <div class="mdl-card__supporting-text">
+      <h3>Please type in the items sold today:</h3>
+    </div>
+  </div>
+</div>
+
+<div class="space"></div>
+
 <div class="container">
   <div class="row">
     <div class="col-sm-4">
@@ -6,9 +22,8 @@
       <div class="box">
         <div class="container cont-bg">
           <div class="space"></div>
-          <h1>Items sold today</h1>
+
           <div>
-            <h3>Please type in the items sold today:</h3>
             <div class="container cont-bg2 ">
               <div class="space"></div>
 
@@ -131,9 +146,31 @@
           </div>
         </div>
       </div>
+    </div>
+  </div>
+
+<div class="space"></div>
+
+  <div class="container-fluid d-flex justify-content-center">
+    <!--BOX -->
+    <div class="demo-card-wide mdl-card mdl-shadow--2dp justi ">
+      <div class="container d-flex justify-content-left mdl-card__title ">
+        <h2>Checked out Items</h2>
+      </div>
+      <div class="mdl-card__supporting-text">
+        <h3>Category-organized</h3>
+      </div>
+    </div>
+  </div>
+
+<div class="space"></div>
+
+<div class="container">
+  <div class="row">
+    <div class="col-sm-4">
+      <div class="space"></div>
 
       <div class="categoryItemsList container cont-bg">
-        <h3>Sold Items by Category:</h3>
         <div class="table-responsive">
           <table mat-table #myShopCheckoutProductsTable [dataSource]="categoryLists">
 
@@ -153,7 +190,7 @@
                       </p>
                     </mat-card-content>
                     <mat-card-actions>
-                    <button mat-button (click)="openDialogCategory(element)"><mat-icon>list_alt</mat-icon></button>
+                      <button mat-button (click)="openDialogCategory(element)"><mat-icon>list_alt</mat-icon></button>
                     </mat-card-actions>
                   </mat-card>
                 </div>
@@ -167,25 +204,27 @@
           </table>
         </div>
       </div>
+    </div>
+  </div>
+</div>
 
-      <div class="sendSaveSoldItemsList container cont-bg">
-        <div>
+<div class="space"></div>
+
+<div class="container-fluid d-flex justify-content-center">
+
+  <!--BOX -->
+  <div class="demo-card-wide mdl-card mdl-shadow--2dp justi ">
+    <div class="container d-flex justify-content-left mdl-card__title ">
+      <h3 class="mdl-card__title-text">Send, Save, Delete</h3>
+    </div>
+    <div class="mdl-card__supporting-text">
+      <div class=" table-responsive ">
+        <div class="container cont-bg4">
           <button mat-button matTooltip="save sold items list" (click)="saveSoldItemList()"><mat-icon>save</mat-icon></button>
           <button mat-button matTooltip="send sold items list" (click)="sendSoldItemList()"><mat-icon>send</mat-icon></button>
           <button mat-button matTooltip="save sold items list" (click)="deleteSoldItemList()"><mat-icon>delete</mat-icon></button>
         </div>
       </div>
-
-        <!--      CONTENT-->
-
-
-
-      </div>
-
-      <div class="mdl-card__menu">
-        <button class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect">
-          <i class="material-icons">share</i>
-        </button>
-      </div>
     </div>
   </div>
+</div>

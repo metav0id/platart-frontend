@@ -14,7 +14,7 @@ import {Shop} from "../../commonDTOs/shop";
 export class ViewShopInventoryComponent implements OnInit {
 
   // table information
-  displayedColumns: string[] = ['position', 'shop', 'category', 'quantity', 'priceSalesPerUnit', 'priceListPerUnit' ];
+  displayedColumns: string[] = ['category', 'quantity', 'priceListPerUnit', 'priceSalesPerUnit' ];
   dataSource = new MatTableDataSource();
   @ViewChild('myShopsItemsTable') table: MatTable<any>;
 
@@ -24,6 +24,7 @@ export class ViewShopInventoryComponent implements OnInit {
   /** List of available shops */
   public listShops: Shop[] = [{name: 'shop1'}, {name: 'shop2'}];
   public selectedShopToFilterOnList = '';
+  public selectedShopToDisplay = '';
 
   constructor(private viewShopInventoryService: ViewShopInventoryService) { }
 
@@ -32,6 +33,7 @@ export class ViewShopInventoryComponent implements OnInit {
 
   // fetch inventory data
   getShopItems(): void {
+    this.selectedShopToDisplay = this.selectedShopToFilterOnList;
     const shopItems: ShopInventoryItem[] = [];
     this.viewShopInventoryService.getAllItemsObs(this.selectedShopToFilterOnList).subscribe((observable) => {
       console.log(observable);
