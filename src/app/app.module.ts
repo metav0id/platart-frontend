@@ -44,9 +44,20 @@ import {LoginComponent} from './content/pages/login/login.component';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {NgxChartsModule} from '@swimlane/ngx-charts';
 import {FlexLayoutModule} from '@angular/flex-layout';
+import { AngularFireModule } from '@angular/fire';
+import { AngularFirestoreModule } from '@angular/fire/firestore';
+import { AngularFireStorageModule } from '@angular/fire/storage';
+import { AngularFireAuthModule } from '@angular/fire/auth';
 
 
-
+ //
+ export const firebaseConfig = {
+   apiKey: '',
+   authDomain: '',
+   databaseURL: '',
+   storageBucket:'',
+   messagingSenderId: '',
+ };
 
 
 @NgModule({
@@ -94,6 +105,7 @@ import {FlexLayoutModule} from '@angular/flex-layout';
     MDBBootstrapModule.forRoot(),
     NgxChartsModule,
     FlexLayoutModule,
+    AngularFireModule
   ],
   providers: [],
   bootstrap: [AppComponent]
