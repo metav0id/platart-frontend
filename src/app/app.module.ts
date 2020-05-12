@@ -50,14 +50,7 @@ import { AngularFireStorageModule } from '@angular/fire/storage';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 
 
- //
- export const firebaseConfig = {
-   apiKey: '',
-   authDomain: '',
-   databaseURL: '',
-   storageBucket:'',
-   messagingSenderId: '',
- };
+
 
 
 @NgModule({

@@ -12,6 +12,7 @@ export class AuthService {
   private apiKey = 'AIzaSyCqV2cjIUIeQ_zpFCfbGWT11pNdI7Lka3k';
   userToken: string;
   savedToken: String;
+  tokenInStorage: string;
 
   // create new user
   // https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=[API_KEY]
@@ -84,13 +85,15 @@ export class AuthService {
 
 
   authStatus(): boolean{
-    if (this.userToken.length < 2) {
+    this.tokenInStorage = localStorage.getItem('token');
+    console.log(this.tokenInStorage)
+    if (this.tokenInStorage != this.savedToken) {
       return false;
     }
     const expires = Number(localStorage.getItem('expires'));
     const expDate = new Date();
     expDate.setTime(expires);
-    if (expDate > new Date() && this.userToken == this.savedToken ) {
+    if (expDate > new Date() ) {
       return true;
     } else {
       return false;
