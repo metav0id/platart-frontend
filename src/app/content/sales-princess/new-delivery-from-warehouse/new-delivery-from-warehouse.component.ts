@@ -6,7 +6,7 @@ import {WarehouseItemCategoryDTO} from '../../warehouse-queen/warehouseCategory/
 import {MatTable} from '@angular/material/table';
 import {NewDeliveryToWarehouseService} from '../../warehouse-queen/new-delivery-to-warehouse/new-delivery-to-warehouse.service';
 import {SalesItemCategoryDTO} from './sales-item-category-dto';
-import {PeriodicElement} from './periodic-element';
+import {DeliveryItemFromWarehouseDTO} from './DeliveryItemFromWarehouseDTO';
 import {MatDialog} from '@angular/material/dialog';
 // tslint:disable-next-line:max-line-length
 import {NewDeliveryFromWarehouseDetailsComponent} from './new-delivery-from-warehouse-details/new-delivery-from-warehouse-details.component';
@@ -26,8 +26,8 @@ import {AddDeliveryItemComponent} from "./add-delivery-item/add-delivery-item.co
 
 export class NewDeliveryFromWarehouseComponent implements OnInit {
   public displayedColumns: string[] = ['select', 'category', 'salesPrice', 'quantity', 'action'];
-  public listNewItemsFromWarehouse: PeriodicElement[] = [];
-  public selection = new SelectionModel<PeriodicElement>(true, []);
+  public listNewItemsFromWarehouse: DeliveryItemFromWarehouseDTO[] = [];
+  public selection = new SelectionModel<DeliveryItemFromWarehouseDTO>(true, []);
 
   /** Is used to increase position attribute of list elements constantly */
   private counter = 1;
@@ -47,8 +47,7 @@ export class NewDeliveryFromWarehouseComponent implements OnInit {
   }
 
   ngOnInit(): void {
-
-    // TODO implment method to get all Shops
+    this.newDeliveryFromWarehouseService.getListShops().subscribe(JSON => this.listShops = JSON);
   }
 
   /** Whether the number of selected elements matches the total number of rows. */
@@ -69,7 +68,7 @@ export class NewDeliveryFromWarehouseComponent implements OnInit {
   }
 
   /** The label for the checkbox on the passed row */
-  checkboxLabel(row?: PeriodicElement): string {
+  checkboxLabel(row?: DeliveryItemFromWarehouseDTO): string {
     if (!row) {
       return `${this.isAllSelected() ? 'select' : 'deselect'} all`;
     }
@@ -82,7 +81,7 @@ export class NewDeliveryFromWarehouseComponent implements OnInit {
     this.table.renderRows();
   }
 
-  openDialogDeliveryDetails(element: PeriodicElement): void {
+  openDialogDeliveryDetails(element: DeliveryItemFromWarehouseDTO): void {
     const dialogRef = this.dialog.open(NewDeliveryFromWarehouseDetailsComponent, {
       width: '250px',
       data: element

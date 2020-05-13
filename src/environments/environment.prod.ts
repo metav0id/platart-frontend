@@ -7,7 +7,7 @@ export const environment = {
   findMarker: 'http://161.35.4.253:8081/marker/find',
   updateMarker: 'http://161.35.4.253:8081/marker/update',
   deleteMarker: 'http://161.35.4.253:8081/marker/delete',
-  getAllShops: 'http://161.35.4.253:8081/shops/getAllItemsAllShops',
+  getAllShops: 'http://161.35.4.253:8081/comerce/getallshops',
   getAllCategories: 'http://161.35.4.253:8081/warehouse/getAllCategories',
   getAllNewOrderItems: 'http://161.35.4.253:8081/warehouse/getAllNewOrderItems',
   setAllNewOrderItems: 'http://161.35.4.253:8081/warehouse/setAllNewOrderItems',
