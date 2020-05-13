@@ -11,8 +11,6 @@ export class ViewShopInventoryService {
 
   constructor(private http: HttpClient) { }
 
-
-
   getAllItemsObs(shopInput: string): Observable<ShopInventoryItem[]> {
     const ELEMENT_DATA: ShopInventoryItem[] = [
       {

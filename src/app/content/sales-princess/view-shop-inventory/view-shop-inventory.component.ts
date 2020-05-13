@@ -1,10 +1,10 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {ShopInventoryItem} from './view-shop-inventory-DTOs/ShopInventoryItem';
 import {MatTable, MatTableDataSource} from '@angular/material/table';
-import {ViewShopInventoryService} from "./view-shop-inventory.service";
-import {observable} from "rxjs";
-import {FormControl, Validators} from "@angular/forms";
-import {Shop} from "../../commonDTOs/shop";
+import {ViewShopInventoryService} from './view-shop-inventory.service';
+import {observable} from 'rxjs';
+import {FormControl, Validators} from '@angular/forms';
+import {Shop} from '../../commonDTOs/shop';
 
 @Component({
   selector: 'app-view-shop-inventory',
