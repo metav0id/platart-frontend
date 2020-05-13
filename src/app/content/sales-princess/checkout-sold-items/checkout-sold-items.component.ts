@@ -1,16 +1,16 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
-import {SelectionModel} from "@angular/cdk/collections";
-import {MatTable} from "@angular/material/table";
-import {WarehouseItemCategoryDTO} from "../../warehouse-queen/warehouseCategory/warehouse-item-category-DTO";
-import {FormControl, Validators} from "@angular/forms";
-import {CheckoutSoldItemsService} from "./checkout-sold-items.service";
-import {ShopsCheckoutSoldItemsDTO} from "./checkout-sold-items-DTOs/ShopsCheckoutSoldItemsDTO";
-import {DropDownItem} from "./checkout-sold-items-DTOs/DropDownItem";
-import {MatDatepickerInputEvent} from "@angular/material/datepicker";
-import {MatDialog} from "@angular/material/dialog";
-import {CheckoutSoldItemsDetailsComponent} from "./checkout-sold-items-details/checkout-sold-items-details.component";
-import {CheckoutCategories} from "./checkout-sold-items-DTOs/CheckoutCategories";
-import {CheckoutSoldItemsSendVerificationComponent} from "./checkout-sold-items-send-verification/checkout-sold-items-send-verification.component";
+import {SelectionModel} from '@angular/cdk/collections';
+import {MatTable} from '@angular/material/table';
+import {WarehouseItemCategoryDTO} from '../../warehouse-queen/warehouseCategory/warehouse-item-category-DTO';
+import {FormControl, Validators} from '@angular/forms';
+import {CheckoutSoldItemsService} from './checkout-sold-items.service';
+import {ShopsCheckoutSoldItemsDTO} from './checkout-sold-items-DTOs/ShopsCheckoutSoldItemsDTO';
+import {Shop} from './checkout-sold-items-DTOs/Shop';
+import {MatDatepickerInputEvent} from '@angular/material/datepicker';
+import {MatDialog} from '@angular/material/dialog';
+import {CheckoutSoldItemsDetailsComponent} from './checkout-sold-items-details/checkout-sold-items-details.component';
+import {CheckoutCategories} from './checkout-sold-items-DTOs/CheckoutCategories';
+import {CheckoutSoldItemsSendVerificationComponent} from './checkout-sold-items-send-verification/checkout-sold-items-send-verification.component';
 
 @Component({
   selector: 'app-checkout-sold-items',
@@ -18,6 +18,9 @@ import {CheckoutSoldItemsSendVerificationComponent} from "./checkout-sold-items-
   styleUrls: ['./checkout-sold-items.component.css']
 })
 export class CheckoutSoldItemsComponent implements OnInit {
+  constructor(/*private _snackBar: MatSnackBar,*/
+              private checkoutSoldItemsService: CheckoutSoldItemsService,
+              public dialog: MatDialog) { }
 
   // Fields for input-form
   public discountControll = new FormControl('', Validators.required);
@@ -26,7 +29,7 @@ export class CheckoutSoldItemsComponent implements OnInit {
   private readonly DISCOUNT_METHOD_REVENUE = 'revenue';
   private readonly DISCOUNT_METHOD_NO_DISCOUNT = 'no discount';
   public discountType: string = this.DISCOUNT_METHOD_NO_DISCOUNT;
-  public discountList: DropDownItem[] = [
+  public discountList: Shop[] = [
     {name: this.DISCOUNT_METHOD_PERCENT},
     {name: this.DISCOUNT_METHOD_REVENUE},
     {name: this.DISCOUNT_METHOD_NO_DISCOUNT},
@@ -44,12 +47,7 @@ export class CheckoutSoldItemsComponent implements OnInit {
   // Fields for input-form - Drop-Down-Selection
   /** Shop selection */
   public shopControll = new FormControl('', Validators.required);
-  public shopsList: DropDownItem[] = [
-    {name: 'shop1'},
-    {name: 'shop2'},
-    {name: 'shop3'},
-    {name: 'shop4'}
-  ];
+  public shopsList: Shop[] = [{name: 'shop1'}, {name: 'shop2'}];
 
   /** Category selection */
   public categoryControl = new FormControl('', Validators.required);
@@ -61,23 +59,24 @@ export class CheckoutSoldItemsComponent implements OnInit {
   private totalItems: number;
   public listNewItemsToShops: ShopsCheckoutSoldItemsDTO[] = [];
   public categoryLists: CheckoutCategories[] = [];
-  availableItems: number = 0;
+  availableItems = 0;
   selection = new SelectionModel<ShopsCheckoutSoldItemsDTO>(true, []);
   newCheckoutItem: ShopsCheckoutSoldItemsDTO;
 
   @ViewChild('myShopCheckoutProductsTable') table: MatTable<any>;
-  constructor(/*private _snackBar: MatSnackBar,*/
-              private checkoutSoldItemsService: CheckoutSoldItemsService,
-              public dialog: MatDialog) { }
+
+  // Date input
+  eventsTime: string[] = [];
 
   ngOnInit(): void {
+    this.checkoutSoldItemsService.getListShops().subscribe(JSON => this.shopsList = JSON);
     this.loadSoldItemList();
     this.initNewOrderElement();
     this.fetchCategories();
   }
 
-  fetchCategories(): void{
-    this.checkoutSoldItemsService.getAllCategories().subscribe(JsonDto =>{
+  fetchCategories(): void {
+    this.checkoutSoldItemsService.getAllCategories().subscribe(JsonDto => {
       this.categoryItems = JsonDto;
     });
   }
@@ -95,33 +94,33 @@ export class CheckoutSoldItemsComponent implements OnInit {
       deliverySending: null,
       itemLastSold: null,
       comment: null
-    }
+    };
   }
 
   loremIpsumMethod() {
-    console.log('implement loremIpsumMethod!')
+    console.log('implement loremIpsumMethod!');
 
     // Simple message.
-    //let snackBarRef =  this._snackBar.open('Sale send!','ok',{duration: 2000,});
-    //this.checkoutSoldItemsService.getAllItemsAllShops();
+    // let snackBarRef =  this._snackBar.open('Sale send!','ok',{duration: 2000,});
+    // this.checkoutSoldItemsService.getAllItemsAllShops();
   }
 
   addSoldItem() {
 
     // do if values of this.newCheckoutItem are valid
-    if( this.newCheckoutItem.quantity>0 &&
-        this.newCheckoutItem.quantity<100 &&
-        this.newCheckoutItem.priceListPerUnit>0 &&
-        this.newCheckoutItem.priceSalesPerUnit>0 &&
+    if ( this.newCheckoutItem.quantity > 0 &&
+        this.newCheckoutItem.quantity < 100 &&
+        this.newCheckoutItem.priceListPerUnit > 0 &&
+        this.newCheckoutItem.priceSalesPerUnit > 0 &&
         this.newCheckoutItem.category !== null &&
         this.newCheckoutItem.itemLastSold !== null
-    ){
+    ) {
 
-      let revenueCalculation: number = 0;
-      let discountPercentCalculation: number = 0;
-      if(this.discountType === this.DISCOUNT_METHOD_PERCENT ) {
+      let revenueCalculation = 0;
+      let discountPercentCalculation = 0;
+      if (this.discountType === this.DISCOUNT_METHOD_PERCENT ) {
         discountPercentCalculation = this.newCheckoutItem.discountPercent;
-        revenueCalculation = this.newCheckoutItem.priceListPerUnit * (100-this.newCheckoutItem.discountPercent)/100;
+        revenueCalculation = this.newCheckoutItem.priceListPerUnit * (100 - this.newCheckoutItem.discountPercent) / 100;
       } else if ( this.discountType === this.DISCOUNT_METHOD_REVENUE ) {
         revenueCalculation = this.newCheckoutItem.revenuePerUnit;
         discountPercentCalculation = 100 - (this.newCheckoutItem.revenuePerUnit * 100 / this.newCheckoutItem.priceListPerUnit);
@@ -131,13 +130,13 @@ export class CheckoutSoldItemsComponent implements OnInit {
       }
 
       let commentBefore: string;
-      if(this.commentNessesary === "No Comment"){
-        commentBefore = "No Comment";
+      if (this.commentNessesary === 'No Comment') {
+        commentBefore = 'No Comment';
       } else {
         commentBefore = this.newCheckoutItem.comment;
       }
 
-      let newSoldItemForTable: ShopsCheckoutSoldItemsDTO ={
+      const newSoldItemForTable: ShopsCheckoutSoldItemsDTO = {
         position: this.newCheckoutItem.position,
         category: this.newCheckoutItem.category,
         quantity: this.newCheckoutItem.quantity,
@@ -158,17 +157,17 @@ export class CheckoutSoldItemsComponent implements OnInit {
       this.rebuildListCategories();
       this.table.renderRows();
     } else {
-      console.log('item can not be added, since its fields are unvalid.')
+      console.log('item can not be added, since its fields are unvalid.');
     }
   }
 
   rebuildListCategories(): void {
-    let positionCounter: number = 0;
-    let newCategoryLists: CheckoutCategories[] = [];
+    let positionCounter = 0;
+    const newCategoryLists: CheckoutCategories[] = [];
 
     // create categories
-    for(let item of this.listNewItemsToShops){
-      let newCategory: CheckoutCategories = {
+    for (const item of this.listNewItemsToShops) {
+      const newCategory: CheckoutCategories = {
         position: positionCounter,
         category: item.category,
         priceListPerUnit: item.priceListPerUnit,
@@ -176,21 +175,21 @@ export class CheckoutSoldItemsComponent implements OnInit {
         items: []
       };
 
-      if(newCategoryLists.length === 0){
+      if (newCategoryLists.length === 0) {
         newCategoryLists.push(newCategory);
       } else {
-        let createNewCategoryFlag: boolean = true;
+        let createNewCategoryFlag = true;
 
         // check if category already exists
-        for(let categoryItem of newCategoryLists){
-          if( categoryItem.category === newCategory.category &&
+        for (const categoryItem of newCategoryLists) {
+          if ( categoryItem.category === newCategory.category &&
               categoryItem.priceListPerUnit === newCategory.priceListPerUnit) {
             createNewCategoryFlag = false;
           }
         }
 
         // create new category
-        if(createNewCategoryFlag){
+        if (createNewCategoryFlag) {
           newCategoryLists.push(newCategory);
           positionCounter++;
         }
@@ -198,8 +197,8 @@ export class CheckoutSoldItemsComponent implements OnInit {
     }
 
     // Add items by category
-    for(let categoryItem of newCategoryLists){
-      for(let item of this.listNewItemsToShops){
+    for (const categoryItem of newCategoryLists) {
+      for (const item of this.listNewItemsToShops) {
         const newItem: ShopsCheckoutSoldItemsDTO = {
           position: item.position,
           category: item.category,
@@ -213,8 +212,8 @@ export class CheckoutSoldItemsComponent implements OnInit {
           itemLastSold: item.itemLastSold,
           comment: item.comment
         };
-        if( categoryItem.category === newItem.category &&
-            categoryItem.priceListPerUnit === categoryItem.priceListPerUnit){
+        if ( categoryItem.category === newItem.category &&
+            categoryItem.priceListPerUnit === categoryItem.priceListPerUnit) {
           categoryItem.quantity += Number(newItem.quantity);
           categoryItem.items.push(newItem);
         }
@@ -224,11 +223,8 @@ export class CheckoutSoldItemsComponent implements OnInit {
     console.log('new Categories Json:');
     console.log(this.categoryLists);
   }
-
-  // Date input
-  eventsTime: string[] = [];
   dateSelection($event: MatDatepickerInputEvent<Date>) {
-    let newDate: Date = $event.value;
+    const newDate: Date = $event.value;
     this.newCheckoutItem.itemLastSold = newDate.toISOString();
     this.eventsTime.push( newDate.toISOString() );
   }
@@ -251,15 +247,15 @@ export class CheckoutSoldItemsComponent implements OnInit {
 
   // updates the category list and renders table
   updateAmountListCategories(): void {
-    for(let item of this.categoryLists){
-      let newQuantity: number = 0;
-      for(let subItem of item.items){
+    for (const item of this.categoryLists) {
+      let newQuantity = 0;
+      for (const subItem of item.items) {
         newQuantity += Number(subItem.quantity);
       }
       item.quantity = newQuantity;
 
       // remove category if empty
-      if(item.quantity === 0){
+      if (item.quantity === 0) {
         const indexItem: number = this.categoryLists.indexOf(item);
         this.categoryLists.splice(indexItem, 1);
       }
@@ -272,8 +268,8 @@ export class CheckoutSoldItemsComponent implements OnInit {
     this.listNewItemsToShops = [];
 
     // refill with category items
-    for(let categoryItem of this.categoryLists){
-      for(let item of categoryItem.items){
+    for (const categoryItem of this.categoryLists) {
+      for (const item of categoryItem.items) {
         const newItem: ShopsCheckoutSoldItemsDTO = {
           position: item.position,
           category: item.category,

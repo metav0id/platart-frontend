@@ -5,6 +5,7 @@ import {WarehouseItemCategoryDTO} from '../../warehouse-queen/warehouseCategory/
 import {Observable} from 'rxjs';
 import {environment} from '../../../../environments/environment';
 import {ShopsCheckoutSoldItemsDTO} from "./checkout-sold-items-DTOs/ShopsCheckoutSoldItemsDTO";
+import {ShopDTO} from "../../warehouse-queen/new-delivery-to-shop/new-delivery-to-shop-DTOs/shop-dto";
 
 @Injectable({
   providedIn: 'root'
@@ -40,12 +41,16 @@ export class CheckoutSoldItemsService {
     return this.http.post<null>(environment.sendAllSoldItemsListURL, soldItemList);
   }
 
-// delete current sold items list
+  // delete current sold items list
   public deleteCurrentSoldItemsList(): Observable<null> {
     return this.http.post<null>(environment.deleteCurrentSoldItemsListURL, null);
   }
 
   public loadCurrentSoldItemsList(): Observable<ShopsCheckoutSoldItemsDTO[]> {
     return this.http.post<null>(environment.loadAllSoldItemsListURL, null);
+  }
+
+  public getListShops(): Observable<ShopDTO[]> {
+    return this.http.get<ShopDTO[]>(environment.getAllShops);
   }
 }
