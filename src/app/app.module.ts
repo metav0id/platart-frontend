@@ -48,9 +48,19 @@ import { AngularFireModule } from '@angular/fire';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { AngularFireStorageModule } from '@angular/fire/storage';
 import { AngularFireAuthModule } from '@angular/fire/auth';
+import { environment } from 'src/environments/environment';
 
 
+import * as firebase from 'firebase';
 
+firebase.initializeApp({
+  apiKey: '...',
+  authDomain: '...',
+  databaseURL: '...',
+  projectId: '...',
+  storageBucket: '...',
+  messagingSenderId: '...',
+});
 
 
 @NgModule({
@@ -98,9 +108,11 @@ import { AngularFireAuthModule } from '@angular/fire/auth';
     MDBBootstrapModule.forRoot(),
     NgxChartsModule,
     FlexLayoutModule,
-    AngularFireModule
+    AngularFireModule,
+    AngularFireAuthModule
   ],
   providers: [],
+
   bootstrap: [AppComponent]
 })
 export class AppModule {
