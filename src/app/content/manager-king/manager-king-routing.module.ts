@@ -1,12 +1,12 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {RouterModule, Routes} from '@angular/router';
-import {ManageShopsInfoComponent} from './manage-shops-info/manage-shops-info.component';
+import {ManagerShopsInfoComponent} from './manager-shops-info/manager-shops-info.component';
 import {ManagerDashboardComponent} from './manager-dashboard/manager-dashboard.component';
 
 const routes: Routes = [
-  {path: 'manageshopsinfo', component: ManageShopsInfoComponent},
-  {path: 'managerdashboard', component: ManagerDashboardComponent}
+  {path: 'manageshopsinfo', component: ManagerShopsInfoComponent},
+  {path: 'managerdashboard', component: ManagerDashboardComponent},
 ];
 
 @NgModule({

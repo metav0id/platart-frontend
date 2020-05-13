@@ -3,11 +3,11 @@ import {TRANSLOCO_SCOPE} from '@ngneat/transloco';
 
 @Component({
   selector: 'app-manage-shops-info',
-  templateUrl: './manage-shops-info.component.html',
-  styleUrls: ['./manage-shops-info.component.css'],
+  templateUrl: './manager-shops-info.component.html',
+  styleUrls: ['./manager-shops-info.component.css'],
   providers: [{provide: TRANSLOCO_SCOPE, useValue: { scope: 'managerKing/manageShopsInfo', alias: 'translate' }}]
 })
-export class ManageShopsInfoComponent implements OnInit {
+export class ManagerShopsInfoComponent implements OnInit {
 
   constructor() { }
 
