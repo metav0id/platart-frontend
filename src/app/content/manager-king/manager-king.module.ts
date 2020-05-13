@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {ManagerKingRoutingModule} from './manager-king-routing.module';
-import { ManageShopsInfoComponent } from './manage-shops-info/manage-shops-info.component';
+import { ManagerShopsInfoComponent } from './manager-shops-info/manager-shops-info.component';
 import { ManagerDashboardComponent } from './manager-dashboard/manager-dashboard.component';
 import {FlexLayoutModule, FlexModule} from '@angular/flex-layout';
 import {MatCardModule} from '@angular/material/card';
@@ -16,7 +16,7 @@ import {NgxGaugeModule} from 'ngx-gauge';
 import {NgxChartsModule} from '@swimlane/ngx-charts';
 
 @NgModule({
-  declarations: [ManageShopsInfoComponent, ManagerDashboardComponent, ArchGaugeCardComponent, HbarCharCardComponent,
+  declarations: [ManagerShopsInfoComponent, ManagerDashboardComponent, ArchGaugeCardComponent, HbarCharCardComponent,
     VbarChartCardComponent, MonthToDateTableCardComponent],
     imports: [
         CommonModule,

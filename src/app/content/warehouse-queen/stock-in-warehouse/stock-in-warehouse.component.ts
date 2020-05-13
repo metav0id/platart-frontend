@@ -1,17 +1,10 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
-import {WarehouseGetAllItemsDTO} from './WarehouseGetAllItemsDTO';
+import {WarehouseGetAllItemsDTO} from './stock-in-warehouse-DTOs/WarehouseGetAllItemsDTO';
 import {HttpClient} from '@angular/common/http';
 import {StockInWarehouseService} from './stock-in-warehouse.service';
 import {TRANSLOCO_SCOPE} from '@ngneat/transloco';
 import {MatTable, MatTableDataSource} from '@angular/material/table';
-
-/** Is used for table elements */
-export interface WarehouseItem {
-  position: number;
-  category: string;
-  priceListPerUnit: number;
-  quantity: number;
-}
+import {WarehouseItem} from './stock-in-warehouse-DTOs/WarehouseItem';
 
 @Component({
   selector: 'app-stock-in-warehouse',
@@ -22,7 +15,6 @@ export interface WarehouseItem {
 export class StockInWarehouseComponent implements OnInit {
   displayedColumns: string[] = ['category', 'priceListPerUnit', 'quantity', 'value'];
 
-  //public warehouseData: WarehouseGetAllItemsDTO[] = [];
   public warehouseData: WarehouseItem[] = [];
   dataSource = new MatTableDataSource();
   private totalCost: number;
@@ -38,7 +30,6 @@ export class StockInWarehouseComponent implements OnInit {
   };
 
   @ViewChild('myWarehouseItemsTable') table: MatTable<any>;
-
   constructor(private http: HttpClient, private stockInWarehouseService: StockInWarehouseService) {
   }
 
@@ -64,9 +55,6 @@ export class StockInWarehouseComponent implements OnInit {
         this.table.renderRows();
 
         this.dataSource = new MatTableDataSource(this.warehouseData);
-
-        // this.warehouseData = JsonDto;
-        // console.log(this.warehouseData);
       });
   }
 
@@ -103,6 +91,5 @@ export class StockInWarehouseComponent implements OnInit {
 
   saveUpdateQuantityButton() {
     this.updateQuantityState = false;
-
   }
 }
