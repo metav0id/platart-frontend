@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {TRANSLOCO_SCOPE} from '@ngneat/transloco';
 import {Shop} from './manager-shops-info-DTOs/Shop';
 import {MatTable, MatTableDataSource} from '@angular/material/table';
