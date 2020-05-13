@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {TRANSLOCO_SCOPE} from '@ngneat/transloco';
-import {FormControl, Validators} from "@angular/forms";
-import {Shop} from "./manager-shops-info-DTOs/Shop";
-import {ManagerShopsInfoService} from "./manager-shops-info.service";
+import {FormControl, Validators} from '@angular/forms';
+import {ManagerShopsInfoService} from './manager-shops-info.service';
+import {ShopDTO} from '../shop-dto';
 
 @Component({
   selector: 'app-manage-shops-info',
@@ -16,7 +16,7 @@ export class ManagerShopsInfoComponent implements OnInit {
   public shopControl = new FormControl('', Validators.required);
 
   /** List of available shops */
-  public listShops: Shop[] = [{name: 'shop1'}, {name: 'shop2'}];
+  public listShops: ShopDTO[] = [{name: 'shop1'}, {name: 'shop2'}];
   public selectedShopToFilterOnList = '';
   public selectedShopToDisplay = '';
 
