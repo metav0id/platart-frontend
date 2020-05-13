@@ -1,6 +1,6 @@
 import {Component, Inject, OnInit} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
-import {PeriodicElement} from '../periodic-element';
+import {DeliveryItemFromWarehouseDTO} from '../DeliveryItemFromWarehouseDTO';
 import {
   AbstractControl,
   FormBuilder,
@@ -16,7 +16,7 @@ import {
 export class AddDeliveryItemComponent implements OnInit {
   public myForm: FormGroup;
 
-  public newItem: PeriodicElement = {
+  public newItem: DeliveryItemFromWarehouseDTO = {
     identifierOnDeliveryList: -1,
     category: '',
     quantity: 0,
@@ -38,7 +38,7 @@ export class AddDeliveryItemComponent implements OnInit {
 
   constructor(
     public dialogRef: MatDialogRef<AddDeliveryItemComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: PeriodicElement[],
+    @Inject(MAT_DIALOG_DATA) public data: DeliveryItemFromWarehouseDTO[],
     private formBuilder: FormBuilder) {
   }
 
