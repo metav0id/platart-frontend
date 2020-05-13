@@ -1,1 +1,110 @@
-<p>view-shop-inventory works!</p>
+<div class="space"></div>
+
+<div class="container-fluid d-flex justify-content-center">
+
+  <!--BOX -->
+  <div class="demo-card-wide mdl-card mdl-shadow--2dp justi ">
+    <div class="container d-flex justify-content-left mdl-card__title ">
+      <h2 class="mdl-card__title-text">Select Shop</h2>
+    </div>
+    <div class="mdl-card__supporting-text">
+      <!--      CONTENIDO-->
+
+      <div class=" ">
+        <div class=" table-responsive ">
+
+          <div class="space"></div>
+          <div class="container cont-bg4 cont-bg mdl-shadow--2dp justify-content-center  ">
+            <div class="container cont-bg4">
+              <mat-form-field>
+                <mat-label>Select Shop</mat-label>
+                <mat-select [formControl]="shopControl" [(value)]="selectedShopToFilterOnList" required>
+                  <mat-option>--</mat-option>
+                  <mat-option *ngFor="let entry of listShops" [value]="entry.name">{{ entry.name }}</mat-option>
+                </mat-select>
+              </mat-form-field>
+
+              <button mat-mini-fab (click)="getDeliveryItemList(selectedShopToFilterOnList)">
+                <mat-icon>autorenew</mat-icon>
+              </button>
+            </div>
+          </div>
+          <div class="space"></div>
+        </div>
+
+      </div>
+    </div>
+    <!--BOX-->
+
+    <div>
+    </div>
+  </div>
+</div>
+
+<div class="space"></div>
+
+<div class="container-fluid d-flex justify-content-center">
+
+  <!--BOX -->
+  <div class="demo-card-wide mdl-card mdl-shadow--2dp justi ">
+    <div class="container d-flex justify-content-left mdl-card__title ">
+      <h2 class="mdl-card__title-text">Shop-Stock in: {{selectedShopToDisplay}}</h2>
+    </div>
+    <div class="mdl-card__supporting-text">
+      <!--      CONTENIDO-->
+
+      <div class=" ">
+        <div class=" table-responsive ">
+
+          <div class="space"></div>
+          <div class="container cont-bg4 cont-bg mdl-shadow--2dp justify-content-center  ">
+            <div class="d-flex justify-content-around" >
+              <mat-form-field>
+                <mat-label>Filter</mat-label>
+                <input matInput (keyup)="applyFilter($event)" placeholder="Ex. ium">
+              </mat-form-field>
+            </div >
+          </div>
+
+          <div class="space"></div>
+
+          <table mat-table #myShopsItemsTable [dataSource]="dataSource" class="mat-elevation-z8">
+
+            <!-- Symbol Column -->
+            <ng-container matColumnDef="category">
+              <th mat-header-cell *matHeaderCellDef> Cat. </th>
+              <td mat-cell *matCellDef="let element"> {{element.category}} </td>
+            </ng-container>
+
+            <!-- Symbol Column -->
+            <ng-container matColumnDef="quantity">
+              <th mat-header-cell *matHeaderCellDef> Qty. </th>
+              <td mat-cell *matCellDef="let element"> {{element.quantity}} </td>
+            </ng-container>
+
+            <!-- Symbol Column -->
+            <ng-container matColumnDef="priceSalesPerUnit">
+              <th mat-header-cell *matHeaderCellDef> Sales-PPU </th>
+              <td mat-cell *matCellDef="let element"> {{element.priceSalesPerUnit}} </td>
+            </ng-container>
+
+            <!-- Symbol Column -->
+            <ng-container matColumnDef="priceListPerUnit">
+              <th mat-header-cell *matHeaderCellDef> List-PPU </th>
+              <td mat-cell *matCellDef="let element"> {{element.priceListPerUnit}} </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+          </table>
+          <div class="space"></div>
+        </div>
+
+      </div>
+    </div>
+    <!--BOX-->
+
+    <div>
+    </div>
+  </div>
+</div>
