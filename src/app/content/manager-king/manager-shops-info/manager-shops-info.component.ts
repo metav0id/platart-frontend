@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {TRANSLOCO_SCOPE} from '@ngneat/transloco';
 import {FormControl, Validators} from "@angular/forms";
-import {Shop} from "../../commonDTOs/shop";
+import {Shop} from "./manager-shops-info-DTOs/Shop";
+import {ManagerShopsInfoService} from "./manager-shops-info.service";
 
 @Component({
   selector: 'app-manage-shops-info',
@@ -19,9 +20,12 @@ export class ManagerShopsInfoComponent implements OnInit {
   public selectedShopToFilterOnList = '';
   public selectedShopToDisplay = '';
 
-  constructor() { }
+  constructor(private managerShopsInfoService: ManagerShopsInfoService) { }
 
   ngOnInit(): void {
+    this.managerShopsInfoService.getListShops().subscribe( (JsonDto) => {
+      this.listShops = JsonDto;
+    } );
   }
 
   getDeliveryItemList(selectedShopToFilterOnList: string) {
