@@ -14,20 +14,31 @@ import { MonthToDateTableCardComponent } from './manager-dashboard/widgets/month
 
 import {NgxGaugeModule} from 'ngx-gauge';
 import {NgxChartsModule} from '@swimlane/ngx-charts';
+import {MatFormFieldModule} from "@angular/material/form-field";
+import {MatSelectModule} from "@angular/material/select";
+import {ReactiveFormsModule} from "@angular/forms";
 
 @NgModule({
-  declarations: [ManagerShopsInfoComponent, ManagerDashboardComponent, ArchGaugeCardComponent, HbarCharCardComponent,
-    VbarChartCardComponent, MonthToDateTableCardComponent],
-    imports: [
-        CommonModule,
-        ManagerKingRoutingModule,
-        FlexModule,
-        MatCardModule,
-        MatDividerModule,
-        FlexLayoutModule,
-        MatIconModule,
-        NgxGaugeModule,
-        NgxChartsModule
-    ]
+  declarations: [ ManagerShopsInfoComponent,
+                  ManagerDashboardComponent,
+                  ArchGaugeCardComponent,
+                  HbarCharCardComponent,
+                  VbarChartCardComponent,
+                  MonthToDateTableCardComponent
+  ],
+  imports: [
+    CommonModule,
+    ManagerKingRoutingModule,
+    FlexModule,
+    MatCardModule,
+    MatDividerModule,
+    FlexLayoutModule,
+    MatIconModule,
+    NgxGaugeModule,
+    NgxChartsModule,
+    MatFormFieldModule,
+    MatSelectModule,
+    ReactiveFormsModule
+  ]
 })
 export class ManagerKingModule { }
