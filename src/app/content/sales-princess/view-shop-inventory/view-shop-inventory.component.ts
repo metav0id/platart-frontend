@@ -29,6 +29,9 @@ export class ViewShopInventoryComponent implements OnInit {
   constructor(private viewShopInventoryService: ViewShopInventoryService) { }
 
   ngOnInit(): void {
+    this.viewShopInventoryService.getListShops().subscribe( (JsonDto) => {
+      this.listShops = JsonDto;
+    } );
   }
 
   // fetch inventory data
