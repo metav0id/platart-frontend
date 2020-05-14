@@ -58,16 +58,6 @@
                 </mat-form-field>
               </div>
 
-              <div class="itemCheckoutSoldItemQuantity">
-                <mat-form-field appearance="fill">
-                  <mat-label>sold quantity</mat-label>
-                  <input matInput #input [(ngModel)]="newCheckoutItem.quantity" maxlength="3" placeholder="number of sold items">
-                </mat-form-field>
-                <mat-error *ngIf="newCheckoutItem.quantity<=0">
-                  enter sold quantity of items !
-                </mat-error>
-              </div>
-
               <div class="itemCheckoutSoldItemFinalPricePerUnit">
                 <mat-form-field appearance="fill">
                   <mat-label>List Price</mat-label>
@@ -80,11 +70,27 @@
 
               <div class="itemCheckoutSoldItemFinalPricePerUnit">
                 <mat-form-field appearance="fill">
-                  <mat-label>Display Price</mat-label>
+                  <mat-label>Sales Price</mat-label>
                   <input matInput #input [(ngModel)]="newCheckoutItem.priceSalesPerUnit" maxlength="10" placeholder="Ex. deliveryDisplayPricePerUnit">
                 </mat-form-field>
                 <mat-error *ngIf="newCheckoutItem.priceListPerUnit<=0" >
                   Entered sales price not valid !
+                </mat-error>
+              </div>
+
+              <div class="availabilityAmount space">
+                <button mat-button (click)="verifyAvailability(newCheckoutItem)">Check Availability</button>
+                <a>{{availableItems}} items</a>
+              </div>
+              <div class="space"></div>
+
+              <div class="itemCheckoutSoldItemQuantity">
+                <mat-form-field appearance="fill">
+                  <mat-label>sold quantity</mat-label>
+                  <input matInput #input [(ngModel)]="newCheckoutItem.quantity" maxlength="3" placeholder="number of sold items">
+                </mat-form-field>
+                <mat-error *ngIf="newCheckoutItem.quantity<=0">
+                  enter sold quantity of items !
                 </mat-error>
               </div>
 
@@ -99,7 +105,7 @@
                   </mat-form-field>
                 </div>
 
-                <div *ngIf="discountType==='revenue'" class="itemCheckoutSoldItemPricePerUnit">
+                <div *ngIf="discountType==='revenue per item'" class="itemCheckoutSoldItemPricePerUnit">
                   <mat-form-field hintLabel="Max 10 characters" appearance="fill">
                     <mat-label>revenue</mat-label>
                     <input matInput #input [(ngModel)]="newCheckoutItem.revenuePerUnit" maxlength="10" placeholder="Ex. deliveryDisplayPricePerUnit">

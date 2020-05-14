@@ -11,6 +11,7 @@ import {MatDialog} from '@angular/material/dialog';
 import {CheckoutSoldItemsDetailsComponent} from './checkout-sold-items-details/checkout-sold-items-details.component';
 import {CheckoutCategories} from './checkout-sold-items-DTOs/CheckoutCategories';
 import {CheckoutSoldItemsSendVerificationComponent} from './checkout-sold-items-send-verification/checkout-sold-items-send-verification.component';
+import {observable} from "rxjs";
 
 @Component({
   selector: 'app-checkout-sold-items',
@@ -26,7 +27,7 @@ export class CheckoutSoldItemsComponent implements OnInit {
   public discountControll = new FormControl('', Validators.required);
 
   private readonly DISCOUNT_METHOD_PERCENT = 'percent';
-  private readonly DISCOUNT_METHOD_REVENUE = 'revenue';
+  private readonly DISCOUNT_METHOD_REVENUE = 'revenue per item';
   private readonly DISCOUNT_METHOD_NO_DISCOUNT = 'no discount';
   public discountType: string = this.DISCOUNT_METHOD_NO_DISCOUNT;
   public discountList: Shop[] = [
@@ -59,7 +60,6 @@ export class CheckoutSoldItemsComponent implements OnInit {
   private totalItems: number;
   public listNewItemsToShops: ShopsCheckoutSoldItemsDTO[] = [];
   public categoryLists: CheckoutCategories[] = [];
-  availableItems = 0;
   selection = new SelectionModel<ShopsCheckoutSoldItemsDTO>(true, []);
   newCheckoutItem: ShopsCheckoutSoldItemsDTO;
 
@@ -67,6 +67,9 @@ export class CheckoutSoldItemsComponent implements OnInit {
 
   // Date input
   eventsTime: string[] = [];
+
+  // fields for amount of items
+  availableItems: number = 0;
 
   ngOnInit(): void {
     this.checkoutSoldItemsService.getListShops().subscribe(JSON => this.shopsList = JSON);
@@ -327,4 +330,27 @@ export class CheckoutSoldItemsComponent implements OnInit {
     }
   );
   }
+
+  verifyAvailability(newItem: ShopsCheckoutSoldItemsDTO) {
+    console.log('implement verifyAvailability for :');
+    const verifyCategory: boolean = newItem.category !== null && newItem.category !== 'chooseCategory';
+    const verifyShop: boolean = newItem.shop !== null && newItem.shop !== 'chooseShop';
+    const verifyPriceListPerUnit: boolean = newItem.priceListPerUnit !== null && newItem.priceListPerUnit > 0;
+    const verifyPriceSalesPerUnit: boolean = newItem.priceSalesPerUnit !== null && newItem.priceSalesPerUnit > 0;
+
+    if (verifyCategory &&
+        verifyShop &&
+        verifyPriceListPerUnit &&
+        verifyPriceSalesPerUnit ) {
+      console.log('entered into the if');
+      this.checkoutSoldItemsService.verifyAvailability(newItem).subscribe((observable) => {
+        console.log(observable);
+        this.availableItems = observable.quantity;
+      });
+    } else {
+      console.log('New Item not fully defined');
+    }
+
+  }
+
 }
