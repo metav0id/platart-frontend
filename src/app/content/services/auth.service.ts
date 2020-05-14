@@ -3,12 +3,9 @@ import {HttpClient} from "@angular/common/http";
 import {UserComponent} from "../pages/models/user.component";
 import {map} from "rxjs/operators";
 import {id} from "@swimlane/ngx-charts";
-import { AngularFireAuthModule } from '@angular/fire/auth';
-import { AngularFireAuth } from 'angularfire2/auth';
-import * as firebase from 'firebase/app';
+
 import 'firebase/auth';
-import {Marcador} from "../map/components/marker.class";
-import {environment} from "../../../environments/environment";
+
 import {Observable} from "rxjs";
 @Injectable({
   providedIn: 'root'
@@ -19,7 +16,8 @@ export class AuthService {
   userToken: string;
   savedToken: string;
   idToken: string;
-  retrivedEmail: string;
+  retrivedObject: any;
+  retrivedEmail2: any;
   userEmail: string;
 
   // create new user
@@ -31,12 +29,14 @@ export class AuthService {
   // token
   // https://identitytoolkit.googleapis.com/v1/accounts:lookup?key=[API_KEY]
 
-  constructor(private http: HttpClient, private firebase: AngularFireAuthModule) {
+  constructor(private http: HttpClient) {
     this.readToken();
   }
 
   logOut() {
     localStorage.removeItem('token');
+    localStorage.removeItem('expires');
+
   }
 
   logIn(user: UserComponent) {
@@ -48,6 +48,7 @@ export class AuthService {
     ).pipe(
       map(resp => {
         console.log('In RXJS');
+        console.log(resp)
         this.savedToken = ( resp ['idToken'] );
         console.log("savedtoken" + this.savedToken)
         this.saveToken( resp ['idToken'] );
@@ -93,12 +94,13 @@ export class AuthService {
 
 
   authStatus(): boolean{
+
     this.getToken().subscribe(resp => {console.log("respuesta"+resp);})
     this.userEmail = localStorage.getItem('email');
     console.log(this.userEmail)
-    console.log(this.retrivedEmail)
+    console.log(this.retrivedEmail2)
 
-    if (this.userEmail!= this.retrivedEmail) {
+    if (this.userEmail!= this.retrivedEmail2) {
       console.log("nein")
       return false;
     }
@@ -113,6 +115,11 @@ export class AuthService {
     }
   }
 
+
+  private saveMail(email: string) {
+    this.retrivedObject = email;
+  }
+
 getToken():Observable<Object>{
 
   const authData = {
@@ -125,12 +132,15 @@ getToken():Observable<Object>{
 )
 .pipe(
   map(resp => {
-    console.log('In gettoken2');
+    console.log('In getUser');
     console.log(resp);
-    this.retrivedEmail = ( resp ['email'] );
-    console.log("retrived email" + this.retrivedEmail)
+    this.retrivedObject = ( resp ['users'] );
+    console.log(this.retrivedObject);
+    this.retrivedEmail2 = this.retrivedObject[0].email;
+    console.log(this.retrivedEmail2);
     return resp;
   }))
+
 
 
 

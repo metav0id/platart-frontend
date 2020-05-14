@@ -51,16 +51,7 @@ import { AngularFireAuthModule } from '@angular/fire/auth';
 import { environment } from 'src/environments/environment';
 
 
-import * as firebase from 'firebase';
-
-firebase.initializeApp({
-  apiKey: '...',
-  authDomain: '...',
-  databaseURL: '...',
-  projectId: '...',
-  storageBucket: '...',
-  messagingSenderId: '...',
-});
+;
 
 
 @NgModule({
@@ -108,8 +99,6 @@ firebase.initializeApp({
     MDBBootstrapModule.forRoot(),
     NgxChartsModule,
     FlexLayoutModule,
-    AngularFireModule,
-    AngularFireAuthModule
   ],
   providers: [],
 
