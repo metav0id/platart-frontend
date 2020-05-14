@@ -1,17 +1,19 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
-import {ShopInventoryItem} from './view-shop-inventory-DTOs/ShopInventoryItem';
+import {TRANSLOCO_SCOPE} from '@ngneat/transloco';
+import {Shop} from './manager-shops-info-DTOs/Shop';
 import {MatTable, MatTableDataSource} from '@angular/material/table';
-import {ViewShopInventoryService} from './view-shop-inventory.service';
-import {observable} from 'rxjs';
+import {ShopInventoryItem} from '../../sales-princess/view-shop-inventory/view-shop-inventory-DTOs/ShopInventoryItem';
 import {FormControl, Validators} from '@angular/forms';
-import {Shop} from '../../commonDTOs/shop';
+import {ManagerShopsInfoService} from './manager-shops-info.service';
+import {ShopDTO} from '../shop-dto';
 
 @Component({
-  selector: 'app-view-shop-inventory',
-  templateUrl: './view-shop-inventory.component.html',
-  styleUrls: ['./view-shop-inventory.component.css']
+  selector: 'app-manage-shops-info',
+  templateUrl: './manager-shops-info.component.html',
+  styleUrls: ['./manager-shops-info.component.css'],
+  providers: [{provide: TRANSLOCO_SCOPE, useValue: { scope: 'managerKing/manageShopsInfo', alias: 'translate' }}]
 })
-export class ViewShopInventoryComponent implements OnInit {
+export class ManagerShopsInfoComponent implements OnInit {
 
   // table information
   displayedColumns: string[] = ['category', 'quantity', 'priceListPerUnit', 'priceSalesPerUnit' ];
@@ -22,14 +24,14 @@ export class ViewShopInventoryComponent implements OnInit {
   public shopControl = new FormControl('', Validators.required);
 
   /** List of available shops */
-  public listShops: Shop[] = [{name: 'shop1'}, {name: 'shop2'}];
+  public listShops: ShopDTO[] = [{name: 'shop1'}, {name: 'shop2'}];
   public selectedShopToFilterOnList = '';
   public selectedShopToDisplay = '';
 
-  constructor(private viewShopInventoryService: ViewShopInventoryService) { }
+  constructor(private managerShopsInfoService: ManagerShopsInfoService) { }
 
   ngOnInit(): void {
-    this.viewShopInventoryService.getListShops().subscribe( (JsonDto) => {
+    this.managerShopsInfoService.getListShops().subscribe( (JsonDto) => {
       this.listShops = JsonDto;
     } );
   }
@@ -38,16 +40,15 @@ export class ViewShopInventoryComponent implements OnInit {
   getShopItems(): void {
     this.selectedShopToDisplay = this.selectedShopToFilterOnList;
     const shopItems: ShopInventoryItem[] = [];
-    this.viewShopInventoryService.getAllItemsObs(this.selectedShopToFilterOnList).subscribe((observable) => {
+    this.managerShopsInfoService.getAllItemsObs(this.selectedShopToFilterOnList).subscribe((observable) => {
       console.log(observable);
       this.dataSource = new MatTableDataSource(observable);
       this.table.renderRows();
     });
   }
 
-  getDeliveryItemList(shop: string) {
-    console.log('Loading data for ' + shop);
-    this.getShopItems();
+  getDeliveryItemList(selectedShopToFilterOnList: string) {
+    console.log(selectedShopToFilterOnList);
   }
 
   // filter methods
@@ -55,5 +56,4 @@ export class ViewShopInventoryComponent implements OnInit {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
-
 }

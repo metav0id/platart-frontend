@@ -1,6 +1,6 @@
 import {Component, Inject, OnInit} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
-import {PeriodicElement} from '../periodic-element';
+import {DeliveryItemFromWarehouseDTO} from '../DeliveryItemFromWarehouseDTO';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {validateQuantity} from './check-quantity.validator';
 
@@ -15,7 +15,7 @@ export class NewDeliveryFromWarehouseDetailsComponent implements OnInit {
 
   constructor(
     public dialogRef: MatDialogRef<NewDeliveryFromWarehouseDetailsComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: PeriodicElement) {
+    @Inject(MAT_DIALOG_DATA) public data: DeliveryItemFromWarehouseDTO) {
   }
 
   ngOnInit(): void {

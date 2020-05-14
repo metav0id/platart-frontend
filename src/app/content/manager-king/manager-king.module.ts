@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {ManagerKingRoutingModule} from './manager-king-routing.module';
-import { ManageShopsInfoComponent } from './manage-shops-info/manage-shops-info.component';
+import { ManagerShopsInfoComponent } from './manager-shops-info/manager-shops-info.component';
 import { ManagerDashboardComponent } from './manager-dashboard/manager-dashboard.component';
 import {FlexLayoutModule, FlexModule} from '@angular/flex-layout';
 import {MatCardModule} from '@angular/material/card';
@@ -14,20 +14,34 @@ import { MonthToDateTableCardComponent } from './manager-dashboard/widgets/month
 
 import {NgxGaugeModule} from 'ngx-gauge';
 import {NgxChartsModule} from '@swimlane/ngx-charts';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatSelectModule} from '@angular/material/select';
+import {ReactiveFormsModule} from '@angular/forms';
+import {MatTableModule} from '@angular/material/table';
 
 @NgModule({
-  declarations: [ManageShopsInfoComponent, ManagerDashboardComponent, ArchGaugeCardComponent, HbarCharCardComponent,
-    VbarChartCardComponent, MonthToDateTableCardComponent],
-    imports: [
-        CommonModule,
-        ManagerKingRoutingModule,
-        FlexModule,
-        MatCardModule,
-        MatDividerModule,
-        FlexLayoutModule,
-        MatIconModule,
-        NgxGaugeModule,
-        NgxChartsModule
-    ]
+  declarations: [
+    ManagerShopsInfoComponent,
+    ManagerDashboardComponent,
+    ArchGaugeCardComponent,
+    HbarCharCardComponent,
+    VbarChartCardComponent,
+    MonthToDateTableCardComponent
+  ],
+  imports: [
+    CommonModule,
+    ManagerKingRoutingModule,
+    FlexModule,
+    MatCardModule,
+    MatDividerModule,
+    FlexLayoutModule,
+    MatIconModule,
+    NgxGaugeModule,
+    NgxChartsModule,
+    MatFormFieldModule,
+    MatSelectModule,
+    ReactiveFormsModule,
+    MatTableModule
+  ]
 })
 export class ManagerKingModule { }

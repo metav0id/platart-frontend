@@ -1,4 +1,4 @@
-export interface PeriodicElement {
+export interface DeliveryItemFromWarehouseDTO {
   /** Is used for table elements */
   identifierOnDeliveryList: number;
   category: string;

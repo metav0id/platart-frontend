@@ -18,7 +18,7 @@ export interface PeriodicElement {
   providers: [{provide: TRANSLOCO_SCOPE, useValue: { scope: 'warehouseQueen/newItemCategory', alias: 'translate' }}]
 })
 export class NewItemCategoryComponent implements OnInit {
-  displayedColumns: string[] = ['select', 'category', 'updateItem'];
+  displayedColumns: string[] = ['select', 'category'];
   public listCategories: PeriodicElement[] = [];
   selection = new SelectionModel<PeriodicElement>(true, []);
 
@@ -26,7 +26,7 @@ export class NewItemCategoryComponent implements OnInit {
     position: 0,
     category: 'chooseCategory'
   };
-  availableItems: string = 'check existance';
+  availableItems = 'check existance';
 
   @ViewChild('myShopCheckinProductsTable') table: MatTable<any>;
 
@@ -39,7 +39,7 @@ export class NewItemCategoryComponent implements OnInit {
 
   fetchAllCategoriesData(): void {
     this.newitemcategoryService.getAllCategories().subscribe(JsonDto => {
-      let counter: number = 1;
+      let counter = 1;
       this.listCategories = [];
       for (const item of JsonDto) {
         this.listCategories.push({position: counter, category: item.category});
@@ -52,7 +52,7 @@ export class NewItemCategoryComponent implements OnInit {
     if (!this.verifyCategoryExistant()) {
       this.newCategoryElement.category = this.newCategoryElement.category.toLowerCase();
 
-      let newCategoryElementToList: PeriodicElement = {
+      const newCategoryElementToList: PeriodicElement = {
         position: this.newCategoryElement.position,
         category: this.newCategoryElement.category
       };
@@ -67,7 +67,7 @@ export class NewItemCategoryComponent implements OnInit {
 
   verifyCategoryExistant(): boolean {
     this.availableItems = 'category element is new';
-    for (let categoryElement of this.listCategories) {
+    for (const categoryElement of this.listCategories) {
       if (categoryElement.category.toString().toUpperCase() === this.newCategoryElement.category.toString().toUpperCase()) {
         console.log('element already in list');
         this.availableItems = 'element already in list';
@@ -103,17 +103,13 @@ export class NewItemCategoryComponent implements OnInit {
     return `${this.selection.isSelected(row) ? 'deselect' : 'select'} row ${row.position + 1}`;
   }
 
-  updateButton(periodicElement: PeriodicElement) {
-    console.log('implement periodic element');
-  }
-
   deleteSelectedCategory() {
     console.log('delete selected categories');
 
-    for (let elem of this.selection.selected) {
+    for (const elem of this.selection.selected) {
 
-      let currentCategory: string = elem.category;
-      let currentCategoryIndex: number = elem.position;
+      const currentCategory: string = elem.category;
+      const currentCategoryIndex: number = elem.position;
       this.removeCurrentIndex(currentCategoryIndex);
 
       this.newitemcategoryService.deleteCategory(currentCategory);

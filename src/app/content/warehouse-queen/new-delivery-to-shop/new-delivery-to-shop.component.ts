@@ -2,16 +2,17 @@ import {Component, OnInit, ViewChild} from '@angular/core';
 import {FormControl, Validators} from '@angular/forms';
 import {SelectionModel} from '@angular/cdk/collections';
 import {MatTable} from '@angular/material/table';
-import {NewOrderItemDTO} from './NewOrderItemDTO';
+import {NewOrderItemDTO} from './new-delivery-to-shop-DTOs/NewOrderItemDTO';
 import {NewDeliveryToShopService} from './new-delivery-to-shop.service';
-import {VerifyAmountItemsOnStockDTO} from './VerifyAmountItemsOnStockDTO';
+import {VerifyAmountItemsOnStockDTO} from './new-delivery-to-shop-DTOs/VerifyAmountItemsOnStockDTO';
 import {WarehouseItemCategoryDTO} from '../warehouseCategory/warehouse-item-category-DTO';
 import {WarehouseCategoryService} from '../warehouseCategory/warehouseCategory.service';
 import {NewDeliveryToWarehouseService} from '../new-delivery-to-warehouse/new-delivery-to-warehouse.service';
 import {observable, Observable} from 'rxjs';
-import {WarehouseNewDeliveryPersistanceResponseDTO} from './WarehouseNewDeliveryPersistanceResponseDTO';
+import {WarehouseNewDeliveryPersistanceResponseDTO} from './new-delivery-to-shop-DTOs/WarehouseNewDeliveryPersistanceResponseDTO';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import {TRANSLOCO_SCOPE} from '@ngneat/transloco';
+import {Shop} from './new-delivery-to-shop-DTOs/Shop';
 
 /** Is used for table elements */
 export interface PeriodicElement {
@@ -22,11 +23,6 @@ export interface PeriodicElement {
   discountPercent: number;
   priceListPerUnit: number;
   deliveryShop: string;
-}
-
-/** Is used for Shops Drop Down */
-export interface Shop {
-  name: string;
 }
 
 @Component({
@@ -48,12 +44,7 @@ export class NewDeliveryToShopComponent implements OnInit {
   private readonly INITIALIZE_CATEGORY = 'chooseCategory';
   private readonly INITIALIZE_SHOP = 'chooseShop';
 
-  public shopsList: Shop[] = [
-    {name: 'shop1'},
-    {name: 'shop2'},
-    {name: 'shop3'},
-    {name: 'shop4'}
-  ];
+  public shopsList: Shop[] = [{name: 'shop1'}, {name: 'shop2'}];
   private totalCost: number;
   private totalItems: number;
 
@@ -80,6 +71,7 @@ export class NewDeliveryToShopComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.newDeliveryToShopService.getListShops().subscribe(JSON => this.shopsList = JSON);
     this.fetchCategoyItems();
     this.fetchNewOrderData();
   }
@@ -228,7 +220,7 @@ export class NewDeliveryToShopComponent implements OnInit {
     this.newOrderElement.priceListPerUnit = periodicElement.priceListPerUnit;
     this.newOrderElement.deliveryShop = periodicElement.deliveryShop;
 
-    //function to remove the current element
+    // function to remove the current element
     this.removeCurrentItem(periodicElement.position);
     this.table.renderRows();
 
@@ -244,7 +236,7 @@ export class NewDeliveryToShopComponent implements OnInit {
   }
 
   verifyAvailability() {
-    //update the amount of items on stock
+    // update the amount of items on stock
     this.newDeliveryToShopService.verifyAmountItemsOnStock(
       this.newOrderElement.category,
       this.newOrderElement.quantity,

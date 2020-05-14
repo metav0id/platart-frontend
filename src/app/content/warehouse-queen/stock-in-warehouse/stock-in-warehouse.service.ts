@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import {Observable} from 'rxjs';
-import {WarehouseGetAllItemsDTO} from './WarehouseGetAllItemsDTO';
+import {WarehouseGetAllItemsDTO} from './stock-in-warehouse-DTOs/WarehouseGetAllItemsDTO';
 import {HttpClient} from '@angular/common/http';
 import {environment} from '../../../../environments/environment';
 

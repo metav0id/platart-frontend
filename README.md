@@ -8,7 +8,17 @@ Run `npm install -g @angular/cli`
 
 Run `npm install bootstrap`
 
+Run `npm install @agm/core`
+
 Run `npm install sweetalert2`
+
+Run `npm install --save ngx-gauge`
+
+Run `ng add @ngneat/transloco`
+
+Run `npm i @swimlane/ngx-charts --save`
+
+Run `npm install --save @angular/flex-layout@latest @angular/cdk@latest`
 
 ## Development server
 

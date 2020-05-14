@@ -1,10 +1,12 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
-import {NewOrderItemDTO} from './NewOrderItemDTO';
-import {VerifyAmountItemsOnStockDTO} from './VerifyAmountItemsOnStockDTO';
-import {WarehouseNewDeliveryPersistanceResponseDTO} from './WarehouseNewDeliveryPersistanceResponseDTO';
+import {NewOrderItemDTO} from './new-delivery-to-shop-DTOs/NewOrderItemDTO';
+import {VerifyAmountItemsOnStockDTO} from './new-delivery-to-shop-DTOs/VerifyAmountItemsOnStockDTO';
+import {WarehouseNewDeliveryPersistanceResponseDTO} from './new-delivery-to-shop-DTOs/WarehouseNewDeliveryPersistanceResponseDTO';
 import {environment} from '../../../../environments/environment';
+import {ShopDTO} from "./new-delivery-to-shop-DTOs/shop-dto";
+
 
 @Injectable({
   providedIn: 'root'
@@ -47,6 +49,10 @@ export class NewDeliveryToShopService {
           observer.next(persistanceResponseList);
         });
     });
+  }
+
+  public getListShops(): Observable<ShopDTO[]> {
+    return this.http.get<ShopDTO[]>(environment.getAllShops);
   }
 
 }

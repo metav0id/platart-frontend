@@ -1,15 +1,30 @@
+<div class="space"></div>
+
+<div class="container-fluid d-flex justify-content-center">
+  <!--BOX -->
+  <div class="demo-card-wide mdl-card mdl-shadow--2dp justi ">
+    <div class="container d-flex justify-content-left mdl-card__title ">
+      <h1>Items sold today</h1>
+    </div>
+    <div class="mdl-card__supporting-text">
+      <h3>Please type in the items sold today:</h3>
+    </div>
+  </div>
+</div>
+
+<div class="space"></div>
+
 <div class="container">
   <div class="row">
     <div class="col-sm-4">
       <div class="space"></div>
 
       <div class="box">
-        <div class="container cont-bg punkt">
+        <div class="container cont-bg">
           <div class="space"></div>
-          <h1>Items sold today</h1>
+
           <div>
-            <h3>Please type in the items sold today:</h3>
-            <div class="container cont-bg2 punkt">
+            <div class="container cont-bg2 ">
               <div class="space"></div>
 
               <div class="newOrderInputFieldsDate">
@@ -23,11 +38,11 @@
               <div class="newOrderInputFieldsShop">
                 <mat-form-field appearance="fill">
                   <mat-label>shop</mat-label>
-                  <mat-select [formControl]="shopControll" [(value)]="newCheckoutItem.shop">
+                  <mat-select [formControl]="shopControll" [(value)]="newCheckoutSoldItem.shop">
                     <mat-option>--</mat-option>
                     <mat-option *ngFor="let entry of shopsList" [value]="entry.name">{{ entry.name}}</mat-option>
                   </mat-select>
-                  <mat-error *ngIf="newCheckoutItem.shop===null">
+                  <mat-error *ngIf="newCheckoutSoldItem.shop===null">
                     select a shop!
                   </mat-error>
                 </mat-form-field>
@@ -36,44 +51,50 @@
               <div class="itemCheckoutSoldItemCategory">
                 <mat-form-field appearance="fill">
                   <mat-label>category</mat-label>
-                  <mat-select [formControl]="categoryControl" [(value)]="newCheckoutItem.category">
+                  <mat-select [formControl]="categoryControl" [(value)]="newCheckoutSoldItem.category">
                     <mat-option>--</mat-option>
                     <mat-option *ngFor="let entry of categoryItems" [value]="entry.category">{{ entry.category}}</mat-option>
                   </mat-select>
                 </mat-form-field>
               </div>
 
-              <div class="itemCheckoutSoldItemQuantity">
-                <mat-form-field appearance="fill">
-                  <mat-label>sold quantity</mat-label>
-                  <input matInput #input [(ngModel)]="newCheckoutItem.quantity" maxlength="3" placeholder="number of sold items">
-                </mat-form-field>
-                <mat-error *ngIf="newCheckoutItem.quantity<=0">
-                  enter sold quantity of items !
-                </mat-error>
-              </div>
-
               <div class="itemCheckoutSoldItemFinalPricePerUnit">
                 <mat-form-field appearance="fill">
-                  <mat-label>FinalPrice/Unit</mat-label>
-                  <input matInput #input [(ngModel)]="newCheckoutItem.priceListPerUnit" maxlength="10" placeholder="Ex. deliveryDisplayPricePerUnit">
+                  <mat-label>List Price</mat-label>
+                  <input matInput #input [(ngModel)]="newCheckoutSoldItem.priceListPerUnit" maxlength="10" placeholder="Ex. deliveryDisplayPricePerUnit">
                 </mat-form-field>
-                <mat-error *ngIf="newCheckoutItem.priceListPerUnit<=0" >
+                <mat-error *ngIf="newCheckoutSoldItem.priceListPerUnit<=0" >
                   Entered list price not valid !
                 </mat-error>
               </div>
 
               <div class="itemCheckoutSoldItemFinalPricePerUnit">
                 <mat-form-field appearance="fill">
-                  <mat-label>Display Price</mat-label>
-                  <input matInput #input [(ngModel)]="newCheckoutItem.priceSalesPerUnit" maxlength="10" placeholder="Ex. deliveryDisplayPricePerUnit">
+                  <mat-label>Sales Price</mat-label>
+                  <input matInput #input [(ngModel)]="newCheckoutSoldItem.priceSalesPerUnit" maxlength="10" placeholder="Ex. deliveryDisplayPricePerUnit">
                 </mat-form-field>
-                <mat-error *ngIf="newCheckoutItem.priceListPerUnit<=0" >
+                <mat-error *ngIf="newCheckoutSoldItem.priceListPerUnit<=0" >
                   Entered sales price not valid !
                 </mat-error>
               </div>
 
-              <div class=" container cont-bg punkt">
+              <div class="availabilityAmount space">
+                <button mat-button (click)="verifyAvailability(newCheckoutSoldItem)">Check Availability</button>
+                <a>{{availableItems}} items</a>
+              </div>
+              <div class="space"></div>
+
+              <div class="itemCheckoutSoldItemQuantity">
+                <mat-form-field appearance="fill">
+                  <mat-label>sold quantity</mat-label>
+                  <input matInput #input [(ngModel)]="newCheckoutSoldItem.quantity" maxlength="3" placeholder="number of sold items">
+                </mat-form-field>
+                <mat-error *ngIf="newCheckoutSoldItem.quantity<=0">
+                  enter sold quantity of items !
+                </mat-error>
+              </div>
+
+              <div class=" container cont-bg">
                 <div class="discountSelectionRadioButton">
                   <mat-form-field appearance="fill">
                     <mat-label>Revenue type:</mat-label>
@@ -84,24 +105,24 @@
                   </mat-form-field>
                 </div>
 
-                <div *ngIf="discountType==='revenue'" class="itemCheckoutSoldItemPricePerUnit">
+                <div *ngIf="discountType==='revenue per item'" class="itemCheckoutSoldItemPricePerUnit">
                   <mat-form-field hintLabel="Max 10 characters" appearance="fill">
                     <mat-label>revenue</mat-label>
-                    <input matInput #input [(ngModel)]="newCheckoutItem.revenuePerUnit" maxlength="10" placeholder="Ex. deliveryDisplayPricePerUnit">
+                    <input matInput #input [(ngModel)]="newCheckoutSoldItem.revenuePerUnit" maxlength="10" placeholder="Ex. deliveryDisplayPricePerUnit">
                   </mat-form-field>
                 </div>
                 <div *ngIf="discountType==='percent'" class="itemCheckoutSoldItemDeliveryDiscount">
                   <mat-form-field hintLabel="Max 10 characters" appearance="fill">
                     <mat-label>discount percent</mat-label>
-                    <input matInput #input [(ngModel)]="newCheckoutItem.discountPercent" maxlength="4" placeholder="discount percent">
-                    <mat-error *ngIf="newCheckoutItem.discountPercent<0 || newCheckoutItem.discountPercent >= 100">
+                    <input matInput #input [(ngModel)]="newCheckoutSoldItem.discountPercent" maxlength="4" placeholder="discount percent">
+                    <mat-error *ngIf="newCheckoutSoldItem.discountPercent<0 || newCheckoutSoldItem.discountPercent >= 100">
                       Invalid discount percent
                     </mat-error>
                   </mat-form-field>
                 </div>
               </div>
 
-              <div class=" container cont-bg punkt">
+              <div class=" container cont-bg">
                 <div class="discountSelectionRadioButton">
                   <label id="example-radio-group-label">Comment:</label>
                   <div class="space"></div>
@@ -117,7 +138,7 @@
                 <div *ngIf="commentNessesary==='Comment'" class="itemCheckoutSoldItemComment">
                   <mat-form-field hintLabel="Max 10 characters" appearance="fill">
                     <mat-label>Comment</mat-label>
-                    <input matInput #input [(ngModel)]="newCheckoutItem.comment" maxlength="250" placeholder="Comment on the order.">
+                    <input matInput #input [(ngModel)]="newCheckoutSoldItem.comment" maxlength="250" placeholder="Comment on the order.">
                     <mat-hint align="end">{{input.value?.length || 0}}/250</mat-hint>
                   </mat-form-field>
                 </div>
@@ -131,11 +152,30 @@
           </div>
         </div>
       </div>
+    </div>
+  </div>
 
-      <div class="categoryItemsList container cont-bg punkt">
-        <h3>Sold Items:</h3>
+<div class="space"></div>
+
+  <div class="container-fluid d-flex justify-content-center">
+    <div class="demo-card-wide mdl-card mdl-shadow--2dp justi ">
+      <div class="container d-flex justify-content-left mdl-card__title ">
+        <h2>Categories</h2>
+        <h3>Sold Items By List Price </h3>
+      </div>
+    </div>
+  </div>
+
+<div class="space"></div>
+
+<div class="container">
+  <div class="row">
+    <div class="col-sm-4">
+      <div class="space"></div>
+
+      <div class="categoryItemsList container cont-bg">
         <div class="table-responsive">
-          <table mat-table #myShopCheckoutProductsTable [dataSource]="categoryLists">
+          <table mat-table #myShopCheckoutProductsTable [dataSource]="soldItemsCategoryLists">
 
             <!-- category column-->
             <ng-container matColumnDef="sale">
@@ -153,7 +193,7 @@
                       </p>
                     </mat-card-content>
                     <mat-card-actions>
-                    <button mat-button (click)="openDialogCategory(element)"><mat-icon>list_alt</mat-icon></button>
+                      <button mat-button (click)="openDialogCategory(element)"><mat-icon>list_alt</mat-icon></button>
                     </mat-card-actions>
                   </mat-card>
                 </div>
@@ -167,25 +207,27 @@
           </table>
         </div>
       </div>
+    </div>
+  </div>
+</div>
 
-      <div class="sendSaveSoldItemsList container cont-bg punkt">
-        <div>
+<div class="space"></div>
+
+<div class="container-fluid d-flex justify-content-center">
+
+  <!--BOX -->
+  <div class="demo-card-wide mdl-card mdl-shadow--2dp justi ">
+    <div class="container d-flex justify-content-left mdl-card__title ">
+      <h3 class="mdl-card__title-text">Send, Save, Delete</h3>
+    </div>
+    <div class="mdl-card__supporting-text">
+      <div class=" table-responsive ">
+        <div class="container cont-bg4">
           <button mat-button matTooltip="save sold items list" (click)="saveSoldItemList()"><mat-icon>save</mat-icon></button>
           <button mat-button matTooltip="send sold items list" (click)="sendSoldItemList()"><mat-icon>send</mat-icon></button>
           <button mat-button matTooltip="save sold items list" (click)="deleteSoldItemList()"><mat-icon>delete</mat-icon></button>
         </div>
       </div>
-
-        <!--      CONTENT-->
-
-
-
-      </div>
-
-      <div class="mdl-card__menu">
-        <button class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect">
-          <i class="material-icons">share</i>
-        </button>
-      </div>
     </div>
   </div>
+</div>

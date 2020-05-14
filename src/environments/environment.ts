@@ -11,7 +11,7 @@ export const environment = {
   findMarker: 'http://localhost:8081/marker/find',
   updateMarker: 'http://localhost:8081/marker/update',
   deleteMarker: 'http://localhost:8081/marker/delete',
-  getAllShops: 'http://localhost:8081/shops/getAllItemsAllShops',
+  getAllShops: 'http://localhost:8081/comerce/getallshops',
   getAllCategories: 'http://localhost:8081/warehouse/getAllCategories',
   getAllNewOrderItems: 'http://localhost:8081/warehouse/getAllNewOrderItems',
   setAllNewOrderItems: 'http://localhost:8081/warehouse/setAllNewOrderItems',
@@ -34,7 +34,6 @@ export const environment = {
   sendAllSoldItemsListURL:  'http://localhost:8081/shops/sendAllSoldItemsList',
   deleteCurrentSoldItemsListURL:  'http://localhost:8081/shops/deleteCurrentSoldItemsList',
   loadAllSoldItemsListURL: 'http://localhost:8081/shops/loadAllCurrentSoldItemsList',
-
 };
 
 /*
