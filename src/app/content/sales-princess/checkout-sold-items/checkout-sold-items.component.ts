@@ -150,11 +150,16 @@ export class CheckoutSoldItemsComponent implements OnInit {
         comment: commentBefore,
       };
       this.soldItemsToShopsList.push(newSoldItemForTable);
-      this.saveSoldItemList();
+      // this.saveSoldItemList();
+      console.log('soldItemsToShopsList');
       console.log(this.soldItemsToShopsList);
 
+      this.rebuildListCategories();
+      this.rebuildListCategories();
+      //this.table.renderRows();
+
       // update listNewItemsCategories
-      if (this.soldItemsCategoryLists.length === 0) {
+      /*if (this.soldItemsCategoryLists.length === 0) {
         this.rebuildListCategories();
       } else {
         for ( const categoryItem of this.soldItemsCategoryLists) {
@@ -180,7 +185,7 @@ export class CheckoutSoldItemsComponent implements OnInit {
             categoryItem.items.push(newItem);
           }
         }
-      }
+      }*/
     } else {
       console.log('item can not be added, since its fields are unvalid.');
     }
@@ -194,9 +199,11 @@ export class CheckoutSoldItemsComponent implements OnInit {
 
   // Check! ->
   rebuildListCategories(): void {
+    console.log('rebuildListCategories -> soldItemsToShopsList:');
+    console.log(this.soldItemsToShopsList);
+
     let positionCounter = 0;
     const newCategoryLists: CheckoutCategories[] = [];
-    this.table.renderRows();
 
     // only create categories
     for (const item of this.soldItemsToShopsList) {
@@ -216,9 +223,9 @@ export class CheckoutSoldItemsComponent implements OnInit {
 
         // check if category already exists
         for (const categoryItem of newCategoryLists) {
-          if ( categoryItem.category === newCategory.category &&
-              categoryItem.priceListPerUnit === newCategory.priceListPerUnit &&
-              categoryItem.priceSalesPerUnit === newCategory.priceSalesPerUnit
+          if ( categoryItem.category == newCategory.category &&
+              categoryItem.priceListPerUnit == newCategory.priceListPerUnit &&
+              categoryItem.priceSalesPerUnit == newCategory.priceSalesPerUnit
           ) {
             createNewCategoryFlag = false;
           }
@@ -248,9 +255,9 @@ export class CheckoutSoldItemsComponent implements OnInit {
           itemLastSold: item.itemLastSold,
           comment: item.comment
         };
-        if ( categoryItem.category === newItem.category &&
-            categoryItem.priceListPerUnit === newItem.priceListPerUnit &&
-            categoryItem.priceSalesPerUnit === newItem.priceSalesPerUnit
+        if ( categoryItem.category == newItem.category &&
+            categoryItem.priceListPerUnit == newItem.priceListPerUnit &&
+            categoryItem.priceSalesPerUnit == newItem.priceSalesPerUnit
         ) {
           categoryItem.quantity += Number(newItem.quantity);
           categoryItem.items.push(newItem);
@@ -258,7 +265,7 @@ export class CheckoutSoldItemsComponent implements OnInit {
       }
     }
     this.soldItemsCategoryLists = newCategoryLists;
-    console.log('new Categories Json:');
+    console.log('rebuildListCategories -> soldItemsCategoryLists:');
     console.log(this.soldItemsCategoryLists);
     this.table.renderRows();
   }
