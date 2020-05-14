@@ -5,6 +5,7 @@ import {AuthService} from "../../services/auth.service";
 import Swal from 'sweetalert2';
 import {Router} from "@angular/router";
 
+
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -22,6 +23,7 @@ export class LoginComponent implements OnInit {
       this.user.email = localStorage.getItem('email');
       this.rememberUser = true
     }
+
   }
 
   login(form: NgForm) {

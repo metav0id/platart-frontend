@@ -103,8 +103,7 @@ h3{
 
 
 .demo-card-wide.mdl-card {
-  width: 50%;
-
+  width: 500em;
 
 }
 .demo-card-wide > .mdl-card__title {

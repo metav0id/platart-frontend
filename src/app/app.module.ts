@@ -44,7 +44,14 @@ import {LoginComponent} from './content/pages/login/login.component';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {NgxChartsModule} from '@swimlane/ngx-charts';
 import {FlexLayoutModule} from '@angular/flex-layout';
+import { AngularFireModule } from '@angular/fire';
+import { AngularFirestoreModule } from '@angular/fire/firestore';
+import { AngularFireStorageModule } from '@angular/fire/storage';
+import { AngularFireAuthModule } from '@angular/fire/auth';
+import { environment } from 'src/environments/environment';
 
+
+;
 
 
 @NgModule({
@@ -91,9 +98,10 @@ import {FlexLayoutModule} from '@angular/flex-layout';
     MatFormFieldModule,
     MDBBootstrapModule.forRoot(),
     NgxChartsModule,
-    FlexLayoutModule
+    FlexLayoutModule,
   ],
   providers: [],
+
   bootstrap: [AppComponent]
 })
 export class AppModule {

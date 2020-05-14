@@ -10,6 +10,7 @@ export class UserComponent implements OnInit {
   password: string;
   name: string;
 
+
   constructor() { }
 
   ngOnInit() {
