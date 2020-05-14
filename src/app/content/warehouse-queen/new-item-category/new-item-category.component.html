@@ -1,88 +1,110 @@
+
+
+
+
+
+<!--NEW TABLE -->
 <ng-template transloco let-t>
 
 
+  <!--NEW TABLE 1-->
+  <!-- Wide card with share menu button -->
+  <div class="space"></div>
+  <div class="container-fluid d-flex justify-content-center">
 
-<div class="space"></div>
-<div class="row">
-  <div class="col">
-    <!--    CONTENT OF FIRST COL-->
-    <div class="container-fluid d-flex justify-content-center ">
-      <div class="demo-card-wide mdl-card mdl-shadow--2dp">
-        <div class="mdl-card__title">
-          <h2 class="mdl-card__title-text">New delivery order</h2>
-        </div>
-        <div class="container-fluid d-flex justify-content-center cont-bg4">
 
-          <!--      FORMULAR-->
-          <div class="container  ">
-            <div class="space"></div>
-            <div>
-              <div class="container cont-bg4  ">
-                <div class="space"></div>
-                <div class="box">
-                  <h1>New delivery order</h1>
-                  <h3>{{ t('translate.createNewCategory') }}:</h3>
-                  <div class="container ">
-                    <div class="space"></div>
-                    <div class="newOrderInputFieldsDeliveryFinalPricePerUnit">
-                      <mat-form-field hintLabel="Max 10 characters" appearance="fill">
-                        <mat-label>Enter item category</mat-label>
-                        <input matInput #input [(ngModel)]="newCategoryElement.category" maxlength="10" placeholder="Ex. deliveryQuantity">
-                      </mat-form-field>
-                    </div>
+    <div class="demo-card-wide mdl-card mdl-shadow--2dp cont-bg justi">
+      <div class="container d-flex justify-content-left mdl-card__title">
+        <h2 class="mdl-card__title-text">New delivery order</h2>
+      </div>
+      <div class="mdl-card__supporting-text">
 
-                    <div class="verifyCategoryExistant">
-                      <button mat-button (click)="verifyCategoryExistant()">Check available</button>
-                      <br>
-                      <a>{{availableItems}}</a>
-                      <br>
-                    </div>
 
-                    <div>
-                      <button mat-button (click)="createNewCategory()">create new category</button>
-                      <!--                <button mat-button (click)="deleteSelectedCategory()">delete selected</button>-->
-                    </div>
-                  </div>
+        <!--    CONTENT-->
+
+
+        <div class="container cont-bg2 ">
+          <div class="space"></div>
+          <h1>New delivery order</h1>
+
+          <div>
+            <h3>Insert new order element:</h3>
+            <div class="container cont-bg4  ">
+              <div class="space"></div>
+              <div class="box">
+                <h1>New delivery order</h1>
+                <h3>{{ t('translate.createNewCategory') }}:</h3>
+                <div class="container cont-bg2 ">
                   <div class="space"></div>
+                  <div class="newOrderInputFieldsDeliveryFinalPricePerUnit">
+                    <mat-form-field hintLabel="Max 10 characters" appearance="fill">
+                      <mat-label>Enter item category</mat-label>
+                      <input matInput #input [(ngModel)]="newCategoryElement.category" maxlength="10" placeholder="Ex. deliveryQuantity">
+                    </mat-form-field>
+                  </div>
+
+                  <div class="verifyCategoryExistant">
+                    <button mat-button (click)="verifyCategoryExistant()">Check available</button>
+                    <br>
+                    <a>{{availableItems}}</a>
+                    <br>
+                  </div>
+
+                  <div>
+                    <button mat-button (click)="createNewCategory()">create new category</button>
+                    <!--                <button mat-button (click)="deleteSelectedCategory()">delete selected</button>-->
+                  </div>
                 </div>
+                <div class="space"></div>
               </div>
             </div>
-            <div class="space"></div>
           </div>
+          <div class="space"></div>
+        </div>
 
-          <!--        FORLUMAR ENDS-->
 
-            <!--        NEXT DIV CLOSES CONTAINER OF FORMULAR-->
-          </div>
-          <!--    CONTENT OF FIRST COL-->
-          <!--NEX DIV CLOSES THE CONTENT OF CARD-->
+
+        <!--    CONTENT-->
+
+
+
+
+
+
+
+        </div>
+
+        <div class="mdl-card__menu">
+          <button class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect">
+            <i class="material-icons">share</i>
+          </button>
         </div>
       </div>
-      <!--NEX DIV CORRESPONDS TO COLUMN-->
+
     </div>
+    <!--SEGUNDA TABLA-->
+  <div class="container-fluid d-flex justify-content-center">
+
+    <div class="demo-card-wide mdl-card mdl-shadow--2dp cont-bg justi">
+
+      <div class="mdl-card__supporting-text">
 
 
-    <div class="w-100"></div>
-    <div class="space"></div>
 
-    <!--  SEGUNDA COLUMNA-->
-    <div class="col">
-      <!--    CONTAINER TO CENTER IN THE PAGE-->
-      <div class="container-fluid d-flex justify-content-center">
-        <!--    CONTENT-->
-        <div class="demo-card-wide mdl-card mdl-shadow--2dp">
-          <div class="container cont-bg2 ">
+        <!--      CONTENT-->
+
+        <div class="container cont-bg2 ">
+          <div class="space"></div>
+          <div class="container cont-bg4  justify-content-center ">
             <div class="space"></div>
-            <div class="container cont-bg4  justify-content-center ">
-              <div class="space"></div>
-              <div class="d-flex justify-content-around" >
-                <div class="d-flex justify-content-around">
-                  <button mat-button (click)="deleteSelectedCategory()">delete selected</button>
-                </div>
-                <div class="space"></div>
+            <div class="d-flex justify-content-around" >
+              <div class="d-flex justify-content-around">
+                <button mat-button (click)="deleteSelectedCategory()">delete selected</button>
               </div>
               <div class="space"></div>
             </div>
+            <div class="space"></div>
+          </div>
 
             <div class="space"></div>
             <div class= "table-responsive">
@@ -114,211 +136,30 @@
                     <td mat-cell *matCellDef="let element"> {{element.category}} </td>
                   </ng-container>
 
-                  <!-- updateItem Column -->
-                  <ng-container matColumnDef="updateItem">
-                    <th mat-header-cell *matHeaderCellDef> *updateItem* </th>
-                    <td mat-cell *matCellDef="let element">
-                      <button (click)="updateButton(element)">correct category</button>
-                    </td>
-                  </ng-container>
-
                   <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
                   <tr mat-row *matRowDef="let element; columns: displayedColumns;"></tr>
 
                 </table>
-                <div class="space"></div>
-                <!--          </div>-->
-              </div>
-
-            </div>
-
+            <div class="space"></div>
+<!--          </div>-->
+        </div>
 
           </div>
-        <!--    CONTENT-->
+
+
+        <!--      CONTENT-->
 
 
 
-        <!--    NEXT DIV CLOSES CONTAINER TO CENTER CARD-->
       </div>
-      <!--    NEXT DIV CLOSES CLUMN-->
+
+      <div class="mdl-card__menu">
+        <button class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect">
+          <i class="material-icons">share</i>
+        </button>
+      </div>
     </div>
-    <!--    NEXT DIV CLOSES ROW-->
   </div>
+
 </div>
 </ng-template>
-
-
-
-
-
-
-
-
-
-<!--  &lt;!&ndash;NEW TABLE &ndash;&gt;-->
-<!--<ng-template transloco let-t>-->
-
-
-<!--  &lt;!&ndash;NEW TABLE 1&ndash;&gt;-->
-<!--  &lt;!&ndash; Wide card with share menu button &ndash;&gt;-->
-<!--  <div class="space"></div>-->
-<!--  <div class="container-fluid d-flex justify-content-center">-->
-
-
-<!--    <div class="demo-card-wide mdl-card mdl-shadow&#45;&#45;2dp cont-bg justi">-->
-<!--      <div class="container d-flex justify-content-left mdl-card__title">-->
-<!--        <h2 class="mdl-card__title-text">New delivery order</h2>-->
-<!--      </div>-->
-<!--      <div class="mdl-card__supporting-text">-->
-
-
-<!--        &lt;!&ndash;    CONTENT&ndash;&gt;-->
-
-
-<!--        <div class="container cont-bg2 ">-->
-<!--          <div class="space"></div>-->
-<!--          <h1>New delivery order</h1>-->
-
-<!--          <div>-->
-<!--            <h3>Insert new order element:</h3>-->
-<!--            <div class="container cont-bg4  ">-->
-<!--              <div class="space"></div>-->
-<!--              <div class="box">-->
-<!--                <h1>New delivery order</h1>-->
-<!--                <h3>{{ t('translate.createNewCategory') }}:</h3>-->
-<!--                <div class="container cont-bg2 ">-->
-<!--                  <div class="space"></div>-->
-<!--                  <div class="newOrderInputFieldsDeliveryFinalPricePerUnit">-->
-<!--                    <mat-form-field hintLabel="Max 10 characters" appearance="fill">-->
-<!--                      <mat-label>Enter item category</mat-label>-->
-<!--                      <input matInput #input [(ngModel)]="newCategoryElement.category" maxlength="10" placeholder="Ex. deliveryQuantity">-->
-<!--                    </mat-form-field>-->
-<!--                  </div>-->
-
-<!--                  <div class="verifyCategoryExistant">-->
-<!--                    <button mat-button (click)="verifyCategoryExistant()">Check available</button>-->
-<!--                    <br>-->
-<!--                    <a>{{availableItems}}</a>-->
-<!--                    <br>-->
-<!--                  </div>-->
-
-<!--                  <div>-->
-<!--                    <button mat-button (click)="createNewCategory()">create new category</button>-->
-<!--                    &lt;!&ndash;                <button mat-button (click)="deleteSelectedCategory()">delete selected</button>&ndash;&gt;-->
-<!--                  </div>-->
-<!--                  </div>-->
-<!--                  <div class="space"></div>-->
-<!--                </div>-->
-<!--              </div>-->
-<!--            </div>-->
-<!--            <div class="space"></div>-->
-<!--          </div>-->
-
-
-<!--          &lt;!&ndash;    CONTENT&ndash;&gt;-->
-
-
-
-
-
-
-
-<!--        </div>-->
-
-<!--        <div class="mdl-card__menu">-->
-<!--          <button class="mdl-button mdl-button&#45;&#45;icon mdl-js-button mdl-js-ripple-effect">-->
-<!--            <i class="material-icons">share</i>-->
-<!--          </button>-->
-<!--        </div>-->
-<!--      </div>-->
-
-<!--    </div>-->
-<!--    &lt;!&ndash;SEGUNDA TABLA&ndash;&gt;-->
-<!--  <div class="container-fluid d-flex justify-content-center">-->
-
-<!--    <div class="demo-card-wide mdl-card mdl-shadow&#45;&#45;2dp cont-bg justi">-->
-
-<!--      <div class="mdl-card__supporting-text">-->
-
-
-
-<!--        &lt;!&ndash;      CONTENT&ndash;&gt;-->
-
-<!--        <div class="container cont-bg2 ">-->
-<!--          <div class="space"></div>-->
-<!--          <div class="container cont-bg4  justify-content-center ">-->
-<!--            <div class="space"></div>-->
-<!--            <div class="d-flex justify-content-around" >-->
-<!--              <div class="d-flex justify-content-around">-->
-<!--                <button mat-button (click)="deleteSelectedCategory()">delete selected</button>-->
-<!--              </div>-->
-<!--              <div class="space"></div>-->
-<!--            </div>-->
-<!--            <div class="space"></div>-->
-<!--          </div>-->
-
-<!--            <div class="space"></div>-->
-<!--            <div class= "table-responsive">-->
-<!--              <div class=" table-responsive">-->
-
-<!--                <table mat-table #myShopCheckinProductsTable [dataSource]="listCategories" class="mat-elevation-z8" >-->
-
-<!--                  &lt;!&ndash; Checkbox Column &ndash;&gt;-->
-<!--                  <ng-container matColumnDef="select">-->
-<!--                    <th mat-header-cell *matHeaderCellDef>-->
-<!--                      <mat-checkbox (change)="$event ? masterToggle() : null"-->
-<!--                                    [checked]="selection.hasValue() && isAllSelected()"-->
-<!--                                    [indeterminate]="selection.hasValue() && !isAllSelected()"-->
-<!--                                    [aria-label]="checkboxLabel()">-->
-<!--                      </mat-checkbox>-->
-<!--                    </th>-->
-<!--                    <td mat-cell *matCellDef="let row">-->
-<!--                      <mat-checkbox (click)="$event.stopPropagation()"-->
-<!--                                    (change)="$event ? selection.toggle(row) : null"-->
-<!--                                    [checked]="selection.isSelected(row)"-->
-<!--                                    [aria-label]="checkboxLabel(row)">-->
-<!--                      </mat-checkbox>-->
-<!--                    </td>-->
-<!--                  </ng-container>-->
-
-<!--                  &lt;!&ndash; Position Column &ndash;&gt;-->
-<!--                  <ng-container matColumnDef="category">-->
-<!--                    <th mat-header-cell *matHeaderCellDef> Category </th>-->
-<!--                    <td mat-cell *matCellDef="let element"> {{element.category}} </td>-->
-<!--                  </ng-container>-->
-
-<!--                  &lt;!&ndash; updateItem Column &ndash;&gt;-->
-<!--                  <ng-container matColumnDef="updateItem">-->
-<!--                    <th mat-header-cell *matHeaderCellDef> *updateItem* </th>-->
-<!--                    <td mat-cell *matCellDef="let element">-->
-<!--                      <button (click)="updateButton(element)">correct category</button>-->
-<!--                    </td>-->
-<!--                  </ng-container>-->
-
-<!--                  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>-->
-<!--                  <tr mat-row *matRowDef="let element; columns: displayedColumns;"></tr>-->
-
-<!--                </table>-->
-<!--            <div class="space"></div>-->
-<!--&lt;!&ndash;          </div>&ndash;&gt;-->
-<!--        </div>-->
-
-<!--          </div>-->
-
-
-<!--        &lt;!&ndash;      CONTENT&ndash;&gt;-->
-
-
-
-<!--      </div>-->
-
-<!--      <div class="mdl-card__menu">-->
-<!--        <button class="mdl-button mdl-button&#45;&#45;icon mdl-js-button mdl-js-ripple-effect">-->
-<!--          <i class="material-icons">share</i>-->
-<!--        </button>-->
-<!--      </div>-->
-<!--    </div>-->
-<!--  </div>-->
-
-<!--</div>-->
-<!--</ng-template>-->
