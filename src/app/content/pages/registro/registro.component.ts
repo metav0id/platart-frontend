@@ -10,17 +10,22 @@ import {Router} from "@angular/router";
   templateUrl: './registro.component.html',
   styleUrls: ['./registro.component.css']
 })
+
 export class RegistroComponent implements OnInit {
   user: UserComponent;
   rememberUser = false;
 
-  constructor(private auth: AuthService, private router: Router) { }
+constructor(private auth: AuthService, private router: Router) { }
 
+/**When started, it will create a new instance of user.*/
   ngOnInit() {
     this.user = new UserComponent();
     // this.user.email = 'platart@gmail.com';
   }
-
+  /** This methods starts by checking if the formular is correct. Then will show a "sweetalert". Then it will go into
+     * AuthService and use the register method. If the user wants it so, it will save the email in localstorage.
+      *then it will navigate to mapcomponent. If there is an error it will show it in form of a "sweetalert"
+   */
   onSubmit(form: NgForm) {
     if (form.invalid) {return; }
     Swal.fire({
@@ -43,7 +48,6 @@ export class RegistroComponent implements OnInit {
           title: 'login data is not valid',
           text: err.error.error.message
         });
-
       }
     );
   }

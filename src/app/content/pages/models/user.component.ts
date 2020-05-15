@@ -9,6 +9,7 @@ export class UserComponent implements OnInit {
   email: string;
   password: string;
   name: string;
+  // role:string;
 
 
   constructor() { }
