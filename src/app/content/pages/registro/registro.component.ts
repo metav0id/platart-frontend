@@ -35,6 +35,7 @@ export class RegistroComponent implements OnInit {
     this.auth.register(this.user).subscribe(resp => {console.log(resp);
         Swal.close();
         if (this.rememberUser) {localStorage.setItem('email', this.user.email) }
+        this.auth.authStatus();
         this.router.navigateByUrl('/home');
       }, (err) => {
         console.log(err.error.error.message);

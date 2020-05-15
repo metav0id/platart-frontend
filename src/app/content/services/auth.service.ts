@@ -15,9 +15,8 @@ export class AuthService {
   private apiKey = 'AIzaSyCqV2cjIUIeQ_zpFCfbGWT11pNdI7Lka3k';
   userToken: string;
   savedToken: string;
-  idToken: string;
   retrivedObject: any;
-  retrivedEmail2: any;
+  retrivedEmail: any;
   userEmail: string;
 
   // create new user
@@ -98,9 +97,9 @@ export class AuthService {
     this.getToken().subscribe(resp => {console.log("respuesta"+resp);})
     this.userEmail = localStorage.getItem('email');
     console.log(this.userEmail)
-    console.log(this.retrivedEmail2)
+    console.log(this.retrivedEmail)
 
-    if (this.userEmail!= this.retrivedEmail2) {
+    if (this.userEmail!= this.retrivedEmail) {
       console.log("nein")
       return false;
     }
@@ -117,7 +116,7 @@ export class AuthService {
 
 
   private saveMail(email: string) {
-    this.retrivedObject = email;
+    this.retrivedEmail = email;
   }
 
 getToken():Observable<Object>{
@@ -136,59 +135,13 @@ getToken():Observable<Object>{
     console.log(resp);
     this.retrivedObject = ( resp ['users'] );
     console.log(this.retrivedObject);
-    this.retrivedEmail2 = this.retrivedObject[0].email;
-    console.log(this.retrivedEmail2);
+    this.saveMail(this.retrivedObject[0].email);
+    // this.retrivedEmail = this.retrivedObject[0].email;
+    console.log(this.retrivedEmail);
     return resp;
   }))
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    // .pipe(
-    // map(resp => {
-    //   console.log('In gettoken2');
-    //   console.log(resp);
-    //   this.retrivedEmail = ( resp ['email'] );
-    //   console.log("retrived email" + this.retrivedEmail)
-    //   return resp;
-    // }))
 }
-
-
-  // getToken(){
-  //   firebase.auth().setPersistence(firebase.auth.Auth.Persistence.SESSION)
-  //     .then(function() {
-  //       // Existing and future Auth states are now persisted in the current
-  //       // session only. Closing the window would clear any existing state even
-  //       // if a user forgets to sign out.
-  //       // ...
-  //       // New sign-in will be persisted with session persistence.
-  //       console.log(this.user.email)
-  //       console.log(this.user.password)
-  //       return firebase.auth().signInWithEmailAndPassword(this.user.email, this.user.password);
-  //     })
-  //     .catch(function(error) {
-  //       // Handle Errors here.
-  //       var errorCode = error.code;
-  //       var errorMessage = error.message;
-  //     });
-  // }
-
-
 
 
 }
