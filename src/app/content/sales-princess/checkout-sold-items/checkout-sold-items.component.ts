@@ -107,13 +107,20 @@ export class CheckoutSoldItemsComponent implements OnInit {
 
   // Check! ->
   addSoldItem() {
+
+    // compute amount of available items of given category
+    this.verifyAvailability(this.newCheckoutSoldItem);
+
+    // console.log('Amount of items available' + amountOfItemsChecketOut);
+    const verifyAmountAvailable: boolean = Number(this.availableItems) >= Number(this.newCheckoutSoldItem.quantity);
     // do if values of this.newCheckoutItem are valid
-    if ( this.newCheckoutSoldItem.quantity > 0 &&
-        this.newCheckoutSoldItem.quantity < 1000 &&
-        this.newCheckoutSoldItem.priceListPerUnit > 0 &&
-        this.newCheckoutSoldItem.priceSalesPerUnit > 0 &&
-        this.newCheckoutSoldItem.category !== null &&
-        this.newCheckoutSoldItem.itemLastSold !== null
+    const verifyQuantity: boolean = this.newCheckoutSoldItem.quantity > 0 && this.newCheckoutSoldItem.quantity < 1000;
+    const verifyPriceListPerUnit: boolean = this.newCheckoutSoldItem.priceListPerUnit > 0 && this.newCheckoutSoldItem.priceSalesPerUnit > 0;
+    const verifyCategory: boolean = this.newCheckoutSoldItem.category !== null && this.newCheckoutSoldItem.itemLastSold !== null;
+    if (  verifyAmountAvailable &&
+          verifyQuantity &&
+          verifyPriceListPerUnit &&
+          verifyCategory
     ) {
 
       let revenueCalculation = 0;
@@ -149,52 +156,15 @@ export class CheckoutSoldItemsComponent implements OnInit {
         itemLastSold: this.newCheckoutSoldItem.itemLastSold,
         comment: commentBefore,
       };
+
       this.soldItemsToShopsList.push(newSoldItemForTable);
-      // this.saveSoldItemList();
-      console.log('soldItemsToShopsList');
-      console.log(this.soldItemsToShopsList);
-
       this.rebuildListCategories();
-      this.rebuildListCategories();
-      //this.table.renderRows();
 
-      // update listNewItemsCategories
-      /*if (this.soldItemsCategoryLists.length === 0) {
-        this.rebuildListCategories();
-      } else {
-        for ( const categoryItem of this.soldItemsCategoryLists) {
-          if ( categoryItem.category === newSoldItemForTable.category &&
-              categoryItem.priceListPerUnit === newSoldItemForTable.priceListPerUnit &&
-              categoryItem.priceSalesPerUnit === newSoldItemForTable.priceSalesPerUnit
-            ) {
-
-            const newItem: ShopsCheckoutSoldItemsDTO = {
-              position: newSoldItemForTable.position,
-              category: newSoldItemForTable.category,
-              quantity: newSoldItemForTable.quantity,
-              priceListPerUnit: newSoldItemForTable.priceListPerUnit,
-              priceSalesPerUnit: newSoldItemForTable.priceSalesPerUnit,
-              revenuePerUnit: newSoldItemForTable.revenuePerUnit,
-              discountPercent: newSoldItemForTable.discountPercent,
-              shop: newSoldItemForTable.shop,
-              deliverySending: newSoldItemForTable.deliverySending,
-              itemLastSold: newSoldItemForTable.itemLastSold,
-              comment: newSoldItemForTable.comment
-            };
-            categoryItem.quantity += Number(newItem.quantity);
-            categoryItem.items.push(newItem);
-          }
-        }
-      }*/
     } else {
       console.log('item can not be added, since its fields are unvalid.');
     }
     this.table.renderRows();
-    console.log(this.soldItemsCategoryLists);
-  }
-
-  updateListCategories(): void {
-
+    //console.log(this.soldItemsCategoryLists);
   }
 
   // Check! ->
@@ -270,7 +240,6 @@ export class CheckoutSoldItemsComponent implements OnInit {
     this.table.renderRows();
   }
 
-  // un
   dateSelection($event: MatDatepickerInputEvent<Date>) {
     const newDate: Date = $event.value;
     this.newCheckoutSoldItem.itemLastSold = newDate.toISOString();
@@ -294,7 +263,6 @@ export class CheckoutSoldItemsComponent implements OnInit {
     });
   }
 
-  // un
   // updates the category list and renders table
   updateAmountListCategories(): void {
     for (const item of this.soldItemsCategoryLists) {
@@ -312,7 +280,6 @@ export class CheckoutSoldItemsComponent implements OnInit {
     }
   }
 
-  // un
   // update the listNewItemsToShops from updated category list
   updateListNewItemsToShops(): void {
     // reset the listNewItemsToShops list
@@ -339,13 +306,11 @@ export class CheckoutSoldItemsComponent implements OnInit {
     }
   }
 
-  // un
   saveSoldItemList() {
     console.log('implement saving sold items list');
     this.checkoutSoldItemsService.saveAllSoldItemsList(this.soldItemsToShopsList).subscribe();
   }
 
-  // un
   sendSoldItemList() {
     console.log('implement sending sold items list');
 
@@ -367,13 +332,11 @@ export class CheckoutSoldItemsComponent implements OnInit {
     });
   }
 
-  // un
   deleteSoldItemList() {
     console.log('implement deleting sold items list');
     this.checkoutSoldItemsService.deleteCurrentSoldItemsList().subscribe();
   }
 
-  // Un
   loadSoldItemList() {
     console.log('implement loading sold items list');
     this.checkoutSoldItemsService.getAllSoldItemsList().subscribe( JsonDto => {
@@ -384,9 +347,7 @@ export class CheckoutSoldItemsComponent implements OnInit {
   );
   }
 
-  // checked
   verifyAvailability(newItem: ShopsCheckoutSoldItemsDTO) {
-    console.log('implement verifyAvailability for :');
     const verifyCategory: boolean = newItem.category !== null && newItem.category !== 'chooseCategory';
     const verifyShop: boolean = newItem.shop !== null && newItem.shop !== 'chooseShop';
     const verifyPriceListPerUnit: boolean = newItem.priceListPerUnit !== null && newItem.priceListPerUnit > 0;
@@ -398,8 +359,11 @@ export class CheckoutSoldItemsComponent implements OnInit {
         verifyPriceSalesPerUnit ) {
       console.log('entered into the if');
       this.checkoutSoldItemsService.verifyAvailability(newItem).subscribe((observable) => {
-        console.log(observable);
         this.availableItems = observable.quantity;
+
+        for ( const item of this.soldItemsToShopsList) {
+          this.availableItems -= Number(item.quantity);
+        }
       });
     } else {
       console.log('New Item not fully defined');

@@ -20,6 +20,8 @@ Run `npm i @swimlane/ngx-charts --save`
 
 Run `npm install --save @angular/flex-layout@latest @angular/cdk@latest`
 
+Run `npm install firebase @angular/fire`
+
 ## Development server
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
