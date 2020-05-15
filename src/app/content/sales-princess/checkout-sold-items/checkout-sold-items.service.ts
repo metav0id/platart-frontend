@@ -2,10 +2,11 @@ import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {ShopsCurrentInventoryDTO} from '../sales-princess-DTOs/ShopsCurrentInventoryDTO';
 import {WarehouseItemCategoryDTO} from '../../warehouse-queen/warehouseCategory/warehouse-item-category-DTO';
-import {Observable} from 'rxjs';
+import {observable, Observable} from 'rxjs';
 import {environment} from '../../../../environments/environment';
 import {ShopsCheckoutSoldItemsDTO} from "./checkout-sold-items-DTOs/ShopsCheckoutSoldItemsDTO";
 import {ShopDTO} from "../../warehouse-queen/new-delivery-to-shop/new-delivery-to-shop-DTOs/shop-dto";
+import {ShopInventoryItem} from "../view-shop-inventory/view-shop-inventory-DTOs/ShopInventoryItem";
 
 @Injectable({
   providedIn: 'root'
@@ -53,4 +54,23 @@ export class CheckoutSoldItemsService {
   public getListShops(): Observable<ShopDTO[]> {
     return this.http.get<ShopDTO[]>(environment.getAllShops);
   }
+
+  public verifyAvailability(newItem: ShopsCheckoutSoldItemsDTO): Observable<ShopsCheckoutSoldItemsDTO> {
+    const ELEMENT_DATA: ShopsCheckoutSoldItemsDTO = {
+      position: 1,
+      category: 'anillo',
+      quantity: 100,
+      priceListPerUnit: 20,
+      priceSalesPerUnit: 20,
+      revenuePerUnit: 20,
+      discountPercent: 0,
+      shop: 'shop1',
+      deliverySending: 'delivery',
+      itemLastSold: 'delivery',
+      comment: 'comment'
+    };
+
+    return this.http.post<ShopsCheckoutSoldItemsDTO>('http://localhost:8081/shops/getShopInventoryAvailability', newItem );
+  }
+
 }

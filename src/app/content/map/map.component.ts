@@ -32,7 +32,7 @@ export interface DialogData {
 export class MapComponent implements OnInit {
   lat: number = 51.678418;
   lng: number = 7.809007;
-  marcadores: Marcador[];
+  marcadores: Marcador[] = new Array();
   marker: Marcador;
   markerToEdit: Marcador;
   markerToGetCoords: Marcador;

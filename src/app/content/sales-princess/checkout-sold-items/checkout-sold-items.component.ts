@@ -11,6 +11,7 @@ import {MatDialog} from '@angular/material/dialog';
 import {CheckoutSoldItemsDetailsComponent} from './checkout-sold-items-details/checkout-sold-items-details.component';
 import {CheckoutCategories} from './checkout-sold-items-DTOs/CheckoutCategories';
 import {CheckoutSoldItemsSendVerificationComponent} from './checkout-sold-items-send-verification/checkout-sold-items-send-verification.component';
+import {observable} from 'rxjs';
 
 @Component({
   selector: 'app-checkout-sold-items',
@@ -26,7 +27,7 @@ export class CheckoutSoldItemsComponent implements OnInit {
   public discountControll = new FormControl('', Validators.required);
 
   private readonly DISCOUNT_METHOD_PERCENT = 'percent';
-  private readonly DISCOUNT_METHOD_REVENUE = 'revenue';
+  private readonly DISCOUNT_METHOD_REVENUE = 'revenue per item';
   private readonly DISCOUNT_METHOD_NO_DISCOUNT = 'no discount';
   public discountType: string = this.DISCOUNT_METHOD_NO_DISCOUNT;
   public discountList: Shop[] = [
@@ -57,21 +58,27 @@ export class CheckoutSoldItemsComponent implements OnInit {
 
   private totalAmountSold: number;
   private totalItems: number;
-  public listNewItemsToShops: ShopsCheckoutSoldItemsDTO[] = [];
-  public categoryLists: CheckoutCategories[] = [];
-  availableItems = 0;
+  public soldItemsToShopsList: ShopsCheckoutSoldItemsDTO[] = [];
+  public soldItemsCategoryLists: CheckoutCategories[] = [];
   selection = new SelectionModel<ShopsCheckoutSoldItemsDTO>(true, []);
-  newCheckoutItem: ShopsCheckoutSoldItemsDTO;
+  newCheckoutSoldItem: ShopsCheckoutSoldItemsDTO;
 
   @ViewChild('myShopCheckoutProductsTable') table: MatTable<any>;
 
   // Date input
   eventsTime: string[] = [];
 
+  // fields for amount of items
+  availableItems = 0;
+
   ngOnInit(): void {
-    this.checkoutSoldItemsService.getListShops().subscribe(JSON => this.shopsList = JSON);
-    this.loadSoldItemList();
     this.initNewOrderElement();
+
+    // fetch saved sold items-list
+    this.loadSoldItemList();
+
+    // drop-down-lists
+    this.checkoutSoldItemsService.getListShops().subscribe(JSON => this.shopsList = JSON);
     this.fetchCategories();
   }
 
@@ -81,8 +88,9 @@ export class CheckoutSoldItemsComponent implements OnInit {
     });
   }
 
+  // un
   initNewOrderElement(): void {
-    this.newCheckoutItem = {
+    this.newCheckoutSoldItem = {
       position: 0,
       category: this.INITIALIZE_CATEGORY,
       quantity: 0,
@@ -97,80 +105,83 @@ export class CheckoutSoldItemsComponent implements OnInit {
     };
   }
 
-  loremIpsumMethod() {
-    console.log('implement loremIpsumMethod!');
-
-    // Simple message.
-    // let snackBarRef =  this._snackBar.open('Sale send!','ok',{duration: 2000,});
-    // this.checkoutSoldItemsService.getAllItemsAllShops();
-  }
-
+  // Check! ->
   addSoldItem() {
 
+    // compute amount of available items of given category
+    this.verifyAvailability(this.newCheckoutSoldItem);
+
+    // console.log('Amount of items available' + amountOfItemsChecketOut);
+    const verifyAmountAvailable: boolean = Number(this.availableItems) >= Number(this.newCheckoutSoldItem.quantity);
     // do if values of this.newCheckoutItem are valid
-    if ( this.newCheckoutItem.quantity > 0 &&
-        this.newCheckoutItem.quantity < 100 &&
-        this.newCheckoutItem.priceListPerUnit > 0 &&
-        this.newCheckoutItem.priceSalesPerUnit > 0 &&
-        this.newCheckoutItem.category !== null &&
-        this.newCheckoutItem.itemLastSold !== null
+    const verifyQuantity: boolean = this.newCheckoutSoldItem.quantity > 0 && this.newCheckoutSoldItem.quantity < 1000;
+    const verifyPriceListPerUnit: boolean = this.newCheckoutSoldItem.priceListPerUnit > 0 && this.newCheckoutSoldItem.priceSalesPerUnit > 0;
+    const verifyCategory: boolean = this.newCheckoutSoldItem.category !== null && this.newCheckoutSoldItem.itemLastSold !== null;
+    if (  verifyAmountAvailable &&
+          verifyQuantity &&
+          verifyPriceListPerUnit &&
+          verifyCategory
     ) {
 
       let revenueCalculation = 0;
       let discountPercentCalculation = 0;
       if (this.discountType === this.DISCOUNT_METHOD_PERCENT ) {
-        discountPercentCalculation = this.newCheckoutItem.discountPercent;
-        revenueCalculation = this.newCheckoutItem.priceListPerUnit * (100 - this.newCheckoutItem.discountPercent) / 100;
+        discountPercentCalculation = this.newCheckoutSoldItem.discountPercent;
+        revenueCalculation = this.newCheckoutSoldItem.priceListPerUnit * (100 - this.newCheckoutSoldItem.discountPercent) / 100;
       } else if ( this.discountType === this.DISCOUNT_METHOD_REVENUE ) {
-        revenueCalculation = this.newCheckoutItem.revenuePerUnit;
-        discountPercentCalculation = 100 - (this.newCheckoutItem.revenuePerUnit * 100 / this.newCheckoutItem.priceListPerUnit);
+        revenueCalculation = this.newCheckoutSoldItem.revenuePerUnit;
+        discountPercentCalculation = 100 - (this.newCheckoutSoldItem.revenuePerUnit * 100 / this.newCheckoutSoldItem.priceListPerUnit);
       } else if ( this.discountType === this.DISCOUNT_METHOD_NO_DISCOUNT) {
-        revenueCalculation = this.newCheckoutItem.priceListPerUnit;
-        discountPercentCalculation = this.newCheckoutItem.discountPercent;
+        revenueCalculation = this.newCheckoutSoldItem.priceListPerUnit;
+        discountPercentCalculation = this.newCheckoutSoldItem.discountPercent;
       }
 
       let commentBefore: string;
       if (this.commentNessesary === 'No Comment') {
         commentBefore = 'No Comment';
       } else {
-        commentBefore = this.newCheckoutItem.comment;
+        commentBefore = this.newCheckoutSoldItem.comment;
       }
 
       const newSoldItemForTable: ShopsCheckoutSoldItemsDTO = {
-        position: this.newCheckoutItem.position,
-        category: this.newCheckoutItem.category,
-        quantity: this.newCheckoutItem.quantity,
-        priceListPerUnit: this.newCheckoutItem.priceListPerUnit,
-        priceSalesPerUnit: this.newCheckoutItem.priceSalesPerUnit,
+        position: this.newCheckoutSoldItem.position,
+        category: this.newCheckoutSoldItem.category,
+        quantity: this.newCheckoutSoldItem.quantity,
+        priceListPerUnit: this.newCheckoutSoldItem.priceListPerUnit,
+        priceSalesPerUnit: this.newCheckoutSoldItem.priceSalesPerUnit,
         revenuePerUnit: revenueCalculation,
         discountPercent: discountPercentCalculation,
-        shop: this.newCheckoutItem.shop,
-        deliverySending: this.newCheckoutItem.deliverySending,
-        itemLastSold: this.newCheckoutItem.itemLastSold,
+        shop: this.newCheckoutSoldItem.shop,
+        deliverySending: this.newCheckoutSoldItem.deliverySending,
+        itemLastSold: this.newCheckoutSoldItem.itemLastSold,
         comment: commentBefore,
       };
 
-      this.listNewItemsToShops.push(newSoldItemForTable);
-      console.log(this.listNewItemsToShops);
-
-      // update listNewItemsCategories
+      this.soldItemsToShopsList.push(newSoldItemForTable);
       this.rebuildListCategories();
-      this.table.renderRows();
+
     } else {
       console.log('item can not be added, since its fields are unvalid.');
     }
+    this.table.renderRows();
+    //console.log(this.soldItemsCategoryLists);
   }
 
+  // Check! ->
   rebuildListCategories(): void {
+    console.log('rebuildListCategories -> soldItemsToShopsList:');
+    console.log(this.soldItemsToShopsList);
+
     let positionCounter = 0;
     const newCategoryLists: CheckoutCategories[] = [];
 
-    // create categories
-    for (const item of this.listNewItemsToShops) {
+    // only create categories
+    for (const item of this.soldItemsToShopsList) {
       const newCategory: CheckoutCategories = {
         position: positionCounter,
         category: item.category,
         priceListPerUnit: item.priceListPerUnit,
+        priceSalesPerUnit: item.priceSalesPerUnit,
         quantity: 0,
         items: []
       };
@@ -182,8 +193,10 @@ export class CheckoutSoldItemsComponent implements OnInit {
 
         // check if category already exists
         for (const categoryItem of newCategoryLists) {
-          if ( categoryItem.category === newCategory.category &&
-              categoryItem.priceListPerUnit === newCategory.priceListPerUnit) {
+          if ( categoryItem.category == newCategory.category &&
+              categoryItem.priceListPerUnit == newCategory.priceListPerUnit &&
+              categoryItem.priceSalesPerUnit == newCategory.priceSalesPerUnit
+          ) {
             createNewCategoryFlag = false;
           }
         }
@@ -198,7 +211,7 @@ export class CheckoutSoldItemsComponent implements OnInit {
 
     // Add items by category
     for (const categoryItem of newCategoryLists) {
-      for (const item of this.listNewItemsToShops) {
+      for (const item of this.soldItemsToShopsList) {
         const newItem: ShopsCheckoutSoldItemsDTO = {
           position: item.position,
           category: item.category,
@@ -212,23 +225,28 @@ export class CheckoutSoldItemsComponent implements OnInit {
           itemLastSold: item.itemLastSold,
           comment: item.comment
         };
-        if ( categoryItem.category === newItem.category &&
-            categoryItem.priceListPerUnit === categoryItem.priceListPerUnit) {
+        if ( categoryItem.category == newItem.category &&
+            categoryItem.priceListPerUnit == newItem.priceListPerUnit &&
+            categoryItem.priceSalesPerUnit == newItem.priceSalesPerUnit
+        ) {
           categoryItem.quantity += Number(newItem.quantity);
           categoryItem.items.push(newItem);
         }
       }
     }
-    this.categoryLists = newCategoryLists;
-    console.log('new Categories Json:');
-    console.log(this.categoryLists);
+    this.soldItemsCategoryLists = newCategoryLists;
+    console.log('rebuildListCategories -> soldItemsCategoryLists:');
+    console.log(this.soldItemsCategoryLists);
+    this.table.renderRows();
   }
+
   dateSelection($event: MatDatepickerInputEvent<Date>) {
     const newDate: Date = $event.value;
-    this.newCheckoutItem.itemLastSold = newDate.toISOString();
+    this.newCheckoutSoldItem.itemLastSold = newDate.toISOString();
     this.eventsTime.push( newDate.toISOString() );
   }
 
+  // CHECK! -> subscribe or not
   openDialogCategory(checkoutCategory: CheckoutCategories) {
     console.log('open category Dialog');
     // open the dialogue
@@ -247,7 +265,7 @@ export class CheckoutSoldItemsComponent implements OnInit {
 
   // updates the category list and renders table
   updateAmountListCategories(): void {
-    for (const item of this.categoryLists) {
+    for (const item of this.soldItemsCategoryLists) {
       let newQuantity = 0;
       for (const subItem of item.items) {
         newQuantity += Number(subItem.quantity);
@@ -256,8 +274,8 @@ export class CheckoutSoldItemsComponent implements OnInit {
 
       // remove category if empty
       if (item.quantity === 0) {
-        const indexItem: number = this.categoryLists.indexOf(item);
-        this.categoryLists.splice(indexItem, 1);
+        const indexItem: number = this.soldItemsCategoryLists.indexOf(item);
+        this.soldItemsCategoryLists.splice(indexItem, 1);
       }
     }
   }
@@ -265,10 +283,10 @@ export class CheckoutSoldItemsComponent implements OnInit {
   // update the listNewItemsToShops from updated category list
   updateListNewItemsToShops(): void {
     // reset the listNewItemsToShops list
-    this.listNewItemsToShops = [];
+    this.soldItemsToShopsList = [];
 
     // refill with category items
-    for (const categoryItem of this.categoryLists) {
+    for (const categoryItem of this.soldItemsCategoryLists) {
       for (const item of categoryItem.items) {
         const newItem: ShopsCheckoutSoldItemsDTO = {
           position: item.position,
@@ -283,14 +301,14 @@ export class CheckoutSoldItemsComponent implements OnInit {
           itemLastSold: item.itemLastSold,
           comment: item.comment
         };
-        this.listNewItemsToShops.push(newItem);
+        this.soldItemsToShopsList.push(newItem);
       }
     }
   }
 
   saveSoldItemList() {
     console.log('implement saving sold items list');
-    this.checkoutSoldItemsService.saveAllSoldItemsList(this.listNewItemsToShops).subscribe();
+    this.checkoutSoldItemsService.saveAllSoldItemsList(this.soldItemsToShopsList).subscribe();
   }
 
   sendSoldItemList() {
@@ -299,15 +317,15 @@ export class CheckoutSoldItemsComponent implements OnInit {
     // open dialoge window
     const dialogRef = this.dialog.open(CheckoutSoldItemsSendVerificationComponent, {
       width: '250px',
-      data: this.listNewItemsToShops
+      data: this.soldItemsToShopsList
     });
 
     // once confirmed, send delivery order
     dialogRef.afterClosed().subscribe(() => {
-      this.checkoutSoldItemsService.sendAllSoldItemsList(this.listNewItemsToShops).subscribe( JsonDto => {
+      this.checkoutSoldItemsService.sendAllSoldItemsList(this.soldItemsToShopsList).subscribe(JsonDto => {
           console.log(JsonDto);
 
-          this.listNewItemsToShops = JsonDto;
+          this.soldItemsToShopsList = JsonDto;
           this.rebuildListCategories();
         }
       );
@@ -322,9 +340,35 @@ export class CheckoutSoldItemsComponent implements OnInit {
   loadSoldItemList() {
     console.log('implement loading sold items list');
     this.checkoutSoldItemsService.getAllSoldItemsList().subscribe( JsonDto => {
-      this.listNewItemsToShops = JsonDto;
+      this.soldItemsToShopsList = JsonDto;
       this.rebuildListCategories();
+      this.table.renderRows();
     }
   );
   }
+
+  verifyAvailability(newItem: ShopsCheckoutSoldItemsDTO) {
+    const verifyCategory: boolean = newItem.category !== null && newItem.category !== 'chooseCategory';
+    const verifyShop: boolean = newItem.shop !== null && newItem.shop !== 'chooseShop';
+    const verifyPriceListPerUnit: boolean = newItem.priceListPerUnit !== null && newItem.priceListPerUnit > 0;
+    const verifyPriceSalesPerUnit: boolean = newItem.priceSalesPerUnit !== null && newItem.priceSalesPerUnit > 0;
+
+    if (verifyCategory &&
+        verifyShop &&
+        verifyPriceListPerUnit &&
+        verifyPriceSalesPerUnit ) {
+      console.log('entered into the if');
+      this.checkoutSoldItemsService.verifyAvailability(newItem).subscribe((observable) => {
+        this.availableItems = observable.quantity;
+
+        for ( const item of this.soldItemsToShopsList) {
+          this.availableItems -= Number(item.quantity);
+        }
+      });
+    } else {
+      console.log('New Item not fully defined');
+    }
+
+  }
+
 }

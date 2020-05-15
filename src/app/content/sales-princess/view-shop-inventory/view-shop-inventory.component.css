@@ -1,3 +1,4 @@
+
 .box{
   text-align: center;
   display: flex;
@@ -18,36 +19,37 @@ table {
   width: 20px;
 }
 .justi{
-  display: flex;
+
   align-items: center;
-  justify-content: center
+
 }
+
 button {
-  transition-duration: 0.4s;
-  display: inline-block;
-  font-size: 15px;
-  cursor: pointer;
-  text-align: center;
-  text-decoration: none;
-  outline: none;
+  /*transition-duration: 0.4s;*/
+  /*display: inline-block;*/
+  /*font-size: 15px;*/
+  /*cursor: pointer;*/
+  /*text-align: center;*/
+  /*text-decoration: none;*/
+  /*outline: none;*/
   color: #fff;
-  background-color: #212e3e;
-  border: none;
-  border-radius: 15px;
+  background-color:  #212e3e;
+  /*border: none;*/
+  /*border-radius: 15px;*/
   /*box-shadow: 0 5px #999;*/
 }
 
-button:hover {
-  background-color: #f1d4cf; /* Green */
-  color: white;
-  box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
-}
+/*button:hover {*/
+/*  background-color:#f1d4cf ; !* Green #4caf50 *!*/
+/*  color: white;*/
+/*  box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);*/
+/*}*/
 
-.button:active {
-  background-color: #3e8e41;
-  box-shadow: 0 5px #666;
-  transform: translateY(4px);
-}
+/*.button:active {*/
+/*  background-color: #3e8e41;*/
+/*  box-shadow: 0 5px #666;*/
+/*  transform: translateY(4px);*/
+/*}*/
 
 th{
   font-family: Raleway /* Replace with your custom font */, sans-serif !important;
@@ -58,7 +60,7 @@ th{
 
 .cont-bg{
   background-color: #ffffff;
-  border-radius: 25px;
+
 }
 
 .cont-bg2{
@@ -67,7 +69,7 @@ th{
 }
 .cont-bg4{
   background-color: #f5f5f5;
-
+  border-radius: 10px;
 }
 
 .cont-bg3{
@@ -77,23 +79,23 @@ th{
 
 
 h1{
-  text-shadow: 2px 5px 5px #403f3f;
+
   font-weight: bolder;
   font-family: sans-serif;
-  color: #3d0949;
+  color: #212e3e;
 }
 h2{
 
   font-weight: bolder;
   font-family: sans-serif;
-  color: #000000;
+  color: #212e3e;
 
 }
 h3{
 
   font-weight: bolder;
   font-family: sans-serif;
-  color: #490927;
+  color: #212e3e;
 }
 
 .punkt{
@@ -102,7 +104,7 @@ h3{
 
 
 .demo-card-wide.mdl-card {
-  width: 80%;
+  width: 500em;
 
 }
 .demo-card-wide > .mdl-card__title {
@@ -113,5 +115,24 @@ h3{
   /*background: url('../assets/demos/welcome_card.jpg') center / cover;*/
 }
 .demo-card-wide > .mdl-card__menu {
+  color: #fff;
+}
+
+
+
+
+.demo-card-wide2.mdl-card {
+  width: 80%;
+  height:50%
+
+}
+.demo-card-wide2 > .mdl-card__title {
+  color: #fff;
+  height: 100px;
+
+
+  /*background: url('../assets/demos/welcome_card.jpg') center / cover;*/
+}
+.demo-card-wide2 > .mdl-card__menu {
   color: #fff;
 }

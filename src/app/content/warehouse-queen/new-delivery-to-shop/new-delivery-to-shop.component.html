@@ -1,494 +1,221 @@
-<div>
-
-<!--NEW TABLE 1-->
-<!-- Wide card with share menu button -->
-<div class="space"></div>
-<div class="container-fluid d-flex justify-content-center">
-
-
-<div class="demo-card-wide mdl-card mdl-shadow--2dp cont-bg justi">
-  <div class="container d-flex justify-content-left mdl-card__title">
-    <h2 class="mdl-card__title-text">New delivery order</h2>
-  </div>
-  <div class="mdl-card__supporting-text">
-
-
-<!--    CONTENT-->
-
-<!--    <div class="container">-->
-<!--      <div class="row">-->
-<!--        <div class="col-sm-4">-->
-<!--          <div class="space"></div>-->
-
-<!--        </div>-->
-
-          <div class="container cont-bg2 ">
-            <div class="space"></div>
-            <h1>New delivery order</h1>
-
-            <div>
-              <h3>Insert new order element:</h3>
-              <div class="container cont-bg4  ">
-                <div class="space"></div>
-                <div class="box">
-                <div class="newOrderInputFields">
-                  <div class="newOrderInputFieldsCategory">
-                    <mat-form-field appearance="fill">
-                      <mat-label>shop</mat-label>
-                      <mat-select [formControl]="shopControl" [(value)]="newOrderElement.deliveryShop">
-                        <mat-option>--</mat-option>
-                        <mat-option *ngFor="let entry of shopsList" [value]="entry.name">{{ entry.name}}</mat-option>
-                      </mat-select>
-                    </mat-form-field>
-                  </div>
-
-                  <div class="newOrderInputFields">
-                    <div class="newOrderInputFieldsCategory">
-                      <mat-form-field appearance="fill">
-                        <mat-label>category</mat-label>
-                        <mat-select [formControl]="categoryControl" [(value)]="newOrderElement.category">
-                          <mat-option>--</mat-option>
-                          <mat-option *ngFor="let entry of categoryItems"
-                                      [value]="entry.category">{{ entry.category }}</mat-option>
-                        </mat-select>
-                      </mat-form-field>
-                    </div>
-
-                    <div class="newOrderInputFieldsDeliveryFinalPricePerUnit">
-                      <mat-form-field hintLabel="Max 10 characters" appearance="fill">
-                        <mat-label>List Price per Unit</mat-label>
-                        <input matInput #input [(ngModel)]="newOrderElement.priceListPerUnit" maxlength="10" placeholder="Ex. deliveryDisplayPricePerUnit">
-                        <mat-hint align="end">{{input.value?.length || 0}}/10</mat-hint>
-                      </mat-form-field>
-                    </div>
-
-                    <div class="availabilityAmount space">
-                      <button mat-button (click)="verifyAvailability()">Check Availability</button>
-                      <a>{{availableItems}} items</a>
-                    </div>
-                    <div class="space"></div>
-
-                    <div class="newOrderInputFieldsDeliveryQuantity">
-                      <mat-form-field hintLabel="Max 10 characters" appearance="fill">
-                        <mat-label>Enter Quantity</mat-label>
-                        <input matInput #input [(ngModel)]="newOrderElement.quantity" maxlength="10" placeholder="Ex. deliveryQuantity">
-                        <mat-hint align="end">{{input.value?.length || 0}}/10</mat-hint>
-                      </mat-form-field>
-                    </div>
-
-                    <div class="discountSelectionRadioButton">
-                      <label id="example-radio-group-label">Pick discount type:</label>
-                      <div class="space"></div>
-                      <mat-radio-group
-                        aria-labelledby="example-radio-group-label"
-                        class="example-radio-group"
-                        [(ngModel)]="discountMethod">
-                        <mat-radio-button class="example-radio-button" *ngFor="let discount of discountMethodList" [value]="discount">
-                          {{discount}}
-                        </mat-radio-button>
-                      </mat-radio-group>
-                    </div>
-
-                    <div *ngIf="discountMethod==='displayPrice'" class="newOrderInputFieldsDeliveryDisplayPricePerUnit">
-                      <mat-form-field hintLabel="Max 10 characters" appearance="fill">
-                        <mat-label>Enter Sales Price per Unit</mat-label>
-                        <input matInput #input [(ngModel)]="newOrderElement.priceSalesPerUnit" maxlength="10" placeholder="Ex. deliveryDisplayPricePerUnit">
-                        <mat-hint align="end">{{input.value?.length || 0}}/10</mat-hint>
-                      </mat-form-field>
-                    </div>
-
-                    <div *ngIf="discountMethod==='percent'" class="newOrderInputFieldsDeliveryDeliveryDiscount">
-                      <mat-form-field hintLabel="Max 10 characters" appearance="fill">
-                        <mat-label>Enter Discount in %</mat-label>
-                        <input matInput #input [(ngModel)]="newOrderElement.discountPercent" maxlength="10" placeholder="Ex. deliveryDiscount">
-                        <mat-hint align="end">{{input.value?.length || 0}}/10</mat-hint>
-                      </mat-form-field>
-                    </div>
-                    <div class="space"></div>
-
-                    <div>
-                      <button mat-button (click)="setNewItemOrder()">Add new order item</button>
-                    </div>
-                  </div>
-                  <div class="space"></div>
-                </div>
-              </div>
-            </div>
-              <div class="space"></div>
+  <div class="space"></div>
+<div class="row">
+  <div class="col">
+<!--    CONTENT OF FIRST COL-->
+<div class="container-fluid d-flex justify-content-center ">
+    <div class="demo-card-wide mdl-card mdl-shadow--2dp">
+      <div class="mdl-card__title">
+        <h2 class="mdl-card__title-text">New delivery order</h2>
+      </div>
+      <div class="container-fluid d-flex justify-content-center cont-bg4">
+<!--      FORMULAR-->
+      <div class="newOrderInputFields">
+        <div class="newOrderInputFieldsCategory">
+          <mat-form-field appearance="fill">
+            <mat-label>shop</mat-label>
+            <mat-select [formControl]="shopControl" [(value)]="newOrderElement.deliveryShop">
+              <mat-option>--</mat-option>
+              <mat-option *ngFor="let entry of shopsList" [value]="entry.name">{{ entry.name}}</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+        <div class="newOrderInputFields">
+          <div class="newOrderInputFieldsCategory">
+            <mat-form-field appearance="fill">
+              <mat-label>category</mat-label>
+              <mat-select [formControl]="categoryControl" [(value)]="newOrderElement.category">
+                <mat-option>--</mat-option>
+                <mat-option *ngFor="let entry of categoryItems"
+                            [value]="entry.category">{{ entry.category }}</mat-option>
+              </mat-select>
+            </mat-form-field>
           </div>
-<!--        </div>-->
-<!--      </div>-->
 
+          <div class="newOrderInputFieldsDeliveryFinalPricePerUnit">
+            <mat-form-field hintLabel="Max 10 characters" appearance="fill">
+              <mat-label>List Price per Unit</mat-label>
+              <input matInput #input [(ngModel)]="newOrderElement.priceListPerUnit" maxlength="10" placeholder="Ex. deliveryDisplayPricePerUnit">
+              <mat-hint align="end">{{input.value?.length || 0}}/10</mat-hint>
+            </mat-form-field>
+          </div>
 
-      <!--    CONTENT-->
-
-
-
-
-
-
-
-  </div>
-<!--  <div class="mdl-card__actions mdl-card&#45;&#45;border">-->
-<!--    <a class="mdl-button mdl-button&#45;&#45;colored mdl-js-button mdl-js-ripple-effect">-->
-<!--      Get Started-->
-<!--    </a>-->
-<!--  </div>-->
-  <div class="mdl-card__menu">
-    <button class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect">
-      <i class="material-icons">share</i>
-    </button>
-  </div>
-</div>
-
-</div>
-<!--SEGUNDA TABLA-->
-
-
-  <div class="demo-card-wide2 mdl-card mdl-shadow--2dp cont-bg justi">
-<!--    <div class="mdl-card__title">-->
-<!--      <h2 class="mdl-card__title-text">Welcome</h2>-->
-<!--    </div>-->
-    <div class="mdl-card__supporting-text">
-
-
-
-<!--      CONTENT-->
-<!--      <div class="col-sm-8">-->
-<!--        <div class="space"></div>-->
-        <div class="container cont-bg2 ">
+          <div class="availabilityAmount space">
+            <button mat-raised-button  (click)="verifyAvailability()">Check Availability</button>
+            <a>{{availableItems}} items</a>
+          </div>
           <div class="space"></div>
-          <div class="container cont-bg4  justify-content-center ">
-            <div class="space"></div>
-            <div class="d-flex justify-content-around" >
-              <button mat-button mat-stroked-button (click)="saveCurrentOrder()">Save current order items</button>
-              <button mat-button (click)="clearCurrentOrder()">Clear current order items</button>
-              <button mat-button (click)="sendCurrentOrder()">Send order</button>
-            </div >
 
-
-            <div class="space"></div>
+          <div class="newOrderInputFieldsDeliveryQuantity">
+            <mat-form-field hintLabel="Max 10 characters" appearance="fill">
+              <mat-label>Enter Quantity</mat-label>
+              <input matInput #input [(ngModel)]="newOrderElement.quantity" maxlength="10" placeholder="Ex. deliveryQuantity">
+              <mat-hint align="end">{{input.value?.length || 0}}/10</mat-hint>
+            </mat-form-field>
           </div>
-          <div class="container cont-bg4  justify-content-center  ">
+
+          <div class="discountSelectionRadioButton">
+            <label id="example-radio-group-label">Pick discount type:</label>
             <div class="space"></div>
-            <div class="d-flex justify-content-around" >
-              <h3><u>Delivery list to:</u> {{newOrderElement.deliveryShop}}</h3>
-            </div >
+            <mat-radio-group
+              aria-labelledby="example-radio-group-label"
+              class="example-radio-group"
+              [(ngModel)]="discountMethod">
+              <mat-radio-button class="example-radio-button" *ngFor="let discount of discountMethodList" [value]="discount">
+                {{discount}}
+              </mat-radio-button>
+            </mat-radio-group>
+          </div>
+
+          <div *ngIf="discountMethod==='displayPrice'" class="newOrderInputFieldsDeliveryDisplayPricePerUnit">
+            <mat-form-field hintLabel="Max 10 characters" appearance="fill">
+              <mat-label>Enter Sales Price per Unit</mat-label>
+              <input matInput #input [(ngModel)]="newOrderElement.priceSalesPerUnit" maxlength="10" placeholder="Ex. deliveryDisplayPricePerUnit">
+              <mat-hint align="end">{{input.value?.length || 0}}/10</mat-hint>
+            </mat-form-field>
+          </div>
+
+          <div *ngIf="discountMethod==='percent'" class="newOrderInputFieldsDeliveryDeliveryDiscount">
+            <mat-form-field hintLabel="Max 10 characters" appearance="fill">
+              <mat-label>Enter Discount in %</mat-label>
+              <input matInput #input [(ngModel)]="newOrderElement.discountPercent" maxlength="10" placeholder="Ex. deliveryDiscount">
+              <mat-hint align="end">{{input.value?.length || 0}}/10</mat-hint>
+            </mat-form-field>
           </div>
           <div>
-          </div>
-          <div class="space"></div>
-          <div class="table-responsive">
-
-            <table mat-table #myShopCheckinProductsTable [dataSource]="listNewItemsToShops" class="mat-elevation-z8" >
-
-              <!-- Checkbox Column -->
-              <ng-container matColumnDef="select">
-                <th mat-header-cell *matHeaderCellDef>
-                  <mat-checkbox (change)="$event ? masterToggle() : null"
-                                [checked]="selection.hasValue() && isAllSelected()"
-                                [indeterminate]="selection.hasValue() && !isAllSelected()"
-                                [aria-label]="checkboxLabel()">
-                  </mat-checkbox>
-                </th>
-                <td mat-cell *matCellDef="let row">
-                  <mat-checkbox (click)="$event.stopPropagation()"
-                                (change)="$event ? selection.toggle(row) : null"
-                                [checked]="selection.isSelected(row)"
-                                [aria-label]="checkboxLabel(row)">
-                  </mat-checkbox>
-                </td>
-                <td mat-footer-cell *matFooterCellDef> - </td>
-              </ng-container>
-
-              <!-- Position Column -->
-              <ng-container matColumnDef="category">
-                <th mat-header-cell *matHeaderCellDef> Category </th>
-                <td mat-cell *matCellDef="let element"> {{element.category}} </td>
-                <td mat-footer-cell *matFooterCellDef> - </td>
-              </ng-container>
-
-              <!-- Name Column -->
-              <ng-container matColumnDef="quantity">
-                <th mat-header-cell *matHeaderCellDef> Quantity </th>
-                <td mat-cell *matCellDef="let element"> {{element.quantity}}# </td>
-                <td mat-footer-cell *matFooterCellDef> {{getTotalItems()}}# </td>
-              </ng-container>
-
-              <!-- priceSalesPerUnit Column -->
-              <ng-container matColumnDef="priceSalesPerUnit">
-                <th mat-header-cell *matHeaderCellDef> Sales Price </th>
-                <td mat-cell *matCellDef="let element"> {{element.priceSalesPerUnit}}$ </td>
-                <td mat-footer-cell *matFooterCellDef> Total items: </td>
-              </ng-container>
-
-              <!-- priceDiscount Column -->
-              <ng-container matColumnDef="discountPercent">
-                <th mat-header-cell *matHeaderCellDef> Discount % </th>
-                <td mat-cell *matCellDef="let element"> {{element.discountPercent}}%</td>
-                <td mat-footer-cell *matFooterCellDef> Total value: </td>
-              </ng-container>
-
-              <!-- priceListPerUnit Column -->
-              <ng-container matColumnDef="priceListPerUnit">
-                <th mat-header-cell *matHeaderCellDef> List Price </th>
-                <td mat-cell *matCellDef="let element"> {{element.priceListPerUnit}}$</td>
-                <td mat-footer-cell *matFooterCellDef> {{getTotalValue()}}$ </td>
-              </ng-container>
-
-              <!-- Action Column -->
-              <ng-container matColumnDef="updateItem">
-                <th mat-header-cell *matHeaderCellDef> Action </th>
-                <td mat-cell *matCellDef="let element">
-                  <button (click)="updateButton(element)">Correct item</button>
-                </td>
-                <td mat-footer-cell *matFooterCellDef> - </td>
-              </ng-container>
-
-              <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-              <tr mat-row *matRowDef="let element; columns: displayedColumns;"></tr>
-              <tr mat-footer-row *matFooterRowDef="displayedColumns"></tr>
-            </table>
-            <div class="space"></div>
+            <button mat-raised-button  (click)="setNewItemOrder()">Add new order item</button>
           </div>
         </div>
-<!--      </div>-->
+        <div class="space"></div>
+<!--        FORLUMAR ENDS-->
 
-<!--    </div>-->
-
-
-
-    <!--      CONTENT-->
-
-
-
-
-
+<!--        NEXT DIV CLOSES CONTAINER OF FORMULAR-->
+      </div>
+        <!--    CONTENT OF FIRST COL-->
+<!--NEX DIV CLOSES THE CONTENT OF CARD-->
     </div>
-<!--    <div class="mdl-card__actions mdl-card&#45;&#45;border">-->
-<!--      <a class="mdl-button mdl-button&#45;&#45;colored mdl-js-button mdl-js-ripple-effect">-->
-<!--        Get Started-->
-<!--      </a>-->
-<!--    </div>-->
-    <div class="mdl-card__menu">
-      <button class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect">
-        <i class="material-icons">share</i>
-      </button>
     </div>
+    <!--NEX DIV CORRESPONDS TO COLUMN-->
   </div>
+
+
+  <div class="w-100"></div>
+    <div class="space"></div>
+
+  <!--  SEGUNDA COLUMNA-->
+  <div class="col">
+<!--    CONTAINER TO CENTER IN THE PAGE-->
+    <div class="container-fluid d-flex justify-content-center">
+<!--    CONTENT-->
+    <div class="demo-card-wide mdl-card mdl-shadow--2dp">
+      <div class="container cont-bg2 ">
+        <div class="space"></div>
+        <div class="container cont-bg4  justify-content-center ">
+          <div class="space"></div>
+          <div class="d-flex justify-content-around" >
+            <button  mat-raised-button (click)="saveCurrentOrder()">Save current order items</button>
+            <button  mat-raised-button  (click)="clearCurrentOrder()">Clear current order items</button>
+            <button  mat-raised-button  (click)="sendCurrentOrder()">Send order</button>
+          </div >
+          <div class="space"></div>
+        </div>
+
+        <div class="space"></div>
+
+        <div class="container cont-bg4  justify-content-center  ">
+          <div class="space"></div>
+          <div class="d-flex justify-content-around" >
+            <h3><u>Delivery list to:</u> {{newOrderElement.deliveryShop}}</h3>
+          </div >
+        </div>
+        <div>
+        </div>
+        <div class="space"></div>
+        <div class="table-responsive">
+
+          <table mat-table #myShopCheckinProductsTable [dataSource]="listNewItemsToShops" class="mat-elevation-z8" >
+
+            <!-- Checkbox Column -->
+            <ng-container matColumnDef="select">
+              <th mat-header-cell *matHeaderCellDef>
+                <mat-checkbox (change)="$event ? masterToggle() : null"
+                              [checked]="selection.hasValue() && isAllSelected()"
+                              [indeterminate]="selection.hasValue() && !isAllSelected()"
+                              [aria-label]="checkboxLabel()">
+                </mat-checkbox>
+              </th>
+              <td mat-cell *matCellDef="let row">
+                <mat-checkbox (click)="$event.stopPropagation()"
+                              (change)="$event ? selection.toggle(row) : null"
+                              [checked]="selection.isSelected(row)"
+                              [aria-label]="checkboxLabel(row)">
+                </mat-checkbox>
+              </td>
+              <td mat-footer-cell *matFooterCellDef> - </td>
+            </ng-container>
+
+            <!-- Position Column -->
+            <ng-container matColumnDef="category">
+              <th mat-header-cell *matHeaderCellDef> Category </th>
+              <td mat-cell *matCellDef="let element"> {{element.category}} </td>
+              <td mat-footer-cell *matFooterCellDef> - </td>
+            </ng-container>
+
+            <!-- Name Column -->
+            <ng-container matColumnDef="quantity">
+              <th mat-header-cell *matHeaderCellDef> Quantity </th>
+              <td mat-cell *matCellDef="let element"> {{element.quantity}}# </td>
+              <td mat-footer-cell *matFooterCellDef> {{getTotalItems()}}# </td>
+            </ng-container>
+
+            <!-- priceSalesPerUnit Column -->
+            <ng-container matColumnDef="priceSalesPerUnit">
+              <th mat-header-cell *matHeaderCellDef> Sales Price </th>
+              <td mat-cell *matCellDef="let element"> {{element.priceSalesPerUnit}}$ </td>
+              <td mat-footer-cell *matFooterCellDef> Total items: </td>
+            </ng-container>
+
+            <!-- priceDiscount Column -->
+            <ng-container matColumnDef="discountPercent">
+              <th mat-header-cell *matHeaderCellDef> Discount % </th>
+              <td mat-cell *matCellDef="let element"> {{element.discountPercent}}%</td>
+              <td mat-footer-cell *matFooterCellDef> Total value: </td>
+            </ng-container>
+
+            <!-- priceListPerUnit Column -->
+            <ng-container matColumnDef="priceListPerUnit">
+              <th mat-header-cell *matHeaderCellDef> List Price </th>
+              <td mat-cell *matCellDef="let element"> {{element.priceListPerUnit}}$</td>
+              <td mat-footer-cell *matFooterCellDef> {{getTotalValue()}}$ </td>
+            </ng-container>
+
+            <!-- Action Column -->
+            <ng-container matColumnDef="updateItem">
+              <th mat-header-cell *matHeaderCellDef> Action </th>
+              <td mat-cell *matCellDef="let element">
+                <button (click)="updateButton(element)">Correct item</button>
+              </td>
+              <td mat-footer-cell *matFooterCellDef> - </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let element; columns: displayedColumns;"></tr>
+            <tr mat-footer-row *matFooterRowDef="displayedColumns"></tr>
+          </table>
+          <div class="space"></div>
+        </div>
+      </div>
+
+
+    </div>
+<!--    CONTENT-->
+
+
+
+<!--    NEXT DIV CLOSES CONTAINER TO CENTER CARD-->
 </div>
-
+<!--    NEXT DIV CLOSES CLUMN-->
+  </div>
+<!--    NEXT DIV CLOSES ROW-->
 </div>
-
-
-
-
-
-
-<!--<div class="container">-->
-<!--  <div class="row">-->
-<!--    <div class="col-sm-4">-->
-<!--      <div class="space"></div>-->
-
-<!--      </div>-->
-<!--      <div class="box">-->
-<!--        <div class="container cont-bg punkt">-->
-<!--          <div class="space"></div>-->
-<!--        <h1>New delivery order</h1>-->
-
-<!--        <div>-->
-<!--          <h3>Insert new order element:</h3>-->
-<!--          <div class="container cont-bg2 punkt">-->
-<!--            <div class="space"></div>-->
-
-<!--            <div class="newOrderInputFields">-->
-<!--              <div class="newOrderInputFieldsCategory">-->
-<!--                <mat-form-field appearance="fill">-->
-<!--                  <mat-label>shop</mat-label>-->
-<!--                  <mat-select [formControl]="shopControl" [(value)]="newOrderElement.deliveryShop">-->
-<!--                    <mat-option>&#45;&#45;</mat-option>-->
-<!--                    <mat-option *ngFor="let entry of shopsList" [value]="entry.name">{{ entry.name}}</mat-option>-->
-<!--                  </mat-select>-->
-<!--                </mat-form-field>-->
-<!--              </div>-->
-
-<!--              <div class="newOrderInputFields">-->
-<!--                <div class="newOrderInputFieldsCategory">-->
-<!--                  <mat-form-field appearance="fill">-->
-<!--                    <mat-label>category</mat-label>-->
-<!--                    <mat-select [formControl]="categoryControl" [(value)]="newOrderElement.category">-->
-<!--                      <mat-option>&#45;&#45;</mat-option>-->
-<!--                      <mat-option *ngFor="let entry of categoryItems"-->
-<!--                                  [value]="entry.category">{{ entry.category }}</mat-option>-->
-<!--                    </mat-select>-->
-<!--                  </mat-form-field>-->
-<!--                </div>-->
-
-<!--              <div class="newOrderInputFieldsDeliveryFinalPricePerUnit">-->
-<!--                <mat-form-field hintLabel="Max 10 characters" appearance="fill">-->
-<!--                  <mat-label>List Price per Unit</mat-label>-->
-<!--                  <input matInput #input [(ngModel)]="newOrderElement.priceListPerUnit" maxlength="10" placeholder="Ex. deliveryDisplayPricePerUnit">-->
-<!--                  <mat-hint align="end">{{input.value?.length || 0}}/10</mat-hint>-->
-<!--                </mat-form-field>-->
-<!--              </div>-->
-
-<!--              <div class="availabilityAmount space">-->
-<!--                <button mat-button (click)="verifyAvailability()">Check Availability</button>-->
-<!--                <a>{{availableItems}} items</a>-->
-<!--              </div>-->
-<!--              <div class="space"></div>-->
-
-<!--              <div class="newOrderInputFieldsDeliveryQuantity">-->
-<!--                <mat-form-field hintLabel="Max 10 characters" appearance="fill">-->
-<!--                <mat-label>Enter Quantity</mat-label>-->
-<!--                <input matInput #input [(ngModel)]="newOrderElement.quantity" maxlength="10" placeholder="Ex. deliveryQuantity">-->
-<!--                <mat-hint align="end">{{input.value?.length || 0}}/10</mat-hint>-->
-<!--              </mat-form-field>-->
-<!--              </div>-->
-
-<!--            <div class="discountSelectionRadioButton">-->
-<!--              <label id="example-radio-group-label">Pick discount type:</label>-->
-<!--              <div class="space"></div>-->
-<!--              <mat-radio-group-->
-<!--                aria-labelledby="example-radio-group-label"-->
-<!--                class="example-radio-group"-->
-<!--                [(ngModel)]="discountMethod">-->
-<!--                <mat-radio-button class="example-radio-button" *ngFor="let discount of discountMethodList" [value]="discount">-->
-<!--                  {{discount}}-->
-<!--                </mat-radio-button>-->
-<!--              </mat-radio-group>-->
-<!--            </div>-->
-
-<!--            <div *ngIf="discountMethod==='displayPrice'" class="newOrderInputFieldsDeliveryDisplayPricePerUnit">-->
-<!--              <mat-form-field hintLabel="Max 10 characters" appearance="fill">-->
-<!--                <mat-label>Enter Sales Price per Unit</mat-label>-->
-<!--                <input matInput #input [(ngModel)]="newOrderElement.priceSalesPerUnit" maxlength="10" placeholder="Ex. deliveryDisplayPricePerUnit">-->
-<!--                <mat-hint align="end">{{input.value?.length || 0}}/10</mat-hint>-->
-<!--              </mat-form-field>-->
-<!--            </div>-->
-
-<!--            <div *ngIf="discountMethod==='percent'" class="newOrderInputFieldsDeliveryDeliveryDiscount">-->
-<!--              <mat-form-field hintLabel="Max 10 characters" appearance="fill">-->
-<!--                <mat-label>Enter Discount in %</mat-label>-->
-<!--                <input matInput #input [(ngModel)]="newOrderElement.discountPercent" maxlength="10" placeholder="Ex. deliveryDiscount">-->
-<!--                <mat-hint align="end">{{input.value?.length || 0}}/10</mat-hint>-->
-<!--              </mat-form-field>-->
-<!--            </div>-->
-<!--            <div class="space"></div>-->
-
-<!--            <div>-->
-<!--              <button mat-button (click)="setNewItemOrder()">Add new order item</button>-->
-<!--            </div>-->
-<!--          </div>-->
-<!--            <div class="space"></div>-->
-<!--          </div>-->
-<!--          </div>-->
-<!--        </div>-->
-<!--      </div>-->
-<!--    </div>-->
-<!--    </div>-->
-
-<!--    <div class="col-sm-8">-->
-<!--      <div class="space"></div>-->
-<!--      <div class="container cont-bg punkt">-->
-<!--        <div class="space"></div>-->
-<!--        <div class="container cont-bg3  justify-content-center punkt ">-->
-<!--          <div class="space"></div>-->
-<!--            <div class="d-flex justify-content-around" >-->
-<!--              <button mat-button mat-stroked-button (click)="saveCurrentOrder()">Save current order items</button>-->
-<!--              <button mat-button (click)="clearCurrentOrder()">Clear current order items</button>-->
-<!--              <button mat-button (click)="sendCurrentOrder()">Send order</button>-->
-<!--            </div >-->
-
-
-<!--          <div class="space"></div>-->
-<!--        </div>-->
-
-<!--        <div class="container cont-bg3  justify-content-center punkt ">-->
-<!--          <div class="space"></div>-->
-<!--          <div class="d-flex justify-content-around" >-->
-<!--            <h3><u>Delivery list to:</u> {{newOrderElement.deliveryShop}}</h3>-->
-<!--          </div >-->
-<!--        </div>-->
-<!--      <div>-->
-<!--    </div>-->
-
-<!--        <div class="table-responsive">-->
-
-<!--        <table mat-table #myShopCheckinProductsTable [dataSource]="listNewItemsToShops" class="mat-elevation-z8" >-->
-
-<!--          &lt;!&ndash; Checkbox Column &ndash;&gt;-->
-<!--          <ng-container matColumnDef="select">-->
-<!--            <th mat-header-cell *matHeaderCellDef>-->
-<!--              <mat-checkbox (change)="$event ? masterToggle() : null"-->
-<!--                            [checked]="selection.hasValue() && isAllSelected()"-->
-<!--                            [indeterminate]="selection.hasValue() && !isAllSelected()"-->
-<!--                            [aria-label]="checkboxLabel()">-->
-<!--              </mat-checkbox>-->
-<!--            </th>-->
-<!--            <td mat-cell *matCellDef="let row">-->
-<!--              <mat-checkbox (click)="$event.stopPropagation()"-->
-<!--                            (change)="$event ? selection.toggle(row) : null"-->
-<!--                            [checked]="selection.isSelected(row)"-->
-<!--                            [aria-label]="checkboxLabel(row)">-->
-<!--              </mat-checkbox>-->
-<!--            </td>-->
-<!--            <td mat-footer-cell *matFooterCellDef> - </td>-->
-<!--          </ng-container>-->
-
-<!--          &lt;!&ndash; Position Column &ndash;&gt;-->
-<!--          <ng-container matColumnDef="category">-->
-<!--            <th mat-header-cell *matHeaderCellDef> Category </th>-->
-<!--            <td mat-cell *matCellDef="let element"> {{element.category}} </td>-->
-<!--            <td mat-footer-cell *matFooterCellDef> - </td>-->
-<!--          </ng-container>-->
-
-<!--          &lt;!&ndash; Name Column &ndash;&gt;-->
-<!--          <ng-container matColumnDef="quantity">-->
-<!--            <th mat-header-cell *matHeaderCellDef> Quantity </th>-->
-<!--            <td mat-cell *matCellDef="let element"> {{element.quantity}}# </td>-->
-<!--            <td mat-footer-cell *matFooterCellDef> {{getTotalItems()}}# </td>-->
-<!--          </ng-container>-->
-
-<!--          &lt;!&ndash; priceSalesPerUnit Column &ndash;&gt;-->
-<!--          <ng-container matColumnDef="priceSalesPerUnit">-->
-<!--            <th mat-header-cell *matHeaderCellDef> Sales Price </th>-->
-<!--            <td mat-cell *matCellDef="let element"> {{element.priceSalesPerUnit}}$ </td>-->
-<!--            <td mat-footer-cell *matFooterCellDef> Total items: </td>-->
-<!--          </ng-container>-->
-
-<!--          &lt;!&ndash; priceDiscount Column &ndash;&gt;-->
-<!--          <ng-container matColumnDef="discountPercent">-->
-<!--            <th mat-header-cell *matHeaderCellDef> Discount % </th>-->
-<!--            <td mat-cell *matCellDef="let element"> {{element.discountPercent}}%</td>-->
-<!--            <td mat-footer-cell *matFooterCellDef> Total value: </td>-->
-<!--          </ng-container>-->
-
-<!--          &lt;!&ndash; priceListPerUnit Column &ndash;&gt;-->
-<!--          <ng-container matColumnDef="priceListPerUnit">-->
-<!--            <th mat-header-cell *matHeaderCellDef> List Price </th>-->
-<!--            <td mat-cell *matCellDef="let element"> {{element.priceListPerUnit}}$</td>-->
-<!--            <td mat-footer-cell *matFooterCellDef> {{getTotalValue()}}$ </td>-->
-<!--          </ng-container>-->
-
-<!--          &lt;!&ndash; Action Column &ndash;&gt;-->
-<!--          <ng-container matColumnDef="updateItem">-->
-<!--            <th mat-header-cell *matHeaderCellDef> Action </th>-->
-<!--            <td mat-cell *matCellDef="let element">-->
-<!--              <button (click)="updateButton(element)">Correct item</button>-->
-<!--            </td>-->
-<!--            <td mat-footer-cell *matFooterCellDef> - </td>-->
-<!--          </ng-container>-->
-
-<!--          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>-->
-<!--          <tr mat-row *matRowDef="let element; columns: displayedColumns;"></tr>-->
-<!--          <tr mat-footer-row *matFooterRowDef="displayedColumns"></tr>-->
-<!--        </table>-->
-<!--        <div class="space"></div>-->
-<!--      </div>-->
-<!--      </div>-->
-<!--    </div>-->
-
-<!--    </div>-->
 
 

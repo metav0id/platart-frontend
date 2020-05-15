@@ -1,212 +1,173 @@
-
-
-
-
-<!--new table1-->
-<!-- Wide card with share menu button -->
-
 <div class="space"></div>
-<div class="container-fluid d-flex justify-content-center">
-<div class="demo-card-wide mdl-card mdl-shadow--2dp cont-bg justi">
-  <div class="container d-flex justify-content-left mdl-card__title">
-    <h2 class="mdl-card__title-text">New delivery for warehouse</h2>
-  </div>
-  <div class="mdl-card__supporting-text">
-
-
-<!--    CONTENT-->
-
-    <div class="container cont-bg2 ">
-      <div class="space"></div>
-      <h1>Check-in new products</h1>
-
-      <div>
-        <h3>Insert new order element:</h3>
-
-
-              </div>
-              <div class="container cont-bg4">
-                <div class="space"></div>
-                <div class="box">
-                <div>
-                  <!--Pre-defined categories-->
-                  <mat-form-field>
-                    <mat-label>Category:</mat-label>
-                    <mat-select [formControl] = "categoryControl" [(value)]="newItemFromSupplier.category" required>
-                      <mat-option>--</mat-option>
-                      <mat-option *ngFor="let entry of categoryItems" [value]="entry.category">{{ entry.category }}</mat-option>
-                    </mat-select>
-                    <mat-error *ngIf="categoryControl.hasError('required')">Please choose a category</mat-error>
-                    <mat-hint>{{ categoryControl.value?.sound }}</mat-hint>
-                  </mat-form-field>
-
-                  <!--Input Quantity-->
-                  <div class="deliveryToWarehouseQuantity">
-                    <mat-form-field hintLabel="Max 10 characters" appearance="fill">
-                      <mat-label>Enter Quantity</mat-label>
-                      <input matInput #input [(ngModel)]="newItemFromSupplier.quantity" maxlength="10" placeholder="Quantity">
-                      <mat-hint align="end">{{input.value?.length || 0}}/10</mat-hint>
-                    </mat-form-field>
-                  </div>
-
-                  <!--Input Price Supplier Per Unit-->
-                  <div class="deliveryToWarehouseQuantity">
-                    <mat-form-field hintLabel="Max 10 characters" appearance="fill">
-                      <mat-label>Enter Supplier Price</mat-label>
-                      <input matInput #input [(ngModel)]="newItemFromSupplier.priceSupplierPerUnit" maxlength="10" placeholder="Quantity">
-                      <mat-hint align="end">{{input.value?.length || 0}}/10</mat-hint>
-                    </mat-form-field>
-                  </div>
-
-                  <!--Input Price List Per Unit-->
-                  <div class="deliveryToWarehousePricePerUnit">
-                    <mat-form-field hintLabel="Max 10 characters" appearance="fill">
-                      <mat-label>Enter List Price</mat-label>
-                      <input matInput #input [(ngModel)]="newItemFromSupplier.priceListPerUnit" maxlength="10" placeholder="PricePerUnit">
-                      <mat-hint align="end">{{input.value?.length || 0}}/10</mat-hint>
-                    </mat-form-field>
-                  </div>
-                  <!--Input Supplier Name-->
-                  <div class="deliveryToWarehousePricePerUnit">
-                    <mat-form-field hintLabel="Max 10 characters" appearance="fill">
-                      <mat-label>Enter SupplierName</mat-label>
-                      <input matInput #input [(ngModel)]="newItemFromSupplier.supplierName" maxlength="10" placeholder="SupplierName">
-                      <mat-hint align="end">{{input.value?.length || 0}}/10</mat-hint>
-                    </mat-form-field>
-                  </div>
-                  <div class="space">
-
-                  </div>
-                  <div>
-                    <button mat-button (click)="addNewItemToList()">Add new product to inventory</button>
-                  </div>
-                  <div class="space"></div>
-                </div>
-              </div>
-            </div>
-    </div>
-
-    <!--    CONTENT-->
-
-
-
-
-
-  </div>
-<!--  <div class="mdl-card__actions mdl-card&#45;&#45;border">-->
-<!--    <a class="mdl-button mdl-button&#45;&#45;colored mdl-js-button mdl-js-ripple-effect">-->
-<!--      Get Started-->
-<!--    </a>-->
-<!--  </div>-->
-  <div class="mdl-card__menu">
-    <button class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect">
-      <i class="material-icons">share</i>
-    </button>
-  </div>
-</div>
-
-<!--new table2-->
-
-
-<!-- Wide card with share menu button -->
-
-<div class="demo-card-wide2 mdl-card mdl-shadow--2dp cont-bg justi">
-
-  <div class="mdl-card__supporting-text">
-
-
-<!--    CONTENT -->
-    <div class="space"></div>
-    <div class="container cont-bg2 ">
-      <div class="space"></div>
-      <div class="container cont-bg4  ">
-        <div class="space"></div>
-        <div class="d-flex justify-content-around">
-          <button mat-button (click)="deleteItem()">Delete selected</button>
-          <button mat-button (click)="saveList()">Save List</button>
+<div class="row">
+  <div class="col">
+    <!--    CONTENT OF FIRST COL-->
+    <div class="container-fluid d-flex justify-content-center ">
+      <div class="demo-card-wide mdl-card mdl-shadow--2dp">
+        <div class="mdl-card__title">
+          <h2 class="mdl-card__title-text">New delivery order</h2>
         </div>
-        <div class="space"></div>
+        <div class="container-fluid d-flex justify-content-center cont-bg4">
+          <!--      FORMULAR-->
+          <div>
+          <mat-form-field>
+            <mat-label>Category:</mat-label>
+            <mat-select [formControl] = "categoryControl" [(value)]="newItemFromSupplier.category" required>
+              <mat-option>--</mat-option>
+              <mat-option *ngFor="let entry of categoryItems" [value]="entry.category">{{ entry.category }}</mat-option>
+            </mat-select>
+            <mat-error *ngIf="categoryControl.hasError('required')">Please choose a category</mat-error>
+            <mat-hint>{{ categoryControl.value?.sound }}</mat-hint>
+          </mat-form-field>
+
+
+          <!--Input Quantity-->
+          <div class="deliveryToWarehouseQuantity">
+            <mat-form-field hintLabel="Max 10 characters" appearance="fill">
+              <mat-label>Enter Quantity</mat-label>
+              <input matInput #input [(ngModel)]="newItemFromSupplier.quantity" maxlength="10" placeholder="Quantity">
+              <mat-hint align="end">{{input.value?.length || 0}}/10</mat-hint>
+            </mat-form-field>
+          </div>
+
+          <!--Input Price Supplier Per Unit-->
+          <div class="deliveryToWarehouseQuantity">
+            <mat-form-field hintLabel="Max 10 characters" appearance="fill">
+              <mat-label>Enter Supplier Price</mat-label>
+              <input matInput #input [(ngModel)]="newItemFromSupplier.priceSupplierPerUnit" maxlength="10" placeholder="Quantity">
+              <mat-hint align="end">{{input.value?.length || 0}}/10</mat-hint>
+            </mat-form-field>
+          </div>
+
+          <!--Input Price List Per Unit-->
+          <div class="deliveryToWarehousePricePerUnit">
+            <mat-form-field hintLabel="Max 10 characters" appearance="fill">
+              <mat-label>Enter List Price</mat-label>
+              <input matInput #input [(ngModel)]="newItemFromSupplier.priceListPerUnit" maxlength="10" placeholder="PricePerUnit">
+              <mat-hint align="end">{{input.value?.length || 0}}/10</mat-hint>
+            </mat-form-field>
+          </div>
+          <!--Input Supplier Name-->
+          <div class="deliveryToWarehousePricePerUnit">
+            <mat-form-field hintLabel="Max 10 characters" appearance="fill">
+              <mat-label>Enter SupplierName</mat-label>
+              <input matInput #input [(ngModel)]="newItemFromSupplier.supplierName" maxlength="10" placeholder="SupplierName">
+              <mat-hint align="end">{{input.value?.length || 0}}/10</mat-hint>
+            </mat-form-field>
+          </div>
+          <div class="space">
+
+          </div>
+          <div>
+            <button  mat-raised-button (click)="addNewItemToList()">Add new product to inventory</button>
+          </div>
+          <div class="space"></div>
+        </div>
+          </div>
+            <!--        FORLUMAR ENDS-->
+
+            <!--        NEXT DIV CLOSES CONTAINER OF FORMULAR-->
+          </div>
+          <!--    CONTENT OF FIRST COL-->
+          <!--NEX DIV CLOSES THE CONTENT OF CARD-->
+        </div>
       </div>
-      <div class="space"></div>
-      <div class= "table-responsive">
-
-        <table #myCheckinProductsTable mat-table [dataSource]="listNewItemsFromSuppliers" class="mat-elevation-z8">
-
-          <!-- Checkbox Column -->
-          <ng-container matColumnDef="select">
-            <th mat-header-cell *matHeaderCellDef>
-              <mat-checkbox (change)="$event ? masterToggle() : null"
-                            [checked]="selection.hasValue() && isAllSelected()"
-                            [indeterminate]="selection.hasValue() && !isAllSelected()"
-                            [aria-label]="checkboxLabel()">
-              </mat-checkbox>
-            </th>
-            <td mat-cell *matCellDef="let row">
-              <mat-checkbox (click)="$event.stopPropagation()"
-                            (change)="$event ? selection.toggle(row) : null"
-                            [checked]="selection.isSelected(row)"
-                            [aria-label]="checkboxLabel(row)">
-              </mat-checkbox>
-            </td>
-          </ng-container>
-
-          <!-- Category Column -->
-          <ng-container matColumnDef="category">
-            <th mat-header-cell *matHeaderCellDef> Category </th>
-            <td mat-cell *matCellDef="let element"> {{element.category}} </td>
-            <td mat-footer-cell *matFooterCellDef> - </td>
-          </ng-container>
-
-          <!-- List Price Per Unit Column -->
-          <ng-container matColumnDef="priceListPerUnit">
-            <th mat-header-cell *matHeaderCellDef> List Price </th>
-            <td mat-cell *matCellDef="let element"> {{element.priceListPerUnit}} </td>
-            <td mat-footer-cell *matFooterCellDef> - </td>
-          </ng-container>
-
-          <!-- Supplier Price Per Unit column -->
-          <ng-container matColumnDef="priceSupplierPerUnit">
-            <th mat-header-cell *matHeaderCellDef> Supplier Price </th>
-            <td mat-cell *matCellDef="let element"> {{(element.priceSupplierPerUnit)}} </td>
-          </ng-container>
-
-          <!-- Quantity Column -->
-          <ng-container matColumnDef="quantity">
-            <th mat-header-cell *matHeaderCellDef> Quantity </th>
-            <td mat-cell *matCellDef="let element"> {{element.quantity}} </td>
-            <td mat-footer-cell *matFooterCellDef> Total </td>
-          </ng-container>
-
-          <!-- SupplierName column -->
-          <ng-container matColumnDef="supplierName">
-            <th mat-header-cell *matHeaderCellDef> Supplier </th>
-            <td mat-cell *matCellDef="let element"> {{element.supplierName}} </td>
-          </ng-container>
-
-          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-          <tr mat-row *matRowDef="let element; columns: displayedColumns;"></tr>
-        </table>
-        <div class="space"></div>
-      </div>
+      <!--NEX DIV CORRESPONDS TO COLUMN-->
     </div>
-  </div>
-
-    <!--    CONTENT -->
 
 
+    <div class="w-100"></div>
+    <div class="space"></div>
 
+    <!--  SEGUNDA COLUMNA-->
+    <div class="col">
+      <!--    CONTAINER TO CENTER IN THE PAGE-->
+      <div class="container-fluid d-flex justify-content-center">
+        <div class="demo-card-wide mdl-card mdl-shadow--2dp">
+        <!--    CONTENT-->
+        <div class="space"></div>
+        <div class="container cont-bg2 ">
+              <div class="space"></div>
+            <div class="container cont-bg4">
+              <div class="space"></div>
+                <div class="d-flex justify-content-around">
+                  <button  mat-raised-button  (click)="deleteItem()">Delete selected</button>
+                  <button  mat-raised-button  (click)="saveList()">Save List</button>
+                </div>
+                <div class="space"></div>
+               </div>
+                <div class="space"></div>
+              <div class= "table-responsive">
+                <table #myCheckinProductsTable mat-table [dataSource]="listNewItemsFromSuppliers" class="mat-elevation-z8">
 
+              <!-- Checkbox Column -->
+                    <ng-container matColumnDef="select">
+                      <th mat-header-cell *matHeaderCellDef>
+                        <mat-checkbox (change)="$event ? masterToggle() : null"
+                                      [checked]="selection.hasValue() && isAllSelected()"
+                                      [indeterminate]="selection.hasValue() && !isAllSelected()"
+                                      [aria-label]="checkboxLabel()">
+                        </mat-checkbox>
+                      </th>
+                      <td mat-cell *matCellDef="let row">
+                        <mat-checkbox (click)="$event.stopPropagation()"
+                                      (change)="$event ? selection.toggle(row) : null"
+                                      [checked]="selection.isSelected(row)"
+                                      [aria-label]="checkboxLabel(row)">
+                        </mat-checkbox>
+                      </td>
+                    </ng-container>
 
+                    <!-- Category Column -->
+                    <ng-container matColumnDef="category">
+                      <th mat-header-cell *matHeaderCellDef> Category </th>
+                      <td mat-cell *matCellDef="let element"> {{element.category}} </td>
+                      <td mat-footer-cell *matFooterCellDef> - </td>
+                    </ng-container>
 
-<!--  <div class="mdl-card__actions mdl-card&#45;&#45;border">-->
-<!--    <a class="mdl-button mdl-button&#45;&#45;colored mdl-js-button mdl-js-ripple-effect">-->
-<!--      Get Started-->
-<!--    </a>-->
+                    <!-- List Price Per Unit Column -->
+                    <ng-container matColumnDef="priceListPerUnit">
+                      <th mat-header-cell *matHeaderCellDef> List Price </th>
+                      <td mat-cell *matCellDef="let element"> {{element.priceListPerUnit}} </td>
+                      <td mat-footer-cell *matFooterCellDef> - </td>
+                    </ng-container>
+
+                    <!-- Supplier Price Per Unit column -->
+                    <ng-container matColumnDef="priceSupplierPerUnit">
+                      <th mat-header-cell *matHeaderCellDef> Supplier Price </th>
+                      <td mat-cell *matCellDef="let element"> {{(element.priceSupplierPerUnit)}} </td>
+                    </ng-container>
+
+                    <!-- Quantity Column -->
+                    <ng-container matColumnDef="quantity">
+                      <th mat-header-cell *matHeaderCellDef> Quantity </th>
+                      <td mat-cell *matCellDef="let element"> {{element.quantity}} </td>
+                      <td mat-footer-cell *matFooterCellDef> Total </td>
+                    </ng-container>
+
+                    <!-- SupplierName column -->
+                    <ng-container matColumnDef="supplierName">
+                      <th mat-header-cell *matHeaderCellDef> Supplier </th>
+                      <td mat-cell *matCellDef="let element"> {{element.supplierName}} </td>
+                    </ng-container>
+
+                    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                    <tr mat-row *matRowDef="let element; columns: displayedColumns;"></tr>
+                  </table>
+                    <div class="space"></div>
+              </div>
+          </div>
+        </div>
+        <!--    CONTENT-->
+         <!--    NEXT DIV CLOSES CONTAINER TO CENTER CARD-->
+      </div>
+      <!--    NEXT DIV CLOSES CLUMN-->
+    </div>
+    <!--    NEXT DIV CLOSES ROW-->
 <!--  </div>-->
-  <div class="mdl-card__menu">
-    <button class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect">
-      <i class="material-icons">share</i>
-    </button>
-  </div>
-</div>
-</div>
+
+
+
+
+
+

@@ -15,6 +15,7 @@ import {MatSelectModule} from '@angular/material/select';
 import {MatInputModule} from "@angular/material/input";
 import {MatIconModule} from "@angular/material/icon";
 import {MatRadioModule} from "@angular/material/radio";
+import {MatButtonModule} from '@angular/material/button';
 
 
 @NgModule({
@@ -36,7 +37,8 @@ import {MatRadioModule} from "@angular/material/radio";
         MatSelectModule,
         MatInputModule,
         MatIconModule,
-        MatRadioModule
+        MatRadioModule,
+      MatButtonModule
     ]
 })
 export class WarehouseQueenModule { }
