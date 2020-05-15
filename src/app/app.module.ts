@@ -99,6 +99,8 @@ import { environment } from 'src/environments/environment';
     MDBBootstrapModule.forRoot(),
     NgxChartsModule,
     FlexLayoutModule,
+    MatButtonModule
+
   ],
   providers: [],
 

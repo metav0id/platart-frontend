@@ -66,7 +66,7 @@
           </div>
 
           <div class="availabilityAmount space">
-            <button mat-button (click)="verifyAvailability(newCheckoutSoldItem)">Check Availability</button>
+            <button mat-raised-button (click)="verifyAvailability(newCheckoutSoldItem)">Check Availability</button>
             <a>{{availableItems}} items</a>
           </div>
           <div class="space"></div>
@@ -131,7 +131,7 @@
   </div>
   <div class="space"></div>
   <div>
-    <button mat-button (click)="addSoldItem()"><mat-icon>library_add</mat-icon></button>
+    <button mat-raised-button (click)="addSoldItem()"><mat-icon>library_add</mat-icon></button>
   </div>
   <div class="space"></div>
             <!--        FORLUMAR ENDS-->
@@ -174,7 +174,7 @@
                         </p>
                       </mat-card-content>
                       <mat-card-actions>
-                        <button mat-button (click)="openDialogCategory(element)"><mat-icon>list_alt</mat-icon></button>
+                        <button mat-raised-button (click)="openDialogCategory(element)"><mat-icon>list_alt</mat-icon></button>
                       </mat-card-actions>
                     </mat-card>
                   </div>
@@ -201,9 +201,9 @@
               <div class="mdl-card__supporting-text">
                 <div class=" table-responsive ">
                   <div class="container cont-bg4">
-                    <button mat-button matTooltip="save sold items list" (click)="saveSoldItemList()"><mat-icon>save</mat-icon></button>
-                    <button mat-button matTooltip="send sold items list" (click)="sendSoldItemList()"><mat-icon>send</mat-icon></button>
-                    <button mat-button matTooltip="save sold items list" (click)="deleteSoldItemList()"><mat-icon>delete</mat-icon></button>
+                    <button mat-raised-button matTooltip="save sold items list" (click)="saveSoldItemList()"><mat-icon>save</mat-icon></button>
+                    <button mat-raised-button matTooltip="send sold items list" (click)="sendSoldItemList()"><mat-icon>send</mat-icon></button>
+                    <button mat-raised-button matTooltip="save sold items list" (click)="deleteSoldItemList()"><mat-icon>delete</mat-icon></button>
                   </div>
                 </div>
               </div>

@@ -55,6 +55,8 @@ export class AuthService {
         return resp;
       })
     );
+
+
   }
 
   register(user: UserComponent) {
