@@ -35,6 +35,7 @@ export const environment = {
   deleteCurrentSoldItemsListURL:  'http://localhost:8081/shops/deleteCurrentSoldItemsList',
   loadAllSoldItemsListURL: 'http://localhost:8081/shops/loadAllCurrentSoldItemsList',
   getShopInventoryAvailability: 'http://localhost:8081/shops/getShopInventoryAvailability',
+  getShopInventoryItems: 'http://161.35.4.253:8081/shops/getShopInventoryItems',
 };
 
 /*
