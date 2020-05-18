@@ -53,7 +53,7 @@ export class MapComponent implements OnInit {
   //This method is the guide to follow when wanting to open a dialog window
   openDialog(): void {
     const dialogRef = this.dialog.open(FormComponent, {
-      width: '600px'
+      width: '400px'
       // data: {name: this.name, animal: this.animal}
     });
 
