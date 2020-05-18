@@ -30,4 +30,5 @@ export const environment = {
   dataCurrentMonthURL: 'http://161.35.4.253:8081/dashboard/getCurrentMonthDAta',
   yesterdaysDataURL: 'http://161.35.4.253:8081/dashboard/getYesterdaysData',
   actualsDataURL: 'http://161.35.4.253:8081/dashboard/getActualsData',
+  getShopInventoryAvailability: 'http://161.35.4.253:8081/shops/getShopInventoryAvailability',
 };
