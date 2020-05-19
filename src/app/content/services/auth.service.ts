@@ -1,15 +1,38 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {UserComponent} from "../pages/models/user.component";
-import {map} from "rxjs/operators";
+import {
+  map,
+  switchMap
+} from "rxjs/operators";
 import 'firebase/auth';
-import {Observable} from "rxjs";
+import {
+  of,
+  BehaviorSubject,
+  Observable
+} from "rxjs";
 import {Router} from "@angular/router";
+import firebase
+  from "firebase";
+// import {User} from "../pages/models/user";
+// import {AngularFireAuth} from "@angular/fire/auth";
+import {AngularFireDatabase} from "@angular/fire/database";
+// import * as firebase from 'firebase/app';
+// import { AngularFirestore, AngularFirestoreDocument } from 'angularfire2/firestore';
+
+
+
 @Injectable({
   providedIn: 'root'
 })
 
 export class AuthService {
+  userId: any = new Object();
+  database = firebase.database();
+
+  // user: BehaviorSubject<User> = new BehaviorSubject<User>(null);
+  // user$: Observable<User>;
+
   private url = 'https://identitytoolkit.googleapis.com/v1';
   private apiKey = 'AIzaSyCqV2cjIUIeQ_zpFCfbGWT11pNdI7Lka3k';
   userToken: string;
@@ -30,6 +53,38 @@ export class AuthService {
 
   constructor(private http: HttpClient, private router: Router) {
     this.readToken();
+    // this.afAuth.authState.pipe(map(auth => {
+    //   if (auth){
+    //     return this.db.object('users/' + auth.uid)
+    //   } else {
+    //     return null
+    //   }
+    // })
+    // ).subscribe(user => {
+    //   this.user.next(user);
+    //
+    // })
+
+  }
+
+   writeUserData( name, email, role) {
+      firebase.database().ref('users/' ).set({
+        username: name,
+        email: email,
+        role : role
+      });
+    }
+
+
+findUser(){
+
+    this.userId = firebase.auth().currentUser;
+  return firebase.database().ref('/users/' + this.userId).once('value').then(function(snapshot) {
+    var username = (snapshot.val() && snapshot.val().username) || 'Anonymous';
+    // ...
+    console.log("USERID" + this.userId)
+    console.log("USERNAME" + username)
+  });
   }
 
   /**This method deletes the token and the expiration code from the local storage making authentication impossible.
@@ -48,6 +103,7 @@ export class AuthService {
       ...user,
       returnSecureToke: true
     };
+
     return this.http.post(`${this.url}/accounts:signInWithPassword?key=${this.apiKey}`, authData
     ).pipe(
       map(resp => {
@@ -70,6 +126,7 @@ export class AuthService {
       ...user,
       returnSecureToke: true
     };
+    this.writeUserData(authData.name, authData.email, authData.role);
     return this.http.post(`${this.url}/accounts:signUp?key=${this.apiKey}`, authData
     ).pipe(
       map(resp => {
@@ -118,7 +175,6 @@ async myFunction(){
     * allows to navigate
    * */
   authStatus(): boolean{
-
     this.getToken().subscribe(resp => {
       this.permission =true;
       console.log(this.permission)
@@ -157,17 +213,17 @@ getToken():Observable<Object>{
   console.log(authData)
   return this.http.post(`${this.url}/accounts:lookup?key=${this.apiKey}`, authData
 )
-// .pipe(
-//   map(resp => {
-//     this.permission =true;
-//     console.log('In Pipe');
-//     console.log(resp);
-//     this.retrivedObject = ( resp ['users'] );
-//     console.log(this.retrivedObject);
-//     this.saveMail(this.retrivedObject[0].email);
-//     console.log(this.retrivedEmail);
-//     return resp;
-//   }))
+.pipe(
+  map(resp => {
+    this.permission =true;
+    console.log('In Pipe');
+    console.log(resp);
+    this.retrivedObject = ( resp ['users'] );
+    console.log(this.retrivedObject);
+    this.saveMail(this.retrivedObject[0].email);
+    console.log(this.retrivedEmail);
+    return resp;
+  }))
 
 }
 
