@@ -102,6 +102,7 @@ findUser(userId: string){
     localStorage.removeItem('token');
     localStorage.removeItem('expires');
     this.permission = false;
+    localStorage.removeItem('role');
   }
 /**This method uses the API from firebase to match the formular data to the one in firebase and allows the login
     *then it saves the generated token in the local storage and prints them both
