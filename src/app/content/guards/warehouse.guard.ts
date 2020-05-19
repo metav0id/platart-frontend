@@ -13,14 +13,14 @@ import {AuthService} from "../services/auth.service";
   providedIn: 'root'
 })
 export class WarehouseGuard implements CanActivate{
-
+ role = localStorage.getItem('role');
 
   constructor(private auth: AuthService, private router: Router) {
   }
 
   canActivate(): boolean {
 
-    if (this.auth.authStatus() && (this.auth.role == "admin" || this.auth.role == "warehouse")) {
+    if (this.auth.authStatus() && (this.role == "admin" || this.role == "warehouse")) {
       return true;
     } else {
       this.router.navigateByUrl('/login');

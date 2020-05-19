@@ -12,7 +12,7 @@
 <!--      <div class="col ">-->
 
   <!-- Navbar brand -->
-        <mdb-navbar-brand><a class="navbar-brand" routerLink="home">{{ t('header.administration') }}</a></mdb-navbar-brand>
+        <mdb-navbar-brand><a class="navbar-brand" routerLink="home">Platart</a></mdb-navbar-brand>
         <!-- creates gurber menu for mobile version with all elements in the menu -->
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -25,7 +25,7 @@
 
         <!-- Links -->
             <ul class="navbar-nav mr-auto">
-
+              <div *ngIf="role == 'warehouse'">
               <li class="nav-item active">
                 <a class="nav-link waves-light" [matMenuTriggerFor]="aboveMenu" mdbWavesEffect>{{ t('header.warehouse') }}<span class="sr-only">(current)</span></a>
                 <mat-menu #aboveMenu="matMenu" yPosition="below">
@@ -47,7 +47,9 @@
                 </a>
                 </mat-menu>
               </li>
+              </div>
 
+              <div *ngIf="role == 'manager'">
               <li class="nav-item">
                <a class="nav-link waves-light" mdbWavesEffect [matMenuTriggerFor]="belowMenu">{{ t('header.Manager') }}</a>
                <mat-menu #belowMenu="matMenu" yPosition="below">
@@ -59,6 +61,9 @@
                   </a>
                 </mat-menu>
                </li>
+              </div>
+
+              <div *ngIf="role == 'sales'">
               <li class="nav-item">
               <a class="nav-link waves-light" mdbWavesEffect [matMenuTriggerFor]="beforeMenu">{{ t('header.Sales') }}</a>
               <mat-menu #beforeMenu="matMenu" xPosition="before">
@@ -73,6 +78,7 @@
                 </a>
               </mat-menu>
               </li>
+              </div>
 
               <li class="nav-item">
               <a class="nav-link waves-light" mdbWavesEffect [matMenuTriggerFor]="afterMenu">{{ t('header.After') }}</a>
