@@ -164,7 +164,6 @@ export class CheckoutSoldItemsComponent implements OnInit {
       console.log('item can not be added, since its fields are unvalid.');
     }
     this.table.renderRows();
-    //console.log(this.soldItemsCategoryLists);
   }
 
   // Check! ->
@@ -362,13 +361,22 @@ export class CheckoutSoldItemsComponent implements OnInit {
         this.availableItems = observable.quantity;
 
         for ( const item of this.soldItemsToShopsList) {
-          this.availableItems -= Number(item.quantity);
+          // tslint:disable-next-line:triple-equals no-shadowed-variable
+          const verifyShop: boolean = (this.newCheckoutSoldItem.shop == item.shop );
+          // tslint:disable-next-line:triple-equals no-shadowed-variable
+          const verifyPriceListPerUnit: boolean = (this.newCheckoutSoldItem.priceListPerUnit == item.priceListPerUnit );
+          // tslint:disable-next-line:triple-equals no-shadowed-variable
+          const verifyPriceSalesPerUnit: boolean = (this.newCheckoutSoldItem.priceSalesPerUnit == item.priceSalesPerUnit );
+          // tslint:disable-next-line:triple-equals no-shadowed-variable
+          const verifyCategory: boolean = (this.newCheckoutSoldItem.category == item.category );
+
+          if ( verifyShop && verifyPriceListPerUnit && verifyPriceSalesPerUnit) {
+            this.availableItems -= Number(item.quantity);
+          }
         }
       });
     } else {
       console.log('New Item not fully defined');
     }
-
   }
-
 }

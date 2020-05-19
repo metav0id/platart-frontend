@@ -4,8 +4,8 @@ import {ShopsCurrentInventoryDTO} from '../sales-princess-DTOs/ShopsCurrentInven
 import {WarehouseItemCategoryDTO} from '../../warehouse-queen/warehouseCategory/warehouse-item-category-DTO';
 import {observable, Observable} from 'rxjs';
 import {environment} from '../../../../environments/environment';
-import {ShopsCheckoutSoldItemsDTO} from "./checkout-sold-items-DTOs/ShopsCheckoutSoldItemsDTO";
-import {ShopDTO} from "../../warehouse-queen/new-delivery-to-shop/new-delivery-to-shop-DTOs/shop-dto";
+import {ShopsCheckoutSoldItemsDTO} from './checkout-sold-items-DTOs/ShopsCheckoutSoldItemsDTO';
+import {ShopDTO} from '../../warehouse-queen/new-delivery-to-shop/new-delivery-to-shop-DTOs/shop-dto';
 import {ShopInventoryItem} from "../view-shop-inventory/view-shop-inventory-DTOs/ShopInventoryItem";
 
 @Injectable({
