@@ -12,6 +12,7 @@ import {CheckoutSoldItemsDetailsComponent} from './checkout-sold-items-details/c
 import {CheckoutCategories} from './checkout-sold-items-DTOs/CheckoutCategories';
 import {CheckoutSoldItemsSendVerificationComponent} from './checkout-sold-items-send-verification/checkout-sold-items-send-verification.component';
 import {observable} from 'rxjs';
+import {SendItemsDTO} from "./checkout-sold-items-DTOs/Send-Items-DTO";
 
 @Component({
   selector: 'app-checkout-sold-items',
@@ -164,6 +165,9 @@ export class CheckoutSoldItemsComponent implements OnInit {
       console.log('item can not be added, since its fields are unvalid.');
     }
     this.table.renderRows();
+
+    // save sold items
+    this.saveSoldItemList();
   }
 
   // Check! ->
@@ -313,21 +317,29 @@ export class CheckoutSoldItemsComponent implements OnInit {
   sendSoldItemList() {
     console.log('implement sending sold items list');
 
+    const sendSoldItemsData: SendItemsDTO = {
+      sendSoldItemsVerification: false,
+      sendSoldItemsList: this.soldItemsToShopsList
+    };
+
     // open dialoge window
     const dialogRef = this.dialog.open(CheckoutSoldItemsSendVerificationComponent, {
       width: '250px',
-      data: this.soldItemsToShopsList
+      data: sendSoldItemsData
     });
 
     // once confirmed, send delivery order
-    dialogRef.afterClosed().subscribe(() => {
-      this.checkoutSoldItemsService.sendAllSoldItemsList(this.soldItemsToShopsList).subscribe(JsonDto => {
-          console.log(JsonDto);
+    dialogRef.afterClosed().subscribe((DataObservable) => {
+      console.log(sendSoldItemsData);
 
-          this.soldItemsToShopsList = JsonDto;
-          this.rebuildListCategories();
-        }
-      );
+      if ( sendSoldItemsData.sendSoldItemsVerification === true ) {
+        console.log('Send items');
+        this.checkoutSoldItemsService.sendAllSoldItemsList(this.soldItemsToShopsList).subscribe((JsonDto) => {
+            this.soldItemsToShopsList = [];
+            this.rebuildListCategories();
+          }
+        );
+      }
     });
   }
 

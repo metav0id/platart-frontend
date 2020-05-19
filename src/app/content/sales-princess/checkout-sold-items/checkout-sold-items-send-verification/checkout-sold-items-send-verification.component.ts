@@ -1,7 +1,8 @@
 import {Component, Inject, OnInit} from '@angular/core';
-import {FormControl, FormGroup, Validators} from "@angular/forms";
-import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
-import {ShopsCheckoutSoldItemsDTO} from "../checkout-sold-items-DTOs/ShopsCheckoutSoldItemsDTO";
+import {FormControl, FormGroup, Validators} from '@angular/forms';
+import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
+import {ShopsCheckoutSoldItemsDTO} from '../checkout-sold-items-DTOs/ShopsCheckoutSoldItemsDTO';
+import {SendItemsDTO} from '../checkout-sold-items-DTOs/Send-Items-DTO';
 
 @Component({
   selector: 'app-checkout-sold-items-send-verification',
@@ -15,7 +16,7 @@ export class CheckoutSoldItemsSendVerificationComponent implements OnInit {
 
   constructor(
     public dialogRef: MatDialogRef<CheckoutSoldItemsSendVerificationComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: ShopsCheckoutSoldItemsDTO[]
+    @Inject(MAT_DIALOG_DATA) public data: SendItemsDTO/*ShopsCheckoutSoldItemsDTO[]*/
   ) { }
 
   ngOnInit(): void {
@@ -43,10 +44,12 @@ export class CheckoutSoldItemsSendVerificationComponent implements OnInit {
   onSendClick() {
     if (this.myForm.valid) {
       console.log('Form submitted');
-      //this.myForm.reset();
+      this.data.sendSoldItemsVerification = true;
       this.dialogRef.close();
     } else {
       console.log('Error by input');
     }
+    this.data.sendSoldItemsVerification = true;
+    this.dialogRef.close();
   }
 }
