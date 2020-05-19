@@ -41,6 +41,8 @@ export class AuthService {
   retrivedEmail: any;
   userEmail: string;
   permission = false;
+  localId: string;
+  role: string = '';
 
   // create new user
   // https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=[API_KEY]
@@ -51,7 +53,7 @@ export class AuthService {
   // token
   // https://identitytoolkit.googleapis.com/v1/accounts:lookup?key=[API_KEY]
 
-  constructor(private http: HttpClient, private router: Router) {
+  constructor(private http: HttpClient, private router: Router, private db: AngularFireDatabase) {
     this.readToken();
     // this.afAuth.authState.pipe(map(auth => {
     //   if (auth){
@@ -67,8 +69,8 @@ export class AuthService {
 
   }
 
-   writeUserData( name, email, role) {
-      firebase.database().ref('users/' ).set({
+   writeUserData( userId, name, email, role) {
+      firebase.database().ref('users/' + userId).set({
         username: name,
         email: email,
         role : role
@@ -76,15 +78,21 @@ export class AuthService {
     }
 
 
-findUser(){
-
-    this.userId = firebase.auth().currentUser;
-  return firebase.database().ref('/users/' + this.userId).once('value').then(function(snapshot) {
-    var username = (snapshot.val() && snapshot.val().username) || 'Anonymous';
-    // ...
-    console.log("USERID" + this.userId)
-    console.log("USERNAME" + username)
+findUser(userId: string){
+  // this.userId = firebase.auth().currentUser.uid;
+  console.log("USERIDFirst" + userId)
+  return firebase.database().ref('/users/' + userId).once('value').then(function(snapshot) {
+        var username = (snapshot.val() && snapshot.val().username) || 'Anonymous';
+        console.log("USERNAME" + username)
+        var role = (snapshot.val() && snapshot.val().role) || 'Anonymous';
+        localStorage.setItem('role', role);
+        console.log("USERROLE" + role)
+        return Promise;
+        // ...
+        // console.log("USERID" + this.userId)
   });
+
+
   }
 
   /**This method deletes the token and the expiration code from the local storage making authentication impossible.
@@ -109,16 +117,16 @@ findUser(){
       map(resp => {
         console.log('In RXJS');
         console.log(resp)
-        this.savedToken = ( resp ['idToken'] );
-        console.log("savedtoken" + this.savedToken)
         this.saveToken( resp ['idToken'] );
-        console.log("usertoken" + this.userToken)
+        this.localId = (resp ['localId'])
+        console.log("LOCALID" + this.localId)
+        this.findUser(this.localId)
         return resp;
       })
     );
   }
   /**This method uses the API from firebase to match the formular data to the one in firebase and
-      *allows the regustration
+      *allows the registration
       *then it saves the generated token in the local storage and prints them both
     * */
   register(user: UserComponent) {
@@ -126,18 +134,18 @@ findUser(){
       ...user,
       returnSecureToke: true
     };
-    this.writeUserData(authData.name, authData.email, authData.role);
     return this.http.post(`${this.url}/accounts:signUp?key=${this.apiKey}`, authData
     ).pipe(
       map(resp => {
         console.log('In RXJS');
-        this.savedToken = ( resp ['idToken'] );
-        console.log("savedtoken" + this.savedToken)
+        this.localId = (resp ['localId']);
+        this.writeUserData(this.localId, authData.name, authData.email, authData.role)
         this.saveToken( resp ['idToken'] );
         return resp;
       })
     );
   }
+
   /*Saves the token and also sets the expiration date of the session */
   private saveToken(idToken: string) {
     this.userToken = idToken;
@@ -146,6 +154,8 @@ findUser(){
     today.setSeconds(3600);
     localStorage.setItem('expires', today.getTime().toString());
   }
+
+
   /**This method checks if there is a token in the local storage and if so it sets it in the variable
    * */
   readToken() {
@@ -158,18 +168,6 @@ findUser(){
   }
 
 
-
-async myFunction(){
-    const prom1 = new Promise((resolve,reject)=>{
-
-
-    })
-  prom1.then()
-  prom1.catch()
-  const value = <Observable<any>>await this.getToken();
-    return Promise.resolve("firebase");
-  }
-
   /**This method is called by the authentication service to see if the token saved is connected to a user and if so
     * it uses the token to compare the saved user to the one in local storage. if token and email are correct then it
     * allows to navigate
@@ -180,14 +178,6 @@ async myFunction(){
       console.log(this.permission)
     })
 
-    // this.userEmail = localStorage.getItem('email');
-    // console.log(this.userEmail)
-    // console.log(this.retrivedEmail)
-    //
-    // if (this.userEmail!= this.retrivedEmail) {
-    //   console.log("nein")
-    //   return false;
-    // }
     const expires = Number(localStorage.getItem('expires'));
     const expDate = new Date();
     expDate.setTime(expires);
@@ -205,7 +195,6 @@ async myFunction(){
   }
 
 getToken():Observable<Object>{
-
   const authData = {
   idToken: localStorage.getItem('token')
   };
@@ -224,7 +213,6 @@ getToken():Observable<Object>{
     console.log(this.retrivedEmail);
     return resp;
   }))
-
 }
 
 

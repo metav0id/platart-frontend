@@ -63,6 +63,7 @@ const config = {
   storageBucket: '<your-storage-bucket>',
   messagingSenderId: '<your-messaging-sender-id>'
 };
+
 firebase.initializeApp(config);
 
 
