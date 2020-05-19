@@ -370,7 +370,7 @@ export class CheckoutSoldItemsComponent implements OnInit {
           // tslint:disable-next-line:triple-equals no-shadowed-variable
           const verifyCategory: boolean = (this.newCheckoutSoldItem.category == item.category );
 
-          if ( verifyShop && verifyPriceListPerUnit && verifyPriceSalesPerUnit) {
+          if ( verifyShop && verifyPriceListPerUnit && verifyPriceSalesPerUnit && verifyCategory) {
             this.availableItems -= Number(item.quantity);
           }
         }
