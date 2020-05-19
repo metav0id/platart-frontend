@@ -16,7 +16,7 @@ export class CheckoutSoldItemsSendVerificationComponent implements OnInit {
 
   constructor(
     public dialogRef: MatDialogRef<CheckoutSoldItemsSendVerificationComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: SendItemsDTO/*ShopsCheckoutSoldItemsDTO[]*/
+    @Inject(MAT_DIALOG_DATA) public data: SendItemsDTO
   ) { }
 
   ngOnInit(): void {
