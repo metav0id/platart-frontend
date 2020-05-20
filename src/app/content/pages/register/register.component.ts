@@ -7,11 +7,11 @@ import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-registro',
-  templateUrl: './registro.component.html',
-  styleUrls: ['./registro.component.css']
+  templateUrl: './register.component.html',
+  styleUrls: ['./register.component.css']
 })
 
-export class RegistroComponent implements OnInit {
+export class RegisterComponent implements OnInit {
   user: UserComponent;
   rememberUser = false;
 

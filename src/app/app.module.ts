@@ -38,7 +38,7 @@ import {FormComponent} from './content/comerce/form.component';
 import { MarkerFormComponent } from './content/map/components/marker-form.component';
 import { MDBBootstrapModule } from 'angular-bootstrap-md';
 import {UserComponent} from './content/pages/models/user.component';
-import {RegistroComponent} from './content/pages/registro/registro.component';
+import {RegisterComponent} from './content/pages/register/register.component';
 import {LoginComponent} from './content/pages/login/login.component';
 
 import {MatFormFieldModule} from '@angular/material/form-field';
@@ -79,7 +79,7 @@ firebase.initializeApp(config);
     FormComponent,
     MarkerFormComponent,
     UserComponent,
-    RegistroComponent,
+    RegisterComponent,
     LoginComponent,
 
   ],
