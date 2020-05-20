@@ -117,13 +117,13 @@ async myFunction(){
     * it uses the token to compare the saved user to the one in local storage. if token and email are correct then it
     * allows to navigate
    * */
- // wait(ms){
- //    var start = new Date().getTime();
- //    var end = start;
- //    while(end < start + ms) {
- //      end = new Date().getTime();
- //    }
- //  }
+ wait(ms){
+    var start = new Date().getTime();
+    var end = start;
+    while(end < start + ms) {
+      end = new Date().getTime();
+    }
+  }
 
 
   authStatus(): boolean{
@@ -134,9 +134,10 @@ async myFunction(){
     })
 
 
-    // console.log('before');
-    // this.wait(7000);  //7 seconds in milliseconds
-    // console.log('after');
+    console.log('before');
+    this.wait(4000);  //4 seconds in milliseconds
+    console.log('after' + this.permission);
+
 
     // this.userEmail = localStorage.getItem('email');
     // console.log(this.userEmail)
@@ -152,6 +153,7 @@ async myFunction(){
     const expDate = new Date();
     expDate.setTime(expires);
     if (expDate > new Date() ) {
+      console.log(this.permission)
       return this.permission;
     } else {
       return false;
