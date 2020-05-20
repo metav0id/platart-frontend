@@ -5,7 +5,6 @@ import Swal from 'sweetalert2';
 import {Router} from '@angular/router';
 import {AuthGuard} from '../../guards/auth.guard';
 import {UserFirebase} from '../user-firebase';
-import {Roles} from '../models/user';
 
 
 @Component({

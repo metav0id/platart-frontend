@@ -1,14 +1,14 @@
 import {Injectable} from '@angular/core';
-import {HttpClient} from "@angular/common/http";
-import {map} from "rxjs/operators";
+import {HttpClient} from '@angular/common/http';
+import {map} from 'rxjs/operators';
 import 'firebase/auth';
-import {Observable} from "rxjs";
-import {Router} from "@angular/router";
-import firebase from "firebase";
+import {Observable} from 'rxjs';
+import {Router} from '@angular/router';
+import firebase from 'firebase';
 // import {User} from "../pages/models/user";
 // import {AngularFireAuth} from "@angular/fire/auth";
-import {AngularFireDatabase} from "@angular/fire/database";
-import {UserFirebase} from "../pages/user-firebase";
+import {AngularFireDatabase} from '@angular/fire/database';
+import {UserFirebase} from '../pages/user-firebase';
 // import * as firebase from 'firebase/app';
 // import { AngularFirestore, AngularFirestoreDocument } from 'angularfire2/firestore';
 
@@ -33,7 +33,7 @@ export class AuthService {
   userEmail: string;
   permission = false;
   localId: string;
-  role: string = '';
+  role = '';
 
   // create new user
   // https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=[API_KEY]
@@ -73,11 +73,11 @@ export class AuthService {
     ).pipe(
       map(resp => {
         console.log('In RXJS');
-        console.log(resp)
-        this.saveToken(resp ['idToken']);
-        this.localId = (resp ['localId'])
-        console.log("LOCALID" + this.localId)
-        this.findUser(this.localId)
+        console.log(resp);
+        this.saveToken(resp.idToken);
+        this.localId = (resp.localId);
+        console.log('LOCALID' + this.localId);
+        this.findUser(this.localId);
         return resp;
       })
     );
@@ -86,21 +86,21 @@ export class AuthService {
   writeUserData(userId, name, email, role) {
     firebase.database().ref('users/' + userId).set({
       username: name,
-      email: email,
-      role: role
+      email,
+      role
     });
   }
 
 
   findUser(userId: string) {
     // this.userId = firebase.auth().currentUser.uid;
-    console.log("USERIDFirst" + userId)
-    return firebase.database().ref('/users/' + userId).once('value').then(function (snapshot) {
-      var username = (snapshot.val() && snapshot.val().username) || 'Anonymous';
-      console.log("USERNAME" + username)
-      var role = (snapshot.val() && snapshot.val().role) || 'Anonymous';
+    console.log('USERIDFirst' + userId);
+    return firebase.database().ref('/users/' + userId).once('value').then(function(snapshot) {
+      const username = (snapshot.val() && snapshot.val().username) || 'Anonymous';
+      console.log('USERNAME' + username);
+      const role = (snapshot.val() && snapshot.val().role) || 'Anonymous';
       localStorage.setItem('role', role);
-      console.log("USERROLE" + role)
+      console.log('USERROLE' + role);
       return Promise;
       // ...
       // console.log("USERID" + this.userId)
@@ -132,11 +132,7 @@ export class AuthService {
     return this.http.post(`${this.url}/accounts:signUp?key=${this.apiKey}`, authData
     ).pipe(
       map(resp => {
-        console.log('In RXJS');
-        this.localId = (resp ['localId']);
-        this.writeUserData(this.localId, authData.name, authData.email, authData.role)
-        this.saveToken(resp ['idToken']);
-        return resp;
+        this.writeUserData(this.localId, authData.name, authData.email, authData.role);
       })
     );
   }
@@ -145,7 +141,7 @@ export class AuthService {
   private saveToken(idToken: string) {
     this.userToken = idToken;
     localStorage.setItem('token', idToken);
-    let today = new Date();
+    const today = new Date();
     today.setSeconds(3600);
     localStorage.setItem('expires', today.getTime().toString());
   }
@@ -170,8 +166,8 @@ export class AuthService {
   authStatus(): boolean {
     this.getToken().subscribe(resp => {
       this.permission = true;
-      console.log(this.permission)
-    })
+      console.log(this.permission);
+    });
 
     const expires = Number(localStorage.getItem('expires'));
     const expDate = new Date();
@@ -194,7 +190,7 @@ export class AuthService {
       idToken: localStorage.getItem('token')
     };
     console.log('In gettoken');
-    console.log(authData)
+    console.log(authData);
     return this.http.post(`${this.url}/accounts:lookup?key=${this.apiKey}`, authData
     )
       .pipe(
@@ -202,12 +198,12 @@ export class AuthService {
           this.permission = true;
           console.log('In Pipe');
           console.log(resp);
-          this.retrivedObject = (resp ['users']);
+          this.retrivedObject = (resp.users);
           console.log(this.retrivedObject);
           this.saveMail(this.retrivedObject[0].email);
           console.log(this.retrivedEmail);
           return resp;
-        }))
+        }));
   }
 
 
