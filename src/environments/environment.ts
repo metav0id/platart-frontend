@@ -36,6 +36,7 @@ export const environment = {
   loadAllSoldItemsListURL: 'http://localhost:8081/shops/loadAllCurrentSoldItemsList',
   getShopInventoryAvailability: 'http://localhost:8081/shops/getShopInventoryAvailability',
   getShopInventoryItems: 'http://localhost:8081/shops/getShopInventoryItems',
+  getAllItemsAllShops: 'http://localhost:8081/shops/getAllItemsAllShops',
 };
 
 /*

@@ -32,4 +32,5 @@ export const environment = {
   actualsDataURL: 'http://161.35.4.253:8081/dashboard/getActualsData',
   getShopInventoryAvailability: 'http://161.35.4.253:8081/shops/getShopInventoryAvailability',
   getShopInventoryItems: 'http://161.35.4.253:8081/shops/getShopInventoryItems',
+  getAllItemsAllShops: 'http://161.35.4.253:8081/shops/getAllItemsAllShops',
 };

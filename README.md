@@ -16,6 +16,8 @@ Run `npm install --save ngx-gauge`
 
 Run `ng add @ngneat/transloco`
 
+Run `ng add @angular/material`
+
 Run `npm i @swimlane/ngx-charts --save`
 
 Run `npm install --save @angular/flex-layout@latest @angular/cdk@latest`
