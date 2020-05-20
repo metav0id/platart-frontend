@@ -15,8 +15,8 @@ import {UserFirebase} from '../user-firebase';
 export class LoginComponent implements OnInit {
   user: UserFirebase = {
     email: '',
-    password: 'string',
-    name: '',
+    password: '',
+    displayName: '',
     role: {reader: true}
   };
   rememberUser = false;
@@ -25,10 +25,10 @@ export class LoginComponent implements OnInit {
   }
   /*When the module is initialized if will check for an email in the local storage of the bowser.*/
   ngOnInit() {
-    if (localStorage.getItem('email')) {
-      this.user.email = localStorage.getItem('email');
-      this.rememberUser = true;
-    }
+    // if (localStorage.getItem('email')) {
+    //   this.user.email = localStorage.getItem('email');
+    //   this.rememberUser = true;
+    // }
   }
 
   /** This methods starts by checking if the formular is correct. Then will show a "sweetalert". Then it will go into
@@ -45,23 +45,14 @@ export class LoginComponent implements OnInit {
       text: 'Wait a moment...'
     });
     Swal.showLoading();
-    this.auth.logIn(this.user).subscribe(resp => {
-        console.log(resp);
-        Swal.close();
-        if (this.rememberUser) {
-          localStorage.setItem('email', this.user.email);
-        }
-        this.router.navigateByUrl('/home');
-      }, (err) => {
-        console.log(err.error.error.message);
-        Swal.fire({
-          icon: 'error',
-          title: 'login data is not valid',
-          text: err.error.error.message
-        });
-      }
-    );
-    console.log(form);
-    console.log('Print if form is valid');
+    this.auth.signIn(this.user.email, this.user.password).then(resp => {
+      Swal.close();
+      console.log('Logged in');
+      this.router.navigateByUrl('home');
+    }).catch(error => Swal.fire({
+            icon: 'error',
+            title: 'login data is not valid',
+            text: error.message
+          }));
   }
 }

@@ -20,13 +20,13 @@ export class WarehouseGuard implements CanActivate{
 
   canActivate(): boolean {
 
-    if (this.auth.authStatus() && (this.role == "admin" || this.role == "warehouse")) {
-      return true;
-    } else {
-      this.router.navigateByUrl('/login');
-      return false;
-    }
-
+    // if (this.auth.authStatus() && (this.role == "admin" || this.role == "warehouse")) {
+    //   return true;
+    // } else {
+    //   this.router.navigateByUrl('/login');
+    //   return false;
+    // }
+    return true;
   }
 
 

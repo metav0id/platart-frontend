@@ -13,11 +13,11 @@ import {AuthService} from "../services/auth.service";
   providedIn: 'root'
 })
 export class AuthGuard implements CanActivate {
-  constructor() {
+  constructor(private auth: AuthService, private router: Router) {
   }
 
   canActivate(): boolean {
-    return true;
+    return this.auth.isLoggedIn();
   }
 
   // constructor(private auth: AuthService, private router: Router) {

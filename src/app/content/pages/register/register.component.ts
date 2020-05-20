@@ -15,7 +15,7 @@ export class RegisterComponent implements OnInit {
   user: UserFirebase = {
     email: '',
     password: 'string',
-    name: '',
+    displayName: '',
     role: {reader: true}
   };
 
@@ -50,15 +50,10 @@ export class RegisterComponent implements OnInit {
     } else {
       this.user = {
         email: this.registerForm.value.email,
-        name: this.registerForm.value.name,
+        displayName: this.registerForm.value.name,
         password: this.registerForm.value.password,
         role: this.registerForm.value.role
       };
-      console.log('Mail: ', this.registerForm.value.email);
-      console.log('UserName: ', this.registerForm.value.name);
-      console.log('Password: ', this.registerForm.value.password);
-      console.log('Role: ', this.registerForm.value.role);
-
       Swal.fire({
         allowOutsideClick: false,
         icon: 'info',
@@ -66,40 +61,15 @@ export class RegisterComponent implements OnInit {
       });
       Swal.showLoading();
 
-      this.auth.register(this.user).subscribe(resp => {
+      this.auth.signUp(this.user).then(resp => {
         Swal.close();
         this.router.navigateByUrl('/login');
-      }, (error => Swal.fire({
+      }).catch(error => Swal.fire({
         icon: 'error',
         title: 'Error',
-        text: 'An error occured. Please try again.'
-      }))
+        text: 'An error occured. Please try again later.'
+      })
       );
-
     }
-
-    // Swal.fire({
-    //   allowOutsideClick: false,
-    //   icon: 'info',
-    //   text: 'Wait a moment...'
-    // });
-    // Swal.showLoading();
-
-    // this.auth.register(this.user).subscribe(resp => {
-    //     console.log(resp);
-    //     Swal.close();
-    //     if (this.rememberUser) {
-    //       localStorage.setItem('email', this.user.email);
-    //     }
-    //     this.router.navigateByUrl('/home');
-    //   }, (err) => {
-    //     console.log(err.error.error.message);
-    //     Swal.fire({
-    //       icon: 'error',
-    //       title: 'login data is not valid',
-    //       text: err.error.error.message
-    //     });
-    //   }
-    // );
   }
 }

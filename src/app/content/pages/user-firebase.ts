@@ -1,12 +1,15 @@
 interface Roles {
   reader: boolean;
-  author?: boolean;
-  admin?: boolean;
+  warehouse?: boolean;
+  manager?: boolean;
+  shop?: boolean;
 }
 
 export interface UserFirebase {
+  uid?: string;
   email: string;
-  password: string;
-  name: string;
-  role: Roles;
+  password?: string;
+  displayName: string;
+  role?: Roles;
+  emailVerified?: boolean;
 }

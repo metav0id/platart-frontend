@@ -18,7 +18,6 @@ import {MatSidenavModule} from '@angular/material/sidenav';
 import {MatIconModule} from '@angular/material/icon';
 import {MatListModule} from '@angular/material/list';
 import {MatMenuModule} from '@angular/material/menu';
-import {FooterComponent} from './content/footer/footer.component';
 import {NewItemCategoryComponent} from './content/warehouse-queen/new-item-category/new-item-category.component';
 import {MatSelectModule} from '@angular/material/select';
 import {MatInputModule} from '@angular/material/input';
@@ -52,26 +51,13 @@ import { AngularFireStorageModule } from '@angular/fire/storage';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import firebase
   from "firebase";
-
-// 2. Add your credentials from step 1
-const config = {
-  apiKey: 'AIzaSyCqV2cjIUIeQ_zpFCfbGWT11pNdI7Lka3k',
-  authDomain: '<your-project-authdomain>',
-  databaseURL: 'https://platart-89d10.firebaseio.com',
-  projectId: 'platart-89d10',
-  storageBucket: '<your-storage-bucket>',
-  messagingSenderId: '<your-messaging-sender-id>'
-};
-
-firebase.initializeApp(config);
-
+import {environment} from "../environments/environment";
 
 @NgModule({
   declarations: [
     AppComponent,
     PageNotFoundComponent,
     HeaderComponent,
-    FooterComponent,
     NewItemCategoryComponent,
     MapComponent,
     ComerceComponent,
@@ -112,7 +98,7 @@ firebase.initializeApp(config);
     NgxChartsModule,
     FlexLayoutModule,
     MatButtonModule,
-    AngularFireModule.initializeApp(config),
+    AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFirestoreModule, // firestore
     AngularFireAuthModule, // auth
     AngularFireStorageModule // storage

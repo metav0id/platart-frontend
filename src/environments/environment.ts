@@ -4,6 +4,15 @@
 
 export const environment = {
   production: false,
+  firebaseConfig : {
+    apiKey: "AIzaSyAYu4hMLTk28gkQPNcNEH3nYC6EqC3ZBZM",
+    authDomain: "platart-warehouse-user-mngt.firebaseapp.com",
+    databaseURL: "https://platart-warehouse-user-mngt.firebaseio.com",
+    projectId: "platart-warehouse-user-mngt",
+    storageBucket: "platart-warehouse-user-mngt.appspot.com",
+    messagingSenderId: "144533891918",
+    appId: "1:144533891918:web:494591651874627f7bcc1f"
+  },
   saveCommerce: 'http://localhost:8081/comerce/savecomerce',
   getAllMarkers: 'http://localhost:8081/marker/getallmarkers',
   getAllMarkersNoCoords: 'http://localhost:8081/marker/getallmarkersNoCoords',
