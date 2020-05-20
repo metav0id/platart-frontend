@@ -3,6 +3,7 @@ import {HttpClient} from "@angular/common/http";
 import {UserComponent} from "../pages/models/user.component";
 import {
   map,
+  repeat,
   switchMap
 } from "rxjs/operators";
 import 'firebase/auth';
@@ -43,6 +44,7 @@ export class AuthService {
   permission = false;
   localId: string;
   role: string = '';
+  resp: Object;
 
   // create new user
   // https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=[API_KEY]
@@ -166,27 +168,56 @@ findUser(userId: string){
       this.userToken = ' ';
     }
     return this.userToken;
-  }
+  };
 
 
   /**This method is called by the authentication service to see if the token saved is connected to a user and if so
     * it uses the token to compare the saved user to the one in local storage. if token and email are correct then it
     * allows to navigate
    * */
-  authStatus(): boolean{
-    this.getToken().subscribe(resp => {
-      this.permission =true;
-      console.log(this.permission)
-    })
 
-    const expires = Number(localStorage.getItem('expires'));
-    const expDate = new Date();
-    expDate.setTime(expires);
-    if (expDate > new Date() ) {
-      return this.permission;
-    } else {
-      return false;
-    }
+  authStatus(): Observable<Object>{
+
+    return
+    const authStatus = new Observable(observer => {
+      // setTimeout(() => {
+        observer.next(this.getToken().subscribe(resp => {
+            this.permission = true;
+            console.log(this.permission)
+            const expires = Number(localStorage.getItem('expires'));
+            const expDate = new Date();
+            expDate.setTime(expires);
+            if (expDate > new Date()) {
+              return this.permission;
+            } else {
+              return false;
+            }
+        }));
+        observer.complete();
+      // }, 2000);
+
+    });
+    // return this.getToken().subscribe(resp => {
+   //    this.permission =true;
+   //    console.log(this.permission)
+   //    const expires = Number(localStorage.getItem('expires'));
+   //    const expDate = new Date();
+   //    expDate.setTime(expires);
+   //    if (expDate > new Date() ) {
+   //      return this.permission;
+   //    } else {
+   //      return false;
+   //    }
+   //  })
+
+    // const expires = Number(localStorage.getItem('expires'));
+    // const expDate = new Date();
+    // expDate.setTime(expires);
+    // if (expDate > new Date() ) {
+    //   return this.permission;
+    // } else {
+    //   return false;
+    // }
   }
 
   /** This method saves the email retrived by the token in a local variable.
