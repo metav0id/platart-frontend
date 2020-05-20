@@ -37,7 +37,6 @@ import {ComerceComponent} from './content/comerce/comerce.component';
 import {FormComponent} from './content/comerce/form.component';
 import { MarkerFormComponent } from './content/map/components/marker-form.component';
 import { MDBBootstrapModule } from 'angular-bootstrap-md';
-import {UserComponent} from './content/pages/models/user.component';
 import {RegisterComponent} from './content/pages/register/register.component';
 import {LoginComponent} from './content/pages/login/login.component';
 
@@ -78,7 +77,6 @@ firebase.initializeApp(config);
     ComerceComponent,
     FormComponent,
     MarkerFormComponent,
-    UserComponent,
     RegisterComponent,
     LoginComponent,
 

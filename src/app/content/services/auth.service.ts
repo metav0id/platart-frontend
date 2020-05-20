@@ -1,25 +1,16 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
-import {UserComponent} from "../pages/models/user.component";
-import {
-  map,
-  switchMap
-} from "rxjs/operators";
+import {map} from "rxjs/operators";
 import 'firebase/auth';
-import {
-  of,
-  BehaviorSubject,
-  Observable
-} from "rxjs";
+import {Observable} from "rxjs";
 import {Router} from "@angular/router";
-import firebase
-  from "firebase";
+import firebase from "firebase";
 // import {User} from "../pages/models/user";
 // import {AngularFireAuth} from "@angular/fire/auth";
 import {AngularFireDatabase} from "@angular/fire/database";
+import {UserFirebase} from "../pages/user-firebase";
 // import * as firebase from 'firebase/app';
 // import { AngularFirestore, AngularFirestoreDocument } from 'angularfire2/firestore';
-
 
 
 @Injectable({
@@ -69,28 +60,51 @@ export class AuthService {
 
   }
 
-   writeUserData( userId, name, email, role) {
-      firebase.database().ref('users/' + userId).set({
-        username: name,
-        email: email,
-        role : role
-      });
-    }
+  /**This method uses the API from firebase to match the formular data to the one in firebase and allows the login
+   * then it saves the generated token in the local storage and prints them both
+   */
+  logIn(user: UserFirebase) {
+    const authData = {
+      ...user,
+      returnSecureToke: true
+    };
+
+    return this.http.post(`${this.url}/accounts:signInWithPassword?key=${this.apiKey}`, authData
+    ).pipe(
+      map(resp => {
+        console.log('In RXJS');
+        console.log(resp)
+        this.saveToken(resp ['idToken']);
+        this.localId = (resp ['localId'])
+        console.log("LOCALID" + this.localId)
+        this.findUser(this.localId)
+        return resp;
+      })
+    );
+  }
+
+  writeUserData(userId, name, email, role) {
+    firebase.database().ref('users/' + userId).set({
+      username: name,
+      email: email,
+      role: role
+    });
+  }
 
 
-findUser(userId: string){
-  // this.userId = firebase.auth().currentUser.uid;
-  console.log("USERIDFirst" + userId)
-  return firebase.database().ref('/users/' + userId).once('value').then(function(snapshot) {
-        var username = (snapshot.val() && snapshot.val().username) || 'Anonymous';
-        console.log("USERNAME" + username)
-        var role = (snapshot.val() && snapshot.val().role) || 'Anonymous';
-        localStorage.setItem('role', role);
-        console.log("USERROLE" + role)
-        return Promise;
-        // ...
-        // console.log("USERID" + this.userId)
-  });
+  findUser(userId: string) {
+    // this.userId = firebase.auth().currentUser.uid;
+    console.log("USERIDFirst" + userId)
+    return firebase.database().ref('/users/' + userId).once('value').then(function (snapshot) {
+      var username = (snapshot.val() && snapshot.val().username) || 'Anonymous';
+      console.log("USERNAME" + username)
+      var role = (snapshot.val() && snapshot.val().role) || 'Anonymous';
+      localStorage.setItem('role', role);
+      console.log("USERROLE" + role)
+      return Promise;
+      // ...
+      // console.log("USERID" + this.userId)
+    });
 
 
   }
@@ -104,33 +118,13 @@ findUser(userId: string){
     this.permission = false;
     localStorage.removeItem('role');
   }
-/**This method uses the API from firebase to match the formular data to the one in firebase and allows the login
-    *then it saves the generated token in the local storage and prints them both
-    * */
-  logIn(user: UserComponent) {
-    const authData = {
-      ...user,
-      returnSecureToke: true
-    };
 
-    return this.http.post(`${this.url}/accounts:signInWithPassword?key=${this.apiKey}`, authData
-    ).pipe(
-      map(resp => {
-        console.log('In RXJS');
-        console.log(resp)
-        this.saveToken( resp ['idToken'] );
-        this.localId = (resp ['localId'])
-        console.log("LOCALID" + this.localId)
-        this.findUser(this.localId)
-        return resp;
-      })
-    );
-  }
+
   /**This method uses the API from firebase to match the formular data to the one in firebase and
-      *allows the registration
-      *then it saves the generated token in the local storage and prints them both
-    * */
-  register(user: UserComponent) {
+   *allows the registration
+   *then it saves the generated token in the local storage and prints them both
+   * */
+  register(user: UserFirebase) {
     const authData = {
       ...user,
       returnSecureToke: true
@@ -141,7 +135,7 @@ findUser(userId: string){
         console.log('In RXJS');
         this.localId = (resp ['localId']);
         this.writeUserData(this.localId, authData.name, authData.email, authData.role)
-        this.saveToken( resp ['idToken'] );
+        this.saveToken(resp ['idToken']);
         return resp;
       })
     );
@@ -160,7 +154,7 @@ findUser(userId: string){
   /**This method checks if there is a token in the local storage and if so it sets it in the variable
    * */
   readToken() {
-    if (localStorage.getItem('token') ) {
+    if (localStorage.getItem('token')) {
       this.userToken = localStorage.getItem('token');
     } else {
       this.userToken = ' ';
@@ -170,19 +164,19 @@ findUser(userId: string){
 
 
   /**This method is called by the authentication service to see if the token saved is connected to a user and if so
-    * it uses the token to compare the saved user to the one in local storage. if token and email are correct then it
-    * allows to navigate
+   * it uses the token to compare the saved user to the one in local storage. if token and email are correct then it
+   * allows to navigate
    * */
-  authStatus(): boolean{
+  authStatus(): boolean {
     this.getToken().subscribe(resp => {
-      this.permission =true;
+      this.permission = true;
       console.log(this.permission)
     })
 
     const expires = Number(localStorage.getItem('expires'));
     const expDate = new Date();
     expDate.setTime(expires);
-    if (expDate > new Date() ) {
+    if (expDate > new Date()) {
       return this.permission;
     } else {
       return false;
@@ -195,26 +189,26 @@ findUser(userId: string){
     this.retrivedEmail = email;
   }
 
-getToken():Observable<Object>{
-  const authData = {
-  idToken: localStorage.getItem('token')
-  };
-  console.log('In gettoken');
-  console.log(authData)
-  return this.http.post(`${this.url}/accounts:lookup?key=${this.apiKey}`, authData
-)
-.pipe(
-  map(resp => {
-    this.permission =true;
-    console.log('In Pipe');
-    console.log(resp);
-    this.retrivedObject = ( resp ['users'] );
-    console.log(this.retrivedObject);
-    this.saveMail(this.retrivedObject[0].email);
-    console.log(this.retrivedEmail);
-    return resp;
-  }))
-}
+  getToken(): Observable<Object> {
+    const authData = {
+      idToken: localStorage.getItem('token')
+    };
+    console.log('In gettoken');
+    console.log(authData)
+    return this.http.post(`${this.url}/accounts:lookup?key=${this.apiKey}`, authData
+    )
+      .pipe(
+        map(resp => {
+          this.permission = true;
+          console.log('In Pipe');
+          console.log(resp);
+          this.retrivedObject = (resp ['users']);
+          console.log(this.retrivedObject);
+          this.saveMail(this.retrivedObject[0].email);
+          console.log(this.retrivedEmail);
+          return resp;
+        }))
+  }
 
 
 //

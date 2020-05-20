@@ -1,9 +1,9 @@
-import { Component, OnInit } from '@angular/core';
-import {UserComponent} from "../models/user.component";
+import {Component, OnInit} from '@angular/core';
 import {NgForm} from "@angular/forms";
 import {AuthService} from "../../services/auth.service";
 import Swal from 'sweetalert2'
 import {Router} from "@angular/router";
+import {UserFirebase} from "../user-firebase";
 
 @Component({
   selector: 'app-registro',
@@ -12,22 +12,30 @@ import {Router} from "@angular/router";
 })
 
 export class RegisterComponent implements OnInit {
-  user: UserComponent;
+  user: UserFirebase = {
+    email: '',
+    password: 'string',
+    name: '',
+    role: {reader: true}
+  };
   rememberUser = false;
 
-constructor(private auth: AuthService, private router: Router) { }
+  constructor(private auth: AuthService, private router: Router) {
+  }
 
-/**When started, it will create a new instance of user.*/
+  /**When started, it will create a new instance of user.*/
   ngOnInit() {
-    this.user = new UserComponent();
     // this.user.email = 'platart@gmail.com';
   }
+
   /** This methods starts by checking if the formular is correct. Then will show a "sweetalert". Then it will go into
-     * AuthService and use the register method. If the user wants it so, it will save the email in localstorage.
-      *then it will navigate to mapcomponent. If there is an error it will show it in form of a "sweetalert"
+   * AuthService and use the register method. If the user wants it so, it will save the email in localstorage.
+   *then it will navigate to mapcomponent. If there is an error it will show it in form of a "sweetalert"
    */
   onSubmit(form: NgForm) {
-    if (form.invalid) {return; }
+    if (form.invalid) {
+      return;
+    }
     Swal.fire({
       allowOutsideClick: false,
       icon: 'info',
@@ -37,9 +45,12 @@ constructor(private auth: AuthService, private router: Router) { }
     console.log('Form sent');
     console.log(this.user);
     console.log(form);
-    this.auth.register(this.user).subscribe(resp => {console.log(resp);
+    this.auth.register(this.user).subscribe(resp => {
+        console.log(resp);
         Swal.close();
-        if (this.rememberUser) {localStorage.setItem('email', this.user.email) }
+        if (this.rememberUser) {
+          localStorage.setItem('email', this.user.email)
+        }
         this.router.navigateByUrl('/home');
       }, (err) => {
         console.log(err.error.error.message);
