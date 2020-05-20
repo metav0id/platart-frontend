@@ -118,6 +118,21 @@ export class NewItemCategoryComponent implements OnInit {
     this.table.renderRows();
   }
 
+  /*deleteSelectedCategory() {
+    console.log('delete selected categories');
+
+    for (const elem of this.selection.selected) {
+
+      const currentCategory: string = elem.category;
+      const currentCategoryIndex: number = elem.position;
+      this.removeCurrentIndex(currentCategoryIndex);
+
+      this.newitemcategoryService.deleteCategory(currentCategory);
+    }
+
+    this.table.renderRows();
+  }*/
+
   removeCurrentIndex(currentIndex: number) {
     for (let i = 0; i < this.listCategories.length; i++) {
       if (this.listCategories[i].position === currentIndex) {
