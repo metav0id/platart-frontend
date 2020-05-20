@@ -44,27 +44,14 @@ import {LoginComponent} from './content/pages/login/login.component';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {NgxChartsModule} from '@swimlane/ngx-charts';
 import {FlexLayoutModule} from '@angular/flex-layout';
-
-
-// 1. Import the libs you need
 import { AngularFireModule } from '@angular/fire';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { AngularFireStorageModule } from '@angular/fire/storage';
 import { AngularFireAuthModule } from '@angular/fire/auth';
-import firebase
-  from "firebase";
+import { environment } from 'src/environments/environment';
 
-// 2. Add your credentials from step 1
-const config = {
-  apiKey: 'AIzaSyCqV2cjIUIeQ_zpFCfbGWT11pNdI7Lka3k',
-  authDomain: '<your-project-authdomain>',
-  databaseURL: 'https://platart-89d10.firebaseio.com',
-  projectId: 'platart-89d10',
-  storageBucket: '<your-storage-bucket>',
-  messagingSenderId: '<your-messaging-sender-id>'
-};
 
-firebase.initializeApp(config);
+;
 
 
 @NgModule({
@@ -80,8 +67,7 @@ firebase.initializeApp(config);
     MarkerFormComponent,
     UserComponent,
     RegistroComponent,
-    LoginComponent,
-
+    LoginComponent
   ],
   imports: [
     BrowserModule,
@@ -113,11 +99,7 @@ firebase.initializeApp(config);
     MDBBootstrapModule.forRoot(),
     NgxChartsModule,
     FlexLayoutModule,
-    MatButtonModule,
-    AngularFireModule.initializeApp(config),
-    AngularFirestoreModule, // firestore
-    AngularFireAuthModule, // auth
-    AngularFireStorageModule // storage
+    MatButtonModule
 
   ],
   providers: [],

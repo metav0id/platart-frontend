@@ -23,7 +23,6 @@ table {
   justify-content: center
 }
 button {
-  margin: 7px;
   transition-duration: 0.4s;
   display: inline-block;
   font-size: 15px;
@@ -102,10 +101,10 @@ h3{
 }
 
 
- .demo-card-wide.mdl-card {
-   width: 80%;
+.demo-card-wide.mdl-card {
+  width: 80%;
 
- }
+}
 .demo-card-wide > .mdl-card__title {
   color: #fff;
   height: 100px;

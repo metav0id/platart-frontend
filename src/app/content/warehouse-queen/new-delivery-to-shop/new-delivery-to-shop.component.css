@@ -24,6 +24,7 @@ table {
   align-items: center;
 }
 button {
+  margin: 7px;
   /*transition-duration: 0.4s;*/
   /*display: inline-block;*/
   /*font-size: 15px;*/

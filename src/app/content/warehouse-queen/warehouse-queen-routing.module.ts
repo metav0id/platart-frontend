@@ -6,10 +6,9 @@ import {NewDeliveryToWarehouseComponent} from './new-delivery-to-warehouse/new-d
 import {NewItemCategoryComponent} from './new-item-category/new-item-category.component';
 import {FormComponent} from '../comerce/form.component';
 import {AuthGuard} from "../guards/auth.guard";
-import {WarehouseGuard} from "../guards/warehouse.guard";
 
 const routes: Routes = [
-  {path: 'stockinwarehouse', component: StockInWarehouseComponent, canActivate: [WarehouseGuard]},
+  {path: 'stockinwarehouse', component: StockInWarehouseComponent, canActivate: [AuthGuard] },
   {path: 'newdeliverytoshop', component: NewDeliveryToShopComponent, canActivate: [AuthGuard] },
   {path: 'newdeliverytowarehouse', component: NewDeliveryToWarehouseComponent, canActivate: [AuthGuard] },
   {path: 'newitemcategory', component: NewItemCategoryComponent, canActivate: [AuthGuard] },

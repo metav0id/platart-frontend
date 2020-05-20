@@ -178,8 +178,7 @@ findUser(userId: string){
 
   authStatus(): Observable<Object>{
 
-    return
-    const authStatus = new Observable(observer => {
+    return new Observable(observer => {
       // setTimeout(() => {
         observer.next(this.getToken().subscribe(resp => {
             this.permission = true;

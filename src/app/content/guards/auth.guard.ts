@@ -18,17 +18,20 @@ export class AuthGuard implements CanActivate{
   }
 
 
-  canActivate(): boolean{
+  canActivate(): Observable<boolean>{
+    new Observable()
+    var item: boolean = false;
     this.auth.authStatus().subscribe( resp => {
+
         if (this.auth.permission){
-          return true;
+          item = true;
         }
         else {
           this.router.navigateByUrl('/login');
         }
 
       })
-        return this.auth.permission;
+
     }
 
 

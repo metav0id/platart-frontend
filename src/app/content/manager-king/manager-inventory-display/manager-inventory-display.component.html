@@ -1,0 +1,24 @@
+<div class="space"></div>
+
+<!-- BOX-0: Shop-Selection -->
+<div class="container-fluid d-flex justify-content-center">
+  <div class="demo-card-wide mdl-card mdl-shadow--2dp justi ">
+    <div class="container d-flex justify-content-left mdl-card__title ">
+      <h2 class="mdl-card__title-text">Inventory of: {{inventorySelected}}</h2>
+    </div>
+    <mat-radio-group
+      aria-labelledby="example-radio-group-label"
+      class="example-radio-group"
+      [(ngModel)]="inventorySelected">
+      <mat-radio-button class="example-radio-button" *ngFor="let season of inventoryRange" [value]="season">
+        {{season}}
+      </mat-radio-button>
+    </mat-radio-group>
+  </div>
+</div>
+
+<div class="space"></div>
+
+<div *ngIf="inventorySelected=='Shops'">
+  <app-manage-shops-info></app-manage-shops-info>
+</div>
