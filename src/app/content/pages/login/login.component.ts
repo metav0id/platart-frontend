@@ -45,14 +45,15 @@ export class LoginComponent implements OnInit {
       text: 'Wait a moment...'
     });
     Swal.showLoading();
-    this.auth.signIn(this.user.email, this.user.password).then(resp => {
+    this.auth.signIn(this.user.email, this.user.password).subscribe(resp => {
       Swal.close();
       console.log('Logged in');
       this.router.navigateByUrl('home');
-    }).catch(error => Swal.fire({
-            icon: 'error',
-            title: 'login data is not valid',
-            text: error.message
-          }));
+    }, (error => Swal.fire({
+      icon: 'error',
+      title: 'login data is not valid',
+      text: error.message
+    }))
+    );
   }
 }

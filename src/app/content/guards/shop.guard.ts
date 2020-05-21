@@ -5,15 +5,14 @@ import {AuthService} from '../services/auth.service';
 @Injectable({
   providedIn: 'root'
 })
-export class WarehouseGuard implements CanActivate {
-  private role = localStorage.getItem('role');
-  private warehouseRole = 'Warehouse';
+export class ShopGuard implements CanActivate {
+  private shopRole = 'Shop';
 
   constructor(private auth: AuthService, private router: Router) {
   }
 
   canActivate(): boolean {
-    if (this.auth.isCorrectRole(this.warehouseRole)) {
+    if (this.auth.isCorrectRole(this.shopRole)) {
       return true;
     } else {
       this.router.navigateByUrl('login');

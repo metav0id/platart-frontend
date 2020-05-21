@@ -1,8 +1,9 @@
 import {Injectable} from '@angular/core';
-import {AngularFirestore} from "@angular/fire/firestore";
-import {AngularFireAuth} from "@angular/fire/auth";
-import {Router} from "@angular/router";
-import {UserFirebase} from "../pages/user-firebase";
+import {AngularFirestore} from '@angular/fire/firestore';
+import {AngularFireAuth} from '@angular/fire/auth';
+import {Router} from '@angular/router';
+import {UserFirebase} from '../pages/user-firebase';
+import {Observable} from 'rxjs';
 
 
 @Injectable({
@@ -15,25 +16,36 @@ export class AuthService {
   constructor(public afs: AngularFirestore,
               public afAuth: AngularFireAuth,
               public router: Router) {
-    this.afAuth.authState.subscribe(user => {
-      if (user) {
-        this.userData = user;
-        localStorage.setItem('user', JSON.stringify(this.userData));
-        JSON.parse(localStorage.getItem('user'));
-      } else {
-        localStorage.setItem('user', null);
-        JSON.parse(localStorage.getItem('user'));
-      }
-    });
   }
 
   signIn(email, password) {
-    return this.afAuth.signInWithEmailAndPassword(email, password);
+    return new Observable(observer => {
+      this.afAuth.signInWithEmailAndPassword(email, password).then(resp => {
+        this.afAuth.authState.subscribe(user => {
+          if (user) {
+            this.userData = user;
+            this.getUserData(this.userData.uid).subscribe(obj => {
+              if (obj) {
+                console.log('Setting local storage');
+                localStorage.setItem('user', JSON.stringify(this.userData));
+                localStorage.setItem('role', obj.role);
+                observer.next();
+              }
+            });
+          } else {
+            console.log('I am deleting local user');
+            localStorage.setItem('user', null);
+            JSON.parse(localStorage.getItem('user'));
+          }
+        });
+      });
+    });
   }
 
   signOut() {
     return this.afAuth.signOut().then(() => {
       localStorage.removeItem('user');
+      localStorage.removeItem('role');
     });
   }
 
@@ -55,18 +67,22 @@ export class AuthService {
     userRef.set(userData);
   }
 
-  getUserData(uid){
-    this.afs.collection('users').doc(uid).get().subscribe(result => {
-      const user = JSON.parse(localStorage.getItem('user'));
-
-    })
+  getUserData(uid): Observable<any> {
+    const userRef = this.afs.collection('users').doc(uid);
+    return new Observable(observer => userRef.get().subscribe(doc => {
+      const data = doc.data();
+      observer.next(data);
+    }));
   }
 
   isLoggedIn(): boolean {
     const user = JSON.parse(localStorage.getItem('user'));
-    console.log('IsLoggedIn Function:');
-    console.log(user);
     return user !== null;
+  }
+
+  isCorrectRole(roleComponent: string): boolean {
+    const roleLocalStorage = localStorage.getItem('role');
+    return roleLocalStorage === roleComponent || roleLocalStorage === 'Manager';
   }
 }
 

@@ -23,7 +23,7 @@
 
         <!-- Links -->
             <ul class="navbar-nav mr-auto">
-              <div *ngIf="role == 'warehouse'">
+              <div *ngIf="isWarehouseRole()">
               <li class="nav-item active">
                 <a class="nav-link waves-light" [matMenuTriggerFor]="aboveMenu" mdbWavesEffect>{{ t('header.warehouse') }}<span class="sr-only">(current)</span></a>
                 <mat-menu #aboveMenu="matMenu" yPosition="below">
@@ -47,7 +47,7 @@
               </li>
               </div>
 
-              <div *ngIf="role == 'manager'">
+              <div *ngIf="isManagerRole()">
               <li class="nav-item">
                <a class="nav-link waves-light" mdbWavesEffect [matMenuTriggerFor]="belowMenu">{{ t('header.Manager') }}</a>
                <mat-menu #belowMenu="matMenu" yPosition="below">
@@ -61,7 +61,7 @@
                </li>
               </div>
 
-              <div *ngIf="role == 'sales'">
+              <div *ngIf="isShopRole()">
               <li class="nav-item">
               <a class="nav-link waves-light" mdbWavesEffect [matMenuTriggerFor]="beforeMenu">{{ t('header.Sales') }}</a>
               <mat-menu #beforeMenu="matMenu" xPosition="before">

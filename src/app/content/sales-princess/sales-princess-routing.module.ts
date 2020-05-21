@@ -5,11 +5,12 @@ import {CheckoutSoldItemsComponent} from './checkout-sold-items/checkout-sold-it
 import {PageNotFoundComponent} from "../page-not-found/page-not-found.component";
 import {AuthGuard} from "../guards/auth.guard";
 import {ViewShopInventoryComponent} from "./view-shop-inventory/view-shop-inventory.component";
+import {ShopGuard} from "../guards/shop.guard";
 
 const routes: Routes = [
-  {path: 'newdeliveryfromwarehouse', component: NewDeliveryFromWarehouseComponent, canActivate: [AuthGuard]},
-  {path: 'checkoutsolditems', component: CheckoutSoldItemsComponent, canActivate: [AuthGuard]},
-  {path: 'viewshopinventory', component: ViewShopInventoryComponent, canActivate: [AuthGuard]}
+  {path: 'newdeliveryfromwarehouse', component: NewDeliveryFromWarehouseComponent, canActivate: [AuthGuard, ShopGuard]},
+  {path: 'checkoutsolditems', component: CheckoutSoldItemsComponent, canActivate: [AuthGuard, ShopGuard]},
+  {path: 'viewshopinventory', component: ViewShopInventoryComponent, canActivate: [AuthGuard, ShopGuard]}
 ];
 
 @NgModule({
