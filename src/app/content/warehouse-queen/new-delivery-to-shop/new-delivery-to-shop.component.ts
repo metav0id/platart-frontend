@@ -29,7 +29,7 @@ export interface PeriodicElement {
   selector: 'app-new-delivery-order',
   templateUrl: './new-delivery-to-shop.component.html',
   styleUrls: ['./new-delivery-to-shop.component.css'],
-  providers: [{provide: TRANSLOCO_SCOPE, useValue: { scope: 'warehouseQueen/newDeliveryToShop', alias: 'translate' }}]
+  providers: [{provide: TRANSLOCO_SCOPE, useValue: { scope: 'warehouseQueen', alias: 'translate' }}]
 })
 export class NewDeliveryToShopComponent implements OnInit {
   displayedColumns: string[] = ['select', 'category', 'priceListPerUnit', 'quantity',

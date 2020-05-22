@@ -10,18 +10,22 @@ import {MatDatepickerInputEvent} from '@angular/material/datepicker';
 import {MatDialog} from '@angular/material/dialog';
 import {CheckoutSoldItemsDetailsComponent} from './checkout-sold-items-details/checkout-sold-items-details.component';
 import {CheckoutCategories} from './checkout-sold-items-DTOs/CheckoutCategories';
+// tslint:disable-next-line:max-line-length
 import {CheckoutSoldItemsSendVerificationComponent} from './checkout-sold-items-send-verification/checkout-sold-items-send-verification.component';
 import {observable} from 'rxjs';
-import {SendItemsDTO} from "./checkout-sold-items-DTOs/Send-Items-DTO";
+import {SendItemsDTO} from './checkout-sold-items-DTOs/Send-Items-DTO';
+import {TRANSLOCO_SCOPE, TranslocoService} from '@ngneat/transloco';
 
 @Component({
   selector: 'app-checkout-sold-items',
   templateUrl: './checkout-sold-items.component.html',
-  styleUrls: ['./checkout-sold-items.component.css']
+  styleUrls: ['./checkout-sold-items.component.css'],
+  providers: [{provide: TRANSLOCO_SCOPE, useValue: { scope: 'salesPrincess', alias: 'translate' }}]
 })
 export class CheckoutSoldItemsComponent implements OnInit {
   constructor(/*private _snackBar: MatSnackBar,*/
               private checkoutSoldItemsService: CheckoutSoldItemsService,
+              private transloco: TranslocoService,
               public dialog: MatDialog) { }
 
   // Fields for input-form

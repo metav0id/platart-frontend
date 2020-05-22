@@ -26,7 +26,7 @@ import {MatInputModule} from "@angular/material/input";
 import {MatRadioModule} from "@angular/material/radio";
 import {MatDialogModule} from "@angular/material/dialog";
 import {MatButtonModule} from "@angular/material/button";
-import {TranslocoRootModule} from "../../transloco-root.module";
+import {TranslocoRootModule} from '../../transloco-root.module';
 import {MatDatepickerModule} from "@angular/material/datepicker";
 import {MatNativeDateModule} from "@angular/material/core";
 
@@ -53,6 +53,7 @@ import {MatNativeDateModule} from "@angular/material/core";
     MatSelectModule,
     ReactiveFormsModule,
     MatTableModule,
+    TranslocoRootModule,
 
   ]
 })

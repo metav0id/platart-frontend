@@ -41,7 +41,7 @@ export class ManagerDashboardService {
 
   fetchDataLastMonth(): MonthToDateReportingDto {
     return {shop: 'all', salesNo: 419, salesTo: 6822, salesMg: 1540, salesMgAvg: 5.09,
-      discountRateAvg: 13.0, month: 'April', year: '2020'};
+      discountRateAvg: 13.0, date: new Date('2020-04-01')};
   }
 
   // fetchDataLastMonth(): Observable<MonthToDateReportingDto> {
@@ -52,7 +52,7 @@ export class ManagerDashboardService {
 
   fetchDataCurrentMonth(): MonthToDateReportingDto {
     return {shop: 'all', salesNo: 321, salesTo: 5467, salesMg: 1190, salesMgAvg: 5.13,
-      discountRateAvg: 12.7, month: 'May', year: '2020'};
+      discountRateAvg: 12.7, date: new Date('2020-05-01')};
   }
 
   // fetchDataCurrentMonth(): Observable<MonthToDateReportingDto> {
