@@ -1,8 +1,8 @@
 {
   "abort": "Abort",
   "createUser": "Create User",
-  "fillInUsername": "Please enter user name"
-  "fillInPassword": "Please enter password"
+  "fillInUsername": "Please enter user name",
+  "fillInPassword": "Please enter password",
   "insertValidEmail": "Please enter a valid e-mail address",
   "selectRole": "Please select role"
  }
