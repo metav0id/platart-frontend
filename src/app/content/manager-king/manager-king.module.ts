@@ -18,11 +18,11 @@ import {MatSelectModule} from '@angular/material/select';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {MatTableModule} from '@angular/material/table';
 import {MatInputModule} from "@angular/material/input";
-import {MatPaginator} from "@angular/material/paginator";
 import {MatSort, MatSortModule} from "@angular/material/sort";
-import {MatRadioModule} from "@angular/material/radio";
+import {MatRadioModule} from '@angular/material/radio';
 import { ManagerInventoryDisplayComponent } from './manager-inventory-display/manager-inventory-display.component';
 import { ManagerWarehouseInfoComponent } from './manager-inventory-display/manager-warehouse-info/manager-warehouse-info.component';
+import {RegisterComponent} from './register/register.component';
 
 
 
@@ -37,6 +37,7 @@ import { ManagerWarehouseInfoComponent } from './manager-inventory-display/manag
     ManagerInventoryDisplayComponent,
     ManagerShopsInfoComponent,
     ManagerWarehouseInfoComponent,
+    RegisterComponent,
   ],
   imports: [
     CommonModule,

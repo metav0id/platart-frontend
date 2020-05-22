@@ -1,13 +1,15 @@
-import { NgModule } from '@angular/core';
+import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
 import {ManagerDashboardComponent} from './manager-dashboard/manager-dashboard.component';
 import {ManagerInventoryDisplayComponent} from './manager-inventory-display/manager-inventory-display.component';
 import {AuthGuard} from '../guards/auth.guard';
 import {ManagerGuard} from '../guards/manager.guard';
+import {RegisterComponent} from './register/register.component';
 
 const routes: Routes = [
   {path: 'managerinventoryinfo', component: ManagerInventoryDisplayComponent, canActivate: [AuthGuard, ManagerGuard]},
   {path: 'managerdashboard', component: ManagerDashboardComponent, canActivate: [AuthGuard, ManagerGuard]},
+  {path: 'register', component: RegisterComponent, canActivate: [AuthGuard, ManagerGuard]},
 ];
 
 @NgModule({
@@ -16,4 +18,5 @@ const routes: Routes = [
   ],
   exports: [RouterModule]
 })
-export class ManagerKingRoutingModule { }
+export class ManagerKingRoutingModule {
+}

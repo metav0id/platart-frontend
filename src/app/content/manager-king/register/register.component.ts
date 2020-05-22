@@ -3,7 +3,7 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {AuthService} from '../../services/auth.service';
 import Swal from 'sweetalert2';
 import {Router} from '@angular/router';
-import {UserFirebase} from '../user-firebase';
+import {UserFirebase} from '../../pages/user-firebase';
 
 @Component({
   selector: 'app-registro',
@@ -63,7 +63,12 @@ export class RegisterComponent implements OnInit {
 
       this.auth.signUp(this.user).then(resp => {
         Swal.close();
-        this.router.navigateByUrl('/login');
+        Swal.fire(
+          'Success',
+          'User successfully registered.',
+          'success'
+        );
+        this.router.navigateByUrl('/home');
       }).catch(error => Swal.fire({
         icon: 'error',
         title: 'Error',
