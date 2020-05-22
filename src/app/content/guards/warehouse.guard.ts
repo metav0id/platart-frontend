@@ -6,7 +6,6 @@ import {AuthService} from '../services/auth.service';
   providedIn: 'root'
 })
 export class WarehouseGuard implements CanActivate {
-  private role = localStorage.getItem('role');
   private warehouseRole = 'Warehouse';
 
   constructor(private auth: AuthService, private router: Router) {
