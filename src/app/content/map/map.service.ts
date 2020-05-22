@@ -45,6 +45,11 @@ export class MapService {
     console.log('Marker Deleted');
   }
 
+  deleteMarker(marcador: Marcador): void {
+    this.httpClient.post<null>(environment.deleteCoords, marcador).subscribe();
+    console.log('Marker Deleted');
+  }
+
 //This method finds a marker from the data base and gives it back through an observable that becomes a Marker.
   getMarker(marker: Marcador): Observable<Marcador> {
     return this.httpClient.post<Marcador>(environment.findMarker, marker, {headers: this.httpHeader});

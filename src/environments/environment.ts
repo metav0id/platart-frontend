@@ -11,6 +11,7 @@ export const environment = {
   findMarker: 'http://localhost:8081/marker/find',
   updateMarker: 'http://localhost:8081/marker/update',
   deleteMarker: 'http://localhost:8081/marker/delete',
+  deleteCoords: 'http://localhost:8081/marker/deleteCoords',
   getAllShops: 'http://localhost:8081/comerce/getallshops',
   getAllCategories: 'http://localhost:8081/warehouse/getAllCategories',
   getAllNewOrderItems: 'http://localhost:8081/warehouse/getAllNewOrderItems',

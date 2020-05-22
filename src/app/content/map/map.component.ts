@@ -22,6 +22,7 @@ export interface DialogData {
   markerToEdit: Marcador;
   markerToGetCoords: Marcador;
 }
+import {TooltipPosition} from '@angular/material/tooltip';
 
 @Component({
   selector: 'app-map',
@@ -30,6 +31,9 @@ export interface DialogData {
   providers: [{provide: TRANSLOCO_SCOPE, useValue: { scope: 'map', alias: 'translate' }}]
 })
 export class MapComponent implements OnInit {
+  positionOptions: TooltipPosition[] = ['after', 'before', 'above', 'below', 'left', 'right'];
+  position = new FormControl(this.positionOptions[0]);
+
   lat: number = -0.180653;
   lng: number = -78.467834;
   marcadores: Marcador[] = new Array();
@@ -113,9 +117,14 @@ export class MapComponent implements OnInit {
 
 
 //This methods deletes the marker from the map and the data base.
-  borrarMarcador(i: number, marker: Marcador){
+  borrarComercio(i: number, marker: Marcador){
     console.log(i);
     this.mapService.delete(marker);
+    this.marcadores.splice(i,1);
+  }
+  borrarMarcador(i: number, marker: Marcador){
+    console.log(i);
+    this.mapService.deleteMarker(marker);
     this.marcadores.splice(i,1);
   }
 }

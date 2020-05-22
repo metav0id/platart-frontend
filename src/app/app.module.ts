@@ -49,6 +49,7 @@ import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { AngularFireStorageModule } from '@angular/fire/storage';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { environment } from 'src/environments/environment';
+import {MatTooltipModule} from "@angular/material/tooltip";
 
 
 ;
@@ -69,39 +70,40 @@ import { environment } from 'src/environments/environment';
     RegistroComponent,
     LoginComponent
   ],
-  imports: [
-    BrowserModule,
-    HttpClientModule,
-    WarehouseQueenModule,
-    ManagerKingModule,
-    SalesPrincessModule,
-    AppRoutingModule,
-    MatMenuModule,
-    MatToolbarModule,
-    MatIconModule,
-    MatListModule,
-    MatButtonModule,
-    MatSidenavModule,
-    ReactiveFormsModule,
-    MatSelectModule,
-    FormsModule,
-    MatInputModule,
-    BrowserAnimationsModule,
-    MatCheckboxModule,
-    MatTableModule,
-    MatDatepickerModule,
-    MatSliderModule,
-    AgmCoreModule.forRoot({apiKey: 'AIzaSyDNOu2JQ001PxZY-GVwFvVou0_6h_Sj-14'}),
-    MatCardModule,
-    MatDialogModule,
-    TranslocoRootModule,
-    MatFormFieldModule,
-    MDBBootstrapModule.forRoot(),
-    NgxChartsModule,
-    FlexLayoutModule,
-    MatButtonModule
+    imports: [
+        BrowserModule,
+        HttpClientModule,
+        WarehouseQueenModule,
+        ManagerKingModule,
+        SalesPrincessModule,
+        AppRoutingModule,
+        MatMenuModule,
+        MatToolbarModule,
+        MatIconModule,
+        MatListModule,
+        MatButtonModule,
+        MatSidenavModule,
+        ReactiveFormsModule,
+        MatSelectModule,
+        FormsModule,
+        MatInputModule,
+        BrowserAnimationsModule,
+        MatCheckboxModule,
+        MatTableModule,
+        MatDatepickerModule,
+        MatSliderModule,
+        AgmCoreModule.forRoot({apiKey: 'AIzaSyDNOu2JQ001PxZY-GVwFvVou0_6h_Sj-14'}),
+        MatCardModule,
+        MatDialogModule,
+        TranslocoRootModule,
+        MatFormFieldModule,
+        MDBBootstrapModule.forRoot(),
+        NgxChartsModule,
+        FlexLayoutModule,
+        MatButtonModule,
+        MatTooltipModule
 
-  ],
+    ],
   providers: [],
 
   bootstrap: [AppComponent]

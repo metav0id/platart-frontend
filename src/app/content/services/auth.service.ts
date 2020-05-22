@@ -134,9 +134,9 @@ async myFunction(){
     })
 
 
-    console.log('before');
-    this.wait(4000);  //4 seconds in milliseconds
-    console.log('after' + this.permission);
+    // console.log('before');
+    // this.wait(4000);  //4 seconds in milliseconds
+    // console.log('after' + this.permission);
 
 
     // this.userEmail = localStorage.getItem('email');
