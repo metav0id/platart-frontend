@@ -37,6 +37,7 @@ export class MapComponent implements OnInit {
   lat: number = -0.180653;
   lng: number = -78.467834;
   marcadores: Marcador[] = new Array();
+
   marker: Marcador;
   markerToEdit: Marcador;
   markerToGetCoords: Marcador;
@@ -48,6 +49,7 @@ export class MapComponent implements OnInit {
 //When the component is started it gives a list with all markers back.
   ngOnInit(): void {
     this.mapService.readAllMarkers().subscribe(response => this.marcadores = response);
+
 
 
   }
