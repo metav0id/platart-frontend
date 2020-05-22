@@ -49,9 +49,13 @@ import { AngularFireModule } from '@angular/fire';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { AngularFireStorageModule } from '@angular/fire/storage';
 import { AngularFireAuthModule } from '@angular/fire/auth';
-import firebase
-  from "firebase";
 import {environment} from "../environments/environment";
+import { environment } from 'src/environments/environment';
+import {MatTooltipModule} from "@angular/material/tooltip";
+
+
+;
+
 
 @NgModule({
   declarations: [
@@ -101,8 +105,8 @@ import {environment} from "../environments/environment";
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFirestoreModule, // firestore
     AngularFireAuthModule, // auth
-    AngularFireStorageModule // storage
-
+    AngularFireStorageModule, // storage
+    MatTooltipModule
   ],
   providers: [],
 

@@ -14,10 +14,10 @@ import {environment} from '../../../environments/environment';
 export class ComerceService {
 // the string connects with the service from backend that will gett all offers aviable
 
-  // this adds the header needed in case the method calls for one
+  /** this adds the header needed in case the method calls for one**/
   private httpHeader = new HttpHeaders({'Content-Type': 'application/json'});
 
-  // contructor must have an HTTPclient
+  /**contructor must have an HTTPclient**/
   constructor(private httpClient: HttpClient) {
   }
 

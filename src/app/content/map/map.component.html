@@ -1,16 +1,13 @@
 <ng-template transloco let-t>
-<!--  <app-header></app-header>-->
+
 <mat-card>
   <mat-card-title>{{ t('translate.selectlocation') }}:</mat-card-title>
 
-
-<!--  <a href="comerce">-->
-
-<!--    <button mat-raised-button color="primary"> Create new comerce</button>-->
-<!--  </a>-->
   <div class="space"></div>
   <a>
-    <button mat-raised-button  (click)="openDialog()">Create comerce </button>
+    <button mat-raised-button matTooltip="Register a warehouse or store for your business"
+            [matTooltipPosition]="position.value"
+             (click)="openDialog()">Create comerce </button>
   </a>
   <div class="space"></div>
   <mat-card-content>
@@ -35,7 +32,9 @@
               <a href="{{marcador.link}}">
               <button mat-raised-button color="primary"> Go to {{marcador.name}}</button>
               </a>
-              <button (click)="borrarMarcador(i,marcador)" mat-raised-button color="primary"> Borrar</button>
+
+              <button (click)="borrarComercio(i,marcador)" mat-raised-button color="primary"> Borrar comercio</button>
+                <button (click)="borrarMarcador(i,marcador)" mat-raised-button color="primary"> Borrar marcador</button>
           </div>
 <!--            <button mat-raised-button color="warn"> Edit marker</button>-->
           </div>

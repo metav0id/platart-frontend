@@ -1,12 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {Marcador} from "./components/marker.class";
-import {MARKERS} from "./components/marker";
-import {
-  HttpClient,
-  HttpHeaders
-} from "@angular/common/http";
-import {Marker} from "@agm/core";
-import {Observable} from "rxjs";
+
 import {MapService} from "./map.service";
 import {MatDialog} from "@angular/material/dialog";
 import {FormComponent} from "../comerce/form.component";
@@ -16,12 +10,13 @@ import {
 } from "@angular/forms";
 import {MarkerFormComponent} from "./components/marker-form.component";
 import {Router, ActivatedRoute} from "@angular/router";
-import {Comerce} from "../comerce/comerce";
+
 import {TRANSLOCO_SCOPE} from "@ngneat/transloco";
 export interface DialogData {
   markerToEdit: Marcador;
   markerToGetCoords: Marcador;
 }
+import {TooltipPosition} from '@angular/material/tooltip';
 
 @Component({
   selector: 'app-map',
@@ -30,9 +25,15 @@ export interface DialogData {
   providers: [{provide: TRANSLOCO_SCOPE, useValue: { scope: 'map', alias: 'translate' }}]
 })
 export class MapComponent implements OnInit {
+  /** tooltip features**/
+  positionOptions: TooltipPosition[] = ['after', 'before', 'above', 'below', 'left', 'right'];
+  position = new FormControl(this.positionOptions[0]);
+
+/** quito coordinates**/
   lat: number = -0.180653;
   lng: number = -78.467834;
   marcadores: Marcador[] = new Array();
+
   marker: Marcador;
   markerToEdit: Marcador;
   markerToGetCoords: Marcador;
@@ -41,9 +42,10 @@ export class MapComponent implements OnInit {
   allMarkers: Marcador[];
   public markerControl = new FormControl('', Validators.required);
 
-//When the component is started it gives a list with all markers back.
+/**When the component is started it gives a list with all markers back.**/
   ngOnInit(): void {
     this.mapService.readAllMarkers().subscribe(response => this.marcadores = response);
+
 
 
   }
@@ -51,7 +53,7 @@ export class MapComponent implements OnInit {
   constructor( private mapService: MapService, public dialog: MatDialog, private activatedRoute: ActivatedRoute, private router: Router) {
   }
 
-  //This method is the guide to follow when wanting to open a dialog window
+  /**This method is the guide to follow when wanting to open a dialog window**/
   openDialog(): void {
     const dialogRef = this.dialog.open(FormComponent, {
       width: '400px'
@@ -65,7 +67,7 @@ export class MapComponent implements OnInit {
   }
 
 
-//This method finds a client when an id is provided
+/**This method finds a client when an id is provided**/
   cargarCliente(): void{
     this.activatedRoute.params.subscribe(params=>{
       let id = params['id']
@@ -78,7 +80,9 @@ export class MapComponent implements OnInit {
 
 
 
-//This methods adds a new marker to the map, opens a dialog window to asign it to a comerce and saves the connection in data base.
+/**This methods adds a new marker to the map,
+ * opens a dialog window to asign it to a comerce and saves the connection in data base.
+ * **/
   agregarMarcador(evento): Marcador{
     //Creates marker with coords
     const coords: { lat: string, lng: string } = evento.coords;
@@ -113,10 +117,15 @@ export class MapComponent implements OnInit {
   }
 
 
-//This methods deletes the marker from the map and the data base.
-  borrarMarcador(i: number, marker: Marcador){
+/**This methods deletes the marker from the map and the data base.**/
+  borrarComercio(i: number, marker: Marcador){
     console.log(i);
     this.mapService.delete(marker);
+    this.marcadores.splice(i,1);
+  }
+  borrarMarcador(i: number, marker: Marcador){
+    console.log(i);
+    this.mapService.deleteMarker(marker);
     this.marcadores.splice(i,1);
   }
 }
