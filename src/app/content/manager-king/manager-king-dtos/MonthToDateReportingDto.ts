@@ -5,6 +5,5 @@ export interface MonthToDateReportingDto {
   salesMg: number;
   salesMgAvg: number;
   discountRateAvg: number;
-  month: string;
-  year: string;
+  date: Date;
 }

@@ -1,13 +1,14 @@
 <ng-template transloco let-t>
 
 <mat-card>
-  <mat-card-title>{{ t('translate.selectlocation') }}:</mat-card-title>
+  <mat-card-title>{{ t('translate.selectLocation') }}:</mat-card-title>
 
   <div class="space"></div>
   <a>
     <button mat-raised-button matTooltip="Register a warehouse or store for your business"
             [matTooltipPosition]="position.value"
              (click)="openDialog()">Create comerce </button>
+    <button mat-raised-button  (click)="openDialog()">{{ t('translate.createCommerce') }} </button>
   </a>
   <div class="space"></div>
   <mat-card-content>
@@ -30,8 +31,9 @@
             <!--opens managing service of asigned comerce-->
               <div *ngIf="marcador.name!=null">
               <a href="{{marcador.link}}">
-              <button mat-raised-button color="primary"> Go to {{marcador.name}}</button>
+              <button mat-raised-button color="primary"> {{ t('translate.goTo') }} {{marcador.name}}</button>
               </a>
+              <button (click)="borrarMarcador(i,marcador)" mat-raised-button color="primary"> {{ t('translate.delete') }}</button>
 
               <button (click)="borrarComercio(i,marcador)" mat-raised-button color="primary"> Borrar comercio</button>
                 <button (click)="borrarMarcador(i,marcador)" mat-raised-button color="primary"> Borrar marcador</button>

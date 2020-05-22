@@ -5,11 +5,13 @@ import {ViewShopInventoryService} from './view-shop-inventory.service';
 import {observable} from 'rxjs';
 import {FormControl, Validators} from '@angular/forms';
 import {Shop} from '../../commonDTOs/shop';
+import {TRANSLOCO_SCOPE, TranslocoService} from '@ngneat/transloco';
 
 @Component({
   selector: 'app-view-shop-inventory',
   templateUrl: './view-shop-inventory.component.html',
-  styleUrls: ['./view-shop-inventory.component.css']
+  styleUrls: ['./view-shop-inventory.component.css'],
+  providers: [{provide: TRANSLOCO_SCOPE, useValue: { scope: 'salesPrincess', alias: 'translate' }}]
 })
 export class ViewShopInventoryComponent implements OnInit {
 
@@ -26,7 +28,7 @@ export class ViewShopInventoryComponent implements OnInit {
   public selectedShopToFilterOnList = '';
   public selectedShopToDisplay = '';
 
-  constructor(private viewShopInventoryService: ViewShopInventoryService) { }
+  constructor(private viewShopInventoryService: ViewShopInventoryService, private transloco: TranslocoService) { }
 
   ngOnInit(): void {
     this.viewShopInventoryService.getListShops().subscribe( (JsonDto) => {

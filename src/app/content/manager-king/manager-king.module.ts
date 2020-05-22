@@ -25,6 +25,11 @@ import { ManagerWarehouseInfoComponent } from './manager-inventory-display/manag
 import {RegisterComponent} from './register/register.component';
 
 
+import {MatDialogModule} from "@angular/material/dialog";
+import {MatButtonModule} from "@angular/material/button";
+import {TranslocoRootModule} from '../../transloco-root.module';
+import {MatDatepickerModule} from "@angular/material/datepicker";
+import {MatNativeDateModule} from "@angular/material/core";
 
 @NgModule({
   declarations: [
@@ -53,6 +58,8 @@ import {RegisterComponent} from './register/register.component';
     MatSelectModule,
     ReactiveFormsModule,
     MatTableModule,
+    TranslocoRootModule,
+
     MatInputModule,
     MatSortModule,
     MatRadioModule,

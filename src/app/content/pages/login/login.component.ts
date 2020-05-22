@@ -1,16 +1,18 @@
 import {Component, OnInit} from '@angular/core';
-import {NgForm} from '@angular/forms';
+import {FormBuilder, NgForm} from '@angular/forms';
 import {AuthService} from '../../services/auth.service';
 import Swal from 'sweetalert2';
 import {Router} from '@angular/router';
 import {AuthGuard} from '../../guards/auth.guard';
 import {UserFirebase} from '../user-firebase';
+import {TRANSLOCO_SCOPE, TranslocoService} from '@ngneat/transloco';
 
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css']
+  styleUrls: ['./login.component.css'],
+  providers: [{provide: TRANSLOCO_SCOPE, useValue: { scope: 'userManagement', alias: 'translate' }}]
 })
 export class LoginComponent implements OnInit {
   user: UserFirebase = {
@@ -21,7 +23,7 @@ export class LoginComponent implements OnInit {
   };
   rememberUser = false;
 
-  constructor(private auth: AuthService, private router: Router, private guard: AuthGuard) {
+  constructor(private auth: AuthService, private router: Router, private guard: AuthGuard, private transloco: TranslocoService) {
   }
   /*When the module is initialized if will check for an email in the local storage of the bowser.*/
   ngOnInit() {
