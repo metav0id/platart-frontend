@@ -1,13 +1,13 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import {RouterModule, Routes} from '@angular/router';
-import {ManagerShopsInfoComponent} from './manager-inventory-display/manager-shops-info/manager-shops-info.component';
 import {ManagerDashboardComponent} from './manager-dashboard/manager-dashboard.component';
 import {ManagerInventoryDisplayComponent} from './manager-inventory-display/manager-inventory-display.component';
+import {AuthGuard} from '../guards/auth.guard';
+import {ManagerGuard} from '../guards/manager.guard';
 
 const routes: Routes = [
-  {path: 'managerinventoryinfo', component: ManagerInventoryDisplayComponent},
-  {path: 'managerdashboard', component: ManagerDashboardComponent},
+  {path: 'managerinventoryinfo', component: ManagerInventoryDisplayComponent, canActivate: [AuthGuard, ManagerGuard]},
+  {path: 'managerdashboard', component: ManagerDashboardComponent, canActivate: [AuthGuard, ManagerGuard]},
 ];
 
 @NgModule({
