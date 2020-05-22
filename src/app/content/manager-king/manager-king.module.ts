@@ -22,6 +22,7 @@ import {MatPaginator} from "@angular/material/paginator";
 import {MatSort, MatSortModule} from "@angular/material/sort";
 import {MatRadioModule} from "@angular/material/radio";
 import { ManagerInventoryDisplayComponent } from './manager-inventory-display/manager-inventory-display.component';
+import { ManagerWarehouseInfoComponent } from './manager-inventory-display/manager-warehouse-info/manager-warehouse-info.component';
 
 
 
@@ -34,6 +35,8 @@ import { ManagerInventoryDisplayComponent } from './manager-inventory-display/ma
     VbarChartCardComponent,
     MonthToDateTableCardComponent,
     ManagerInventoryDisplayComponent,
+    ManagerShopsInfoComponent,
+    ManagerWarehouseInfoComponent,
   ],
   imports: [
     CommonModule,

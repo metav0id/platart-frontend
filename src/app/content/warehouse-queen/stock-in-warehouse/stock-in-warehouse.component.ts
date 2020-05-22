@@ -52,9 +52,8 @@ export class StockInWarehouseComponent implements OnInit {
           counter++;
           this.warehouseData.push(newWarehouseItem);
         }
-        this.table.renderRows();
-
         this.dataSource = new MatTableDataSource(this.warehouseData);
+        this.table.renderRows();
       });
   }
 
