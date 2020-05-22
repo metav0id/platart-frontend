@@ -20,7 +20,7 @@ import {AddDeliveryItemComponent} from "./add-delivery-item/add-delivery-item.co
   styleUrls: ['./new-delivery-from-warehouse.component.css'],
   providers: [{
     provide: TRANSLOCO_SCOPE,
-    useValue: {scope: 'salesPrincess/newDeliveryFromWarehouse', alias: 'translate'}
+    useValue: {scope: 'salesPrincess', alias: 'translate'}
   }]
 })
 

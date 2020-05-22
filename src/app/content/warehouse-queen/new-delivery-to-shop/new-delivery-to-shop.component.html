@@ -1,4 +1,5 @@
-  <div class="space"></div>
+<ng-template transloco let-t>
+<div class="space"></div>
 <div class="row">
   <div class="col">
 <!--    CONTENT OF FIRST COL-->
@@ -6,13 +7,14 @@
     <div class="demo-card-wide mdl-card mdl-shadow--2dp">
       <div class="mdl-card__title">
         <h2 class="mdl-card__title-text">New delivery to a shop order</h2>
+        <h2 class="mdl-card__title-text">{{ t('translate.newDeliveryShop') }}</h2>
       </div>
       <div class="container-fluid d-flex justify-content-center cont-bg4">
 <!--      FORMULAR-->
       <div class="newOrderInputFields">
         <div class="newOrderInputFieldsCategory">
           <mat-form-field appearance="fill">
-            <mat-label>shop</mat-label>
+            <mat-label>{{ t('translate.shop') }}</mat-label>
             <mat-select [formControl]="shopControl" [(value)]="newOrderElement.deliveryShop">
               <mat-option>--</mat-option>
               <mat-option *ngFor="let entry of shopsList" [value]="entry.name">{{ entry.name}}</mat-option>
@@ -22,7 +24,7 @@
         <div class="newOrderInputFields">
           <div class="newOrderInputFieldsCategory">
             <mat-form-field appearance="fill">
-              <mat-label>category</mat-label>
+              <mat-label>{{ t('translate.category') }}</mat-label>
               <mat-select [formControl]="categoryControl" [(value)]="newOrderElement.category">
                 <mat-option>--</mat-option>
                 <mat-option *ngFor="let entry of categoryItems"
@@ -33,28 +35,28 @@
 
           <div class="newOrderInputFieldsDeliveryFinalPricePerUnit">
             <mat-form-field hintLabel="Max 10 characters" appearance="fill">
-              <mat-label>List Price per Unit</mat-label>
+              <mat-label>{{ t('translate.listPricePerUnit') }}</mat-label>
               <input matInput #input [(ngModel)]="newOrderElement.priceListPerUnit" maxlength="10" placeholder="Ex. deliveryDisplayPricePerUnit">
               <mat-hint align="end">{{input.value?.length || 0}}/10</mat-hint>
             </mat-form-field>
           </div>
 
           <div class="availabilityAmount space">
-            <button mat-raised-button  (click)="verifyAvailability()">Check Availability</button>
-            <a>{{availableItems}} items</a>
+            <button mat-raised-button  (click)="verifyAvailability()">{{ t('translate.checkAvailability') }}</button>
+            <a>{{availableItems}} {{ t('translate.items') }}</a>
           </div>
           <div class="space"></div>
 
           <div class="newOrderInputFieldsDeliveryQuantity">
             <mat-form-field hintLabel="Max 10 characters" appearance="fill">
-              <mat-label>Enter Quantity</mat-label>
+              <mat-label>{{ t('translate.enterQuantity') }}</mat-label>
               <input matInput #input [(ngModel)]="newOrderElement.quantity" maxlength="10" placeholder="Ex. deliveryQuantity">
               <mat-hint align="end">{{input.value?.length || 0}}/10</mat-hint>
             </mat-form-field>
           </div>
 
           <div class="discountSelectionRadioButton">
-            <label id="example-radio-group-label">Pick discount type:</label>
+            <label id="example-radio-group-label">{{ t('translate.discountType') }}:</label>
             <div class="space"></div>
             <mat-radio-group
               aria-labelledby="example-radio-group-label"
@@ -68,7 +70,7 @@
 
           <div *ngIf="discountMethod==='displayPrice'" class="newOrderInputFieldsDeliveryDisplayPricePerUnit">
             <mat-form-field hintLabel="Max 10 characters" appearance="fill">
-              <mat-label>Enter Sales Price per Unit</mat-label>
+              <mat-label>{{ t('translate.salesPricePerUnit') }}</mat-label>
               <input matInput #input [(ngModel)]="newOrderElement.priceSalesPerUnit" maxlength="10" placeholder="Ex. deliveryDisplayPricePerUnit">
               <mat-hint align="end">{{input.value?.length || 0}}/10</mat-hint>
             </mat-form-field>
@@ -76,13 +78,13 @@
 
           <div *ngIf="discountMethod==='percent'" class="newOrderInputFieldsDeliveryDeliveryDiscount">
             <mat-form-field hintLabel="Max 10 characters" appearance="fill">
-              <mat-label>Enter Discount in %</mat-label>
+              <mat-label>{{ t('translate.discountInPercent') }}</mat-label>
               <input matInput #input [(ngModel)]="newOrderElement.discountPercent" maxlength="10" placeholder="Ex. deliveryDiscount">
               <mat-hint align="end">{{input.value?.length || 0}}/10</mat-hint>
             </mat-form-field>
           </div>
           <div>
-            <button mat-raised-button  (click)="setNewItemOrder()">Add new order item</button>
+            <button mat-raised-button  (click)="setNewItemOrder()">{{ t('translate.addNewOrderItem') }}</button>
           </div>
         </div>
         <div class="space"></div>
@@ -112,9 +114,9 @@
         <div class="container cont-bg4  justify-content-center ">
           <div class="space"></div>
           <div class="d-flex justify-content-around" >
-            <button  mat-raised-button (click)="saveCurrentOrder()">Save current order items</button>
-            <button  mat-raised-button  (click)="clearCurrentOrder()">Clear current order items</button>
-            <button  mat-raised-button  (click)="sendCurrentOrder()">Send order</button>
+            <button  mat-raised-button (click)="saveCurrentOrder()">{{ t('translate.saveCurrentOrder') }}</button>
+            <button  mat-raised-button  (click)="clearCurrentOrder()">{{ t('translate.clearCurrentOrder') }}</button>
+            <button  mat-raised-button  (click)="sendCurrentOrder()">{{ t('translate.sendOrder') }}</button>
           </div >
           <div class="space"></div>
         </div>
@@ -124,7 +126,7 @@
         <div class="container cont-bg4  justify-content-center  ">
           <div class="space"></div>
           <div class="d-flex justify-content-around" >
-            <h3><u>Delivery list to:</u> {{newOrderElement.deliveryShop}}</h3>
+            <h3><u>{{ t('translate.deliveriesTo') }}:</u> {{newOrderElement.deliveryShop}}</h3>
           </div >
         </div>
         <div>
@@ -155,44 +157,44 @@
 
             <!-- Position Column -->
             <ng-container matColumnDef="category">
-              <th mat-header-cell *matHeaderCellDef> Category </th>
+              <th mat-header-cell *matHeaderCellDef> {{ t('translate.category') }} </th>
               <td mat-cell *matCellDef="let element"> {{element.category}} </td>
               <td mat-footer-cell *matFooterCellDef> - </td>
             </ng-container>
 
             <!-- Name Column -->
             <ng-container matColumnDef="quantity">
-              <th mat-header-cell *matHeaderCellDef> Quantity </th>
+              <th mat-header-cell *matHeaderCellDef> {{ t('translate.quantity') }} </th>
               <td mat-cell *matCellDef="let element"> {{element.quantity}}# </td>
               <td mat-footer-cell *matFooterCellDef> {{getTotalItems()}}# </td>
             </ng-container>
 
             <!-- priceSalesPerUnit Column -->
             <ng-container matColumnDef="priceSalesPerUnit">
-              <th mat-header-cell *matHeaderCellDef> Sales Price </th>
+              <th mat-header-cell *matHeaderCellDef> {{ t('translate.salesPrice') }} </th>
               <td mat-cell *matCellDef="let element"> {{element.priceSalesPerUnit}}$ </td>
-              <td mat-footer-cell *matFooterCellDef> Total items: </td>
+              <td mat-footer-cell *matFooterCellDef> Total {{ t('translate.items') }}: </td>
             </ng-container>
 
             <!-- priceDiscount Column -->
             <ng-container matColumnDef="discountPercent">
-              <th mat-header-cell *matHeaderCellDef> Discount % </th>
+              <th mat-header-cell *matHeaderCellDef> {{ t('translate.discount') }} % </th>
               <td mat-cell *matCellDef="let element"> {{element.discountPercent}}%</td>
-              <td mat-footer-cell *matFooterCellDef> Total value: </td>
+              <td mat-footer-cell *matFooterCellDef> Total {{ t('translate.value') }}: </td>
             </ng-container>
 
             <!-- priceListPerUnit Column -->
             <ng-container matColumnDef="priceListPerUnit">
-              <th mat-header-cell *matHeaderCellDef> List Price </th>
+              <th mat-header-cell *matHeaderCellDef> {{ t('translate.listPrice') }} </th>
               <td mat-cell *matCellDef="let element"> {{element.priceListPerUnit}}$</td>
               <td mat-footer-cell *matFooterCellDef> {{getTotalValue()}}$ </td>
             </ng-container>
 
             <!-- Action Column -->
             <ng-container matColumnDef="updateItem">
-              <th mat-header-cell *matHeaderCellDef> Action </th>
+              <th mat-header-cell *matHeaderCellDef> {{ t('translate.action') }} </th>
               <td mat-cell *matCellDef="let element">
-                <button (click)="updateButton(element)">Correct item</button>
+                <button (click)="updateButton(element)">{{ t('translate.correctItem') }}</button>
               </td>
               <td mat-footer-cell *matFooterCellDef> - </td>
             </ng-container>
@@ -217,5 +219,6 @@
   </div>
 <!--    NEXT DIV CLOSES ROW-->
 </div>
-
+</div>
+</ng-template>
 

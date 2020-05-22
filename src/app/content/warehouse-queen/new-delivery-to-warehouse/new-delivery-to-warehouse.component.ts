@@ -11,7 +11,7 @@ import {TRANSLOCO_SCOPE} from '@ngneat/transloco';
   selector: 'app-new-delivery-to-warehouse',
   templateUrl: './new-delivery-to-warehouse.component.html',
   styleUrls: ['./new-delivery-to-warehouse.component.css'],
-  providers: [{provide: TRANSLOCO_SCOPE, useValue: { scope: 'warehouseQueen/newDeliveryToWarehouse', alias: 'translate' }}]
+  providers: [{provide: TRANSLOCO_SCOPE, useValue: { scope: 'warehouseQueen', alias: 'translate' }}]
 })
 
 export class NewDeliveryToWarehouseComponent implements OnInit {

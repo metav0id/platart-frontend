@@ -36,7 +36,7 @@ export const environment = {
   vBarDataURL: 'http://localhost:8081/dashboard/getVbarData',
   hBarDataURL: 'http://localhost:8081/dashboard/getHbarData',
   dataLastMonthURL: 'http://localhost:8081/dashboard/getLastMonthData',
-  dataCurrentMonthURL: 'http://localhost:8081/dashboard/getCurrentMonthDAta',
+  dataCurrentMonthURL: 'http://localhost:8081/dashboard/getCurrentMonthData',
   yesterdaysDataURL: 'http://localhost:8081/dashboard/getYesterdaysData',
   actualsDataURL: 'http://localhost:8081/dashboard/getActualsData',
   saveDeliveryItemsToShopStock: 'http://localhost:8081/shops/saveNewDeliveryFromWarehouse',

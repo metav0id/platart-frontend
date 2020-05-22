@@ -21,6 +21,8 @@ import {MatNativeDateModule} from '@angular/material/core';
 import { CheckoutSoldItemsDetailsComponent } from './checkout-sold-items/checkout-sold-items-details/checkout-sold-items-details.component';
 import {MatCardModule} from '@angular/material/card';
 import {TranslocoRootModule} from '../../transloco-root.module';
+import {MatCardModule} from "@angular/material/card";
+import {TranslocoRootModule} from '../../transloco-root.module';
 import { CheckoutSoldItemsSendVerificationComponent } from './checkout-sold-items/checkout-sold-items-send-verification/checkout-sold-items-send-verification.component';
 import { ViewShopInventoryComponent } from './view-shop-inventory/view-shop-inventory.component';
 import { AddDeliveryItemComponent } from './new-delivery-from-warehouse/add-delivery-item/add-delivery-item.component';

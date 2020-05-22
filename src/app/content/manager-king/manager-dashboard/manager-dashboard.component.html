@@ -1,25 +1,26 @@
+<ng-template transloco let-t>
 <mat-divider></mat-divider>
 <div fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="20px" class="stats-card">
   <mat-card fxFlex="100">
-    <h1 align="center">Manager Dashboard</h1>
+    <h1 align="center">{{ t('translate.managerDashboard') }}</h1>
   </mat-card>
 </div>
 
 <mat-divider></mat-divider>
 <div fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="20px" class="stats-card">
   <mat-card fxFlex="30">
-    <app-arch-gauge-card gaugeLabel="Turnover" unit="USD" gaugeType="arch" gaugeValue="{{dataYesterday.salesTo}}"
+    <app-arch-gauge-card gaugeLabel="{{ t('translate.turnover') }}" unit="USD" gaugeType="arch" gaugeValue="{{dataYesterday.salesTo}}"
                          gaugeMin="0" gaugeMax="2000" gaugeAppendText="$"
-                         label="Yesterday's Turnover"></app-arch-gauge-card>
+                         label="{{ t('translate.yesterdaysTurnover') }}"></app-arch-gauge-card>
   </mat-card>
   <mat-card fxFlex="30">
-    <app-arch-gauge-card gaugeLabel="Sales Margin" unit="USD" gaugeType="arch" gaugeValue="{{dataYesterday.salesMg}}"
+    <app-arch-gauge-card gaugeLabel="{{ t('translate.salesMargin') }}" unit="USD" gaugeType="arch" gaugeValue="{{dataYesterday.salesMg}}"
                          gaugeMin="0" gaugeMax="1000" threshMin="0" threshMid="200" threshMax="600" gaugeAppendText="$"
-                         label="Yesterday's Sales Margin"></app-arch-gauge-card>
+                         label="{{ t('translate.yesterdaysSalesMargin') }}"></app-arch-gauge-card>
   </mat-card>
   <mat-card fxFlex="30">
-    <app-arch-gauge-card gaugeLabel="Discount-Rate" unit="Percentage" gaugeType="arch" gaugeValue="{{dataYesterday.discountRateAvg}}" gaugeAppendText="%"
-                         gaugeMin="0" gaugeMax="100" label="Yesterday's Average Discount"></app-arch-gauge-card>
+    <app-arch-gauge-card gaugeLabel="{{ t('translate.discountRate') }}" unit="{{ t('translate.percentage') }}" gaugeType="arch" gaugeValue="{{dataYesterday.discountRateAvg}}" gaugeAppendText="%"
+                         gaugeMin="0" gaugeMax="100" label="{{ t('translate.yesterdaysAverageDiscount') }}"></app-arch-gauge-card>
   </mat-card>
 </div>
 <mat-divider></mat-divider>
@@ -76,11 +77,10 @@
 
 <div fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="20px" class="stats-card">
   <mat-card fxFlex="50">
-    <app-hbar-char-card label="Daily Turnover by Shop"></app-hbar-char-card>
+    <app-hbar-char-card label="{{ t('translate.dailyTurnoverByShop') }}"></app-hbar-char-card>
   </mat-card>
   <mat-card fxFlex="50">
-    <app-vbar-chart-card label="Aggregated turnover by last 7 days" ></app-vbar-chart-card>
+    <app-vbar-chart-card label="{{ t('translate.aggregatedTurnoverByLast7Days') }}" ></app-vbar-chart-card>
   </mat-card>
-
-
 </div>
+</ng-template>

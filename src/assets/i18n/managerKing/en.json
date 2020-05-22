@@ -1,0 +1,14 @@
+{
+  "aggregatedTurnoverByLast7Days": "Aggregated turnover by last 7 days",
+  "dailyTurnoverByShop": "Daily turnover by shop",
+  "discountRate": "Discount-Rate",
+  "inventoryOfShop": "Inventory of shop",
+  "managerDashboard": "Manager Dashboard",
+  "percentage":  "Percentage",
+  "salesMargin": "Sales margin",
+  "selectShop": "Select shop",
+  "turnover": "Turnover",
+  "yesterdaysAverageDiscount": "Yesterday's Average Discount",
+  "yesterdaysSalesMargin": "Yesterdays' sales margin",
+  "yesterdaysTurnover": "Yesterdays' turnover"
+}
