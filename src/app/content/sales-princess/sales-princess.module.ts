@@ -19,8 +19,6 @@ import {CheckoutSoldItemsComponent} from './checkout-sold-items/checkout-sold-it
 import {MatDatepickerInputEvent, MatDatepickerModule} from '@angular/material/datepicker';
 import {MatNativeDateModule} from '@angular/material/core';
 import { CheckoutSoldItemsDetailsComponent } from './checkout-sold-items/checkout-sold-items-details/checkout-sold-items-details.component';
-import {MatCardModule} from '@angular/material/card';
-import {TranslocoRootModule} from '../../transloco-root.module';
 import {MatCardModule} from "@angular/material/card";
 import {TranslocoRootModule} from '../../transloco-root.module';
 import { CheckoutSoldItemsSendVerificationComponent } from './checkout-sold-items/checkout-sold-items-send-verification/checkout-sold-items-send-verification.component';

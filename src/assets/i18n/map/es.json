@@ -1,3 +1,6 @@
 {
-  "selectlocation": "Selección"
+  "selectLocation": "Selección",
+  "createCommerce": "Create commerce (es)",
+  "goTo": "Go to (es)",
+  "delete": "Delete (es)"
 }

@@ -4,11 +4,13 @@ import {AuthService} from '../../services/auth.service';
 import Swal from 'sweetalert2';
 import {Router} from '@angular/router';
 import {UserFirebase} from '../user-firebase';
+import {TRANSLOCO_SCOPE, TranslocoService} from '@ngneat/transloco';
 
 @Component({
   selector: 'app-registro',
   templateUrl: './register.component.html',
-  styleUrls: ['./register.component.css']
+  styleUrls: ['./register.component.css'],
+  providers: [{provide: TRANSLOCO_SCOPE, useValue: { scope: 'userManagement', alias: 'translate' }}]
 })
 
 export class RegisterComponent implements OnInit {
@@ -23,7 +25,7 @@ export class RegisterComponent implements OnInit {
 
   public listRoles = ['Warehouse', 'Manager', 'Shop'];
 
-  constructor(private auth: AuthService, private router: Router, private formBuilder: FormBuilder) {
+  constructor(private auth: AuthService, private router: Router, private formBuilder: FormBuilder, private transloco: TranslocoService) {
   }
 
   /**When started, it will create a new instance of user.*/
