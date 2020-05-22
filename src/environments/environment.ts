@@ -6,6 +6,7 @@ export const environment = {
   production: false,
   saveCommerce: 'http://localhost:8081/comerce/savecomerce',
   getAllMarkers: 'http://localhost:8081/marker/getallmarkers',
+  getAllMarkersNoCoords: 'http://localhost:8081/marker/getallmarkersNoCoords',
   saveMarker: 'http://localhost:8081/marker/savemarker',
   findCommerce: 'http://localhost:8081/comerce/find',
   findMarker: 'http://localhost:8081/marker/find',

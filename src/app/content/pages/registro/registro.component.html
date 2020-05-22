@@ -37,6 +37,19 @@
 
                         <span class="focus-input100"></span>
                     </div>
+<!--                  <span *ngIf="f.submitted && f.controls['role'].errors"-->
+<!--                        class="text-danger animated fadeIn">El rol es obligatorio</span>-->
+                  <div class="wrap-input100 m-b-16">
+                    <input class="input100"
+                           type="text"
+                           name="nombre"
+                           [(ngModel)]="user.role"
+                           required
+                           minlength="2"
+                           placeholder="role">
+
+                    <span class="focus-input100"></span>
+                  </div>
 
                   <span *ngIf="f.submitted && f.controls['pass'].errors"
                         class="text-danger animated fadeIn">Password must be at least 6 characters long</span>

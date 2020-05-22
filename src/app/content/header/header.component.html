@@ -8,6 +8,7 @@
     <mdb-navbar SideClass="navbar navbar-expand-lg navbar-light bg2 " >
 
 
+
   <!-- Navbar brand -->
         <mdb-navbar-brand><a class="navbar-brand" routerLink="home">Platart</a></mdb-navbar-brand>
         <!-- creates gurber menu for mobile version with all elements in the menu -->
@@ -22,9 +23,9 @@
 
         <!-- Links -->
             <ul class="navbar-nav mr-auto">
-
-              <li class="nav-item ">
-                <a class="nav-link waves-light" [matMenuTriggerFor]="aboveMenu" mdbWavesEffect>{{ t('header.warehouse') }}</a>
+              <div *ngIf="role == 'warehouse'">
+              <li class="nav-item active">
+                <a class="nav-link waves-light" [matMenuTriggerFor]="aboveMenu" mdbWavesEffect>{{ t('header.warehouse') }}<span class="sr-only">(current)</span></a>
                 <mat-menu #aboveMenu="matMenu" yPosition="below">
                 <a class="nav-link a" routerLink="stockinwarehouse">
                 {{ t('header.Stock-in-warehouse') }}
@@ -44,11 +45,13 @@
                 </a>
                 </mat-menu>
               </li>
+              </div>
 
+              <div *ngIf="role == 'manager'">
               <li class="nav-item">
                <a class="nav-link waves-light" mdbWavesEffect [matMenuTriggerFor]="belowMenu">{{ t('header.Manager') }}</a>
                <mat-menu #belowMenu="matMenu" yPosition="below">
-                   <a class="nav-link a" routerLink="managerinventoryinfo">
+                   <a class="nav-link a" routerLink="manageshopsinfo">
                   {{ t('header.Manage-Shops-Information') }}
                   </a>
                   <a class="nav-link a" routerLink="managerdashboard">
@@ -56,6 +59,9 @@
                   </a>
                 </mat-menu>
                </li>
+              </div>
+
+              <div *ngIf="role == 'sales'">
               <li class="nav-item">
               <a class="nav-link waves-light" mdbWavesEffect [matMenuTriggerFor]="beforeMenu">{{ t('header.Sales') }}</a>
               <mat-menu #beforeMenu="matMenu" xPosition="before">
@@ -70,18 +76,8 @@
                 </a>
               </mat-menu>
               </li>
+              </div>
 
-              <li class="nav-item">
-              <a class="nav-link waves-light" mdbWavesEffect [matMenuTriggerFor]="afterMenu">{{ t('header.After') }}</a>
-              <mat-menu #afterMenu="matMenu" xPosition="after">
-              <a class="nav-link a" routerLink="newdeliveryfromwarehouse">
-                Place Holder
-              </a>
-              <a class="nav-link a" routerLink="newdeliveryfromwarehouse">
-                Place Holder
-              </a>
-              </mat-menu>
-             </li>
 
 
             </ul>
@@ -95,9 +91,7 @@
           </links>
         </div>
           </div>
-<!--      </div>-->
-<!--    </div>-->
-<!--  </div>-->
+
 
         <!-- Collapsible content -->
 

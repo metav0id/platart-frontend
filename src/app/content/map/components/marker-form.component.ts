@@ -46,7 +46,7 @@ export class MarkerFormComponent implements OnInit {
 
 //When the component is started it gives a list with all markers back.
   ngOnInit(): void {
-    this.mapService.readAllMarkers().subscribe(response => this.allMarkers = response);
+    this.mapService.readAllMarkersNoCoords().subscribe(response => this.allMarkers = response);
   }
 
 
