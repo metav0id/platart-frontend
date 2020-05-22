@@ -4,7 +4,7 @@ import {NewDeliveryFromWarehouseComponent} from './new-delivery-from-warehouse/n
 import {CheckoutSoldItemsComponent} from './checkout-sold-items/checkout-sold-items.component';
 import {AuthGuard} from '../guards/auth.guard';
 import {ViewShopInventoryComponent} from './view-shop-inventory/view-shop-inventory.component';
-import {ShopGuard} from "../guards/shop.guard";
+import {ShopGuard} from '../guards/shop.guard';
 
 const routes: Routes = [
   {path: 'newdeliveryfromwarehouse', component: NewDeliveryFromWarehouseComponent, canActivate: [AuthGuard, ShopGuard]},
