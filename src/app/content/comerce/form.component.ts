@@ -30,6 +30,7 @@ export class FormComponent implements OnInit {
 
   //This method will close the dialog window.
   onNoClick(): void {
+
     this.dialogRef.close();
   }
 

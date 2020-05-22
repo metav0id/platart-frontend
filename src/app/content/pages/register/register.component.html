@@ -1,0 +1,56 @@
+
+<div class="limiter animated fadeInRight">
+  <div class="container-login100">
+      <div class="wrap-login100 p-t-50 p-b-90">
+          <form [formGroup]="registerForm" (ngSubmit)="onSubmit()"
+            class="login100-form validate-form flex-sb flex-w">
+
+            <span class="login100-form-title p-b-51">
+                Register new user
+            </span>
+
+            <span *ngIf="registerForm.controls['email'].errors && (registerForm.controls['email'].dirty || registerForm.controls['email'].touched)"
+                  class="text-danger animated fadeIn">Please insert a valid e-mail address</span>
+            <div class="wrap-input100 m-b-16">
+              <input class="input100" type="email" name="email" required placeholder="Email" formControlName="email">
+              <span class="focus-input100"></span>
+            </div>
+
+            <span *ngIf="registerForm.controls['name'].errors && (registerForm.controls['name'].dirty || registerForm.controls['name'].touched)"
+                  class="text-danger animated fadeIn">Please fill in user name</span>
+            <div class="wrap-input100 m-b-16">
+              <input class="input100" type="text" name="name" required placeholder="User Name" formControlName="name">
+              <span class="focus-input100"></span>
+            </div>
+
+            <span *ngIf="registerForm.controls['password'].errors && (registerForm.controls['password'].dirty || registerForm.controls['password'].touched)"
+                  class="text-danger animated fadeIn">Please fill in password</span>
+            <div class="wrap-input100 m-b-16">
+              <input class="input100" type="password" name="password" required placeholder="Password" formControlName="password">
+              <span class="focus-input100"></span>
+            </div>
+
+            <span *ngIf="registerForm.controls['role'].errors && (registerForm.controls['role'].dirty || registerForm.controls['role'].touched)"
+                  class="text-danger animated fadeIn">Please select role</span>
+            <div class="wrap-input100 m-b-16">
+                <select class="input100" name="role" formControlName="role">
+                  <option *ngFor="let entry of listRoles" [value]="entry">{{ entry }}</option>
+                </select>
+            </div>
+
+            <div class="container-login100-form-btn m-t-17">
+              <button class="login100-form-btn" type="submit">
+                  Create User
+              </button>
+            </div>
+
+            <div class="container-login100-form-btn m-t-17">
+              <a routerLink="/login"><button class="login100-form-btn">
+                Abort
+              </button></a>
+            </div>
+          </form>
+      </div>
+  </div>
+</div>
+

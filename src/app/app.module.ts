@@ -18,7 +18,6 @@ import {MatSidenavModule} from '@angular/material/sidenav';
 import {MatIconModule} from '@angular/material/icon';
 import {MatListModule} from '@angular/material/list';
 import {MatMenuModule} from '@angular/material/menu';
-import {FooterComponent} from './content/footer/footer.component';
 import {NewItemCategoryComponent} from './content/warehouse-queen/new-item-category/new-item-category.component';
 import {MatSelectModule} from '@angular/material/select';
 import {MatInputModule} from '@angular/material/input';
@@ -37,37 +36,36 @@ import {ComerceComponent} from './content/comerce/comerce.component';
 import {FormComponent} from './content/comerce/form.component';
 import { MarkerFormComponent } from './content/map/components/marker-form.component';
 import { MDBBootstrapModule } from 'angular-bootstrap-md';
-import {UserComponent} from './content/pages/models/user.component';
-import {RegistroComponent} from './content/pages/registro/registro.component';
+import {RegisterComponent} from './content/pages/register/register.component';
 import {LoginComponent} from './content/pages/login/login.component';
 
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {NgxChartsModule} from '@swimlane/ngx-charts';
 import {FlexLayoutModule} from '@angular/flex-layout';
+
+
+// 1. Import the libs you need
 import { AngularFireModule } from '@angular/fire';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { AngularFireStorageModule } from '@angular/fire/storage';
 import { AngularFireAuthModule } from '@angular/fire/auth';
-import { environment } from 'src/environments/environment';
-
-
-;
-
+import firebase
+  from "firebase";
+import {environment} from "../environments/environment";
 
 @NgModule({
   declarations: [
     AppComponent,
     PageNotFoundComponent,
     HeaderComponent,
-    FooterComponent,
     NewItemCategoryComponent,
     MapComponent,
     ComerceComponent,
     FormComponent,
     MarkerFormComponent,
-    UserComponent,
-    RegistroComponent,
-    LoginComponent
+    RegisterComponent,
+    LoginComponent,
+
   ],
   imports: [
     BrowserModule,
@@ -99,7 +97,11 @@ import { environment } from 'src/environments/environment';
     MDBBootstrapModule.forRoot(),
     NgxChartsModule,
     FlexLayoutModule,
-    MatButtonModule
+    MatButtonModule,
+    AngularFireModule.initializeApp(environment.firebaseConfig),
+    AngularFirestoreModule, // firestore
+    AngularFireAuthModule, // auth
+    AngularFireStorageModule // storage
 
   ],
   providers: [],

@@ -18,6 +18,8 @@ export class MapService {
   private urlEndPoint4: string ="http://localhost:8081/marker/find";
   private urlEndPoint2: string ="http://localhost:8081/marker/update";
   private urlEndPoint5: string ="http://localhost:8081/marker/delete";*/
+  // private urlEndPoint6: string = "http://localhost:8081/marker/getallmarkersNoCoords";
+
 
   //this adds the header needed in case the method calls for one
   private httpHeader = new HttpHeaders({'Content-Type': 'application/json'});
@@ -31,6 +33,10 @@ export class MapService {
   public readAllMarkers(): Observable<Marcador[]> {
     // this returns the list provided from the backend link.
     return this.httpClient.get<Marcador[]>(environment.getAllMarkers);
+  }
+  public readAllMarkersNoCoords(): Observable<Marcador[]> {
+    // this returns the list provided from the backend link.
+    return this.httpClient.get<Marcador[]>(environment.getAllMarkersNoCoords);
   }
 
 // This methods allows you to create a new marker and save it in the data base. It gives it back and prints its coords.

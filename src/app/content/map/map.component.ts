@@ -45,9 +45,10 @@ export class MapComponent implements OnInit {
   ngOnInit(): void {
     this.mapService.readAllMarkers().subscribe(response => this.marcadores = response);
 
+
   }
 
-  constructor(private mapService: MapService, public dialog: MatDialog, private activatedRoute: ActivatedRoute, private router: Router) {
+  constructor( private mapService: MapService, public dialog: MatDialog, private activatedRoute: ActivatedRoute, private router: Router) {
   }
 
   //This method is the guide to follow when wanting to open a dialog window
