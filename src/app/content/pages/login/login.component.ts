@@ -47,10 +47,10 @@ export class LoginComponent implements OnInit {
     Swal.showLoading();
     this.auth.signIn(this.user.email, this.user.password).subscribe(resp => {
       Swal.close();
-      this.router.navigateByUrl('home');
+      this.router.navigate(['home']);
     }, (error => Swal.fire({
       icon: 'error',
-      title: 'login data is not valid',
+      title: 'Login Error',
       text: 'Login data are not correct, please try again.'
     }))
     );

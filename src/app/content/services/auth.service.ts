@@ -11,7 +11,6 @@ import {Observable} from 'rxjs';
 })
 
 export class AuthService {
-  userData: any;
 
   constructor(public afs: AngularFirestore,
               public afAuth: AngularFireAuth,
@@ -20,29 +19,22 @@ export class AuthService {
 
   signIn(email, password) {
     return new Observable(observer => {
-      this.afAuth.signInWithEmailAndPassword(email, password).then(resp => {
-        this.afAuth.authState.subscribe(user => {
-          if (user) {
-            this.userData = user;
-            this.getUserData(this.userData.uid).subscribe(obj => {
-              if (obj) {
-                localStorage.setItem('user', JSON.stringify(this.userData));
-                localStorage.setItem('role', obj.role);
-                observer.next();
-              }
-            });
-          } else {
-            console.log('I am deleting local user');
-            localStorage.setItem('user', null);
-            JSON.parse(localStorage.getItem('user'));
-          }
+      this.afAuth.signInWithEmailAndPassword(email, password).then(user => {
+        this.getUserData(user.user.uid).subscribe(firestoreObj => {
+          localStorage.setItem('user', JSON.stringify(user.user));
+          localStorage.setItem('role', firestoreObj.role);
+          observer.next();
         });
+      }).catch( error => {
+        localStorage.setItem('user', null);
+        observer.error();
       });
     });
   }
 
   signOut() {
     return this.afAuth.signOut().then(() => {
+      console.log('Calling from signOut-> authstate');
       localStorage.removeItem('user');
       localStorage.removeItem('role');
     });
