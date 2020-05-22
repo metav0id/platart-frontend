@@ -1,0 +1,42 @@
+<div class="space"></div>
+
+<!-- BOX-2: Shop-Selection -->
+<div class="container-fluid d-flex justify-content-center">
+  <div class="demo-card-wide mdl-card mdl-shadow--2dp justi ">
+    <div class="container d-flex justify-content-left mdl-card__title ">
+      <h2 class="mdl-card__title-text">Inventory of Warehouse {{selectedShopToDisplay}}</h2>
+      <button mat-mini-fab (click)="getAllItems()">
+        <mat-icon>autorenew</mat-icon>
+      </button>
+    </div>
+
+    <mat-form-field>
+      <mat-label>Filter</mat-label>
+      <input matInput (keyup)="applyFilter($event)" placeholder="Ex. cadena">
+    </mat-form-field>
+
+    <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8">
+
+      <!-- Symbol Column -->
+      <ng-container matColumnDef="category">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Category. </th>
+        <td mat-cell *matCellDef="let element"> {{element.category}} </td>
+      </ng-container>
+
+      <!-- Symbol Column -->
+      <ng-container matColumnDef="quantity">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Quantity. </th>
+        <td mat-cell *matCellDef="let element"> {{element.quantity}} </td>
+      </ng-container>
+
+      <!-- Symbol Column -->
+      <ng-container matColumnDef="priceListPerUnit">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> List-Price. </th>
+        <td mat-cell *matCellDef="let element"> {{element.priceListPerUnit}} </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+  </div>
+</div>

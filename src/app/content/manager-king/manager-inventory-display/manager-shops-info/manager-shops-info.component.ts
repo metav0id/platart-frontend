@@ -9,7 +9,7 @@ import {MatTableModule, MatTableDataSource, MatTable} from '@angular/material/ta
 import {MatSort} from '@angular/material/sort';
 
 @Component({
-  selector: 'app-manage-shops-info',
+  selector: 'app-manager-shops-info',
   templateUrl: './manager-shops-info.component.html',
   styleUrls: ['./manager-shops-info.component.css'],
   providers: [{provide: TRANSLOCO_SCOPE, useValue: { scope: 'managerKing/manageShopsInfo', alias: 'translate' }}]
