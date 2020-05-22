@@ -3,8 +3,8 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {AuthService} from '../../services/auth.service';
 import Swal from 'sweetalert2';
 import {Router} from '@angular/router';
-import {UserFirebase} from '../user-firebase';
 import {TRANSLOCO_SCOPE, TranslocoService} from '@ngneat/transloco';
+import {UserFirebase} from '../../services/user-firebase';
 
 @Component({
   selector: 'app-registro',
