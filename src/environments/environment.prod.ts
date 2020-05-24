@@ -1,12 +1,23 @@
 export const environment = {
   production: true,
+  firebaseConfig : {
+    apiKey: 'AIzaSyAYu4hMLTk28gkQPNcNEH3nYC6EqC3ZBZM',
+    authDomain: 'platart-warehouse-user-mngt.firebaseapp.com',
+    databaseURL: 'https://platart-warehouse-user-mngt.firebaseio.com',
+    projectId: 'platart-warehouse-user-mngt',
+    storageBucket: 'platart-warehouse-user-mngt.appspot.com',
+    messagingSenderId: '144533891918',
+    appId: '1:144533891918:web:494591651874627f7bcc1f'
+  },
   saveCommerce: 'http://161.35.4.253:8081/comerce/savecomerce',
   getAllMarkers: 'http://161.35.4.253:8081/marker/getallmarkers',
+  getAllMarkersNoCoords: 'http://161.35.4.253:8081/marker/getallmarkersNoCoords',
   saveMarker: 'http://161.35.4.253:8081/marker/savemarker',
   findCommerce: 'http://161.35.4.253:8081/comerce/find',
   findMarker: 'http://161.35.4.253:8081/marker/find',
   updateMarker: 'http://161.35.4.253:8081/marker/update',
   deleteMarker: 'http://161.35.4.253:8081/marker/delete',
+  deleteCoords: 'http://161.35.4.253:8081/marker/deleteCoords',
   getAllShops: 'http://161.35.4.253:8081/comerce/getallshops',
   getAllCategories: 'http://161.35.4.253:8081/warehouse/getAllCategories',
   getAllNewOrderItems: 'http://161.35.4.253:8081/warehouse/getAllNewOrderItems',
