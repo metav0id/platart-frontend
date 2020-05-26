@@ -44,4 +44,5 @@ export const environment = {
   getShopInventoryAvailability: 'http://161.35.4.253:8081/shops/getShopInventoryAvailability',
   getShopInventoryItems: 'http://161.35.4.253:8081/shops/getShopInventoryItems',
   getAllItemsAllShops: 'http://161.35.4.253:8081/shops/getAllItemsAllShops',
+  getSoldItemsList: 'http://161.35.4.253:8081/warehouse/getSoldItemsListByDateRange',
 };

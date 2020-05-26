@@ -30,6 +30,7 @@ import {MatButtonModule} from "@angular/material/button";
 import {TranslocoRootModule} from '../../transloco-root.module';
 import {MatDatepickerModule} from "@angular/material/datepicker";
 import {MatNativeDateModule} from "@angular/material/core";
+import { ManagerSalesDescriptionComponent } from './manager-sales-description/manager-sales-description.component';
 
 @NgModule({
   declarations: [
@@ -43,6 +44,7 @@ import {MatNativeDateModule} from "@angular/material/core";
     ManagerShopsInfoComponent,
     ManagerWarehouseInfoComponent,
     RegisterComponent,
+    ManagerSalesDescriptionComponent,
   ],
   imports: [
     CommonModule,
@@ -64,6 +66,8 @@ import {MatNativeDateModule} from "@angular/material/core";
     MatSortModule,
     MatRadioModule,
     FormsModule,
+    MatButtonModule,
+    MatDatepickerModule,
   ]
 })
 export class ManagerKingModule { }
