@@ -12,7 +12,7 @@ import {MatDatepickerInputEvent} from '@angular/material/datepicker';
 })
 export class ManagerSalesDescriptionComponent implements OnInit {
 
-  displayedColumns: string[] = ['category', 'shop', 'priceListPerUnit', 'itemLastSold'];
+  displayedColumns: string[] = ['shop', 'category', 'revenuePerUnit', 'priceListPerUnit', 'priceSalesPerUnit', 'itemLastSold'];
   dataSource = new MatTableDataSource();
 
   @ViewChild(MatSort, {static: true}) sort: MatSort;

@@ -32,27 +32,39 @@
 
     <table [dataSource]="dataSource" class="mat-elevation-z8" mat-table matSort>
 
-      <!-- Name Column -->
-      <ng-container matColumnDef="category">
-        <th *matHeaderCellDef mat-header-cell mat-sort-header> Name</th>
-        <td *matCellDef="let element" mat-cell> {{element.category}} </td>
-      </ng-container>
-
       <!-- Weight Column -->
       <ng-container matColumnDef="shop">
-        <th *matHeaderCellDef mat-header-cell mat-sort-header> Weight</th>
+        <th *matHeaderCellDef mat-header-cell mat-sort-header>shop</th>
         <td *matCellDef="let element" mat-cell> {{element.shop}} </td>
+      </ng-container>
+
+      <!-- Name Column -->
+      <ng-container matColumnDef="category">
+        <th *matHeaderCellDef mat-header-cell mat-sort-header>Category</th>
+        <td *matCellDef="let element" mat-cell> {{element.category}} </td>
       </ng-container>
 
       <!-- Symbol Column -->
       <ng-container matColumnDef="priceListPerUnit">
-        <th *matHeaderCellDef mat-header-cell mat-sort-header> Symbol</th>
+        <th *matHeaderCellDef mat-header-cell mat-sort-header>List Price</th>
         <td *matCellDef="let element" mat-cell> {{element.priceListPerUnit}} </td>
       </ng-container>
 
       <!-- Symbol Column -->
+      <ng-container matColumnDef="priceSalesPerUnit">
+        <th *matHeaderCellDef mat-header-cell mat-sort-header>Sales Price</th>
+        <td *matCellDef="let element" mat-cell> {{element.priceSalesPerUnit}} </td>
+      </ng-container>
+
+      <!-- Symbol Column -->
+      <ng-container matColumnDef="revenuePerUnit">
+        <th *matHeaderCellDef mat-header-cell mat-sort-header>Revenue</th>
+        <td *matCellDef="let element" mat-cell> {{element.revenuePerUnit}} </td>
+      </ng-container>
+
+      <!-- Symbol Column -->
       <ng-container matColumnDef="itemLastSold">
-        <th *matHeaderCellDef mat-header-cell mat-sort-header> Symbol</th>
+        <th *matHeaderCellDef mat-header-cell mat-sort-header>Date Sold</th>
         <td *matCellDef="let element" mat-cell> {{element.itemLastSold}} </td>
       </ng-container>
 

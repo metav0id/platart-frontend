@@ -17,20 +17,21 @@ import {MatFormFieldControl, MatFormFieldModule} from '@angular/material/form-fi
 import {MatSelectModule} from '@angular/material/select';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {MatTableModule} from '@angular/material/table';
-import {MatInputModule} from "@angular/material/input";
-import {MatSort, MatSortModule} from "@angular/material/sort";
+import {MatInputModule} from '@angular/material/input';
+import {MatSort, MatSortModule} from '@angular/material/sort';
 import {MatRadioModule} from '@angular/material/radio';
 import { ManagerInventoryDisplayComponent } from './manager-inventory-display/manager-inventory-display.component';
 import { ManagerWarehouseInfoComponent } from './manager-inventory-display/manager-warehouse-info/manager-warehouse-info.component';
 import {RegisterComponent} from './register/register.component';
 
 
-import {MatDialogModule} from "@angular/material/dialog";
-import {MatButtonModule} from "@angular/material/button";
+import {MatDialogModule} from '@angular/material/dialog';
+import {MatButtonModule} from '@angular/material/button';
 import {TranslocoRootModule} from '../../transloco-root.module';
-import {MatDatepickerModule} from "@angular/material/datepicker";
-import {MatNativeDateModule} from "@angular/material/core";
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import {MatNativeDateModule} from '@angular/material/core';
 import { ManagerSalesDescriptionComponent } from './manager-sales-description/manager-sales-description.component';
+import { ManagerWarehouseCheckinDescriptionComponent } from './manager-warehouse-checkin-description/manager-warehouse-checkin-description.component';
 
 @NgModule({
   declarations: [
@@ -45,6 +46,7 @@ import { ManagerSalesDescriptionComponent } from './manager-sales-description/ma
     ManagerWarehouseInfoComponent,
     RegisterComponent,
     ManagerSalesDescriptionComponent,
+    ManagerWarehouseCheckinDescriptionComponent,
   ],
   imports: [
     CommonModule,
