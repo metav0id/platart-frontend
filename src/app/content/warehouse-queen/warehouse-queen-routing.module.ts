@@ -4,7 +4,7 @@ import {StockInWarehouseComponent} from './stock-in-warehouse/stock-in-warehouse
 import {NewDeliveryToShopComponent} from './new-delivery-to-shop/new-delivery-to-shop.component';
 import {NewDeliveryToWarehouseComponent} from './new-delivery-to-warehouse/new-delivery-to-warehouse.component';
 import {NewItemCategoryComponent} from './new-item-category/new-item-category.component';
-import {FormComponent} from '../comerce/form.component';
+import {FormComponent} from '../manager-king/manager-map/comerce/form.component';
 import {AuthGuard} from '../guards/auth.guard';
 import {WarehouseGuard} from '../guards/warehouse.guard';
 

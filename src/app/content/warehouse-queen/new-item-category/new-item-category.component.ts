@@ -3,6 +3,8 @@ import {SelectionModel} from '@angular/cdk/collections';
 import {MatTable} from '@angular/material/table';
 import {NewitemcategoryService} from './new-item-category.service';
 import {TRANSLOCO_SCOPE} from '@ngneat/transloco';
+import {TooltipPosition} from "@angular/material/tooltip";
+import {FormControl} from "@angular/forms";
 
 
 /** Is used for table elements */
@@ -18,6 +20,10 @@ export interface PeriodicElement {
   providers: [{provide: TRANSLOCO_SCOPE, useValue: { scope: 'warehouseQueen', alias: 'translate' }}]
 })
 export class NewItemCategoryComponent implements OnInit {
+  /** tooltip features**/
+  positionOptions: TooltipPosition[] = ['after', 'before', 'above', 'below', 'left', 'right'];
+  position = new FormControl(this.positionOptions[0]);
+
   displayedColumns: string[] = ['select', 'category'];
   public listCategories: PeriodicElement[] = [];
   selection = new SelectionModel<PeriodicElement>(true, []);

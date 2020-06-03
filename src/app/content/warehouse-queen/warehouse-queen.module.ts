@@ -17,6 +17,7 @@ import {MatIconModule} from "@angular/material/icon";
 import {MatRadioModule} from "@angular/material/radio";
 import {MatButtonModule} from '@angular/material/button';
 import {TranslocoRootModule} from '../../transloco-root.module';
+import {MatTooltipModule} from "@angular/material/tooltip";
 
 
 @NgModule({
@@ -26,21 +27,22 @@ import {TranslocoRootModule} from '../../transloco-root.module';
     NewDeliveryToWarehouseComponent
   ],
     imports: [
-      CommonModule,
-      WarehouseQueenRoutingModule,
-      CdkTableModule,
-      MatTableModule,
-      BrowserAnimationsModule,
-      FormsModule,
-      MatCheckboxModule,
-      MatFormFieldModule,
-      ReactiveFormsModule,
-      MatSelectModule,
-      MatInputModule,
-      MatIconModule,
-      MatRadioModule,
-      MatButtonModule,
-      TranslocoRootModule
+        CommonModule,
+        WarehouseQueenRoutingModule,
+        CdkTableModule,
+        MatTableModule,
+        BrowserAnimationsModule,
+        FormsModule,
+        MatCheckboxModule,
+        MatFormFieldModule,
+        ReactiveFormsModule,
+        MatSelectModule,
+        MatInputModule,
+        MatIconModule,
+        MatRadioModule,
+        MatButtonModule,
+        TranslocoRootModule,
+        MatTooltipModule
     ]
 })
 export class WarehouseQueenModule { }

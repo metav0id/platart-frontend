@@ -15,7 +15,8 @@
       <mat-datepicker-toggle [for]="picker2" matSuffix></mat-datepicker-toggle>
       <mat-datepicker #picker2 touchUi></mat-datepicker>
     </mat-form-field>
-    <button mat-mini-fab (click)="getSoldItemsList()">
+    <button matTooltip="Refresh list of sold items"
+            [matTooltipPosition]="position.value" mat-mini-fab (click)="getSoldItemsList()">
       <mat-icon>autorenew</mat-icon>
     </button>
   </div>

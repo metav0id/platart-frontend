@@ -4,6 +4,7 @@ import {MatTableDataSource} from '@angular/material/table';
 import {ManagerSalesDescriptionService} from './manager-sales-description.service';
 import {MatSort} from '@angular/material/sort';
 import {MatDatepickerInputEvent} from '@angular/material/datepicker';
+import {TooltipPosition} from "@angular/material/tooltip";
 
 @Component({
   selector: 'app-manager-sales-description',
@@ -11,6 +12,9 @@ import {MatDatepickerInputEvent} from '@angular/material/datepicker';
   styleUrls: ['./manager-sales-description.component.css']
 })
 export class ManagerSalesDescriptionComponent implements OnInit {
+  /** tooltip features**/
+  positionOptions: TooltipPosition[] = ['after', 'before', 'above', 'below', 'left', 'right'];
+  position = new FormControl(this.positionOptions[0]);
 
   displayedColumns: string[] = ['shop', 'category', 'revenuePerUnit', 'priceListPerUnit', 'priceSalesPerUnit', 'itemLastSold'];
   dataSource = new MatTableDataSource();

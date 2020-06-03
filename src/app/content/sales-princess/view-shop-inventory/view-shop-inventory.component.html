@@ -25,7 +25,8 @@
                 </mat-select>
               </mat-form-field>
 
-              <button mat-mini-fab (click)="getDeliveryItemList(selectedShopToFilterOnList)">
+              <button matTooltip="Get list of delivery items"
+                      [matTooltipPosition]="position.value"  mat-mini-fab (click)="getDeliveryItemList(selectedShopToFilterOnList)">
                 <mat-icon>autorenew</mat-icon>
               </button>
             </div>

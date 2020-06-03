@@ -31,14 +31,16 @@
                       </div>
 
                       <div class="verifyCategoryExistant">
-                        <button  mat-raised-button (click)="verifyCategoryExistant()">{{ t('translate.checkAvailability') }}</button>
+                        <button matTooltip="Checks if the category already exists"
+                                [matTooltipPosition]="position.value" mat-raised-button (click)="verifyCategoryExistant()">{{ t('translate.checkAvailability') }}</button>
                         <br>
                         <a>{{availableItems}}</a>
                         <br>
                       </div>
 
                       <div>
-                        <button  mat-raised-button  (click)="createNewCategory()">{{ t('translate.createNewCategory') }}</button>
+                        <button matTooltip="Adds new category to the list"
+                                [matTooltipPosition]="position.value"  mat-raised-button  (click)="createNewCategory()">{{ t('translate.createNewCategory') }}</button>
                         <!--                <button mat-button (click)="deleteSelectedCategory()">delete selected</button>-->
                       </div>
                     </div>
@@ -77,8 +79,8 @@
               <div class="space"></div>
               <div class="d-flex justify-content-around" >
                 <div class="d-flex justify-content-around">
-                  <button  mat-raised-button  (click)="deleteSelectedCategory()">deactivate selected categories</button>
-                  <button  mat-raised-button  (click)="deleteSelectedCategory()">{{ t('translate.deleteSelected') }}</button>
+                  <button matTooltip="Deletes selected categories from the list"
+                          [matTooltipPosition]="position.value"  mat-raised-button  (click)="deleteSelectedCategory()">{{ t('translate.deleteSelected') }}</button>
                 </div>
                 <div class="space"></div>
               </div>

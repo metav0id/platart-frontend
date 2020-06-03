@@ -6,6 +6,7 @@ import {PeriodicElement} from './periodic-element';
 import {NewDeliveryToWarehouseService} from './new-delivery-to-warehouse.service';
 import {WarehouseItemCategoryDTO} from '../warehouseCategory/warehouse-item-category-DTO';
 import {TRANSLOCO_SCOPE} from '@ngneat/transloco';
+import {TooltipPosition} from "@angular/material/tooltip";
 
 @Component({
   selector: 'app-new-delivery-to-warehouse',
@@ -15,6 +16,10 @@ import {TRANSLOCO_SCOPE} from '@ngneat/transloco';
 })
 
 export class NewDeliveryToWarehouseComponent implements OnInit {
+  /** tooltip features**/
+  positionOptions: TooltipPosition[] = ['after', 'before', 'above', 'below', 'left', 'right'];
+  position = new FormControl(this.positionOptions[0]);
+
   public displayedColumns: string[] = ['select', 'category', 'priceListPerUnit', 'quantity', 'priceSupplierPerUnit', 'supplierName'];
   public listNewItemsFromSuppliers: PeriodicElement[] = [];
   public newItemFromSupplier: PeriodicElement = {

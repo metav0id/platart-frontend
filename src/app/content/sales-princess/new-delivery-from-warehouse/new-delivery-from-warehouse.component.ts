@@ -13,6 +13,7 @@ import {NewDeliveryFromWarehouseDetailsComponent} from './new-delivery-from-ware
 import {NewDeliveryFromWarehouseService} from './new-delivery-from-warehouse.service';
 import {Shop} from '../../commonDTOs/shop';
 import {AddDeliveryItemComponent} from "./add-delivery-item/add-delivery-item.component";
+import {TooltipPosition} from "@angular/material/tooltip";
 
 @Component({
   selector: 'app-new-delivery-from-warehouse',
@@ -25,6 +26,10 @@ import {AddDeliveryItemComponent} from "./add-delivery-item/add-delivery-item.co
 })
 
 export class NewDeliveryFromWarehouseComponent implements OnInit {
+  /** tooltip features**/
+  positionOptions: TooltipPosition[] = ['after', 'before', 'above', 'below', 'left', 'right'];
+  position = new FormControl(this.positionOptions[0]);
+
   public displayedColumns: string[] = ['select', 'category', 'salesPrice', 'quantity', 'action'];
   public listNewItemsFromWarehouse: DeliveryItemFromWarehouseDTO[] = [];
   public selection = new SelectionModel<DeliveryItemFromWarehouseDTO>(true, []);

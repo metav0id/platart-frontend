@@ -70,7 +70,8 @@
               </div>
 
               <div class="availabilityAmount space">
-                <button (click)="verifyAvailability(newCheckoutSoldItem)"
+                <button matTooltip="Check if the item is available in stock"
+                        [matTooltipPosition]="position.value" (click)="verifyAvailability(newCheckoutSoldItem)"
                         mat-raised-button>{{ t('translate.checkAvailability') }}</button>
                 <a>{{availableItems}} items</a>
               </div>
@@ -142,7 +143,8 @@
               </div>
               <div class="space"></div>
               <div>
-                <button (click)="addSoldItem()" mat-raised-button>
+                <button matTooltip="Add sell to the list"
+                        [matTooltipPosition]="position.value" (click)="addSoldItem()" mat-raised-button>
                   <mat-icon>library_add</mat-icon>
                 </button>
               </div>
@@ -217,13 +219,16 @@
                 <div class="mdl-card__supporting-text">
                   <div class=" table-responsive ">
                     <div class="container cont-bg4">
-                      <button (click)="saveSoldItemList()" mat-raised-button matTooltip="save sold items list">
+                      <button matTooltip="Save list locally"
+                              [matTooltipPosition]="position.value" (click)="saveSoldItemList()" mat-raised-button >
                         <mat-icon>save</mat-icon>
                       </button>
-                      <button (click)="sendSoldItemList()" mat-raised-button matTooltip="send sold items list">
+                      <button matTooltip="Save list"
+                              [matTooltipPosition]="position.value" (click)="sendSoldItemList()" mat-raised-button >
                         <mat-icon>send</mat-icon>
                       </button>
-                      <button (click)="deleteSoldItemList()" mat-raised-button matTooltip="save sold items list">
+                      <button matTooltip="Delete element from the list"
+                              [matTooltipPosition]="position.value" (click)="deleteSoldItemList()" mat-raised-button >
                         <mat-icon>delete</mat-icon>
                       </button>
                     </div>

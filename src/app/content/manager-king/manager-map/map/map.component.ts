@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {Marcador} from "./components/marker.class";
+import {Marcador} from "../components/marker.class";
 
 import {MapService} from "./map.service";
 import {MatDialog} from "@angular/material/dialog";
@@ -8,7 +8,7 @@ import {
   FormControl,
   Validators
 } from "@angular/forms";
-import {MarkerFormComponent} from "./components/marker-form.component";
+import {MarkerFormComponent} from "../components/marker-form.component";
 import {Router, ActivatedRoute} from "@angular/router";
 
 import {TRANSLOCO_SCOPE} from "@ngneat/transloco";
@@ -17,6 +17,9 @@ export interface DialogData {
   markerToGetCoords: Marcador;
 }
 import {TooltipPosition} from '@angular/material/tooltip';
+import {mark} from "@angular/compiler-cli/src/ngtsc/perf/src/clock";
+import {Comerce} from "../comerce/comerce";
+import {ComerceFormComponent} from "../comerce-form/comerce-form.component";
 
 @Component({
   selector: 'app-map',
@@ -35,19 +38,17 @@ export class MapComponent implements OnInit {
   marcadores: Marcador[] = new Array();
 
   marker: Marcador;
+  comerce: Comerce;
   markerToEdit: Marcador;
-  markerToGetCoords: Marcador;
   markersToEdit: Marcador[] = new Array();
-  //use this variable when the connetion with BE is completed
-  allMarkers: Marcador[];
+  latE: string ;
+  lngE: string ;
+
   public markerControl = new FormControl('', Validators.required);
 
 /**When the component is started it gives a list with all markers back.**/
   ngOnInit(): void {
     this.mapService.readAllMarkers().subscribe(response => this.marcadores = response);
-
-
-
   }
 
   constructor( private mapService: MapService, public dialog: MatDialog, private activatedRoute: ActivatedRoute, private router: Router) {
@@ -56,8 +57,8 @@ export class MapComponent implements OnInit {
   /**This method is the guide to follow when wanting to open a dialog window**/
   openDialog(): void {
     const dialogRef = this.dialog.open(FormComponent, {
-      width: '400px'
-      // data: {name: this.name, animal: this.animal}
+      width: '400px',
+      // data: {marker: this.marker2}
     });
 
     dialogRef.afterClosed().subscribe(result => {
@@ -68,13 +69,21 @@ export class MapComponent implements OnInit {
 
 
 /**This method finds a client when an id is provided**/
-  cargarCliente(): void{
-    this.activatedRoute.params.subscribe(params=>{
-      let id = params['id']
-      if(id){
-        this.mapService.getMarker(id).subscribe( (marcador) => this.marker = marcador)
-      }
-    })
+//this is the marker than i need
+  loadMarkerToModify(marcador: Marcador): void{
+    console.log(marcador)
+    this.latE = marcador.lat;
+    this.lngE = marcador.lng
+    const dialogRef = this.dialog.open(ComerceFormComponent, {
+      width: '400px',
+      data: {lat: this.latE, lng: this.lngE}
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+      // this.animal = result;
+    });
+
   }
 
 
@@ -87,7 +96,7 @@ export class MapComponent implements OnInit {
     //Creates marker with coords
     const coords: { lat: string, lng: string } = evento.coords;
     // const nuevoMarcador = new Marcador(coords.lat, coords.lng);
-    const nuevoMarcador = {lat: coords.lat, lng: coords.lng, name: '', address:"", link:'',category:'',id: null}
+    const nuevoMarcador = {lat: coords.lat, lng: coords.lng, name: null, address:"", link:'',category:'',id: null}
     this.marcadores.push(nuevoMarcador);
     console.log(nuevoMarcador.lat,nuevoMarcador.lng);
 
@@ -108,21 +117,20 @@ export class MapComponent implements OnInit {
       //send array to backend
       this.mapService.update(this.markersToEdit)
     });
-
-
-    // this.mapService.create(nuevoMarcador).subscribe(response => this.marker = response);
-
     return this.marker = nuevoMarcador;
-
   }
+
 
 
 /**This methods deletes the marker from the map and the data base.**/
   borrarComercio(i: number, marker: Marcador){
+  console.log(marker.name);
     console.log(i);
     this.mapService.delete(marker);
     this.marcadores.splice(i,1);
   }
+
+  /**This methods deletes the marker from the map only.**/
   borrarMarcador(i: number, marker: Marcador){
     console.log(i);
     this.mapService.deleteMarker(marker);
