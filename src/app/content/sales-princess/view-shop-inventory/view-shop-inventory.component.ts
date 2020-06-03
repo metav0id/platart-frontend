@@ -6,6 +6,7 @@ import {observable} from 'rxjs';
 import {FormControl, Validators} from '@angular/forms';
 import {Shop} from '../../commonDTOs/shop';
 import {TRANSLOCO_SCOPE, TranslocoService} from '@ngneat/transloco';
+import {TooltipPosition} from "@angular/material/tooltip";
 
 @Component({
   selector: 'app-view-shop-inventory',
@@ -14,6 +15,9 @@ import {TRANSLOCO_SCOPE, TranslocoService} from '@ngneat/transloco';
   providers: [{provide: TRANSLOCO_SCOPE, useValue: { scope: 'salesPrincess', alias: 'translate' }}]
 })
 export class ViewShopInventoryComponent implements OnInit {
+  /** tooltip features**/
+  positionOptions: TooltipPosition[] = ['after', 'before', 'above', 'below', 'left', 'right'];
+  position = new FormControl(this.positionOptions[0]);
 
   // table information
   displayedColumns: string[] = ['category', 'quantity', 'priceListPerUnit', 'priceSalesPerUnit' ];

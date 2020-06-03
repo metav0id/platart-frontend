@@ -13,6 +13,7 @@ import {WarehouseNewDeliveryPersistanceResponseDTO} from './new-delivery-to-shop
 import {MatSnackBar} from '@angular/material/snack-bar';
 import {TRANSLOCO_SCOPE} from '@ngneat/transloco';
 import {Shop} from './new-delivery-to-shop-DTOs/Shop';
+import {TooltipPosition} from "@angular/material/tooltip";
 
 /** Is used for table elements */
 export interface PeriodicElement {
@@ -32,6 +33,10 @@ export interface PeriodicElement {
   providers: [{provide: TRANSLOCO_SCOPE, useValue: { scope: 'warehouseQueen', alias: 'translate' }}]
 })
 export class NewDeliveryToShopComponent implements OnInit {
+  /** tooltip features**/
+  positionOptions: TooltipPosition[] = ['after', 'before', 'above', 'below', 'left', 'right'];
+  position = new FormControl(this.positionOptions[0]);
+
   displayedColumns: string[] = ['select', 'category', 'priceListPerUnit', 'quantity',
     'discountPercent', 'priceSalesPerUnit', 'updateItem'];
   public listNewItemsToShops: PeriodicElement[] = [];

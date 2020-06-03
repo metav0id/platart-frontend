@@ -8,8 +8,8 @@ import {
   MAT_DIALOG_DATA,
   MatDialogRef
 } from "@angular/material/dialog";
-import {FormComponent} from "../../comerce/form.component";
-import {MapService} from "../map.service";
+import {FormComponent} from "../comerce/form.component";
+import {MapService} from "../map/map.service";
 import {Marcador} from "./marker.class";
 import {
   FormControl,
@@ -18,12 +18,13 @@ import {
 import {
   DialogData,
   MapComponent
-} from "../map.component";
+} from "../map/map.component";
 import {
   ActivatedRoute,
+  NavigationEnd,
   Router
 } from "@angular/router";
-import {Comerce} from "../../comerce/comerce";
+import {Comerce} from "../comerce/comerce";
 import {from} from "rxjs";
 
 
@@ -54,4 +55,5 @@ export class MarkerFormComponent implements OnInit {
   onNoClick(): void {
     this.dialogRef.close();
   }
+
 }

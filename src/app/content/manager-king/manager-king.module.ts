@@ -32,6 +32,9 @@ import {MatDatepickerModule} from "@angular/material/datepicker";
 import {MatNativeDateModule} from "@angular/material/core";
 import { ManagerSalesDescriptionComponent } from './manager-sales-description/manager-sales-description.component';
 
+import { ComerceFormComponent } from './manager-map/comerce-form/comerce-form.component';
+import {MatTooltipModule} from "@angular/material/tooltip";
+
 @NgModule({
   declarations: [
     ManagerShopsInfoComponent,
@@ -45,6 +48,7 @@ import { ManagerSalesDescriptionComponent } from './manager-sales-description/ma
     ManagerWarehouseInfoComponent,
     RegisterComponent,
     ManagerSalesDescriptionComponent,
+    ComerceFormComponent,
   ],
   imports: [
     CommonModule,
@@ -68,6 +72,8 @@ import { ManagerSalesDescriptionComponent } from './manager-sales-description/ma
     FormsModule,
     MatButtonModule,
     MatDatepickerModule,
+    MatDialogModule,
+    MatTooltipModule,
   ]
 })
 export class ManagerKingModule { }

@@ -24,6 +24,7 @@ import {TranslocoRootModule} from '../../transloco-root.module';
 import { CheckoutSoldItemsSendVerificationComponent } from './checkout-sold-items/checkout-sold-items-send-verification/checkout-sold-items-send-verification.component';
 import { ViewShopInventoryComponent } from './view-shop-inventory/view-shop-inventory.component';
 import { AddDeliveryItemComponent } from './new-delivery-from-warehouse/add-delivery-item/add-delivery-item.component';
+import {MatTooltipModule} from "@angular/material/tooltip";
 
 
 @NgModule({
@@ -37,28 +38,29 @@ import { AddDeliveryItemComponent } from './new-delivery-from-warehouse/add-deli
     CheckoutSoldItemsSendVerificationComponent,
     AddDeliveryItemComponent
   ],
-  imports: [
-    CommonModule,
-    SalesPrincessRoutingModule,
-    CdkTableModule,
-    MatTableModule,
-    BrowserAnimationsModule,
-    FormsModule,
-    MatCheckboxModule,
-    MatFormFieldModule,
-    ReactiveFormsModule,
-    MatSelectModule,
-    MatInputModule,
-    MatIconModule,
-    MatRadioModule,
-    MatDialogModule,
-    MatButtonModule,
-    TranslocoRootModule,
-    MatButtonModule,
-    MatDatepickerModule,
-    MatNativeDateModule,
-    MatCardModule
-  ],
+    imports: [
+        CommonModule,
+        SalesPrincessRoutingModule,
+        CdkTableModule,
+        MatTableModule,
+        BrowserAnimationsModule,
+        FormsModule,
+        MatCheckboxModule,
+        MatFormFieldModule,
+        ReactiveFormsModule,
+        MatSelectModule,
+        MatInputModule,
+        MatIconModule,
+        MatRadioModule,
+        MatDialogModule,
+        MatButtonModule,
+        TranslocoRootModule,
+        MatButtonModule,
+        MatDatepickerModule,
+        MatNativeDateModule,
+        MatCardModule,
+        MatTooltipModule
+    ],
   entryComponents: [
     NewDeliveryFromWarehouseComponent,
     CheckoutSoldItemsComponent

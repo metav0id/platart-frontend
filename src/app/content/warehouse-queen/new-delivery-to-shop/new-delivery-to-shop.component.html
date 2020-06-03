@@ -41,7 +41,8 @@
           </div>
 
           <div class="availabilityAmount space">
-            <button mat-raised-button  (click)="verifyAvailability()">{{ t('translate.checkAvailability') }}</button>
+            <button matTooltip="Check how many items are available in stock"
+                    [matTooltipPosition]="position.value" mat-raised-button  (click)="verifyAvailability()">{{ t('translate.checkAvailability') }}</button>
             <a>{{availableItems}} {{ t('translate.items') }}</a>
           </div>
           <div class="space"></div>
@@ -83,7 +84,8 @@
             </mat-form-field>
           </div>
           <div>
-            <button mat-raised-button  (click)="setNewItemOrder()">{{ t('translate.addNewOrderItem') }}</button>
+            <button matTooltip="Add the order to the table"
+                    [matTooltipPosition]="position.value" mat-raised-button  (click)="setNewItemOrder()">{{ t('translate.addNewOrderItem') }}</button>
           </div>
         </div>
         <div class="space"></div>
@@ -113,9 +115,12 @@
         <div class="container cont-bg4  justify-content-center ">
           <div class="space"></div>
           <div class="d-flex justify-content-around" >
-            <button  mat-raised-button (click)="saveCurrentOrder()">{{ t('translate.saveCurrentOrder') }}</button>
-            <button  mat-raised-button  (click)="clearCurrentOrder()">{{ t('translate.clearCurrentOrder') }}</button>
-            <button  mat-raised-button  (click)="sendCurrentOrder()">{{ t('translate.sendOrder') }}</button>
+            <button matTooltip="Save the order locally"
+                    [matTooltipPosition]="position.value" mat-raised-button (click)="saveCurrentOrder()">{{ t('translate.saveCurrentOrder') }}</button>
+            <button matTooltip="Deletes the table"
+                    [matTooltipPosition]="position.value" mat-raised-button  (click)="clearCurrentOrder()">{{ t('translate.clearCurrentOrder') }}</button>
+            <button  matTooltip="Send the current order to the shop"
+                     [matTooltipPosition]="position.value" mat-raised-button  (click)="sendCurrentOrder()">{{ t('translate.sendOrder') }}</button>
           </div >
           <div class="space"></div>
         </div>

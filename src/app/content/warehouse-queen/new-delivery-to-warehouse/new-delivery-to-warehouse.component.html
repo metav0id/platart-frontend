@@ -60,7 +60,8 @@
 
           </div>
           <div>
-            <button  mat-raised-button (click)="addNewItemToList()">{{ t('translate.addNewProductInventory') }}</button>
+            <button  matTooltip="Adds new items to the table"
+                     [matTooltipPosition]="position.value" mat-raised-button (click)="addNewItemToList()">{{ t('translate.addNewProductInventory') }}</button>
           </div>
           <div class="space"></div>
         </div>
@@ -92,8 +93,10 @@
             <div class="container cont-bg4">
               <div class="space"></div>
                 <div class="d-flex justify-content-around">
-                  <button  mat-raised-button  (click)="deleteItem()">{{ t('translate.deleteSelected') }}</button>
-                  <button  mat-raised-button  (click)="saveList()">{{ t('translate.saveList') }}</button>
+                  <button matTooltip="Deletes the selected item"
+                          [matTooltipPosition]="position.value" mat-raised-button  (click)="deleteItem()">{{ t('translate.deleteSelected') }}</button>
+                  <button matTooltip="Saves the list"
+                          [matTooltipPosition]="position.value" mat-raised-button  (click)="saveList()">{{ t('translate.saveList') }}</button>
                 </div>
                 <div class="space"></div>
                </div>

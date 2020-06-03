@@ -1,10 +1,13 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 
-import {Observable} from "rxjs";
-import {Marcador} from "./components/marker.class";
+import {
+  Observable,
+  Subject
+} from "rxjs";
+import {Marcador} from "../components/marker.class";
 import {Comerce} from "../comerce/comerce";
-import {environment} from "../../../environments/environment";
+import {environment} from "../../../../../environments/environment";
 
 @Injectable({
   providedIn: 'root'
@@ -27,6 +30,7 @@ export class MapService {
   // contructor must have an HTTPclient
   constructor(private httpClient: HttpClient) {
   }
+
 
 
   // this method is called readAllMarkers and gets an observable type back that becomes an array of offers.
@@ -57,8 +61,8 @@ export class MapService {
   }
 
 //This method finds a marker from the data base and gives it back through an observable that becomes a Marker.
-  getMarker(marker: Marcador): Observable<Marcador> {
-    return this.httpClient.post<Marcador>(environment.findMarker, marker, {headers: this.httpHeader});
+  getComerce(comerce: Comerce): Observable<Marcador> {
+    return this.httpClient.post<Marcador>(environment.findCommerce,comerce, {headers: this.httpHeader});
 
   }
 
@@ -69,11 +73,14 @@ export class MapService {
     this.httpClient.post<null>(environment.updateMarker, marcador).subscribe();
 
   }
+  edit(marcador: Marcador): void {
+    console.log(marcador);
+    // return this.httpClient.post<Marcador>(`$ {this.urlEndPoint2}\${id}`,marcador,{headers: this.httpHeader})
+    this.httpClient.post<null>(environment.editMarker, marcador).subscribe();
 
-  getComerce(comerce: Comerce): Observable<Comerce> {
-
-    return this.httpClient.post<Comerce>(environment.findCommerce, comerce, {headers: this.httpHeader});
   }
+
+
 
 
 }

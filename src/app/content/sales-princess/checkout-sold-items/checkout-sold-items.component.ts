@@ -15,6 +15,7 @@ import {CheckoutSoldItemsSendVerificationComponent} from './checkout-sold-items-
 import {observable} from 'rxjs';
 import {SendItemsDTO} from './checkout-sold-items-DTOs/Send-Items-DTO';
 import {TRANSLOCO_SCOPE, TranslocoService} from '@ngneat/transloco';
+import {TooltipPosition} from "@angular/material/tooltip";
 
 @Component({
   selector: 'app-checkout-sold-items',
@@ -23,6 +24,10 @@ import {TRANSLOCO_SCOPE, TranslocoService} from '@ngneat/transloco';
   providers: [{provide: TRANSLOCO_SCOPE, useValue: { scope: 'salesPrincess', alias: 'translate' }}]
 })
 export class CheckoutSoldItemsComponent implements OnInit {
+  /** tooltip features**/
+  positionOptions: TooltipPosition[] = ['after', 'before', 'above', 'below', 'left', 'right'];
+  position = new FormControl(this.positionOptions[0]);
+
   constructor(/*private _snackBar: MatSnackBar,*/
               private checkoutSoldItemsService: CheckoutSoldItemsService,
               private transloco: TranslocoService,
