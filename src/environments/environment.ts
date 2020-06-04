@@ -49,7 +49,8 @@ export const environment = {
   getShopInventoryAvailability: 'http://localhost:8081/shops/getShopInventoryAvailability',
   getShopInventoryItems: 'http://localhost:8081/shops/getShopInventoryItems',
   getAllItemsAllShops: 'http://localhost:8081/shops/getAllItemsAllShops',
-  getSoldItemsList: 'http://localhost:8081/warehouse/getSoldItemsListByDateRange',
+  getSoldItemsList: 'http://localhost:8081/manager/getSoldItemsListByDateRange',
+  getCheckinItemsList: 'http://localhost:8081/manager/getCheckinItemsListByDateRange',
 };
 
 /*
