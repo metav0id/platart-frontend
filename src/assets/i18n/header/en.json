@@ -9,6 +9,8 @@
   "Manage-Shops-Information" : "Manage Shops Information",
   "Sales" : "Sales",
   "After" : "After",
-  "Dashboard" : "Nifty Manager Dashboard"
-
+  "Dashboard" : "Nifty Manager Dashboard",
+  "Checkout-Sold-Items" : "Checkout Sold Items",
+  "Checkin-new-Delivery-to-Shop" : "Checkin new Delivery to Shop",
+  "Shop-Inventory" : "Shop Inventory"
 }

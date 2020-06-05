@@ -1,13 +1,16 @@
 {
   "administration" : "administración",
-  "warehouse" : "almacén",
-  "Stock-in-warehouse" : "Stock en almacén",
-  "New-delivery-to-shop" : "Entrega en comercio",
-  "New-delivery-to-warehouse" : "entrega en almacén",
-  "Add-new-category-to-warehouse" : "Anadir categoría nueva al almacén",
-  "Manager" : "Manager (es)",
+  "warehouse" : "Bodega",
+  "Stock-in-warehouse" : "Stock en bodega",
+  "New-delivery-to-shop" : "Entrega a sucursal",
+  "New-delivery-to-warehouse" : "Llegada a bodega",
+  "Add-new-category-to-warehouse" : "Anadir categoría nueva",
+  "Manager" : "Manager",
   "Manage-Shops-Information" : "Manage información de comercios",
-  "Sales" : "Sales (es)",
-  "After" : "After (es)",
-  "Dashboard" : "Nifty Manager Dashboard (es)"
+  "Sales" : "Ventas",
+  "After" : "Después",
+  "Dashboard" : "Tablero indicadores rendimiento",
+  "Checkout-Sold-Items" : "Egreso items vendidos",
+  "Checkin-new-Delivery-to-Shop" : "Revisión N/E-nueva",
+  "Shop-Inventory" : "Inventario sucursal"
 }

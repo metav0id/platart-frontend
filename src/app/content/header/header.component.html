@@ -64,13 +64,13 @@
                    [matMenuTriggerFor]="beforeMenu">{{ t('header.Sales') }}</a>
                 <mat-menu #beforeMenu="matMenu" xPosition="before">
                   <a class="nav-link a" routerLink="checkoutsolditems">
-                    Checkout sold items
+                    {{ t('header.Checkout-Sold-Items') }}
                   </a>
                   <a class="nav-link a" routerLink="newdeliveryfromwarehouse">
-                    Checkin new Delivery to Shop
+                    {{ t('header.Checkin-new-Delivery-to-Shop') }}
                   </a>
                   <a class="nav-link a" routerLink="viewshopinventory">
-                    Shop Inventory
+                    {{ t('header.Shop-Inventory') }}
                   </a>
                 </mat-menu>
               </li>
