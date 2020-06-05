@@ -1,0 +1,16 @@
+
+.demo-card-wide.mdl-card {
+  width: 500em;
+  margin: 1em;
+}
+.demo-card-wide > .mdl-card__title {
+  color: #000000;
+  height: 5em;
+}
+.demo-card-wide > .mdl-card__menu {
+  color: #000000;
+}
+
+.mat-form-field + .mat-form-field {
+  margin-left: 8px;
+}
