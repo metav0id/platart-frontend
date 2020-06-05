@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {MatExpansionModule} from '@angular/material/expansion';
 
 @Component({
   selector: 'app-page-not-found',
@@ -6,6 +7,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./page-not-found.component.css']
 })
 export class PageNotFoundComponent implements OnInit {
+  role: String = "Warehouse manager";
+  panelOpenState = false;
 
   constructor() { }
 
