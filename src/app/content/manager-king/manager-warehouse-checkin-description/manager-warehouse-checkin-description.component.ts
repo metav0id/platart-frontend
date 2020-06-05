@@ -1,29 +1,29 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
-import {FormControl, Validators} from '@angular/forms';
-import {MatTableDataSource} from '@angular/material/table';
-import {ManagerSalesDescriptionService} from './manager-sales-description.service';
-import {MatSort} from '@angular/material/sort';
-import {MatDatepickerInputEvent} from '@angular/material/datepicker';
 import {TooltipPosition} from '@angular/material/tooltip';
+import {FormControl} from '@angular/forms';
+import {MatTableDataSource} from '@angular/material/table';
+import {MatSort} from '@angular/material/sort';
+import {ManagerWarehouseCheckinDescriptionService} from './manager-warehouse-checkin-description.service';
+import {MatDatepickerInputEvent} from '@angular/material/datepicker';
 
 @Component({
-  selector: 'app-manager-sales-description',
-  templateUrl: './manager-sales-description.component.html',
-  styleUrls: ['./manager-sales-description.component.css']
+  selector: 'app-manager-warehouse-checkin-description',
+  templateUrl: './manager-warehouse-checkin-description.component.html',
+  styleUrls: ['./manager-warehouse-checkin-description.component.css']
 })
-export class ManagerSalesDescriptionComponent implements OnInit {
+export class ManagerWarehouseCheckinDescriptionComponent implements OnInit {
 
   positionOptions: TooltipPosition[] = ['after', 'before', 'above', 'below', 'left', 'right'];
   position = new FormControl(this.positionOptions[0]);
 
-  displayedColumns: string[] = ['shop', 'category', 'revenuePerUnit', 'priceListPerUnit', 'priceSalesPerUnit', 'itemLastSold'];
+  displayedColumns: string[] = ['category', 'quantity', 'priceListPerUnit', 'priceSupplierPerUnit', 'supplierName', 'createDateTime'];
   dataSource = new MatTableDataSource();
 
   @ViewChild(MatSort, {static: true}) sort: MatSort;
-  constructor(private managerSalesDescriptionService: ManagerSalesDescriptionService) { }
+  constructor(private managerWarehouseCheckinDescriptionService: ManagerWarehouseCheckinDescriptionService) { }
 
-  startDate: string = '';
-  endDate: string = '';
+  startDate = '';
+  endDate = '';
   // Date input
   eventsTime: string[] = [];
 
@@ -53,12 +53,12 @@ export class ManagerSalesDescriptionComponent implements OnInit {
 
   getSoldItemsList(): void {
     if ( this.startDate != '' && this.endDate != '') {
-      this.managerSalesDescriptionService.getSoldItemsList(this.startDate, this.endDate )
+      this.managerWarehouseCheckinDescriptionService.getSoldItemsList(this.startDate, this.endDate )
         .subscribe((observable) => {
           console.log(observable);
           this.dataSource = new MatTableDataSource(observable);
           this.dataSource.sort = this.sort;
-      });
+        });
     } else {
       console.log('Please select date range');
     }

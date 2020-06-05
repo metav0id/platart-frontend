@@ -2,7 +2,7 @@
 
 <div class="container-fluid d-flex justify-content-center">
   <div class="demo-card-wide mdl-card mdl-shadow--2dp justi ">
-    <h2>Sales by Start and End Range</h2>
+    <h2>Warehouse Checkin Items by Start and End Range</h2>
     <mat-form-field>
       <mat-label>Start Date</mat-label>
       <input (dateInput)="startDateSelection($event)" [matDatepicker]="picker1" matInput>
@@ -33,16 +33,16 @@
 
     <table [dataSource]="dataSource" class="mat-elevation-z8" mat-table matSort>
 
-      <!-- Weight Column -->
-      <ng-container matColumnDef="shop">
-        <th *matHeaderCellDef mat-header-cell mat-sort-header>shop</th>
-        <td *matCellDef="let element" mat-cell> {{element.shop}} </td>
-      </ng-container>
-
       <!-- Name Column -->
       <ng-container matColumnDef="category">
         <th *matHeaderCellDef mat-header-cell mat-sort-header>Category</th>
         <td *matCellDef="let element" mat-cell> {{element.category}} </td>
+      </ng-container>
+
+      <!-- Symbol Column -->
+      <ng-container matColumnDef="quantity">
+        <th *matHeaderCellDef mat-header-cell mat-sort-header>Quantity</th>
+        <td *matCellDef="let element" mat-cell> {{element.quantity}} </td>
       </ng-container>
 
       <!-- Symbol Column -->
@@ -52,21 +52,21 @@
       </ng-container>
 
       <!-- Symbol Column -->
-      <ng-container matColumnDef="priceSalesPerUnit">
-        <th *matHeaderCellDef mat-header-cell mat-sort-header>Sales Price</th>
-        <td *matCellDef="let element" mat-cell> {{element.priceSalesPerUnit}} </td>
+      <ng-container matColumnDef="priceSupplierPerUnit">
+        <th *matHeaderCellDef mat-header-cell mat-sort-header>Suppliert Price</th>
+        <td *matCellDef="let element" mat-cell> {{element.priceSupplierPerUnit}} </td>
       </ng-container>
 
       <!-- Symbol Column -->
-      <ng-container matColumnDef="revenuePerUnit">
-        <th *matHeaderCellDef mat-header-cell mat-sort-header>Revenue</th>
-        <td *matCellDef="let element" mat-cell> {{element.revenuePerUnit}} </td>
+      <ng-container matColumnDef="supplierName">
+        <th *matHeaderCellDef mat-header-cell mat-sort-header>Supplier Name</th>
+        <td *matCellDef="let element" mat-cell> {{element.supplierName}} </td>
       </ng-container>
 
       <!-- Symbol Column -->
-      <ng-container matColumnDef="itemLastSold">
-        <th *matHeaderCellDef mat-header-cell mat-sort-header>Date Sold</th>
-        <td *matCellDef="let element" mat-cell> {{element.itemLastSold}} </td>
+      <ng-container matColumnDef="createDateTime">
+        <th *matHeaderCellDef mat-header-cell mat-sort-header>Date Checkin</th>
+        <td *matCellDef="let element" mat-cell> {{element.createDateTime}} </td>
       </ng-container>
 
       <tr *matHeaderRowDef="displayedColumns" mat-header-row></tr>
