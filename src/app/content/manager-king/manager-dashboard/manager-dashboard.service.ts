@@ -83,6 +83,7 @@ export class ManagerDashboardService {
 
   getColors(itemCount: number) {
     const colours = ['#8B0000', '#B22222', '#CD5C5C', '#F08080', '#FA8072', '#FFA07A', '#E9967A'];
+    // tslint:disable-next-line:prefer-const
     let colourset: string[];
     for (let i = 0; i < itemCount; i++) {
       colourset[i] = colours[i];
