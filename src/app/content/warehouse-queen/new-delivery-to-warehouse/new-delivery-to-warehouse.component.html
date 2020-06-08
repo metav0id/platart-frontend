@@ -26,8 +26,8 @@
           <div class="deliveryToWarehouseQuantity">
             <mat-form-field hintLabel="Max 10 characters" appearance="fill">
               <mat-label>{{ t('translate.enterQuantity') }}</mat-label>
-              <input matInput #input [(ngModel)]="newItemFromSupplier.quantity" maxlength="10" placeholder="Quantity">
-              <mat-hint align="end">{{input.value?.length || 0}}/10</mat-hint>
+              <input matInput #input [(ngModel)]="newItemFromSupplier.quantity" maxlength="4" placeholder="Quantity">
+              <mat-hint align="end">{{input.value?.length || 0}}/4</mat-hint>
             </mat-form-field>
           </div>
 
@@ -35,8 +35,8 @@
           <div class="deliveryToWarehouseQuantity">
             <mat-form-field hintLabel="Max 10 characters" appearance="fill">
               <mat-label>{{ t('translate.enterPurchasingPrice') }}</mat-label>
-              <input matInput #input [(ngModel)]="newItemFromSupplier.priceSupplierPerUnit" maxlength="10" placeholder="Quantity">
-              <mat-hint align="end">{{input.value?.length || 0}}/10</mat-hint>
+              <input matInput #input [(ngModel)]="newItemFromSupplier.priceSupplierPerUnit" maxlength="6" placeholder="Quantity">
+              <mat-hint align="end">{{input.value?.length || 0}}/6</mat-hint>
             </mat-form-field>
           </div>
 
@@ -44,16 +44,16 @@
           <div class="deliveryToWarehousePricePerUnit">
             <mat-form-field hintLabel="Max 10 characters" appearance="fill">
               <mat-label>{{ t('translate.enterListPrice') }}</mat-label>
-              <input matInput #input [(ngModel)]="newItemFromSupplier.priceListPerUnit" maxlength="30" placeholder="PricePerUnit">
-              <mat-hint align="end">{{input.value?.length || 0}}/30</mat-hint>
+              <input matInput #input [(ngModel)]="newItemFromSupplier.priceListPerUnit" maxlength="6" placeholder="PricePerUnit">
+              <mat-hint align="end">{{input.value?.length || 0}}/6</mat-hint>
             </mat-form-field>
           </div>
           <!--Input Supplier Name-->
           <div class="deliveryToWarehousePricePerUnit">
             <mat-form-field hintLabel="Max 10 characters" appearance="fill">
               <mat-label>{{ t('translate.enterSupplierName') }}</mat-label>
-              <input matInput #input [(ngModel)]="newItemFromSupplier.supplierName" maxlength="10" placeholder="SupplierName">
-              <mat-hint align="end">{{input.value?.length || 0}}/10</mat-hint>
+              <input matInput #input [(ngModel)]="newItemFromSupplier.supplierName" maxlength="40" placeholder="SupplierName">
+              <mat-hint align="end">{{input.value?.length || 0}}/40</mat-hint>
             </mat-form-field>
           </div>
           <div class="space">
