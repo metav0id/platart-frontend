@@ -18,31 +18,38 @@ import {MatRadioModule} from "@angular/material/radio";
 import {MatButtonModule} from '@angular/material/button';
 import {TranslocoRootModule} from '../../transloco-root.module';
 import {MatTooltipModule} from "@angular/material/tooltip";
+import { LandingPageWarehouseComponent } from './landing-page-warehouse/landing-page-warehouse.component';
+import {MatExpansionModule} from "@angular/material/expansion";
+import {MatCardModule} from "@angular/material/card";
+
 
 
 @NgModule({
   declarations: [
     StockInWarehouseComponent,
     NewDeliveryToShopComponent,
-    NewDeliveryToWarehouseComponent
+    NewDeliveryToWarehouseComponent,
+    LandingPageWarehouseComponent
   ],
-    imports: [
-        CommonModule,
-        WarehouseQueenRoutingModule,
-        CdkTableModule,
-        MatTableModule,
-        BrowserAnimationsModule,
-        FormsModule,
-        MatCheckboxModule,
-        MatFormFieldModule,
-        ReactiveFormsModule,
-        MatSelectModule,
-        MatInputModule,
-        MatIconModule,
-        MatRadioModule,
-        MatButtonModule,
-        TranslocoRootModule,
-        MatTooltipModule
-    ]
+  imports: [
+    CommonModule,
+    WarehouseQueenRoutingModule,
+    CdkTableModule,
+    MatTableModule,
+    BrowserAnimationsModule,
+    FormsModule,
+    MatCheckboxModule,
+    MatFormFieldModule,
+    ReactiveFormsModule,
+    MatSelectModule,
+    MatInputModule,
+    MatIconModule,
+    MatRadioModule,
+    MatButtonModule,
+    TranslocoRootModule,
+    MatTooltipModule,
+    MatExpansionModule,
+    MatCardModule
+  ]
 })
 export class WarehouseQueenModule { }

@@ -7,13 +7,15 @@ import {NewItemCategoryComponent} from './new-item-category/new-item-category.co
 import {FormComponent} from '../manager-king/manager-map/comerce/form.component';
 import {AuthGuard} from '../guards/auth.guard';
 import {WarehouseGuard} from '../guards/warehouse.guard';
+import {LandingPageWarehouseComponent} from "./landing-page-warehouse/landing-page-warehouse.component";
 
 const routes: Routes = [
   {path: 'stockinwarehouse', component: StockInWarehouseComponent, canActivate: [AuthGuard, WarehouseGuard]},
   {path: 'newdeliverytoshop', component: NewDeliveryToShopComponent, canActivate: [AuthGuard, WarehouseGuard]},
   {path: 'newdeliverytowarehouse', component: NewDeliveryToWarehouseComponent, canActivate: [AuthGuard, WarehouseGuard]},
   {path: 'newitemcategory', component: NewItemCategoryComponent, canActivate: [AuthGuard, WarehouseGuard]},
-  {path: 'comerce', component: FormComponent, canActivate: [AuthGuard] }
+  {path: 'comerce', component: FormComponent, canActivate: [AuthGuard] },
+  { path: 'landingPage'   , component: LandingPageWarehouseComponent, canActivate: [AuthGuard]},
 ];
 
 @NgModule({
