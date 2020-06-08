@@ -15,7 +15,7 @@ import {CheckoutSoldItemsSendVerificationComponent} from './checkout-sold-items-
 import {observable} from 'rxjs';
 import {SendItemsDTO} from './checkout-sold-items-DTOs/Send-Items-DTO';
 import {TRANSLOCO_SCOPE, TranslocoService} from '@ngneat/transloco';
-import {TooltipPosition} from "@angular/material/tooltip";
+import {TooltipPosition} from '@angular/material/tooltip';
 
 @Component({
   selector: 'app-checkout-sold-items',
@@ -36,15 +36,14 @@ export class CheckoutSoldItemsComponent implements OnInit {
   // Fields for input-form
   public discountControll = new FormControl('', Validators.required);
 
-  private readonly DISCOUNT_METHOD_PERCENT = 'percent';
-  private readonly DISCOUNT_METHOD_REVENUE = 'revenue per item';
-  private readonly DISCOUNT_METHOD_NO_DISCOUNT = 'no discount';
+  public readonly DISCOUNT_METHOD_REVENUE = 'special price';
+  public readonly DISCOUNT_METHOD_NO_DISCOUNT = 'no extra discount';
   public discountType: string = this.DISCOUNT_METHOD_NO_DISCOUNT;
   public discountList: Shop[] = [
-    {name: this.DISCOUNT_METHOD_PERCENT},
     {name: this.DISCOUNT_METHOD_REVENUE},
     {name: this.DISCOUNT_METHOD_NO_DISCOUNT},
   ];
+  public discountNessesary: string = this.DISCOUNT_METHOD_NO_DISCOUNT;
 
 
   private readonly COMMENT_YES_NECESSARY = 'Comment';
@@ -135,10 +134,7 @@ export class CheckoutSoldItemsComponent implements OnInit {
 
       let revenueCalculation = 0;
       let discountPercentCalculation = 0;
-      if (this.discountType === this.DISCOUNT_METHOD_PERCENT ) {
-        discountPercentCalculation = this.newCheckoutSoldItem.discountPercent;
-        revenueCalculation = this.newCheckoutSoldItem.priceListPerUnit * (100 - this.newCheckoutSoldItem.discountPercent) / 100;
-      } else if ( this.discountType === this.DISCOUNT_METHOD_REVENUE ) {
+      if ( this.discountType === this.DISCOUNT_METHOD_REVENUE ) {
         revenueCalculation = this.newCheckoutSoldItem.revenuePerUnit;
         discountPercentCalculation = 100 - (this.newCheckoutSoldItem.revenuePerUnit * 100 / this.newCheckoutSoldItem.priceListPerUnit);
       } else if ( this.discountType === this.DISCOUNT_METHOD_NO_DISCOUNT) {

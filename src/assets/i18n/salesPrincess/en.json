@@ -24,9 +24,11 @@
   "salesNumber": "Number of sales",
   "salesPrice": "Sales Price",
   "salesPricePerUnit": "Sales PPU",
+  "salesType": "Sales type",
   "save": "Save",
   "selectShop": "Select a shop",
   "send": "Send",
   "shop": "Shop",
-  "shopStock": "Shop-Stock in"
+  "shopStock": "Shop-Stock in",
+  "DISCOUNT_METHOD_REVENUE": "special price"
 }

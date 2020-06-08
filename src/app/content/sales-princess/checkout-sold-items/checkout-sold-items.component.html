@@ -88,36 +88,50 @@
                 </mat-error>
               </div>
 
-              <div class=" container ">
+           <!--   <div class=" container ">
                 <div class="discountSelectionRadioButton">
                   <mat-form-field appearance="fill">
                     <mat-label>{{ t('translate.revenueType') }}:</mat-label>
                     <mat-select [(value)]="discountType" [formControl]="discountControll">
-                      <mat-option>--</mat-option>
+                      <mat-option>&#45;&#45;</mat-option>
                       <mat-option *ngFor="let entry of discountList" [value]="entry.name">{{ entry.name}}</mat-option>
                     </mat-select>
                   </mat-form-field>
                 </div>
 
-                <div *ngIf="discountType==='revenue per item'" class="itemCheckoutSoldItemPricePerUnit">
+                <div *ngIf="discountType  ==DISCOUNT_METHOD_REVENUE" class="itemCheckoutSoldItemPricePerUnit">
                   <mat-form-field appearance="fill" hintLabel="Max 10 characters">
                     <mat-label>{{ t('translate.revenue') }}</mat-label>
                     <input #input [(ngModel)]="newCheckoutSoldItem.revenuePerUnit" matInput maxlength="10"
                            placeholder="Ex. deliveryDisplayPricePerUnit">
                   </mat-form-field>
                 </div>
-                <div *ngIf="discountType==='percent'" class="itemCheckoutSoldItemDeliveryDiscount">
+              </div>-->
+
+              <div class=" container ">
+                <div class="discountSelectionRadioButton">
+                  <label id="example-radio-group-label">{{ t('translate.salesType') }}:</label>
+                  <div class="space"></div>
+                  <mat-radio-group
+                    [(ngModel)]="discountNessesary"
+                    aria-labelledby="example-radio-group-label"
+                    class="example-radio-group">
+                    <mat-radio-button *ngFor="let discountType of discountList" [value]="discountType.name"
+                                      class="example-radio-button">
+                      {{discountType.name}}
+                    </mat-radio-button>
+                  </mat-radio-group>
+                </div>
+                <div *ngIf="discountNessesary  ==DISCOUNT_METHOD_REVENUE" class="itemCheckoutSoldItemPricePerUnit">
                   <mat-form-field appearance="fill" hintLabel="Max 10 characters">
-                    <mat-label>{{ t('translate.percent') }}</mat-label>
-                    <input #input [(ngModel)]="newCheckoutSoldItem.discountPercent" matInput maxlength="4"
-                           placeholder="discount percent">
-                    <mat-error
-                      *ngIf="newCheckoutSoldItem.discountPercent<0 || newCheckoutSoldItem.discountPercent >= 100">
-                      {{ t('translate.invalidDiscountRate') }}
-                    </mat-error>
+                    <mat-label>{{ t('translate.revenue') }}</mat-label>
+                    <input #input [(ngModel)]="newCheckoutSoldItem.revenuePerUnit" matInput maxlength="10"
+                           placeholder="Ex. deliveryDisplayPricePerUnit">
                   </mat-form-field>
                 </div>
               </div>
+
+              <div class="space"></div>
               <div class=" container ">
                 <div class="discountSelectionRadioButton">
                   <label id="example-radio-group-label">{{ t('translate.comment') }}:</label>
