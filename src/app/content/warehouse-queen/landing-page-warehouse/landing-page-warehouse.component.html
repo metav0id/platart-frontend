@@ -1,0 +1,290 @@
+<div class="card space">
+  <div class="card-body">
+      <h1>User guide: {{role}}</h1>
+  </div>
+</div>
+
+<div class="container-fluid d-flex justify-content-center">
+  <!--  FIRST CARD-->
+  <div class="demo-card-wide mdl-card mdl-shadow--2dp">
+    <!--  TITLE-->
+    <div class="mdl-card__title">
+      <h1 class="mdl-card__title-text">Things you can do in this module:</h1>
+    </div>
+    <!--  TITLE-->
+    <div class="mdl-card__actions mdl-card--border">
+      <!--EXPANDIBLES-->
+      <mat-accordion>
+        <mat-expansion-panel>
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              <div>
+                <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" routerLink="/stockinwarehouse">
+                  - Check how much stock of each item is in warehouse
+                </a>
+              </div>
+            </mat-panel-title>
+            <mat-panel-description>
+
+            </mat-panel-description>
+          </mat-expansion-panel-header>
+<!--          CADS WITH USER GUIDE-->
+          <div class="container-fluid">
+            <mat-card class="example-card">
+              <mat-card-header>
+                <div mat-card-avatar class="example-header-image"></div>
+                <mat-card-title>Warehouse</mat-card-title>
+                <mat-card-subtitle>Stock in warehouse</mat-card-subtitle>
+              </mat-card-header>
+              <img mat-card-image src="assets/images/sw1.jpg" alt="Photo of a Shiba Inu">
+              <mat-card-content>
+                <p>
+                  -En stock in warehouse se observa una lista de todo el stock con la información correspondiente.
+                </p>
+              </mat-card-content>
+              <mat-card-actions>
+                <button mat-button>Esto me ayudo</button>
+                <button mat-button>No me ayudo</button>
+              </mat-card-actions>
+            </mat-card>
+
+            <mat-card class="example-card">
+              <mat-card-header>
+                <div mat-card-avatar class="example-header-image"></div>
+                <mat-card-title>Warehouse</mat-card-title>
+                <mat-card-subtitle>Stock in warehouse</mat-card-subtitle>
+              </mat-card-header>
+              <img mat-card-image src="assets/images/sw2.jpg" alt="Photo of a Shiba Inu">
+              <mat-card-content>
+                <p>
+                  -La información se puede filtrar utilizando el filtro sobre la tabla
+                </p>
+              </mat-card-content>
+              <mat-card-actions>
+                <button mat-button>Esto me ayudo</button>
+                <button mat-button>No me ayudo</button>
+              </mat-card-actions>
+            </mat-card>
+          </div>
+
+<!--CARDS WITH USER GUIDE-->
+        </mat-expansion-panel>
+        <mat-expansion-panel (opened)="panelOpenState = true"
+                             (closed)="panelOpenState = false">
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              <div>
+                <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect " routerLink="/newdeliverytoshop">
+                  - Register a new delivery to a shop
+                </a>
+              </div>
+            </mat-panel-title>
+            <mat-panel-description>
+              <!--            Currently I am {{panelOpenState ? 'open' : 'closed'}}-->
+            </mat-panel-description>
+          </mat-expansion-panel-header>
+          <!--          CADS WITH USER GUIDE-->
+          <div class="container-fluid">
+            <mat-card class="example-card">
+              <mat-card-header>
+                <div mat-card-avatar class="example-header-image"></div>
+                <mat-card-title>Warehouse</mat-card-title>
+                <mat-card-subtitle>New delivery to shop</mat-card-subtitle>
+              </mat-card-header>
+              <img mat-card-image src="assets/images/ndts1.jpg" alt="Photo of a Shiba Inu">
+              <mat-card-content>
+                <p>
+                  -Inserte información sobre el envío que se hará a alguna
+                  <br> -Consulte el número de objetos disponibles en stock.
+                </p>
+              </mat-card-content>
+              <mat-card-actions>
+                <button mat-button>Esto me ayudo</button>
+                <button mat-button>No me ayudo</button>
+              </mat-card-actions>
+            </mat-card>
+
+            <mat-card class="example-card">
+              <mat-card-header>
+                <div mat-card-avatar class="example-header-image"></div>
+                <mat-card-title>Warehouse</mat-card-title>
+                <mat-card-subtitle>New delivery to shop</mat-card-subtitle>
+              </mat-card-header>
+              <img mat-card-image src="assets/images/ndts2.jpg" alt="Photo of a Shiba Inu">
+              <mat-card-content>
+                <p>
+                  -Introduza información sobre un descuento, si aplicable.
+                </p>
+              </mat-card-content>
+              <mat-card-actions>
+                <button mat-button>Esto me ayudo</button>
+                <button mat-button>No me ayudo</button>
+              </mat-card-actions>
+            </mat-card>
+
+            <mat-card class="example-card">
+              <mat-card-header>
+                <div mat-card-avatar class="example-header-image"></div>
+                <mat-card-title>Warehouse</mat-card-title>
+                <mat-card-subtitle>New delivery to shop</mat-card-subtitle>
+              </mat-card-header>
+              <img mat-card-image src="assets/images/ndts3.jpg" alt="Photo of a Shiba Inu">
+              <mat-card-content>
+                <p>
+                  -Con el envío una vez en la lista, se puede guardar localmente, borrar o guardar/enviar con los botones de arriba. No olvide seleccionarlo a la izquierda.
+                </p>
+              </mat-card-content>
+              <mat-card-actions>
+                <button mat-button>Esto me ayudo</button>
+                <button mat-button>No me ayudo</button>
+              </mat-card-actions>
+            </mat-card>
+          </div>
+
+          <!--CARDS WITH USER GUIDE-->
+        </mat-expansion-panel>
+
+        <mat-expansion-panel (opened)="panelOpenState = true"
+                             (closed)="panelOpenState = false">
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              <div>
+                <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect " routerLink="/newdeliverytowarehouse">
+                  - Register an incomming delivery to warehouse
+                </a>
+              </div>
+            </mat-panel-title>
+            <mat-panel-description>
+              <!--            Currently I am {{panelOpenState ? 'open' : 'closed'}}-->
+            </mat-panel-description>
+          </mat-expansion-panel-header>
+          <!--          CADS WITH USER GUIDE-->
+          <div class="container-fluid">
+            <mat-card class="example-card">
+              <mat-card-header>
+                <div mat-card-avatar class="example-header-image"></div>
+                <mat-card-title>Warehouse</mat-card-title>
+                <mat-card-subtitle>New delivery to warehouse</mat-card-subtitle>
+              </mat-card-header>
+              <img mat-card-image src="assets/images/ndtw1.jpg" alt="Photo of a Shiba Inu">
+              <mat-card-content>
+                <p>
+                  -Llene el formulario con información sobre una nueva entrada de mercancía de un distribuidor al almacen.
+                </p>
+              </mat-card-content>
+              <mat-card-actions>
+                <button mat-button>Esto me ayudo</button>
+                <button mat-button>No me ayudo</button>
+              </mat-card-actions>
+            </mat-card>
+
+            <mat-card class="example-card">
+              <mat-card-header>
+                <div mat-card-avatar class="example-header-image"></div>
+                <mat-card-title>Warehouse</mat-card-title>
+                <mat-card-subtitle>New delivery to warehouse</mat-card-subtitle>
+              </mat-card-header>
+              <img mat-card-image src="assets/images/ndtw2.jpg" alt="Photo of a Shiba Inu">
+              <mat-card-content>
+                <p>
+                  -Con el envío una vez en la lista, se puede borrar o guardar/enviar con los botones de arriba. No olvide seleccionarlo a la izquierda.
+                </p>
+              </mat-card-content>
+              <mat-card-actions>
+                <button mat-button>Esto me ayudo</button>
+                <button mat-button>No me ayudo</button>
+              </mat-card-actions>
+            </mat-card>
+          </div>
+
+          <!--CARDS WITH USER GUIDE-->
+        </mat-expansion-panel>
+
+        <mat-expansion-panel (opened)="panelOpenState = true"
+                             (closed)="panelOpenState = false">
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              <div>
+                <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect " routerLink="/newitemcategory" >
+                  - Add a new category of an item to the warehouse stock registry
+                </a>
+              </div>
+            </mat-panel-title>
+            <mat-panel-description>
+              <!--            Currently I am {{panelOpenState ? 'open' : 'closed'}}-->
+            </mat-panel-description>
+          </mat-expansion-panel-header>
+          <!--          CADS WITH USER GUIDE-->
+          <div class="container-fluid">
+            <mat-card class="example-card">
+              <mat-card-header>
+                <div mat-card-avatar class="example-header-image"></div>
+                <mat-card-title>Warehouse</mat-card-title>
+                <mat-card-subtitle>New category</mat-card-subtitle>
+              </mat-card-header>
+              <img mat-card-image src="assets/images/nc1.jpg" alt="Photo of a Shiba Inu">
+              <mat-card-content>
+                <p>
+                  -Utilice el "checar disponibilidad" para verificar si la categoria ya existe o esta disponible.
+                  -Si la categoria esta disponible, puede agregarla a la lista con el boton de crear categoria nueva.
+                </p>
+              </mat-card-content>
+              <mat-card-actions>
+                <button mat-button>Esto me ayudo</button>
+                <button mat-button>No me ayudo</button>
+              </mat-card-actions>
+            </mat-card>
+
+            <mat-card class="example-card">
+              <mat-card-header>
+                <div mat-card-avatar class="example-header-image"></div>
+                <mat-card-title>Warehouse</mat-card-title>
+                <mat-card-subtitle>New category</mat-card-subtitle>
+              </mat-card-header>
+              <img mat-card-image src="assets/images/nc2.jpg" alt="Photo of a Shiba Inu">
+              <mat-card-content>
+                <p>
+                  -Con la categoria una vez en la lista, se puede borrar. No olvide seleccionarlo a la izquierda.
+                </p>
+              </mat-card-content>
+              <mat-card-actions>
+                <button mat-button>Esto me ayudo</button>
+                <button mat-button>No me ayudo</button>
+              </mat-card-actions>
+            </mat-card>
+          </div>
+
+          <!--CARDS WITH USER GUIDE-->
+        </mat-expansion-panel>
+      </mat-accordion>
+
+    </div>
+    <div class="mdl-card__supporting-text">
+      <h2>Tip: Select one on the list above or use the menu at the header to navigate across the webpage!</h2>
+    </div>
+
+  </div>
+</div>
+<!--END OF FIRST CARD-->
+
+
+<!--&lt;!&ndash;  SECOND CARD&ndash;&gt;-->
+<!--<div class="container-fluid d-flex justify-content-center">-->
+
+<!--  <div class="demo-card-wide mdl-card mdl-shadow&#45;&#45;2dp">-->
+<!--    <div class="mdl-card__title">-->
+<!--      <h2 class="mdl-card__title-text">Welcome</h2>-->
+<!--    </div>-->
+<!--    <div class="mdl-card__supporting-text">-->
+<!--      Lorem ipsum dolor sit amet, consectetur adipiscing elit.-->
+<!--      Mauris sagittis pellentesque lacus eleifend lacinia...-->
+<!--    </div>-->
+<!--    <div class="mdl-card__actions mdl-card&#45;&#45;border">-->
+<!--      <a class="mdl-button mdl-button&#45;&#45;colored mdl-js-button mdl-js-ripple-effect">-->
+<!--        Get Started-->
+<!--      </a>-->
+<!--    </div>-->
+
+<!--  </div>-->
+<!--  &lt;!&ndash;  END OF SECOND CARD&ndash;&gt;-->
+<!--</div>-->
