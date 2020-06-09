@@ -12,7 +12,6 @@ import {CheckoutSoldItemsDetailsComponent} from './checkout-sold-items-details/c
 import {CheckoutCategories} from './checkout-sold-items-DTOs/CheckoutCategories';
 // tslint:disable-next-line:max-line-length
 import {CheckoutSoldItemsSendVerificationComponent} from './checkout-sold-items-send-verification/checkout-sold-items-send-verification.component';
-import {observable} from 'rxjs';
 import {SendItemsDTO} from './checkout-sold-items-DTOs/Send-Items-DTO';
 import {TRANSLOCO_SCOPE, TranslocoService} from '@ngneat/transloco';
 import {TooltipPosition} from '@angular/material/tooltip';
@@ -26,7 +25,6 @@ import Swal
   providers: [{provide: TRANSLOCO_SCOPE, useValue: { scope: 'salesPrincess', alias: 'translate' }}]
 })
 export class CheckoutSoldItemsComponent implements OnInit {
-  /** tooltip features**/
   positionOptions: TooltipPosition[] = ['after', 'before', 'above', 'below', 'left', 'right'];
   position = new FormControl(this.positionOptions[0]);
 
@@ -151,6 +149,8 @@ export class CheckoutSoldItemsComponent implements OnInit {
         commentBefore = this.newCheckoutSoldItem.comment;
       }
 
+      console.log('revenueCalculation: ' + revenueCalculation);
+
       const newSoldItemForTable: ShopsCheckoutSoldItemsDTO = {
         position: this.newCheckoutSoldItem.position,
         category: this.newCheckoutSoldItem.category,
@@ -164,6 +164,7 @@ export class CheckoutSoldItemsComponent implements OnInit {
         itemLastSold: this.newCheckoutSoldItem.itemLastSold,
         comment: commentBefore,
       };
+      console.log(newSoldItemForTable);
 
       this.soldItemsToShopsList.push(newSoldItemForTable);
       this.rebuildListCategories();
@@ -207,9 +208,12 @@ export class CheckoutSoldItemsComponent implements OnInit {
 
         // check if category already exists
         for (const categoryItem of newCategoryLists) {
+          // tslint:disable-next-line:triple-equals
           if ( categoryItem.category == newCategory.category &&
-              categoryItem.priceListPerUnit == newCategory.priceListPerUnit &&
-              categoryItem.priceSalesPerUnit == newCategory.priceSalesPerUnit
+            // tslint:disable-next-line:triple-equals
+            categoryItem.priceListPerUnit == newCategory.priceListPerUnit &&
+            // tslint:disable-next-line:triple-equals
+            categoryItem.priceSalesPerUnit == newCategory.priceSalesPerUnit
           ) {
             createNewCategoryFlag = false;
           }
@@ -239,9 +243,13 @@ export class CheckoutSoldItemsComponent implements OnInit {
           itemLastSold: item.itemLastSold,
           comment: item.comment
         };
-        if ( categoryItem.category == newItem.category &&
-            categoryItem.priceListPerUnit == newItem.priceListPerUnit &&
-            categoryItem.priceSalesPerUnit == newItem.priceSalesPerUnit
+        if (
+          // tslint:disable-next-line:triple-equals
+          categoryItem.category == newItem.category &&
+          // tslint:disable-next-line:triple-equals
+          categoryItem.priceListPerUnit == newItem.priceListPerUnit &&
+          // tslint:disable-next-line:triple-equals
+          categoryItem.priceSalesPerUnit == newItem.priceSalesPerUnit
         ) {
           categoryItem.quantity += Number(newItem.quantity);
           categoryItem.items.push(newItem);

@@ -1,8 +1,8 @@
 {
-  "abort": "Abort (es)",
-  "createUser": "Create User (es)",
-  "fillInUsername": "Please enter user name (es)",
-  "fillInPassword": "Please enter password (es)",
-  "insertValidEmail": "Please enter a valid e-mail address (es)",
-  "selectRole": "Please select role (es)"
+  "abort": "Cancelar",
+  "createUser": "Crear usuario nuevo",
+  "fillInUsername": "Ingrese nombre de usuario",
+  "fillInPassword": "Ingrese contraseña",
+  "insertValidEmail": "Ingrese correo e-mail válido",
+  "selectRole": "Ingrese rol del usuario"
 }

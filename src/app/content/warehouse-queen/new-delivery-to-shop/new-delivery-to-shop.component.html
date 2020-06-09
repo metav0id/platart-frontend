@@ -35,7 +35,7 @@
           <div class="newOrderInputFieldsDeliveryFinalPricePerUnit">
             <mat-form-field hintLabel="Max 10 characters" appearance="fill">
               <mat-label>{{ t('translate.listPricePerUnit') }}</mat-label>
-              <input matInput #input [(ngModel)]="newOrderElement.priceListPerUnit" maxlength="10" placeholder="Ex. deliveryDisplayPricePerUnit">
+              <input matInput #input [(ngModel)]="newOrderElement.priceListPerUnit" maxlength="10" placeholder="List Price">
               <mat-hint align="end">{{input.value?.length || 0}}/10</mat-hint>
             </mat-form-field>
           </div>
@@ -68,7 +68,7 @@
             </mat-radio-group>
           </div>
 
-          <div *ngIf="discountMethod==='displayPrice'" class="newOrderInputFieldsDeliveryDisplayPricePerUnit">
+          <div *ngIf="discountMethod== DISCOUNT_METHOD_DISPLAY_PRICE" class="newOrderInputFieldsDeliveryDisplayPricePerUnit">
             <mat-form-field hintLabel="Max 10 characters" appearance="fill">
               <mat-label>{{ t('translate.salesPricePerUnit') }}</mat-label>
               <input matInput #input [(ngModel)]="newOrderElement.priceSalesPerUnit" maxlength="10" placeholder="Ex. deliveryDisplayPricePerUnit">
