@@ -44,7 +44,7 @@ export class NewDeliveryToShopComponent implements OnInit {
 
   public discountMethod: string;
   private readonly DISCOUNT_METHOD_PERCENT = 'percent';
-  private readonly DISCOUNT_METHOD_DISPLAY_PRICE = 'sales price';
+  readonly DISCOUNT_METHOD_DISPLAY_PRICE = 'sales price';
   public discountMethodList: string[] = [this.DISCOUNT_METHOD_PERCENT, this.DISCOUNT_METHOD_DISPLAY_PRICE];
   private readonly INITIALIZE_CATEGORY = 'chooseCategory';
   private readonly INITIALIZE_SHOP = 'chooseShop';
