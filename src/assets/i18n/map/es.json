@@ -1,6 +1,6 @@
 {
   "selectLocation": "Selección",
-  "createCommerce": "Create commerce (es)",
-  "goTo": "Go to (es)",
-  "delete": "Delete (es)"
+  "createCommerce": "Crear sucursal",
+  "goTo": "Ir a sucursal",
+  "delete": "Eliminar sucursales"
 }

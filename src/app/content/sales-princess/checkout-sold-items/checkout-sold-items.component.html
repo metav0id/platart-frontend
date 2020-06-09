@@ -88,26 +88,6 @@
                 </mat-error>
               </div>
 
-           <!--   <div class=" container ">
-                <div class="discountSelectionRadioButton">
-                  <mat-form-field appearance="fill">
-                    <mat-label>{{ t('translate.revenueType') }}:</mat-label>
-                    <mat-select [(value)]="discountType" [formControl]="discountControll">
-                      <mat-option>&#45;&#45;</mat-option>
-                      <mat-option *ngFor="let entry of discountList" [value]="entry.name">{{ entry.name}}</mat-option>
-                    </mat-select>
-                  </mat-form-field>
-                </div>
-
-                <div *ngIf="discountType  ==DISCOUNT_METHOD_REVENUE" class="itemCheckoutSoldItemPricePerUnit">
-                  <mat-form-field appearance="fill" hintLabel="Max 10 characters">
-                    <mat-label>{{ t('translate.revenue') }}</mat-label>
-                    <input #input [(ngModel)]="newCheckoutSoldItem.revenuePerUnit" matInput maxlength="10"
-                           placeholder="Ex. deliveryDisplayPricePerUnit">
-                  </mat-form-field>
-                </div>
-              </div>-->
-
               <div class=" container ">
                 <div class="discountSelectionRadioButton">
                   <label id="example-radio-group-label">{{ t('translate.salesType') }}:</label>
