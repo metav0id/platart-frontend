@@ -21,7 +21,7 @@ export class CheckedInItemsComponent implements OnInit {
   public shopsList: ShopDTO[] = [{name: 'shop1'}, {name: 'shop2'}];
 
   // displayedColumns: string[] = ['position', 'name', 'weight', 'symbol'];
-  displayedColumns: string[] = ['shop', 'category', 'revenuePerUnit', 'priceListPerUnit', 'priceSalesPerUnit', 'itemLastSold'];
+  displayedColumns: string[] = ['shop', 'category', 'priceListPerUnit', 'priceSalesPerUnit', 'itemLastSold'];
   dataSource = new MatTableDataSource();
 
   constructor(private checkedInItemsService: CheckedInItemsService) { }
