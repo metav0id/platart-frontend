@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {ShopInventoryItem} from './view-shop-inventory-DTOs/ShopInventoryItem';
 import {observable, Observable} from 'rxjs';
@@ -11,7 +11,8 @@ import {environment} from '../../../../environments/environment';
 })
 export class ViewShopInventoryService {
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {
+  }
 
   getAllItemsObs(shopInput: string): Observable<ShopInventoryItem[]> {
 

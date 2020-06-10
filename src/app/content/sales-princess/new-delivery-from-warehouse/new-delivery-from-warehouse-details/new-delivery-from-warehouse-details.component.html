@@ -1,35 +1,27 @@
-<h1 mat-dialog-title>Detail View</h1>
+<h1 mat-dialog-title>Detailed View</h1>
 <div mat-dialog-content>
   <mat-card>
+    <mat-card-subtitle>Instructions:</mat-card-subtitle>
+    <mat-card-content>{{ data.instructionComment }}</mat-card-content>
+
     <mat-card-subtitle>Category:</mat-card-subtitle>
     <mat-card-content>{{ data.category }}</mat-card-content>
-  </mat-card>
 
-  <mat-card>
     <mat-card-subtitle>List Price:</mat-card-subtitle>
     <mat-card-content>{{ data.priceListPerUnit }}</mat-card-content>
-  </mat-card>
 
-  <mat-card>
     <mat-card-subtitle>Sales Price:</mat-card-subtitle>
     <mat-card-content>{{ data.priceSalesPerUnit }}</mat-card-content>
   </mat-card>
 
-  <!--<mat-form-field appearance="fill">
-    <mat-label>Quantity</mat-label>
-    <input #inputQuantity matInput [value]="data.quantity" [(ngModel)]="data.quantity" [formControl]="quantityFormControl">
-    <mat-icon matPrefix>edit</mat-icon>
-    <mat-hint *ngIf="inputQuantity.value != data.originalQuantity" style="color: red">Original: {{ data.originalQuantity }}</mat-hint>
-    <mat-error *ngIf="quantityFormControl.hasError('required')">
-      Quantity is <strong>required</strong>
-    </mat-error>
-  </mat-form-field>-->
-
   <mat-form-field appearance="fill" [formGroup]="myForm" (ngSubmit)="onSubmit()">
     <mat-label>Quantity</mat-label>
-    <input #inputQuantity matInput [value]="data.quantity" [(ngModel)]="data.quantity" [formControl]="quantityFormControl">
+    <input #inputQuantity matInput [value]="data.quantity" [(ngModel)]="data.quantity"
+           [formControl]="quantityFormControl">
     <mat-icon matPrefix>edit</mat-icon>
-    <mat-hint *ngIf="inputQuantity.value != data.originalQuantity" style="color: red">Original: {{ data.originalQuantity }}</mat-hint>
+    <mat-hint *ngIf="inputQuantity.value != data.originalQuantity" style="color: red">Original: {{ data.originalQuantity
+      }}
+    </mat-hint>
     <mat-error *ngIf="quantityFormControl.hasError('required')">
       Quantity is <strong>required</strong>
     </mat-error>

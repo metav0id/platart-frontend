@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {Observable} from 'rxjs';
 import {environment} from '../../../../../environments/environment';
 import {HttpClient} from '@angular/common/http';
@@ -11,7 +11,8 @@ import {Shop} from './manager-shops-info-DTOs/Shop';
 })
 export class ManagerShopsInfoService {
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {
+  }
 
   public getListShops(): Observable<Shop[]> {
     return this.http.get<Shop[]>(environment.getAllShops);

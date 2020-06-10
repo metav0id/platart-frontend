@@ -1,6 +1,6 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { ManagerDashboardComponent } from './manager-dashboard.component';
+import {ManagerDashboardComponent} from './manager-dashboard.component';
 
 describe('ManagerDashboardComponent', () => {
   let component: ManagerDashboardComponent;
@@ -8,9 +8,9 @@ describe('ManagerDashboardComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ManagerDashboardComponent ]
+      declarations: [ManagerDashboardComponent]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

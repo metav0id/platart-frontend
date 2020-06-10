@@ -1,5 +1,5 @@
-export interface DeliveryItemFromWarehouseDTO {
-  /** Is used for table elements */
+export interface TableItem {
+  isChecked: boolean;
   identifierOnDeliveryList: number;
   category: string;
   quantity: number;

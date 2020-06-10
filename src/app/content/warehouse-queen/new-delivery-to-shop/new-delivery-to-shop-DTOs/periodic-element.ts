@@ -1,8 +1,8 @@
-export interface NewOrderItemDTO {
-  id: number;
+export interface PeriodicElement {
+  position: number;
   category: string;
-  quantity: number;
   priceSalesPerUnit: number;
+  quantity: number;
   discountPercent: number;
   priceListPerUnit: number;
   deliveryShop: string;

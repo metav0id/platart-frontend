@@ -1,228 +1,231 @@
 <ng-template transloco let-t>
-<div class="space"></div>
-<div class="row">
-  <div class="col">
-<!--    CONTENT OF FIRST COL-->
-<div class="container-fluid d-flex justify-content-center ">
-    <div class="demo-card-wide mdl-card mdl-shadow--2dp">
-      <div class="mdl-card__title">
-        <h2 class="mdl-card__title-text">{{ t('translate.newDeliveryShop') }}</h2>
-      </div>
-      <div class="container-fluid d-flex justify-content-center cont-bg4">
-<!--      FORMULAR-->
-      <div class="newOrderInputFields">
-        <div class="newOrderInputFieldsCategory">
-          <mat-form-field appearance="fill">
-            <mat-label>{{ t('translate.shop') }}</mat-label>
-            <mat-select [formControl]="shopControl" [(value)]="newOrderElement.deliveryShop">
-              <mat-option>--</mat-option>
-              <mat-option *ngFor="let entry of shopsList" [value]="entry.name">{{ entry.name}}</mat-option>
-            </mat-select>
-          </mat-form-field>
+  <div class="space"></div>
+  <div class="row">
+    <div class="col">
+      <div class="container-fluid d-flex justify-content-center ">
+        <div class="demo-card-wide mdl-card mdl-shadow--2dp">
+          <div class="mdl-card__title">
+            <h2 class="mdl-card__title-text">{{ t('translate.newDeliveryShop') }}</h2>
+          </div>
+          <div class="container-fluid d-flex justify-content-center cont-bg4">
+            <div class="newOrderInputFields">
+              <div class="newOrderInputFieldsCategory">
+                <mat-form-field appearance="fill">
+                  <mat-label>{{ t('translate.shop') }}</mat-label>
+                  <mat-select [formControl]="shopControl" [(value)]="newOrderElement.deliveryShop">
+                    <mat-option>--</mat-option>
+                    <mat-option *ngFor="let entry of shopsList" [value]="entry.name">{{ entry.name}}</mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+              <div class="newOrderInputFields">
+                <div class="newOrderInputFieldsCategory">
+                  <mat-form-field appearance="fill">
+                    <mat-label>{{ t('translate.category') }}</mat-label>
+                    <mat-select [formControl]="categoryControl" [(value)]="newOrderElement.category">
+                      <mat-option>--</mat-option>
+                      <mat-option *ngFor="let entry of categoryItems"
+                                  [value]="entry.category">{{ entry.category }}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </div>
+
+                <div class="newOrderInputFieldsDeliveryFinalPricePerUnit">
+                  <mat-form-field hintLabel="Max 10 characters" appearance="fill">
+                    <mat-label>{{ t('translate.listPricePerUnit') }}</mat-label>
+                    <input matInput #input [(ngModel)]="newOrderElement.priceListPerUnit" maxlength="10"
+                           placeholder="List Price">
+                    <mat-hint align="end">{{input.value?.length || 0}}/10</mat-hint>
+                  </mat-form-field>
+                </div>
+
+                <div class="availabilityAmount space">
+                  <button matTooltip="Check how many items are available in stock"
+                          [matTooltipPosition]="position.value" mat-raised-button
+                          (click)="verifyAvailability()">{{ t('translate.checkAvailability') }}
+                  </button>
+                  <a>{{availableItems}} {{ t('translate.items') }}</a>
+                </div>
+                <div class="space"></div>
+
+                <div class="newOrderInputFieldsDeliveryQuantity">
+                  <mat-form-field hintLabel="Max 10 characters" appearance="fill">
+                    <mat-label>{{ t('translate.enterQuantity') }}</mat-label>
+                    <input matInput #input [(ngModel)]="newOrderElement.quantity" maxlength="10"
+                           placeholder="Ex. deliveryQuantity">
+                    <mat-hint align="end">{{input.value?.length || 0}}/10</mat-hint>
+                  </mat-form-field>
+                </div>
+
+                <div class="discountSelectionRadioButton">
+                  <label id="example-radio-group-label">{{ t('translate.discountType') }}:</label>
+                  <div class="space"></div>
+                  <mat-radio-group
+                    aria-labelledby="example-radio-group-label"
+                    class="example-radio-group"
+                    [(ngModel)]="discountMethod">
+                    <mat-radio-button class="example-radio-button" *ngFor="let discount of discountMethodList"
+                                      [value]="discount">
+                      {{discount}}
+                    </mat-radio-button>
+                  </mat-radio-group>
+                </div>
+
+                <div *ngIf="discountMethod== DISCOUNT_METHOD_DISPLAY_PRICE"
+                     class="newOrderInputFieldsDeliveryDisplayPricePerUnit">
+                  <mat-form-field hintLabel="Max 10 characters" appearance="fill">
+                    <mat-label>{{ t('translate.salesPricePerUnit') }}</mat-label>
+                    <input matInput #input [(ngModel)]="newOrderElement.priceSalesPerUnit" maxlength="10"
+                           placeholder="Ex. deliveryDisplayPricePerUnit">
+                    <mat-hint align="end">{{input.value?.length || 0}}/10</mat-hint>
+                  </mat-form-field>
+                </div>
+
+                <div *ngIf="discountMethod==DISCOUNT_METHOD_PERCENT"
+                     class="newOrderInputFieldsDeliveryDeliveryDiscount">
+                  <mat-form-field hintLabel="Max 10 characters" appearance="fill">
+                    <mat-label>{{ t('translate.discountInPercent') }}</mat-label>
+                    <input matInput #input [(ngModel)]="newOrderElement.discountPercent" maxlength="10"
+                           placeholder="Ex. deliveryDiscount">
+                    <mat-hint align="end">{{input.value?.length || 0}}/10</mat-hint>
+                  </mat-form-field>
+                </div>
+
+                <mat-form-field appearance="fill">
+                  <mat-label>Comments</mat-label>
+                  <textarea matInput [(ngModel)]="newOrderElement.comment">Your comment</textarea>
+                </mat-form-field>
+
+                <div>
+                  <button matTooltip="Add the order to the table"
+                          [matTooltipPosition]="position.value" mat-raised-button
+                          (click)="setNewItemOrder()">{{ t('translate.addNewOrderItem') }}
+                  </button>
+                </div>
+              </div>
+              <div class="space"></div>
+            </div>
+          </div>
         </div>
-        <div class="newOrderInputFields">
-          <div class="newOrderInputFieldsCategory">
-            <mat-form-field appearance="fill">
-              <mat-label>{{ t('translate.category') }}</mat-label>
-              <mat-select [formControl]="categoryControl" [(value)]="newOrderElement.category">
-                <mat-option>--</mat-option>
-                <mat-option *ngFor="let entry of categoryItems"
-                            [value]="entry.category">{{ entry.category }}</mat-option>
-              </mat-select>
-            </mat-form-field>
-          </div>
+      </div>
 
-          <div class="newOrderInputFieldsDeliveryFinalPricePerUnit">
-            <mat-form-field hintLabel="Max 10 characters" appearance="fill">
-              <mat-label>{{ t('translate.listPricePerUnit') }}</mat-label>
-              <input matInput #input [(ngModel)]="newOrderElement.priceListPerUnit" maxlength="10" placeholder="List Price">
-              <mat-hint align="end">{{input.value?.length || 0}}/10</mat-hint>
-            </mat-form-field>
-          </div>
+      <div class="w-100"></div>
+      <div class="space"></div>
 
-          <div class="availabilityAmount space">
-            <button matTooltip="Check how many items are available in stock"
-                    [matTooltipPosition]="position.value" mat-raised-button  (click)="verifyAvailability()">{{ t('translate.checkAvailability') }}</button>
-            <a>{{availableItems}} {{ t('translate.items') }}</a>
-          </div>
-          <div class="space"></div>
+      <div class="col">
+        <div class="container-fluid d-flex justify-content-center">
+          <div class="demo-card-wide mdl-card mdl-shadow--2dp">
+            <div class="container cont-bg2 ">
+              <div class="space"></div>
+              <div class="container cont-bg4  justify-content-center ">
+                <div class="space"></div>
+                <div class="d-flex justify-content-around">
+                  <button matTooltip="Save the order locally"
+                          [matTooltipPosition]="position.value" mat-raised-button
+                          (click)="saveCurrentOrder()">{{ t('translate.saveCurrentOrder') }}
+                  </button>
+                  <button matTooltip="Deletes the table"
+                          [matTooltipPosition]="position.value" mat-raised-button
+                          (click)="clearCurrentOrder()">{{ t('translate.clearCurrentOrder') }}
+                  </button>
+                  <button matTooltip="Send the current order to the shop"
+                          [matTooltipPosition]="position.value" mat-raised-button
+                          (click)="sendCurrentOrder()">{{ t('translate.sendOrder') }}
+                  </button>
+                </div>
+                <div class="space"></div>
+              </div>
 
-          <div class="newOrderInputFieldsDeliveryQuantity">
-            <mat-form-field hintLabel="Max 10 characters" appearance="fill">
-              <mat-label>{{ t('translate.enterQuantity') }}</mat-label>
-              <input matInput #input [(ngModel)]="newOrderElement.quantity" maxlength="10" placeholder="Ex. deliveryQuantity">
-              <mat-hint align="end">{{input.value?.length || 0}}/10</mat-hint>
-            </mat-form-field>
-          </div>
+              <div class="space"></div>
 
-          <div class="discountSelectionRadioButton">
-            <label id="example-radio-group-label">{{ t('translate.discountType') }}:</label>
-            <div class="space"></div>
-            <mat-radio-group
-              aria-labelledby="example-radio-group-label"
-              class="example-radio-group"
-              [(ngModel)]="discountMethod">
-              <mat-radio-button class="example-radio-button" *ngFor="let discount of discountMethodList" [value]="discount">
-                {{discount}}
-              </mat-radio-button>
-            </mat-radio-group>
-          </div>
+              <div class="container cont-bg4  justify-content-center  ">
+                <div class="space"></div>
+                <div class="d-flex justify-content-around">
+                  <h3><u>{{ t('translate.deliveriesTo') }}:</u> {{newOrderElement.deliveryShop}}</h3>
+                </div>
+              </div>
+              <div>
+              </div>
+              <div class="space"></div>
+              <div class="table-responsive">
 
-          <div *ngIf="discountMethod== DISCOUNT_METHOD_DISPLAY_PRICE" class="newOrderInputFieldsDeliveryDisplayPricePerUnit">
-            <mat-form-field hintLabel="Max 10 characters" appearance="fill">
-              <mat-label>{{ t('translate.salesPricePerUnit') }}</mat-label>
-              <input matInput #input [(ngModel)]="newOrderElement.priceSalesPerUnit" maxlength="10" placeholder="Ex. deliveryDisplayPricePerUnit">
-              <mat-hint align="end">{{input.value?.length || 0}}/10</mat-hint>
-            </mat-form-field>
-          </div>
+                <table mat-table #myShopCheckinProductsTable [dataSource]="listNewItemsToShops"
+                       class="mat-elevation-z8">
 
-          <div *ngIf="discountMethod==='percent'" class="newOrderInputFieldsDeliveryDeliveryDiscount">
-            <mat-form-field hintLabel="Max 10 characters" appearance="fill">
-              <mat-label>{{ t('translate.discountInPercent') }}</mat-label>
-              <input matInput #input [(ngModel)]="newOrderElement.discountPercent" maxlength="10" placeholder="Ex. deliveryDiscount">
-              <mat-hint align="end">{{input.value?.length || 0}}/10</mat-hint>
-            </mat-form-field>
-          </div>
-          <div>
-            <button matTooltip="Add the order to the table"
-                    [matTooltipPosition]="position.value" mat-raised-button  (click)="setNewItemOrder()">{{ t('translate.addNewOrderItem') }}</button>
+                  <ng-container matColumnDef="select">
+                    <th mat-header-cell *matHeaderCellDef>
+                      <mat-checkbox (change)="$event ? masterToggle() : null"
+                                    [checked]="selection.hasValue() && isAllSelected()"
+                                    [indeterminate]="selection.hasValue() && !isAllSelected()"
+                                    [aria-label]="checkboxLabel()">
+                      </mat-checkbox>
+                    </th>
+                    <td mat-cell *matCellDef="let row">
+                      <mat-checkbox (click)="$event.stopPropagation()"
+                                    (change)="$event ? selection.toggle(row) : null"
+                                    [checked]="selection.isSelected(row)"
+                                    [aria-label]="checkboxLabel(row)">
+                      </mat-checkbox>
+                    </td>
+                    <td mat-footer-cell *matFooterCellDef> -</td>
+                  </ng-container>
+
+                  <!-- Position Column -->
+                  <ng-container matColumnDef="category">
+                    <th mat-header-cell *matHeaderCellDef> {{ t('translate.category') }}</th>
+                    <td mat-cell *matCellDef="let element"> {{element.category}}</td>
+                    <td mat-footer-cell *matFooterCellDef> -</td>
+                  </ng-container>
+
+                  <!-- Name Column -->
+                  <ng-container matColumnDef="quantity">
+                    <th mat-header-cell *matHeaderCellDef> {{ t('translate.quantity') }}</th>
+                    <td mat-cell *matCellDef="let element"> {{element.quantity}}#</td>
+                    <td mat-footer-cell *matFooterCellDef> {{getTotalItems()}}#</td>
+                  </ng-container>
+
+                  <!-- priceSalesPerUnit Column -->
+                  <ng-container matColumnDef="priceSalesPerUnit">
+                    <th mat-header-cell *matHeaderCellDef> {{ t('translate.salesPrice') }}</th>
+                    <td mat-cell *matCellDef="let element"> {{element.priceSalesPerUnit}}$</td>
+                    <td mat-footer-cell *matFooterCellDef> Total {{ t('translate.items') }}:</td>
+                  </ng-container>
+
+                  <!-- priceDiscount Column -->
+                  <ng-container matColumnDef="discountPercent">
+                    <th mat-header-cell *matHeaderCellDef> {{ t('translate.discount') }} %</th>
+                    <td mat-cell *matCellDef="let element"> {{element.discountPercent}}%</td>
+                    <td mat-footer-cell *matFooterCellDef> Total {{ t('translate.value') }}:</td>
+                  </ng-container>
+
+                  <!-- priceListPerUnit Column -->
+                  <ng-container matColumnDef="priceListPerUnit">
+                    <th mat-header-cell *matHeaderCellDef> {{ t('translate.listPrice') }}</th>
+                    <td mat-cell *matCellDef="let element"> {{element.priceListPerUnit}}$</td>
+                    <td mat-footer-cell *matFooterCellDef> {{getTotalValue()}}$</td>
+                  </ng-container>
+
+                  <!-- Action Column -->
+                  <ng-container matColumnDef="updateItem">
+                    <th mat-header-cell *matHeaderCellDef> {{ t('translate.action') }}</th>
+                    <td mat-cell *matCellDef="let element">
+                      <button (click)="updateButton(element)">{{ t('translate.correctItem') }}</button>
+                    </td>
+                    <td mat-footer-cell *matFooterCellDef> -</td>
+                  </ng-container>
+
+                  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                  <tr mat-row *matRowDef="let element; columns: displayedColumns;"></tr>
+                  <tr mat-footer-row *matFooterRowDef="displayedColumns"></tr>
+                </table>
+                <div class="space"></div>
+              </div>
+            </div>
           </div>
         </div>
-        <div class="space"></div>
-<!--        FORLUMAR ENDS-->
-
-<!--        NEXT DIV CLOSES CONTAINER OF FORMULAR-->
       </div>
-        <!--    CONTENT OF FIRST COL-->
-<!--NEX DIV CLOSES THE CONTENT OF CARD-->
     </div>
-    </div>
-    <!--NEX DIV CORRESPONDS TO COLUMN-->
   </div>
-
-
-  <div class="w-100"></div>
-    <div class="space"></div>
-
-  <!--  SEGUNDA COLUMNA-->
-  <div class="col">
-<!--    CONTAINER TO CENTER IN THE PAGE-->
-    <div class="container-fluid d-flex justify-content-center">
-<!--    CONTENT-->
-    <div class="demo-card-wide mdl-card mdl-shadow--2dp">
-      <div class="container cont-bg2 ">
-        <div class="space"></div>
-        <div class="container cont-bg4  justify-content-center ">
-          <div class="space"></div>
-          <div class="d-flex justify-content-around" >
-            <button matTooltip="Save the order locally"
-                    [matTooltipPosition]="position.value" mat-raised-button (click)="saveCurrentOrder()">{{ t('translate.saveCurrentOrder') }}</button>
-            <button matTooltip="Deletes the table"
-                    [matTooltipPosition]="position.value" mat-raised-button  (click)="clearCurrentOrder()">{{ t('translate.clearCurrentOrder') }}</button>
-            <button  matTooltip="Send the current order to the shop"
-                     [matTooltipPosition]="position.value" mat-raised-button  (click)="sendCurrentOrder()">{{ t('translate.sendOrder') }}</button>
-          </div >
-          <div class="space"></div>
-        </div>
-
-        <div class="space"></div>
-
-        <div class="container cont-bg4  justify-content-center  ">
-          <div class="space"></div>
-          <div class="d-flex justify-content-around" >
-            <h3><u>{{ t('translate.deliveriesTo') }}:</u> {{newOrderElement.deliveryShop}}</h3>
-          </div >
-        </div>
-        <div>
-        </div>
-        <div class="space"></div>
-        <div class="table-responsive">
-
-          <table mat-table #myShopCheckinProductsTable [dataSource]="listNewItemsToShops" class="mat-elevation-z8" >
-
-            <!-- Checkbox Column -->
-            <ng-container matColumnDef="select">
-              <th mat-header-cell *matHeaderCellDef>
-                <mat-checkbox (change)="$event ? masterToggle() : null"
-                              [checked]="selection.hasValue() && isAllSelected()"
-                              [indeterminate]="selection.hasValue() && !isAllSelected()"
-                              [aria-label]="checkboxLabel()">
-                </mat-checkbox>
-              </th>
-              <td mat-cell *matCellDef="let row">
-                <mat-checkbox (click)="$event.stopPropagation()"
-                              (change)="$event ? selection.toggle(row) : null"
-                              [checked]="selection.isSelected(row)"
-                              [aria-label]="checkboxLabel(row)">
-                </mat-checkbox>
-              </td>
-              <td mat-footer-cell *matFooterCellDef> - </td>
-            </ng-container>
-
-            <!-- Position Column -->
-            <ng-container matColumnDef="category">
-              <th mat-header-cell *matHeaderCellDef> {{ t('translate.category') }} </th>
-              <td mat-cell *matCellDef="let element"> {{element.category}} </td>
-              <td mat-footer-cell *matFooterCellDef> - </td>
-            </ng-container>
-
-            <!-- Name Column -->
-            <ng-container matColumnDef="quantity">
-              <th mat-header-cell *matHeaderCellDef> {{ t('translate.quantity') }} </th>
-              <td mat-cell *matCellDef="let element"> {{element.quantity}}# </td>
-              <td mat-footer-cell *matFooterCellDef> {{getTotalItems()}}# </td>
-            </ng-container>
-
-            <!-- priceSalesPerUnit Column -->
-            <ng-container matColumnDef="priceSalesPerUnit">
-              <th mat-header-cell *matHeaderCellDef> {{ t('translate.salesPrice') }} </th>
-              <td mat-cell *matCellDef="let element"> {{element.priceSalesPerUnit}}$ </td>
-              <td mat-footer-cell *matFooterCellDef> Total {{ t('translate.items') }}: </td>
-            </ng-container>
-
-            <!-- priceDiscount Column -->
-            <ng-container matColumnDef="discountPercent">
-              <th mat-header-cell *matHeaderCellDef> {{ t('translate.discount') }} % </th>
-              <td mat-cell *matCellDef="let element"> {{element.discountPercent}}%</td>
-              <td mat-footer-cell *matFooterCellDef> Total {{ t('translate.value') }}: </td>
-            </ng-container>
-
-            <!-- priceListPerUnit Column -->
-            <ng-container matColumnDef="priceListPerUnit">
-              <th mat-header-cell *matHeaderCellDef> {{ t('translate.listPrice') }} </th>
-              <td mat-cell *matCellDef="let element"> {{element.priceListPerUnit}}$</td>
-              <td mat-footer-cell *matFooterCellDef> {{getTotalValue()}}$ </td>
-            </ng-container>
-
-            <!-- Action Column -->
-            <ng-container matColumnDef="updateItem">
-              <th mat-header-cell *matHeaderCellDef> {{ t('translate.action') }} </th>
-              <td mat-cell *matCellDef="let element">
-                <button (click)="updateButton(element)">{{ t('translate.correctItem') }}</button>
-              </td>
-              <td mat-footer-cell *matFooterCellDef> - </td>
-            </ng-container>
-
-            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-            <tr mat-row *matRowDef="let element; columns: displayedColumns;"></tr>
-            <tr mat-footer-row *matFooterRowDef="displayedColumns"></tr>
-          </table>
-          <div class="space"></div>
-        </div>
-      </div>
-
-
-    </div>
-<!--    CONTENT-->
-
-
-
-<!--    NEXT DIV CLOSES CONTAINER TO CENTER CARD-->
-</div>
-<!--    NEXT DIV CLOSES CLUMN-->
-  </div>
-<!--    NEXT DIV CLOSES ROW-->
-</div>
-</div>
 </ng-template>
 

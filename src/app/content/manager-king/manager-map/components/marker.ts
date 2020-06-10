@@ -1,4 +1,3 @@
-
 import {Marcador} from "./marker.class";
 
 export const MARKERS: Marcador[] = [

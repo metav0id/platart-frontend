@@ -25,7 +25,8 @@
       <input matInput #input maxlength="10" placeholder="Quantity" formControlName="quantity"
              [value]="newItem.quantity">
       <mat-error *ngIf="myForm.controls['quantity'].hasError('required')">Please insert quantity</mat-error>
-      <mat-error *ngIf="myForm.controls['quantity'].hasError('invalidNumber')">Please insert number greater than 0</mat-error>
+      <mat-error *ngIf="myForm.controls['quantity'].hasError('invalidNumber')">Please insert number greater than 0
+      </mat-error>
     </mat-form-field>
 
     <!--  Input List Price-->
@@ -36,7 +37,9 @@
       <mat-hint align="end">{{input.value?.length || 0}}/10</mat-hint>
       <mat-error *ngIf="myForm.controls['priceListPerUnit'].hasError('required')">Please insert List Price per Unit
       </mat-error>
-      <mat-error *ngIf="myForm.controls['priceListPerUnit'].hasError('invalidNumber')">Please insert number greater than 0</mat-error>
+      <mat-error *ngIf="myForm.controls['priceListPerUnit'].hasError('invalidNumber')">Please insert number greater than
+        0
+      </mat-error>
     </mat-form-field>
 
     <!--  Input Sales Price-->
@@ -47,7 +50,9 @@
       <mat-hint align="end">{{input.value?.length || 0}}/10</mat-hint>
       <mat-error *ngIf="myForm.controls['priceSalesPerUnit'].hasError('required')">Please insert Sales Price per Unit
       </mat-error>
-      <mat-error *ngIf="myForm.controls['priceSalesPerUnit'].hasError('invalidNumber')">Please insert number greater than 0</mat-error>
+      <mat-error *ngIf="myForm.controls['priceSalesPerUnit'].hasError('invalidNumber')">Please insert number greater
+        than 0
+      </mat-error>
     </mat-form-field>
 
     <!--  Input Comment-->

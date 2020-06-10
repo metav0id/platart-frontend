@@ -1,6 +1,6 @@
 export const environment = {
   production: true,
-  firebaseConfig : {
+  firebaseConfig: {
     apiKey: 'AIzaSyAYu4hMLTk28gkQPNcNEH3nYC6EqC3ZBZM',
     authDomain: 'platart-warehouse-user-mngt.firebaseapp.com',
     databaseURL: 'https://platart-warehouse-user-mngt.firebaseio.com',
@@ -30,10 +30,10 @@ export const environment = {
   getAllItemsInStock: 'http://161.35.4.253:8081/warehouse/getallitems',
   getDeliveryItemsFromWarehouseByShop: 'http://161.35.4.253:8081/shops/getalldeliveriesnotinstock',
   saveDeliveryItemsToShopStock: 'http://161.35.4.253:8081/shops/saveNewDeliveryFromWarehouse',
-  getAllSoldItemsListURL:  'http://161.35.4.253:8081/shops/getAllSoldItemsList',
-  saveAllSoldItemsListURL:  'http://161.35.4.253:8081/shops/saveAllSoldItemsList',
-  sendAllSoldItemsListURL:  'http://161.35.4.253:8081/shops/sendAllSoldItemsList',
-  deleteCurrentSoldItemsListURL:  'http://161.35.4.253:8081/shops/deleteCurrentSoldItemsList',
+  getAllSoldItemsListURL: 'http://161.35.4.253:8081/shops/getAllSoldItemsList',
+  saveAllSoldItemsListURL: 'http://161.35.4.253:8081/shops/saveAllSoldItemsList',
+  sendAllSoldItemsListURL: 'http://161.35.4.253:8081/shops/sendAllSoldItemsList',
+  deleteCurrentSoldItemsListURL: 'http://161.35.4.253:8081/shops/deleteCurrentSoldItemsList',
   loadAllSoldItemsListURL: 'http://161.35.4.253:8081/shops/loadAllCurrentSoldItemsList',
   vBarDataURL: 'http://161.35.4.253:8081/dashboard/getVbarData',
   hBarDataURL: 'http://161.35.4.253:8081/dashboard/getHbarData',

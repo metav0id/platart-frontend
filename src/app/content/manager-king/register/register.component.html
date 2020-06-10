@@ -1,56 +1,63 @@
 <ng-template transloco let-t>
-<div class="limiter animated fadeInRight">
-  <div class="container-login100">
+  <div class="limiter animated fadeInRight">
+    <div class="container-login100">
       <div class="wrap-login100 p-t-50 p-b-90">
-          <form [formGroup]="registerForm" (ngSubmit)="onSubmit()"
-            class="login100-form validate-form flex-sb flex-w">
+        <form [formGroup]="registerForm" (ngSubmit)="onSubmit()"
+              class="login100-form validate-form flex-sb flex-w">
 
             <span class="login100-form-title p-b-51">
                 Register new user
             </span>
 
-            <span *ngIf="registerForm.controls['email'].errors && (registerForm.controls['email'].dirty || registerForm.controls['email'].touched)"
-                  class="text-danger animated fadeIn">{{ t('translate.insertValidEmail') }}</span>
-            <div class="wrap-input100 m-b-16">
-              <input class="input100" type="email" name="email" required placeholder="Email" formControlName="email">
-              <span class="focus-input100"></span>
-            </div>
+          <span
+            *ngIf="registerForm.controls['email'].errors && (registerForm.controls['email'].dirty || registerForm.controls['email'].touched)"
+            class="text-danger animated fadeIn">{{ t('translate.insertValidEmail') }}</span>
+          <div class="wrap-input100 m-b-16">
+            <input class="input100" type="email" name="email" required placeholder="Email" formControlName="email">
+            <span class="focus-input100"></span>
+          </div>
 
-            <span *ngIf="registerForm.controls['name'].errors && (registerForm.controls['name'].dirty || registerForm.controls['name'].touched)"
-                  class="text-danger animated fadeIn">{{ t('translate.fillInUsername') }}</span>
-            <div class="wrap-input100 m-b-16">
-              <input class="input100" type="text" name="name" required placeholder="User Name" formControlName="name">
-              <span class="focus-input100"></span>
-            </div>
+          <span
+            *ngIf="registerForm.controls['name'].errors && (registerForm.controls['name'].dirty || registerForm.controls['name'].touched)"
+            class="text-danger animated fadeIn">{{ t('translate.fillInUsername') }}</span>
+          <div class="wrap-input100 m-b-16">
+            <input class="input100" type="text" name="name" required placeholder="User Name" formControlName="name">
+            <span class="focus-input100"></span>
+          </div>
 
-            <span *ngIf="registerForm.controls['password'].errors && (registerForm.controls['password'].dirty || registerForm.controls['password'].touched)"
-                  class="text-danger animated fadeIn">{{ t('translate.fillInPassword') }}</span>
-            <div class="wrap-input100 m-b-16">
-              <input class="input100" type="password" name="password" required placeholder="Password" formControlName="password">
-              <span class="focus-input100"></span>
-            </div>
+          <span
+            *ngIf="registerForm.controls['password'].errors && (registerForm.controls['password'].dirty || registerForm.controls['password'].touched)"
+            class="text-danger animated fadeIn">{{ t('translate.fillInPassword') }}</span>
+          <div class="wrap-input100 m-b-16">
+            <input class="input100" type="password" name="password" required placeholder="Password"
+                   formControlName="password">
+            <span class="focus-input100"></span>
+          </div>
 
-            <span *ngIf="registerForm.controls['role'].errors && (registerForm.controls['role'].dirty || registerForm.controls['role'].touched)"
-                  class="text-danger animated fadeIn">{{ t('translate.selectRole') }}</span>
-            <div class="wrap-input100 m-b-16">
-                <select class="input100" name="role" formControlName="role">
-                  <option *ngFor="let entry of listRoles" [value]="entry">{{ entry }}</option>
-                </select>
-            </div>
+          <span
+            *ngIf="registerForm.controls['role'].errors && (registerForm.controls['role'].dirty || registerForm.controls['role'].touched)"
+            class="text-danger animated fadeIn">{{ t('translate.selectRole') }}</span>
+          <div class="wrap-input100 m-b-16">
+            <select class="input100" name="role" formControlName="role">
+              <option *ngFor="let entry of listRoles" [value]="entry">{{ entry }}</option>
+            </select>
+          </div>
 
-            <div class="container-login100-form-btn m-t-17">
-              <button class="login100-form-btn" type="submit">
-                {{ t('translate.createUser') }}
-              </button>
-            </div>
+          <div class="container-login100-form-btn m-t-17">
+            <button class="login100-form-btn" type="submit">
+              {{ t('translate.createUser') }}
+            </button>
+          </div>
 
-            <div class="container-login100-form-btn m-t-17">
-              <a routerLink="/login"><button class="login100-form-btn">
+          <div class="container-login100-form-btn m-t-17">
+            <a routerLink="/login">
+              <button class="login100-form-btn">
                 {{ t('translate.abort') }}
-              </button></a>
-            </div>
-          </form>
+              </button>
+            </a>
+          </div>
+        </form>
       </div>
+    </div>
   </div>
-</div>
 </ng-template>

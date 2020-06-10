@@ -34,8 +34,10 @@
               "node_modules/angular-bootstrap-md/assets/scss/mdb.scss",
               "node_modules/animate.css/animate.css"
             ],
-            "scripts": [ "node_modules/chart.js/dist/Chart.js",
-              "node_modules/hammerjs/hammer.min.js"]
+            "scripts": [
+              "node_modules/chart.js/dist/Chart.js",
+              "node_modules/hammerjs/hammer.min.js"
+            ]
           },
           "configurations": {
             "production": {

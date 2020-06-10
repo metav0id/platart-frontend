@@ -32,12 +32,12 @@ export class MapService {
   }
 
 
-
   // this method is called readAllMarkers and gets an observable type back that becomes an array of offers.
   public readAllMarkers(): Observable<Marcador[]> {
     // this returns the list provided from the backend link.
     return this.httpClient.get<Marcador[]>(environment.getAllMarkers);
   }
+
   public readAllMarkersNoCoords(): Observable<Marcador[]> {
     // this returns the list provided from the backend link.
     return this.httpClient.get<Marcador[]>(environment.getAllMarkersNoCoords);
@@ -62,7 +62,7 @@ export class MapService {
 
 //This method finds a marker from the data base and gives it back through an observable that becomes a Marker.
   getComerce(comerce: Comerce): Observable<Marcador> {
-    return this.httpClient.post<Marcador>(environment.findCommerce,comerce, {headers: this.httpHeader});
+    return this.httpClient.post<Marcador>(environment.findCommerce, comerce, {headers: this.httpHeader});
 
   }
 
@@ -73,14 +73,13 @@ export class MapService {
     this.httpClient.post<null>(environment.updateMarker, marcador).subscribe();
 
   }
+
   edit(marcador: Marcador): void {
     console.log(marcador);
     // return this.httpClient.post<Marcador>(`$ {this.urlEndPoint2}\${id}`,marcador,{headers: this.httpHeader})
     this.httpClient.post<null>(environment.editMarker, marcador).subscribe();
 
   }
-
-
 
 
 }

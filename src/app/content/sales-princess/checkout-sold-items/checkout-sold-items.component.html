@@ -42,7 +42,8 @@
                   <mat-select [(value)]="newCheckoutSoldItem.category" [formControl]="categoryControl">
                     <mat-option>--</mat-option>
                     <mat-option *ngFor="let entry of categoryItems"
-                                [value]="entry.category">{{ entry.category}}</mat-option>
+                                [value]="entry.category">{{ entry.category}}
+                    </mat-option>
                   </mat-select>
                 </mat-form-field>
               </div>
@@ -72,7 +73,8 @@
               <div class="availabilityAmount space">
                 <button matTooltip="Check if the item is available in stock"
                         [matTooltipPosition]="position.value" (click)="verifyAvailability(newCheckoutSoldItem)"
-                        mat-raised-button>{{ t('translate.checkAvailability') }}</button>
+                        mat-raised-button>{{ t('translate.checkAvailability') }}
+                </button>
                 <a>{{availableItems}} items</a>
               </div>
               <div class="space"></div>
@@ -103,7 +105,7 @@
                   </mat-radio-group>
                 </div>
                 <div *ngIf="discountNessesary  ==DISCOUNT_METHOD_REVENUE" class="itemCheckoutSoldItemPricePerUnit">
-                  <mat-form-field appearance="fill" >
+                  <mat-form-field appearance="fill">
                     <mat-label>{{ t('translate.revenue') }}</mat-label>
                     <input #input [(ngModel)]="newCheckoutSoldItem.revenuePerUnit" matInput maxlength="6"
                            placeholder="{{ t('translate.revenue') }}">
@@ -169,7 +171,7 @@
 
                 <!-- category column-->
                 <ng-container matColumnDef="sale">
-                  <th *matHeaderCellDef mat-header-cell> {{ t('translate.category') }} </th>
+                  <th *matHeaderCellDef mat-header-cell> {{ t('translate.category') }}</th>
                   <td *matCellDef="let element" mat-cell>
                     <div>
                       <mat-card>
@@ -214,15 +216,15 @@
                   <div class=" table-responsive ">
                     <div class="container cont-bg4">
                       <button matTooltip="Save list locally"
-                              [matTooltipPosition]="position.value" (click)="saveSoldItemList()" mat-raised-button >
+                              [matTooltipPosition]="position.value" (click)="saveSoldItemList()" mat-raised-button>
                         <mat-icon>save</mat-icon>
                       </button>
                       <button matTooltip="Save list"
-                              [matTooltipPosition]="position.value" (click)="sendSoldItemList()" mat-raised-button >
+                              [matTooltipPosition]="position.value" (click)="sendSoldItemList()" mat-raised-button>
                         <mat-icon>send</mat-icon>
                       </button>
                       <button matTooltip="Delete element from the list"
-                              [matTooltipPosition]="position.value" (click)="deleteSoldItemList()" mat-raised-button >
+                              [matTooltipPosition]="position.value" (click)="deleteSoldItemList()" mat-raised-button>
                         <mat-icon>delete</mat-icon>
                       </button>
                     </div>

@@ -20,7 +20,9 @@ export class ManagerSalesDescriptionComponent implements OnInit {
   dataSource = new MatTableDataSource();
 
   @ViewChild(MatSort, {static: true}) sort: MatSort;
-  constructor(private managerSalesDescriptionService: ManagerSalesDescriptionService) { }
+
+  constructor(private managerSalesDescriptionService: ManagerSalesDescriptionService) {
+  }
 
   startDate: string = '';
   endDate: string = '';
@@ -33,13 +35,13 @@ export class ManagerSalesDescriptionComponent implements OnInit {
   startDateSelection($event: MatDatepickerInputEvent<Date>) {
     const newDate: Date = $event.value;
     this.startDate = newDate.toISOString();
-    this.eventsTime.push( newDate.toISOString() );
+    this.eventsTime.push(newDate.toISOString());
   }
 
   endDateSelection($event: MatDatepickerInputEvent<Date>) {
     const newDate: Date = $event.value;
     this.endDate = newDate.toISOString();
-    this.eventsTime.push( newDate.toISOString() );
+    this.eventsTime.push(newDate.toISOString());
   }
 
   applyFilter(event: Event) {
@@ -52,13 +54,13 @@ export class ManagerSalesDescriptionComponent implements OnInit {
   }
 
   getSoldItemsList(): void {
-    if ( this.startDate != '' && this.endDate != '') {
-      this.managerSalesDescriptionService.getSoldItemsList(this.startDate, this.endDate )
+    if (this.startDate != '' && this.endDate != '') {
+      this.managerSalesDescriptionService.getSoldItemsList(this.startDate, this.endDate)
         .subscribe((observable) => {
           console.log(observable);
           this.dataSource = new MatTableDataSource(observable);
           this.dataSource.sort = this.sort;
-      });
+        });
     } else {
       console.log('Please select date range');
     }

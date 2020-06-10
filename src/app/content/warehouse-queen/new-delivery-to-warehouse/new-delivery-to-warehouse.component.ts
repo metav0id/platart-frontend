@@ -12,7 +12,7 @@ import {TooltipPosition} from "@angular/material/tooltip";
   selector: 'app-new-delivery-to-warehouse',
   templateUrl: './new-delivery-to-warehouse.component.html',
   styleUrls: ['./new-delivery-to-warehouse.component.css'],
-  providers: [{provide: TRANSLOCO_SCOPE, useValue: { scope: 'warehouseQueen', alias: 'translate' }}]
+  providers: [{provide: TRANSLOCO_SCOPE, useValue: {scope: 'warehouseQueen', alias: 'translate'}}]
 })
 
 export class NewDeliveryToWarehouseComponent implements OnInit {
@@ -42,6 +42,7 @@ export class NewDeliveryToWarehouseComponent implements OnInit {
   public categoryItems: WarehouseItemCategoryDTO[] = [];
 
   @ViewChild('myCheckinProductsTable') table: MatTable<any>;
+
   constructor(private newDeliveryToWarehouseService: NewDeliveryToWarehouseService) {
   }
 
