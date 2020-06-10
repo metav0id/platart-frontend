@@ -25,6 +25,7 @@ import { CheckoutSoldItemsSendVerificationComponent } from './checkout-sold-item
 import { ViewShopInventoryComponent } from './view-shop-inventory/view-shop-inventory.component';
 import { AddDeliveryItemComponent } from './new-delivery-from-warehouse/add-delivery-item/add-delivery-item.component';
 import {MatTooltipModule} from "@angular/material/tooltip";
+import { CheckedInItemsComponent } from './checked-in-items/checked-in-items.component';
 
 
 @NgModule({
@@ -36,7 +37,8 @@ import {MatTooltipModule} from "@angular/material/tooltip";
     CheckoutSoldItemsSendVerificationComponent,
     ViewShopInventoryComponent,
     CheckoutSoldItemsSendVerificationComponent,
-    AddDeliveryItemComponent
+    AddDeliveryItemComponent,
+    CheckedInItemsComponent
   ],
     imports: [
         CommonModule,
