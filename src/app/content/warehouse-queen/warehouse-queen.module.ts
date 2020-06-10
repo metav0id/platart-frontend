@@ -1,7 +1,7 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import {NgModule} from '@angular/core';
+import {CommonModule} from '@angular/common';
 
-import { WarehouseQueenRoutingModule } from './warehouse-queen-routing.module';
+import {WarehouseQueenRoutingModule} from './warehouse-queen-routing.module';
 import {StockInWarehouseComponent} from './stock-in-warehouse/stock-in-warehouse.component';
 import {CdkTableModule} from '@angular/cdk/table';
 import {MatTableModule} from '@angular/material/table';
@@ -18,10 +18,9 @@ import {MatRadioModule} from "@angular/material/radio";
 import {MatButtonModule} from '@angular/material/button';
 import {TranslocoRootModule} from '../../transloco-root.module';
 import {MatTooltipModule} from "@angular/material/tooltip";
-import { LandingPageWarehouseComponent } from './landing-page-warehouse/landing-page-warehouse.component';
+import {LandingPageWarehouseComponent} from './landing-page-warehouse/landing-page-warehouse.component';
 import {MatExpansionModule} from "@angular/material/expansion";
 import {MatCardModule} from "@angular/material/card";
-
 
 
 @NgModule({
@@ -52,4 +51,5 @@ import {MatCardModule} from "@angular/material/card";
     MatCardModule
   ]
 })
-export class WarehouseQueenModule { }
+export class WarehouseQueenModule {
+}

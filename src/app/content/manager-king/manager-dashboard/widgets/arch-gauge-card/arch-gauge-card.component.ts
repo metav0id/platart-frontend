@@ -30,7 +30,8 @@ export class ArchGaugeCardComponent implements OnInit {
     // threshMax: {color: 'green'}
   };
 
-  constructor() { }
+  constructor() {
+  }
 
   ngOnInit(): void {
   }

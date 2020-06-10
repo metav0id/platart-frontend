@@ -1,3 +1,3 @@
-export interface Shop{
+export interface Shop {
   name: string;
 }

@@ -20,7 +20,7 @@ import {TooltipPosition} from '@angular/material/tooltip';
   selector: 'app-checkout-sold-items',
   templateUrl: './checkout-sold-items.component.html',
   styleUrls: ['./checkout-sold-items.component.css'],
-  providers: [{provide: TRANSLOCO_SCOPE, useValue: { scope: 'salesPrincess', alias: 'translate' }}]
+  providers: [{provide: TRANSLOCO_SCOPE, useValue: {scope: 'salesPrincess', alias: 'translate'}}]
 })
 export class CheckoutSoldItemsComponent implements OnInit {
   positionOptions: TooltipPosition[] = ['after', 'before', 'above', 'below', 'left', 'right'];
@@ -29,7 +29,8 @@ export class CheckoutSoldItemsComponent implements OnInit {
   constructor(/*private _snackBar: MatSnackBar,*/
               private checkoutSoldItemsService: CheckoutSoldItemsService,
               private transloco: TranslocoService,
-              public dialog: MatDialog) { }
+              public dialog: MatDialog) {
+  }
 
   // Fields for input-form
   public discountControll = new FormControl('', Validators.required);
@@ -124,18 +125,18 @@ export class CheckoutSoldItemsComponent implements OnInit {
     const verifyQuantity: boolean = this.newCheckoutSoldItem.quantity > 0 && this.newCheckoutSoldItem.quantity < 1000;
     const verifyPriceListPerUnit: boolean = this.newCheckoutSoldItem.priceListPerUnit > 0 && this.newCheckoutSoldItem.priceSalesPerUnit > 0;
     const verifyCategory: boolean = this.newCheckoutSoldItem.category !== null && this.newCheckoutSoldItem.itemLastSold !== null;
-    if (  verifyAmountAvailable &&
-          verifyQuantity &&
-          verifyPriceListPerUnit &&
-          verifyCategory
+    if (verifyAmountAvailable &&
+      verifyQuantity &&
+      verifyPriceListPerUnit &&
+      verifyCategory
     ) {
 
       let revenueCalculation = 0;
       let discountPercentCalculation = 0;
-      if ( this.discountType === this.DISCOUNT_METHOD_REVENUE ) {
+      if (this.discountType === this.DISCOUNT_METHOD_REVENUE) {
         revenueCalculation = this.newCheckoutSoldItem.revenuePerUnit;
         discountPercentCalculation = 100 - (this.newCheckoutSoldItem.revenuePerUnit * 100 / this.newCheckoutSoldItem.priceListPerUnit);
-      } else if ( this.discountType === this.DISCOUNT_METHOD_NO_DISCOUNT) {
+      } else if (this.discountType === this.DISCOUNT_METHOD_NO_DISCOUNT) {
         revenueCalculation = this.newCheckoutSoldItem.priceListPerUnit;
         discountPercentCalculation = this.newCheckoutSoldItem.discountPercent;
       }
@@ -203,7 +204,7 @@ export class CheckoutSoldItemsComponent implements OnInit {
         // check if category already exists
         for (const categoryItem of newCategoryLists) {
           // tslint:disable-next-line:triple-equals
-          if ( categoryItem.category == newCategory.category &&
+          if (categoryItem.category == newCategory.category &&
             // tslint:disable-next-line:triple-equals
             categoryItem.priceListPerUnit == newCategory.priceListPerUnit &&
             // tslint:disable-next-line:triple-equals
@@ -259,7 +260,7 @@ export class CheckoutSoldItemsComponent implements OnInit {
   dateSelection($event: MatDatepickerInputEvent<Date>) {
     const newDate: Date = $event.value;
     this.newCheckoutSoldItem.itemLastSold = newDate.toISOString();
-    this.eventsTime.push( newDate.toISOString() );
+    this.eventsTime.push(newDate.toISOString());
   }
 
   // CHECK! -> subscribe or not
@@ -345,7 +346,7 @@ export class CheckoutSoldItemsComponent implements OnInit {
     dialogRef.afterClosed().subscribe((DataObservable) => {
       console.log(sendSoldItemsData);
 
-      if ( sendSoldItemsData.sendSoldItemsVerification === true ) {
+      if (sendSoldItemsData.sendSoldItemsVerification === true) {
         console.log('Send items');
         this.checkoutSoldItemsService.sendAllSoldItemsList(this.soldItemsToShopsList).subscribe((JsonDto) => {
             this.soldItemsToShopsList = [];
@@ -363,12 +364,12 @@ export class CheckoutSoldItemsComponent implements OnInit {
 
   loadSoldItemList() {
     console.log('implement loading sold items list');
-    this.checkoutSoldItemsService.getAllSoldItemsList().subscribe( JsonDto => {
-      this.soldItemsToShopsList = JsonDto;
-      this.rebuildListCategories();
-      this.table.renderRows();
-    }
-  );
+    this.checkoutSoldItemsService.getAllSoldItemsList().subscribe(JsonDto => {
+        this.soldItemsToShopsList = JsonDto;
+        this.rebuildListCategories();
+        this.table.renderRows();
+      }
+    );
   }
 
   verifyAvailability(newItem: ShopsCheckoutSoldItemsDTO) {
@@ -378,24 +379,24 @@ export class CheckoutSoldItemsComponent implements OnInit {
     const verifyPriceSalesPerUnit: boolean = newItem.priceSalesPerUnit !== null && newItem.priceSalesPerUnit > 0;
 
     if (verifyCategory &&
-        verifyShop &&
-        verifyPriceListPerUnit &&
-        verifyPriceSalesPerUnit ) {
+      verifyShop &&
+      verifyPriceListPerUnit &&
+      verifyPriceSalesPerUnit) {
       console.log('entered into the if');
       this.checkoutSoldItemsService.verifyAvailability(newItem).subscribe((observable) => {
         this.availableItems = observable.quantity;
 
-        for ( const item of this.soldItemsToShopsList) {
+        for (const item of this.soldItemsToShopsList) {
           // tslint:disable-next-line:triple-equals no-shadowed-variable
-          const verifyShop: boolean = (this.newCheckoutSoldItem.shop == item.shop );
+          const verifyShop: boolean = (this.newCheckoutSoldItem.shop == item.shop);
           // tslint:disable-next-line:triple-equals no-shadowed-variable
-          const verifyPriceListPerUnit: boolean = (this.newCheckoutSoldItem.priceListPerUnit == item.priceListPerUnit );
+          const verifyPriceListPerUnit: boolean = (this.newCheckoutSoldItem.priceListPerUnit == item.priceListPerUnit);
           // tslint:disable-next-line:triple-equals no-shadowed-variable
-          const verifyPriceSalesPerUnit: boolean = (this.newCheckoutSoldItem.priceSalesPerUnit == item.priceSalesPerUnit );
+          const verifyPriceSalesPerUnit: boolean = (this.newCheckoutSoldItem.priceSalesPerUnit == item.priceSalesPerUnit);
           // tslint:disable-next-line:triple-equals no-shadowed-variable
-          const verifyCategory: boolean = (this.newCheckoutSoldItem.category == item.category );
+          const verifyCategory: boolean = (this.newCheckoutSoldItem.category == item.category);
 
-          if ( verifyShop && verifyPriceListPerUnit && verifyPriceSalesPerUnit && verifyCategory) {
+          if (verifyShop && verifyPriceListPerUnit && verifyPriceSalesPerUnit && verifyCategory) {
             this.availableItems -= Number(item.quantity);
           }
         }

@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {MonthToDateReportingDto} from '../manager-king-dtos/MonthToDateReportingDto';
 import {DATA} from './mock-data';
 import {DailyReportingDto} from '../manager-king-dtos/DailyReportingDto';
@@ -14,13 +14,17 @@ export class ManagerDashboardService {
 
   data = DATA;
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {
+  }
 
   // get data for vertical bar-chart: Last week's aggregated turnover
 
   fetchVBarData(): object[] {
-    return [{name: 'mon', value: 1870}, {name: 'tue', value: 2344}, {name: 'wed', value: 1766}, {name: 'thu', value: 1800},
-      {name: 'fri', value: 1666}, {name: 'sat', value: 1920}, {name: 'sun', value: 1545}, ];
+    return [{name: 'mon', value: 1870}, {name: 'tue', value: 2344}, {name: 'wed', value: 1766}, {
+      name: 'thu',
+      value: 1800
+    },
+      {name: 'fri', value: 1666}, {name: 'sat', value: 1920}, {name: 'sun', value: 1545},];
   }
 
   // fetchVBarData(): Observable<BarDataDTO[]> {
@@ -30,7 +34,10 @@ export class ManagerDashboardService {
   // get data for horizontal bar-chart: Last day's turnover by shops
 
   fetchHBarData(): object[] {
-    return [{name: 'shop1', value: 340}, {name: 'shop2', value: 223}, {name: 'shop3', value: 413}, {name: 'shop4', value: 491}];
+    return [{name: 'shop1', value: 340}, {name: 'shop2', value: 223}, {name: 'shop3', value: 413}, {
+      name: 'shop4',
+      value: 491
+    }];
   }
 
   // fetchHBarData(): Observable<BarDataDTO[]> {
@@ -40,8 +47,10 @@ export class ManagerDashboardService {
   // get data for main table: Corresponding aggregated month-to-date numbers from previous month
 
   fetchDataLastMonth(): MonthToDateReportingDto {
-    return {shop: 'all', salesNo: 419, salesTo: 6822, salesMg: 1540, salesMgAvg: 5.09,
-      discountRateAvg: 13.0, date: new Date('2020-04-01')};
+    return {
+      shop: 'all', salesNo: 419, salesTo: 6822, salesMg: 1540, salesMgAvg: 5.09,
+      discountRateAvg: 13.0, date: new Date('2020-04-01')
+    };
   }
 
   // fetchDataLastMonth(): Observable<MonthToDateReportingDto> {
@@ -51,8 +60,10 @@ export class ManagerDashboardService {
   // get data for main table: Aggregated month-to-date actuals
 
   fetchDataCurrentMonth(): MonthToDateReportingDto {
-    return {shop: 'all', salesNo: 321, salesTo: 5467, salesMg: 1190, salesMgAvg: 5.13,
-      discountRateAvg: 12.7, date: new Date('2020-05-01')};
+    return {
+      shop: 'all', salesNo: 321, salesTo: 5467, salesMg: 1190, salesMgAvg: 5.13,
+      discountRateAvg: 12.7, date: new Date('2020-05-01')
+    };
   }
 
   // fetchDataCurrentMonth(): Observable<MonthToDateReportingDto> {

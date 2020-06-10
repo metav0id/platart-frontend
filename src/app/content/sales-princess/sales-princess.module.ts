@@ -18,12 +18,12 @@ import {MatButtonModule} from '@angular/material/button';
 import {CheckoutSoldItemsComponent} from './checkout-sold-items/checkout-sold-items.component';
 import {MatDatepickerInputEvent, MatDatepickerModule} from '@angular/material/datepicker';
 import {MatNativeDateModule} from '@angular/material/core';
-import { CheckoutSoldItemsDetailsComponent } from './checkout-sold-items/checkout-sold-items-details/checkout-sold-items-details.component';
+import {CheckoutSoldItemsDetailsComponent} from './checkout-sold-items/checkout-sold-items-details/checkout-sold-items-details.component';
 import {MatCardModule} from "@angular/material/card";
 import {TranslocoRootModule} from '../../transloco-root.module';
-import { CheckoutSoldItemsSendVerificationComponent } from './checkout-sold-items/checkout-sold-items-send-verification/checkout-sold-items-send-verification.component';
-import { ViewShopInventoryComponent } from './view-shop-inventory/view-shop-inventory.component';
-import { AddDeliveryItemComponent } from './new-delivery-from-warehouse/add-delivery-item/add-delivery-item.component';
+import {CheckoutSoldItemsSendVerificationComponent} from './checkout-sold-items/checkout-sold-items-send-verification/checkout-sold-items-send-verification.component';
+import {ViewShopInventoryComponent} from './view-shop-inventory/view-shop-inventory.component';
+import {AddDeliveryItemComponent} from './new-delivery-from-warehouse/add-delivery-item/add-delivery-item.component';
 import {MatTooltipModule} from "@angular/material/tooltip";
 
 
@@ -38,29 +38,29 @@ import {MatTooltipModule} from "@angular/material/tooltip";
     CheckoutSoldItemsSendVerificationComponent,
     AddDeliveryItemComponent
   ],
-    imports: [
-        CommonModule,
-        SalesPrincessRoutingModule,
-        CdkTableModule,
-        MatTableModule,
-        BrowserAnimationsModule,
-        FormsModule,
-        MatCheckboxModule,
-        MatFormFieldModule,
-        ReactiveFormsModule,
-        MatSelectModule,
-        MatInputModule,
-        MatIconModule,
-        MatRadioModule,
-        MatDialogModule,
-        MatButtonModule,
-        TranslocoRootModule,
-        MatButtonModule,
-        MatDatepickerModule,
-        MatNativeDateModule,
-        MatCardModule,
-        MatTooltipModule
-    ],
+  imports: [
+    CommonModule,
+    SalesPrincessRoutingModule,
+    CdkTableModule,
+    MatTableModule,
+    BrowserAnimationsModule,
+    FormsModule,
+    MatCheckboxModule,
+    MatFormFieldModule,
+    ReactiveFormsModule,
+    MatSelectModule,
+    MatInputModule,
+    MatIconModule,
+    MatRadioModule,
+    MatDialogModule,
+    MatButtonModule,
+    TranslocoRootModule,
+    MatButtonModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    MatCardModule,
+    MatTooltipModule
+  ],
   entryComponents: [
     NewDeliveryFromWarehouseComponent,
     CheckoutSoldItemsComponent

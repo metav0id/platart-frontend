@@ -1,6 +1,6 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { VbarChartCardComponent } from './vbar-chart-card.component';
+import {VbarChartCardComponent} from './vbar-chart-card.component';
 
 describe('VbarChartCardComponent', () => {
   let component: VbarChartCardComponent;
@@ -8,9 +8,9 @@ describe('VbarChartCardComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ VbarChartCardComponent ]
+      declarations: [VbarChartCardComponent]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

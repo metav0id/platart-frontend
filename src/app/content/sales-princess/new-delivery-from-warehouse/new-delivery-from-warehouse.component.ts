@@ -91,10 +91,6 @@ export class NewDeliveryFromWarehouseComponent implements OnInit {
       width: '250px',
       data: element
     });
-
-    dialogRef.afterClosed().subscribe(result => {
-      console.log('Dialog closed');
-    });
   }
 
   /**

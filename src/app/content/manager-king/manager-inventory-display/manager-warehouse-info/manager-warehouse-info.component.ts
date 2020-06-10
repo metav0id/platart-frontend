@@ -12,7 +12,7 @@ import {MatSort} from '@angular/material/sort';
   selector: 'app-manager-warehouse-info',
   templateUrl: './manager-warehouse-info.component.html',
   styleUrls: ['./manager-warehouse-info.component.css'],
-  providers: [{provide: TRANSLOCO_SCOPE, useValue: { scope: 'managerKing/manageShopsInfo', alias: 'translate' }}]
+  providers: [{provide: TRANSLOCO_SCOPE, useValue: {scope: 'managerKing/manageShopsInfo', alias: 'translate'}}]
 })
 export class ManagerWarehouseInfoComponent implements OnInit {
   // inventory type
@@ -30,6 +30,7 @@ export class ManagerWarehouseInfoComponent implements OnInit {
   public selectedShopToDisplay = '';
 
   @ViewChild(MatSort, {static: true}) sort: MatSort;
+
   constructor(private managerShopsInfoService: ManagerWarehouseInfoService) {
   }
 

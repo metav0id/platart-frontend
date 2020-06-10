@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 
 @Component({
   selector: 'app-month-to-date-table-card',
@@ -9,7 +9,8 @@ export class MonthToDateTableCardComponent implements OnInit {
 
   // todo: for modularization-purposes the dashboard table might be separated from man-dash-comp
 
-  constructor() { }
+  constructor() {
+  }
 
   ngOnInit(): void {
   }

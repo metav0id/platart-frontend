@@ -24,11 +24,12 @@ import {
 export class FormComponent implements OnInit {
 
   colorControl = new FormControl('primary');
-  comerce: Comerce= new Comerce();
+  comerce: Comerce = new Comerce();
 
 
-  constructor(private comerceService : ComerceService, private router: Router,
-              public dialogRef: MatDialogRef<FormComponent>, @Inject(MAT_DIALOG_DATA) public data: DialogData) { }
+  constructor(private comerceService: ComerceService, private router: Router,
+              public dialogRef: MatDialogRef<FormComponent>, @Inject(MAT_DIALOG_DATA) public data: DialogData) {
+  }
 
 
   /**This method will close the dialog window.**/
@@ -43,15 +44,16 @@ export class FormComponent implements OnInit {
   /**This method create is summoned in the form.component.html class.
    * this will create an offer and save it in DB. then will redirect to the offer page.
    * **/
-  public create(): void{
+  public create(): void {
     console.log(this.comerce);
-    this.comerceService.create(this.comerce).subscribe(response=>{
+    this.comerceService.create(this.comerce).subscribe(response => {
       this.router.navigate(['map']);
 
-  })
+    })
   }
-  getComerce(comerce: Comerce):void{
-    this.comerceService.getComerce(comerce).subscribe(response=> this.comerce = response)
+
+  getComerce(comerce: Comerce): void {
+    this.comerceService.getComerce(comerce).subscribe(response => this.comerce = response)
   }
 
 

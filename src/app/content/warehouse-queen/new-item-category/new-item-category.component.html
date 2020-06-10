@@ -1,7 +1,6 @@
 <ng-template transloco let-t>
 
 
-
   <div class="space"></div>
   <div class="row">
     <div class="col">
@@ -26,13 +25,16 @@
                       <div class="newOrderInputFieldsDeliveryFinalPricePerUnit">
                         <mat-form-field hintLabel="Max 30 characters" appearance="fill">
                           <mat-label>{{ t('translate.enterNameCategory') }}</mat-label>
-                          <input matInput #input [(ngModel)]="newCategoryElement.category" maxlength="30" placeholder="Ex. deliveryQuantity">
+                          <input matInput #input [(ngModel)]="newCategoryElement.category" maxlength="30"
+                                 placeholder="Ex. deliveryQuantity">
                         </mat-form-field>
                       </div>
 
                       <div class="verifyCategoryExistant">
                         <button matTooltip="Checks if the category already exists"
-                                [matTooltipPosition]="position.value" mat-raised-button (click)="verifyCategoryExistant()">{{ t('translate.checkAvailability') }}</button>
+                                [matTooltipPosition]="position.value" mat-raised-button
+                                (click)="verifyCategoryExistant()">{{ t('translate.checkAvailability') }}
+                        </button>
                         <br>
                         <a>{{availableItems}}</a>
                         <br>
@@ -40,7 +42,9 @@
 
                       <div>
                         <button matTooltip="Adds new category to the list"
-                                [matTooltipPosition]="position.value"  mat-raised-button  (click)="createNewCategory()">{{ t('translate.createNewCategory') }}</button>
+                                [matTooltipPosition]="position.value" mat-raised-button (click)="createNewCategory()">{{
+                          t('translate.createNewCategory') }}
+                        </button>
                         <!--                <button mat-button (click)="deleteSelectedCategory()">delete selected</button>-->
                       </div>
                     </div>
@@ -71,16 +75,18 @@
       <!--    CONTAINER TO CENTER IN THE PAGE-->
       <div class="container-fluid d-flex justify-content-center">
         <div class="demo-card-wide mdl-card mdl-shadow--2dp">
-        <!--    CONTENT-->
+          <!--    CONTENT-->
 
           <div class="container cont-bg2 ">
             <div class="space"></div>
             <div class="container cont-bg4  justify-content-center ">
               <div class="space"></div>
-              <div class="d-flex justify-content-around" >
+              <div class="d-flex justify-content-around">
                 <div class="d-flex justify-content-around">
                   <button matTooltip="Deletes selected categories from the list"
-                          [matTooltipPosition]="position.value"  mat-raised-button  (click)="deleteSelectedCategory()">{{ t('translate.deleteSelected') }}</button>
+                          [matTooltipPosition]="position.value" mat-raised-button (click)="deleteSelectedCategory()">{{
+                    t('translate.deleteSelected') }}
+                  </button>
                 </div>
                 <div class="space"></div>
               </div>
@@ -88,10 +94,10 @@
             </div>
 
             <div class="space"></div>
-            <div class= "table-responsive">
+            <div class="table-responsive">
               <div class=" table-responsive">
 
-                <table mat-table #myShopCheckinProductsTable [dataSource]="listCategories" class="mat-elevation-z8" >
+                <table mat-table #myShopCheckinProductsTable [dataSource]="listCategories" class="mat-elevation-z8">
 
                   <!-- Checkbox Column -->
                   <ng-container matColumnDef="select">
@@ -113,8 +119,8 @@
 
                   <!-- Position Column -->
                   <ng-container matColumnDef="category">
-                    <th mat-header-cell *matHeaderCellDef> {{ t('translate.category') }} </th>
-                    <td mat-cell *matCellDef="let element"> {{element.category}} </td>
+                    <th mat-header-cell *matHeaderCellDef> {{ t('translate.category') }}</th>
+                    <td mat-cell *matCellDef="let element"> {{element.category}}</td>
                   </ng-container>
 
                   <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
@@ -128,9 +134,9 @@
             </div>
 
 
-          <!--    CONTENT-->
+            <!--    CONTENT-->
 
-        </div>
+          </div>
 
           <!--    NEXT DIV CLOSES CONTAINER TO CENTER CARD-->
         </div>

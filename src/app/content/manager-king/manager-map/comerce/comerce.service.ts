@@ -27,7 +27,6 @@ export class ComerceService {
   }
 
 
-
 // this method is called readAllOffers and gets an observable type back that becomes an array of offers.
 
 

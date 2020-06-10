@@ -35,7 +35,8 @@ export class NewDeliveryFromWarehouseService {
         quantity: entry.quantity,
         originalQuantity: entry.quantity,
         timestamp: entry.timestamp,
-        comment: entry.comment
+        instructionComment: entry.comment,
+        comment: ''
       };
       listItemsPeriodicElements.push(entryPeriodicElement);
     });

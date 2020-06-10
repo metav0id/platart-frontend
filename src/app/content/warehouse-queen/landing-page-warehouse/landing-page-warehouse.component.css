@@ -4,11 +4,13 @@
   margin: 1em;
 
 }
+
 .demo-card-wide > .mdl-card__title {
   color: #000000;
   height: 5em;
 
 }
+
 .demo-card-wide > .mdl-card__menu {
   color: #000000;
 
@@ -19,14 +21,14 @@
 
 }
 
-h1{
+h1 {
   /*text-shadow: 2px 5px 5px #403f3f;*/
   /*font-weight: bolder;*/
   font-family: sans-serif;
   color: #000000;
 }
 
-.space{
+.space {
   margin-top: 2em;
   margin-right: 2em;
   margin-left: 2em;
@@ -42,7 +44,7 @@ h1{
   background-size: cover;
 }
 
-mat-card{
+mat-card {
   margin-bottom: 5em;
 }
 

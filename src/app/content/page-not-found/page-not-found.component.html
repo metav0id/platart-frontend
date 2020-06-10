@@ -1,124 +1,128 @@
 <h1>User guide: {{role}}</h1>
 
 <div class="container-fluid d-flex justify-content-center">
-<!--  FIRST CARD-->
-<div class="demo-card-wide mdl-card mdl-shadow--2dp">
-<!--  TITLE-->
-  <div class="mdl-card__title">
-    <h2 class="mdl-card__title-text">Things you can do in this module:</h2>
-  </div>
-<!--  TITLE-->
-  <div class="mdl-card__actions mdl-card--border">
-<!--EXPANDIBLES-->
-    <mat-accordion>
-      <mat-expansion-panel>
-        <mat-expansion-panel-header>
-          <mat-panel-title>
-            <div>
-              <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect nav-link a" routerLink="stockinwarehouse">
-                - Check how much stock of each item is in warehouse
-              </a>
-            </div>
-          </mat-panel-title>
-          <mat-panel-description>
-<!--            Type your name and age-->
-          </mat-panel-description>
-        </mat-expansion-panel-header>
-
-        <mat-form-field>
-          <mat-label>First name</mat-label>
-          <input matInput>
-        </mat-form-field>
-
-        <mat-form-field>
-          <mat-label>Age</mat-label>
-          <input matInput type="number" min="1">
-        </mat-form-field>
-      </mat-expansion-panel>
-      <mat-expansion-panel (opened)="panelOpenState = true"
-                           (closed)="panelOpenState = false">
-        <mat-expansion-panel-header>
-          <mat-panel-title>
-            <div>
-              <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect nav-link a" routerLink="newdeliverytoshop">
-                - Register a new delivery to a shop
-              </a>
-            </div>
-          </mat-panel-title>
-          <mat-panel-description>
-<!--            Currently I am {{panelOpenState ? 'open' : 'closed'}}-->
-          </mat-panel-description>
-        </mat-expansion-panel-header>
-        <p>I'm visible because I am open</p>
-      </mat-expansion-panel>
-
-      <mat-expansion-panel (opened)="panelOpenState = true"
-                           (closed)="panelOpenState = false">
-        <mat-expansion-panel-header>
-          <mat-panel-title>
+  <!--  FIRST CARD-->
+  <div class="demo-card-wide mdl-card mdl-shadow--2dp">
+    <!--  TITLE-->
+    <div class="mdl-card__title">
+      <h2 class="mdl-card__title-text">Things you can do in this module:</h2>
+    </div>
+    <!--  TITLE-->
+    <div class="mdl-card__actions mdl-card--border">
+      <!--EXPANDIBLES-->
+      <mat-accordion>
+        <mat-expansion-panel>
+          <mat-expansion-panel-header>
+            <mat-panel-title>
               <div>
-                <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect nav-link a" routerLink="newdeliverytowarehouse">
+                <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect nav-link a"
+                   routerLink="stockinwarehouse">
+                  - Check how much stock of each item is in warehouse
+                </a>
+              </div>
+            </mat-panel-title>
+            <mat-panel-description>
+              <!--            Type your name and age-->
+            </mat-panel-description>
+          </mat-expansion-panel-header>
+
+          <mat-form-field>
+            <mat-label>First name</mat-label>
+            <input matInput>
+          </mat-form-field>
+
+          <mat-form-field>
+            <mat-label>Age</mat-label>
+            <input matInput type="number" min="1">
+          </mat-form-field>
+        </mat-expansion-panel>
+        <mat-expansion-panel (opened)="panelOpenState = true"
+                             (closed)="panelOpenState = false">
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              <div>
+                <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect nav-link a"
+                   routerLink="newdeliverytoshop">
+                  - Register a new delivery to a shop
+                </a>
+              </div>
+            </mat-panel-title>
+            <mat-panel-description>
+              <!--            Currently I am {{panelOpenState ? 'open' : 'closed'}}-->
+            </mat-panel-description>
+          </mat-expansion-panel-header>
+          <p>I'm visible because I am open</p>
+        </mat-expansion-panel>
+
+        <mat-expansion-panel (opened)="panelOpenState = true"
+                             (closed)="panelOpenState = false">
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              <div>
+                <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect nav-link a"
+                   routerLink="newdeliverytowarehouse">
                   - Register an incomming delivery to warehouse
                 </a>
               </div>
-          </mat-panel-title>
-          <mat-panel-description>
-<!--            Currently I am {{panelOpenState ? 'open' : 'closed'}}-->
-          </mat-panel-description>
-        </mat-expansion-panel-header>
-        <p>I'm visible because I am open</p>
-      </mat-expansion-panel>
+            </mat-panel-title>
+            <mat-panel-description>
+              <!--            Currently I am {{panelOpenState ? 'open' : 'closed'}}-->
+            </mat-panel-description>
+          </mat-expansion-panel-header>
+          <p>I'm visible because I am open</p>
+        </mat-expansion-panel>
 
-      <mat-expansion-panel (opened)="panelOpenState = true"
-                           (closed)="panelOpenState = false">
-        <mat-expansion-panel-header>
-          <mat-panel-title>
-            <div>
-              <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect nav-link a" routerLink="newitemcategory" >
-                - Add a new category of an item to the warehouse stock registry
-              </a>
-            </div>
-          </mat-panel-title>
-          <mat-panel-description>
-<!--            Currently I am {{panelOpenState ? 'open' : 'closed'}}-->
-          </mat-panel-description>
-        </mat-expansion-panel-header>
-        <p>I'm visible because I am open</p>
-      </mat-expansion-panel>
-    </mat-accordion>
-    <!--EXPANDIBLES-->
+        <mat-expansion-panel (opened)="panelOpenState = true"
+                             (closed)="panelOpenState = false">
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              <div>
+                <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect nav-link a"
+                   routerLink="newitemcategory">
+                  - Add a new category of an item to the warehouse stock registry
+                </a>
+              </div>
+            </mat-panel-title>
+            <mat-panel-description>
+              <!--            Currently I am {{panelOpenState ? 'open' : 'closed'}}-->
+            </mat-panel-description>
+          </mat-expansion-panel-header>
+          <p>I'm visible because I am open</p>
+        </mat-expansion-panel>
+      </mat-accordion>
+      <!--EXPANDIBLES-->
 
-<!--      <div>-->
-<!--        <a class="mdl-button mdl-button&#45;&#45;colored mdl-js-button mdl-js-ripple-effect nav-link a" routerLink="stockinwarehouse">-->
-<!--         - Check how much stock of each item is in warehouse-->
-<!--        </a>-->
-<!--      </div>-->
-<!--      <div>-->
-<!--          <a class="mdl-button mdl-button&#45;&#45;colored mdl-js-button mdl-js-ripple-effect">-->
-<!--            - Register a new delivery to a shop-->
-<!--          </a>-->
-<!--      </div>-->
-<!--      <div>-->
-<!--          <a class="mdl-button mdl-button&#45;&#45;colored mdl-js-button mdl-js-ripple-effect">-->
-<!--           - Register an incomming delivery to warehouse-->
-<!--          </a>-->
-<!--      </div>-->
-<!--      <div>-->
-<!--          <a class="mdl-button mdl-button&#45;&#45;colored mdl-js-button mdl-js-ripple-effect" >-->
-<!--           - Add a new category of an item to the warehouse stock registry-->
-<!--          </a>-->
-<!--      </div>-->
+      <!--      <div>-->
+      <!--        <a class="mdl-button mdl-button&#45;&#45;colored mdl-js-button mdl-js-ripple-effect nav-link a" routerLink="stockinwarehouse">-->
+      <!--         - Check how much stock of each item is in warehouse-->
+      <!--        </a>-->
+      <!--      </div>-->
+      <!--      <div>-->
+      <!--          <a class="mdl-button mdl-button&#45;&#45;colored mdl-js-button mdl-js-ripple-effect">-->
+      <!--            - Register a new delivery to a shop-->
+      <!--          </a>-->
+      <!--      </div>-->
+      <!--      <div>-->
+      <!--          <a class="mdl-button mdl-button&#45;&#45;colored mdl-js-button mdl-js-ripple-effect">-->
+      <!--           - Register an incomming delivery to warehouse-->
+      <!--          </a>-->
+      <!--      </div>-->
+      <!--      <div>-->
+      <!--          <a class="mdl-button mdl-button&#45;&#45;colored mdl-js-button mdl-js-ripple-effect" >-->
+      <!--           - Add a new category of an item to the warehouse stock registry-->
+      <!--          </a>-->
+      <!--      </div>-->
+    </div>
+
+    <div class="mdl-card__supporting-text">
+      Select one on the list above or use the menu at the header to navigate across the webpage!
+    </div>
+    <!--  <div class="mdl-card__actions mdl-card&#45;&#45;border">-->
+    <!--    <a class="mdl-button mdl-button&#45;&#45;colored mdl-js-button mdl-js-ripple-effect">-->
+    <!--      Get Started-->
+    <!--    </a>-->
+    <!--  </div>-->
   </div>
-
-  <div class="mdl-card__supporting-text">
-    Select one on the list above or use the menu at the header to navigate across the webpage!
-  </div>
-<!--  <div class="mdl-card__actions mdl-card&#45;&#45;border">-->
-<!--    <a class="mdl-button mdl-button&#45;&#45;colored mdl-js-button mdl-js-ripple-effect">-->
-<!--      Get Started-->
-<!--    </a>-->
-<!--  </div>-->
-</div>
 </div>
 <!--END OF FIRST CARD-->
 
@@ -140,5 +144,5 @@
     </div>
 
   </div>
-<!--  END OF SECOND CARD-->
+  <!--  END OF SECOND CARD-->
 </div>

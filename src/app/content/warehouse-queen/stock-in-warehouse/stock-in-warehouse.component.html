@@ -1,121 +1,125 @@
 <ng-template transloco let-t>
-<div class="space"></div>
-
-<div class="container-fluid d-flex justify-content-center">
-
-<!--BOX -->
-  <div class="demo-card-wide mdl-card mdl-shadow--2dp justi ">
-    <div class="container d-flex justify-content-left mdl-card__title ">
-      <h2 class="mdl-card__title-text">{{ t('translate.stockInWarehouse') }}</h2>
-    </div>
-    <div class="mdl-card__supporting-text">
-<!--      CONTENIDO-->
-
-
-
-      <div class=" ">
-
-        <div class=" table-responsive ">
-          <div class="space"></div>
-          <div class="container cont-bg4 cont-bg mdl-shadow--2dp justify-content-center  ">
-
-            <div class="d-flex justify-content-around" >
-              <mat-form-field >
-                <mat-label>Filter</mat-label>
-                <input matInput (keyup)="applyFilter($event)" placeholder="Ex. ium">
-              </mat-form-field>
-            </div >
-          </div>
-          <div class="space"></div>
-          <table mat-table #myWarehouseItemsTable [dataSource]="dataSource" class="mat-elevation-z8" >
-
-            <!-- Position Column -->
-            <ng-container matColumnDef="category">
-              <th mat-header-cell *matHeaderCellDef> {{ t('translate.category') }} </th>
-              <td mat-cell *matCellDef="let element"> {{element.category}} </td>
-              <td mat-footer-cell *matFooterCellDef> - </td>
-            </ng-container>
-
-            <!-- Name Column -->
-            <ng-container matColumnDef="priceListPerUnit">
-              <th mat-header-cell *matHeaderCellDef> {{ t('translate.listPrice') }} </th>
-              <td mat-cell *matCellDef="let element"> {{element.priceListPerUnit}} </td>
-              <td mat-footer-cell *matFooterCellDef> Sum </td>
-            </ng-container>
-
-            <!-- Quantity Column -->
-            <ng-container matColumnDef="quantity">
-              <th mat-header-cell *matHeaderCellDef> {{ t('translate.quantity') }} </th>
-              <td mat-cell *matCellDef="let element"> {{element.quantity}} </td>
-              <td mat-footer-cell *matFooterCellDef> {{getSumQuantity()}} </td>
-            </ng-container>
-
-            <!-- Correct Quantity -->
-            <ng-container matColumnDef="correctQuantity">
-              <th mat-header-cell *matHeaderCellDef> {{ t('translate.quantity') }} </th>
-              <td mat-cell *matCellDef="let element">
-                <button *ngIf="!updateQuantityState" (click)="updateQuantityButton(element)">{{ t('translate.changeQuantity') }}</button>
-                <button *ngIf="updateQuantityState" >{{ t('translate.changeQuantity') }}</button>
-              </td>
-              <td mat-footer-cell *matFooterCellDef> - </td>
-            </ng-container>
-
-            <!-- Weight UnitPrice*quantity -->
-            <ng-container matColumnDef="value">
-              <th mat-header-cell *matHeaderCellDef> {{ t('translate.categoryValue') }} </th>
-              <td mat-cell *matCellDef="let element"> {{(element.quantity)*(element.priceListPerUnit)}} </td>
-              <td mat-footer-cell *matFooterCellDef> {{getTotalCost()}} </td>
-            </ng-container>
-
-            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-            <tr mat-row *matRowDef="let element; columns: displayedColumns;"></tr>
-            <tr mat-footer-row *matFooterRowDef="displayedColumns"></tr>
-
-          </table>
-          <div class="space"></div>
-        </div>
-
-        <div *ngIf="updateQuantityState">
-          <div class="container cont-bg3  justify-content-center punkt ">
-            <div class="space"></div>
-            <div class="d-flex justify-content-around" >
-
-              <h3>{{ t('translate.update') }} {{updateWarehouseItem.category}} {{ t('translate.for') }} {{updateWarehouseItem.priceListPerUnit}}$</h3>
-              <h4>{{ t('translate.currentQuantity') }}: {{updateWarehouseItem.quantity}} {{ t('translate.correctTo') }}:</h4>
-
-              <div class="newQuantity">
-                <mat-form-field hintLabel="Max 10 characters" appearance="fill">
-                  <mat-label>{{ t('translate.newQuantity') }}</mat-label>
-                  <input matInput #input [(ngModel)]="updateWarehouseItem.quantity" maxlength="10" placeholder="Ex. deliveryQuantity">
-                  <mat-hint align="end">{{input.value?.length || 0}}/10</mat-hint>
-                </mat-form-field>
-              </div>
-
-              <div class="updateResponsiblePerson">
-                <mat-form-field hintLabel="Max 10 characters" appearance="fill">
-                  <mat-label>{{ t('translate.employee') }}:</mat-label>
-                  <input matInput #input [(ngModel)]="updateResponsiblePerson" maxlength="10" placeholder="Ex. deliveryQuantity">
-                  <mat-hint align="end">{{input.value?.length || 0}}/10</mat-hint>
-                </mat-form-field>
-              </div>
-
-              <button (click)="saveUpdateQuantityButton()">{{ t('translate.changeQuantity') }}</button>
-            </div >
-            <div class="space"></div>
-          </div>
-        </div>
-
-<!--      CONTENIDO-->
-    </div>
-
-<!--BOX-->
   <div class="space"></div>
-<div>
+
+  <div class="container-fluid d-flex justify-content-center">
+
+    <!--BOX -->
+    <div class="demo-card-wide mdl-card mdl-shadow--2dp justi ">
+      <div class="container d-flex justify-content-left mdl-card__title ">
+        <h2 class="mdl-card__title-text">{{ t('translate.stockInWarehouse') }}</h2>
+      </div>
+      <div class="mdl-card__supporting-text">
+        <!--      CONTENIDO-->
 
 
+        <div class=" ">
 
-</div>
-</div>
-</div>
-</div>
+          <div class=" table-responsive ">
+            <div class="space"></div>
+            <div class="container cont-bg4 cont-bg mdl-shadow--2dp justify-content-center  ">
+
+              <div class="d-flex justify-content-around">
+                <mat-form-field>
+                  <mat-label>Filter</mat-label>
+                  <input matInput (keyup)="applyFilter($event)" placeholder="Ex. ium">
+                </mat-form-field>
+              </div>
+            </div>
+            <div class="space"></div>
+            <table mat-table #myWarehouseItemsTable [dataSource]="dataSource" class="mat-elevation-z8">
+
+              <!-- Position Column -->
+              <ng-container matColumnDef="category">
+                <th mat-header-cell *matHeaderCellDef> {{ t('translate.category') }}</th>
+                <td mat-cell *matCellDef="let element"> {{element.category}}</td>
+                <td mat-footer-cell *matFooterCellDef> -</td>
+              </ng-container>
+
+              <!-- Name Column -->
+              <ng-container matColumnDef="priceListPerUnit">
+                <th mat-header-cell *matHeaderCellDef> {{ t('translate.listPrice') }}</th>
+                <td mat-cell *matCellDef="let element"> {{element.priceListPerUnit}}</td>
+                <td mat-footer-cell *matFooterCellDef> Sum</td>
+              </ng-container>
+
+              <!-- Quantity Column -->
+              <ng-container matColumnDef="quantity">
+                <th mat-header-cell *matHeaderCellDef> {{ t('translate.quantity') }}</th>
+                <td mat-cell *matCellDef="let element"> {{element.quantity}}</td>
+                <td mat-footer-cell *matFooterCellDef> {{getSumQuantity()}}</td>
+              </ng-container>
+
+              <!-- Correct Quantity -->
+              <ng-container matColumnDef="correctQuantity">
+                <th mat-header-cell *matHeaderCellDef> {{ t('translate.quantity') }}</th>
+                <td mat-cell *matCellDef="let element">
+                  <button *ngIf="!updateQuantityState" (click)="updateQuantityButton(element)">{{
+                    t('translate.changeQuantity') }}
+                  </button>
+                  <button *ngIf="updateQuantityState">{{ t('translate.changeQuantity') }}</button>
+                </td>
+                <td mat-footer-cell *matFooterCellDef> -</td>
+              </ng-container>
+
+              <!-- Weight UnitPrice*quantity -->
+              <ng-container matColumnDef="value">
+                <th mat-header-cell *matHeaderCellDef> {{ t('translate.categoryValue') }}</th>
+                <td mat-cell *matCellDef="let element"> {{(element.quantity)*(element.priceListPerUnit)}}</td>
+                <td mat-footer-cell *matFooterCellDef> {{getTotalCost()}}</td>
+              </ng-container>
+
+              <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+              <tr mat-row *matRowDef="let element; columns: displayedColumns;"></tr>
+              <tr mat-footer-row *matFooterRowDef="displayedColumns"></tr>
+
+            </table>
+            <div class="space"></div>
+          </div>
+
+          <div *ngIf="updateQuantityState">
+            <div class="container cont-bg3  justify-content-center punkt ">
+              <div class="space"></div>
+              <div class="d-flex justify-content-around">
+
+                <h3>{{ t('translate.update') }} {{updateWarehouseItem.category}} {{ t('translate.for') }}
+                  {{updateWarehouseItem.priceListPerUnit}}$</h3>
+                <h4>{{ t('translate.currentQuantity') }}: {{updateWarehouseItem.quantity}} {{ t('translate.correctTo')
+                  }}:</h4>
+
+                <div class="newQuantity">
+                  <mat-form-field hintLabel="Max 10 characters" appearance="fill">
+                    <mat-label>{{ t('translate.newQuantity') }}</mat-label>
+                    <input matInput #input [(ngModel)]="updateWarehouseItem.quantity" maxlength="10"
+                           placeholder="Ex. deliveryQuantity">
+                    <mat-hint align="end">{{input.value?.length || 0}}/10</mat-hint>
+                  </mat-form-field>
+                </div>
+
+                <div class="updateResponsiblePerson">
+                  <mat-form-field hintLabel="Max 10 characters" appearance="fill">
+                    <mat-label>{{ t('translate.employee') }}:</mat-label>
+                    <input matInput #input [(ngModel)]="updateResponsiblePerson" maxlength="10"
+                           placeholder="Ex. deliveryQuantity">
+                    <mat-hint align="end">{{input.value?.length || 0}}/10</mat-hint>
+                  </mat-form-field>
+                </div>
+
+                <button (click)="saveUpdateQuantityButton()">{{ t('translate.changeQuantity') }}</button>
+              </div>
+              <div class="space"></div>
+            </div>
+          </div>
+
+          <!--      CONTENIDO-->
+        </div>
+
+        <!--BOX-->
+        <div class="space"></div>
+        <div>
+
+
+        </div>
+      </div>
+    </div>
+  </div>
 </ng-template>

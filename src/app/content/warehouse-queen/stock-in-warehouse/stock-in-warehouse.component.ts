@@ -10,7 +10,7 @@ import {WarehouseItem} from './stock-in-warehouse-DTOs/WarehouseItem';
   selector: 'app-stock-in-warehouse',
   templateUrl: './stock-in-warehouse.component.html',
   styleUrls: ['./stock-in-warehouse.component.css'],
-  providers: [{provide: TRANSLOCO_SCOPE, useValue: { scope: 'warehouseQueen', alias: 'translate' }}]
+  providers: [{provide: TRANSLOCO_SCOPE, useValue: {scope: 'warehouseQueen', alias: 'translate'}}]
 })
 export class StockInWarehouseComponent implements OnInit {
   displayedColumns: string[] = ['category', 'priceListPerUnit', 'quantity', 'value'];
@@ -30,6 +30,7 @@ export class StockInWarehouseComponent implements OnInit {
   };
 
   @ViewChild('myWarehouseItemsTable') table: MatTable<any>;
+
   constructor(private http: HttpClient, private stockInWarehouseService: StockInWarehouseService) {
   }
 

@@ -27,8 +27,9 @@ export class ComerceFormComponent implements OnInit {
   marcador: Marcador = new Marcador(this.data['lat'], this.data['lng']);
 
 
-  constructor(private comerceService : ComerceService, private router: Router, private mapService: MapService,
-              public dialogRef: MatDialogRef<FormComponent>, @Inject(MAT_DIALOG_DATA) public data: DialogData) { }
+  constructor(private comerceService: ComerceService, private router: Router, private mapService: MapService,
+              public dialogRef: MatDialogRef<FormComponent>, @Inject(MAT_DIALOG_DATA) public data: DialogData) {
+  }
 
 
   /**This method will close the dialog window.**/
@@ -41,15 +42,15 @@ export class ComerceFormComponent implements OnInit {
   }
 
 
-  getMarcador(comerce: Comerce):void{
-    this.comerceService.getComerce(comerce).subscribe(response=> comerce = response)
+  getMarcador(comerce: Comerce): void {
+    this.comerceService.getComerce(comerce).subscribe(response => comerce = response)
   }
 
   /**This method saves the edited field in the asigned marker
    * **/
-  public save(): void{
+  public save(): void {
     console.log(this.marcador);
     this.mapService.edit(this.marcador)
-    }
+  }
 
 }

@@ -8,4 +8,5 @@ export interface DeliveryItemFromWarehouseDTO {
   priceSalesPerUnit: number;
   timestamp: string;
   comment: string;
+  instructionComment?: string;
 }

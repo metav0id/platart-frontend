@@ -70,7 +70,7 @@ export class CheckoutSoldItemsService {
     //   comment: 'comment'
     // };
 
-    return this.http.post<ShopsCheckoutSoldItemsDTO>(environment.getShopInventoryAvailability, newItem );
+    return this.http.post<ShopsCheckoutSoldItemsDTO>(environment.getShopInventoryAvailability, newItem);
   }
 
 }

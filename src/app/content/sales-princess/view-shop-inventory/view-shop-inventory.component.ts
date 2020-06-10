@@ -12,7 +12,7 @@ import {TooltipPosition} from "@angular/material/tooltip";
   selector: 'app-view-shop-inventory',
   templateUrl: './view-shop-inventory.component.html',
   styleUrls: ['./view-shop-inventory.component.css'],
-  providers: [{provide: TRANSLOCO_SCOPE, useValue: { scope: 'salesPrincess', alias: 'translate' }}]
+  providers: [{provide: TRANSLOCO_SCOPE, useValue: {scope: 'salesPrincess', alias: 'translate'}}]
 })
 export class ViewShopInventoryComponent implements OnInit {
   /** tooltip features**/
@@ -20,7 +20,7 @@ export class ViewShopInventoryComponent implements OnInit {
   position = new FormControl(this.positionOptions[0]);
 
   // table information
-  displayedColumns: string[] = ['category', 'quantity', 'priceListPerUnit', 'priceSalesPerUnit' ];
+  displayedColumns: string[] = ['category', 'quantity', 'priceListPerUnit', 'priceSalesPerUnit'];
   dataSource = new MatTableDataSource();
   @ViewChild('myShopsItemsTable') table: MatTable<any>;
 
@@ -32,12 +32,13 @@ export class ViewShopInventoryComponent implements OnInit {
   public selectedShopToFilterOnList = '';
   public selectedShopToDisplay = '';
 
-  constructor(private viewShopInventoryService: ViewShopInventoryService, private transloco: TranslocoService) { }
+  constructor(private viewShopInventoryService: ViewShopInventoryService, private transloco: TranslocoService) {
+  }
 
   ngOnInit(): void {
-    this.viewShopInventoryService.getListShops().subscribe( (JsonDto) => {
+    this.viewShopInventoryService.getListShops().subscribe((JsonDto) => {
       this.listShops = JsonDto;
-    } );
+    });
   }
 
   // fetch inventory data

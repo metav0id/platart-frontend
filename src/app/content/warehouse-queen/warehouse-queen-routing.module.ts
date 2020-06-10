@@ -12,10 +12,14 @@ import {LandingPageWarehouseComponent} from "./landing-page-warehouse/landing-pa
 const routes: Routes = [
   {path: 'stockinwarehouse', component: StockInWarehouseComponent, canActivate: [AuthGuard, WarehouseGuard]},
   {path: 'newdeliverytoshop', component: NewDeliveryToShopComponent, canActivate: [AuthGuard, WarehouseGuard]},
-  {path: 'newdeliverytowarehouse', component: NewDeliveryToWarehouseComponent, canActivate: [AuthGuard, WarehouseGuard]},
+  {
+    path: 'newdeliverytowarehouse',
+    component: NewDeliveryToWarehouseComponent,
+    canActivate: [AuthGuard, WarehouseGuard]
+  },
   {path: 'newitemcategory', component: NewItemCategoryComponent, canActivate: [AuthGuard, WarehouseGuard]},
-  {path: 'comerce', component: FormComponent, canActivate: [AuthGuard] },
-  { path: 'landingPage'   , component: LandingPageWarehouseComponent, canActivate: [AuthGuard]},
+  {path: 'comerce', component: FormComponent, canActivate: [AuthGuard]},
+  {path: 'landingPage', component: LandingPageWarehouseComponent, canActivate: [AuthGuard]},
 ];
 
 @NgModule({

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 
 @Component({
   selector: 'app-manager-inventory-display',
@@ -11,7 +11,8 @@ export class ManagerInventoryDisplayComponent implements OnInit {
   inventorySelected: string;
   inventoryRange: string[] = ['Warehouse', 'Shops'];
 
-  constructor() { }
+  constructor() {
+  }
 
   ngOnInit(): void {
   }

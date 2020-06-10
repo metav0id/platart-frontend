@@ -1,23 +1,26 @@
-agm-map{
+agm-map {
   height: 600px;
-width:90%;
+  width: 90%;
 
 }
-mat-card-title{
+
+mat-card-title {
 
   font-weight: bolder;
   font-family: sans-serif;
   color: #212e3e;
 }
-mat-card{
+
+mat-card {
   background-color: #f5f5f5;
 
 }
+
 mat-card[_ngcontent-acc-c179] {
   background-color: #f5f5f5;
 }
 
-.box{
+.box {
   text-align: center;
   display: flex;
   flex-direction: column;
@@ -26,21 +29,24 @@ mat-card[_ngcontent-acc-c179] {
 
 table {
   width: 100%;
-  margin-left:auto;
-  margin-right:auto;
+  margin-left: auto;
+  margin-right: auto;
 }
-.space{
+
+.space {
   height: 20px;
 }
 
-.space2{
+.space2 {
   width: 20px;
 }
-.justi{
+
+.justi {
   display: flex;
   align-items: center;
   justify-content: center
 }
+
 button {
   margin: 7px;
   /*transition-duration: 0.4s;*/
@@ -51,7 +57,7 @@ button {
   /*text-decoration: none;*/
   /*outline: none;*/
   color: #fff;
-  background-color:  #212e3e;
+  background-color: #212e3e;
   /*border: none;*/
   /*border-radius: 15px;*/
   /*box-shadow: 0 5px #999;*/
@@ -69,53 +75,56 @@ button {
 /*  transform: translateY(4px);*/
 /*}*/
 
-th{
+th {
   font-family: Raleway /* Replace with your custom font */, sans-serif !important;
   /* Add !important to overwrite all elements */
   color: #0056b3;
 
 }
 
-.cont-bg{
+.cont-bg {
   background-color: #ffffff;
   border-radius: 25px;
 }
 
-.cont-bg2{
+.cont-bg2 {
   background-color: #ffffff;
   border-radius: 25px;
 }
-.cont-bg4{
+
+.cont-bg4 {
   background-color: #f5f5f5;
 
 }
 
-.cont-bg3{
+.cont-bg3 {
   background-color: #f1d4cf;
 
 }
 
 
-h1{
+h1 {
   text-shadow: 2px 5px 5px #403f3f;
   font-weight: bolder;
   font-family: sans-serif;
   color: #3d0949;
 }
-h2{
+
+h2 {
 
   font-weight: bolder;
   font-family: sans-serif;
   color: #000000;
 
 }
-h3{
+
+h3 {
 
   font-weight: bolder;
   font-family: sans-serif;
   color: #490927;
 }
 
-.punkt{
+.punkt {
   border-style: dotted;
 }

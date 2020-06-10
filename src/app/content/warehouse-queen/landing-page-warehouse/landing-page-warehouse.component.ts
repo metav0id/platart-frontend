@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 
 @Component({
   selector: 'app-landing-page-warehouse',
@@ -8,7 +8,9 @@ import { Component, OnInit } from '@angular/core';
 export class LandingPageWarehouseComponent implements OnInit {
   role: String = "Warehouse manager";
   panelOpenState = false;
-  constructor() { }
+
+  constructor() {
+  }
 
   ngOnInit(): void {
   }

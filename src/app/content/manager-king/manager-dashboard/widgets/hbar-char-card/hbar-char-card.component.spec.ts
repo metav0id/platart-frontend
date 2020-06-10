@@ -1,6 +1,6 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { HbarCharCardComponent } from './hbar-char-card.component';
+import {HbarCharCardComponent} from './hbar-char-card.component';
 
 describe('HbarCharCardComponent', () => {
   let component: HbarCharCardComponent;
@@ -8,9 +8,9 @@ describe('HbarCharCardComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ HbarCharCardComponent ]
+      declarations: [HbarCharCardComponent]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

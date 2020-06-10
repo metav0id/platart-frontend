@@ -30,7 +30,8 @@ export class HbarCharCardComponent implements OnInit {
 
   public hbarData = this.managerDashboardService.fetchHBarData();
 
-  constructor(private managerDashboardService: ManagerDashboardService) { }
+  constructor(private managerDashboardService: ManagerDashboardService) {
+  }
 
   ngOnInit(): void {
   }

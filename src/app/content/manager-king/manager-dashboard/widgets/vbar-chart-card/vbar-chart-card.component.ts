@@ -31,9 +31,10 @@ export class VbarChartCardComponent implements OnInit {
 
   showLabels = false;
 
-  constructor(private managerDashboardService: ManagerDashboardService) { }
+  constructor(private managerDashboardService: ManagerDashboardService) {
+  }
 
   ngOnInit(): void {
-    }
+  }
 
 }

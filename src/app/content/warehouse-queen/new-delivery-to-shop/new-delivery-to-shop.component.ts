@@ -4,33 +4,31 @@ import {SelectionModel} from '@angular/cdk/collections';
 import {MatTable} from '@angular/material/table';
 import {NewOrderItemDTO} from './new-delivery-to-shop-DTOs/NewOrderItemDTO';
 import {NewDeliveryToShopService} from './new-delivery-to-shop.service';
-import {VerifyAmountItemsOnStockDTO} from './new-delivery-to-shop-DTOs/VerifyAmountItemsOnStockDTO';
 import {WarehouseItemCategoryDTO} from '../warehouseCategory/warehouse-item-category-DTO';
 import {WarehouseCategoryService} from '../warehouseCategory/warehouseCategory.service';
-import {NewDeliveryToWarehouseService} from '../new-delivery-to-warehouse/new-delivery-to-warehouse.service';
-import {observable, Observable} from 'rxjs';
+import {Observable} from 'rxjs';
 import {WarehouseNewDeliveryPersistanceResponseDTO} from './new-delivery-to-shop-DTOs/WarehouseNewDeliveryPersistanceResponseDTO';
-import {MatSnackBar} from '@angular/material/snack-bar';
 import {TRANSLOCO_SCOPE} from '@ngneat/transloco';
 import {Shop} from './new-delivery-to-shop-DTOs/Shop';
-import {TooltipPosition} from "@angular/material/tooltip";
+import {TooltipPosition} from '@angular/material/tooltip';
+import {PeriodicElement} from './new-delivery-to-shop-DTOs/periodic-element';
 
 /** Is used for table elements */
-export interface PeriodicElement {
-  position: number;
-  category: string;
-  priceSalesPerUnit: number;
-  quantity: number;
-  discountPercent: number;
-  priceListPerUnit: number;
-  deliveryShop: string;
-}
+// export interface PeriodicElement {
+//   position: number;
+//   category: string;
+//   priceSalesPerUnit: number;
+//   quantity: number;
+//   discountPercent: number;
+//   priceListPerUnit: number;
+//   deliveryShop: string;
+// }
 
 @Component({
   selector: 'app-new-delivery-order',
   templateUrl: './new-delivery-to-shop.component.html',
   styleUrls: ['./new-delivery-to-shop.component.css'],
-  providers: [{provide: TRANSLOCO_SCOPE, useValue: { scope: 'warehouseQueen', alias: 'translate' }}]
+  providers: [{provide: TRANSLOCO_SCOPE, useValue: {scope: 'warehouseQueen', alias: 'translate'}}]
 })
 export class NewDeliveryToShopComponent implements OnInit {
   /** tooltip features**/
@@ -43,8 +41,8 @@ export class NewDeliveryToShopComponent implements OnInit {
   public categoryItems: WarehouseItemCategoryDTO[] = [];
 
   public discountMethod: string;
-  private readonly DISCOUNT_METHOD_PERCENT = 'percent';
-  private readonly DISCOUNT_METHOD_DISPLAY_PRICE = 'sales price';
+  readonly DISCOUNT_METHOD_PERCENT = 'percent';
+  readonly DISCOUNT_METHOD_DISPLAY_PRICE = 'sales price';
   public discountMethodList: string[] = [this.DISCOUNT_METHOD_PERCENT, this.DISCOUNT_METHOD_DISPLAY_PRICE];
   private readonly INITIALIZE_CATEGORY = 'chooseCategory';
   private readonly INITIALIZE_SHOP = 'chooseShop';
@@ -60,7 +58,8 @@ export class NewDeliveryToShopComponent implements OnInit {
     priceSalesPerUnit: 0,
     discountPercent: 0,
     priceListPerUnit: 0,
-    deliveryShop: this.INITIALIZE_SHOP
+    deliveryShop: this.INITIALIZE_SHOP,
+    comment: ''
   };
 
   selection = new SelectionModel<PeriodicElement>(true, []);
@@ -70,8 +69,9 @@ export class NewDeliveryToShopComponent implements OnInit {
   /** Shop selection */
   public shopControl = new FormControl('', Validators.required);
 
-  availableItems: number = 0;
+  availableItems = 0;
   @ViewChild('myShopCheckinProductsTable') table: MatTable<any>;
+
   constructor(private newDeliveryToShopService: NewDeliveryToShopService, private warehouseCategoryService: WarehouseCategoryService) {
   }
 
@@ -94,7 +94,8 @@ export class NewDeliveryToShopComponent implements OnInit {
             priceSalesPerUnit: tempNewOrderItemDTO.priceSalesPerUnit,
             priceListPerUnit: tempNewOrderItemDTO.priceListPerUnit,
             quantity: tempNewOrderItemDTO.quantity,
-            deliveryShop: tempNewOrderItemDTO.deliveryShop
+            deliveryShop: tempNewOrderItemDTO.deliveryShop,
+            comment: tempNewOrderItemDTO.comment
           };
           counter++;
           this.listNewItemsToShops.push(newPeriodicElement);
@@ -110,20 +111,15 @@ export class NewDeliveryToShopComponent implements OnInit {
   }
 
   setNewItemOrder() {
-    console.log('set new Item Value');
-
     this.verifyAvailabilityObservale().subscribe(obs => {
       this.availableItems = obs;
-
-      console.log('obs value' + obs);
 
       if (this.availableItems >= this.newOrderElement.quantity) {
 
         if (this.newOrderElement.priceListPerUnit > 0 &&
           this.newOrderElement.category !== this.INITIALIZE_CATEGORY &&
           this.newOrderElement.quantity > 0 &&
-          this.newOrderElement.deliveryShop !== this.INITIALIZE_SHOP &&
-          true) {
+          this.newOrderElement.deliveryShop !== this.INITIALIZE_SHOP) {
 
           const newItem: PeriodicElement = {
             position: this.listNewItemsToShops.length + 1,
@@ -132,13 +128,9 @@ export class NewDeliveryToShopComponent implements OnInit {
             priceSalesPerUnit: this.newOrderElement.priceSalesPerUnit,
             discountPercent: this.newOrderElement.discountPercent,
             priceListPerUnit: this.newOrderElement.priceListPerUnit,
-            deliveryShop: this.newOrderElement.deliveryShop
+            deliveryShop: this.newOrderElement.deliveryShop,
+            comment: this.newOrderElement.comment
           };
-
-          console.log('before if : discount ' + newItem.discountPercent + ' final price: ' + newItem.priceListPerUnit +
-            ' display price: ' + newItem.priceSalesPerUnit);
-
-          console.log('discount method flag:' + this.discountMethod);
 
           if (this.discountMethod === undefined) {
             newItem.priceSalesPerUnit = newItem.priceListPerUnit;
@@ -148,17 +140,12 @@ export class NewDeliveryToShopComponent implements OnInit {
             newItem.priceSalesPerUnit = Math.round(newItem.priceListPerUnit * (1 - newItem.discountPercent / 100));
           }
 
-          console.log('After If : discount ' + newItem.discountPercent + ' final price: ' + newItem.priceListPerUnit +
-            ' display price: ' + newItem.priceSalesPerUnit);
-
           this.listNewItemsToShops.push(newItem);
           this.table.renderRows();
         }
       }
     });
     this.verifyAvailability();
-/*
-    let snackBarItemAdded = this._snackBar.open('Item added to list!!', 'ok', {duration: 2000,});*/
   }
 
   getTotalValue(): number {
@@ -179,10 +166,8 @@ export class NewDeliveryToShopComponent implements OnInit {
 
   saveCurrentOrder() {
     const tempNewOrderItemDTOList: NewOrderItemDTO[] = this.mapPeriodicElementListToDTO();
-
     this.newDeliveryToShopService.setAllNewOrderItems(tempNewOrderItemDTOList);
     this.table.renderRows();
-    // let snackBarOrderSaved = this._snackBar.open('Order send!', 'ok', {duration: 2000,});
   }
 
   mapPeriodicElementListToDTO(): NewOrderItemDTO[] {
@@ -195,8 +180,10 @@ export class NewDeliveryToShopComponent implements OnInit {
         priceSalesPerUnit: tempPeriodicElement.priceSalesPerUnit,
         priceListPerUnit: tempPeriodicElement.priceListPerUnit,
         quantity: tempPeriodicElement.quantity,
-        deliveryShop: tempPeriodicElement.deliveryShop
+        deliveryShop: tempPeriodicElement.deliveryShop,
+        comment: tempPeriodicElement.comment
       };
+      console.log('Comment: ' + newOrderItemDTO.comment);
       tempNewOrderItemDTOList.push(newOrderItemDTO);
     }
     return tempNewOrderItemDTOList;
@@ -210,8 +197,6 @@ export class NewDeliveryToShopComponent implements OnInit {
     }
     console.log(this.listNewItemsToShops);
     this.table.renderRows();
-
-    // let snackBarItemsDeleted = this._snackBar.open('Sale send!', 'ok', {duration: 2000,});
   }
 
   updateButton(periodicElement: PeriodicElement) {
@@ -225,11 +210,8 @@ export class NewDeliveryToShopComponent implements OnInit {
     this.newOrderElement.priceListPerUnit = periodicElement.priceListPerUnit;
     this.newOrderElement.deliveryShop = periodicElement.deliveryShop;
 
-    // function to remove the current element
     this.removeCurrentItem(periodicElement.position);
     this.table.renderRows();
-
-    // let snackBarUpdateItem = this._snackBar.open('Update item', 'ok', {duration: 2000,});
   }
 
   removeCurrentItem(currentIndex: number) {
@@ -262,7 +244,7 @@ export class NewDeliveryToShopComponent implements OnInit {
   verifyAvailabilityObservale(): Observable<number> {
 
     return new Observable((observer) => {
-      let localAvailableItems: number = 0;
+      let localAvailableItems = 0;
 
       this.newDeliveryToShopService.verifyAmountItemsOnStock(
         this.newOrderElement.category,
@@ -281,14 +263,10 @@ export class NewDeliveryToShopComponent implements OnInit {
           observer.next(localAvailableItems);
         });
     });
-
-    // let snackBarItemVerification = this._snackBar.open('Verification complete!', 'ok', {duration: 2000,});
   }
 
   sendCurrentOrder() {
     const tempNewOrderItemDTOList: NewOrderItemDTO[] = this.mapPeriodicElementListToDTO();
-
-    // let snackBarOrderSendStart = this._snackBar.open('Order was send. Wait for response.', 'ok', {duration: 2000,});
 
     let persistanceResponseList: WarehouseNewDeliveryPersistanceResponseDTO;
 
@@ -298,8 +276,6 @@ export class NewDeliveryToShopComponent implements OnInit {
       console.log(persistanceResponseList);
       this.fetchNewOrderData();
     });
-
-    // let snackBarOrderSendEnd = this._snackBar.open('Order response has arrived.', 'ok', {duration: 2000,});
   }
 
   /** Whether the number of selected elements matches the total number of rows. */
