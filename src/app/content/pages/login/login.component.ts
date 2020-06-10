@@ -43,7 +43,7 @@ export class LoginComponent implements OnInit {
     Swal.showLoading();
     this.auth.signIn(this.user.email, this.user.password).subscribe(resp => {
         Swal.close();
-        this.router.navigate(['landingPage']);
+        this.router.navigate(['login']);
       }, (error => Swal.fire({
         icon: 'error',
         title: 'Login Error',
