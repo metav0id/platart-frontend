@@ -1,11 +1,11 @@
 import {Injectable} from '@angular/core';
 import {Observable} from 'rxjs';
-import {DeliveryItemFromWarehouseDTO} from './DeliveryItemFromWarehouseDTO';
 import {HttpClient} from '@angular/common/http';
 import {environment} from '../../../../environments/environment';
 import {map} from 'rxjs/operators';
 import {ShopCheckInNewItemsDTO} from './shop-check-in-new-items-dto';
 import {ShopDTO} from './shop-dto';
+import {TableItem} from './table-item';
 
 @Injectable({
   providedIn: 'root'
@@ -14,20 +14,21 @@ export class NewDeliveryFromWarehouseService {
   constructor(private http: HttpClient) {
   }
 
-  public getNewDeliveryForShop(shop: string): Observable<DeliveryItemFromWarehouseDTO[]> {
+  public getNewDeliveryForShop(shop: string): Observable<TableItem[]> {
 
     const shopDTO = {shop};
 
-    return this.http.post<DeliveryItemFromWarehouseDTO[]>(environment.getDeliveryItemsFromWarehouseByShop, shopDTO).pipe(map(Json => {
-      return this.convertDtoToPeriodicElement(Json);
+    return this.http.post<TableItem[]>(environment.getDeliveryItemsFromWarehouseByShop, shopDTO).pipe(map(Json => {
+      return this.convertDtoToTableItem(Json);
     }));
   }
 
-  private convertDtoToPeriodicElement(listItems): DeliveryItemFromWarehouseDTO[] {
-    const listItemsPeriodicElements: DeliveryItemFromWarehouseDTO[] = [];
+  private convertDtoToTableItem(listItems): TableItem[] {
+    const listItemsPeriodicElements: TableItem[] = [];
 
     listItems.forEach(entry => {
-      const entryPeriodicElement: DeliveryItemFromWarehouseDTO = {
+      const entryPeriodicElement: TableItem = {
+        isChecked: false,
         identifierOnDeliveryList: entry.identifierOnDeliveryList,
         category: entry.category,
         priceListPerUnit: entry.listPrice,
@@ -43,13 +44,13 @@ export class NewDeliveryFromWarehouseService {
     return listItemsPeriodicElements;
   }
 
-  public saveList(shop: string, listTable: DeliveryItemFromWarehouseDTO[]) {
-    const listDTO: ShopCheckInNewItemsDTO[] = this.convertPeridicElementToDTO(shop, listTable);
-    console.log(listDTO);
+  public saveList(shop: string, listTable: TableItem[]): TableItem[] {
+    const listDTO: ShopCheckInNewItemsDTO[] = this.convertTableItemToDTO(shop, listTable.filter(obj => obj.isChecked));
     this.http.post(environment.saveDeliveryItemsToShopStock, listDTO).subscribe(answer => console.log('Saved successfully? ' + answer));
+    return listTable.filter(obj => !obj.isChecked);
   }
 
-  private convertPeridicElementToDTO(shop: string, listTable: DeliveryItemFromWarehouseDTO[]): ShopCheckInNewItemsDTO[] {
+  private convertTableItemToDTO(shop: string, listTable: TableItem[]): ShopCheckInNewItemsDTO[] {
     const listDTO: ShopCheckInNewItemsDTO[] = [];
     for (const item of listTable) {
       const itemDTO: ShopCheckInNewItemsDTO = {

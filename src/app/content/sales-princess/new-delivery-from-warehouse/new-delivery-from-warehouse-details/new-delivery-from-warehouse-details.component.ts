@@ -1,8 +1,7 @@
 import {Component, Inject, OnInit} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
-import {DeliveryItemFromWarehouseDTO} from '../DeliveryItemFromWarehouseDTO';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
-import {validateQuantity} from './check-quantity.validator';
+import {TableItem} from '../table-item';
 
 @Component({
   selector: 'app-new-delivery-from-warehouse-details',
@@ -15,7 +14,7 @@ export class NewDeliveryFromWarehouseDetailsComponent implements OnInit {
 
   constructor(
     public dialogRef: MatDialogRef<NewDeliveryFromWarehouseDetailsComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: DeliveryItemFromWarehouseDTO) {
+    @Inject(MAT_DIALOG_DATA) public data: TableItem) {
   }
 
   ngOnInit(): void {
@@ -37,8 +36,6 @@ export class NewDeliveryFromWarehouseDetailsComponent implements OnInit {
 
   onSubmit() {
     if (this.myForm.valid) {
-      console.log('Form submitted');
-      //this.myForm.reset();
       this.dialogRef.close();
     } else {
       console.log('Error by input');
