@@ -1,8 +1,21 @@
+<ng-template transloco let-t>
 <div class="container-fluid d-flex justify-content-center">
   <div class="demo-card-wide mdl-card mdl-shadow--2dp justi ">
 
     <h1>Checked In Items</h1>
-
+    <div class="newOrderInputFieldsCategory">
+      <mat-form-field appearance="fill">
+        <mat-label>{{ t('translate.shop') }}</mat-label>
+        <mat-select [formControl]="formControl" [(value)]="deliveryShop">
+          <mat-option>--</mat-option>
+          <mat-option *ngFor="let entry of shopsList" [value]="entry.name">{{ entry.name}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+    <button matTooltip="Refresh list"
+            mat-mini-fab (click)="getCheckedInItemsListSpecificShop()">
+      <mat-icon>autorenew</mat-icon>
+    </button>
   </div>
 </div>
 
@@ -16,30 +29,44 @@
       <input matInput (keyup)="applyFilter($event)" placeholder="Ex. ium">
     </mat-form-field>
 
+<!--    'shop', 'category', 'revenuePerUnit', 'priceListPerUnit', 'priceSalesPerUnit', 'itemLastSold'-->
+
     <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8">
 
       <!-- Position Column -->
-      <ng-container matColumnDef="position">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header> No. </th>
-        <td mat-cell *matCellDef="let element"> {{element.position}} </td>
+      <ng-container matColumnDef="shop">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Shop </th>
+        <td mat-cell *matCellDef="let element"> {{element.shop}} </td>
       </ng-container>
 
       <!-- Name Column -->
-      <ng-container matColumnDef="name">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header> Name </th>
-        <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+      <ng-container matColumnDef="category">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Category </th>
+        <td mat-cell *matCellDef="let element"> {{element.category}} </td>
       </ng-container>
 
       <!-- Weight Column -->
-      <ng-container matColumnDef="weight">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header> Weight </th>
-        <td mat-cell *matCellDef="let element"> {{element.weight}} </td>
+      <ng-container matColumnDef="revenuePerUnit">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Revenue </th>
+        <td mat-cell *matCellDef="let element"> {{element.revenuePerUnit}} </td>
       </ng-container>
 
       <!-- Symbol Column -->
-      <ng-container matColumnDef="symbol">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header> Symbol </th>
-        <td mat-cell *matCellDef="let element"> {{element.symbol}} </td>
+      <ng-container matColumnDef="priceListPerUnit">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> List Price </th>
+        <td mat-cell *matCellDef="let element"> {{element.priceListPerUnit}} </td>
+      </ng-container>
+
+      <!-- Symbol Column -->
+      <ng-container matColumnDef="priceSalesPerUnit">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Sales </th>
+        <td mat-cell *matCellDef="let element"> {{element.priceSalesPerUnit}} </td>
+      </ng-container>
+
+      <!-- Symbol Column -->
+      <ng-container matColumnDef="itemLastSold">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Last Sold </th>
+        <td mat-cell *matCellDef="let element"> {{element.itemLastSold}} </td>
       </ng-container>
 
       <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
@@ -49,3 +76,4 @@
 
   </div>
 </div>
+</ng-template>

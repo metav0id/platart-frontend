@@ -51,6 +51,8 @@ export const environment = {
   getAllItemsAllShops: 'http://localhost:8081/shops/getAllItemsAllShops',
   getSoldItemsList: 'http://localhost:8081/manager/getSoldItemsListByDateRange',
   getCheckinItemsList: 'http://localhost:8081/manager/getCheckinItemsListByDateRange',
+  getAllCheckedInItems: 'http://localhost:8081/shops/getAllCheckedInItems',
+  getSpecificCheckedInItems: 'http://localhost:8081/shops/getSpecificCheckedInItems'
 };
 
 /*

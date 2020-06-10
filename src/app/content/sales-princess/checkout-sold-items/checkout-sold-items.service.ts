@@ -6,7 +6,6 @@ import {observable, Observable} from 'rxjs';
 import {environment} from '../../../../environments/environment';
 import {ShopsCheckoutSoldItemsDTO} from './checkout-sold-items-DTOs/ShopsCheckoutSoldItemsDTO';
 import {ShopDTO} from '../../warehouse-queen/new-delivery-to-shop/new-delivery-to-shop-DTOs/shop-dto';
-import {ShopInventoryItem} from "../view-shop-inventory/view-shop-inventory-DTOs/ShopInventoryItem";
 
 @Injectable({
   providedIn: 'root'
@@ -56,19 +55,6 @@ export class CheckoutSoldItemsService {
   }
 
   public verifyAvailability(newItem: ShopsCheckoutSoldItemsDTO): Observable<ShopsCheckoutSoldItemsDTO> {
-    // const ELEMENT_DATA: ShopsCheckoutSoldItemsDTO = {
-    //   position: 1,
-    //   category: 'anillo',
-    //   quantity: 100,
-    //   priceListPerUnit: 20,
-    //   priceSalesPerUnit: 20,
-    //   revenuePerUnit: 20,
-    //   discountPercent: 0,
-    //   shop: 'shop1',
-    //   deliverySending: 'delivery',
-    //   itemLastSold: 'delivery',
-    //   comment: 'comment'
-    // };
 
     return this.http.post<ShopsCheckoutSoldItemsDTO>(environment.getShopInventoryAvailability, newItem );
   }

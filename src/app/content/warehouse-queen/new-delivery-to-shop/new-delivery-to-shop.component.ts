@@ -13,7 +13,7 @@ import {WarehouseNewDeliveryPersistanceResponseDTO} from './new-delivery-to-shop
 import {MatSnackBar} from '@angular/material/snack-bar';
 import {TRANSLOCO_SCOPE} from '@ngneat/transloco';
 import {Shop} from './new-delivery-to-shop-DTOs/Shop';
-import {TooltipPosition} from "@angular/material/tooltip";
+import {TooltipPosition} from '@angular/material/tooltip';
 
 /** Is used for table elements */
 export interface PeriodicElement {

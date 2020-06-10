@@ -47,4 +47,6 @@ export const environment = {
   getAllItemsAllShops: 'http://161.35.4.253:8081/shops/getAllItemsAllShops',
   getSoldItemsList: 'http://161.35.4.253:8081/manager/getSoldItemsListByDateRange',
   getCheckinItemsList: 'http://161.35.4.253:8081/manager/getCheckinItemsListByDateRange',
+  getAllCheckedInItems: 'http://161.35.4.253:8081/shops/getAllCheckedInItems',
+  getSpecificCheckedInItems: 'http://161.35.4.253:8081/shops/getSpecificCheckedInItems'
 };

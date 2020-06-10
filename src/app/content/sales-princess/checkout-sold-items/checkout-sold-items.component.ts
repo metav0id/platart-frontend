@@ -15,8 +15,7 @@ import {CheckoutSoldItemsSendVerificationComponent} from './checkout-sold-items-
 import {SendItemsDTO} from './checkout-sold-items-DTOs/Send-Items-DTO';
 import {TRANSLOCO_SCOPE, TranslocoService} from '@ngneat/transloco';
 import {TooltipPosition} from '@angular/material/tooltip';
-import Swal
-  from "sweetalert2";
+import Swal from "sweetalert2";
 
 @Component({
   selector: 'app-checkout-sold-items',
