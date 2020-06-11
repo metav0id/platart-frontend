@@ -5,6 +5,9 @@
   flex-direction: column;
   justify-content: center;
 }
+.pad{
+  padding-bottom: 1em;
+}
 
 table {
   width: 100%;
@@ -111,6 +114,7 @@ h3 {
 
 .demo-card-wide.mdl-card {
   width: 500em;
+  margin-bottom: 2em;
 
 }
 

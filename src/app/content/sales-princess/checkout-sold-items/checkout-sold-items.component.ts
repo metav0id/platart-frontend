@@ -274,7 +274,7 @@ export class CheckoutSoldItemsComponent implements OnInit {
     console.log('open category Dialog');
     // open the dialogue
     const dialogRef = this.dialog.open(CheckoutSoldItemsDetailsComponent, {
-      width: '250px',
+      width: '400px',
       data: checkoutCategory.items
     });
 
