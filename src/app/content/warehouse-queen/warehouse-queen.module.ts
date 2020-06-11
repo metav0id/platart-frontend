@@ -21,6 +21,8 @@ import {MatTooltipModule} from "@angular/material/tooltip";
 
 import {MatExpansionModule} from "@angular/material/expansion";
 import {MatCardModule} from "@angular/material/card";
+import { CommentDialogComponent } from './new-delivery-to-shop/comment-dialog/comment-dialog.component';
+import {MatDialogModule} from "@angular/material/dialog";
 
 
 
@@ -29,26 +31,28 @@ import {MatCardModule} from "@angular/material/card";
     StockInWarehouseComponent,
     NewDeliveryToShopComponent,
     NewDeliveryToWarehouseComponent,
+    CommentDialogComponent,
   ],
-  imports: [
-    CommonModule,
-    WarehouseQueenRoutingModule,
-    CdkTableModule,
-    MatTableModule,
-    BrowserAnimationsModule,
-    FormsModule,
-    MatCheckboxModule,
-    MatFormFieldModule,
-    ReactiveFormsModule,
-    MatSelectModule,
-    MatInputModule,
-    MatIconModule,
-    MatRadioModule,
-    MatButtonModule,
-    TranslocoRootModule,
-    MatTooltipModule,
-    MatExpansionModule,
-    MatCardModule
-  ]
+    imports: [
+        CommonModule,
+        WarehouseQueenRoutingModule,
+        CdkTableModule,
+        MatTableModule,
+        BrowserAnimationsModule,
+        FormsModule,
+        MatCheckboxModule,
+        MatFormFieldModule,
+        ReactiveFormsModule,
+        MatSelectModule,
+        MatInputModule,
+        MatIconModule,
+        MatRadioModule,
+        MatButtonModule,
+        TranslocoRootModule,
+        MatTooltipModule,
+        MatExpansionModule,
+        MatCardModule,
+        MatDialogModule
+    ]
 })
 export class WarehouseQueenModule { }

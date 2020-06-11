@@ -12,6 +12,8 @@ import {TRANSLOCO_SCOPE} from '@ngneat/transloco';
 import {Shop} from './new-delivery-to-shop-DTOs/Shop';
 import {TooltipPosition} from '@angular/material/tooltip';
 import {PeriodicElement} from './new-delivery-to-shop-DTOs/periodic-element';
+import {MatDialog} from "@angular/material/dialog";
+import {CommentDialogComponent} from "./comment-dialog/comment-dialog.component";
 
 /** Is used for table elements */
 // export interface PeriodicElement {
@@ -36,7 +38,7 @@ export class NewDeliveryToShopComponent implements OnInit {
   position = new FormControl(this.positionOptions[0]);
 
   displayedColumns: string[] = ['select', 'category', 'priceListPerUnit', 'quantity',
-    'discountPercent', 'priceSalesPerUnit', 'updateItem'];
+    'discountPercent', 'priceSalesPerUnit', 'comment', 'updateItem'];
   public listNewItemsToShops: PeriodicElement[] = [];
   public categoryItems: WarehouseItemCategoryDTO[] = [];
 
@@ -72,7 +74,9 @@ export class NewDeliveryToShopComponent implements OnInit {
   availableItems = 0;
   @ViewChild('myShopCheckinProductsTable') table: MatTable<any>;
 
-  constructor(private newDeliveryToShopService: NewDeliveryToShopService, private warehouseCategoryService: WarehouseCategoryService) {
+  constructor(private newDeliveryToShopService: NewDeliveryToShopService,
+              private warehouseCategoryService: WarehouseCategoryService,
+              private dialog: MatDialog) {
   }
 
   ngOnInit(): void {
@@ -277,6 +281,14 @@ export class NewDeliveryToShopComponent implements OnInit {
       this.fetchNewOrderData();
     });
   }
+
+  openDialogComment(element: PeriodicElement) {
+    this.dialog.open(CommentDialogComponent, {
+      width: '250px',
+      data: element.comment
+    });
+  }
+
 
   /** Whether the number of selected elements matches the total number of rows. */
   isAllSelected() {

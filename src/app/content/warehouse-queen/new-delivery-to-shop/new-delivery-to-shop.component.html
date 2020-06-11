@@ -206,6 +206,15 @@
                     <td mat-footer-cell *matFooterCellDef> {{getTotalValue()}}$</td>
                   </ng-container>
 
+                  <!-- Comment Column -->
+                  <ng-container matColumnDef="comment">
+                    <th mat-header-cell *matHeaderCellDef> {{ t('translate.comment') }}</th>
+                    <td mat-cell *matCellDef="let element">
+                      <button (click)="openDialogComment(element)">{{ t('translate.comment') }}</button>
+                    </td>
+                    <td mat-footer-cell *matFooterCellDef> -</td>
+                  </ng-container>
+
                   <!-- Action Column -->
                   <ng-container matColumnDef="updateItem">
                     <th mat-header-cell *matHeaderCellDef> {{ t('translate.action') }}</th>
