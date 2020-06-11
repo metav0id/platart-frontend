@@ -22,7 +22,6 @@ import {CommentDialogComponent} from './comment-dialog/comment-dialog.component'
   providers: [{provide: TRANSLOCO_SCOPE, useValue: {scope: 'warehouseQueen', alias: 'translate'}}]
 })
 export class NewDeliveryToShopComponent implements OnInit {
-  /** tooltip features**/
   positionOptions: TooltipPosition[] = ['after', 'before', 'above', 'below', 'left', 'right'];
   position = new FormControl(this.positionOptions[0]);
 
