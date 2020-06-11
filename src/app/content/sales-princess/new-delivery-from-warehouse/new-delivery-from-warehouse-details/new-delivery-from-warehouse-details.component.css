@@ -1,0 +1,18 @@
+.cont-bg4{
+  background-color: #f5f5f5;
+
+}
+
+.demo-card-wide.mdl-card {
+  color: #fff;
+
+}
+.demo-card-wide > .mdl-card__title {
+
+
+
+
+  /*background: url('../assets/demos/welcome_card.jpg') center / cover;*/
+}
+.demo-card-wide > .mdl-card__menu {
+}
