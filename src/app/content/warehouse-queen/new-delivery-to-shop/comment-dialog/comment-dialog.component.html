@@ -1,26 +1,26 @@
+<ng-template transloco let-t>
+  <div class="demo-card-wide mdl-card mdl-shadow--2dp cont-bg4">
+    <div class="mdl-card__title">
 
-<div class="demo-card-wide mdl-card mdl-shadow--2dp cont-bg4">
-  <div class="mdl-card__title">
+      <h1 mat-dialog-title>{{ t('translate.comment') }}</h1>
 
-    <h1 mat-dialog-title>Comment</h1>
-
-  </div>
-  <!--  CONTENT-->
-  <div mat-dialog-content>
-    <mat-card>
-      <mat-card-subtitle>Comment:</mat-card-subtitle>
-      <mat-card-content>{{ data }}</mat-card-content>
-    </mat-card>
-
-  </div>
-  <!--  CONTENT-->
-  <div class="mdl-card__actions mdl-card--border cont-bg4">
-    <div>
-      <mat-dialog-actions>
-        <button mat-raised-button mat-dialog-close>Close</button>
-      </mat-dialog-actions>
     </div>
+    <!--  CONTENT-->
+    <div mat-dialog-content>
+      <mat-card>
+        <mat-card-subtitle>{{ t('translate.comment') }}:</mat-card-subtitle>
+        <mat-card-content>{{ data }}</mat-card-content>
+      </mat-card>
+
+    </div>
+    <!--  CONTENT-->
+    <div class="mdl-card__actions mdl-card--border cont-bg4">
+      <div>
+        <mat-dialog-actions>
+          <button mat-raised-button mat-dialog-close>{{ t('translate.close') }}</button>
+        </mat-dialog-actions>
+      </div>
+    </div>
+
   </div>
-
-</div>
-
+</ng-template>

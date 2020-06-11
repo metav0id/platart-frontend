@@ -93,8 +93,8 @@
                 </div>
 
                 <mat-form-field appearance="fill">
-                  <mat-label>Comments</mat-label>
-                  <textarea matInput [(ngModel)]="newOrderElement.comment">Your comment</textarea>
+                  <mat-label>{{ t('translate.comment') }}</mat-label>
+                  <textarea matInput [(ngModel)]="newOrderElement.comment">{{ t('translate.comment') }}</textarea>
                 </mat-form-field>
 
                 <div>

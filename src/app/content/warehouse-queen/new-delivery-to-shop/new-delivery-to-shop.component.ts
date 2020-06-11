@@ -12,19 +12,8 @@ import {TRANSLOCO_SCOPE} from '@ngneat/transloco';
 import {Shop} from './new-delivery-to-shop-DTOs/Shop';
 import {TooltipPosition} from '@angular/material/tooltip';
 import {PeriodicElement} from './new-delivery-to-shop-DTOs/periodic-element';
-import {MatDialog} from "@angular/material/dialog";
-import {CommentDialogComponent} from "./comment-dialog/comment-dialog.component";
-
-/** Is used for table elements */
-// export interface PeriodicElement {
-//   position: number;
-//   category: string;
-//   priceSalesPerUnit: number;
-//   quantity: number;
-//   discountPercent: number;
-//   priceListPerUnit: number;
-//   deliveryShop: string;
-// }
+import {MatDialog} from '@angular/material/dialog';
+import {CommentDialogComponent} from './comment-dialog/comment-dialog.component';
 
 @Component({
   selector: 'app-new-delivery-order',
