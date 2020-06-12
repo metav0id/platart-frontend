@@ -27,14 +27,6 @@ export class ComerceService {
   }
 
 
-// this method is called readAllOffers and gets an observable type back that becomes an array of offers.
-
-
-  // public readAllComerces(): Observable<Offer[]> {
-  //   //this returns the list provided from the backend link.
-  //   return this.httpClient.get<Offer[]>(this.urlEndPoint);
-  // }
-
   create(comerce: Comerce): Observable<Comerce> {
 // this method uses post to create an offer . parameters are an url for the method, the DTO and a header if necessary
     return this.httpClient.post<Comerce>(environment.saveCommerce, comerce, {headers: this.httpHeader});
@@ -49,6 +41,5 @@ export class ComerceService {
 
   getComerce(comerce: Comerce): Observable<Marcador> {
     return this.httpClient.post<Marcador>(environment.findCommerce, comerce, {headers: this.httpHeader});
-
   }
 }

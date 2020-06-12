@@ -272,7 +272,7 @@ export class NewDeliveryToShopComponent implements OnInit {
 
   openDialogComment(element: PeriodicElement) {
     this.dialog.open(CommentDialogComponent, {
-      width: '250px',
+      width: '400px',
       data: element.comment
     });
   }

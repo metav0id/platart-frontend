@@ -35,7 +35,6 @@ import {from} from "rxjs";
 })
 export class MarkerFormComponent implements OnInit {
 
-  markersToEdit: Marcador[];
   allMarkers: Marcador[];
 
 

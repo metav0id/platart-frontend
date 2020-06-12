@@ -53,25 +53,22 @@ export class MapComponent implements OnInit {
     this.mapService.readAllMarkers().subscribe(response => this.marcadores = response);
   }
 
-  constructor(private mapService: MapService, public dialog: MatDialog, private activatedRoute: ActivatedRoute, private router: Router) {
+  constructor(private mapService: MapService, public dialog: MatDialog) {
   }
 
   /**This method is the guide to follow when wanting to open a dialog window**/
   openDialog(): void {
     const dialogRef = this.dialog.open(FormComponent, {
       width: '400px',
-      // data: {marker: this.marker2}
     });
 
     dialogRef.afterClosed().subscribe(result => {
       console.log('The dialog was closed');
-      // this.animal = result;
     });
   }
 
 
   /**This method finds a client when an id is provided**/
-//this is the marker than i need
   loadMarkerToModify(marcador: Marcador): void {
     console.log(marcador)
     this.latE = marcador.lat;
@@ -83,7 +80,6 @@ export class MapComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(result => {
       console.log('The dialog was closed');
-      // this.animal = result;
     });
 
   }

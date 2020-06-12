@@ -4,16 +4,11 @@ import {ComerceService} from "./comerce.service";
 import {Router, ActivatedRoute} from "@angular/router";
 import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
 import {FormControl,} from "@angular/forms";
-import {Marcador} from "../components/marker.class";
 import {
   DialogData,
-  MapComponent
+
 } from "../map/map.component";
-import {MapService} from "../map/map.service";
-import {
-  Observable,
-  Subject
-} from 'rxjs';
+
 
 
 @Component({
@@ -51,10 +46,5 @@ export class FormComponent implements OnInit {
 
     })
   }
-
-  getComerce(comerce: Comerce): void {
-    this.comerceService.getComerce(comerce).subscribe(response => this.comerce = response)
-  }
-
 
 }
