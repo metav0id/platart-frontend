@@ -264,8 +264,6 @@ export class NewDeliveryToShopComponent implements OnInit {
 
     this.newDeliveryToShopService.sendFinalizedOrder(tempNewOrderItemDTOList).subscribe(observer => {
       persistanceResponseList = observer;
-      console.log('after everything');
-      console.log(persistanceResponseList);
       this.fetchNewOrderData();
     });
   }
