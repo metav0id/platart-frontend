@@ -26,6 +26,8 @@ export class AddDeliveryItemComponent implements OnInit {
     timestamp: '',
     comment: ''
   };
+
+  // TODO check if categories are loaded correctly
   public categoryItems = [{category: 'Pulsera'}, {category: 'Sabato'}];
   public date = new Date();
 

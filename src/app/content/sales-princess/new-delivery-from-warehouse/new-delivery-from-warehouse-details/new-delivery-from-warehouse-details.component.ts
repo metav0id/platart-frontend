@@ -1,6 +1,6 @@
 import {Component, Inject, OnInit} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
-import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
+import {AbstractControl, FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {TableItem} from '../table-item';
 
 @Component({
@@ -9,36 +9,47 @@ import {TableItem} from '../table-item';
   styleUrls: ['./new-delivery-from-warehouse-details.component.css']
 })
 export class NewDeliveryFromWarehouseDetailsComponent implements OnInit {
-  public quantityFormControl: FormControl;
   public myForm: FormGroup;
+
+  /**
+   * This method is used for validating number input of form. Is a Validation-Function.
+   * @param control
+   */
+  static invalidNumberValidator(control: AbstractControl): { [key: string]: boolean } | null {
+    if (control.value <= 0) {
+      return {invalidNumber: true};
+    }
+    return null;
+  }
 
   constructor(
     public dialogRef: MatDialogRef<NewDeliveryFromWarehouseDetailsComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: TableItem) {
+    @Inject(MAT_DIALOG_DATA) public data: TableItem,
+    private formBuilder: FormBuilder) {
   }
 
   ngOnInit(): void {
-    this.createFormControls();
     this.createForm();
   }
 
-  createFormControls() {
-    this.quantityFormControl = new FormControl('', [
-      Validators.required
-    ]);
-  }
-
   createForm() {
-    this.myForm = new FormGroup({
-      quantity: this.quantityFormControl
+    this.myForm = this.formBuilder.group({
+      quantity: [this.data.quantity, [Validators.required, NewDeliveryFromWarehouseDetailsComponent.invalidNumberValidator]],
+      comment: [this.data.comment, [Validators.required]]
     });
   }
 
-  onSubmit() {
+  onSubmit(userData) {
     if (this.myForm.valid) {
+      this.saveItem(userData);
       this.dialogRef.close();
     } else {
       console.log('Error by input');
     }
+  }
+
+  saveItem(userData) {
+    this.data.quantity = userData.quantity;
+    this.data.comment = userData.comment;
   }
 }
