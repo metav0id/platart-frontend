@@ -1,6 +1,4 @@
-export interface TempCheckedInItemsDTO {
-  id: number;
-
+export interface CheckedInItemsDTO {
   shop: string;
   category: string;
   quantity: number;
@@ -8,4 +6,6 @@ export interface TempCheckedInItemsDTO {
   priceListPerUnit: number;
   discountPercent: number;
   deliverySending: string;
+  warehouseInstruction: string;
+  shopComment: string;
 }

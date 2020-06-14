@@ -5,6 +5,8 @@ import {CheckedInItemsService} from './checked-in-items.service';
 import {FormControl, Validators} from '@angular/forms';
 import {TRANSLOCO_SCOPE} from '@ngneat/transloco';
 import {ShopDTO} from './checked-in-items-DTOs/shop-dto';
+import {MatDialog} from '@angular/material/dialog';
+import {CheckedInItemsDetailsComponent} from './checked-in-items-details/checked-in-items-details.component';
 
 @Component({
   selector: 'app-checked-in-items',
@@ -20,12 +22,11 @@ export class CheckedInItemsComponent implements OnInit {
   public deliveryShop: string;
   public shopsList: ShopDTO[] = [{name: 'shop1'}, {name: 'shop2'}];
 
-  // displayedColumns: string[] = ['position', 'name', 'weight', 'symbol'];
-  displayedColumns: string[] = ['shop', 'category', 'priceListPerUnit', 'priceSalesPerUnit', 'itemLastSold'];
+  displayedColumns: string[] = ['date', 'category', 'priceListPerUnit', 'popup'];
   dataSource = new MatTableDataSource();
 
-  constructor(private checkedInItemsService: CheckedInItemsService) { }
-  // @ViewChild(MatSort) sort: MatSort;
+  constructor(public dialog: MatDialog,
+              private checkedInItemsService: CheckedInItemsService) { }
   @ViewChild(MatSort, {static: true}) sort: MatSort;
 
   ngOnInit(): void {
@@ -47,7 +48,7 @@ export class CheckedInItemsComponent implements OnInit {
     // tslint:disable-next-line:no-shadowed-variable
     this.checkedInItemsService.getCheckedInItems().subscribe((observable) => {
       this.dataSource = new MatTableDataSource(observable);
-      console.log();
+      console.log(observable);
     });
     this.dataSource.sort = this.sort;
   }
@@ -57,10 +58,24 @@ export class CheckedInItemsComponent implements OnInit {
       // tslint:disable-next-line:no-shadowed-variable
       this.checkedInItemsService.getCheckedInItemsListSpecificShop(this.deliveryShop).subscribe((observable) => {
         this.dataSource = new MatTableDataSource(observable);
-        console.log();
+        console.log(observable);
       });
       this.dataSource.sort = this.sort;
     }
   }
 
+  openDialogCheckInDetails(element: any) {
+
+    const dialogRef = this.dialog.open(CheckedInItemsDetailsComponent, {
+      width: '250px',
+      data: element
+    });
+
+    console.log('some details: ' +  element);
+
+    dialogRef.afterClosed().subscribe((DataObservable) => {
+      console.log(DataObservable);
+    });
+
+    }
 }

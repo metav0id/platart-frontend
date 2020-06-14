@@ -15,7 +15,7 @@ import {CheckoutSoldItemsSendVerificationComponent} from './checkout-sold-items-
 import {SendItemsDTO} from './checkout-sold-items-DTOs/Send-Items-DTO';
 import {TRANSLOCO_SCOPE, TranslocoService} from '@ngneat/transloco';
 import {TooltipPosition} from '@angular/material/tooltip';
-import Swal from "sweetalert2";
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-checkout-sold-items',
@@ -173,7 +173,7 @@ export class CheckoutSoldItemsComponent implements OnInit {
         icon: 'error',
         title: 'Entered data Error',
         text: 'Entered data are invalid, please try again or check stock to make sure the information is correct.'
-      })
+      });
     }
     this.table.renderRows();
 

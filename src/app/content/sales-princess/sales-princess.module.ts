@@ -27,6 +27,7 @@ import { AddDeliveryItemComponent } from './new-delivery-from-warehouse/add-deli
 import {MatTooltipModule} from '@angular/material/tooltip';
 import { CheckedInItemsComponent } from './checked-in-items/checked-in-items.component';
 import {MatSortModule} from "@angular/material/sort";
+import { CheckedInItemsDetailsComponent } from './checked-in-items/checked-in-items-details/checked-in-items-details.component';
 
 
 @NgModule({
@@ -39,7 +40,8 @@ import {MatSortModule} from "@angular/material/sort";
     ViewShopInventoryComponent,
     CheckoutSoldItemsSendVerificationComponent,
     AddDeliveryItemComponent,
-    CheckedInItemsComponent
+    CheckedInItemsComponent,
+    CheckedInItemsDetailsComponent
   ],
   imports: [
     CommonModule,
