@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  firebaseConfig : {
+  firebaseConfig: {
     apiKey: 'AIzaSyAYu4hMLTk28gkQPNcNEH3nYC6EqC3ZBZM',
     authDomain: 'platart-warehouse-user-mngt.firebaseapp.com',
     databaseURL: 'https://platart-warehouse-user-mngt.firebaseio.com',
@@ -41,10 +41,10 @@ export const environment = {
   yesterdaysDataURL: 'http://localhost:8081/dashboard/getYesterdaysData',
   actualsDataURL: 'http://localhost:8081/dashboard/getActualsData',
   saveDeliveryItemsToShopStock: 'http://localhost:8081/shops/saveNewDeliveryFromWarehouse',
-  getAllSoldItemsListURL:  'http://localhost:8081/shops/getAllSoldItemsList',
-  saveAllSoldItemsListURL:  'http://localhost:8081/shops/saveAllSoldItemsList',
-  sendAllSoldItemsListURL:  'http://localhost:8081/shops/sendAllSoldItemsList',
-  deleteCurrentSoldItemsListURL:  'http://localhost:8081/shops/deleteCurrentSoldItemsList',
+  getAllSoldItemsListURL: 'http://localhost:8081/shops/getAllSoldItemsList',
+  saveAllSoldItemsListURL: 'http://localhost:8081/shops/saveAllSoldItemsList',
+  sendAllSoldItemsListURL: 'http://localhost:8081/shops/sendAllSoldItemsList',
+  deleteCurrentSoldItemsListURL: 'http://localhost:8081/shops/deleteCurrentSoldItemsList',
   loadAllSoldItemsListURL: 'http://localhost:8081/shops/loadAllCurrentSoldItemsList',
   getShopInventoryAvailability: 'http://localhost:8081/shops/getShopInventoryAvailability',
   getShopInventoryItems: 'http://localhost:8081/shops/getShopInventoryItems',

@@ -1,6 +1,6 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { MonthToDateTableCardComponent } from './month-to-date-table-card.component';
+import {MonthToDateTableCardComponent} from './month-to-date-table-card.component';
 
 describe('MonthToDateTableCardComponent', () => {
   let component: MonthToDateTableCardComponent;
@@ -8,9 +8,9 @@ describe('MonthToDateTableCardComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ MonthToDateTableCardComponent ]
+      declarations: [MonthToDateTableCardComponent]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

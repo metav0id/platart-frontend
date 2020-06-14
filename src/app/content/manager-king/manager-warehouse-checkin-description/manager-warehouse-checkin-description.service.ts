@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {observable, Observable} from 'rxjs';
 import {environment} from '../../../../environments/environment';
 import {HttpClient} from '@angular/common/http';
@@ -12,7 +12,8 @@ import {ManagerWarehouseCheckinListingDTO} from './manager-warehouse-checkin-des
 })
 export class ManagerWarehouseCheckinDescriptionService {
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {
+  }
 
   getSoldItemsList(startDateValue: string, endDateValue: string): Observable<WarehouseCheckInNewItemDTO[]> {
 

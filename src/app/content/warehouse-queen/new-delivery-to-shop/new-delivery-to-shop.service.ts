@@ -5,7 +5,7 @@ import {NewOrderItemDTO} from './new-delivery-to-shop-DTOs/NewOrderItemDTO';
 import {VerifyAmountItemsOnStockDTO} from './new-delivery-to-shop-DTOs/VerifyAmountItemsOnStockDTO';
 import {WarehouseNewDeliveryPersistanceResponseDTO} from './new-delivery-to-shop-DTOs/WarehouseNewDeliveryPersistanceResponseDTO';
 import {environment} from '../../../../environments/environment';
-import {ShopDTO} from "./new-delivery-to-shop-DTOs/shop-dto";
+import {ShopDTO} from './new-delivery-to-shop-DTOs/shop-dto';
 
 
 @Injectable({
@@ -21,7 +21,6 @@ export class NewDeliveryToShopService {
   }
 
   setAllNewOrderItems(newOrderItemDTOList: NewOrderItemDTO[]): void {
-    console.log('Persist the order to database.');
     this.http.post<NewOrderItemDTO[]>(environment.setAllNewOrderItems, newOrderItemDTOList).subscribe();
   }
 
@@ -43,11 +42,10 @@ export class NewDeliveryToShopService {
     console.log(sendOrderItemDTOList);
     return new Observable((observer) => {
       let persistanceResponseList: WarehouseNewDeliveryPersistanceResponseDTO;
-      this.http.post<WarehouseNewDeliveryPersistanceResponseDTO>(environment.saveDeliveryOrder, sendOrderItemDTOList).
-        subscribe(JsonDto => {
-          persistanceResponseList = JsonDto;
-          observer.next(persistanceResponseList);
-        });
+      this.http.post<WarehouseNewDeliveryPersistanceResponseDTO>(environment.saveDeliveryOrder, sendOrderItemDTOList).subscribe(JsonDto => {
+        persistanceResponseList = JsonDto;
+        observer.next(persistanceResponseList);
+      });
     });
   }
 

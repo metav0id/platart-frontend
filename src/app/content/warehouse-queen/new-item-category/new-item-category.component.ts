@@ -17,7 +17,7 @@ export interface PeriodicElement {
   selector: 'app-new-item-category',
   templateUrl: './new-item-category.component.html',
   styleUrls: ['./new-item-category.component.css'],
-  providers: [{provide: TRANSLOCO_SCOPE, useValue: { scope: 'warehouseQueen', alias: 'translate' }}]
+  providers: [{provide: TRANSLOCO_SCOPE, useValue: {scope: 'warehouseQueen', alias: 'translate'}}]
 })
 export class NewItemCategoryComponent implements OnInit {
   /** tooltip features**/

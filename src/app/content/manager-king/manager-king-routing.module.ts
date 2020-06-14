@@ -11,13 +11,21 @@ import {MapComponent} from "./manager-map/map/map.component";
 import {FormComponent} from "./manager-map/comerce/form.component";
 
 const routes: Routes = [
-  { path: 'formComerce'    , component:  FormComponent, canActivate: [AuthGuard, ManagerGuard] },
-  { path: 'map'    , component: MapComponent, canActivate: [AuthGuard, ManagerGuard] },
+  {path: 'formComerce', component: FormComponent, canActivate: [AuthGuard, ManagerGuard]},
+  {path: 'map', component: MapComponent, canActivate: [AuthGuard, ManagerGuard]},
   {path: 'managerinventoryinfo', component: ManagerInventoryDisplayComponent, canActivate: [AuthGuard, ManagerGuard]},
   {path: 'managerdashboard', component: ManagerDashboardComponent, canActivate: [AuthGuard, ManagerGuard]},
   {path: 'register', component: RegisterComponent, canActivate: [AuthGuard, ManagerGuard]},
-  {path: 'managersalesdescription', component: ManagerSalesDescriptionComponent, canActivate: [AuthGuard, ManagerGuard]},
-  {path: 'managerwarehousecheckindescription', component: ManagerWarehouseCheckinDescriptionComponent, canActivate: [AuthGuard, ManagerGuard]},
+  {
+    path: 'managersalesdescription',
+    component: ManagerSalesDescriptionComponent,
+    canActivate: [AuthGuard, ManagerGuard]
+  },
+  {
+    path: 'managerwarehousecheckindescription',
+    component: ManagerWarehouseCheckinDescriptionComponent,
+    canActivate: [AuthGuard, ManagerGuard]
+  },
 ];
 
 @NgModule({

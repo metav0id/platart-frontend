@@ -1,5 +1,5 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import {NgModule} from '@angular/core';
+import {CommonModule} from '@angular/common';
 import {WarehouseQueenRoutingModule} from "../../../warehouse-queen/warehouse-queen-routing.module";
 import {CdkTableModule} from "@angular/cdk/table";
 import {MatTableModule} from "@angular/material/table";
@@ -19,11 +19,10 @@ import {MatDialogModule} from "@angular/material/dialog";
 import {MatCardModule} from "@angular/material/card";
 
 
-
 @NgModule({
   declarations: [
     // MarkerFormComponent
- ],
+  ],
   imports: [
     CommonModule,
     WarehouseQueenRoutingModule,
@@ -42,4 +41,5 @@ import {MatCardModule} from "@angular/material/card";
     MatCardModule,
   ]
 })
-export class MapModule { }
+export class MapModule {
+}

@@ -2,7 +2,7 @@
   <div class="mdl-card__title">
     <h2 class="mdl-card__title-text">Enter the comerce information</h2>
   </div>
-<!--  CONTENT-->
+  <!--  CONTENT-->
   <body class="cont-bg2 ">
   <form class="form ">
     <div class="container-fluid cont-bg2">
@@ -17,44 +17,45 @@
           </mat-card-header>
           <div class="form-container">
             <div>
-              <mat-form-field  appearance="legacy">
+              <mat-form-field appearance="legacy">
                 <mat-label>Name</mat-label>
-                <input matInput type="text" class="form-control"[(ngModel)]="comerce.name" name= "name" >
+                <input matInput type="text" class="form-control" [(ngModel)]="comerce.name" name="name">
               </mat-form-field>
             </div>
             <div>
               <mat-form-field appearance="legacy">
                 <mat-label>Category</mat-label>
                 <mat-select [formControl]="colorControl" [(value)]="comerce.category">
-                  <mat-option value="warehouse" class="form-control" >warehouse</mat-option>
-                  <mat-option value="store" class="form-control" >store</mat-option>
+                  <mat-option value="warehouse" class="form-control">warehouse</mat-option>
+                  <mat-option value="store" class="form-control">store</mat-option>
                 </mat-select>
 
                 <!--                      <input matInput  type="text" class="form-control"[(ngModel)]="comerce.category" name= "category" >-->
               </mat-form-field>
             </div>
             <div>
-              <mat-form-field appearance="legacy" >
+              <mat-form-field appearance="legacy">
                 <mat-label>Address</mat-label>
 
-                <input matInput  type="text" class="form-control"[(ngModel)]="comerce.address" name= "address" >
+                <input matInput type="text" class="form-control" [(ngModel)]="comerce.address" name="address">
               </mat-form-field>
             </div>
 
           </div>
 
         </mat-card>
-  <div class="space"></div>
+        <div class="space"></div>
       </div>
     </div>
   </form>
   </body>
-<!--  CONTENT-->
+  <!--  CONTENT-->
   <div class="mdl-card__actions mdl-card--border">
     <div>
-      <button mat-raised-button [mat-dialog-close]="" class = "btn btn-primary" role="button" (click)="create()">Save!</button>
+      <button mat-raised-button [mat-dialog-close]="" class="btn btn-primary" role="button" (click)="create()">Save!
+      </button>
 
-      <button mat-raised-button class = "btn btn-primary" role="button" (click)="onNoClick()">No Thanks</button>
+      <button mat-raised-button class="btn btn-primary" role="button" (click)="onNoClick()">No Thanks</button>
     </div>
   </div>
 

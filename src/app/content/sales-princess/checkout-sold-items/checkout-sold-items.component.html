@@ -153,19 +153,20 @@
         </div>
         <!--NEX DIV CORRESPONDS TO COLUMN-->
       </div>
+    </div>
 
 
-      <div class="w-100"></div>
-      <div class="space"></div>
 
       <!--  SEGUNDA COLUMNA-->
       <div class="col">
+
         <!--    CONTAINER TO CENTER IN THE PAGE-->
         <div class="container-fluid d-flex justify-content-center">
           <!--    CONTENT-->
           <div class="demo-card-wide mdl-card mdl-shadow--2dp">
-            <div class="table-responsive">
-              <table #myShopCheckoutProductsTable [dataSource]="soldItemsCategoryLists" mat-table>
+            <div class="container-fluid d-flex justify-content-center cont-bg4">
+            <div class="table-responsive cont-bg4">
+              <table class="cont-bg4" #myShopCheckoutProductsTable [dataSource]="soldItemsCategoryLists" mat-table>
 
                 <!-- category column-->
                 <ng-container matColumnDef="sale">
@@ -198,50 +199,91 @@
 
               </table>
             </div>
-
-            <!--algo mas-->
-            <div class="space"></div>
-
-            <div class="container-fluid d-flex justify-content-center">
-
-              <!--BOX -->
-              <div class="demo-card-wide mdl-card mdl-shadow--2dp justi ">
-                <div class="container d-flex justify-content-left mdl-card__title ">
-                  <h3 class="mdl-card__title-text">{{ t('translate.send') }}, {{ t('translate.save') }}
-                    , {{ t('translate.delete') }}</h3>
-                </div>
-                <div class="mdl-card__supporting-text">
-                  <div class=" table-responsive ">
-                    <div class="container cont-bg4">
-                      <button matTooltip="Save list locally"
-                              [matTooltipPosition]="position.value" (click)="saveSoldItemList()" mat-raised-button >
-                        <mat-icon>save</mat-icon>
-                      </button>
-                      <button matTooltip="Save list"
-                              [matTooltipPosition]="position.value" (click)="sendSoldItemList()" mat-raised-button >
-                        <mat-icon>send</mat-icon>
-                      </button>
-                      <button matTooltip="Delete element from the list"
-                              [matTooltipPosition]="position.value" (click)="deleteSoldItemList()" mat-raised-button >
-                        <mat-icon>delete</mat-icon>
-                      </button>
-                    </div>
-                  </div>
-                </div>
-              </div>
             </div>
-            <!--          algo mas-->
-
           </div>
-          <!--    CONTENT-->
-
-
-          <!--    NEXT DIV CLOSES CONTAINER TO CENTER CARD-->
         </div>
-        <!--    NEXT DIV CLOSES CLUMN-->
       </div>
-      <!--    NEXT DIV CLOSES ROW-->
+
+<!--third column-->
+  <div class="col">
+
+    <div class="container-fluid d-flex justify-content-center">
+      <div class="demo-card-wide mdl-card mdl-shadow&#45;&#45;2dp justi cont-bg4">
+        <div class="container d-flex justify-content-left mdl-card__title ">
+          <h3 class="mdl-card__title-text">{{ t('translate.save') }}- -{{ t('translate.send') }}- -
+            {{ t('translate.delete') }}</h3>
+        </div>
+      <div class="mdl-card__supporting-text">
+        <div class=" table-responsive ">
+          <div class="container ">
+            <button matTooltip="Save list locally"
+                    [matTooltipPosition]="position.value" (click)="saveSoldItemList()" mat-raised-button >
+              <mat-icon>save</mat-icon>
+            </button>
+            <button matTooltip="Save list"
+                    [matTooltipPosition]="position.value" (click)="sendSoldItemList()" mat-raised-button >
+              <mat-icon>send</mat-icon>
+            </button>
+            <button matTooltip="Delete element from the list"
+                    [matTooltipPosition]="position.value" (click)="deleteSoldItemList()" mat-raised-button >
+              <mat-icon>delete</mat-icon>
+            </button>
+          </div>
+      </div>
     </div>
   </div>
+</div>
+  </div>
+
+</div>
 </ng-template>
+
+            <!--algo mas-->
+<!--            <div class="space"></div>-->
+
+<!--            <div class="container-fluid d-flex justify-content-center">-->
+<!--              <div class="space"></div>-->
+<!--              &lt;!&ndash;BOX &ndash;&gt;-->
+<!--              <div class="demo-card-wide mdl-card mdl-shadow&#45;&#45;2dp justi ">-->
+<!--                <div class="container d-flex justify-content-left mdl-card__title ">-->
+<!--                  <h3 class="mdl-card__title-text">{{ t('translate.send') }}, {{ t('translate.save') }}-->
+<!--                    , {{ t('translate.delete') }}</h3>-->
+<!--                </div>-->
+<!--                <div class="mdl-card__supporting-text">-->
+<!--                  <div class=" table-responsive ">-->
+<!--                    <div class="container cont-bg4">-->
+<!--                      <button matTooltip="Save list locally"-->
+<!--                              [matTooltipPosition]="position.value" (click)="saveSoldItemList()" mat-raised-button >-->
+<!--                        <mat-icon>save</mat-icon>-->
+<!--                      </button>-->
+<!--                      <button matTooltip="Save list"-->
+<!--                              [matTooltipPosition]="position.value" (click)="sendSoldItemList()" mat-raised-button >-->
+<!--                        <mat-icon>send</mat-icon>-->
+<!--                      </button>-->
+<!--                      <button matTooltip="Delete element from the list"-->
+<!--                              [matTooltipPosition]="position.value" (click)="deleteSoldItemList()" mat-raised-button >-->
+<!--                        <mat-icon>delete</mat-icon>-->
+<!--                      </button>-->
+<!--                    </div>-->
+<!--                  </div>-->
+<!--                </div>-->
+<!--              </div>-->
+<!--            </div>-->
+<!--            &lt;!&ndash;          algo mas&ndash;&gt;-->
+
+<!--          </div>-->
+<!--          &lt;!&ndash;    CONTENT&ndash;&gt;-->
+
+
+<!--          &lt;!&ndash;    NEXT DIV CLOSES CONTAINER TO CENTER CARD&ndash;&gt;-->
+<!--        </div>-->
+<!--        &lt;!&ndash;    NEXT DIV CLOSES CLUMN&ndash;&gt;-->
+<!--      </div>-->
+<!--      &lt;!&ndash;    NEXT DIV CLOSES ROW&ndash;&gt;-->
+<!--    </div>-->
+<!--  </div>-->
+
+<!--  </div>-->
+
+<!--</ng-template>-->
 

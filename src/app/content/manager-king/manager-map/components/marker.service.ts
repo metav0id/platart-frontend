@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {Subject} from "rxjs";
 
 @Injectable({
@@ -6,8 +6,8 @@ import {Subject} from "rxjs";
 })
 export class MarkerService {
 
-  constructor() { }
-
+  constructor() {
+  }
 
 
 }

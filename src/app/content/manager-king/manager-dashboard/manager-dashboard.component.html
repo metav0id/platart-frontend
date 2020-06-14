@@ -1,86 +1,97 @@
 <ng-template transloco let-t>
-<mat-divider></mat-divider>
-<div fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="20px" class="stats-card">
-  <mat-card fxFlex="100">
-    <h1 align="center">{{ t('translate.managerDashboard') }}</h1>
-  </mat-card>
-</div>
+  <mat-divider></mat-divider>
+  <div fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="20px" class="stats-card">
+    <mat-card fxFlex="100">
+      <h1 align="center">{{ t('translate.managerDashboard') }}</h1>
+    </mat-card>
+  </div>
 
-<mat-divider></mat-divider>
-<div fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="20px" class="stats-card">
-  <mat-card fxFlex="30">
-    <app-arch-gauge-card gaugeLabel="{{ t('translate.turnover') }}" unit="USD" gaugeType="arch" gaugeValue="{{dataYesterday.salesTo}}"
-                         gaugeMin="0" gaugeMax="2000" gaugeAppendText="$"
-                         label="{{ t('translate.yesterdaysTurnover') }}"></app-arch-gauge-card>
-  </mat-card>
-  <mat-card fxFlex="30">
-    <app-arch-gauge-card gaugeLabel="{{ t('translate.salesMargin') }}" unit="USD" gaugeType="arch" gaugeValue="{{dataYesterday.salesMg}}"
-                         gaugeMin="0" gaugeMax="1000" threshMin="0" threshMid="200" threshMax="600" gaugeAppendText="$"
-                         label="{{ t('translate.yesterdaysSalesMargin') }}"></app-arch-gauge-card>
-  </mat-card>
-  <mat-card fxFlex="30">
-    <app-arch-gauge-card gaugeLabel="{{ t('translate.discountRate') }}" unit="{{ t('translate.percentage') }}" gaugeType="arch" gaugeValue="{{dataYesterday.discountRateAvg}}" gaugeAppendText="%"
-                         gaugeMin="0" gaugeMax="100" label="{{ t('translate.yesterdaysAverageDiscount') }}"></app-arch-gauge-card>
-  </mat-card>
-</div>
-<mat-divider></mat-divider>
+  <mat-divider></mat-divider>
+  <div fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="20px" class="stats-card">
+    <mat-card fxFlex="30">
+      <app-arch-gauge-card gaugeLabel="{{ t('translate.turnover') }}" unit="USD" gaugeType="arch"
+                           gaugeValue="{{dataYesterday.salesTo}}"
+                           gaugeMin="0" gaugeMax="2000" gaugeAppendText="$"
+                           label="{{ t('translate.yesterdaysTurnover') }}"></app-arch-gauge-card>
+    </mat-card>
+    <mat-card fxFlex="30">
+      <app-arch-gauge-card gaugeLabel="{{ t('translate.salesMargin') }}" unit="USD" gaugeType="arch"
+                           gaugeValue="{{dataYesterday.salesMg}}"
+                           gaugeMin="0" gaugeMax="1000" threshMin="0" threshMid="200" threshMax="600"
+                           gaugeAppendText="$"
+                           label="{{ t('translate.yesterdaysSalesMargin') }}"></app-arch-gauge-card>
+    </mat-card>
+    <mat-card fxFlex="30">
+      <app-arch-gauge-card gaugeLabel="{{ t('translate.discountRate') }}" unit="{{ t('translate.percentage') }}"
+                           gaugeType="arch" gaugeValue="{{dataYesterday.discountRateAvg}}" gaugeAppendText="%"
+                           gaugeMin="0" gaugeMax="100"
+                           label="{{ t('translate.yesterdaysAverageDiscount') }}"></app-arch-gauge-card>
+    </mat-card>
+  </div>
+  <mat-divider></mat-divider>
 
-<div fxLayout="column" fxLayoutAlign="left" fxLayoutGap="20px" class="stats-card">
-  <mat-card fxFlex="100">
-  <table class="table">
-    <thead>
-    <tr>
-      <th scope="col">May</th>
-      <th scope="col">Sales (No)</th>
-      <th scope="col">Sales (USD)</th>
-      <th scope="col">Sales Margin (USD)</th>
-      <th scope="col">Avg. Sales Margin (USD)</th>
-      <th scope="col">Avg. Discount Rate (%)</th>
-      <th scope="col">Tendency</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr *ngFor="let entry of data">
-      <th scope="row">{{entry.date.toDateString()}}</th>
-      <td>{{entry.salesNo}}</td>
-      <td>{{entry.salesTo}}</td>
-      <td>{{entry.salesMg}}</td>
-      <td>{{entry.salesMgAvg}}</td>
-      <td>{{entry.discountRateAvg}}</td>
-      <td><mat-icon color="primary">trending_flat</mat-icon></td>
-    </tr>
+  <div fxLayout="column" fxLayoutAlign="left" fxLayoutGap="20px" class="stats-card">
+    <mat-card fxFlex="100">
+      <table class="table">
+        <thead>
+        <tr>
+          <th scope="col">May</th>
+          <th scope="col">Sales (No)</th>
+          <th scope="col">Sales (USD)</th>
+          <th scope="col">Sales Margin (USD)</th>
+          <th scope="col">Avg. Sales Margin (USD)</th>
+          <th scope="col">Avg. Discount Rate (%)</th>
+          <th scope="col">Tendency</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let entry of data">
+          <th scope="row">{{entry.date.toDateString()}}</th>
+          <td>{{entry.salesNo}}</td>
+          <td>{{entry.salesTo}}</td>
+          <td>{{entry.salesMg}}</td>
+          <td>{{entry.salesMgAvg}}</td>
+          <td>{{entry.discountRateAvg}}</td>
+          <td>
+            <mat-icon color="primary">trending_flat</mat-icon>
+          </td>
+        </tr>
 
-    <tr>
-      <th scope="row">May totals</th>
-      <td>{{dataCurrentMonth.salesNo}}</td>
-      <td>{{dataCurrentMonth.salesTo}}</td>
-      <td>{{dataCurrentMonth.salesMg}}</td>
-      <td>{{dataCurrentMonth.salesMgAvg}}</td>
-      <td>{{dataCurrentMonth.discountRateAvg}}</td>
-      <td><mat-icon color="primary">trending_down</mat-icon></td>
-    </tr>
-    <tr>
-      <th scope="row">April mtd</th>
-      <td>{{dataLastMonth.salesNo}}</td>
-      <td>{{dataLastMonth.salesTo}}</td>
-      <td>{{dataLastMonth.salesMg}}</td>
-      <td>{{dataLastMonth.salesMgAvg}}</td>
-      <td>{{dataLastMonth.discountRateAvg}}</td>
-      <td><mat-icon color="primary">trending_up</mat-icon></td>
-    </tr>
-    </tbody>
-  </table>
-  </mat-card>
-</div>
+        <tr>
+          <th scope="row">May totals</th>
+          <td>{{dataCurrentMonth.salesNo}}</td>
+          <td>{{dataCurrentMonth.salesTo}}</td>
+          <td>{{dataCurrentMonth.salesMg}}</td>
+          <td>{{dataCurrentMonth.salesMgAvg}}</td>
+          <td>{{dataCurrentMonth.discountRateAvg}}</td>
+          <td>
+            <mat-icon color="primary">trending_down</mat-icon>
+          </td>
+        </tr>
+        <tr>
+          <th scope="row">April mtd</th>
+          <td>{{dataLastMonth.salesNo}}</td>
+          <td>{{dataLastMonth.salesTo}}</td>
+          <td>{{dataLastMonth.salesMg}}</td>
+          <td>{{dataLastMonth.salesMgAvg}}</td>
+          <td>{{dataLastMonth.discountRateAvg}}</td>
+          <td>
+            <mat-icon color="primary">trending_up</mat-icon>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+    </mat-card>
+  </div>
 
-<mat-divider></mat-divider>
+  <mat-divider></mat-divider>
 
-<div fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="20px" class="stats-card">
-  <mat-card fxFlex="50">
-    <app-hbar-char-card label="{{ t('translate.dailyTurnoverByShop') }}"></app-hbar-char-card>
-  </mat-card>
-  <mat-card fxFlex="50">
-    <app-vbar-chart-card label="{{ t('translate.aggregatedTurnoverByLast7Days') }}" ></app-vbar-chart-card>
-  </mat-card>
-</div>
+  <div fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="20px" class="stats-card">
+    <mat-card fxFlex="50">
+      <app-hbar-char-card label="{{ t('translate.dailyTurnoverByShop') }}"></app-hbar-char-card>
+    </mat-card>
+    <mat-card fxFlex="50">
+      <app-vbar-chart-card label="{{ t('translate.aggregatedTurnoverByLast7Days') }}"></app-vbar-chart-card>
+    </mat-card>
+  </div>
 </ng-template>

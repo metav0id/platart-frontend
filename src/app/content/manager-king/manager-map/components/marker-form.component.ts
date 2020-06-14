@@ -35,7 +35,6 @@ import {from} from "rxjs";
 })
 export class MarkerFormComponent implements OnInit {
 
-  markersToEdit: Marcador[];
   allMarkers: Marcador[];
 
 
@@ -43,7 +42,8 @@ export class MarkerFormComponent implements OnInit {
 
   constructor(
     public dialogRef: MatDialogRef<MarkerFormComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: DialogData, private mapService: MapService, private activatedRoute: ActivatedRoute, private router: Router) { }
+    @Inject(MAT_DIALOG_DATA) public data: DialogData, private mapService: MapService, private activatedRoute: ActivatedRoute, private router: Router) {
+  }
 
 //When the component is started it gives a list with all markers back.
   ngOnInit(): void {

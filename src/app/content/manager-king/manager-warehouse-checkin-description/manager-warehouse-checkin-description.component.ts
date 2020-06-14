@@ -20,7 +20,9 @@ export class ManagerWarehouseCheckinDescriptionComponent implements OnInit {
   dataSource = new MatTableDataSource();
 
   @ViewChild(MatSort, {static: true}) sort: MatSort;
-  constructor(private managerWarehouseCheckinDescriptionService: ManagerWarehouseCheckinDescriptionService) { }
+
+  constructor(private managerWarehouseCheckinDescriptionService: ManagerWarehouseCheckinDescriptionService) {
+  }
 
   startDate = '';
   endDate = '';
@@ -33,13 +35,13 @@ export class ManagerWarehouseCheckinDescriptionComponent implements OnInit {
   startDateSelection($event: MatDatepickerInputEvent<Date>) {
     const newDate: Date = $event.value;
     this.startDate = newDate.toISOString();
-    this.eventsTime.push( newDate.toISOString() );
+    this.eventsTime.push(newDate.toISOString());
   }
 
   endDateSelection($event: MatDatepickerInputEvent<Date>) {
     const newDate: Date = $event.value;
     this.endDate = newDate.toISOString();
-    this.eventsTime.push( newDate.toISOString() );
+    this.eventsTime.push(newDate.toISOString());
   }
 
   applyFilter(event: Event) {
@@ -52,8 +54,8 @@ export class ManagerWarehouseCheckinDescriptionComponent implements OnInit {
   }
 
   getSoldItemsList(): void {
-    if ( this.startDate != '' && this.endDate != '') {
-      this.managerWarehouseCheckinDescriptionService.getSoldItemsList(this.startDate, this.endDate )
+    if (this.startDate != '' && this.endDate != '') {
+      this.managerWarehouseCheckinDescriptionService.getSoldItemsList(this.startDate, this.endDate)
         .subscribe((observable) => {
           console.log(observable);
           this.dataSource = new MatTableDataSource(observable);

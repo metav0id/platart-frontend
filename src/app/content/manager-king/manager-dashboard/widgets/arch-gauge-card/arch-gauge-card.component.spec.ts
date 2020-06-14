@@ -1,6 +1,6 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { ArchGaugeCardComponent } from './arch-gauge-card.component';
+import {ArchGaugeCardComponent} from './arch-gauge-card.component';
 
 describe('ArchGaugeCardComponent', () => {
   let component: ArchGaugeCardComponent;
@@ -8,9 +8,9 @@ describe('ArchGaugeCardComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ArchGaugeCardComponent ]
+      declarations: [ArchGaugeCardComponent]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

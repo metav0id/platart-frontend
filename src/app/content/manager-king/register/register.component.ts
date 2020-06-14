@@ -10,7 +10,7 @@ import {UserFirebase} from '../../services/user-firebase';
   selector: 'app-registro',
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.css'],
-  providers: [{provide: TRANSLOCO_SCOPE, useValue: { scope: 'userManagement', alias: 'translate' }}]
+  providers: [{provide: TRANSLOCO_SCOPE, useValue: {scope: 'userManagement', alias: 'translate'}}]
 })
 
 export class RegisterComponent implements OnInit {
@@ -72,10 +72,10 @@ export class RegisterComponent implements OnInit {
         );
         this.router.navigateByUrl('/home');
       }).catch(error => Swal.fire({
-        icon: 'error',
-        title: 'Error',
-        text: 'An error occured. Please try again later.'
-      })
+          icon: 'error',
+          title: 'Error',
+          text: 'An error occured. Please try again later.'
+        })
       );
     }
   }

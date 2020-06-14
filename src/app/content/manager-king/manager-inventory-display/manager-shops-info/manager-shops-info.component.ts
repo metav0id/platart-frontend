@@ -12,7 +12,7 @@ import {MatSort} from '@angular/material/sort';
   selector: 'app-manager-shops-info',
   templateUrl: './manager-shops-info.component.html',
   styleUrls: ['./manager-shops-info.component.css'],
-  providers: [{provide: TRANSLOCO_SCOPE, useValue: { scope: 'managerKing/manageShopsInfo', alias: 'translate' }}]
+  providers: [{provide: TRANSLOCO_SCOPE, useValue: {scope: 'managerKing/manageShopsInfo', alias: 'translate'}}]
 })
 export class ManagerShopsInfoComponent implements OnInit {
   // inventory type
@@ -21,7 +21,7 @@ export class ManagerShopsInfoComponent implements OnInit {
 
   // table information
   // displayedColumns: string[] = ['position', 'name', 'weight', 'symbol'];
-  displayedColumns: string[] = [ 'shop', 'category', 'quantity', 'priceListPerUnit', 'priceSalesPerUnit' ];
+  displayedColumns: string[] = ['shop', 'category', 'quantity', 'priceListPerUnit', 'priceSalesPerUnit'];
   dataSource = new MatTableDataSource();
 
   /** Category selection */
@@ -32,13 +32,14 @@ export class ManagerShopsInfoComponent implements OnInit {
   public selectedShopToDisplay = '';
 
   @ViewChild(MatSort, {static: true}) sort: MatSort;
+
   constructor(private managerShopsInfoService: ManagerShopsInfoService) {
   }
 
   ngOnInit(): void {
-    this.managerShopsInfoService.getListShops().subscribe( (JsonDto) => {
+    this.managerShopsInfoService.getListShops().subscribe((JsonDto) => {
       this.listShops = JsonDto;
-    } );
+    });
   }
 
   applyFilter(event: Event) {

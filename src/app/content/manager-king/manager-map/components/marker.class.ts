@@ -1,4 +1,4 @@
-export class Marcador{
+export class Marcador {
 
   public lat: string;
   public lng: string;
