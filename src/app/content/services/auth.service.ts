@@ -4,6 +4,8 @@ import {AngularFireAuth} from '@angular/fire/auth';
 import {Router} from '@angular/router';
 import {UserFirebase} from './user-firebase';
 import {Observable} from 'rxjs';
+import {Marcador} from "../manager-king/manager-map/components/marker.class";
+import {environment} from "../../../environments/environment";
 
 
 @Injectable({
@@ -11,6 +13,7 @@ import {Observable} from 'rxjs';
 })
 
 export class AuthService {
+   shopsOfUser: string[];
 
   constructor(public afs: AngularFirestore,
               public afAuth: AngularFireAuth,
@@ -21,11 +24,15 @@ export class AuthService {
         this.getUserData(user.uid).subscribe(firestoreObj => {
           localStorage.setItem('user', JSON.stringify(user));
           localStorage.setItem('role', firestoreObj.role);
-          this.router.navigateByUrl('/home');
+          localStorage.setItem('shop', firestoreObj.shop);
+          // if(this.router.navigateByUrl('/login')){
+          // this.router.navigateByUrl('/landingPage');
+          // }
         });
       } else {
         localStorage.setItem('user', null);
         localStorage.setItem('role', null);
+        localStorage.setItem('shop', null);
       }
     });
   }
@@ -36,7 +43,9 @@ export class AuthService {
         this.getUserData(user.user.uid).subscribe(firestoreObj => {
           localStorage.setItem('user', JSON.stringify(user.user));
           localStorage.setItem('role', firestoreObj.role);
+          this.getAllShopsFromUser();
           observer.next();
+          this.router.navigateByUrl('/landingPage');
         });
       }).catch(error => {
         localStorage.setItem('user', null);
@@ -51,6 +60,7 @@ export class AuthService {
       console.log('Calling from signOut-> authstate');
       localStorage.removeItem('user');
       localStorage.removeItem('role');
+      localStorage.removeItem('shop');
     });
   }
 
@@ -90,4 +100,33 @@ export class AuthService {
     const roleLocalStorage = localStorage.getItem('role');
     return roleLocalStorage === roleComponent || roleLocalStorage === 'Manager';
   }
+
+  /** Creates field in local storage with array of stores, fills local variable with array and also prints themm all in console.log
+   *
+   * **/
+  getStoresList(firestoreObj){
+    this.shopsOfUser=  firestoreObj.shop;
+    localStorage.setItem('shop', firestoreObj.shop);
+    // let numberOfShops= shopsOfUser.length;
+    // console.log("Fruits" + shopsOfUser[0] + numberOfShops);
+    for (let entry of this.shopsOfUser) {
+      console.log(entry);
+    }
+    return this.shopsOfUser;
+  }
+/** Gets list of shops of current user
+*
+* **/
+  getAllShopsFromUser(){
+    this.afAuth.authState.subscribe(user => {
+      if (user) {
+        this.getUserData(user.uid).subscribe(firestoreObj => {
+        this.getStoresList(firestoreObj)
+        });
+      } else {
+        console.log("idk")
+      }
+    });
+  }
+
 }

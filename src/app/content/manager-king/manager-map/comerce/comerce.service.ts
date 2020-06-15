@@ -42,4 +42,9 @@ export class ComerceService {
   getComerce(comerce: Comerce): Observable<Marcador> {
     return this.httpClient.post<Marcador>(environment.findCommerce, comerce, {headers: this.httpHeader});
   }
+
+readShops(): Observable<Marcador[]> {
+    // this returns the list provided from the backend link.
+    return this.httpClient.get<Marcador[]>(environment.getAllShops);
+  }
 }

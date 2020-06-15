@@ -1,3 +1,5 @@
+import {Marcador} from "../manager-king/manager-map/components/marker.class";
+
 interface Roles {
   reader: boolean;
   warehouse?: boolean;

@@ -1,10 +1,18 @@
 import {Component, OnInit} from '@angular/core';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  Validators
+} from '@angular/forms';
 import {AuthService} from '../../services/auth.service';
 import Swal from 'sweetalert2';
 import {Router} from '@angular/router';
 import {TRANSLOCO_SCOPE, TranslocoService} from '@ngneat/transloco';
 import {UserFirebase} from '../../services/user-firebase';
+import {Marcador} from "../manager-map/components/marker.class";
+import {Observable} from "rxjs";
+import {ComerceService} from "../manager-map/comerce/comerce.service";
 
 @Component({
   selector: 'app-registro',
@@ -14,23 +22,27 @@ import {UserFirebase} from '../../services/user-firebase';
 })
 
 export class RegisterComponent implements OnInit {
+  shopsControl = new FormControl();
+  shopsOfUser: Marcador[] = new Array();
   user: UserFirebase = {
     email: '',
     password: 'string',
     displayName: '',
-    role: {reader: true}
+    role: {reader: true},
+
   };
 
   public registerForm: FormGroup;
 
   public listRoles = ['Warehouse', 'Manager', 'Shop'];
 
-  constructor(private auth: AuthService, private router: Router, private formBuilder: FormBuilder, private transloco: TranslocoService) {
+  constructor(private auth: AuthService, private router: Router, private formBuilder: FormBuilder, private transloco: TranslocoService, private comServ: ComerceService) {
   }
 
   /**When started, it will create a new instance of user.*/
   ngOnInit() {
     this.createForm();
+    this.getStores();
   }
 
   private createForm() {
@@ -38,7 +50,7 @@ export class RegisterComponent implements OnInit {
       email: [null, [Validators.required]],
       name: [null, [Validators.required]],
       role: [this.listRoles[0], [Validators.required]],
-      password: [null, [Validators.required]]
+      password: [null, [Validators.required]],
     });
   }
 
@@ -54,7 +66,7 @@ export class RegisterComponent implements OnInit {
         email: this.registerForm.value.email,
         displayName: this.registerForm.value.name,
         password: this.registerForm.value.password,
-        role: this.registerForm.value.role
+        role: this.registerForm.value.role,
       };
       Swal.fire({
         allowOutsideClick: false,
@@ -78,5 +90,9 @@ export class RegisterComponent implements OnInit {
         })
       );
     }
+  }
+
+  getStores(){
+    this.comServ.readShops().subscribe(response => this.shopsOfUser = response);
   }
 }
