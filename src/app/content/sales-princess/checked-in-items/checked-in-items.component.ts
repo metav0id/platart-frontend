@@ -7,6 +7,7 @@ import {TRANSLOCO_SCOPE} from '@ngneat/transloco';
 import {ShopDTO} from './checked-in-items-DTOs/shop-dto';
 import {MatDialog} from '@angular/material/dialog';
 import {CheckedInItemsDetailsComponent} from './checked-in-items-details/checked-in-items-details.component';
+import {MatDatepickerInputEvent} from '@angular/material/datepicker';
 
 @Component({
   selector: 'app-checked-in-items',
@@ -15,6 +16,9 @@ import {CheckedInItemsDetailsComponent} from './checked-in-items-details/checked
   providers: [{provide: TRANSLOCO_SCOPE, useValue: { scope: 'salesPrincess', alias: 'translate' }}]
 })
 export class CheckedInItemsComponent implements OnInit {
+
+  startDate = '';
+  endDate = '';
 
   /** Shop selection */
   public formControl = new FormControl('', Validators.required);
@@ -54,11 +58,15 @@ export class CheckedInItemsComponent implements OnInit {
   }
 
   getCheckedInItemsListSpecificShop(): void {
-    if (this.deliveryShop != null) {
+    if (this.deliveryShop != null && this.startDate != '' && this.endDate != '') {
       // tslint:disable-next-line:no-shadowed-variable
-      this.checkedInItemsService.getCheckedInItemsListSpecificShop(this.deliveryShop).subscribe((observable) => {
+      /*this.checkedInItemsService.getCheckedInItemsListSpecificShop(this.deliveryShop).subscribe((observable) => {
         this.dataSource = new MatTableDataSource(observable);
-        console.log(observable);
+        // console.log(observable);
+      });*/
+      this.checkedInItemsService.getCheckedInItemsListSpecificShopDate(this.deliveryShop, this.startDate, this.endDate).subscribe((observable) => {
+        this.dataSource = new MatTableDataSource(observable);
+        // console.log(observable);
       });
       this.dataSource.sort = this.sort;
     }
@@ -72,10 +80,24 @@ export class CheckedInItemsComponent implements OnInit {
     });
 
     console.log('some details: ' +  element);
-
     dialogRef.afterClosed().subscribe((DataObservable) => {
       console.log(DataObservable);
     });
+  }
 
+  startDateSelection($event: MatDatepickerInputEvent<Date>) {
+    const newDate: Date = $event.value;
+    this.startDate = newDate.toISOString();
+
+    // tslint:disable-next-line:triple-equals
+    if (this.endDate == '') {
+      const newEndDate: Date = new Date(newDate.getTime() + (1000 * 60 * 60 * 24));
+      this.endDate = newEndDate.toISOString();
     }
+  }
+
+  endDateSelection($event: MatDatepickerInputEvent<Date>) {
+    const newDate: Date = $event.value;
+    this.endDate = newDate.toISOString();
+  }
 }

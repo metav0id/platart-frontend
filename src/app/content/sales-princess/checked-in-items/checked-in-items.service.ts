@@ -5,6 +5,7 @@ import {environment} from '../../../../environments/environment';
 import {CheckedInItemsDTO} from './checked-in-items-DTOs/CheckedInItemsDTO';
 import {ShopDTO} from '../../warehouse-queen/new-delivery-to-shop/new-delivery-to-shop-DTOs/shop-dto';
 import {ShopSimpleDto} from './checked-in-items-DTOs/shop-simple-dto';
+import {ShopDateSimpleDto} from './checked-in-items-DTOs/shop-date-simple-dto';
 
 @Injectable({
   providedIn: 'root'
@@ -22,6 +23,19 @@ export class CheckedInItemsService {
       shop : selectedShop
     };
     return this.http.post<CheckedInItemsDTO[]>(environment.getSpecificCheckedInItems, shopSimpleDTO);
+  }
+
+  public getCheckedInItemsListSpecificShopDate(selectedShop: string, startDate: string, endDate: string): Observable<CheckedInItemsDTO[]> {
+    /*const shopSimpleDTO: ShopSimpleDto = {
+      shop : selectedShop
+    };*/
+    const shopDateSimpleDTO: ShopDateSimpleDto = {
+      shop : selectedShop,
+      startDate,
+      endDate
+    };
+    // return this.http.post<CheckedInItemsDTO[]>(environment.getSpecificCheckedInItems, shopSimpleDTO);
+    return this.http.post<CheckedInItemsDTO[]>(environment.getSpecificCheckedInItemsDate, shopDateSimpleDTO);
   }
 
   public getListShops(): Observable<ShopDTO[]> {

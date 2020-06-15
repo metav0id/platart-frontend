@@ -5,7 +5,7 @@
     <mat-card class="example-card">
       <mat-card-header>
         <mat-card-title>Category: {{newItem.category}}</mat-card-title>
-        <mat-card-title>Date: {{newItem.deliverySending}}</mat-card-title>
+        <mat-card-title>Date: {{newItem.deliverySending.substring(0,10)}}</mat-card-title>
         <mat-card-subtitle>Shop: {{newItem.shop}}</mat-card-subtitle>
         <mat-card-subtitle>List-price: {{newItem.priceListPerUnit}}</mat-card-subtitle>
         <mat-card-subtitle>Sell-price: {{newItem.priceSalesPerUnit}}</mat-card-subtitle>
@@ -20,10 +20,6 @@
 
     <button mat-mini-fab mat-dialog-close>
       <mat-icon>cancel</mat-icon>
-    </button>
-    <button mat-mini-fab mat-raised-button type="submit">
-      <mat-icon>check_circle
-      </mat-icon>
     </button>
   </form>
 </div>
