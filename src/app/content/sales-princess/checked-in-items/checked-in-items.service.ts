@@ -14,17 +14,6 @@ export class CheckedInItemsService {
 
   constructor(private http: HttpClient) { }
 
-  public getCheckedInItems(): Observable<CheckedInItemsDTO[]> {
-    return this.http.post<CheckedInItemsDTO[]>(environment.getAllCheckedInItems, null);
-  }
-
-  public getCheckedInItemsListSpecificShop(selectedShop: string): Observable<CheckedInItemsDTO[]> {
-    const shopSimpleDTO: ShopSimpleDto = {
-      shop : selectedShop
-    };
-    return this.http.post<CheckedInItemsDTO[]>(environment.getSpecificCheckedInItems, shopSimpleDTO);
-  }
-
   public getCheckedInItemsListSpecificShopDate(selectedShop: string, startDate: string, endDate: string): Observable<CheckedInItemsDTO[]> {
     const shopDateSimpleDTO: ShopDateSimpleDto = {
       shop : selectedShop,

@@ -13,7 +13,7 @@ import {MatDatepickerInputEvent} from '@angular/material/datepicker';
   selector: 'app-checked-in-items',
   templateUrl: './checked-in-items.component.html',
   styleUrls: ['./checked-in-items.component.css'],
-  providers: [{provide: TRANSLOCO_SCOPE, useValue: { scope: 'salesPrincess', alias: 'translate' }}]
+  providers: [{provide: TRANSLOCO_SCOPE, useValue: {scope: 'salesPrincess', alias: 'translate'}}]
 })
 export class CheckedInItemsComponent implements OnInit {
 
@@ -24,13 +24,15 @@ export class CheckedInItemsComponent implements OnInit {
   public formControl = new FormControl('', Validators.required);
 
   public deliveryShop: string;
-  public shopsList: ShopDTO[] = [{name: 'shop1'}, {name: 'shop2'}];
+  public shopsList: ShopDTO[] = [];
 
   displayedColumns: string[] = ['date', 'category', 'priceListPerUnit', 'popup'];
   dataSource = new MatTableDataSource();
 
   constructor(public dialog: MatDialog,
-              private checkedInItemsService: CheckedInItemsService) { }
+              private checkedInItemsService: CheckedInItemsService) {
+  }
+
   @ViewChild(MatSort, {static: true}) sort: MatSort;
 
   ngOnInit(): void {
@@ -48,25 +50,11 @@ export class CheckedInItemsComponent implements OnInit {
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
 
-  getCheckedInItemsList(): void {
-    // tslint:disable-next-line:no-shadowed-variable
-    this.checkedInItemsService.getCheckedInItems().subscribe((observable) => {
-      this.dataSource = new MatTableDataSource(observable);
-      console.log(observable);
-    });
-    this.dataSource.sort = this.sort;
-  }
-
   getCheckedInItemsListSpecificShop(): void {
-    if (this.deliveryShop != null && this.startDate != '' && this.endDate != '') {
-      // tslint:disable-next-line:no-shadowed-variable
-      /*this.checkedInItemsService.getCheckedInItemsListSpecificShop(this.deliveryShop).subscribe((observable) => {
-        this.dataSource = new MatTableDataSource(observable);
-        // console.log(observable);
-      });*/
+    if (this.deliveryShop != null && this.startDate !== '' && this.endDate !== '') {
+      // tslint:disable-next-line:max-line-length
       this.checkedInItemsService.getCheckedInItemsListSpecificShopDate(this.deliveryShop, this.startDate, this.endDate).subscribe((observable) => {
         this.dataSource = new MatTableDataSource(observable);
-        // console.log(observable);
       });
       this.dataSource.sort = this.sort;
     }
@@ -79,7 +67,6 @@ export class CheckedInItemsComponent implements OnInit {
       data: element
     });
 
-    console.log('some details: ' +  element);
     dialogRef.afterClosed().subscribe((DataObservable) => {
       console.log(DataObservable);
     });
