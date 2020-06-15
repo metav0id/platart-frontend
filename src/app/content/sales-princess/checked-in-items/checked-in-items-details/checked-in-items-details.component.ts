@@ -2,11 +2,13 @@ import {Component, Inject, OnInit} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
 import {CheckedInItemsDTO} from '../checked-in-items-DTOs/CheckedInItemsDTO';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {TRANSLOCO_SCOPE} from '@ngneat/transloco';
 
 @Component({
   selector: 'app-checked-in-items-details',
   templateUrl: './checked-in-items-details.component.html',
-  styleUrls: ['./checked-in-items-details.component.css']
+  styleUrls: ['./checked-in-items-details.component.css'],
+  providers: [{provide: TRANSLOCO_SCOPE, useValue: { scope: 'salesPrincess', alias: 'translate' }}]
 })
 export class CheckedInItemsDetailsComponent implements OnInit {
 

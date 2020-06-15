@@ -26,15 +26,11 @@ export class CheckedInItemsService {
   }
 
   public getCheckedInItemsListSpecificShopDate(selectedShop: string, startDate: string, endDate: string): Observable<CheckedInItemsDTO[]> {
-    /*const shopSimpleDTO: ShopSimpleDto = {
-      shop : selectedShop
-    };*/
     const shopDateSimpleDTO: ShopDateSimpleDto = {
       shop : selectedShop,
       startDate,
       endDate
     };
-    // return this.http.post<CheckedInItemsDTO[]>(environment.getSpecificCheckedInItems, shopSimpleDTO);
     return this.http.post<CheckedInItemsDTO[]>(environment.getSpecificCheckedInItemsDate, shopDateSimpleDTO);
   }
 

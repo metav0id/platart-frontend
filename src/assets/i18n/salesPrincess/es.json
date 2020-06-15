@@ -2,11 +2,15 @@
   "action": "Acción",
   "category": "Categoría",
   "checkAvailability": "Verificar disponibilidad",
+  "checked-in-item": "Item-NE ingresado",
+  "checked-in-item-date": "Fecha-ingreso",
   "checkListNewProducts": "Verificar lista de nuevos productos",
   "chooseDate": "Elija fecha",
   "comment": "Comentario",
   "commentOnOrder": "Comentario sobre orden",
+  "detailed-view": "Información detallada",
   "delete": "Eliminar",
+  "discount-in-percent": "Descuento en %",
   "discountInPercent": "Porcentaje",
   "invalidDiscountRate": "Porcentaje de descuento inválido",
   "items": "Items",
@@ -30,6 +34,9 @@
   "selectedShop": "Sucursal seleccionada",
   "send": "Enviar",
   "shop": "Sucursal",
+  "shop-comment": "Commentario de sucursal",
   "shopStock": "Stock en sucursal ",
+  "warehouse-instructions": "Instrucciones adicionales",
   "DISCOUNT_METHOD_REVENUE": "precio especial"
+
 }
