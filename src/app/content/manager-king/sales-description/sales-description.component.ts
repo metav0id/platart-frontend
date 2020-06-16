@@ -1,17 +1,17 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {FormControl, Validators} from '@angular/forms';
 import {MatTableDataSource} from '@angular/material/table';
-import {ManagerSalesDescriptionService} from './manager-sales-description.service';
+import {SalesDescriptionService} from './sales-description.service';
 import {MatSort} from '@angular/material/sort';
 import {MatDatepickerInputEvent} from '@angular/material/datepicker';
 import {TooltipPosition} from '@angular/material/tooltip';
 
 @Component({
   selector: 'app-manager-sales-description',
-  templateUrl: './manager-sales-description.component.html',
-  styleUrls: ['./manager-sales-description.component.css']
+  templateUrl: './sales-description.component.html',
+  styleUrls: ['./sales-description.component.css']
 })
-export class ManagerSalesDescriptionComponent implements OnInit {
+export class SalesDescriptionComponent implements OnInit {
 
   positionOptions: TooltipPosition[] = ['after', 'before', 'above', 'below', 'left', 'right'];
   position = new FormControl(this.positionOptions[0]);
@@ -22,7 +22,7 @@ export class ManagerSalesDescriptionComponent implements OnInit {
 
   @ViewChild(MatSort, {static: true}) sort: MatSort;
 
-  constructor(private managerSalesDescriptionService: ManagerSalesDescriptionService) {
+  constructor(private managerSalesDescriptionService: SalesDescriptionService) {
   }
 
   startDate: string = '';

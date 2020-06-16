@@ -30,7 +30,7 @@ import {MatButtonModule} from '@angular/material/button';
 import {TranslocoRootModule} from '../../transloco-root.module';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatNativeDateModule} from '@angular/material/core';
-import {ManagerSalesDescriptionComponent} from './manager-sales-description/manager-sales-description.component';
+import {SalesDescriptionComponent} from './sales-description/sales-description.component';
 import {ManagerWarehouseCheckinDescriptionComponent} from './manager-warehouse-checkin-description/manager-warehouse-checkin-description.component';
 
 import {ComerceFormComponent} from './manager-map/comerce-form/comerce-form.component';
@@ -48,7 +48,7 @@ import {MatTooltipModule} from "@angular/material/tooltip";
     ManagerShopsInfoComponent,
     ManagerWarehouseInfoComponent,
     RegisterComponent,
-    ManagerSalesDescriptionComponent,
+    SalesDescriptionComponent,
     ManagerWarehouseCheckinDescriptionComponent,
     ComerceFormComponent,
   ],
