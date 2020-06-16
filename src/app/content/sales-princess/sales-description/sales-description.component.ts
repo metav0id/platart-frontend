@@ -5,18 +5,27 @@ import {SalesDescriptionService} from './sales-description.service';
 import {MatSort} from '@angular/material/sort';
 import {MatDatepickerInputEvent} from '@angular/material/datepicker';
 import {TooltipPosition} from '@angular/material/tooltip';
+import {TRANSLOCO_SCOPE} from '@ngneat/transloco';
+import {ShopDTO} from '../checked-in-items/checked-in-items-DTOs/shop-dto';
 
 @Component({
   selector: 'app-manager-sales-description',
   templateUrl: './sales-description.component.html',
-  styleUrls: ['./sales-description.component.css']
+  styleUrls: ['./sales-description.component.css'],
+  providers: [{
+    provide: TRANSLOCO_SCOPE,
+    useValue: {scope: 'salesPrincess', alias: 'translate'}
+  }]
 })
 export class SalesDescriptionComponent implements OnInit {
+
+  public deliveryShop = '';
+  public shopsList: ShopDTO[] = [];
 
   positionOptions: TooltipPosition[] = ['after', 'before', 'above', 'below', 'left', 'right'];
   position = new FormControl(this.positionOptions[0]);
 
-  displayedColumns: string[] = ['shop', 'category', 'revenuePerUnit', 'priceListPerUnit', 'priceSalesPerUnit', 'itemLastSold']
+  displayedColumns: string[] = ['shop', 'category', 'revenuePerUnit', 'priceListPerUnit', 'priceSalesPerUnit', 'itemLastSold'];
 
   dataSource = new MatTableDataSource();
 
@@ -30,7 +39,16 @@ export class SalesDescriptionComponent implements OnInit {
   // Date input
   eventsTime: string[] = [];
 
+  public formControl = new FormControl('', Validators.required);
+
   ngOnInit(): void {
+    this.fetchAllShops();
+  }
+
+  fetchAllShops(): void {
+    this.managerSalesDescriptionService.getListShops().subscribe((observable) => {
+      this.shopsList = observable;
+    });
   }
 
   startDateSelection($event: MatDatepickerInputEvent<Date>) {
@@ -55,7 +73,8 @@ export class SalesDescriptionComponent implements OnInit {
   }
 
   getSoldItemsList(): void {
-    if (this.startDate != '' && this.endDate != '') {
+    // tslint:disable-next-line:triple-equals
+    if (this.startDate != '' && this.endDate != '' && this.deliveryShop != '') {
       this.managerSalesDescriptionService.getSoldItemsList(this.startDate, this.endDate)
         .subscribe((observable) => {
           console.log(observable);

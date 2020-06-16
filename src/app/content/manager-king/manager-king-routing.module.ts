@@ -5,7 +5,7 @@ import {ManagerInventoryDisplayComponent} from './manager-inventory-display/mana
 import {AuthGuard} from '../guards/auth.guard';
 import {ManagerGuard} from '../guards/manager.guard';
 import {RegisterComponent} from './register/register.component';
-import {SalesDescriptionComponent} from './sales-description/sales-description.component';
+// tslint:disable-next-line:max-line-length
 import {ManagerWarehouseCheckinDescriptionComponent} from './manager-warehouse-checkin-description/manager-warehouse-checkin-description.component';
 import {MapComponent} from './manager-map/map/map.component';
 import {FormComponent} from './manager-map/comerce/form.component';
@@ -16,11 +16,6 @@ const routes: Routes = [
   {path: 'managerinventoryinfo', component: ManagerInventoryDisplayComponent, canActivate: [AuthGuard, ManagerGuard]},
   {path: 'managerdashboard', component: ManagerDashboardComponent, canActivate: [AuthGuard, ManagerGuard]},
   {path: 'register', component: RegisterComponent, canActivate: [AuthGuard, ManagerGuard]},
-  {
-    path: 'salesdescription',
-    component: SalesDescriptionComponent,
-    canActivate: [AuthGuard, ManagerGuard]
-  },
   {
     path: 'managerwarehousecheckindescription',
     component: ManagerWarehouseCheckinDescriptionComponent,

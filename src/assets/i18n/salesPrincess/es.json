@@ -12,6 +12,7 @@
   "delete": "Eliminar",
   "discount-in-percent": "Descuento en %",
   "discountInPercent": "Porcentaje",
+  "end-date": "Fecha final",
   "invalidDiscountRate": "Porcentaje de descuento inválido",
   "items": "Items",
   "itemsSoldToday": "Items vendidos hoy",
@@ -35,8 +36,9 @@
   "send": "Enviar",
   "shop": "Sucursal",
   "shop-comment": "Commentario de sucursal",
+  "shop-sales-in-time-frame": "Ventas relizadas por fecha",
   "shopStock": "Stock en sucursal ",
+  "start-date": "Fecha inicial",
   "warehouse-instructions": "Instrucciones adicionales",
   "DISCOUNT_METHOD_REVENUE": "precio especial"
-
 }

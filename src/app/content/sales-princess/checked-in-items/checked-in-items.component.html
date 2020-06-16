@@ -5,7 +5,7 @@
       <h1>{{ t('translate.checked-in-item') }}</h1>
       <div class="newOrderInputFieldsCategory">
         <mat-form-field appearance="fill">
-          <mat-label>{{ t('translate.shop') }}</mat-label>
+          <mat-label>{{ t('translate.shop') }}: {{deliveryShop}}</mat-label>
           <mat-select [(value)]="deliveryShop" [formControl]="formControl">
             <mat-option>--</mat-option>
             <mat-option *ngFor="let entry of shopsList" [value]="entry.name">{{ entry.name}}</mat-option>
