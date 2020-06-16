@@ -4,8 +4,6 @@ import {AngularFireAuth} from '@angular/fire/auth';
 import {Router} from '@angular/router';
 import {UserFirebase} from './user-firebase';
 import {Observable} from 'rxjs';
-import {Marcador} from "../manager-king/manager-map/components/marker.class";
-import {environment} from "../../../environments/environment";
 
 
 @Injectable({
@@ -21,16 +19,17 @@ export class AuthService {
     console.log('Reloading page...');
     this.afAuth.authState.subscribe(user => {
       if (user) {
+        console.log("WIR SIND IN CONSTRUCTOR")
         this.getUserData(user.uid).subscribe(firestoreObj => {
           localStorage.setItem('user', JSON.stringify(user));
           localStorage.setItem('role', firestoreObj.role);
-          localStorage.setItem('shop', JSON.stringify(firestoreObj.shop));
-          console.log()
+          localStorage.setItem('shops', JSON.stringify(firestoreObj.shops));
         });
       } else {
         localStorage.setItem('user', null);
         localStorage.setItem('role', null);
-        localStorage.setItem('shop', null);
+        localStorage.setItem('shops', null);
+        this.router.navigateByUrl('/landingPage');
       }
     });
   }
@@ -40,18 +39,16 @@ export class AuthService {
       this.afAuth.signInWithEmailAndPassword(email, password).then(user => {
         this.getUserData(user.user.uid).subscribe(firestoreObj => {
           localStorage.setItem('user', JSON.stringify(user.user));
-          localStorage.setItem('shop', JSON.stringify(firestoreObj.shop));
+          localStorage.setItem('shops', JSON.stringify(firestoreObj.shops));
           localStorage.setItem('role', firestoreObj.role);
-
           let list = this.getStoresList();
           console.log("FINAL"+ list)
-
           observer.next();
           this.router.navigateByUrl('/landingPage');
         });
       }).catch(error => {
         localStorage.setItem('user', null);
-        localStorage.setItem('shop', null);
+        localStorage.setItem('shops', null);
         localStorage.setItem('role', null);
         observer.error();
       });
@@ -63,24 +60,25 @@ export class AuthService {
       console.log('Calling from signOut-> authstate');
       localStorage.removeItem('user');
       localStorage.removeItem('role');
-      localStorage.removeItem('shop');
+      localStorage.removeItem('shops');
     });
   }
 
   signUp(userInput: UserFirebase) {
     return this.afAuth.createUserWithEmailAndPassword(userInput.email, userInput.password).then(result => {
-      this.setUserData(result.user, userInput.role);
+      this.setUserData(result.user, userInput.role, userInput.shops);
     });
   }
 
-  setUserData(user, role) {
+  setUserData(user, role, shops) {
     const userRef = this.afs.collection('users').doc(user.uid);
     const userData: UserFirebase = {
       uid: user.uid,
       email: user.email,
       displayName: user.displayName,
       emailVerified: user.emailVerified,
-      role
+      role,
+      shops:shops
     };
     userRef.set(userData);
   }
@@ -108,10 +106,7 @@ export class AuthService {
    *
    * **/
   getStoresList(): string[] {
-    let shopsOfUser:  string[] = JSON.parse(localStorage.getItem('shop'));
-    for (let entry of shopsOfUser) {
-      console.log(entry);
-    }
+    const shopsOfUser:  string[] = JSON.parse(localStorage.getItem('shops'));
     return shopsOfUser;
   }
 

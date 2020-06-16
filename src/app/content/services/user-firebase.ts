@@ -14,4 +14,5 @@ export interface UserFirebase {
   displayName: string;
   role?: Roles;
   emailVerified?: boolean;
+  shops?:string[];
 }

@@ -45,8 +45,8 @@
 
 
             <mat-form-field>
-            <mat-select [formControl]="shopsControl" multiple  >
-              <mat-option *ngFor="let shop of shopsOfUser" [value]="shop">{{shop.name}}</mat-option>
+            <mat-select  multiple formControlName="shops" >
+              <mat-option *ngFor="let shop of shopsOfUser" [value]="shop.name">{{shop.name}}</mat-option>
             </mat-select>
             </mat-form-field>
 
