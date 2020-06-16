@@ -19,7 +19,7 @@ export class AuthService {
     console.log('Reloading page...');
     this.afAuth.authState.subscribe(user => {
       if (user) {
-        console.log("WIR SIND IN CONSTRUCTOR")
+
         this.getUserData(user.uid).subscribe(firestoreObj => {
           localStorage.setItem('user', JSON.stringify(user));
           localStorage.setItem('role', firestoreObj.role);
@@ -41,8 +41,6 @@ export class AuthService {
           localStorage.setItem('user', JSON.stringify(user.user));
           localStorage.setItem('shops', JSON.stringify(firestoreObj.shops));
           localStorage.setItem('role', firestoreObj.role);
-          let list = this.getStoresList();
-          console.log("FINAL"+ list)
           observer.next();
           this.router.navigateByUrl('/landingPage');
         });
@@ -93,7 +91,6 @@ export class AuthService {
 
   isLoggedIn(): boolean {
     const user = JSON.parse(localStorage.getItem('user'));
-    console.log(user)
     return user !== null;
   }
 
