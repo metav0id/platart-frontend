@@ -24,10 +24,8 @@ export class AuthService {
         this.getUserData(user.uid).subscribe(firestoreObj => {
           localStorage.setItem('user', JSON.stringify(user));
           localStorage.setItem('role', firestoreObj.role);
-          localStorage.setItem('shop', firestoreObj.shop);
-          // if(this.router.navigateByUrl('/login')){
-          // this.router.navigateByUrl('/landingPage');
-          // }
+          localStorage.setItem('shop', JSON.stringify(firestoreObj.shop));
+          console.log()
         });
       } else {
         localStorage.setItem('user', null);
@@ -42,14 +40,19 @@ export class AuthService {
       this.afAuth.signInWithEmailAndPassword(email, password).then(user => {
         this.getUserData(user.user.uid).subscribe(firestoreObj => {
           localStorage.setItem('user', JSON.stringify(user.user));
+          localStorage.setItem('shop', JSON.stringify(firestoreObj.shop));
           localStorage.setItem('role', firestoreObj.role);
-          this.getAllShopsFromUser();
+
+          let list = this.getStoresList();
+          console.log("FINAL"+ list)
+
           observer.next();
           this.router.navigateByUrl('/landingPage');
         });
       }).catch(error => {
         localStorage.setItem('user', null);
-        localStorage.setItem('user', null);
+        localStorage.setItem('shop', null);
+        localStorage.setItem('role', null);
         observer.error();
       });
     });
@@ -104,29 +107,30 @@ export class AuthService {
   /** Creates field in local storage with array of stores, fills local variable with array and also prints themm all in console.log
    *
    * **/
-  getStoresList(firestoreObj){
-    this.shopsOfUser=  firestoreObj.shop;
-    localStorage.setItem('shop', firestoreObj.shop);
-    // let numberOfShops= shopsOfUser.length;
-    // console.log("Fruits" + shopsOfUser[0] + numberOfShops);
-    for (let entry of this.shopsOfUser) {
+  getStoresList(): string[] {
+    let shopsOfUser:  string[] = JSON.parse(localStorage.getItem('shop'));
+    for (let entry of shopsOfUser) {
       console.log(entry);
     }
-    return this.shopsOfUser;
+    return shopsOfUser;
   }
+
 /** Gets list of shops of current user
 *
 * **/
   getAllShopsFromUser(){
-    this.afAuth.authState.subscribe(user => {
+    return this.afAuth.authState.subscribe(user => {
       if (user) {
         this.getUserData(user.uid).subscribe(firestoreObj => {
-        this.getStoresList(firestoreObj)
+          this.shopsOfUser = firestoreObj.shops;
+        // this.getStoresList(firestoreObj)
+          console.log(this.shopsOfUser);
         });
       } else {
-        console.log("idk")
+        console.log("no shops assigned")
       }
     });
-  }
+
+}
 
 }
