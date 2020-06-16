@@ -1,4 +1,9 @@
 <ng-template transloco let-t>
+  <head>
+    <title>
+      platart
+    </title>
+  </head>
   <mdb-navbar SideClass="navbar navbar-expand-lg navbar-light bg2 ">
     <mdb-navbar-brand><a class="navbar-brand" routerLink="landingPage">Platart</a></mdb-navbar-brand>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
@@ -70,6 +75,9 @@
                   </a>
                   <a class="nav-link a" routerLink="viewshopinventory">
                     {{ t('header.Shop-Inventory') }}
+                  </a>
+                  <a class="nav-link a" routerLink="checkedinitems">
+                    {{ t('header.Checked-In-Items') }}
                   </a>
                 </mat-menu>
               </li>

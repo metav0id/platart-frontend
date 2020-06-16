@@ -26,9 +26,7 @@ export class AddDeliveryItemComponent implements OnInit {
     timestamp: '',
     comment: ''
   };
-
-  // TODO check if categories are loaded correctly
-  public categoryItems = [{category: 'Pulsera'}, {category: 'Sabato'}];
+  public categoryItems = [{category: 'Pulsera'}, {category: 'Zapato'}];
   public date = new Date();
 
   static invalidNumberValidator(control: AbstractControl): { [key: string]: boolean } | null {

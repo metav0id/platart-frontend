@@ -1,0 +1,97 @@
+<ng-template let-t transloco>
+  <div class="container-fluid d-flex justify-content-center">
+    <div class="demo-card-wide mdl-card mdl-shadow--2dp justi ">
+
+      <h1>{{ t('translate.checked-in-item') }}</h1>
+      <div class="newOrderInputFieldsCategory">
+        <mat-form-field appearance="fill">
+          <mat-label>{{ t('translate.shop') }}</mat-label>
+          <mat-select [(value)]="deliveryShop" [formControl]="formControl">
+            <mat-option>--</mat-option>
+            <mat-option *ngFor="let entry of shopsList" [value]="entry.name">{{ entry.name}}</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div>
+        <mat-form-field>
+          <mat-label>Start Date</mat-label>
+          <input (dateInput)="startDateSelection($event)" [matDatepicker]="picker1" matInput>
+          <mat-datepicker-toggle [for]="picker1" matSuffix></mat-datepicker-toggle>
+          <mat-datepicker #picker1 touchUi></mat-datepicker>
+        </mat-form-field>
+      </div>
+      <div>
+        <mat-form-field>
+          <mat-label>End Date</mat-label>
+          <input (dateInput)="endDateSelection($event)" [matDatepicker]="picker2" matInput>
+          <mat-datepicker-toggle [for]="picker2" matSuffix></mat-datepicker-toggle>
+          <mat-datepicker #picker2 touchUi></mat-datepicker>
+        </mat-form-field>
+      </div>
+
+      <button (click)="getCheckedInItemsListSpecificShop()"
+              mat-mini-fab matTooltip="Refresh list">
+        <mat-icon>autorenew</mat-icon>
+      </button>
+    </div>
+  </div>
+
+  <div class="space"></div>
+
+  <div class="container-fluid d-flex justify-content-center">
+    <div class="demo-card-wide mdl-card mdl-shadow--2dp justi ">
+
+      <h3>{{ t('translate.selectedShop') }}: {{deliveryShop}}</h3>
+      <div class="space"></div>
+      <mat-form-field>
+        <mat-label>Filter</mat-label>
+        <input (keyup)="applyFilter($event)" matInput placeholder="Ex. ium">
+      </mat-form-field>
+
+      <table [dataSource]="dataSource" class="mat-elevation-z8" mat-table matSort>
+
+        <!-- Name Column -->
+        <ng-container matColumnDef="category">
+          <th *matHeaderCellDef mat-header-cell mat-sort-header>
+            <mat-icon> category</mat-icon>
+          </th>
+          <td *matCellDef="let element" mat-cell> {{element.category}} </td>
+        </ng-container>
+
+        <!-- Symbol Column -->
+        <ng-container matColumnDef="priceListPerUnit">
+          <th *matHeaderCellDef mat-header-cell mat-sort-header>
+            <mat-icon> attach_money</mat-icon>
+            -list
+          </th>
+          <td *matCellDef="let element" mat-cell> {{element.priceListPerUnit}} </td>
+        </ng-container>
+
+        <!-- Symbol Column -->
+        <ng-container matColumnDef="date">
+          <th *matHeaderCellDef mat-header-cell mat-sort-header>
+            <mat-icon>date_range</mat-icon>
+          </th>
+          <td *matCellDef="let element" mat-cell> {{element.deliverySending.substring(0, 10)}} </td>
+        </ng-container>
+
+        <!-- Symbol Column -->
+        <ng-container matColumnDef="popup">
+          <th *matHeaderCellDef mat-header-cell mat-sort-header>
+            <mat-icon>grading</mat-icon>
+          </th>
+          <td *matCellDef="let element" mat-cell>
+            <button (click)="openDialogCheckInDetails(element)" mat-icon-button>
+              <mat-icon>open_in_new</mat-icon>
+            </button>
+          </td>
+        </ng-container>
+
+        <tr *matHeaderRowDef="displayedColumns" mat-header-row></tr>
+        <tr *matRowDef="let row; columns: displayedColumns;" mat-row></tr>
+      </table>
+
+
+    </div>
+  </div>
+</ng-template>

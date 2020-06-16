@@ -18,13 +18,16 @@ import {MatButtonModule} from '@angular/material/button';
 import {CheckoutSoldItemsComponent} from './checkout-sold-items/checkout-sold-items.component';
 import {MatDatepickerInputEvent, MatDatepickerModule} from '@angular/material/datepicker';
 import {MatNativeDateModule} from '@angular/material/core';
+import {MatCardModule} from '@angular/material/card';
 import {CheckoutSoldItemsDetailsComponent} from './checkout-sold-items/checkout-sold-items-details/checkout-sold-items-details.component';
-import {MatCardModule} from "@angular/material/card";
 import {TranslocoRootModule} from '../../transloco-root.module';
-import {CheckoutSoldItemsSendVerificationComponent} from './checkout-sold-items/checkout-sold-items-send-verification/checkout-sold-items-send-verification.component';
-import {ViewShopInventoryComponent} from './view-shop-inventory/view-shop-inventory.component';
-import {AddDeliveryItemComponent} from './new-delivery-from-warehouse/add-delivery-item/add-delivery-item.component';
-import {MatTooltipModule} from "@angular/material/tooltip";
+import { CheckoutSoldItemsSendVerificationComponent } from './checkout-sold-items/checkout-sold-items-send-verification/checkout-sold-items-send-verification.component';
+import { ViewShopInventoryComponent } from './view-shop-inventory/view-shop-inventory.component';
+import { AddDeliveryItemComponent } from './new-delivery-from-warehouse/add-delivery-item/add-delivery-item.component';
+import {MatTooltipModule} from '@angular/material/tooltip';
+import { CheckedInItemsComponent } from './checked-in-items/checked-in-items.component';
+import {MatSortModule} from "@angular/material/sort";
+import { CheckedInItemsDetailsComponent } from './checked-in-items/checked-in-items-details/checked-in-items-details.component';
 
 
 @NgModule({
@@ -36,7 +39,9 @@ import {MatTooltipModule} from "@angular/material/tooltip";
     CheckoutSoldItemsSendVerificationComponent,
     ViewShopInventoryComponent,
     CheckoutSoldItemsSendVerificationComponent,
-    AddDeliveryItemComponent
+    AddDeliveryItemComponent,
+    CheckedInItemsComponent,
+    CheckedInItemsDetailsComponent
   ],
   imports: [
     CommonModule,
@@ -59,7 +64,8 @@ import {MatTooltipModule} from "@angular/material/tooltip";
     MatDatepickerModule,
     MatNativeDateModule,
     MatCardModule,
-    MatTooltipModule
+    MatTooltipModule,
+    MatSortModule
   ],
   entryComponents: [
     NewDeliveryFromWarehouseComponent,

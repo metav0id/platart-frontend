@@ -15,6 +15,7 @@ export const environment = {
   saveMarker: 'http://161.35.4.253:8081/marker/savemarker',
   findCommerce: 'http://161.35.4.253:8081/comerce/find',
   findMarker: 'http://161.35.4.253:8081/marker/find',
+  editMarker: 'http://161.35.4.253:8081/marker/edit',
   updateMarker: 'http://161.35.4.253:8081/marker/update',
   deleteMarker: 'http://161.35.4.253:8081/marker/delete',
   deleteCoords: 'http://161.35.4.253:8081/marker/deleteCoords',
@@ -46,4 +47,7 @@ export const environment = {
   getAllItemsAllShops: 'http://161.35.4.253:8081/shops/getAllItemsAllShops',
   getSoldItemsList: 'http://161.35.4.253:8081/manager/getSoldItemsListByDateRange',
   getCheckinItemsList: 'http://161.35.4.253:8081/manager/getCheckinItemsListByDateRange',
+  getAllCheckedInItems: 'http://161.35.4.253:8081/shops/getAllCheckedInItems',
+  getSpecificCheckedInItems: 'http://161.35.4.253:8081/shops/getSpecificCheckedInItems',
+  getSpecificCheckedInItemsDate: 'http://161.35.4.253:8081/shops/getSpecificCheckedInItemsDate'
 };

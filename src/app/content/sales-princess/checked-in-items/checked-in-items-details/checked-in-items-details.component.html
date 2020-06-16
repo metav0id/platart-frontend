@@ -1,0 +1,27 @@
+<ng-template transloco let-t>
+<div mat-dialog-content>
+  <h1 mat-dialog-title>{{ t('translate.detailed-view') }}</h1>
+  <form [formGroup]="myForm" (ngSubmit)="onSubmit(myForm.value)" novalidate>
+
+    <mat-card class="example-card">
+      <mat-card-header>
+        <mat-card-title><mat-icon> category</mat-icon>{{ t('translate.category') }}: {{newItem.category}}</mat-card-title>
+        <mat-card-title><mat-icon>date_range</mat-icon>{{ t('translate.checked-in-item-date') }}: {{newItem.deliverySending.substring(0,10)}}</mat-card-title>
+        <mat-card-title><mat-icon> store_mall_directory</mat-icon>{{ t('translate.shop') }}: {{newItem.shop}}</mat-card-title>
+        <mat-card-title><mat-icon> local_offer</mat-icon>{{ t('translate.listPricePerUnit') }}: {{newItem.priceListPerUnit}}$</mat-card-title>
+        <mat-card-title><mat-icon> point_of_sale</mat-icon>{{ t('translate.salesPricePerUnit') }}: {{newItem.priceSalesPerUnit}}$</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <p>{{ t('translate.quantity') }}: {{newItem.quantity}}</p>
+        <p>{{ t('translate.discount-in-percent') }}: {{newItem.discountPercent}}%</p>
+        <p>{{ t('translate.warehouse-instructions') }}: {{newItem.warehouseInstruction}}</p>
+        <p>{{ t('translate.shop-comment') }}: {{newItem.shopComment}}</p>
+      </mat-card-content>
+    </mat-card>
+
+    <button mat-mini-fab mat-dialog-close>
+      <mat-icon>cancel</mat-icon>
+    </button>
+  </form>
+</div>
+</ng-template>
