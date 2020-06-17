@@ -10,6 +10,7 @@ import {ShopDTO} from "../../warehouse-queen/new-delivery-to-shop/new-delivery-t
   providedIn: 'root'
 })
 export class SalesDescriptionService {
+  ops1: String[] = new Array();
 
   constructor(private http: HttpClient) {
   }

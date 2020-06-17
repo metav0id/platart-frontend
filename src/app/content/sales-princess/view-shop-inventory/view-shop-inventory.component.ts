@@ -7,6 +7,7 @@ import {FormControl, Validators} from '@angular/forms';
 import {Shop} from '../../commonDTOs/shop';
 import {TRANSLOCO_SCOPE, TranslocoService} from '@ngneat/transloco';
 import {TooltipPosition} from "@angular/material/tooltip";
+import {AuthService} from "../../services/auth.service";
 
 @Component({
   selector: 'app-view-shop-inventory',
@@ -29,13 +30,15 @@ export class ViewShopInventoryComponent implements OnInit {
 
   /** List of available shops */
   public listShops: Shop[] = [{name: 'shop1'}, {name: 'shop2'}];
+  public listShops1: String[] = new Array();
   public selectedShopToFilterOnList = '';
   public selectedShopToDisplay = '';
 
-  constructor(private viewShopInventoryService: ViewShopInventoryService, private transloco: TranslocoService) {
+  constructor(private viewShopInventoryService: ViewShopInventoryService, private transloco: TranslocoService, private auth: AuthService) {
   }
 
   ngOnInit(): void {
+    this.listShops1 = this.auth.getStoresList();
     this.viewShopInventoryService.getListShops().subscribe((JsonDto) => {
       this.listShops = JsonDto;
     });

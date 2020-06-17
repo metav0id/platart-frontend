@@ -10,6 +10,7 @@ import {Shop} from '../../commonDTOs/shop';
 import {AddDeliveryItemComponent} from './add-delivery-item/add-delivery-item.component';
 import {TooltipPosition} from '@angular/material/tooltip';
 import {TableItem} from './table-item';
+import {AuthService} from "../../services/auth.service";
 
 @Component({
   selector: 'app-new-delivery-from-warehouse',
@@ -34,16 +35,20 @@ export class NewDeliveryFromWarehouseComponent implements OnInit {
 
   /** List of available shops */
   public listShops: Shop[] = [{name: ''}];
+  public listShops1: String[] = new Array();
+
   public selectedShopToFilterOnList = '';
 
   @ViewChild('myCheckinProductsTable') table: MatTable<any>;
 
   constructor(public dialog: MatDialog,
               private transloco: TranslocoService,
-              private newDeliveryFromWarehouseService: NewDeliveryFromWarehouseService) {
+              private newDeliveryFromWarehouseService: NewDeliveryFromWarehouseService,
+              private auth: AuthService) {
   }
 
   ngOnInit(): void {
+    this.listShops1 = this.auth.getStoresList();
     this.newDeliveryFromWarehouseService.getListShops().subscribe(JSON => this.listShops = JSON);
   }
 

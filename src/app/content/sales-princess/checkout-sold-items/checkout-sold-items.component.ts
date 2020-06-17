@@ -16,6 +16,7 @@ import {SendItemsDTO} from './checkout-sold-items-DTOs/Send-Items-DTO';
 import {TRANSLOCO_SCOPE, TranslocoService} from '@ngneat/transloco';
 import {TooltipPosition} from '@angular/material/tooltip';
 import Swal from 'sweetalert2';
+import {AuthService} from "../../services/auth.service";
 
 @Component({
   selector: 'app-checkout-sold-items',
@@ -24,13 +25,15 @@ import Swal from 'sweetalert2';
   providers: [{provide: TRANSLOCO_SCOPE, useValue: {scope: 'salesPrincess', alias: 'translate'}}]
 })
 export class CheckoutSoldItemsComponent implements OnInit {
+  public listShops1: String[] = new Array();
   positionOptions: TooltipPosition[] = ['after', 'before', 'above', 'below', 'left', 'right'];
   position = new FormControl(this.positionOptions[0]);
 
   constructor(/*private _snackBar: MatSnackBar,*/
               private checkoutSoldItemsService: CheckoutSoldItemsService,
               private transloco: TranslocoService,
-              public dialog: MatDialog) {
+              public dialog: MatDialog,
+              private auth: AuthService) {
   }
 
   // Fields for input-form
@@ -81,6 +84,7 @@ export class CheckoutSoldItemsComponent implements OnInit {
   availableItems = 0;
 
   ngOnInit(): void {
+    this.listShops1 = this.auth.getStoresList();
     this.initNewOrderElement();
 
     // fetch saved sold items-list

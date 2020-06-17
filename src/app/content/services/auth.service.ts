@@ -19,7 +19,6 @@ export class AuthService {
     console.log('Reloading page...');
     this.afAuth.authState.subscribe(user => {
       if (user) {
-
         this.getUserData(user.uid).subscribe(firestoreObj => {
           localStorage.setItem('user', JSON.stringify(user));
           localStorage.setItem('role', firestoreObj.role);

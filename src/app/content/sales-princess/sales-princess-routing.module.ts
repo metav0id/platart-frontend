@@ -17,7 +17,7 @@ const routes: Routes = [
   {
     path: 'salesdescription',
     component: SalesDescriptionComponent,
-    canActivate: [AuthGuard, ManagerGuard]
+    canActivate: [AuthGuard, ShopGuard]
   },
   ];
 

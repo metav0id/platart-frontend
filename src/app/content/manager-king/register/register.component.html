@@ -44,11 +44,11 @@
           </div>
 
 
-            <mat-form-field>
-            <mat-select  multiple formControlName="shops" >
+          <mat-form-field>
+            <mat-select multiple formControlName="shops">
               <mat-option *ngFor="let shop of shopsOfUser" [value]="shop.name">{{shop.name}}</mat-option>
             </mat-select>
-            </mat-form-field>
+          </mat-form-field>
 
 
           <div class="container-login100-form-btn m-t-17">

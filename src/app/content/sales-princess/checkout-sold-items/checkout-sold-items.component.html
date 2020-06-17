@@ -28,7 +28,7 @@
                   <mat-label>{{ t('translate.shop') }}</mat-label>
                   <mat-select [(value)]="newCheckoutSoldItem.shop" [formControl]="shopControll">
                     <mat-option>--</mat-option>
-                    <mat-option *ngFor="let entry of shopsList" [value]="entry.name">{{ entry.name}}</mat-option>
+                    <mat-option *ngFor="let entry of listShops1" [value]="entry">{{ entry}}</mat-option>
                   </mat-select>
                   <mat-error *ngIf="newCheckoutSoldItem.shop===null">
                     {{ t('translate.selectShop') }}!

@@ -8,6 +8,7 @@ import {TooltipPosition} from '@angular/material/tooltip';
 import {TRANSLOCO_SCOPE} from '@ngneat/transloco';
 import {ShopDTO} from '../checked-in-items/checked-in-items-DTOs/shop-dto';
 import Swal from 'sweetalert2';
+import {AuthService} from "../../services/auth.service";
 
 @Component({
   selector: 'app-manager-sales-description',
@@ -19,7 +20,7 @@ import Swal from 'sweetalert2';
   }]
 })
 export class SalesDescriptionComponent implements OnInit {
-
+  public listShops1: String[] = new Array();
   public deliveryShop = '';
   public shopsList: ShopDTO[] = [];
 
@@ -32,7 +33,7 @@ export class SalesDescriptionComponent implements OnInit {
 
   @ViewChild(MatSort, {static: true}) sort: MatSort;
 
-  constructor(private managerSalesDescriptionService: SalesDescriptionService) {
+  constructor(private managerSalesDescriptionService: SalesDescriptionService, private auth: AuthService) {
   }
 
   startDate = '';
@@ -43,6 +44,7 @@ export class SalesDescriptionComponent implements OnInit {
   public formControl = new FormControl('', Validators.required);
 
   ngOnInit(): void {
+    this.listShops1 = this.auth.getStoresList();
     this.fetchAllShops();
   }
 

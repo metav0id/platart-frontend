@@ -8,6 +8,7 @@ import {ShopDTO} from './checked-in-items-DTOs/shop-dto';
 import {MatDialog} from '@angular/material/dialog';
 import {CheckedInItemsDetailsComponent} from './checked-in-items-details/checked-in-items-details.component';
 import {MatDatepickerInputEvent} from '@angular/material/datepicker';
+import {AuthService} from "../../services/auth.service";
 
 @Component({
   selector: 'app-checked-in-items',
@@ -25,17 +26,19 @@ export class CheckedInItemsComponent implements OnInit {
 
   public deliveryShop: string;
   public shopsList: ShopDTO[] = [];
+  public listShops1: String[] = new Array();
 
   displayedColumns: string[] = ['date', 'category', 'priceListPerUnit', 'popup'];
   dataSource = new MatTableDataSource();
 
   constructor(public dialog: MatDialog,
-              private checkedInItemsService: CheckedInItemsService) {
+              private checkedInItemsService: CheckedInItemsService, private auth: AuthService) {
   }
 
   @ViewChild(MatSort, {static: true}) sort: MatSort;
 
   ngOnInit(): void {
+    this.listShops1 = this.auth.getStoresList();
     this.fetchAllShops();
   }
 
