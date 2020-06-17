@@ -8,10 +8,13 @@
   "Manager" : "Manager",
   "Manage-Shops-Information" : "Manage información de comercios",
   "Sales" : "Ventas",
+  "Sales-Summary" : "Resumen de ventas",
+  "Register-new-user": "Registrar usuario nuevo",
   "After" : "Después",
   "Dashboard" : "Tablero indicadores rendimiento",
   "Checkout-Sold-Items" : "Egreso items vendidos",
   "Checkin-new-Delivery-to-Shop" : "Revisión N/E-nueva",
   "Shop-Inventory" : "Inventario sucursal",
-  "Checked-In-Items" : "Items ingresados"
+  "Checked-In-Items" : "Items ingresados",
+  "Warehouse-Checkin" : "Lista N/E ingresadas"
 }

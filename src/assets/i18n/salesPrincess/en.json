@@ -12,6 +12,7 @@
   "delete": "Delete",
   "discount-in-percent": "Discount in %",
   "discountInPercent": "Percent",
+  "end-date": "End Date",
   "invalidDiscountRate": "Invalid discount rate",
   "items": "Items",
   "itemsSoldToday": "Items sold today",
@@ -35,7 +36,9 @@
   "send": "Send",
   "shop": "Shop",
   "shop-comment": "Shop Comment",
+  "shop-sales-in-time-frame": "Shop Sales in selected time frame",
   "shopStock": "Shop-Stock in",
+  "start-date": "Start Date",
   "warehouse-instructions": "Warehouse instructions",
   "DISCOUNT_METHOD_REVENUE": "special price"
 }

@@ -8,10 +8,13 @@
   "Manager" : "Manager",
   "Manage-Shops-Information" : "Manage Shops Information",
   "Sales" : "Sales",
+  "Sales-Summary" : "Sales summary",
+  "Register-new-user": "Register new user",
   "After" : "After",
   "Dashboard" : "Nifty Manager Dashboard",
   "Checkout-Sold-Items" : "Checkout Sold Items",
   "Checkin-new-Delivery-to-Shop" : "Checkin new Delivery to Shop",
   "Shop-Inventory" : "Shop Inventory",
-  "Checked-In-Items" : "Checked In Items"
+  "Checked-In-Items" : "Checked In Items",
+  "Warehouse-Checkin" : "Warehouse Checkin"
 }

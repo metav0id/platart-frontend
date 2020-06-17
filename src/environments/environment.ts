@@ -49,7 +49,7 @@ export const environment = {
   getShopInventoryAvailability: 'http://localhost:8081/shops/getShopInventoryAvailability',
   getShopInventoryItems: 'http://localhost:8081/shops/getShopInventoryItems',
   getAllItemsAllShops: 'http://localhost:8081/shops/getAllItemsAllShops',
-  getSoldItemsList: 'http://localhost:8081/manager/getSoldItemsListByDateRange',
+  getSoldItemsList: 'http://localhost:8081/manager/getSoldItemsListByShopAndDateRange',
   getCheckinItemsList: 'http://localhost:8081/manager/getCheckinItemsListByDateRange',
   getAllCheckedInItems: 'http://localhost:8081/shops/getAllCheckedInItems',
   getSpecificCheckedInItems: 'http://localhost:8081/shops/getSpecificCheckedInItems',
