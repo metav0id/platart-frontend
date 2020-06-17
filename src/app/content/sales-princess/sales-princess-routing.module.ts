@@ -14,7 +14,7 @@ const routes: Routes = [
   {path: 'checkoutsolditems', component: CheckoutSoldItemsComponent, canActivate: [AuthGuard, ShopGuard]},
   {path: 'viewshopinventory', component: ViewShopInventoryComponent, canActivate: [AuthGuard, ShopGuard]},
   {path: 'checkedinitems', component: CheckedInItemsComponent, canActivate: [AuthGuard, ShopGuard]},
-  {path: 'salesdescription', component: SalesDescriptionComponent, canActivate: [AuthGuard, ManagerGuard]},
+  {path: 'salesdescription', component: SalesDescriptionComponent, canActivate: [AuthGuard, ShopGuard]},
 ];
 
 @NgModule({
