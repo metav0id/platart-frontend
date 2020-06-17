@@ -8,8 +8,8 @@ import {TooltipPosition} from '@angular/material/tooltip';
 import {TRANSLOCO_SCOPE} from '@ngneat/transloco';
 import {ShopDTO} from '../checked-in-items/checked-in-items-DTOs/shop-dto';
 import Swal from 'sweetalert2';
-import {MatDialog} from "@angular/material/dialog";
-import {SalesDescriptionDetailsComponent} from "./sales-description-details/sales-description-details.component";
+import {MatDialog} from '@angular/material/dialog';
+import {SalesDescriptionDetailsComponent} from './sales-description-details/sales-description-details.component';
 
 @Component({
   selector: 'app-manager-sales-description',
