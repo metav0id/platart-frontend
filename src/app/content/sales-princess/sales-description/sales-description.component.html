@@ -47,37 +47,56 @@
 
         <!-- Name Column -->
         <ng-container matColumnDef="category">
-          <th *matHeaderCellDef mat-header-cell mat-sort-header><mat-icon> category</mat-icon></th>
+          <th *matHeaderCellDef mat-header-cell mat-sort-header>
+            <mat-icon> category</mat-icon>
+          </th>
           <td *matCellDef="let element" mat-cell> {{element.category}}</td>
         </ng-container>
 
         <!-- Symbol Column -->
         <ng-container matColumnDef="priceListPerUnit">
-          <th *matHeaderCellDef mat-header-cell mat-sort-header><mat-icon> attach_money</mat-icon>
-            -list</th>
+          <th *matHeaderCellDef mat-header-cell mat-sort-header>
+            <mat-icon> attach_money</mat-icon>
+            -list
+          </th>
           <td *matCellDef="let element" mat-cell> {{element.priceListPerUnit}}</td>
         </ng-container>
 
         <!-- Symbol Column -->
         <ng-container matColumnDef="priceSalesPerUnit">
-          <th *matHeaderCellDef mat-header-cell mat-sort-header><mat-icon> attach_money</mat-icon>
-            -sales</th>
+          <th *matHeaderCellDef mat-header-cell mat-sort-header>
+            <mat-icon> attach_money</mat-icon>
+            -sales
+          </th>
           <td *matCellDef="let element" mat-cell> {{element.priceSalesPerUnit}}</td>
         </ng-container>
 
         <!-- Symbol Column -->
         <ng-container matColumnDef="revenuePerUnit">
-          <th *matHeaderCellDef mat-header-cell mat-sort-header><mat-icon>  <mat-icon>grading</mat-icon></mat-icon>
-            -final</th>
-          <td *matCellDef="let element" mat-cell> <button (click)="openDialogSalesDescriptionItem(element)" mat-icon-button>
-            <mat-icon>open_in_new</mat-icon>
-          </button></td>
+          <th *matHeaderCellDef mat-header-cell mat-sort-header>
+            <mat-icon>
+              <mat-icon>grading</mat-icon>
+            </mat-icon>
+            -final
+          </th>
+          <td *matCellDef="let element" mat-cell>
+            <button (click)="openDialogSalesDescriptionItem(element)" mat-icon-button>
+              <mat-icon>open_in_new</mat-icon>
+            </button>
+          </td>
         </ng-container>
 
         <!-- Symbol Column -->
         <ng-container matColumnDef="itemLastSold">
-          <th *matHeaderCellDef mat-header-cell mat-sort-header><mat-icon>date_range</mat-icon>-sold</th>
-          <td *matCellDef="let element" mat-cell> {{element.itemLastSold.substring(0,10)}}</td>
+          <th *matHeaderCellDef mat-header-cell mat-sort-header>
+            <mat-icon>date_range</mat-icon>
+            -sold
+          </th>
+          <td *matCellDef="let element" mat-cell>
+            <div id="text"
+                 onClick="openDialogSalesDescriptionItem(element)"> {{element.itemLastSold.substring(0, 10)}}
+            </div>
+          </td>
         </ng-container>
 
         <tr *matHeaderRowDef="displayedColumns" mat-header-row></tr>
