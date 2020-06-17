@@ -46,7 +46,7 @@ import {AngularFireAuthModule} from '@angular/fire/auth';
 import {environment} from 'src/environments/environment';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import {MatExpansionModule} from '@angular/material/expansion';
-import {LandingPageWarehouseComponent} from "./content/landing-page/landing-page-warehouse.component";
+import {LandingPageWarehouseComponent} from './content/landing-page/landing-page-warehouse.component';
 
 
 @NgModule({

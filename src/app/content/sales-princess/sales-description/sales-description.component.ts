@@ -8,7 +8,9 @@ import {TooltipPosition} from '@angular/material/tooltip';
 import {TRANSLOCO_SCOPE} from '@ngneat/transloco';
 import {ShopDTO} from '../checked-in-items/checked-in-items-DTOs/shop-dto';
 import Swal from 'sweetalert2';
-import {AuthService} from "../../services/auth.service";
+import {AuthService} from '../../services/auth.service';
+import {MatDialog} from '@angular/material/dialog';
+import {SalesDescriptionDetailsComponent} from './sales-description-details/sales-description-details.component';
 
 @Component({
   selector: 'app-manager-sales-description',
@@ -33,7 +35,10 @@ export class SalesDescriptionComponent implements OnInit {
 
   @ViewChild(MatSort, {static: true}) sort: MatSort;
 
-  constructor(private managerSalesDescriptionService: SalesDescriptionService, private auth: AuthService) {
+  constructor(
+          public dialog: MatDialog,
+          private managerSalesDescriptionService: SalesDescriptionService,
+          private auth: AuthService) {
   }
 
   startDate = '';
@@ -95,5 +100,14 @@ export class SalesDescriptionComponent implements OnInit {
 
   openDialogSalesDescriptionItem(element: any) {
     console.log('implement element');
+    console.log(element);
+    const dialogRef = this.dialog.open(SalesDescriptionDetailsComponent, {
+      width: '250px',
+      data: element
+    });
+
+    dialogRef.afterClosed().subscribe((DataObservable) => {
+      console.log(DataObservable);
+    });
   }
 }
