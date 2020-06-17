@@ -7,6 +7,7 @@ import {MatDatepickerInputEvent} from '@angular/material/datepicker';
 import {TooltipPosition} from '@angular/material/tooltip';
 import {TRANSLOCO_SCOPE} from '@ngneat/transloco';
 import {ShopDTO} from '../checked-in-items/checked-in-items-DTOs/shop-dto';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-manager-sales-description',
@@ -25,7 +26,7 @@ export class SalesDescriptionComponent implements OnInit {
   positionOptions: TooltipPosition[] = ['after', 'before', 'above', 'below', 'left', 'right'];
   position = new FormControl(this.positionOptions[0]);
 
-  displayedColumns: string[] = ['shop', 'category', 'revenuePerUnit', 'priceListPerUnit', 'priceSalesPerUnit', 'itemLastSold'];
+  displayedColumns: string[] = ['itemLastSold', 'category', 'priceListPerUnit', 'priceSalesPerUnit', 'revenuePerUnit'];
 
   dataSource = new MatTableDataSource();
 
@@ -34,8 +35,8 @@ export class SalesDescriptionComponent implements OnInit {
   constructor(private managerSalesDescriptionService: SalesDescriptionService) {
   }
 
-  startDate: string = '';
-  endDate: string = '';
+  startDate = '';
+  endDate = '';
   // Date input
   eventsTime: string[] = [];
 
@@ -75,15 +76,22 @@ export class SalesDescriptionComponent implements OnInit {
   getSoldItemsList(): void {
     // tslint:disable-next-line:triple-equals
     if (this.startDate != '' && this.endDate != '' && this.deliveryShop != '') {
-      this.managerSalesDescriptionService.getSoldItemsList(this.startDate, this.endDate)
+      this.managerSalesDescriptionService.getSoldItemsList(this.deliveryShop, this.startDate, this.endDate)
         .subscribe((observable) => {
           console.log(observable);
           this.dataSource = new MatTableDataSource(observable);
           this.dataSource.sort = this.sort;
         });
     } else {
-      console.log('Please select date range');
+      Swal.fire({
+        icon: 'error',
+        title: 'Missing Information',
+        text: 'Please make sure the shop is selected as well as the start- and end-dates.'
+      });
     }
   }
 
+  openDialogSalesDescriptionItem(element: any) {
+    console.log('implement element');
+  }
 }

@@ -3,7 +3,7 @@ import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {environment} from '../../../../environments/environment';
 import {ShopsAllSoldItemsDTO} from './sales-description-DTOs/ShopsAllSoldItemsDTO';
-import {DateRangeDTO} from './sales-description-DTOs/DateRangeDTO';
+import {ShopAndDateRangeDTO} from './sales-description-DTOs/ShopAndDateRangeDTO';
 import {ShopDTO} from "../../warehouse-queen/new-delivery-to-shop/new-delivery-to-shop-DTOs/shop-dto";
 
 @Injectable({
@@ -14,9 +14,10 @@ export class SalesDescriptionService {
   constructor(private http: HttpClient) {
   }
 
-  getSoldItemsList(startDateValue: string, endDateValue: string): Observable<ShopsAllSoldItemsDTO[]> {
+  getSoldItemsList(selectedShop: string, startDateValue: string, endDateValue: string): Observable<ShopsAllSoldItemsDTO[]> {
 
-    const range: DateRangeDTO = {
+    const range: ShopAndDateRangeDTO = {
+      shop: selectedShop,
       startDate: startDateValue,
       endDate: endDateValue
     };
