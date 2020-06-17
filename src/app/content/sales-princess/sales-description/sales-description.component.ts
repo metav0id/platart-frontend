@@ -8,6 +8,7 @@ import {TooltipPosition} from '@angular/material/tooltip';
 import {TRANSLOCO_SCOPE} from '@ngneat/transloco';
 import {ShopDTO} from '../checked-in-items/checked-in-items-DTOs/shop-dto';
 import Swal from 'sweetalert2';
+import {AuthService} from '../../services/auth.service';
 import {MatDialog} from '@angular/material/dialog';
 import {SalesDescriptionDetailsComponent} from './sales-description-details/sales-description-details.component';
 
@@ -21,7 +22,7 @@ import {SalesDescriptionDetailsComponent} from './sales-description-details/sale
   }]
 })
 export class SalesDescriptionComponent implements OnInit {
-
+  public listShops1: String[] = new Array();
   public deliveryShop = '';
   public shopsList: ShopDTO[] = [];
 

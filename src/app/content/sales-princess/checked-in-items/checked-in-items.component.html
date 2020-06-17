@@ -72,7 +72,11 @@
           <th *matHeaderCellDef mat-header-cell mat-sort-header>
             <mat-icon>date_range</mat-icon>
           </th>
-          <td *matCellDef="let element" mat-cell> {{element.deliverySending.substring(0, 10)}} </td>
+          <td *matCellDef="let element" mat-cell>
+            <div (click)="openDialogCheckInDetails(element)" mat-icon-button>
+              {{element.deliverySending.substring(0, 10)}}
+            </div>
+          </td>
         </ng-container>
 
         <!-- Symbol Column -->
