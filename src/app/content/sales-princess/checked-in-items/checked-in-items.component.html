@@ -73,9 +73,7 @@
             <mat-icon>date_range</mat-icon>
           </th>
           <td *matCellDef="let element" mat-cell>
-            <div (click)="openDialogCheckInDetails(element)" mat-icon-button>
-              {{element.deliverySending.substring(0, 10)}}
-            </div>
+            {{element.deliverySending.substring(0, 10)}}
           </td>
         </ng-container>
 

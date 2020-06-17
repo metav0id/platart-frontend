@@ -93,8 +93,8 @@
             -sold
           </th>
           <td *matCellDef="let element" mat-cell>
-            <div id="text"
-                 onClick="openDialogSalesDescriptionItem(element)"> {{element.itemLastSold.substring(0, 10)}}
+            <div (click)="openDialogSalesDescriptionItem(element)" mat-icon-button>
+              {{element.itemLastSold.substring(0, 10)}}
             </div>
           </td>
         </ng-container>
