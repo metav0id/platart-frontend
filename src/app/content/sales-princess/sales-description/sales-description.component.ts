@@ -102,7 +102,7 @@ export class SalesDescriptionComponent implements OnInit {
     console.log('implement element');
     console.log(element);
     const dialogRef = this.dialog.open(SalesDescriptionDetailsComponent, {
-      width: '250px',
+      width: '400x',
       data: element
     });
 
