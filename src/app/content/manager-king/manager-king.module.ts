@@ -35,6 +35,7 @@ import {ManagerWarehouseCheckinDescriptionComponent} from './manager-warehouse-c
 
 import {ComerceFormComponent} from './manager-map/comerce-form/comerce-form.component';
 import {MatTooltipModule} from "@angular/material/tooltip";
+import {ManagerDashboardCategoryComponent} from './manager-dashboards/category-overview/manager-dashboard-category.component';
 
 @NgModule({
   declarations: [
@@ -51,6 +52,7 @@ import {MatTooltipModule} from "@angular/material/tooltip";
     SalesDescriptionComponent,
     ManagerWarehouseCheckinDescriptionComponent,
     ComerceFormComponent,
+    ManagerDashboardCategoryComponent
   ],
   imports: [
     CommonModule,

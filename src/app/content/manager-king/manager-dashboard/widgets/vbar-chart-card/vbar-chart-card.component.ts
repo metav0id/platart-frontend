@@ -1,5 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {ManagerDashboardService} from '../../manager-dashboard.service';
+import {DateRangeDTO} from '../../../manager-king-dtos/DateRangeDTO';
 
 
 @Component({
@@ -14,7 +15,7 @@ export class VbarChartCardComponent implements OnInit {
   @Input() percentage: string;
 
   // ngx-charts:
-  public vbarData = this.managerDashboardService.fetchVBarData();
+  public vbarData = this.managerDashboardService.fetchVBarData(this.createChartDates());
 
   showXAxis = true;
   showYAxis = true;
@@ -32,6 +33,16 @@ export class VbarChartCardComponent implements OnInit {
   showLabels = false;
 
   constructor(private managerDashboardService: ManagerDashboardService) {
+  }
+
+  createChartDates(): DateRangeDTO {
+    const tempStartDate = new Date();
+    tempStartDate.setDate(tempStartDate.getDate() - 1);
+    const tempEndDate = new Date();
+    return {
+      startDate: tempStartDate.toISOString(),
+      endDate: tempEndDate.toISOString()
+    };
   }
 
   ngOnInit(): void {

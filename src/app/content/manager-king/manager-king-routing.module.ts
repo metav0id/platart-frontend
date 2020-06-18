@@ -9,12 +9,14 @@ import {RegisterComponent} from './register/register.component';
 import {ManagerWarehouseCheckinDescriptionComponent} from './manager-warehouse-checkin-description/manager-warehouse-checkin-description.component';
 import {MapComponent} from './manager-map/map/map.component';
 import {FormComponent} from './manager-map/comerce/form.component';
+import {ManagerDashboardCategoryComponent} from './manager-dashboards/category-overview/manager-dashboard-category.component';
 
 const routes: Routes = [
   {path: 'formComerce', component: FormComponent, canActivate: [AuthGuard, ManagerGuard]},
   {path: 'map', component: MapComponent, canActivate: [AuthGuard, ManagerGuard]},
   {path: 'managerinventoryinfo', component: ManagerInventoryDisplayComponent, canActivate: [AuthGuard, ManagerGuard]},
   {path: 'managerdashboard', component: ManagerDashboardComponent, canActivate: [AuthGuard, ManagerGuard]},
+  {path: 'categoryoverview', component: ManagerDashboardCategoryComponent, canActivate: [AuthGuard, ManagerGuard]},
   {path: 'register', component: RegisterComponent, canActivate: [AuthGuard, ManagerGuard]},
   {
     path: 'managerwarehousecheckindescription',
