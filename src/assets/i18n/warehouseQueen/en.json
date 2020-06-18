@@ -19,6 +19,7 @@
   "delete": "Delete",
   "deleteSelected": "Delete selected",
   "deliveriesTo": "Delivery manifest for",
+  "displayActiveCategoryFalse": "Show deactivated categories",
   "discount": "Discount",
   "discountInPercent": "Percent",
   "discountType": "Discount type",

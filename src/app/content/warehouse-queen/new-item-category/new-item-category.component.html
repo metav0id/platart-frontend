@@ -83,11 +83,7 @@
               <div class="space"></div>
               <div class="d-flex justify-content-around">
                 <div class="d-flex justify-content-around">
-                  <mat-select>
-                    <mat-option>--</mat-option>
-                    <mat-option *ngFor="let entry of listShops1" [value]="entry">{{ entry }}</mat-option>
-                  </mat-select>
-
+                  <mat-checkbox >{{ t('translate.displayActiveCategoryFalse') }}</mat-checkbox>
                   <button matTooltip="Deletes selected categories from the list"
                           [matTooltipPosition]="position.value" mat-raised-button (click)="deleteSelectedCategory()">{{
                     t('translate.deleteSelected') }}
