@@ -16,7 +16,7 @@ export class NewDeliveryFromWarehouseDetailsComponent implements OnInit {
    * @param control
    */
   static invalidNumberValidator(control: AbstractControl): { [key: string]: boolean } | null {
-    if (control.value <= 0) {
+    if (control.value < 0) {
       return {invalidNumber: true};
     }
     return null;
