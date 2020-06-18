@@ -16,7 +16,6 @@ export class AuthService {
   constructor(public afs: AngularFirestore,
               public afAuth: AngularFireAuth,
               public router: Router) {
-    console.log('Reloading page...');
     this.afAuth.authState.subscribe(user => {
       if (user) {
         this.getUserData(user.uid).subscribe(firestoreObj => {
@@ -54,7 +53,6 @@ export class AuthService {
 
   signOut() {
     return this.afAuth.signOut().then(() => {
-      console.log('Calling from signOut-> authstate');
       localStorage.removeItem('user');
       localStorage.removeItem('role');
       localStorage.removeItem('shops');
@@ -105,23 +103,5 @@ export class AuthService {
     const shopsOfUser:  string[] = JSON.parse(localStorage.getItem('shops'));
     return shopsOfUser;
   }
-
-/** Gets list of shops of current user
-*
-* **/
-  getAllShopsFromUser(){
-    return this.afAuth.authState.subscribe(user => {
-      if (user) {
-        this.getUserData(user.uid).subscribe(firestoreObj => {
-          this.shopsOfUser = firestoreObj.shops;
-        // this.getStoresList(firestoreObj)
-          console.log(this.shopsOfUser);
-        });
-      } else {
-        console.log("no shops assigned")
-      }
-    });
-
-}
 
 }

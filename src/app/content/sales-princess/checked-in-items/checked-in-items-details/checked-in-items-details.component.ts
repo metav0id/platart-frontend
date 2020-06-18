@@ -44,15 +44,14 @@ export class CheckedInItemsDetailsComponent implements OnInit {
 
   onSubmit(userData) {
     if (this.myForm.valid) {
-      console.log('Form submitted');
       this.saveItem(userData);
       this.dialogRef.close();
     } else {
-      console.log('Error by input');
+
     }
   }
 
   saveItem(userData) {
-    console.log('Item saved');
+
   }
 }

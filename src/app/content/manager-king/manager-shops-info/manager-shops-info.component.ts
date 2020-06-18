@@ -1,7 +1,6 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {TRANSLOCO_SCOPE} from '@ngneat/transloco';
 import {MatTable, MatTableDataSource} from '@angular/material/table';
-import {ShopInventoryItem} from '../../sales-princess/view-shop-inventory/view-shop-inventory-DTOs/ShopInventoryItem';
 import {FormControl, Validators} from '@angular/forms';
 import {ManagerShopsInfoService} from './manager-shops-info.service';
 import {ShopDTO} from '../shop-dto';

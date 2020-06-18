@@ -38,7 +38,6 @@ import {MatTooltipModule} from "@angular/material/tooltip";
 
 @NgModule({
   declarations: [
-    ManagerShopsInfoComponent,
     ManagerDashboardComponent,
     ArchGaugeCardComponent,
     HbarCharCardComponent,
@@ -50,7 +49,8 @@ import {MatTooltipModule} from "@angular/material/tooltip";
     RegisterComponent,
     SalesDescriptionComponent,
     ManagerWarehouseCheckinDescriptionComponent,
-    ComerceFormComponent,
+    ComerceFormComponent
+
   ],
   imports: [
     CommonModule,
@@ -75,7 +75,7 @@ import {MatTooltipModule} from "@angular/material/tooltip";
     MatButtonModule,
     MatDatepickerModule,
     MatDialogModule,
-    MatTooltipModule,
+    MatTooltipModule
   ]
 })
 export class ManagerKingModule {

@@ -175,7 +175,6 @@ export class NewDeliveryToShopComponent implements OnInit {
         deliveryShop: tempPeriodicElement.deliveryShop,
         comment: tempPeriodicElement.comment
       };
-      console.log('Comment: ' + newOrderItemDTO.comment);
       tempNewOrderItemDTOList.push(newOrderItemDTO);
     }
     return tempNewOrderItemDTOList;
@@ -183,17 +182,14 @@ export class NewDeliveryToShopComponent implements OnInit {
 
   clearCurrentOrder() {
     for (const elem of this.selection.selected) {
-
       const currentIndex: number = elem.position;
       this.removeCurrentItem(currentIndex);
     }
-    console.log(this.listNewItemsToShops);
+
     this.table.renderRows();
   }
 
   updateButton(periodicElement: PeriodicElement) {
-    console.log('print button');
-    console.log(periodicElement);
     this.newOrderElement.position = periodicElement.position;
     this.newOrderElement.category = periodicElement.category;
     this.newOrderElement.quantity = periodicElement.quantity;
@@ -221,7 +217,6 @@ export class NewDeliveryToShopComponent implements OnInit {
       this.newOrderElement.quantity,
       this.newOrderElement.priceListPerUnit)
       .subscribe(JsonDto => {
-        console.log(JsonDto);
         this.availableItems = JsonDto.quantity;
 
         for (const orderElem of this.listNewItemsToShops) {
@@ -243,7 +238,6 @@ export class NewDeliveryToShopComponent implements OnInit {
         this.newOrderElement.quantity,
         this.newOrderElement.priceListPerUnit)
         .subscribe(JsonDto => {
-          console.log(JsonDto);
           localAvailableItems = JsonDto.quantity;
 
           for (const orderElem of this.listNewItemsToShops) {
@@ -288,7 +282,6 @@ export class NewDeliveryToShopComponent implements OnInit {
     if (this.isAllSelected()) {
       this.selection.clear();
     } else {
-      console.log('All lines are selected');
       this.listNewItemsToShops.forEach(row => this.selection.select(row));
     }
   }

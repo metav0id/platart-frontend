@@ -9,7 +9,6 @@ import {
   Validators
 } from "@angular/forms";
 import {MarkerFormComponent} from "../components/marker-form.component";
-import {Router, ActivatedRoute} from "@angular/router";
 
 import {TRANSLOCO_SCOPE} from "@ngneat/transloco";
 
@@ -19,7 +18,6 @@ export interface DialogData {
 }
 
 import {TooltipPosition} from '@angular/material/tooltip';
-import {mark} from "@angular/compiler-cli/src/ngtsc/perf/src/clock";
 import {Comerce} from "../comerce/comerce";
 import {ComerceFormComponent} from "../comerce-form/comerce-form.component";
 
@@ -63,14 +61,12 @@ export class MapComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
     });
   }
 
 
   /**This method finds a client when an id is provided**/
   loadMarkerToModify(marcador: Marcador): void {
-    console.log(marcador)
     this.latE = marcador.lat;
     this.lngE = marcador.lng
     const dialogRef = this.dialog.open(ComerceFormComponent, {
@@ -79,7 +75,6 @@ export class MapComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
     });
 
   }
@@ -103,12 +98,10 @@ export class MapComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
       this.markerToEdit = result;
 
       this.markersToEdit.push(this.markerToEdit)
       this.markersToEdit.push(nuevoMarcador)
-      console.log(this.markersToEdit.length)
 
       //send array to backend
       this.mapService.update(this.markersToEdit)
@@ -119,15 +112,12 @@ export class MapComponent implements OnInit {
 
   /**This methods deletes the marker from the map and the data base.**/
   borrarComercio(i: number, marker: Marcador) {
-    console.log(marker.name);
-    console.log(i);
     this.mapService.delete(marker);
     this.marcadores.splice(i, 1);
   }
 
   /**This methods deletes the marker from the map only.**/
   borrarMarcador(i: number, marker: Marcador) {
-    console.log(i);
     this.mapService.deleteMarker(marker);
     this.marcadores.splice(i, 1);
   }

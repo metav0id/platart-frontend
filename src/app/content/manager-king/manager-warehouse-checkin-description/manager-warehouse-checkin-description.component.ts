@@ -57,7 +57,6 @@ export class ManagerWarehouseCheckinDescriptionComponent implements OnInit {
     if (this.startDate != '' && this.endDate != '') {
       this.managerWarehouseCheckinDescriptionService.getSoldItemsList(this.startDate, this.endDate)
         .subscribe((observable) => {
-          console.log(observable);
           this.dataSource = new MatTableDataSource(observable);
           this.dataSource.sort = this.sort;
         });

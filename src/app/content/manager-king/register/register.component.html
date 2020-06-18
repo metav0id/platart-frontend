@@ -43,12 +43,13 @@
             </select>
           </div>
 
-
-          <mat-form-field>
-            <mat-select multiple formControlName="shops">
+          <div class="wrap-input100 m-b-16 ">
+<!--          <mat-form-field>-->
+            <mat-select placeholder="Select shops" class="input100" name="shops" multiple formControlName="shops">
               <mat-option *ngFor="let shop of shopsOfUser" [value]="shop.name">{{shop.name}}</mat-option>
             </mat-select>
-          </mat-form-field>
+<!--          </mat-form-field>-->
+          </div>
 
 
           <div class="container-login100-form-btn m-t-17">
@@ -58,7 +59,7 @@
           </div>
 
           <div class="container-login100-form-btn m-t-17">
-            <a routerLink="/login">
+            <a routerLink="/landingPage">
               <button class="login100-form-btn">
                 {{ t('translate.abort') }}
               </button>

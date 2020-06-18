@@ -44,11 +44,11 @@ export class CheckoutSoldItemsSendVerificationComponent implements OnInit {
 
   onSendClick() {
     if (this.myForm.valid) {
-      console.log('Form submitted');
+
       this.data.sendSoldItemsVerification = true;
       this.dialogRef.close();
     } else {
-      console.log('Error by input');
+
     }
     this.data.sendSoldItemsVerification = true;
     this.dialogRef.close();

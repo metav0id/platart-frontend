@@ -80,7 +80,6 @@ export class StockInWarehouseComponent implements OnInit {
   }
 
   updateQuantityButton(element: WarehouseItem) {
-    console.log('Update Item' + element.category + ' ' + element.priceListPerUnit + ' ' + element.quantity);
     this.updateWarehouseItem.position = element.position;
     this.updateWarehouseItem.category = element.category;
     this.updateWarehouseItem.quantity = element.quantity;

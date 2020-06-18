@@ -63,7 +63,6 @@ export class NewDeliveryToWarehouseComponent implements OnInit {
     if (this.isAllSelected()) {
       this.selection.clear();
     } else {
-      console.log('All lines are selected');
       this.listNewItemsFromSuppliers.forEach(row => this.selection.select(row));
     }
   }
@@ -92,10 +91,9 @@ export class NewDeliveryToWarehouseComponent implements OnInit {
     const isSupplierNotEmpty = newItem.supplierName !== '';
     if (isCategoryNotEmpty && isPricePerUnitNotEmpty && isQuantityNotEmpty && isSupplierNotEmpty) {
       this.listNewItemsFromSuppliers.push(newItem);
-      console.log(this.listNewItemsFromSuppliers);
       this.table.renderRows();
     } else {
-      console.log('Please insert valid parameters');
+
     }
   }
 

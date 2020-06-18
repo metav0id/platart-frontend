@@ -40,4 +40,7 @@ export class HeaderComponent implements OnInit {
   isShopRole(): boolean {
     return this.auth.isCorrectRole(this.shopRole);
   }
+  isLoggedin(): boolean {
+    return this.auth.isLoggedIn();
+  }
 }
