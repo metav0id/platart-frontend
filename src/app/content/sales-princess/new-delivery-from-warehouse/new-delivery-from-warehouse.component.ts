@@ -64,7 +64,7 @@ export class NewDeliveryFromWarehouseComponent implements OnInit {
 
   openDialogDeliveryDetails(element: TableItem): void {
     this.dialog.open(NewDeliveryFromWarehouseDetailsComponent, {
-      width: '400px',
+      width: '400em',
       data: element,
       autoFocus: false
     });
