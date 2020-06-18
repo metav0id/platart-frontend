@@ -16,16 +16,31 @@ import {SendItemsDTO} from './checkout-sold-items-DTOs/Send-Items-DTO';
 import {TRANSLOCO_SCOPE, TranslocoService} from '@ngneat/transloco';
 import {TooltipPosition} from '@angular/material/tooltip';
 import Swal from 'sweetalert2';
-import {AuthService} from "../../services/auth.service";
+import {AuthService} from '../../services/auth.service';
+import {
+  MAT_MOMENT_DATE_FORMATS,
+  MomentDateAdapter,
+  MAT_MOMENT_DATE_ADAPTER_OPTIONS,
+} from '@angular/material-moment-adapter';
+import {DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE} from '@angular/material/core';
 
 @Component({
   selector: 'app-checkout-sold-items',
   templateUrl: './checkout-sold-items.component.html',
   styleUrls: ['./checkout-sold-items.component.css'],
-  providers: [{provide: TRANSLOCO_SCOPE, useValue: {scope: 'salesPrincess', alias: 'translate'}}]
+  providers: [
+    {provide: TRANSLOCO_SCOPE, useValue: {scope: 'salesPrincess', alias: 'translate'}},
+    {provide: MAT_DATE_LOCALE, useValue: 'es-ES'},
+    {
+      provide: DateAdapter,
+      useClass: MomentDateAdapter,
+      deps: [MAT_DATE_LOCALE, MAT_MOMENT_DATE_ADAPTER_OPTIONS]
+    },
+    {provide: MAT_DATE_FORMATS, useValue: MAT_MOMENT_DATE_FORMATS},
+  ],
 })
 export class CheckoutSoldItemsComponent implements OnInit {
-  public listShops1: String[] = new Array();
+  public listShops1: string[] = new Array();
   positionOptions: TooltipPosition[] = ['after', 'before', 'above', 'below', 'left', 'right'];
   position = new FormControl(this.positionOptions[0]);
 
@@ -38,6 +53,9 @@ export class CheckoutSoldItemsComponent implements OnInit {
 
   // Fields for input-form
   public discountControll = new FormControl('', Validators.required);
+
+  public selectedShopName = '';
+  public selectedShopBoolean: boolean = false;
 
   public readonly DISCOUNT_METHOD_REVENUE = 'special price';
   public readonly DISCOUNT_METHOD_NO_DISCOUNT = 'no extra discount';
@@ -60,7 +78,7 @@ export class CheckoutSoldItemsComponent implements OnInit {
   // Fields for input-form - Drop-Down-Selection
   /** Shop selection */
   public shopControll = new FormControl('', Validators.required);
-  public shopsList: Shop[] = [{name: 'shop1'}, {name: 'shop2'}];
+  public shopsList: Shop[] = [];
 
   /** Category selection */
   public categoryControl = new FormControl('', Validators.required);
@@ -88,7 +106,7 @@ export class CheckoutSoldItemsComponent implements OnInit {
     this.initNewOrderElement();
 
     // fetch saved sold items-list
-    this.loadSoldItemList();
+    // this.loadSoldItemList();
 
     // drop-down-lists
     this.checkoutSoldItemsService.getListShops().subscribe(JSON => this.shopsList = JSON);
@@ -101,7 +119,6 @@ export class CheckoutSoldItemsComponent implements OnInit {
     });
   }
 
-  // un
   initNewOrderElement(): void {
     this.newCheckoutSoldItem = {
       position: 0,
@@ -118,13 +135,11 @@ export class CheckoutSoldItemsComponent implements OnInit {
     };
   }
 
-  // Check! ->
   addSoldItem() {
 
     // compute amount of available items of given category
     this.verifyAvailability(this.newCheckoutSoldItem);
 
-    // console.log('Amount of items available' + amountOfItemsChecketOut);
     const verifyAmountAvailable: boolean = Number(this.availableItems) >= Number(this.newCheckoutSoldItem.quantity);
     // do if values of this.newCheckoutItem are valid
     const verifyQuantity: boolean = this.newCheckoutSoldItem.quantity > 0 && this.newCheckoutSoldItem.quantity < 1000;
@@ -153,8 +168,6 @@ export class CheckoutSoldItemsComponent implements OnInit {
         commentBefore = this.newCheckoutSoldItem.comment;
       }
 
-      console.log('revenueCalculation: ' + revenueCalculation);
-
       const newSoldItemForTable: ShopsCheckoutSoldItemsDTO = {
         position: this.newCheckoutSoldItem.position,
         category: this.newCheckoutSoldItem.category,
@@ -163,7 +176,7 @@ export class CheckoutSoldItemsComponent implements OnInit {
         priceSalesPerUnit: this.newCheckoutSoldItem.priceSalesPerUnit,
         revenuePerUnit: revenueCalculation,
         discountPercent: discountPercentCalculation,
-        shop: this.newCheckoutSoldItem.shop,
+        shop: this.selectedShopName,
         deliverySending: this.newCheckoutSoldItem.deliverySending,
         itemLastSold: this.newCheckoutSoldItem.itemLastSold,
         comment: commentBefore,
@@ -186,7 +199,6 @@ export class CheckoutSoldItemsComponent implements OnInit {
     this.saveSoldItemList();
   }
 
-  // Check! ->
   rebuildListCategories(): void {
     console.log('rebuildListCategories -> soldItemsToShopsList:');
     console.log(this.soldItemsToShopsList);
@@ -272,7 +284,6 @@ export class CheckoutSoldItemsComponent implements OnInit {
     this.eventsTime.push(newDate.toISOString());
   }
 
-  // CHECK! -> subscribe or not
   openDialogCategory(checkoutCategory: CheckoutCategories) {
     console.log('open category Dialog');
     // open the dialogue
@@ -289,7 +300,6 @@ export class CheckoutSoldItemsComponent implements OnInit {
     });
   }
 
-  // updates the category list and renders table
   updateAmountListCategories(): void {
     for (const item of this.soldItemsCategoryLists) {
       let newQuantity = 0;
@@ -306,7 +316,6 @@ export class CheckoutSoldItemsComponent implements OnInit {
     }
   }
 
-  // update the listNewItemsToShops from updated category list
   updateListNewItemsToShops(): void {
     // reset the listNewItemsToShops list
     this.soldItemsToShopsList = [];
@@ -397,7 +406,7 @@ export class CheckoutSoldItemsComponent implements OnInit {
 
         for (const item of this.soldItemsToShopsList) {
           // tslint:disable-next-line:triple-equals no-shadowed-variable
-          const verifyShop: boolean = (this.newCheckoutSoldItem.shop == item.shop);
+          const verifyShop: boolean = (this.selectedShopName == item.shop);
           // tslint:disable-next-line:triple-equals no-shadowed-variable
           const verifyPriceListPerUnit: boolean = (this.newCheckoutSoldItem.priceListPerUnit == item.priceListPerUnit);
           // tslint:disable-next-line:triple-equals no-shadowed-variable
@@ -414,4 +423,14 @@ export class CheckoutSoldItemsComponent implements OnInit {
       console.log('New Item not fully defined');
     }
   }
+
+  getSpecificShopList() {
+
+    if (this.selectedShopName !== '') {
+      this.selectedShopBoolean = true;
+      console.log('implement fetch function');
+      console.log(this.selectedShopName);
+    }
+  }
+
 }

@@ -10,9 +10,8 @@ import Swal from 'sweetalert2';
 import {Router} from '@angular/router';
 import {TRANSLOCO_SCOPE, TranslocoService} from '@ngneat/transloco';
 import {UserFirebase} from '../../services/user-firebase';
-import {Marcador} from "../manager-map/components/marker.class";
-import {Observable} from "rxjs";
-import {ComerceService} from "../manager-map/comerce/comerce.service";
+import {Marcador} from '../manager-map/components/marker.class';
+import {ComerceService} from '../manager-map/comerce/comerce.service';
 
 @Component({
   selector: 'app-registro',
@@ -29,7 +28,7 @@ export class RegisterComponent implements OnInit {
     password: 'string',
     displayName: '',
     role: {reader: true},
-    shops:[]
+    shops: []
   };
 
   public registerForm: FormGroup;
@@ -51,7 +50,7 @@ export class RegisterComponent implements OnInit {
       name: [null, [Validators.required]],
       role: [this.listRoles[0], [Validators.required]],
       password: [null, [Validators.required]],
-      shops:[null, [Validators.required]]
+      shops: [null, [Validators.required]]
     });
   }
 
@@ -68,7 +67,7 @@ export class RegisterComponent implements OnInit {
         displayName: this.registerForm.value.name,
         password: this.registerForm.value.password,
         role: this.registerForm.value.role,
-        shops:this.registerForm.value.shops
+        shops: this.registerForm.value.shops
       };
       Swal.fire({
         allowOutsideClick: false,
@@ -94,7 +93,7 @@ export class RegisterComponent implements OnInit {
     }
   }
 
-  getStores(){
+  getStores() {
     this.comServ.readShops().subscribe(response => this.shopsOfUser = response);
   }
 }
