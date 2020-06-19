@@ -4,9 +4,10 @@ import {SelectionModel} from '@angular/cdk/collections';
 import {FormControl, Validators} from '@angular/forms';
 import {PeriodicElement} from './periodic-element';
 import {NewDeliveryToWarehouseService} from './new-delivery-to-warehouse.service';
-import {WarehouseItemCategoryDTO} from '../warehouseCategory/warehouse-item-category-DTO';
+
 import {TRANSLOCO_SCOPE} from '@ngneat/transloco';
 import {TooltipPosition} from "@angular/material/tooltip";
+import {WarehouseItemCategoryDTO} from "../warehouseCategory/warehouseItemCategoryDTO";
 
 @Component({
   selector: 'app-new-delivery-to-warehouse',
