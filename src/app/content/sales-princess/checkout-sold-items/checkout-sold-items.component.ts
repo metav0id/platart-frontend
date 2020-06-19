@@ -23,6 +23,7 @@ import {
   MAT_MOMENT_DATE_ADAPTER_OPTIONS,
 } from '@angular/material-moment-adapter';
 import {DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE} from '@angular/material/core';
+import {observable} from "rxjs";
 
 @Component({
   selector: 'app-checkout-sold-items',
@@ -296,6 +297,7 @@ export class CheckoutSoldItemsComponent implements OnInit {
       this.updateAmountListCategories();
       this.table.renderRows();
       this.updateListNewItemsToShops();
+      this.saveSoldItemList();
     });
   }
 
@@ -376,7 +378,11 @@ export class CheckoutSoldItemsComponent implements OnInit {
   }
 
   deleteSoldItemList() {
-    this.checkoutSoldItemsService.deleteShopSpecificCheckoutSoldItemsList(this.selectedShopName).subscribe();
+    this.checkoutSoldItemsService.deleteShopSpecificCheckoutSoldItemsList(this.selectedShopName).subscribe((observable)=>{
+      this.soldItemsToShopsList = [];
+      this.rebuildListCategories();
+      this.table.renderRows();
+    });
   }
 
   loadSoldItemList() {

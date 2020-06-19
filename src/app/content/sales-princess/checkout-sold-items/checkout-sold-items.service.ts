@@ -17,7 +17,7 @@ export class CheckoutSoldItemsService {
   }
 
   public getAllCategories(): Observable<WarehouseItemCategoryDTO[]> {
-    return this.http.post<WarehouseItemCategoryDTO[]>(environment.getAllCategories, null);
+    return this.http.get<WarehouseItemCategoryDTO[]>(environment.getAllCategories);
   }
 
   // get all sold items for a specfic shop
@@ -53,7 +53,6 @@ export class CheckoutSoldItemsService {
     return this.http.post<null>(environment.sendSpecificShopSoldItemsList, soldItemList);
   }
 
-  // TODO: update URL
   // delete shop specific checkout sold items list
   public deleteShopSpecificCheckoutSoldItemsList(shopSelected: string): Observable<null> {
     const shopDTO: ShopNameDTO = {
