@@ -181,7 +181,6 @@ export class CheckoutSoldItemsComponent implements OnInit {
         itemLastSold: this.newCheckoutSoldItem.itemLastSold,
         comment: commentBefore,
       };
-      console.log(newSoldItemForTable);
 
       this.soldItemsToShopsList.push(newSoldItemForTable);
       this.rebuildListCategories();
@@ -342,8 +341,7 @@ export class CheckoutSoldItemsComponent implements OnInit {
   }
 
   saveSoldItemList() {
-    console.log('implement saving sold items list');
-    this.checkoutSoldItemsService.saveAllSoldItemsList(this.soldItemsToShopsList).subscribe();
+    this.checkoutSoldItemsService.saveSpecificShopSoldItemsList(this.selectedShopName, this.soldItemsToShopsList).subscribe();
   }
 
   sendSoldItemList() {
@@ -366,7 +364,9 @@ export class CheckoutSoldItemsComponent implements OnInit {
 
       if (sendSoldItemsData.sendSoldItemsVerification === true) {
         console.log('Send items');
-        this.checkoutSoldItemsService.sendAllSoldItemsList(this.soldItemsToShopsList).subscribe((JsonDto) => {
+        this.checkoutSoldItemsService.sendSpecificShopSoldItemsList(
+          this.selectedShopName,
+          this.soldItemsToShopsList).subscribe((JsonDto) => {
             this.soldItemsToShopsList = [];
             this.rebuildListCategories();
           }
@@ -376,21 +376,22 @@ export class CheckoutSoldItemsComponent implements OnInit {
   }
 
   deleteSoldItemList() {
-    console.log('implement deleting sold items list');
-    this.checkoutSoldItemsService.deleteCurrentSoldItemsList().subscribe();
+    this.checkoutSoldItemsService.deleteShopSpecificCheckoutSoldItemsList(this.selectedShopName).subscribe();
   }
 
   loadSoldItemList() {
-    console.log('implement loading sold items list');
-    this.checkoutSoldItemsService.getAllSoldItemsList().subscribe(JsonDto => {
-        this.soldItemsToShopsList = JsonDto;
-        this.rebuildListCategories();
-        this.table.renderRows();
-      }
-    );
+    if (this.selectedShopBoolean) {
+      this.checkoutSoldItemsService.getSpecificShopSoldItemsList(this.selectedShopName).subscribe(JsonDto => {
+          this.soldItemsToShopsList = JsonDto;
+          this.rebuildListCategories();
+          this.table.renderRows();
+        }
+      );
+    }
   }
 
   verifyAvailability(newItem: ShopsCheckoutSoldItemsDTO) {
+    console.log(newItem);
     const verifyCategory: boolean = newItem.category !== null && newItem.category !== 'chooseCategory';
     const verifyShop: boolean = newItem.shop !== null && newItem.shop !== 'chooseShop';
     const verifyPriceListPerUnit: boolean = newItem.priceListPerUnit !== null && newItem.priceListPerUnit > 0;
@@ -425,11 +426,11 @@ export class CheckoutSoldItemsComponent implements OnInit {
   }
 
   getSpecificShopList() {
-
     if (this.selectedShopName !== '') {
       this.selectedShopBoolean = true;
-      console.log('implement fetch function');
-      console.log(this.selectedShopName);
+      this.newCheckoutSoldItem.shop = this.selectedShopName;
+
+      this.loadSoldItemList();
     }
   }
 
