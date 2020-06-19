@@ -37,7 +37,7 @@ export class CheckoutSoldItemsService {
     return this.http.post<null>(environment.saveShopSpecificSoldItemsList, saveItemsDTO);
   }
 
-  // send shop specific sold items
+  // send shop specific sold item
   public sendSpecificShopSoldItemsList(
     selectedShop: string,
     soldItemList: ShopsCheckoutSoldItemsDTO[]): Observable<ShopsCheckoutSoldItemsDTO[]> {
