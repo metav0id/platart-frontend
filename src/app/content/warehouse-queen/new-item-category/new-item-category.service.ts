@@ -17,25 +17,25 @@ export class NewitemcategoryService {
   }
 
   getAllActivatedCategories(): Observable<WarehouseItemCategoryDTO[]> {
-    return this.http.get<WarehouseItemCategoryDTO[]>(environment.getAllCategories);
+    return this.http.get<WarehouseItemCategoryDTO[]>(environment.getAllActivatedCategories);
   }
 
   getAllDeactivatedCategories(): Observable<WarehouseItemCategoryDTO[]> {
-    return this.http.get<WarehouseItemCategoryDTO[]>(environment.getAllCategories);
+    return this.http.get<WarehouseItemCategoryDTO[]>(environment.getAllDeactivatedCategories);
   }
 
   saveNewCategory(newItemCategory: string): Observable<boolean> {
-    const warehouseItemCategoryDTO: WarehouseItemCategoryDTO = {category: newItemCategory, isActivated: true};
+    const warehouseItemCategoryDTO: WarehouseItemCategoryDTO = {category: newItemCategory, activated: true};
     return this.http.post<boolean>(environment.saveNewCategory, warehouseItemCategoryDTO);
   }
 
   deactivateCategory(deactivateCategory: string): void {
-    const warehouseDeleteCategoryItemDTO: WarehouseItemCategoryDTO = {category: deactivateCategory, isActivated: false};
+    const warehouseDeleteCategoryItemDTO: WarehouseItemCategoryDTO = {category: deactivateCategory, activated: false};
     this.http.post(environment.deleteCategory, warehouseDeleteCategoryItemDTO).subscribe();
   }
 
   activateCategory(deactivateCategory: string): void {
-    const warehouseDeleteCategoryItemDTO: WarehouseItemCategoryDTO = {category: deactivateCategory, isActivated: true};
+    const warehouseDeleteCategoryItemDTO: WarehouseItemCategoryDTO = {category: deactivateCategory, activated: true};
     this.http.post(environment.deleteCategory, warehouseDeleteCategoryItemDTO).subscribe();
   }
 }

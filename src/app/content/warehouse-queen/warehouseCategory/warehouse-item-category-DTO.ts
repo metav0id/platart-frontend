@@ -1,4 +1,4 @@
 export interface WarehouseItemCategoryDTO {
   category: string;
-  isActivated: boolean;
+  activated: boolean;
 }
