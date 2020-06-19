@@ -23,7 +23,7 @@
   "newDeliveryForShop": "Nueva entrega a sucursal",
   "newDeliveryOrder": "Nueva entrega a bodega",
   "numberOfItemsSold": "Cantidad de items vendidos",
-  "pleaseTypeInItems": "Ingrese items vendidos hoy",
+  "pleaseTypeInItems": "Ingrese items vendidos ",
   "priceNotValid": "Precio ingresado inválido",
   "quantity": "Cantidad",
   "revenue": "Valor venta",

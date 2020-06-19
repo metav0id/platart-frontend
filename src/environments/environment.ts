@@ -45,7 +45,7 @@ export const environment = {
   actualsDataURL: 'http://localhost:8081/dashboard/getActualsData',
   saveDeliveryItemsToShopStock: 'http://localhost:8081/shops/saveNewDeliveryFromWarehouse',
   getShopSpecificSoldItemsList: 'http://localhost:8081/shops/getShopSpecificSoldItemsList',
-  saveShopSpecificSoldItemsList: 'http://161.35.4.253:8081/shops/saveShopSpecificSoldItemsList',
+  saveShopSpecificSoldItemsList: 'http://localhost:8081/shops/saveShopSpecificSoldItemsList',
   sendSpecificShopSoldItemsList: 'http://localhost:8081/shops/sendSpecificShopSoldItemsList',
   sendShopSpecificSoldItemsListURL: 'http://localhost:8081/shops/sendShopSpecificSoldItemsList',
   deleteShopSpecificCheckoutSoldItemsList: 'http://localhost:8081/shops/deleteShopSpecificCheckoutSoldItemsList',

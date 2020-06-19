@@ -105,9 +105,6 @@ export class CheckoutSoldItemsComponent implements OnInit {
     this.listShops1 = this.auth.getStoresList();
     this.initNewOrderElement();
 
-    // fetch saved sold items-list
-    // this.loadSoldItemList();
-
     // drop-down-lists
     this.checkoutSoldItemsService.getListShops().subscribe(JSON => this.shopsList = JSON);
     this.fetchCategories();
@@ -296,6 +293,7 @@ export class CheckoutSoldItemsComponent implements OnInit {
       this.updateAmountListCategories();
       this.table.renderRows();
       this.updateListNewItemsToShops();
+      this.saveSoldItemList();
     });
   }
 
