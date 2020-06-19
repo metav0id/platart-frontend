@@ -1,5 +1,6 @@
 <h1 mat-dialog-title>Detail View</h1>
-<div mat-dialog-content>
+<div >
+  <mat-dialog-content>
   <form [formGroup]="myForm" (ngSubmit)="onSubmit(myForm.value)" novalidate>
     <!--  Input Category-->
     <mat-form-field appearance="fill">
@@ -68,5 +69,6 @@
       <mat-icon>save</mat-icon>
     </button>
   </form>
+  </mat-dialog-content>
 </div>
 
