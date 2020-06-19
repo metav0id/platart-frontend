@@ -21,8 +21,4 @@ export class ViewShopInventoryService {
     };
     return this.http.post<ShopInventoryItem[]>(environment.getShopInventoryItems, requestedShop);
   }
-
-  public getListShops(): Observable<ShopDTO[]> {
-    return this.http.get<ShopDTO[]>(environment.getAllShops);
-  }
 }

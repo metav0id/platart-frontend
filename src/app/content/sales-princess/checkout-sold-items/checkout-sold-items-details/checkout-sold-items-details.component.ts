@@ -41,15 +41,11 @@ export class CheckoutSoldItemsDetailsComponent implements OnInit {
   deleteItemList(item: ShopsCheckoutSoldItemsDTO) {
     const index: number = this.data.indexOf(item);
     this.data.splice(index, 1);
-
   }
 
   onSubmit() {
     if (this.myForm.valid) {
-
       this.dialogRef.close();
-    } else {
-
     }
   }
 }

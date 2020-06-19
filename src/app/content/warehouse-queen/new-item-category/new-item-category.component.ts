@@ -1,11 +1,11 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
-import {SelectionModel} from '@angular/cdk/collections';
 import {MatTable} from '@angular/material/table';
 import {NewitemcategoryService} from './new-item-category.service';
 import {TRANSLOCO_SCOPE} from '@ngneat/transloco';
-import {TooltipPosition} from "@angular/material/tooltip";
-import {FormControl} from "@angular/forms";
-
+import {TooltipPosition} from '@angular/material/tooltip';
+import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
+import {WarehouseItemCategoryDTO} from '../warehouseCategory/warehouse-item-category-DTO';
+import Swal from 'sweetalert2';
 
 /** Is used for table elements */
 export interface PeriodicElement {
@@ -21,126 +21,95 @@ export interface PeriodicElement {
 })
 export class NewItemCategoryComponent implements OnInit {
   /** tooltip features**/
-  positionOptions: TooltipPosition[] = ['after', 'before', 'above', 'below', 'left', 'right'];
-  position = new FormControl(this.positionOptions[0]);
+  public positionOptions: TooltipPosition[] = ['after', 'before', 'above', 'below', 'left', 'right'];
+  public position = new FormControl(this.positionOptions[0]);
 
-  displayedColumns: string[] = ['select', 'category'];
-  public listCategories: PeriodicElement[] = [];
-  selection = new SelectionModel<PeriodicElement>(true, []);
+  public displayedColumns: string[] = ['select', 'category', 'isActivated'];
 
-  newCategoryElement: PeriodicElement = {
-    position: 0,
-    category: 'chooseCategory'
-  };
-  availableItems = 'check existance';
+  public optionsSelection = ['all', 'activated', 'deactivated'];
+  public selectedOption = this.optionsSelection[1];
+
+  public listCategories: WarehouseItemCategoryDTO[] = [];
+
+  public myForm: FormGroup;
 
   @ViewChild('myShopCheckinProductsTable') table: MatTable<any>;
 
-  constructor(private newitemcategoryService: NewitemcategoryService) {
+  constructor(private newitemcategoryService: NewitemcategoryService,
+              private formBuilder: FormBuilder) {
   }
 
   ngOnInit(): void {
-    this.fetchAllCategoriesData();
+    this.createForm();
+    this.getCategories();
   }
 
-  fetchAllCategoriesData(): void {
-    this.newitemcategoryService.getAllCategories().subscribe(JsonDto => {
-      let counter = 1;
-      this.listCategories = [];
-      for (const item of JsonDto) {
-        this.listCategories.push({position: counter, category: item.category});
-        counter++;
+  getCategories() {
+    Swal.showLoading();
+    if (this.optionsSelection[0] === this.selectedOption) {
+      this.newitemcategoryService.getAllCategories().subscribe(obj => this.handleData(obj));
+    } else if (this.optionsSelection[1] === this.selectedOption) {
+      this.newitemcategoryService.getAllActivatedCategories().subscribe(obj => this.handleData(obj));
+    } else {
+      this.newitemcategoryService.getAllDeactivatedCategories().subscribe(obj => this.handleData(obj));
+    }
+  }
+
+  private handleData(obj) {
+    obj.forEach(entry => entry.isChecked = false);
+    this.listCategories = obj;
+    this.table.renderRows();
+    Swal.close();
+  }
+
+  selectItem(element: WarehouseItemCategoryDTO): void {
+    element.isChecked = !element.isChecked;
+  }
+
+  toogleCategoryStatus() {
+    this.listCategories.forEach(entry => {
+      if (entry.isChecked) {
+        Swal.showLoading();
+        if (entry.activated) {
+          this.newitemcategoryService.deactivateCategory(entry).subscribe(() => this.getCategories());
+        } else {
+          this.newitemcategoryService.activateCategory(entry).subscribe(() => this.getCategories());
+        }
       }
     });
   }
 
-  createNewCategory() {
-    if (!this.verifyCategoryExistant()) {
-      this.newCategoryElement.category = this.newCategoryElement.category.toLowerCase();
-
-      const newCategoryElementToList: PeriodicElement = {
-        position: this.newCategoryElement.position,
-        category: this.newCategoryElement.category
-      };
-      this.listCategories.push(newCategoryElementToList);
-
-      this.newitemcategoryService.saveNewCategory(this.newCategoryElement.category);
-
-
-      this.table.renderRows();
-    }
+  private createForm() {
+    this.myForm = this.formBuilder.group({
+      category: ['', [Validators.required]]
+    });
   }
 
-  verifyCategoryExistant(): boolean {
-    this.availableItems = 'category element is new';
-    for (const categoryElement of this.listCategories) {
-      if (categoryElement.category.toString().toUpperCase() === this.newCategoryElement.category.toString().toUpperCase()) {
-        this.availableItems = 'element already in list';
-
-        return true;
-      }
-    }
-    return false;
-  }
-
-  /** Whether the number of selected elements matches the total number of rows. */
-  isAllSelected() {
-    const numSelected = this.selection.selected.length;
-    const numRows = this.listCategories.length;
-    return numSelected === numRows;
-  }
-
-  /** Selects all rows if they are not all selected; otherwise clear selection. */
-  masterToggle() {
-    if (this.isAllSelected()) {
-      this.selection.clear();
-    } else {
-      this.listCategories.forEach(row => this.selection.select(row));
-    }
-  }
-
-  /** The label for the checkbox on the passed row */
-  checkboxLabel(row?: PeriodicElement): string {
-    if (!row) {
-      return `${this.isAllSelected() ? 'select' : 'deselect'} all`;
-    }
-    return `${this.selection.isSelected(row) ? 'deselect' : 'select'} row ${row.position + 1}`;
-  }
-
-  deleteSelectedCategory() {
-    for (const elem of this.selection.selected) {
-
-      const currentCategory: string = elem.category;
-      const currentCategoryIndex: number = elem.position;
-      this.removeCurrentIndex(currentCategoryIndex);
-
-      this.newitemcategoryService.deleteCategory(currentCategory);
-    }
-
-    this.table.renderRows();
-  }
-
-  /*deleteSelectedCategory() {
-    console.log('delete selected categories');
-
-    for (const elem of this.selection.selected) {
-
-      const currentCategory: string = elem.category;
-      const currentCategoryIndex: number = elem.position;
-      this.removeCurrentIndex(currentCategoryIndex);
-
-      this.newitemcategoryService.deleteCategory(currentCategory);
-    }
-
-    this.table.renderRows();
-  }*/
-
-  removeCurrentIndex(currentIndex: number) {
-    for (let i = 0; i < this.listCategories.length; i++) {
-      if (this.listCategories[i].position === currentIndex) {
-        this.listCategories.splice(i, 1);
-      }
+  onSubmit(data) {
+    if (!this.myForm.invalid) {
+      Swal.fire({
+        allowOutsideClick: false,
+        icon: 'info',
+        text: 'Saving new category. One moment please...'
+      });
+      Swal.showLoading();
+      this.newitemcategoryService.saveNewCategory(data.category).subscribe(result => {
+        Swal.close();
+        if (result) {
+          Swal.fire(
+            'Success',
+            'Category saved.',
+            'success'
+          );
+          this.getCategories();
+        } else {
+          Swal.fire({
+            icon: 'error',
+            title: 'Error',
+            text: 'Category could not be saved. Does it already exists?'
+          });
+        }
+      });
     }
   }
-
 }
