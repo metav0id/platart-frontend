@@ -17,7 +17,6 @@ import {Marcador} from "../components/marker.class";
 })
 export class ComerceService {
 
-// the string connects with the service from backend that will gett all offers aviable
 
   /** this adds the header needed in case the method calls for one**/
   private httpHeader = new HttpHeaders({'Content-Type': 'application/json'});
@@ -28,13 +27,11 @@ export class ComerceService {
 
 
   create(comerce: Comerce): Observable<Comerce> {
-// this method uses post to create an offer . parameters are an url for the method, the DTO and a header if necessary
+/** this method uses post to create an offer . parameters are an url for the method, the DTO and a header if necessary*/
     return this.httpClient.post<Comerce>(environment.saveCommerce, comerce, {headers: this.httpHeader});
   }
 
   edit(marcador: Marcador[] = []): void {
-    console.log(marcador);
-    // return this.httpClient.post<Marcador>(`$ {this.urlEndPoint2}\${id}`,marcador,{headers: this.httpHeader})
     this.httpClient.post<null>(environment.editMarker, marcador).subscribe();
 
   }
@@ -44,7 +41,6 @@ export class ComerceService {
   }
 
 readShops(): Observable<Marcador[]> {
-    // this returns the list provided from the backend link.
     return this.httpClient.get<Marcador[]>(environment.getAllShops);
   }
 }

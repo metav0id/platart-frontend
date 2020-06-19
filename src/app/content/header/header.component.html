@@ -92,7 +92,9 @@
             <button class="bg" mat-mini-fab id="es" (click)="setActiveLang('es')">es</button>
           </div>
           <div class="space2"></div>
+          <div *ngIf="isLoggedin()">
           <button class=" btn btn-outline-danger" (click)="signOut()"> Log Out</button>
+          </div>
         </links>
       </div>
     </div>

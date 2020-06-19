@@ -49,10 +49,9 @@ export class SalesDescriptionDetailsComponent implements OnInit {
 
   onSubmit() {
     if (this.myForm.valid) {
-      console.log('Form submitted');
       this.dialogRef.close();
     } else {
-      console.log('Error by input');
+
     }
   }
 

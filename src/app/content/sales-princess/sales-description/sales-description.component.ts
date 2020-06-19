@@ -85,7 +85,6 @@ export class SalesDescriptionComponent implements OnInit {
     if (this.startDate != '' && this.endDate != '' && this.deliveryShop != '') {
       this.managerSalesDescriptionService.getSoldItemsList(this.deliveryShop, this.startDate, this.endDate)
         .subscribe((observable) => {
-          console.log(observable);
           this.dataSource = new MatTableDataSource(observable);
           this.dataSource.sort = this.sort;
         });
@@ -99,15 +98,12 @@ export class SalesDescriptionComponent implements OnInit {
   }
 
   openDialogSalesDescriptionItem(element: any) {
-    console.log('implement element');
-    console.log(element);
     const dialogRef = this.dialog.open(SalesDescriptionDetailsComponent, {
       width: '400em',
       data: element
     });
 
     dialogRef.afterClosed().subscribe((DataObservable) => {
-      console.log(DataObservable);
     });
   }
 }

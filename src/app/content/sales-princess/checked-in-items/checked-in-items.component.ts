@@ -71,7 +71,6 @@ export class CheckedInItemsComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe((DataObservable) => {
-      console.log(DataObservable);
     });
   }
 

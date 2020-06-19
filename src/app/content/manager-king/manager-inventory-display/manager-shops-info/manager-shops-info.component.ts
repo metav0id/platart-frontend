@@ -55,7 +55,7 @@ export class ManagerShopsInfoComponent implements OnInit {
     this.selectedShopToDisplay = this.selectedShopToFilterOnList;
 
     this.managerShopsInfoService.getSpecificItemsObs(this.selectedShopToFilterOnList).subscribe((observable) => {
-      console.log(observable);
+
       this.dataSource = new MatTableDataSource(observable);
       this.dataSource.sort = this.sort;
     });
@@ -65,7 +65,6 @@ export class ManagerShopsInfoComponent implements OnInit {
     this.selectedShopToDisplay = this.selectedShopToFilterOnList;
 
     this.managerShopsInfoService.getSpecificItemsObs('Ventura').subscribe((observable) => {
-      console.log(observable);
       this.dataSource = new MatTableDataSource(observable);
       this.dataSource.sort = this.sort;
     });

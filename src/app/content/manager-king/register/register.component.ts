@@ -22,7 +22,6 @@ import {ComerceService} from "../manager-map/comerce/comerce.service";
 })
 
 export class RegisterComponent implements OnInit {
-  shopsControl = new FormControl();
   shopsOfUser: Marcador[] = new Array();
   user: UserFirebase = {
     email: '',

@@ -153,7 +153,7 @@ export class CheckoutSoldItemsComponent implements OnInit {
         commentBefore = this.newCheckoutSoldItem.comment;
       }
 
-      console.log('revenueCalculation: ' + revenueCalculation);
+
 
       const newSoldItemForTable: ShopsCheckoutSoldItemsDTO = {
         position: this.newCheckoutSoldItem.position,
@@ -168,7 +168,7 @@ export class CheckoutSoldItemsComponent implements OnInit {
         itemLastSold: this.newCheckoutSoldItem.itemLastSold,
         comment: commentBefore,
       };
-      console.log(newSoldItemForTable);
+
 
       this.soldItemsToShopsList.push(newSoldItemForTable);
       this.rebuildListCategories();
@@ -188,8 +188,7 @@ export class CheckoutSoldItemsComponent implements OnInit {
 
   // Check! ->
   rebuildListCategories(): void {
-    console.log('rebuildListCategories -> soldItemsToShopsList:');
-    console.log(this.soldItemsToShopsList);
+
 
     let positionCounter = 0;
     const newCategoryLists: CheckoutCategories[] = [];
@@ -261,8 +260,6 @@ export class CheckoutSoldItemsComponent implements OnInit {
       }
     }
     this.soldItemsCategoryLists = newCategoryLists;
-    console.log('rebuildListCategories -> soldItemsCategoryLists:');
-    console.log(this.soldItemsCategoryLists);
     this.table.renderRows();
   }
 
@@ -274,7 +271,6 @@ export class CheckoutSoldItemsComponent implements OnInit {
 
   // CHECK! -> subscribe or not
   openDialogCategory(checkoutCategory: CheckoutCategories) {
-    console.log('open category Dialog');
     // open the dialogue
     const dialogRef = this.dialog.open(CheckoutSoldItemsDetailsComponent, {
       width: '400px',
@@ -333,13 +329,10 @@ export class CheckoutSoldItemsComponent implements OnInit {
   }
 
   saveSoldItemList() {
-    console.log('implement saving sold items list');
     this.checkoutSoldItemsService.saveAllSoldItemsList(this.soldItemsToShopsList).subscribe();
   }
 
   sendSoldItemList() {
-    console.log('implement sending sold items list');
-
     const sendSoldItemsData: SendItemsDTO = {
       sendSoldItemsVerification: false,
       sendSoldItemsList: this.soldItemsToShopsList
@@ -347,16 +340,15 @@ export class CheckoutSoldItemsComponent implements OnInit {
 
     // open dialoge window
     const dialogRef = this.dialog.open(CheckoutSoldItemsSendVerificationComponent, {
-      width: '250px',
+      width: '400em',
       data: sendSoldItemsData
     });
 
     // once confirmed, send delivery order
     dialogRef.afterClosed().subscribe((DataObservable) => {
-      console.log(sendSoldItemsData);
+
 
       if (sendSoldItemsData.sendSoldItemsVerification === true) {
-        console.log('Send items');
         this.checkoutSoldItemsService.sendAllSoldItemsList(this.soldItemsToShopsList).subscribe((JsonDto) => {
             this.soldItemsToShopsList = [];
             this.rebuildListCategories();
@@ -367,12 +359,10 @@ export class CheckoutSoldItemsComponent implements OnInit {
   }
 
   deleteSoldItemList() {
-    console.log('implement deleting sold items list');
     this.checkoutSoldItemsService.deleteCurrentSoldItemsList().subscribe();
   }
 
   loadSoldItemList() {
-    console.log('implement loading sold items list');
     this.checkoutSoldItemsService.getAllSoldItemsList().subscribe(JsonDto => {
         this.soldItemsToShopsList = JsonDto;
         this.rebuildListCategories();
@@ -391,7 +381,6 @@ export class CheckoutSoldItemsComponent implements OnInit {
       verifyShop &&
       verifyPriceListPerUnit &&
       verifyPriceSalesPerUnit) {
-      console.log('entered into the if');
       this.checkoutSoldItemsService.verifyAvailability(newItem).subscribe((observable) => {
         this.availableItems = observable.quantity;
 
@@ -411,7 +400,6 @@ export class CheckoutSoldItemsComponent implements OnInit {
         }
       });
     } else {
-      console.log('New Item not fully defined');
     }
   }
 }

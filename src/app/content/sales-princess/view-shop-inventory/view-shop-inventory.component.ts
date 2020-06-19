@@ -56,7 +56,6 @@ export class ViewShopInventoryComponent implements OnInit {
   }
 
   getDeliveryItemList(shop: string) {
-    console.log('Loading data for ' + shop);
     this.getShopItems();
   }
 

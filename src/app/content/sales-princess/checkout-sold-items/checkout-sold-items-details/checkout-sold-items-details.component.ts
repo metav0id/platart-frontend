@@ -39,20 +39,17 @@ export class CheckoutSoldItemsDetailsComponent implements OnInit {
   }
 
   deleteItemList(item: ShopsCheckoutSoldItemsDTO) {
-    console.log('delete: ' + item.category + ' - ' + item.priceListPerUnit);
     const index: number = this.data.indexOf(item);
-    console.log('index: ' + index);
     this.data.splice(index, 1);
-    console.log(this.data);
+
   }
 
   onSubmit() {
     if (this.myForm.valid) {
-      console.log('Form submitted');
-      //this.myForm.reset();
+
       this.dialogRef.close();
     } else {
-      console.log('Error by input');
+
     }
   }
 }

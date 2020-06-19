@@ -22,7 +22,6 @@ export class CheckoutSoldItemsService {
   // get all sold items
   public getAllItemsAllShops(): void {
     this.http.post<ShopsCurrentInventoryDTO[]>(environment.getAllShops, null).subscribe(JsonDto => {
-      console.log(JsonDto);
     });
   }
 

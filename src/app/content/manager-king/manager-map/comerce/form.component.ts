@@ -40,10 +40,8 @@ export class FormComponent implements OnInit {
    * this will create an offer and save it in DB. then will redirect to the offer page.
    * **/
   public create(): void {
-    console.log(this.comerce);
     this.comerceService.create(this.comerce).subscribe(response => {
       this.router.navigate(['map']);
-
     })
   }
 

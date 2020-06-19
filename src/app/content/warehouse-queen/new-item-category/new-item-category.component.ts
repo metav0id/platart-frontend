@@ -75,7 +75,6 @@ export class NewItemCategoryComponent implements OnInit {
     this.availableItems = 'category element is new';
     for (const categoryElement of this.listCategories) {
       if (categoryElement.category.toString().toUpperCase() === this.newCategoryElement.category.toString().toUpperCase()) {
-        console.log('element already in list');
         this.availableItems = 'element already in list';
 
         return true;
@@ -96,7 +95,6 @@ export class NewItemCategoryComponent implements OnInit {
     if (this.isAllSelected()) {
       this.selection.clear();
     } else {
-      console.log('All lines are selected');
       this.listCategories.forEach(row => this.selection.select(row));
     }
   }
@@ -110,8 +108,6 @@ export class NewItemCategoryComponent implements OnInit {
   }
 
   deleteSelectedCategory() {
-    console.log('delete selected categories');
-
     for (const elem of this.selection.selected) {
 
       const currentCategory: string = elem.category;

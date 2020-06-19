@@ -14,10 +14,7 @@
     <div class="space"></div>
     <mat-card-content>
       <agm-map (mapClick)="agregarMarcador($event)" [latitude]="lat" [longitude]="lng" [zoom]="15">
-        <!--method to add a marker by clicking should be inserted in line above after agm-map-->
-        <!--    (mapClick)="agregarMarcador($event)"-->
-        <!--method to add a marker-->
-        <!--      warehousemarker-->
+
         <agm-marker *ngFor="let marcador of marcadores; let i = index" [latitude]="marcador.lat"
                     [longitude]="marcador.lng">
           <agm-info-window>
@@ -26,15 +23,9 @@
             <p>{{marcador.address}}</p>
 
             <div>
-              <!--opens pop up select comerce if empty-->
-              <!--              <div *ngIf="marcador.name==null" >-->
-              <!--                <button mat-raised-button color="primary" (click)="openDialog2()" >Select a comerce</button>-->
-              <!--              </div>-->
-              <!--opens managing service of asigned comerce-->
+
               <div *ngIf="marcador.name!=null">
-                <!--              <a href="{{marcador.link}}">-->
-                <!--              <button mat-raised-button color="primary"> {{ t('translate.goTo') }} {{marcador.name}}</button>-->
-                <!--              </a>-->
+
                 <button matTooltip="Edit the information form this marker"
                         [matTooltipPosition]="position.value" mat-raised-button (click)="loadMarkerToModify(marcador)"
                         mat-raised-button color="warn"> Edit marker
@@ -53,18 +44,6 @@
             </div>
           </agm-info-window>
         </agm-marker>
-
-        <!--      warehouse marker-->
-
-        <!--      store1 marker-->
-
-
-        <!--      store1 marker-->
-        <!--      store2 marker-->
-
-
-        <!--      store2 marker-->
-
 
       </agm-map>
 

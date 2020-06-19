@@ -49,7 +49,6 @@ export class ComerceFormComponent implements OnInit {
   /**This method saves the edited field in the asigned marker
    * **/
   public save(): void {
-    console.log(this.marcador);
     this.mapService.edit(this.marcador)
   }
 
