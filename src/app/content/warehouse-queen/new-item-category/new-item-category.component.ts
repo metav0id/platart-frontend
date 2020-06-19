@@ -101,7 +101,7 @@ export class NewItemCategoryComponent implements OnInit {
             'Category saved.',
             'success'
           );
-          this.table.renderRows();
+          this.getCategories();
         } else {
           Swal.fire({
             icon: 'error',
