@@ -1,8 +1,7 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
-import {ShopsCurrentInventoryDTO} from '../sales-princess-DTOs/ShopsCurrentInventoryDTO';
 import {WarehouseItemCategoryDTO} from '../../warehouse-queen/warehouseCategory/warehouse-item-category-DTO';
-import {observable, Observable} from 'rxjs';
+import {Observable} from 'rxjs';
 import {environment} from '../../../../environments/environment';
 import {ShopsCheckoutSoldItemsDTO} from './checkout-sold-items-DTOs/ShopsCheckoutSoldItemsDTO';
 import {ShopDTO} from '../../warehouse-queen/new-delivery-to-shop/new-delivery-to-shop-DTOs/shop-dto';
@@ -35,12 +34,7 @@ export class CheckoutSoldItemsService {
       shop: selectedShop,
       itemsDTOList: soldItemList
     };
-    return this.http.post<null>(environment.saveAllSoldItemsListURL, saveItemsDTO);
-  }
-
-  // save all sold items
-  public saveAllSoldItemsList(soldItemList: ShopsCheckoutSoldItemsDTO[]): Observable<null> {
-    return this.http.post<null>(environment.saveAllSoldItemsListURL, soldItemList);
+    return this.http.post<null>(environment.saveShopSpecificSoldItemsList, saveItemsDTO);
   }
 
   // send shop specific sold items
