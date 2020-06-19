@@ -4,7 +4,7 @@ import {SelectionModel} from '@angular/cdk/collections';
 import {MatTable} from '@angular/material/table';
 import {NewOrderItemDTO} from './new-delivery-to-shop-DTOs/NewOrderItemDTO';
 import {NewDeliveryToShopService} from './new-delivery-to-shop.service';
-import {WarehouseItemCategoryDTO} from '../warehouseCategory/warehouse-item-category-DTO';
+import {WarehouseItemCategoryDTO} from '../../services/warehouse-item-category-DTO';
 import {Observable} from 'rxjs';
 import {WarehouseNewDeliveryPersistanceResponseDTO} from './new-delivery-to-shop-DTOs/WarehouseNewDeliveryPersistanceResponseDTO';
 import {TRANSLOCO_SCOPE} from '@ngneat/transloco';

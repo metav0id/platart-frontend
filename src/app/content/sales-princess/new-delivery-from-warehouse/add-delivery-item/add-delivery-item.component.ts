@@ -7,7 +7,7 @@ import {
   FormGroup,
   Validators
 } from '@angular/forms';
-import {WarehouseItemCategoryDTO} from "../../../warehouse-queen/warehouseCategory/warehouse-item-category-DTO";
+import {WarehouseItemCategoryDTO} from "../../../services/warehouse-item-category-DTO";
 import {CategoryService} from "../../../services/category.service";
 
 @Component({

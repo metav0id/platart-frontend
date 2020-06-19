@@ -4,7 +4,7 @@ import {NewitemcategoryService} from './new-item-category.service';
 import {TRANSLOCO_SCOPE} from '@ngneat/transloco';
 import {TooltipPosition} from '@angular/material/tooltip';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
-import {WarehouseItemCategoryDTO} from '../warehouseCategory/warehouse-item-category-DTO';
+import {WarehouseItemCategoryDTO} from '../../services/warehouse-item-category-DTO';
 import Swal from 'sweetalert2';
 
 /** Is used for table elements */

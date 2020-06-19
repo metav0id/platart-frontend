@@ -1,7 +1,7 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {SelectionModel} from '@angular/cdk/collections';
 import {MatTable} from '@angular/material/table';
-import {WarehouseItemCategoryDTO} from '../../warehouse-queen/warehouseCategory/warehouse-item-category-DTO';
+import {WarehouseItemCategoryDTO} from '../../services/warehouse-item-category-DTO';
 import {FormControl, Validators} from '@angular/forms';
 import {CheckoutSoldItemsService} from './checkout-sold-items.service';
 import {ShopsCheckoutSoldItemsDTO} from './checkout-sold-items-DTOs/ShopsCheckoutSoldItemsDTO';

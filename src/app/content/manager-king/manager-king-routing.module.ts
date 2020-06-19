@@ -9,6 +9,8 @@ import {RegisterComponent} from './register/register.component';
 import {ManagerWarehouseCheckinDescriptionComponent} from './manager-warehouse-checkin-description/manager-warehouse-checkin-description.component';
 import {MapComponent} from './manager-map/map/map.component';
 import {FormComponent} from './manager-map/comerce/form.component';
+import {NewItemCategoryComponent} from "./new-item-category/new-item-category.component";
+import {WarehouseGuard} from "../guards/warehouse.guard";
 
 const routes: Routes = [
   {path: 'formComerce', component: FormComponent, canActivate: [AuthGuard, ManagerGuard]},
@@ -21,6 +23,7 @@ const routes: Routes = [
     component: ManagerWarehouseCheckinDescriptionComponent,
     canActivate: [AuthGuard, ManagerGuard]
   },
+  {path: 'newitemcategory', component: NewItemCategoryComponent, canActivate: [AuthGuard, ManagerGuard]},
 ];
 
 @NgModule({

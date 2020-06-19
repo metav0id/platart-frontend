@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
-import {WarehouseItemCategoryDTO} from '../warehouseCategory/warehouse-item-category-DTO';
+import {WarehouseItemCategoryDTO} from '../../services/warehouse-item-category-DTO';
 import {environment} from '../../../../environments/environment';
 
 @Injectable({
