@@ -51,12 +51,12 @@ export class CheckoutSoldItemsService {
       shop: selectedShop,
       itemsDTOList: soldItemList
     };
-    return this.http.post<null>(environment.sendAllSoldItemsListURL, saveItemsDTO);
+    return this.http.post<null>(environment.sendSpecificShopSoldItemsList, saveItemsDTO);
   }
 
   // send all sold items
   public sendAllSoldItemsList(soldItemList: ShopsCheckoutSoldItemsDTO[]): Observable<ShopsCheckoutSoldItemsDTO[]> {
-    return this.http.post<null>(environment.sendAllSoldItemsListURL, soldItemList);
+    return this.http.post<null>(environment.sendSpecificShopSoldItemsList, soldItemList);
   }
 
   // TODO: update URL
@@ -65,7 +65,7 @@ export class CheckoutSoldItemsService {
     const shopDTO: ShopNameDTO = {
       shop: shopSelected
     };
-    return this.http.post<null>(environment.deleteCurrentSoldItemsListURL, shopDTO);
+    return this.http.post<null>(environment.deleteShopSpecificCheckoutSoldItemsList, shopDTO);
   }
 
   public loadCurrentSoldItemsList(): Observable<ShopsCheckoutSoldItemsDTO[]> {
