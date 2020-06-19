@@ -5,7 +5,6 @@ import {MatTable} from '@angular/material/table';
 import {NewOrderItemDTO} from './new-delivery-to-shop-DTOs/NewOrderItemDTO';
 import {NewDeliveryToShopService} from './new-delivery-to-shop.service';
 import {WarehouseItemCategoryDTO} from '../warehouseCategory/warehouse-item-category-DTO';
-import {WarehouseCategoryService} from '../warehouseCategory/warehouseCategory.service';
 import {Observable} from 'rxjs';
 import {WarehouseNewDeliveryPersistanceResponseDTO} from './new-delivery-to-shop-DTOs/WarehouseNewDeliveryPersistanceResponseDTO';
 import {TRANSLOCO_SCOPE} from '@ngneat/transloco';
@@ -14,6 +13,8 @@ import {TooltipPosition} from '@angular/material/tooltip';
 import {PeriodicElement} from './new-delivery-to-shop-DTOs/periodic-element';
 import {MatDialog} from '@angular/material/dialog';
 import {CommentDialogComponent} from './comment-dialog/comment-dialog.component';
+import {CategoryService} from "../../services/category.service";
+import {AuthService} from "../../services/auth.service";
 
 @Component({
   selector: 'app-new-delivery-order',
@@ -37,7 +38,7 @@ export class NewDeliveryToShopComponent implements OnInit {
   private readonly INITIALIZE_CATEGORY = 'chooseCategory';
   private readonly INITIALIZE_SHOP = 'chooseShop';
 
-  public shopsList: Shop[] = [{name: 'shop1'}, {name: 'shop2'}];
+  public shopsList: string[] = [];
   private totalCost: number;
   private totalItems: number;
 
@@ -63,12 +64,13 @@ export class NewDeliveryToShopComponent implements OnInit {
   @ViewChild('myShopCheckinProductsTable') table: MatTable<any>;
 
   constructor(private newDeliveryToShopService: NewDeliveryToShopService,
-              private warehouseCategoryService: WarehouseCategoryService,
-              private dialog: MatDialog) {
+              private categoryService: CategoryService,
+              private dialog: MatDialog,
+              private auth: AuthService) {
   }
 
   ngOnInit(): void {
-    this.newDeliveryToShopService.getListShops().subscribe(JSON => this.shopsList = JSON);
+    this.shopsList = this.auth.getStoresList();
     this.fetchCategoyItems();
     this.fetchNewOrderData();
   }
@@ -97,7 +99,7 @@ export class NewDeliveryToShopComponent implements OnInit {
   }
 
   fetchCategoyItems(): void {
-    this.warehouseCategoryService.getAllCategories().subscribe(JsonDto => {
+    this.categoryService.getAllActivatedCategories().subscribe(JsonDto => {
       this.categoryItems = JsonDto;
     });
   }

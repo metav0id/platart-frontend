@@ -8,7 +8,7 @@ import {ShopDTO} from './checked-in-items-DTOs/shop-dto';
 import {MatDialog} from '@angular/material/dialog';
 import {CheckedInItemsDetailsComponent} from './checked-in-items-details/checked-in-items-details.component';
 import {MatDatepickerInputEvent} from '@angular/material/datepicker';
-import {AuthService} from "../../services/auth.service";
+import {AuthService} from '../../services/auth.service';
 
 @Component({
   selector: 'app-checked-in-items',
@@ -25,8 +25,8 @@ export class CheckedInItemsComponent implements OnInit {
   public formControl = new FormControl('', Validators.required);
 
   public deliveryShop: string;
-  public shopsList: ShopDTO[] = [];
-  public listShops1: String[] = new Array();
+  public shopsList: string[] = [];
+
 
   displayedColumns: string[] = ['date', 'category', 'priceListPerUnit', 'popup'];
   dataSource = new MatTableDataSource();
@@ -38,14 +38,7 @@ export class CheckedInItemsComponent implements OnInit {
   @ViewChild(MatSort, {static: true}) sort: MatSort;
 
   ngOnInit(): void {
-    this.listShops1 = this.auth.getStoresList();
-    this.fetchAllShops();
-  }
-
-  fetchAllShops(): void {
-    this.checkedInItemsService.getListShops().subscribe((observable) => {
-      this.shopsList = observable;
-    });
+    this.shopsList = this.auth.getStoresList();
   }
 
   applyFilter(event: Event) {
@@ -79,7 +72,6 @@ export class CheckedInItemsComponent implements OnInit {
     const newDate: Date = $event.value;
     this.startDate = newDate.toISOString();
 
-    // tslint:disable-next-line:triple-equals
     if (this.endDate == '') {
       const newEndDate: Date = new Date(newDate.getTime() + (1000 * 60 * 60 * 24));
       this.endDate = newEndDate.toISOString();

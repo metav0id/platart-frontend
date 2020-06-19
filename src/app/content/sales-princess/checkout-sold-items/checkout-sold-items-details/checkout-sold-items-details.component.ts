@@ -49,7 +49,6 @@ export class CheckoutSoldItemsDetailsComponent implements OnInit {
   onSubmit() {
     if (this.myForm.valid) {
       console.log('Form submitted');
-      //this.myForm.reset();
       this.dialogRef.close();
     } else {
       console.log('Error by input');

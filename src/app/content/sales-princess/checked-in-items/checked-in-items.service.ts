@@ -22,9 +22,4 @@ export class CheckedInItemsService {
     };
     return this.http.post<CheckedInItemsDTO[]>(environment.getSpecificCheckedInItemsDate, shopDateSimpleDTO);
   }
-
-  public getListShops(): Observable<ShopDTO[]> {
-    return this.http.get<ShopDTO[]>(environment.getAllShops);
-  }
-
 }

@@ -15,9 +15,6 @@ export class CheckoutSoldItemsService {
   constructor(private http: HttpClient) {
   }
 
-  public getAllCategories(): Observable<WarehouseItemCategoryDTO[]> {
-    return this.http.post<WarehouseItemCategoryDTO[]>(environment.getAllCategories, null);
-  }
 
   // get all sold items
   public getAllItemsAllShops(): void {
@@ -48,10 +45,6 @@ export class CheckoutSoldItemsService {
 
   public loadCurrentSoldItemsList(): Observable<ShopsCheckoutSoldItemsDTO[]> {
     return this.http.post<null>(environment.loadAllSoldItemsListURL, null);
-  }
-
-  public getListShops(): Observable<ShopDTO[]> {
-    return this.http.get<ShopDTO[]>(environment.getAllShops);
   }
 
   public verifyAvailability(newItem: ShopsCheckoutSoldItemsDTO): Observable<ShopsCheckoutSoldItemsDTO> {

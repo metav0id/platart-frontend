@@ -7,6 +7,8 @@ import {
   FormGroup,
   Validators
 } from '@angular/forms';
+import {WarehouseItemCategoryDTO} from "../../../warehouse-queen/warehouseCategory/warehouse-item-category-DTO";
+import {CategoryService} from "../../../services/category.service";
 
 @Component({
   selector: 'app-add-delivery-item',
@@ -26,7 +28,7 @@ export class AddDeliveryItemComponent implements OnInit {
     timestamp: '',
     comment: ''
   };
-  public categoryItems = [{category: 'Pulsera'}, {category: 'Zapato'}];
+  public categoryItems: WarehouseItemCategoryDTO[] = [];
   public date = new Date();
 
   static invalidNumberValidator(control: AbstractControl): { [key: string]: boolean } | null {
@@ -39,11 +41,13 @@ export class AddDeliveryItemComponent implements OnInit {
   constructor(
     public dialogRef: MatDialogRef<AddDeliveryItemComponent>,
     @Inject(MAT_DIALOG_DATA) public data: DeliveryItemFromWarehouseDTO[],
-    private formBuilder: FormBuilder) {
+    private formBuilder: FormBuilder,
+    private categoryService: CategoryService) {
   }
 
   ngOnInit(): void {
     this.createForm();
+    this.categoryService.getAllActivatedCategories().subscribe(obj => this.categoryItems = obj);
   }
 
   createForm() {
