@@ -4,11 +4,10 @@ import {SelectionModel} from '@angular/cdk/collections';
 import {FormControl, Validators} from '@angular/forms';
 import {PeriodicElement} from './periodic-element';
 import {NewDeliveryToWarehouseService} from './new-delivery-to-warehouse.service';
-
 import {TRANSLOCO_SCOPE} from '@ngneat/transloco';
-import {TooltipPosition} from "@angular/material/tooltip";
-import {WarehouseItemCategoryDTO} from "../warehouseCategory/warehouseItemCategoryDTO";
-import {CategoryService} from "../../services/category.service";
+import {TooltipPosition} from '@angular/material/tooltip';
+import {CategoryService} from '../../services/category.service';
+import {WarehouseItemCategoryDTO} from '../../services/warehouse-item-category-DTO';
 
 @Component({
   selector: 'app-new-delivery-to-warehouse',

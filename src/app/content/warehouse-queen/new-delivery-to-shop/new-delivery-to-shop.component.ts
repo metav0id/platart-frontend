@@ -8,13 +8,12 @@ import {WarehouseItemCategoryDTO} from '../../services/warehouse-item-category-D
 import {Observable} from 'rxjs';
 import {WarehouseNewDeliveryPersistanceResponseDTO} from './new-delivery-to-shop-DTOs/WarehouseNewDeliveryPersistanceResponseDTO';
 import {TRANSLOCO_SCOPE} from '@ngneat/transloco';
-import {Shop} from './new-delivery-to-shop-DTOs/Shop';
 import {TooltipPosition} from '@angular/material/tooltip';
-import {PeriodicElement} from './new-delivery-to-shop-DTOs/periodic-element';
 import {MatDialog} from '@angular/material/dialog';
 import {CommentDialogComponent} from './comment-dialog/comment-dialog.component';
-import {CategoryService} from "../../services/category.service";
-import {AuthService} from "../../services/auth.service";
+import {CategoryService} from '../../services/category.service';
+import {AuthService} from '../../services/auth.service';
+import {PeriodicElement} from './new-delivery-to-shop-DTOs/periodicElements';
 
 @Component({
   selector: 'app-new-delivery-order',

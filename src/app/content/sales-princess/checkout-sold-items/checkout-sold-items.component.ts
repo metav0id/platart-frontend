@@ -16,10 +16,10 @@ import {CheckoutSoldItemsSendVerificationComponent} from './checkout-sold-items-
 import {TRANSLOCO_SCOPE, TranslocoService} from '@ngneat/transloco';
 import {TooltipPosition} from '@angular/material/tooltip';
 import Swal from 'sweetalert2';
-import {AuthService} from "../../services/auth.service";
-import {SendItemsDTO} from "./checkout-sold-items-DTOs/SendItemsDTO";
-import {WarehouseItemCategoryDTO} from "../../warehouse-queen/warehouseCategory/warehouseItemCategoryDTO";
-import {CategoryService} from "../../services/category.service";
+import {AuthService} from '../../services/auth.service';
+import {SendItemsDTO} from './checkout-sold-items-DTOs/SendItemsDTO';
+import {CategoryService} from '../../services/category.service';
+import {WarehouseItemCategoryDTO} from "../../services/warehouse-item-category-DTO";
 
 @Component({
   selector: 'app-checkout-sold-items',

@@ -4,7 +4,6 @@ import {MatTableDataSource} from '@angular/material/table';
 import {CheckedInItemsService} from './checked-in-items.service';
 import {FormControl, Validators} from '@angular/forms';
 import {TRANSLOCO_SCOPE} from '@ngneat/transloco';
-import {ShopDTO} from './checked-in-items-DTOs/shop-dto';
 import {MatDialog} from '@angular/material/dialog';
 import {CheckedInItemsDetailsComponent} from './checked-in-items-details/checked-in-items-details.component';
 import {MatDatepickerInputEvent} from '@angular/material/datepicker';
