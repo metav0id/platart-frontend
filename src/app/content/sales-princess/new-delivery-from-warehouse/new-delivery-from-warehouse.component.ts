@@ -62,7 +62,7 @@ export class NewDeliveryFromWarehouseComponent implements OnInit {
 
   openDialogDeliveryDetails(element: TableItem): void {
     this.dialog.open(NewDeliveryFromWarehouseDetailsComponent, {
-      width: '400em',
+      width: '400px',
       data: element,
       autoFocus: false
     });
@@ -73,7 +73,7 @@ export class NewDeliveryFromWarehouseComponent implements OnInit {
    */
   openDialogAddItem(): void {
     const dialogRef = this.dialog.open(AddDeliveryItemComponent, {
-      width: '250px',
+      width: '400px',
       data: this.listNewItemsFromWarehouse
     });
 

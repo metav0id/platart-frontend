@@ -11,7 +11,6 @@
 }
 
 table {
-  width: 100%;
   margin-left: auto;
   margin-right: auto;
 }
@@ -114,14 +113,12 @@ h3 {
 
 
 .demo-card-wide.mdl-card {
-  width: 500em;
   padding: 0px;
 
 }
 
 .demo-card-wide > .mdl-card__title {
   color: #fff;
-  height: 100px;
 
 
   /*background: url('../assets/demos/welcome_card.jpg') center / cover;*/
@@ -132,23 +129,6 @@ h3 {
 }
 
 
-.demo-card-wide2.mdl-card {
-  width: 80%;
-  height: 50%
-
-}
-
-.demo-card-wide2 > .mdl-card__title {
-  color: #fff;
-  height: 100px;
-
-
-  /*background: url('../assets/demos/welcome_card.jpg') center / cover;*/
-}
-
-.demo-card-wide2 > .mdl-card__menu {
-  color: #fff;
-}
 .pad{
   padding: 0px;
 }

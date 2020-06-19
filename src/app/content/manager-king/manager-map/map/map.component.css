@@ -12,7 +12,14 @@ mat-card-title {
 }
 
 mat-card {
-  background-color: #f5f5f5;
+  width: 80%;
+  background-color: #ffffff;
+  font-weight: bolder;
+  font-family: sans-serif;
+  color: #212e3e;
+  margin-right: 100px;
+  margin-left: 100px;
+
 
 }
 
@@ -28,7 +35,7 @@ mat-card[_ngcontent-acc-c179] {
 }
 
 table {
-  width: 100%;
+  width: 100em;
   margin-left: auto;
   margin-right: auto;
 }
@@ -128,3 +135,9 @@ h3 {
 .punkt {
   border-style: dotted;
 }
+
+.overflow{
+  -ms-overflow-style: none
+}
+
+

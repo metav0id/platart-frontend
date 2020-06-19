@@ -67,7 +67,7 @@ import {MatTooltipModule} from "@angular/material/tooltip";
     ReactiveFormsModule,
     MatTableModule,
     TranslocoRootModule,
-
+    MatTableModule,
     MatInputModule,
     MatSortModule,
     MatRadioModule,
