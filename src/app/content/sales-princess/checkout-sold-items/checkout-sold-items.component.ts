@@ -23,6 +23,7 @@ import {
 import {DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE} from '@angular/material/core';
 import {WarehouseItemCategoryDTO} from './checkout-sold-items-DTOs/WarehouseItemCategoryDTO';
 import {SendItemsDTO} from './checkout-sold-items-DTOs/SendItemsDTO';
+import {MatAccordion} from '@angular/material/expansion';
 
 @Component({
   selector: 'app-checkout-sold-items',
@@ -90,6 +91,7 @@ export class CheckoutSoldItemsComponent implements OnInit {
   selection = new SelectionModel<ShopsCheckoutSoldItemsDTO>(true, []);
   newCheckoutSoldItem: ShopsCheckoutSoldItemsDTO;
 
+  @ViewChild(MatAccordion) accordion: MatAccordion;
   @ViewChild('myShopCheckoutProductsTable') table: MatTable<any>;
 
   // Date input
