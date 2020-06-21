@@ -183,31 +183,23 @@
                   matTooltip="Delete element from the list">
             <mat-icon>delete</mat-icon>
           </button>
-          <button (click)="saveSoldItemList()"
-                  [matTooltipPosition]="position.value" mat-raised-button matTooltip="Save list locally">
-            <mat-icon>save</mat-icon>
-          </button>
           <div class="container-fluid d-flex justify-content-center cont-bg4">
             <div class="table-responsive cont-bg4">
               <table #myShopCheckoutProductsTable [dataSource]="soldItemsCategoryLists" class="cont-bg4" mat-table>
 
                 <!-- category column-->
                 <ng-container matColumnDef="sale">
-                  <th *matHeaderCellDef mat-header-cell> {{ t('translate.category') }} </th>
+                  <th *matHeaderCellDef mat-header-cell> </th>
                   <td *matCellDef="let element" mat-cell>
                     <div>
-                      <mat-card>
+                      <mat-card (click)="openDialogCategory(element)">
                         <mat-card-header>
                           <mat-card-title>{{element.quantity}}-{{element.category}}</mat-card-title>
                           <mat-card-subtitle>{{element.priceListPerUnit}}$List</mat-card-subtitle>
                         </mat-card-header>
-                        <mat-card-actions>
-                          <button (click)="openDialogCategory(element)" mat-raised-button>
-                            <mat-icon>list_alt</mat-icon>
-                          </button>
-                        </mat-card-actions>
                       </mat-card>
                     </div>
+                    <div class="space"></div>
                   </td>
                   <td *matFooterCellDef mat-footer-cell> -</td>
                 </ng-container>

@@ -33,10 +33,6 @@
             </mat-card>
           </div>
         </div>
-        <div mat-dialog-actions>
-<!--          <button mat-button (click)="onNoClick()">No Thanks</button>-->
-<!--          <button mat-button [mat-dialog-close]="data[0].position" cdkFocusInitial>Ok</button>-->
-        </div>
         <div class="space"></div>
       </div>
   </form>
@@ -44,7 +40,6 @@
   <!--  CONTENT-->
   <div class="mdl-card__actions mdl-card--border cont-bg4">
     <div>
-      <button mat-raised-button class = "btn btn-primary" role="button" (click)="onNoClick()">No Thanks</button>
       <button mat-raised-button class = "btn btn-primary" role="button" [mat-dialog-close]="data[0].position" cdkFocusInitial>Ok</button>
     </div>
   </div>

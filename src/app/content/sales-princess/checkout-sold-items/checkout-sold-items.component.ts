@@ -1,7 +1,6 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {SelectionModel} from '@angular/cdk/collections';
 import {MatTable} from '@angular/material/table';
-import {WarehouseItemCategoryDTO} from '../../warehouse-queen/warehouseCategory/warehouse-item-category-DTO';
 import {FormControl, Validators} from '@angular/forms';
 import {CheckoutSoldItemsService} from './checkout-sold-items.service';
 import {ShopsCheckoutSoldItemsDTO} from './checkout-sold-items-DTOs/ShopsCheckoutSoldItemsDTO';
@@ -12,7 +11,6 @@ import {CheckoutSoldItemsDetailsComponent} from './checkout-sold-items-details/c
 import {CheckoutCategories} from './checkout-sold-items-DTOs/CheckoutCategories';
 // tslint:disable-next-line:max-line-length
 import {CheckoutSoldItemsSendVerificationComponent} from './checkout-sold-items-send-verification/checkout-sold-items-send-verification.component';
-import {SendItemsDTO} from './checkout-sold-items-DTOs/Send-Items-DTO';
 import {TRANSLOCO_SCOPE, TranslocoService} from '@ngneat/transloco';
 import {TooltipPosition} from '@angular/material/tooltip';
 import Swal from 'sweetalert2';
@@ -23,6 +21,8 @@ import {
   MAT_MOMENT_DATE_ADAPTER_OPTIONS,
 } from '@angular/material-moment-adapter';
 import {DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE} from '@angular/material/core';
+import {WarehouseItemCategoryDTO} from './checkout-sold-items-DTOs/WarehouseItemCategoryDTO';
+import {SendItemsDTO} from './checkout-sold-items-DTOs/SendItemsDTO';
 
 @Component({
   selector: 'app-checkout-sold-items',
@@ -40,7 +40,7 @@ import {DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE} from '@angular/material/
   ],
 })
 export class CheckoutSoldItemsComponent implements OnInit {
-  public listShops1: string[] = new Array();
+  public listShops1: string[] = [];
   positionOptions: TooltipPosition[] = ['after', 'before', 'above', 'below', 'left', 'right'];
   position = new FormControl(this.positionOptions[0]);
 
@@ -51,11 +51,8 @@ export class CheckoutSoldItemsComponent implements OnInit {
               private auth: AuthService) {
   }
 
-  // Fields for input-form
-  public discountControll = new FormControl('', Validators.required);
-
   public selectedShopName = '';
-  public selectedShopBoolean: boolean = false;
+  public selectedShopBoolean = false;
 
   public readonly DISCOUNT_METHOD_REVENUE = 'special price';
   public readonly DISCOUNT_METHOD_NO_DISCOUNT = 'no extra discount';
@@ -357,7 +354,7 @@ export class CheckoutSoldItemsComponent implements OnInit {
     });
 
     // once confirmed, send delivery order
-    dialogRef.afterClosed().subscribe((DataObservable) => {
+    dialogRef.afterClosed().subscribe(() => {
       console.log(sendSoldItemsData);
 
       if (sendSoldItemsData.sendSoldItemsVerification === true) {
@@ -365,8 +362,9 @@ export class CheckoutSoldItemsComponent implements OnInit {
         this.checkoutSoldItemsService.sendSpecificShopSoldItemsList(
           this.selectedShopName,
           this.soldItemsToShopsList).subscribe((JsonDto) => {
-            this.soldItemsToShopsList = [];
+            this.soldItemsToShopsList = JsonDto;
             this.rebuildListCategories();
+            this.table.renderRows();
           }
         );
       }
@@ -374,7 +372,13 @@ export class CheckoutSoldItemsComponent implements OnInit {
   }
 
   deleteSoldItemList() {
-    this.checkoutSoldItemsService.deleteShopSpecificCheckoutSoldItemsList(this.selectedShopName).subscribe();
+    this.checkoutSoldItemsService.deleteShopSpecificCheckoutSoldItemsList(this.selectedShopName).subscribe(
+      () => {
+        this.soldItemsToShopsList = [];
+        this.rebuildListCategories();
+        this.table.renderRows();
+      }
+    );
   }
 
   loadSoldItemList() {
@@ -431,5 +435,4 @@ export class CheckoutSoldItemsComponent implements OnInit {
       this.loadSoldItemList();
     }
   }
-
 }

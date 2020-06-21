@@ -1,12 +1,12 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
-import {WarehouseItemCategoryDTO} from '../../warehouse-queen/warehouseCategory/warehouse-item-category-DTO';
 import {Observable} from 'rxjs';
 import {environment} from '../../../../environments/environment';
 import {ShopsCheckoutSoldItemsDTO} from './checkout-sold-items-DTOs/ShopsCheckoutSoldItemsDTO';
 import {ShopDTO} from '../../warehouse-queen/new-delivery-to-shop/new-delivery-to-shop-DTOs/shop-dto';
 import {ShopNameDTO} from './checkout-sold-items-DTOs/Shop-name-DTO';
 import {SaveCheckoutSoldItemsDTO} from './checkout-sold-items-DTOs/SaveCheckoutSoldItemsDTO';
+import {WarehouseItemCategoryDTO} from './checkout-sold-items-DTOs/WarehouseItemCategoryDTO';
 
 @Injectable({
   providedIn: 'root'
@@ -17,7 +17,7 @@ export class CheckoutSoldItemsService {
   }
 
   public getAllCategories(): Observable<WarehouseItemCategoryDTO[]> {
-    return this.http.post<WarehouseItemCategoryDTO[]>(environment.getAllCategories, null);
+    return this.http.get<WarehouseItemCategoryDTO[]>(environment.getAllCategories);
   }
 
   // get all sold items for a specfic shop

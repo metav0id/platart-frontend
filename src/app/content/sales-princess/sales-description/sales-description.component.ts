@@ -6,7 +6,6 @@ import {MatSort} from '@angular/material/sort';
 import {MatDatepickerInputEvent} from '@angular/material/datepicker';
 import {TooltipPosition} from '@angular/material/tooltip';
 import {TRANSLOCO_SCOPE} from '@ngneat/transloco';
-import {ShopDTO} from '../checked-in-items/checked-in-items-DTOs/shop-dto';
 import Swal from 'sweetalert2';
 import {AuthService} from '../../services/auth.service';
 import {MatDialog} from '@angular/material/dialog';
@@ -24,7 +23,6 @@ import {SalesDescriptionDetailsComponent} from './sales-description-details/sale
 export class SalesDescriptionComponent implements OnInit {
   public listShops1: string[] = new Array();
   public deliveryShop = '';
-  public shopsList: ShopDTO[] = [];
 
   positionOptions: TooltipPosition[] = ['after', 'before', 'above', 'below', 'left', 'right'];
   position = new FormControl(this.positionOptions[0]);
@@ -50,13 +48,6 @@ export class SalesDescriptionComponent implements OnInit {
 
   ngOnInit(): void {
     this.listShops1 = this.auth.getStoresList();
-    this.fetchAllShops();
-  }
-
-  fetchAllShops(): void {
-    this.managerSalesDescriptionService.getListShops().subscribe((observable) => {
-      this.shopsList = observable;
-    });
   }
 
   startDateSelection($event: MatDatepickerInputEvent<Date>) {
