@@ -1,0 +1,91 @@
+import {Component, DoCheck, OnChanges, OnInit, SimpleChange, SimpleChanges} from '@angular/core';
+import {FormControl} from '@angular/forms';
+import {MatDatepicker, MatDatepickerInputEvent} from '@angular/material/datepicker';
+import {TooltipPosition} from '@angular/material/tooltip';
+import {Subject} from 'rxjs';
+
+import {ActivatedRoute, Router} from '@angular/router';
+import {ManagerDashboardService} from '../../manager-dashboard/manager-dashboard.service';
+import {DateRangeDTO} from '../../manager-king-dtos/DateRangeDTO';
+
+@Component({
+  selector: 'app-manager-dashboard-category',
+  templateUrl: './manager-dashboard-category.component.html',
+  styleUrls: ['./manager-dashboard-category.component.css']
+})
+export class ManagerDashboardCategoryComponent implements OnInit {
+
+  startDate;
+  endDate;
+  tempDate;
+  maxDate: Date;
+  minDate: Date;
+  hbarData;
+  positionOptions: TooltipPosition[] = ['after', 'before', 'above', 'below', 'left', 'right'];
+  position = new FormControl(this.positionOptions[0]);
+
+  constructor(private managerDashboardService: ManagerDashboardService, private route: ActivatedRoute, private router: Router) {
+    this.endDate = new FormControl(new Date());
+    this.tempDate = new Date();
+    this.tempDate.setDate(this.tempDate.getDate() - 14);
+    this.startDate = new FormControl(this.tempDate);
+    this.maxDate = new Date();
+    this.minDate = this.maxDate;
+
+    const range: DateRangeDTO = {
+      endDate: new Date().toISOString(),
+      startDate: this.tempDate.toISOString()
+    };
+    this.managerDashboardService.fetchCategoryData(range)
+      .subscribe((hbarData) => {this.hbarData = hbarData; });
+  }
+
+
+  showXAxis = true;
+  showYAxis = true;
+  gradient = true;
+  showLegend = false;
+  showXAxisLabel = false;
+  xAxisLabel = '';
+  showYAxisLabel = false;
+  yAxisLabel = '';
+  showLabels = false;
+  timeline = true;
+  colorScheme = {
+    domain: ['#FFA07A', '#E9967A', '#FA8072', '#F08080', '#CD5C5C', '#B22222', '#8B0000']
+  };
+
+
+  ngOnInit(): void {
+    const range: DateRangeDTO = {
+      startDate: this.startDate.toISOString(),
+      endDate: this.endDate.toISOString()
+    };
+
+    this.managerDashboardService.fetchCategoryData(range)
+      .subscribe((hbarData) => {this.hbarData = hbarData; });
+  }
+
+  refreshCategoryGraph(pickerStart: MatDatepicker<any>, pickerEnd: MatDatepicker<any>) {
+    this.startDate = pickerStart;
+    this.endDate = pickerEnd;
+    if (this.startDate < this.endDate) {
+      this.router.navigate(['reload']);
+      this.ngOnInit();
+    }
+  }
+
+  startDateSelection($event: MatDatepickerInputEvent<Date>) {
+    const newDate: Date = $event.value;
+
+  }
+
+  endDateSelection($event: MatDatepickerInputEvent<Date>) {
+    const newDate: Date = $event.value;
+  }
+
+
+
+
+
+}

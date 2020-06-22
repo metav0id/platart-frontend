@@ -10,7 +10,7 @@
   <div fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="20px" class="stats-card">
     <mat-card fxFlex="30">
       <app-arch-gauge-card gaugeLabel="{{ t('translate.turnover') }}" unit="USD" gaugeType="arch"
-                           gaugeValue="{{dataYesterday.salesTo}}"
+                           gaugeValue="{{this.dataYesterday.salesTo}}"
                            gaugeMin="0" gaugeMax="2000" gaugeAppendText="$"
                            label="{{ t('translate.yesterdaysTurnover') }}"></app-arch-gauge-card>
     </mat-card>
