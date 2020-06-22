@@ -1,7 +1,6 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {SelectionModel} from '@angular/cdk/collections';
 import {MatTable} from '@angular/material/table';
-import {WarehouseItemCategoryDTO} from '../../warehouse-queen/warehouseCategory/warehouse-item-category-DTO';
 import {FormControl, Validators} from '@angular/forms';
 import {CheckoutSoldItemsService} from './checkout-sold-items.service';
 import {ShopsCheckoutSoldItemsDTO} from './checkout-sold-items-DTOs/ShopsCheckoutSoldItemsDTO';
@@ -12,7 +11,6 @@ import {CheckoutSoldItemsDetailsComponent} from './checkout-sold-items-details/c
 import {CheckoutCategories} from './checkout-sold-items-DTOs/CheckoutCategories';
 // tslint:disable-next-line:max-line-length
 import {CheckoutSoldItemsSendVerificationComponent} from './checkout-sold-items-send-verification/checkout-sold-items-send-verification.component';
-import {SendItemsDTO} from './checkout-sold-items-DTOs/Send-Items-DTO';
 import {TRANSLOCO_SCOPE, TranslocoService} from '@ngneat/transloco';
 import {TooltipPosition} from '@angular/material/tooltip';
 import Swal from 'sweetalert2';
@@ -23,7 +21,9 @@ import {
   MAT_MOMENT_DATE_ADAPTER_OPTIONS,
 } from '@angular/material-moment-adapter';
 import {DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE} from '@angular/material/core';
-import {observable} from "rxjs";
+import {WarehouseItemCategoryDTO} from './checkout-sold-items-DTOs/WarehouseItemCategoryDTO';
+import {SendItemsDTO} from './checkout-sold-items-DTOs/SendItemsDTO';
+import {MatAccordion} from '@angular/material/expansion';
 
 @Component({
   selector: 'app-checkout-sold-items',
@@ -41,22 +41,25 @@ import {observable} from "rxjs";
   ],
 })
 export class CheckoutSoldItemsComponent implements OnInit {
-  public listShops1: string[] = new Array();
+  public listShops1: string[] = [];
   positionOptions: TooltipPosition[] = ['after', 'before', 'above', 'below', 'left', 'right'];
   position = new FormControl(this.positionOptions[0]);
+
+  tomorrow = new Date();
 
   constructor(/*private _snackBar: MatSnackBar,*/
               private checkoutSoldItemsService: CheckoutSoldItemsService,
               private transloco: TranslocoService,
               public dialog: MatDialog,
               private auth: AuthService) {
+    this.tomorrow.setDate(this.tomorrow.getDate());
+    this.tomorrow.setHours(23);
+    this.tomorrow.setMinutes(59);
+    this.tomorrow.setSeconds(59);
   }
 
-  // Fields for input-form
-  public discountControll = new FormControl('', Validators.required);
-
   public selectedShopName = '';
-  public selectedShopBoolean: boolean = false;
+  public selectedShopBoolean = false;
 
   public readonly DISCOUNT_METHOD_REVENUE = 'special price';
   public readonly DISCOUNT_METHOD_NO_DISCOUNT = 'no extra discount';
@@ -94,6 +97,7 @@ export class CheckoutSoldItemsComponent implements OnInit {
   selection = new SelectionModel<ShopsCheckoutSoldItemsDTO>(true, []);
   newCheckoutSoldItem: ShopsCheckoutSoldItemsDTO;
 
+  @ViewChild(MatAccordion) accordion: MatAccordion;
   @ViewChild('myShopCheckoutProductsTable') table: MatTable<any>;
 
   // Date input
@@ -105,9 +109,6 @@ export class CheckoutSoldItemsComponent implements OnInit {
   ngOnInit(): void {
     this.listShops1 = this.auth.getStoresList();
     this.initNewOrderElement();
-
-    // fetch saved sold items-list
-    // this.loadSoldItemList();
 
     // drop-down-lists
     this.checkoutSoldItemsService.getListShops().subscribe(JSON => this.shopsList = JSON);
@@ -154,11 +155,12 @@ export class CheckoutSoldItemsComponent implements OnInit {
 
       let revenueCalculation = 0;
       let discountPercentCalculation = 0;
-      if (this.discountType === this.DISCOUNT_METHOD_REVENUE) {
+
+      if (this.discountNessesary === this.DISCOUNT_METHOD_REVENUE) {
         revenueCalculation = this.newCheckoutSoldItem.revenuePerUnit;
         discountPercentCalculation = 100 - (this.newCheckoutSoldItem.revenuePerUnit * 100 / this.newCheckoutSoldItem.priceListPerUnit);
-      } else if (this.discountType === this.DISCOUNT_METHOD_NO_DISCOUNT) {
-        revenueCalculation = this.newCheckoutSoldItem.priceListPerUnit;
+      } else if (this.discountNessesary === this.DISCOUNT_METHOD_NO_DISCOUNT) {
+        revenueCalculation = this.newCheckoutSoldItem.priceSalesPerUnit;
         discountPercentCalculation = this.newCheckoutSoldItem.discountPercent;
       }
 
@@ -186,6 +188,12 @@ export class CheckoutSoldItemsComponent implements OnInit {
       this.soldItemsToShopsList.push(newSoldItemForTable);
       this.rebuildListCategories();
 
+      Swal.fire({
+        icon: 'success',
+        title: 'Entry created',
+        text: 'Item was added to checkout-items list.'
+      });
+
     } else {
       Swal.fire({
         icon: 'error',
@@ -200,8 +208,6 @@ export class CheckoutSoldItemsComponent implements OnInit {
   }
 
   rebuildListCategories(): void {
-    console.log('rebuildListCategories -> soldItemsToShopsList:');
-    console.log(this.soldItemsToShopsList);
 
     let positionCounter = 0;
     const newCategoryLists: CheckoutCategories[] = [];
@@ -273,8 +279,6 @@ export class CheckoutSoldItemsComponent implements OnInit {
       }
     }
     this.soldItemsCategoryLists = newCategoryLists;
-    console.log('rebuildListCategories -> soldItemsCategoryLists:');
-    console.log(this.soldItemsCategoryLists);
     this.table.renderRows();
   }
 
@@ -285,7 +289,6 @@ export class CheckoutSoldItemsComponent implements OnInit {
   }
 
   openDialogCategory(checkoutCategory: CheckoutCategories) {
-    console.log('open category Dialog');
     // open the dialogue
     const dialogRef = this.dialog.open(CheckoutSoldItemsDetailsComponent, {
       width: '400px',
@@ -347,8 +350,6 @@ export class CheckoutSoldItemsComponent implements OnInit {
   }
 
   sendSoldItemList() {
-    console.log('implement sending sold items list');
-
     const sendSoldItemsData: SendItemsDTO = {
       sendSoldItemsVerification: false,
       sendSoldItemsList: this.soldItemsToShopsList
@@ -356,21 +357,19 @@ export class CheckoutSoldItemsComponent implements OnInit {
 
     // open dialoge window
     const dialogRef = this.dialog.open(CheckoutSoldItemsSendVerificationComponent, {
-      width: '250px',
+      width: '400px',
       data: sendSoldItemsData
     });
 
     // once confirmed, send delivery order
-    dialogRef.afterClosed().subscribe((DataObservable) => {
-      console.log(sendSoldItemsData);
-
+    dialogRef.afterClosed().subscribe(() => {
       if (sendSoldItemsData.sendSoldItemsVerification === true) {
-        console.log('Send items');
         this.checkoutSoldItemsService.sendSpecificShopSoldItemsList(
           this.selectedShopName,
           this.soldItemsToShopsList).subscribe((JsonDto) => {
-            this.soldItemsToShopsList = [];
+            this.soldItemsToShopsList = JsonDto;
             this.rebuildListCategories();
+            this.table.renderRows();
           }
         );
       }
@@ -378,11 +377,13 @@ export class CheckoutSoldItemsComponent implements OnInit {
   }
 
   deleteSoldItemList() {
-    this.checkoutSoldItemsService.deleteShopSpecificCheckoutSoldItemsList(this.selectedShopName).subscribe((observable)=>{
-      this.soldItemsToShopsList = [];
-      this.rebuildListCategories();
-      this.table.renderRows();
-    });
+    this.checkoutSoldItemsService.deleteShopSpecificCheckoutSoldItemsList(this.selectedShopName).subscribe(
+      () => {
+        this.soldItemsToShopsList = [];
+        this.rebuildListCategories();
+        this.table.renderRows();
+      }
+    );
   }
 
   loadSoldItemList() {
@@ -397,7 +398,6 @@ export class CheckoutSoldItemsComponent implements OnInit {
   }
 
   verifyAvailability(newItem: ShopsCheckoutSoldItemsDTO) {
-    console.log(newItem);
     const verifyCategory: boolean = newItem.category !== null && newItem.category !== 'chooseCategory';
     const verifyShop: boolean = newItem.shop !== null && newItem.shop !== 'chooseShop';
     const verifyPriceListPerUnit: boolean = newItem.priceListPerUnit !== null && newItem.priceListPerUnit > 0;
@@ -407,7 +407,6 @@ export class CheckoutSoldItemsComponent implements OnInit {
       verifyShop &&
       verifyPriceListPerUnit &&
       verifyPriceSalesPerUnit) {
-      console.log('entered into the if');
       this.checkoutSoldItemsService.verifyAvailability(newItem).subscribe((observable) => {
         this.availableItems = observable.quantity;
 
@@ -427,7 +426,11 @@ export class CheckoutSoldItemsComponent implements OnInit {
         }
       });
     } else {
-      console.log('New Item not fully defined');
+      Swal.fire({
+        icon: 'error',
+        title: 'Information missing',
+        text: 'To verify availability fill the fields: date, category, list-price and sales-price.'
+      });
     }
   }
 
@@ -439,5 +442,4 @@ export class CheckoutSoldItemsComponent implements OnInit {
       this.loadSoldItemList();
     }
   }
-
 }
