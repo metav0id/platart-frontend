@@ -10,8 +10,9 @@ import {ManagerWarehouseCheckinDescriptionComponent} from './manager-warehouse-c
 import {MapComponent} from './manager-map/map/map.component';
 import {FormComponent} from './manager-map/comerce/form.component';
 import {ManagerDashboardCategoryComponent} from './manager-dashboards/category-overview/manager-dashboard-category.component';
-import {NewItemCategoryComponent} from "./new-item-category/new-item-category.component";
+import {NewItemCategoryComponent} from './new-item-category/new-item-category.component';
 import {WarehouseGuard} from "../guards/warehouse.guard";
+import {HbarCharCardComponent} from './manager-dashboard/widgets/hbar-char-card/hbar-char-card.component';
 
 const routes: Routes = [
   {path: 'formComerce', component: FormComponent, canActivate: [AuthGuard, ManagerGuard]},
@@ -19,6 +20,7 @@ const routes: Routes = [
   {path: 'managerinventoryinfo', component: ManagerInventoryDisplayComponent, canActivate: [AuthGuard, ManagerGuard]},
   {path: 'managerdashboard', component: ManagerDashboardComponent, canActivate: [AuthGuard, ManagerGuard]},
   {path: 'categoryoverview', component: ManagerDashboardCategoryComponent, canActivate: [AuthGuard, ManagerGuard]},
+  {path: 'hbarview', component: HbarCharCardComponent, canActivate: [AuthGuard, ManagerGuard]},
   {path: 'register', component: RegisterComponent, canActivate: [AuthGuard, ManagerGuard]},
   {
     path: 'managerwarehousecheckindescription',

@@ -43,8 +43,8 @@ export class ManagerDashboardService {
 
   // get data for gauge-charts: Yesterdays' data
 
-  fetchYesterdaysData(range: DateRangeDTO): Observable<DailyReportingDto> {
-    return this.http.post<DailyReportingDto>(environment.getDailyDataForPeriod, range).pipe(delay(1000));
+  fetchYesterdaysData(range: DateRangeDTO): Observable<MonthToDateReportingDto> {
+    return this.http.post<MonthToDateReportingDto>(environment.getAggregatedDataForPeriod, range).pipe(delay(1000));
   }
 
   // get data for main table: Daily performance (shops aggregated)

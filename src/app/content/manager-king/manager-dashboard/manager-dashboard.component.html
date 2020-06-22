@@ -30,8 +30,8 @@
   </div>
   <mat-divider></mat-divider>
 
-  <div fxLayout="column" fxLayoutAlign="left" fxLayoutGap="20px" class="stats-card">
-    <mat-card fxFlex="100">
+  <div fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="20px" class="stats-card">
+  <mat-card fxFlex="100">
       <table class="table">
         <thead>
         <tr>
@@ -45,8 +45,8 @@
         </tr>
         </thead>
         <tbody>
-        <tr *ngFor="let entry of data">
-          <th scope="row">{{entry.date.toDateString()}}</th>
+        <tr *ngFor="let entry of actualsData">
+          <th scope="row">{{entry.date}}</th>
           <td>{{entry.salesNo}}</td>
           <td>{{entry.salesTo}}</td>
           <td>{{entry.salesMg}}</td>
@@ -81,8 +81,10 @@
         </tr>
         </tbody>
       </table>
-    </mat-card>
+  </mat-card>
   </div>
+
+
 
   <mat-divider></mat-divider>
 
@@ -93,5 +95,7 @@
     <mat-card fxFlex="50">
       <app-vbar-chart-card label="{{ t('translate.aggregatedTurnoverByLast7Days') }}"></app-vbar-chart-card>
     </mat-card>
+
+
   </div>
 </ng-template>

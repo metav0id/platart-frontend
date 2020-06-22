@@ -57,22 +57,28 @@ export class ManagerDashboardCategoryComponent implements OnInit {
 
 
   ngOnInit(): void {
-    const range: DateRangeDTO = {
-      startDate: this.startDate.toISOString(),
-      endDate: this.endDate.toISOString()
-    };
-
-    this.managerDashboardService.fetchCategoryData(range)
-      .subscribe((hbarData) => {this.hbarData = hbarData; });
+    // const range: DateRangeDTO = {
+    //   startDate: this.startDate.toISOString(),
+    //   endDate: this.endDate.toISOString()
+    // };
+    //
+    // this.managerDashboardService.fetchCategoryData(range)
+    //   .subscribe((hbarData) => {this.hbarData = hbarData; });
   }
 
   refreshCategoryGraph(pickerStart: MatDatepicker<any>, pickerEnd: MatDatepicker<any>) {
     this.startDate = pickerStart;
     this.endDate = pickerEnd;
-    if (this.startDate < this.endDate) {
-      this.router.navigate(['reload']);
-      this.ngOnInit();
-    }
+    const range: DateRangeDTO = {
+      startDate: this.startDate.toISOString(),
+      endDate: this.endDate.toISOString()
+  };
+    this.managerDashboardService.fetchCategoryData(range)
+      .subscribe((hbarData) => {this.hbarData = hbarData; });
+    // if (this.startDate < this.endDate) {
+    //   this.router.navigate(['reload']);
+    //   this.ngOnInit();
+    // }
   }
 
   startDateSelection($event: MatDatepickerInputEvent<Date>) {

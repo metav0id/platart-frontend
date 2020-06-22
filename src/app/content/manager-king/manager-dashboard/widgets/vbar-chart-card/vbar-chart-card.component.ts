@@ -16,7 +16,7 @@ export class VbarChartCardComponent implements OnInit {
   @Input() percentage: string;
 
   // ngx-charts:
-  vbarData;
+  vbarData = [];
 
   showXAxis = true;
   showYAxis = true;
@@ -40,12 +40,12 @@ export class VbarChartCardComponent implements OnInit {
   }
 
   createChartDates(): DateRangeDTO {
-    const tempStartDate = new Date();
-    tempStartDate.setDate(tempStartDate.getDate() - 8);
-    tempStartDate.setHours(0, 0, 0);
-    const tempEndDate = new Date();
-    tempEndDate.setDate(tempEndDate.getDate() - 1);
-    tempEndDate.setHours(23, 59, 59);
+    const intermediateDate = new Date();
+    const tempYear = intermediateDate.getFullYear();
+    const tempMonth = intermediateDate.getMonth();
+    const tempDay = intermediateDate.getDate();
+    const tempStartDate = new Date(tempYear, tempMonth, tempDay - 8, 0, 0, 0);
+    const tempEndDate = new Date(tempYear, tempMonth, tempDay - 1, 23, 59, 59);
     return {
       startDate: tempStartDate.toISOString(),
       endDate: tempEndDate.toISOString()
