@@ -45,11 +45,17 @@ export class CheckoutSoldItemsComponent implements OnInit {
   positionOptions: TooltipPosition[] = ['after', 'before', 'above', 'below', 'left', 'right'];
   position = new FormControl(this.positionOptions[0]);
 
+  tomorrow = new Date();
+
   constructor(/*private _snackBar: MatSnackBar,*/
               private checkoutSoldItemsService: CheckoutSoldItemsService,
               private transloco: TranslocoService,
               public dialog: MatDialog,
               private auth: AuthService) {
+    this.tomorrow.setDate(this.tomorrow.getDate());
+    this.tomorrow.setHours(23);
+    this.tomorrow.setMinutes(59);
+    this.tomorrow.setSeconds(59);
   }
 
   public selectedShopName = '';

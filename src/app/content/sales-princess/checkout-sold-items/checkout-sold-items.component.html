@@ -33,10 +33,10 @@
               <mat-expansion-panel>
                 <mat-expansion-panel-header>
                   <mat-panel-title>
-                    Checkout Item Info
+                    {{ t('translate.checkout-item-info') }}
                   </mat-panel-title>
                   <mat-panel-description>
-                    Fill the fields
+                    {{ t('translate.checkout-item-fill-fields') }}
                     <span class="material-icons">
                     assignment
                     </span>
@@ -52,7 +52,7 @@
                     <div class="newOrderInputFieldsDate">
                       <mat-form-field>
                         <mat-label>{{ t('translate.chooseDate') }}</mat-label>
-                        <input (dateInput)="dateSelection($event)" [matDatepicker]="picker" matInput>
+                        <input (dateInput)="dateSelection($event)" [matDatepicker]="picker" [max]="tomorrow" matInput>
                         <mat-datepicker-toggle [for]="picker" matSuffix></mat-datepicker-toggle>
                         <mat-datepicker #picker touchUi></mat-datepicker>
                       </mat-form-field>
@@ -190,20 +190,20 @@
         <!--    CONTENT-->
         <div class="demo-card-wide mdl-card mdl-shadow--2dp">
           <div class="mdl-card__supporting-text">
-            <h3>Current Checkout Items-List</h3>
+            <h3>{{ t('translate.current-checkout-items-list') }}</h3>
           </div>
 
           <mat-accordion class="example-headers-align" multi>
             <mat-expansion-panel>
               <mat-expansion-panel-header>
                 <mat-panel-title>
-                  Checkout Item List
+                  {{ t('translate.checkout-item-list') }}
                 </mat-panel-title>
                 <mat-panel-description>
-                  View and correct the checkout list
+                  {{ t('translate.checkout-item-list-correct') }}
                   <span class="material-icons">
                     list
-              </span>
+                  </span>
                 </mat-panel-description>
               </mat-expansion-panel-header>
 
@@ -213,19 +213,19 @@
 
                     <!-- category column-->
                     <ng-container matColumnDef="sale">
-<!--                      <th *matHeaderCellDef mat-header-cell></th>-->
+                      <!--                      <th *matHeaderCellDef mat-header-cell></th>-->
                       <td *matCellDef="let element" mat-cell>
-                          <mat-card (click)="openDialogCategory(element)">
-                            <mat-card-header>
-                              <mat-card-title>{{element.quantity}}-{{element.category}}</mat-card-title>
-                              <mat-card-subtitle>{{element.priceListPerUnit}}$List</mat-card-subtitle>
-                            </mat-card-header>
-                          </mat-card>
+                        <mat-card (click)="openDialogCategory(element)">
+                          <mat-card-header>
+                            <mat-card-title>{{element.quantity}}-{{element.category}}</mat-card-title>
+                            <mat-card-subtitle>{{element.priceListPerUnit}}$List</mat-card-subtitle>
+                          </mat-card-header>
+                        </mat-card>
                         <div class="space"></div>
                       </td>
                       <td *matFooterCellDef mat-footer-cell> -</td>
                     </ng-container>
-<!--                    <tr *matHeaderRowDef="displayedColumns" mat-header-row></tr>-->
+                    <!--                    <tr *matHeaderRowDef="displayedColumns" mat-header-row></tr>-->
                     <tr *matRowDef="let element; columns: displayedColumns;" mat-row></tr>
                     <tr *matFooterRowDef="displayedColumns" mat-footer-row></tr>
 
