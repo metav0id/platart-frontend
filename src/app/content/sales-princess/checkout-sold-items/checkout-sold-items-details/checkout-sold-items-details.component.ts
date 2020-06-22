@@ -1,12 +1,17 @@
 import {Component, Inject, OnInit} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
-import {FormControl, FormGroup, Validators} from "@angular/forms";
-import {ShopsCheckoutSoldItemsDTO} from "../checkout-sold-items-DTOs/ShopsCheckoutSoldItemsDTO";
+import {FormControl, FormGroup, Validators} from '@angular/forms';
+import {ShopsCheckoutSoldItemsDTO} from '../checkout-sold-items-DTOs/ShopsCheckoutSoldItemsDTO';
+import Swal from 'sweetalert2';
+import {TRANSLOCO_SCOPE} from '@ngneat/transloco';
 
 @Component({
   selector: 'app-checkout-sold-items-details',
   templateUrl: './checkout-sold-items-details.component.html',
-  styleUrls: ['./checkout-sold-items-details.component.css']
+  styleUrls: ['./checkout-sold-items-details.component.css'],
+  providers: [
+    {provide: TRANSLOCO_SCOPE, useValue: {scope: 'salesPrincess', alias: 'translate'}}
+  ],
 })
 export class CheckoutSoldItemsDetailsComponent implements OnInit {
   public quantityFormControl: FormControl;
@@ -22,10 +27,6 @@ export class CheckoutSoldItemsDetailsComponent implements OnInit {
     this.createForm();
   }
 
-  onNoClick(): void {
-    this.dialogRef.close();
-  }
-
   createFormControls(): void {
     this.quantityFormControl = new FormControl('', [
       Validators.required
@@ -39,8 +40,24 @@ export class CheckoutSoldItemsDetailsComponent implements OnInit {
   }
 
   deleteItemList(item: ShopsCheckoutSoldItemsDTO) {
-    const index: number = this.data.indexOf(item);
-    this.data.splice(index, 1);
+    if ( this.data !== null && this.data.length > 0 ) {
+      const index: number = this.data.indexOf(item);
+      if (this.data.length > 1) {
+        this.data.splice(index, 1);
+        // tslint:disable-next-line:triple-equals
+      } else if (this.data.length == 1) {
+        this.data = [];
+        this.onSubmit();
+      }
+
+      Swal.fire({
+        icon: 'success',
+        title: 'Item deleted',
+        text: 'The clicked-on item was removed from the list of checkout-items.'
+      });
+    } else {
+      this.onSubmit();
+    }
   }
 
   onSubmit() {
