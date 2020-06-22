@@ -7,235 +7,246 @@
         <div class="demo-card-wide mdl-card mdl-shadow--2dp">
 
           <div class="mdl-card__title">
-            <h2 class="mdl-card__title-text">{{ t('translate.itemsSoldToday') }}</h2>
-          </div>
-          <div class="mdl-card__supporting-text">
-            <h3>{{ t('translate.pleaseTypeInItems') }}:</h3>
+            <h2 class="mdl-card__title-text">{{ t('translate.itemsSoldToday') }} in: {{selectedShopName}}</h2>
           </div>
           <div class="container-fluid d-flex justify-content-center cont-bg4">
-            <!--      FORMULAR-->
-            <div>
-              <div class="newOrderInputFieldsDate">
-                <mat-form-field>
-                  <mat-label>{{ t('translate.chooseDate') }}</mat-label>
-                  <input (dateInput)="dateSelection($event)" [matDatepicker]="picker" matInput>
-                  <mat-datepicker-toggle [for]="picker" matSuffix></mat-datepicker-toggle>
-                  <mat-datepicker #picker touchUi></mat-datepicker>
-                </mat-form-field>
-              </div>
-              <div class="newOrderInputFieldsShop">
-                <mat-form-field appearance="fill">
-                  <mat-label>{{ t('translate.shop') }}</mat-label>
-                  <mat-select [(value)]="newCheckoutSoldItem.shop" [formControl]="shopControll">
-                    <mat-option>--</mat-option>
-                    <mat-option *ngFor="let entry of shopsList" [value]="entry">{{ entry}}</mat-option>
-                  </mat-select>
-                  <mat-error *ngIf="newCheckoutSoldItem.shop===null">
-                    {{ t('translate.selectShop') }}!
-                  </mat-error>
-                </mat-form-field>
-              </div>
-
-              <div class="itemCheckoutSoldItemCategory">
-                <mat-form-field appearance="fill">
-                  <mat-label>{{ t('translate.category') }}</mat-label>
-                  <mat-select [(value)]="newCheckoutSoldItem.category" [formControl]="categoryControl">
-                    <mat-option>--</mat-option>
-                    <mat-option *ngFor="let entry of categoryItems"
-                                [value]="entry.category">{{ entry.category}}</mat-option>
-                  </mat-select>
-                </mat-form-field>
-              </div>
-
-              <div class="itemCheckoutSoldItemFinalPricePerUnit">
-                <mat-form-field appearance="fill">
-                  <mat-label>{{ t('translate.listPrice') }}</mat-label>
-                  <input #input [(ngModel)]="newCheckoutSoldItem.priceListPerUnit" matInput maxlength="10"
-                         placeholder="Ex. deliveryDisplayPricePerUnit">
-                </mat-form-field>
-                <mat-error *ngIf="newCheckoutSoldItem.priceListPerUnit<=0">
-                  {{ t('translate.priceNotValid') }}!
+            <div class="newOrderInputFieldsShop">
+              <mat-form-field appearance="fill">
+                <mat-label>{{ t('translate.shop') }}</mat-label>
+                <mat-select [(value)]="selectedShopName" [formControl]="shopControll">
+                  <mat-option>--</mat-option>
+                  <mat-option *ngFor="let entry of listShops1" [value]="entry">{{ entry}}</mat-option>
+                </mat-select>
+                <mat-error *ngIf="selectedShopName===null">
+                  {{ t('translate.selectShop') }}!
                 </mat-error>
-              </div>
-
-              <div class="itemCheckoutSoldItemFinalPricePerUnit">
-                <mat-form-field appearance="fill">
-                  <mat-label>{{ t('translate.salesPrice') }}</mat-label>
-                  <input #input [(ngModel)]="newCheckoutSoldItem.priceSalesPerUnit" matInput maxlength="10"
-                         placeholder="Ex. deliveryDisplayPricePerUnit">
-                </mat-form-field>
-                <mat-error *ngIf="newCheckoutSoldItem.priceListPerUnit<=0">
-                  {{ t('translate.priceNotValid') }}!
-                </mat-error>
-              </div>
-
-              <div class="availabilityAmount space">
-                <button matTooltip="Check if the item is available in stock"
-                        [matTooltipPosition]="position.value" (click)="verifyAvailability(newCheckoutSoldItem)"
-                        mat-raised-button>{{ t('translate.checkAvailability') }}</button>
-                <a>{{availableItems}} items</a>
-              </div>
-              <div class="space"></div>
-
-              <div class="itemCheckoutSoldItemQuantity">
-                <mat-form-field appearance="fill">
-                  <mat-label>{{ t('translate.salesNumber') }}</mat-label>
-                  <input #input [(ngModel)]="newCheckoutSoldItem.quantity" matInput maxlength="3"
-                         placeholder="{{ t('translate.numberOfItemsSold') }}">
-                </mat-form-field>
-                <mat-error *ngIf="newCheckoutSoldItem.quantity<=0">
-                  {{ t('translate.numberOfItemsSold') }}
-                </mat-error>
-              </div>
-
-              <div class=" container ">
-                <div class="discountSelectionRadioButton">
-                  <label id="example-radio-group-label">{{ t('translate.salesType') }}:</label>
-                  <div class="space"></div>
-                  <mat-radio-group
-                    [(ngModel)]="discountNessesary"
-                    aria-labelledby="example-radio-group-label"
-                    class="example-radio-group">
-                    <mat-radio-button *ngFor="let discountType of discountList" [value]="discountType.name"
-                                      class="example-radio-button">
-                      {{discountType.name}}
-                    </mat-radio-button>
-                  </mat-radio-group>
-                </div>
-                <div *ngIf="discountNessesary  ==DISCOUNT_METHOD_REVENUE" class="itemCheckoutSoldItemPricePerUnit">
-                  <mat-form-field appearance="fill" >
-                    <mat-label>{{ t('translate.revenue') }}</mat-label>
-                    <input #input [(ngModel)]="newCheckoutSoldItem.revenuePerUnit" matInput maxlength="6"
-                           placeholder="{{ t('translate.revenue') }}">
-                  </mat-form-field>
-                </div>
-              </div>
-
-              <div class="space"></div>
-              <div class=" container ">
-                <div class="discountSelectionRadioButton">
-                  <label id="example-radio-group-label">{{ t('translate.comment') }}:</label>
-                  <div class="space"></div>
-                  <mat-radio-group
-                    [(ngModel)]="commentNessesary"
-                    aria-labelledby="example-radio-group-label"
-                    class="example-radio-group">
-                    <mat-radio-button *ngFor="let comment of commentNecessaryList" [value]="comment"
-                                      class="example-radio-button">
-                      {{comment}}
-                    </mat-radio-button>
-                  </mat-radio-group>
-                </div>
-                <div *ngIf="commentNessesary==='Comment'" class="itemCheckoutSoldItemComment">
-                  <mat-form-field appearance="fill" hintLabel="Max 10 characters">
-                    <mat-label>{{ t('translate.comment') }}</mat-label>
-                    <input #input [(ngModel)]="newCheckoutSoldItem.comment" matInput maxlength="250"
-                           placeholder="{{ t('translate.commentOnOrder') }}">
-                    <mat-hint align="end">{{input.value?.length || 0}}/250</mat-hint>
-                  </mat-form-field>
-                </div>
-              </div>
-              <div class="space"></div>
-              <div>
-                <button matTooltip="Add sell to the list"
-                        [matTooltipPosition]="position.value" (click)="addSoldItem()" mat-raised-button>
-                  <mat-icon>library_add</mat-icon>
-                </button>
-              </div>
-              <div class="space"></div>
-              <!--        FORLUMAR ENDS-->
-
-              <!--        NEXT DIV CLOSES CONTAINER OF FORMULAR-->
+              </mat-form-field>
             </div>
-            <!--    CONTENT OF FIRST COL-->
-            <!--NEX DIV CLOSES THE CONTENT OF CARD-->
+            <button (click)="getSpecificShopList()"
+                    mat-mini-fab matTooltip="Refresh list">
+              <mat-icon>autorenew</mat-icon>
+            </button>
           </div>
+
+          <div *ngIf="selectedShopBoolean">
+            <mat-accordion class="example-headers-align" multi>
+              <mat-expansion-panel>
+                <mat-expansion-panel-header>
+                  <mat-panel-title>
+                    Checkout Item Info
+                  </mat-panel-title>
+                  <mat-panel-description>
+                    Fill the fields
+                    <span class="material-icons">
+                    assignment
+                    </span>
+                  </mat-panel-description>
+                </mat-expansion-panel-header>
+
+                <div class="mdl-card__supporting-text">
+                  <h3>{{ t('translate.pleaseTypeInItems') }}:</h3>
+                </div>
+                <div class="container-fluid d-flex justify-content-center cont-bg4">
+                  <!--      FORMULAR-->
+                  <div>
+                    <div class="newOrderInputFieldsDate">
+                      <mat-form-field>
+                        <mat-label>{{ t('translate.chooseDate') }}</mat-label>
+                        <input (dateInput)="dateSelection($event)" [matDatepicker]="picker" matInput>
+                        <mat-datepicker-toggle [for]="picker" matSuffix></mat-datepicker-toggle>
+                        <mat-datepicker #picker touchUi></mat-datepicker>
+                      </mat-form-field>
+                    </div>
+                    <div class="itemCheckoutSoldItemCategory">
+                      <mat-form-field appearance="fill">
+                        <mat-label>{{ t('translate.category') }}</mat-label>
+                        <mat-select [(value)]="newCheckoutSoldItem.category" [formControl]="categoryControl">
+                          <mat-option>--</mat-option>
+                          <mat-option *ngFor="let entry of categoryItems"
+                                      [value]="entry.category">{{ entry.category}}</mat-option>
+                        </mat-select>
+                      </mat-form-field>
+                    </div>
+
+                    <div class="itemCheckoutSoldItemFinalPricePerUnit">
+                      <mat-form-field appearance="fill">
+                        <mat-label>{{ t('translate.listPrice') }}</mat-label>
+                        <input #input [(ngModel)]="newCheckoutSoldItem.priceListPerUnit" matInput maxlength="10"
+                               placeholder="Ex. deliveryDisplayPricePerUnit">
+                      </mat-form-field>
+                      <mat-error *ngIf="newCheckoutSoldItem.priceListPerUnit<=0">
+                        {{ t('translate.priceNotValid') }}!
+                      </mat-error>
+                    </div>
+
+                    <div class="itemCheckoutSoldItemFinalPricePerUnit">
+                      <mat-form-field appearance="fill">
+                        <mat-label>{{ t('translate.salesPrice') }}</mat-label>
+                        <input #input [(ngModel)]="newCheckoutSoldItem.priceSalesPerUnit" matInput maxlength="10"
+                               placeholder="Ex. deliveryDisplayPricePerUnit">
+                      </mat-form-field>
+                      <mat-error *ngIf="newCheckoutSoldItem.priceListPerUnit<=0">
+                        {{ t('translate.priceNotValid') }}!
+                      </mat-error>
+                    </div>
+
+                    <div class="availabilityAmount space">
+                      <button (click)="verifyAvailability(newCheckoutSoldItem)"
+                              [matTooltipPosition]="position.value" mat-raised-button
+                              matTooltip="Check if the item is available in stock">{{ t('translate.checkAvailability') }}</button>
+                      <a>{{availableItems}} items</a>
+                    </div>
+                    <div class="space"></div>
+
+                    <div class="itemCheckoutSoldItemQuantity">
+                      <mat-form-field appearance="fill">
+                        <mat-label>{{ t('translate.salesNumber') }}</mat-label>
+                        <input #input [(ngModel)]="newCheckoutSoldItem.quantity" matInput maxlength="3"
+                               placeholder="{{ t('translate.numberOfItemsSold') }}">
+                      </mat-form-field>
+                      <mat-error *ngIf="newCheckoutSoldItem.quantity<=0">
+                        {{ t('translate.numberOfItemsSold') }}
+                      </mat-error>
+                    </div>
+
+                    <div class=" container ">
+                      <div class="discountSelectionRadioButton">
+                        <label id="example-radio-group-label">{{ t('translate.salesType') }}:</label>
+                        <div class="space"></div>
+                        <mat-radio-group
+                          [(ngModel)]="discountNessesary"
+                          aria-labelledby="example-radio-group-label"
+                          class="example-radio-group">
+                          <mat-radio-button *ngFor="let discountType of discountList" [value]="discountType.name"
+                                            class="example-radio-button">
+                            {{discountType.name}}
+                          </mat-radio-button>
+                        </mat-radio-group>
+                      </div>
+                      <div *ngIf="discountNessesary  ==DISCOUNT_METHOD_REVENUE"
+                           class="itemCheckoutSoldItemPricePerUnit">
+                        <mat-form-field appearance="fill">
+                          <mat-label>{{ t('translate.revenue') }}</mat-label>
+                          <input #input [(ngModel)]="newCheckoutSoldItem.revenuePerUnit" matInput maxlength="6"
+                                 placeholder="{{ t('translate.revenue') }}">
+                        </mat-form-field>
+                      </div>
+                    </div>
+
+                    <div class="space"></div>
+                    <div class=" container ">
+                      <div class="discountSelectionRadioButton">
+                        <label id="example-radio-group-label">{{ t('translate.comment') }}:</label>
+                        <div class="space"></div>
+                        <mat-radio-group
+                          [(ngModel)]="commentNessesary"
+                          aria-labelledby="example-radio-group-label"
+                          class="example-radio-group">
+                          <mat-radio-button *ngFor="let comment of commentNecessaryList" [value]="comment"
+                                            class="example-radio-button">
+                            {{comment}}
+                          </mat-radio-button>
+                        </mat-radio-group>
+                      </div>
+                      <div *ngIf="commentNessesary==='Comment'" class="itemCheckoutSoldItemComment">
+                        <mat-form-field appearance="fill" hintLabel="Max 10 characters">
+                          <mat-label>{{ t('translate.comment') }}</mat-label>
+                          <input #input [(ngModel)]="newCheckoutSoldItem.comment" matInput maxlength="250"
+                                 placeholder="{{ t('translate.commentOnOrder') }}">
+                          <mat-hint align="end">{{input.value?.length || 0}}/250</mat-hint>
+                        </mat-form-field>
+                      </div>
+                    </div>
+                    <div class="space"></div>
+                    <div>
+                      <button (click)="addSoldItem()"
+                              [matTooltipPosition]="position.value" mat-raised-button matTooltip="Add sell to the list">
+                        <mat-icon>library_add</mat-icon>
+                      </button>
+                    </div>
+                    <div class="space"></div>
+                    <!--        FORLUMAR ENDS-->
+
+                    <!--        NEXT DIV CLOSES CONTAINER OF FORMULAR-->
+                  </div>
+                  <!--    CONTENT OF FIRST COL-->
+                  <!--NEX DIV CLOSES THE CONTENT OF CARD-->
+                </div>
+              </mat-expansion-panel>
+            </mat-accordion>
+          </div>
+
         </div>
         <!--NEX DIV CORRESPONDS TO COLUMN-->
       </div>
     </div>
 
+    <!--  SEGUNDA COLUMNA-->
+    <div *ngIf="selectedShopBoolean" class="col">
 
 
-      <!--  SEGUNDA COLUMNA-->
-      <div class="col">
-
-        <!--    CONTAINER TO CENTER IN THE PAGE-->
-        <div class="container-fluid d-flex justify-content-center">
-          <!--    CONTENT-->
-          <div class="demo-card-wide mdl-card mdl-shadow--2dp">
-            <div class="container-fluid d-flex justify-content-center cont-bg4">
-            <div class="table-responsive cont-bg4">
-              <table class="cont-bg4" #myShopCheckoutProductsTable [dataSource]="soldItemsCategoryLists" mat-table>
-
-                <!-- category column-->
-                <ng-container matColumnDef="sale">
-                  <th *matHeaderCellDef mat-header-cell> {{ t('translate.category') }} </th>
-                  <td *matCellDef="let element" mat-cell>
-                    <div>
-                      <mat-card>
-                        <mat-card-header>
-                          <mat-card-title>{{element.category}}</mat-card-title>
-                          <mat-card-subtitle>{{element.priceListPerUnit}}$List</mat-card-subtitle>
-                        </mat-card-header>
-                        <mat-card-content>
-                          <p>
-                            {{element.quantity}} {{ t('translate.items') }}
-                          </p>
-                        </mat-card-content>
-                        <mat-card-actions>
-                          <button (click)="openDialogCategory(element)" mat-raised-button>
-                            <mat-icon>list_alt</mat-icon>
-                          </button>
-                        </mat-card-actions>
-                      </mat-card>
-                    </div>
-                  </td>
-                  <td *matFooterCellDef mat-footer-cell> -</td>
-                </ng-container>
-                <tr *matHeaderRowDef="displayedColumns" mat-header-row></tr>
-                <tr *matRowDef="let element; columns: displayedColumns;" mat-row></tr>
-                <tr *matFooterRowDef="displayedColumns" mat-footer-row></tr>
-
-              </table>
-            </div>
-            </div>
+      <!--    CONTAINER TO CENTER IN THE PAGE-->
+      <div class="container-fluid d-flex justify-content-center">
+        <!--    CONTENT-->
+        <div class="demo-card-wide mdl-card mdl-shadow--2dp">
+          <div class="mdl-card__supporting-text">
+            <h3>Current Checkout Items-List</h3>
           </div>
-        </div>
-      </div>
 
-<!--third column-->
-  <div class="col">
+          <mat-accordion class="example-headers-align" multi>
+            <mat-expansion-panel>
+              <mat-expansion-panel-header>
+                <mat-panel-title>
+                  Checkout Item List
+                </mat-panel-title>
+                <mat-panel-description>
+                  View and correct the checkout list
+                  <span class="material-icons">
+                    list
+              </span>
+                </mat-panel-description>
+              </mat-expansion-panel-header>
 
-    <div class="container-fluid d-flex justify-content-center">
-      <div class="demo-card-wide mdl-card mdl-shadow&#45;&#45;2dp justi cont-bg4">
-        <div class="container d-flex justify-content-left mdl-card__title ">
-          <h3 class="mdl-card__title-text">{{ t('translate.save') }}- -{{ t('translate.send') }}- -
-            {{ t('translate.delete') }}</h3>
+              <button (click)="sendSoldItemList()"
+                      [matTooltipPosition]="position.value" mat-raised-button matTooltip="Save list">
+                <mat-icon>send</mat-icon>
+              </button>
+              <button (click)="deleteSoldItemList()"
+                      [matTooltipPosition]="position.value" mat-raised-button
+                      matTooltip="Delete element from the list">
+                <mat-icon>delete</mat-icon>
+              </button>
+              <div class="container-fluid d-flex justify-content-center cont-bg4">
+                <div class="table-responsive cont-bg4">
+                  <table #myShopCheckoutProductsTable [dataSource]="soldItemsCategoryLists" class="cont-bg4" mat-table>
+
+                    <!-- category column-->
+                    <ng-container matColumnDef="sale">
+                      <th *matHeaderCellDef mat-header-cell></th>
+                      <td *matCellDef="let element" mat-cell>
+                        <div>
+                          <mat-card (click)="openDialogCategory(element)">
+                            <mat-card-header>
+                              <mat-card-title>{{element.quantity}}-{{element.category}}</mat-card-title>
+                              <mat-card-subtitle>{{element.priceListPerUnit}}$List</mat-card-subtitle>
+                            </mat-card-header>
+                          </mat-card>
+                        </div>
+                        <div class="space"></div>
+                      </td>
+                      <td *matFooterCellDef mat-footer-cell> -</td>
+                    </ng-container>
+                    <tr *matHeaderRowDef="displayedColumns" mat-header-row></tr>
+                    <tr *matRowDef="let element; columns: displayedColumns;" mat-row></tr>
+                    <tr *matFooterRowDef="displayedColumns" mat-footer-row></tr>
+
+                  </table>
+                </div>
+              </div>
+            </mat-expansion-panel>
+          </mat-accordion>
         </div>
-      <div class="mdl-card__supporting-text">
-        <div class=" table-responsive ">
-          <div class="container ">
-            <button matTooltip="Save list locally"
-                    [matTooltipPosition]="position.value" (click)="saveSoldItemList()" mat-raised-button >
-              <mat-icon>save</mat-icon>
-            </button>
-            <button matTooltip="Save list"
-                    [matTooltipPosition]="position.value" (click)="sendSoldItemList()" mat-raised-button >
-              <mat-icon>send</mat-icon>
-            </button>
-            <button matTooltip="Delete element from the list"
-                    [matTooltipPosition]="position.value" (click)="deleteSoldItemList()" mat-raised-button >
-              <mat-icon>delete</mat-icon>
-            </button>
-          </div>
       </div>
     </div>
   </div>
-</div>
-  </div>
-
-</div>
 </ng-template>
-
-

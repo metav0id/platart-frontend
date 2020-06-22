@@ -73,7 +73,7 @@ export class AuthService {
       displayName: user.displayName,
       emailVerified: user.emailVerified,
       role,
-      shops:shops
+      shops: shops
     };
     userRef.set(userData);
   }
@@ -100,8 +100,26 @@ export class AuthService {
    *
    * **/
   getStoresList(): string[] {
-    const shopsOfUser:  string[] = JSON.parse(localStorage.getItem('shops'));
+    const shopsOfUser: string[] = JSON.parse(localStorage.getItem('shops'));
     return shopsOfUser;
+  }
+
+  /** Gets list of shops of current user
+   *
+   * **/
+  getAllShopsFromUser() {
+    return this.afAuth.authState.subscribe(user => {
+      if (user) {
+        this.getUserData(user.uid).subscribe(firestoreObj => {
+          this.shopsOfUser = firestoreObj.shops;
+          // this.getStoresList(firestoreObj)
+          console.log(this.shopsOfUser);
+        });
+      } else {
+        console.log("no shops assigned");
+      }
+    });
+
   }
 
 }

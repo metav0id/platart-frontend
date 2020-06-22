@@ -29,6 +29,7 @@ import { CheckedInItemsComponent } from './checked-in-items/checked-in-items.com
 import {MatSortModule} from '@angular/material/sort';
 import { CheckedInItemsDetailsComponent } from './checked-in-items/checked-in-items-details/checked-in-items-details.component';
 import { SalesDescriptionDetailsComponent } from './sales-description/sales-description-details/sales-description-details.component';
+import {MatExpansionModule} from "@angular/material/expansion";
 
 
 @NgModule({
@@ -45,30 +46,31 @@ import { SalesDescriptionDetailsComponent } from './sales-description/sales-desc
     CheckedInItemsDetailsComponent,
     SalesDescriptionDetailsComponent,
   ],
-  imports: [
-    CommonModule,
-    SalesPrincessRoutingModule,
-    CdkTableModule,
-    MatTableModule,
-    BrowserAnimationsModule,
-    FormsModule,
-    MatCheckboxModule,
-    MatFormFieldModule,
-    ReactiveFormsModule,
-    MatSelectModule,
-    MatInputModule,
-    MatIconModule,
-    MatRadioModule,
-    MatDialogModule,
-    MatButtonModule,
-    TranslocoRootModule,
-    MatButtonModule,
-    MatDatepickerModule,
-    MatNativeDateModule,
-    MatCardModule,
-    MatTooltipModule,
-    MatSortModule
-  ],
+    imports: [
+        CommonModule,
+        SalesPrincessRoutingModule,
+        CdkTableModule,
+        MatTableModule,
+        BrowserAnimationsModule,
+        FormsModule,
+        MatCheckboxModule,
+        MatFormFieldModule,
+        ReactiveFormsModule,
+        MatSelectModule,
+        MatInputModule,
+        MatIconModule,
+        MatRadioModule,
+        MatDialogModule,
+        MatButtonModule,
+        TranslocoRootModule,
+        MatButtonModule,
+        MatDatepickerModule,
+        MatNativeDateModule,
+        MatCardModule,
+        MatTooltipModule,
+        MatSortModule,
+        MatExpansionModule
+    ],
   entryComponents: [
     NewDeliveryFromWarehouseComponent,
     CheckoutSoldItemsComponent
