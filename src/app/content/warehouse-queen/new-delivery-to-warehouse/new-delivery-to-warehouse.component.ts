@@ -4,9 +4,10 @@ import {SelectionModel} from '@angular/cdk/collections';
 import {FormControl, Validators} from '@angular/forms';
 import {PeriodicElement} from './periodic-element';
 import {NewDeliveryToWarehouseService} from './new-delivery-to-warehouse.service';
-import {WarehouseItemCategoryDTO} from '../warehouseCategory/warehouse-item-category-DTO';
 import {TRANSLOCO_SCOPE} from '@ngneat/transloco';
-import {TooltipPosition} from "@angular/material/tooltip";
+import {TooltipPosition} from '@angular/material/tooltip';
+import {CategoryService} from '../../services/category.service';
+import {WarehouseItemCategoryDTO} from '../../services/warehouse-item-category-DTO';
 
 @Component({
   selector: 'app-new-delivery-to-warehouse',
@@ -43,11 +44,12 @@ export class NewDeliveryToWarehouseComponent implements OnInit {
 
   @ViewChild('myCheckinProductsTable') table: MatTable<any>;
 
-  constructor(private newDeliveryToWarehouseService: NewDeliveryToWarehouseService) {
+  constructor(private newDeliveryToWarehouseService: NewDeliveryToWarehouseService,
+              private categoryService: CategoryService) {
   }
 
   ngOnInit(): void {
-    this.newDeliveryToWarehouseService.getAllCategories().subscribe(JsonDto => this.categoryItems = JsonDto);
+    this.categoryService.getAllActivatedCategories().subscribe(JsonDto => this.categoryItems = JsonDto);
   }
 
 

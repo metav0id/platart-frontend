@@ -11,7 +11,7 @@ import {
 import {MarkerFormComponent} from "../components/marker-form.component";
 
 import {TRANSLOCO_SCOPE} from "@ngneat/transloco";
-
+import {MatTableModule} from '@angular/material/table';
 export interface DialogData {
   markerToEdit: Marcador;
   markerToGetCoords: Marcador;
@@ -28,6 +28,8 @@ import {ComerceFormComponent} from "../comerce-form/comerce-form.component";
   providers: [{provide: TRANSLOCO_SCOPE, useValue: {scope: 'map', alias: 'translate'}}]
 })
 export class MapComponent implements OnInit {
+  displayedColumns: string[] = ['name', 'address', 'category'];
+  dataSource: Marcador[] = new Array();
   /** tooltip features**/
   positionOptions: TooltipPosition[] = ['after', 'before', 'above', 'below', 'left', 'right'];
   position = new FormControl(this.positionOptions[0]);
@@ -49,6 +51,7 @@ export class MapComponent implements OnInit {
   /**When the component is started it gives a list with all markers back.**/
   ngOnInit(): void {
     this.mapService.readAllMarkers().subscribe(response => this.marcadores = response);
+    this.mapService.readAllMarkers().subscribe(response => this.dataSource = response);
   }
 
   constructor(private mapService: MapService, public dialog: MatDialog) {

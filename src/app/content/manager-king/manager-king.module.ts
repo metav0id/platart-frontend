@@ -68,7 +68,7 @@ import {ManagerDashboardCategoryComponent} from './manager-dashboards/category-o
     ReactiveFormsModule,
     MatTableModule,
     TranslocoRootModule,
-
+    MatTableModule,
     MatInputModule,
     MatSortModule,
     MatRadioModule,

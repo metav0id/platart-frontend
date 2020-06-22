@@ -10,6 +10,8 @@ import {ManagerWarehouseCheckinDescriptionComponent} from './manager-warehouse-c
 import {MapComponent} from './manager-map/map/map.component';
 import {FormComponent} from './manager-map/comerce/form.component';
 import {ManagerDashboardCategoryComponent} from './manager-dashboards/category-overview/manager-dashboard-category.component';
+import {NewItemCategoryComponent} from "./new-item-category/new-item-category.component";
+import {WarehouseGuard} from "../guards/warehouse.guard";
 
 const routes: Routes = [
   {path: 'formComerce', component: FormComponent, canActivate: [AuthGuard, ManagerGuard]},
@@ -23,6 +25,7 @@ const routes: Routes = [
     component: ManagerWarehouseCheckinDescriptionComponent,
     canActivate: [AuthGuard, ManagerGuard]
   },
+  {path: 'newitemcategory', component: NewItemCategoryComponent, canActivate: [AuthGuard, ManagerGuard]},
 ];
 
 @NgModule({

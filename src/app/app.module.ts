@@ -18,7 +18,7 @@ import {MatSidenavModule} from '@angular/material/sidenav';
 import {MatIconModule} from '@angular/material/icon';
 import {MatListModule} from '@angular/material/list';
 import {MatMenuModule} from '@angular/material/menu';
-import {NewItemCategoryComponent} from './content/warehouse-queen/new-item-category/new-item-category.component';
+import {NewItemCategoryComponent} from './content/manager-king/new-item-category/new-item-category.component';
 import {MatSelectModule} from '@angular/material/select';
 import {MatInputModule} from '@angular/material/input';
 import {MatCheckboxModule} from '@angular/material/checkbox';

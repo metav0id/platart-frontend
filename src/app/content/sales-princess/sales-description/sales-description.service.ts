@@ -4,13 +4,11 @@ import {Observable} from 'rxjs';
 import {environment} from '../../../../environments/environment';
 import {ShopsAllSoldItemsDTO} from './sales-description-DTOs/ShopsAllSoldItemsDTO';
 import {ShopAndDateRangeDTO} from './sales-description-DTOs/ShopAndDateRangeDTO';
-import {ShopDTO} from "../../warehouse-queen/new-delivery-to-shop/new-delivery-to-shop-DTOs/shop-dto";
 
 @Injectable({
   providedIn: 'root'
 })
 export class SalesDescriptionService {
-  ops1: String[] = new Array();
 
   constructor(private http: HttpClient) {
   }
@@ -24,9 +22,5 @@ export class SalesDescriptionService {
     };
 
     return this.http.post<ShopsAllSoldItemsDTO[]>(environment.getSoldItemsList, range);
-  }
-
-  public getListShops(): Observable<ShopDTO[]> {
-    return this.http.get<ShopDTO[]>(environment.getAllShops);
   }
 }

@@ -49,8 +49,4 @@ export class NewDeliveryToShopService {
     });
   }
 
-  public getListShops(): Observable<ShopDTO[]> {
-    return this.http.get<ShopDTO[]>(environment.getAllShops);
-  }
-
 }

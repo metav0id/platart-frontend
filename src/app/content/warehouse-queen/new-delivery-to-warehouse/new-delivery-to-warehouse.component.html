@@ -1,7 +1,7 @@
 <ng-template transloco let-t>
   <div class="space"></div>
   <div class="row">
-    <div class="col">
+    <div class="col ">
       <!--    CONTENT OF FIRST COL-->
       <div class="container-fluid d-flex justify-content-center ">
         <div class="demo-card-wide mdl-card mdl-shadow--2dp">
@@ -11,7 +11,7 @@
           <div class="container-fluid d-flex justify-content-center cont-bg4">
             <!--      FORMULAR-->
             <div>
-              <mat-form-field>
+              <mat-form-field hintLabel="Max 10 characters" appearance="fill">
                 <mat-label>{{ t('translate.category') }}:</mat-label>
                 <mat-select [formControl]="categoryControl" [(value)]="newItemFromSupplier.category" required>
                   <mat-option>--</mat-option>

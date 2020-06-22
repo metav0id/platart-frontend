@@ -1,0 +1,114 @@
+<ng-template transloco let-t>
+
+
+  <div class="space"></div>
+  <div class="row">
+    <div class="col">
+      <div class="container-fluid d-flex justify-content-center ">
+        <div class="demo-card-wide mdl-card mdl-shadow--2dp">
+          <div class="mdl-card__title">
+            <h2 class="mdl-card__title-text">{{ t('translate.newItemCategory') }}</h2>
+          </div>
+          <div class="container-fluid d-flex justify-content-center cont-bg4">
+            <div class="container  ">
+              <div class="space"></div>
+              <div>
+                <div class="container cont-bg4  ">
+                  <div class="space"></div>
+                  <div class="box">
+                    <h3>{{ t('translate.createNewCategory') }}:</h3>
+                    <div class="container ">
+                      <form [formGroup]="myForm" (ngSubmit)="onSubmit(myForm.value)">
+                        <div class="space"></div>
+                        <div class="newOrderInputFieldsDeliveryFinalPricePerUnit">
+                          <mat-form-field appearance="fill">
+                            <mat-label>{{ t('translate.enterNameCategory') }}</mat-label>
+                            <input matInput type="text" required formControlName="category">
+                          </mat-form-field>
+                        </div>
+                        <div>
+                          <button type="submit" matTooltip="Adds new category to the list"
+                                  [matTooltipPosition]="position.value" mat-raised-button>{{
+                            t('translate.createNewCategory') }}
+                          </button>
+                        </div>
+                      </form>
+                    </div>
+                    <div class="space"></div>
+                  </div>
+                </div>
+              </div>
+              <div class="space"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="w-100"></div>
+    <div class="space"></div>
+
+    <div class="col">
+      <div class="container-fluid d-flex justify-content-center">
+        <div class="demo-card-wide mdl-card mdl-shadow--2dp">
+
+          <div class="container cont-bg2 ">
+            <div class="space"></div>
+            <div class="container cont-bg4  justify-content-center ">
+              <div class="space"></div>
+              <div class="d-flex justify-content-around">
+                <div class="d-flex justify-content-around">
+                  <mat-select [(ngModel)]="selectedOption" (selectionChange)="getCategories()">
+                    <mat-option [value]="optionsSelection[1]">Activated categories</mat-option>
+                    <mat-option [value]="optionsSelection[2]">Deactivated categories</mat-option>
+                    <mat-option [value]="optionsSelection[0]">All</mat-option>
+                  </mat-select>
+                  <button matTooltip="Deactivates selected categories from the list" (click)="toogleCategoryStatus()">{{t('translate.changeStatus') }}
+                  </button>
+                </div>
+                <div class="space"></div>
+              </div>
+              <div class="space"></div>
+            </div>
+
+            <div class="space"></div>
+            <div class="table-responsive">
+              <div class=" table-responsive">
+
+                <table mat-table #myShopCheckinProductsTable [dataSource]="listCategories" class="mat-elevation-z8">
+
+                  <!-- Checkbox Column -->
+                  <ng-container matColumnDef="select">
+                    <th mat-header-cell *matHeaderCellDef></th>
+                    <td mat-cell *matCellDef="let element">
+                      <mat-checkbox (click)="selectItem(element)"></mat-checkbox>
+                    </td>
+                  </ng-container>
+
+                  <!-- Position Column -->
+                  <ng-container matColumnDef="category">
+                    <th mat-header-cell *matHeaderCellDef> {{ t('translate.category') }}</th>
+                    <td mat-cell *matCellDef="let element"> {{element.category}}</td>
+                  </ng-container>
+
+                  <!-- Position Column -->
+                  <ng-container matColumnDef="isActivated">
+                    <th mat-header-cell *matHeaderCellDef> Is activated</th>
+                    <td mat-cell *matCellDef="let element"> {{element.activated}}</td>
+                  </ng-container>
+
+                  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                  <tr mat-row *matRowDef="let element; columns: displayedColumns;"></tr>
+
+                </table>
+                <div class="space"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-template>
+

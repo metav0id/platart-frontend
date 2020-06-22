@@ -1,7 +1,7 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {SelectionModel} from '@angular/cdk/collections';
 import {MatTable} from '@angular/material/table';
-import {WarehouseItemCategoryDTO} from '../../warehouse-queen/warehouseCategory/warehouse-item-category-DTO';
+
 import {FormControl, Validators} from '@angular/forms';
 import {CheckoutSoldItemsService} from './checkout-sold-items.service';
 import {ShopsCheckoutSoldItemsDTO} from './checkout-sold-items-DTOs/ShopsCheckoutSoldItemsDTO';
@@ -12,11 +12,14 @@ import {CheckoutSoldItemsDetailsComponent} from './checkout-sold-items-details/c
 import {CheckoutCategories} from './checkout-sold-items-DTOs/CheckoutCategories';
 // tslint:disable-next-line:max-line-length
 import {CheckoutSoldItemsSendVerificationComponent} from './checkout-sold-items-send-verification/checkout-sold-items-send-verification.component';
-import {SendItemsDTO} from './checkout-sold-items-DTOs/Send-Items-DTO';
+
 import {TRANSLOCO_SCOPE, TranslocoService} from '@ngneat/transloco';
 import {TooltipPosition} from '@angular/material/tooltip';
 import Swal from 'sweetalert2';
-import {AuthService} from "../../services/auth.service";
+import {AuthService} from '../../services/auth.service';
+import {SendItemsDTO} from './checkout-sold-items-DTOs/SendItemsDTO';
+import {CategoryService} from '../../services/category.service';
+import {WarehouseItemCategoryDTO} from "../../services/warehouse-item-category-DTO";
 
 @Component({
   selector: 'app-checkout-sold-items',
@@ -25,15 +28,15 @@ import {AuthService} from "../../services/auth.service";
   providers: [{provide: TRANSLOCO_SCOPE, useValue: {scope: 'salesPrincess', alias: 'translate'}}]
 })
 export class CheckoutSoldItemsComponent implements OnInit {
-  public listShops1: String[] = new Array();
+  public shopsList: string[] = [];
   positionOptions: TooltipPosition[] = ['after', 'before', 'above', 'below', 'left', 'right'];
   position = new FormControl(this.positionOptions[0]);
 
-  constructor(/*private _snackBar: MatSnackBar,*/
-              private checkoutSoldItemsService: CheckoutSoldItemsService,
+  constructor(private checkoutSoldItemsService: CheckoutSoldItemsService,
               private transloco: TranslocoService,
               public dialog: MatDialog,
-              private auth: AuthService) {
+              private auth: AuthService,
+              private categoryService: CategoryService) {
   }
 
   // Fields for input-form
@@ -60,7 +63,6 @@ export class CheckoutSoldItemsComponent implements OnInit {
   // Fields for input-form - Drop-Down-Selection
   /** Shop selection */
   public shopControll = new FormControl('', Validators.required);
-  public shopsList: Shop[] = [{name: 'shop1'}, {name: 'shop2'}];
 
   /** Category selection */
   public categoryControl = new FormControl('', Validators.required);
@@ -84,19 +86,16 @@ export class CheckoutSoldItemsComponent implements OnInit {
   availableItems = 0;
 
   ngOnInit(): void {
-    this.listShops1 = this.auth.getStoresList();
+    this.shopsList = this.auth.getStoresList();
     this.initNewOrderElement();
 
     // fetch saved sold items-list
     this.loadSoldItemList();
-
-    // drop-down-lists
-    this.checkoutSoldItemsService.getListShops().subscribe(JSON => this.shopsList = JSON);
     this.fetchCategories();
   }
 
   fetchCategories(): void {
-    this.checkoutSoldItemsService.getAllCategories().subscribe(JsonDto => {
+    this.categoryService.getAllActivatedCategories().subscribe(JsonDto => {
       this.categoryItems = JsonDto;
     });
   }
