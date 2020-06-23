@@ -1,7 +1,7 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {MatTable} from '@angular/material/table';
 import {SelectionModel} from '@angular/cdk/collections';
-import {FormControl, Validators} from '@angular/forms';
+import {AbstractControl, FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {PeriodicElement} from './periodic-element';
 import {NewDeliveryToWarehouseService} from './new-delivery-to-warehouse.service';
 import {TRANSLOCO_SCOPE} from '@ngneat/transloco';
@@ -41,17 +41,46 @@ export class NewDeliveryToWarehouseComponent implements OnInit {
   /** Category selection with form control for empty selection */
   public categoryControl = new FormControl('', Validators.required);
   public categoryItems: WarehouseItemCategoryDTO[] = [];
+  public myForm: FormGroup;
 
   @ViewChild('myCheckinProductsTable') table: MatTable<any>;
 
+  static invalidNumberValidator(control: AbstractControl): { [key: string]: boolean } | null {
+    if (control.value < 0) {
+      return {invalidNumber: true};
+    }
+    return null;
+  }
+
   constructor(private newDeliveryToWarehouseService: NewDeliveryToWarehouseService,
-              private categoryService: CategoryService) {
+              private categoryService: CategoryService,
+              private formBuilder: FormBuilder) {
   }
 
   ngOnInit(): void {
     this.categoryService.getAllActivatedCategories().subscribe(JsonDto => this.categoryItems = JsonDto);
+    this.createForm();
   }
 
+  createForm() {
+    this.myForm = this.formBuilder.group({
+      category: ['', [Validators.required]],
+      quantity: [0, [Validators.required, NewDeliveryToWarehouseComponent.invalidNumberValidator]],
+      priceListPerUnit: [0, [Validators.required, NewDeliveryToWarehouseComponent.invalidNumberValidator]],
+      priceSupplierPerUnit: [0, [Validators.required, NewDeliveryToWarehouseComponent.invalidNumberValidator]],
+      supplierName: ['', [Validators.required]]
+    });
+  }
+
+  onSubmit(userData) {
+    if (this.myForm.valid) {
+      this.listNewItemsFromSuppliers.push(userData);
+      console.log('Form input valid: ' + userData);
+      this.table.renderRows();
+    } else {
+      console.log('Error entering formular');
+    }
+  }
 
   /** Whether the number of selected elements matches the total number of rows. */
   isAllSelected() {
