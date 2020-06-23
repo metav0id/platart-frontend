@@ -26,32 +26,32 @@
               </div>
             </div>
             <div class="space"></div>
-            <table mat-table #myWarehouseItemsTable [dataSource]="dataSource" class="mat-elevation-z8">
+            <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8">
 
               <!-- Position Column -->
               <ng-container matColumnDef="category">
-                <th mat-header-cell *matHeaderCellDef> {{ t('translate.category') }}</th>
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> {{ t('translate.category') }}</th>
                 <td mat-cell *matCellDef="let element"> {{element.category}}</td>
                 <td mat-footer-cell *matFooterCellDef> -</td>
               </ng-container>
 
               <!-- Name Column -->
               <ng-container matColumnDef="priceListPerUnit">
-                <th mat-header-cell *matHeaderCellDef> {{ t('translate.listPrice') }}</th>
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> {{ t('translate.listPrice') }}</th>
                 <td mat-cell *matCellDef="let element"> {{element.priceListPerUnit}}</td>
                 <td mat-footer-cell *matFooterCellDef> Sum</td>
               </ng-container>
 
               <!-- Quantity Column -->
               <ng-container matColumnDef="quantity">
-                <th mat-header-cell *matHeaderCellDef> {{ t('translate.quantity') }}</th>
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> {{ t('translate.quantity') }}</th>
                 <td mat-cell *matCellDef="let element"> {{element.quantity}}</td>
                 <td mat-footer-cell *matFooterCellDef> {{getSumQuantity()}}</td>
               </ng-container>
 
               <!-- Correct Quantity -->
               <ng-container matColumnDef="correctQuantity">
-                <th mat-header-cell *matHeaderCellDef> {{ t('translate.quantity') }}</th>
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> {{ t('translate.quantity') }}</th>
                 <td mat-cell *matCellDef="let element">
                   <button *ngIf="!updateQuantityState" (click)="updateQuantityButton(element)">{{
                     t('translate.changeQuantity') }}
@@ -63,7 +63,7 @@
 
               <!-- Weight UnitPrice*quantity -->
               <ng-container matColumnDef="value">
-                <th mat-header-cell *matHeaderCellDef> {{ t('translate.categoryValue') }}</th>
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> {{ t('translate.categoryValue') }}</th>
                 <td mat-cell *matCellDef="let element"> {{(element.quantity)*(element.priceListPerUnit)}}</td>
                 <td mat-footer-cell *matFooterCellDef> {{getTotalCost()}}</td>
               </ng-container>

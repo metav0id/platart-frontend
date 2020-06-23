@@ -1,9 +1,9 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {ManagerDashboardService} from './manager-dashboard.service';
 import {TRANSLOCO_SCOPE, TranslocoService} from '@ngneat/transloco';
-import {DateRangeDTO} from '../manager-king-dtos/DateRangeDTO';
-import {MonthToDateReportingDto} from '../manager-king-dtos/MonthToDateReportingDto';
-import {DailyReportingDto} from '../manager-king-dtos/DailyReportingDto';
+import {DateRangeDTO} from '../../manager-king-dtos/DateRangeDTO';
+import {MonthToDateReportingDto} from '../../manager-king-dtos/MonthToDateReportingDto';
+import {DailyReportingDto} from '../../manager-king-dtos/DailyReportingDto';
 import {log} from 'util';
 import {MatTable, MatTableDataSource} from '@angular/material/table';
 

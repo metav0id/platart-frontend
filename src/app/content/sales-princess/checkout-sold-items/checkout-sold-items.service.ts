@@ -6,7 +6,7 @@ import {ShopsCheckoutSoldItemsDTO} from './checkout-sold-items-DTOs/ShopsCheckou
 import {ShopDTO} from '../../warehouse-queen/new-delivery-to-shop/new-delivery-to-shop-DTOs/shop-dto';
 import {ShopNameDTO} from './checkout-sold-items-DTOs/Shop-name-DTO';
 import {SaveCheckoutSoldItemsDTO} from './checkout-sold-items-DTOs/SaveCheckoutSoldItemsDTO';
-import {WarehouseItemCategoryDTO} from './checkout-sold-items-DTOs/WarehouseItemCategoryDTO';
+import {WarehouseItemCategoryDTO} from '../../services/warehouse-item-category-DTO';
 
 @Injectable({
   providedIn: 'root'
@@ -37,7 +37,7 @@ export class CheckoutSoldItemsService {
     return this.http.post<null>(environment.saveShopSpecificSoldItemsList, saveItemsDTO);
   }
 
-  // send shop specific sold items
+  // send shop specific sold item
   public sendSpecificShopSoldItemsList(
     selectedShop: string,
     soldItemList: ShopsCheckoutSoldItemsDTO[]): Observable<ShopsCheckoutSoldItemsDTO[]> {
@@ -48,6 +48,11 @@ export class CheckoutSoldItemsService {
     return this.http.post<null>(environment.sendSpecificShopSoldItemsList, saveItemsDTO);
   }
 
+  // send all sold items
+  public sendAllSoldItemsList(soldItemList: ShopsCheckoutSoldItemsDTO[]): Observable<ShopsCheckoutSoldItemsDTO[]> {
+    return this.http.post<null>(environment.sendSpecificShopSoldItemsList, soldItemList);
+  }
+
   // delete shop specific checkout sold items list
   public deleteShopSpecificCheckoutSoldItemsList(shopSelected: string): Observable<null> {
     const shopDTO: ShopNameDTO = {
@@ -56,11 +61,16 @@ export class CheckoutSoldItemsService {
     return this.http.post<null>(environment.deleteShopSpecificCheckoutSoldItemsList, shopDTO);
   }
 
+  public loadCurrentSoldItemsList(): Observable<ShopsCheckoutSoldItemsDTO[]> {
+    return this.http.post<null>(environment.loadAllSoldItemsListURL, null);
+  }
+
   public getListShops(): Observable<ShopDTO[]> {
     return this.http.get<ShopDTO[]>(environment.getAllShops);
   }
 
   public verifyAvailability(newItem: ShopsCheckoutSoldItemsDTO): Observable<ShopsCheckoutSoldItemsDTO> {
+
     return this.http.post<ShopsCheckoutSoldItemsDTO>(environment.getShopInventoryAvailability, newItem);
   }
 

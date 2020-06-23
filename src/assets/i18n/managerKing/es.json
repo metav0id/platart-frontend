@@ -10,5 +10,9 @@
   "turnover": "Ventas",
   "yesterdaysAverageDiscount": "Descuento promedio ayer",
   "yesterdaysSalesMargin": "Margen ventas ayer",
-  "yesterdaysTurnover": "Ventas ayer"
+  "yesterdaysTurnover": "Ventas ayer",
+  "currentMonth": "Current month (es)",
+  "sales": "sales (es)",
+  "avgSalesMargin": "average sales margin (es)",
+  "avgDiscountRate": "average discount rate (es)"
 }

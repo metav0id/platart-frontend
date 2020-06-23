@@ -1,15 +1,15 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {ManagerDashboardService} from '../../manager-dashboard.service';
+import {ManagerDashboardService} from '../../dashboard-overview/manager-dashboard.service';
 import {DateRangeDTO} from '../../../manager-king-dtos/DateRangeDTO';
 import {BarDataDto} from '../../../manager-king-dtos/BarDataDto';
 
 
 @Component({
-  selector: 'app-vbar-chart-card',
-  templateUrl: './vbar-chart-card.component.html',
-  styleUrls: ['./vbar-chart-card.component.css']
+  selector: 'app-weekly-performance-chart-card',
+  templateUrl: './weekly-performance-card.component.html',
+  styleUrls: ['./weekly-performance-card.component.css']
 })
-export class VbarChartCardComponent implements OnInit {
+export class WeeklyPerformanceCardComponent implements OnInit {
 
   @Input() label: string;
   @Input() total: string;

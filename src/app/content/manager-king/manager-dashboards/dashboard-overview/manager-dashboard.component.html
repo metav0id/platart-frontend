@@ -35,13 +35,12 @@
       <table class="table">
         <thead>
         <tr>
-          <th scope="col">Current month</th>
-          <th scope="col">Sales (No)</th>
-          <th scope="col">Sales (USD)</th>
-          <th scope="col">Sales Margin (USD)</th>
-          <th scope="col">Avg. Sales Margin (USD)</th>
-          <th scope="col">Avg. Discount Rate (%)</th>
-          <th scope="col">Tendency</th>
+          <th scope="col">{{ t('translate.currentMonth') }}Current month</th>
+          <th scope="col">{{ t('translate.sales') }} (No)</th>
+          <th scope="col">{{ t('translate.sales') }} (USD)</th>
+          <th scope="col">{{ t('translate.salesMargin') }} (USD)</th>
+          <th scope="col">{{ t('translate.avgSalesMargin') }} (USD)</th>
+          <th scope="col">{{ t('translate.avgDiscountRate') }} (%)</th>
         </tr>
         </thead>
         <tbody>
@@ -52,32 +51,23 @@
           <td>{{entry.salesMg}}</td>
           <td>{{entry.salesMgAvg}}</td>
           <td>{{entry.discountRateAvg}}</td>
-          <td>
-            <mat-icon color="primary">trending_flat</mat-icon>
-          </td>
         </tr>
 
         <tr>
-          <th scope="row">Current month mtd</th>
+          <th scope="row">{{ t('translate.currentMonth') }} mtd</th>
           <td>{{dataCurrentMonth.salesNo}}</td>
           <td>{{dataCurrentMonth.salesTo}}</td>
           <td>{{dataCurrentMonth.salesMg}}</td>
           <td>{{dataCurrentMonth.salesMgAvg}}</td>
           <td>{{dataCurrentMonth.discountRateAvg}}</td>
-          <td>
-            <mat-icon color="primary">trending_down</mat-icon>
-          </td>
         </tr>
         <tr>
-          <th scope="row">Last month mtd</th>
+          <th scope="row">{{ t('translate.lastMonth') }} mtd</th>
           <td>{{dataLastMonth.salesNo}}</td>
           <td>{{dataLastMonth.salesTo}}</td>
           <td>{{dataLastMonth.salesMg}}</td>
           <td>{{dataLastMonth.salesMgAvg}}</td>
           <td>{{dataLastMonth.discountRateAvg}}</td>
-          <td>
-            <mat-icon color="primary">trending_up</mat-icon>
-          </td>
         </tr>
         </tbody>
       </table>
@@ -90,10 +80,10 @@
 
   <div fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="20px" class="stats-card">
     <mat-card fxFlex="50">
-      <app-hbar-char-card label="{{ t('translate.dailyTurnoverByShop') }}"></app-hbar-char-card>
+      <app-shop-performance-card label="{{ t('translate.dailyTurnoverByShop') }}"></app-shop-performance-card>
     </mat-card>
     <mat-card fxFlex="50">
-      <app-vbar-chart-card label="{{ t('translate.aggregatedTurnoverByLast7Days') }}"></app-vbar-chart-card>
+      <app-weekly-performance-chart-card label="{{ t('translate.aggregatedTurnoverByLast7Days') }}"></app-weekly-performance-chart-card>
     </mat-card>
 
 
