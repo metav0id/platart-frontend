@@ -6,7 +6,7 @@ import {AuthGuard} from '../guards/auth.guard';
 import {ManagerGuard} from '../guards/manager.guard';
 import {RegisterComponent} from './register/register.component';
 // tslint:disable-next-line:max-line-length
-import {ManagerWarehouseCheckinDescriptionComponent} from './manager-warehouse-checkin-description/manager-warehouse-checkin-description.component';
+import {ManagerWarehouseCheckinDescriptionComponent} from '../warehouse-queen/manager-warehouse-checkin-description/manager-warehouse-checkin-description.component';
 import {MapComponent} from './manager-map/map/map.component';
 import {FormComponent} from './manager-map/comerce/form.component';
 import {ManagerDashboardCategoryComponent} from './manager-dashboards/category-overview/manager-dashboard-category.component';
@@ -19,11 +19,6 @@ const routes: Routes = [
   {path: 'managerdashboard', component: ManagerDashboardComponent, canActivate: [AuthGuard, ManagerGuard]},
   {path: 'categoryoverview', component: ManagerDashboardCategoryComponent, canActivate: [AuthGuard, ManagerGuard]},
   {path: 'register', component: RegisterComponent, canActivate: [AuthGuard, ManagerGuard]},
-  {
-    path: 'managerwarehousecheckindescription',
-    component: ManagerWarehouseCheckinDescriptionComponent,
-    canActivate: [AuthGuard, ManagerGuard]
-  },
   {path: 'newitemcategory', component: NewItemCategoryComponent, canActivate: [AuthGuard, ManagerGuard]},
 ];
 

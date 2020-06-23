@@ -11,7 +11,7 @@
     </mat-form-field>
     <mat-form-field>
       <mat-label>End Date</mat-label>
-      <input (dateInput)="endDateSelection($event)" [matDatepicker]="picker2" matInput>
+      <input (dateInput)="endDateSelection($event)" [matDatepicker]="picker2" matInput [max]="tomorrow">
       <mat-datepicker-toggle [for]="picker2" matSuffix></mat-datepicker-toggle>
       <mat-datepicker #picker2 touchUi></mat-datepicker>
     </mat-form-field>
