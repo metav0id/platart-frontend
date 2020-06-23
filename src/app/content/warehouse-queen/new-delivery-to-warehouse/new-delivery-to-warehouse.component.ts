@@ -74,14 +74,14 @@ export class NewDeliveryToWarehouseComponent implements OnInit {
         Swal.close();
         Swal.fire(
           'Success',
-          'List saved',
+          'List saved', //messageSuccessSaving
           'success'
         );
       } else {
         Swal.fire({
           icon: 'error',
           title: 'Error',
-          text: 'List could not be saved. Please try again.'
+          text: 'List could not be saved. Please try again.' //messageErrorSaving
         });
       }
     });
