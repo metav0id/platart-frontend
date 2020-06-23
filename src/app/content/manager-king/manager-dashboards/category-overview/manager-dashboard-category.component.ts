@@ -7,7 +7,7 @@ import {Subject} from 'rxjs';
 import {ActivatedRoute, Router} from '@angular/router';
 import {ManagerDashboardService} from '../dashboard-overview/manager-dashboard.service';
 import {DateRangeDTO} from '../../manager-king-dtos/DateRangeDTO';
-import {TRANSLOCO_SCOPE} from '@ngneat/transloco';
+import {TRANSLOCO_SCOPE, TranslocoService} from '@ngneat/transloco';
 import {DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE} from '@angular/material/core';
 import {MAT_MOMENT_DATE_ADAPTER_OPTIONS, MAT_MOMENT_DATE_FORMATS, MomentDateAdapter} from '@angular/material-moment-adapter';
 
@@ -37,7 +37,8 @@ export class ManagerDashboardCategoryComponent implements OnInit {
   positionOptions: TooltipPosition[] = ['after', 'before', 'above', 'below', 'left', 'right'];
   position = new FormControl(this.positionOptions[0]);
 
-  constructor(private managerDashboardService: ManagerDashboardService, private translocoService: TranslocoService,
+  constructor(private managerDashboardService: ManagerDashboardService,
+              private translocoService: TranslocoService,
               private route: ActivatedRoute, private router: Router) {
     this.endDate = new FormControl(new Date());
     this.tempDate = new Date();
