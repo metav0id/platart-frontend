@@ -13,7 +13,7 @@ import {WarehouseItem} from './stock-in-warehouse-DTOs/WarehouseItem';
   providers: [{provide: TRANSLOCO_SCOPE, useValue: {scope: 'warehouseQueen', alias: 'translate'}}]
 })
 export class StockInWarehouseComponent implements OnInit {
-  displayedColumns: string[] = ['category', 'priceListPerUnit', 'quantity', 'value'];
+  displayedColumns: string[] = ['category', 'priceListPerUnit', 'quantity'];
 
   public warehouseData: WarehouseItem[] = [];
   dataSource = new MatTableDataSource();
