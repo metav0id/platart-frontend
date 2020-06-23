@@ -2,12 +2,14 @@ import {Component, Input, OnInit} from '@angular/core';
 import {ManagerDashboardService} from '../../dashboard-overview/manager-dashboard.service';
 import {DateRangeDTO} from '../../../manager-king-dtos/DateRangeDTO';
 import {BarDataDto} from '../../../manager-king-dtos/BarDataDto';
+import {TRANSLOCO_SCOPE, TranslocoService} from '@ngneat/transloco';
 
 
 @Component({
   selector: 'app-weekly-performance-chart-card',
   templateUrl: './weekly-performance-card.component.html',
-  styleUrls: ['./weekly-performance-card.component.css']
+  styleUrls: ['./weekly-performance-card.component.css'],
+  providers: [{provide: TRANSLOCO_SCOPE, useValue: {scope: 'managerKing', alias: 'translate'}}]
 })
 export class WeeklyPerformanceCardComponent implements OnInit {
 
@@ -34,7 +36,7 @@ export class WeeklyPerformanceCardComponent implements OnInit {
 
 
 
-  constructor(private managerDashboardService: ManagerDashboardService) {
+  constructor(private managerDashboardService: ManagerDashboardService, private translocoService: TranslocoService) {
     this.managerDashboardService.fetchVBarData(this.createChartDates())
       .subscribe((vbarData) => {this.vbarData = vbarData; });
   }

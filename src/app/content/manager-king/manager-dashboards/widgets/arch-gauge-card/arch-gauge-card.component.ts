@@ -1,9 +1,11 @@
 import {Component, Input, OnInit} from '@angular/core';
+import {TRANSLOCO_SCOPE, TranslocoService} from '@ngneat/transloco';
 
 @Component({
   selector: 'app-arch-gauge-card',
   templateUrl: './arch-gauge-card.component.html',
-  styleUrls: ['./arch-gauge-card.component.css']
+  styleUrls: ['./arch-gauge-card.component.css'],
+  providers: [{provide: TRANSLOCO_SCOPE, useValue: {scope: 'managerKing', alias: 'translate'}}]
 })
 export class ArchGaugeCardComponent implements OnInit {
 
@@ -30,7 +32,7 @@ export class ArchGaugeCardComponent implements OnInit {
     // threshMax: {color: 'green'}
   };
 
-  constructor() {
+  constructor(private translocoService: TranslocoService) {
   }
 
   ngOnInit(): void {
