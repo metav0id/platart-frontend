@@ -25,7 +25,7 @@ export class ArchGaugeCardComponent implements OnInit {
   // todo: find way to implement variable threshold-values and inverted threshold-values for percentage gauge
 
   thresholdConfig = {
-    '0': {color: 'red'},
+    0: {color: 'red'},
     // threshMid: {color: 'orange'},
     // threshMax: {color: 'green'}
   };

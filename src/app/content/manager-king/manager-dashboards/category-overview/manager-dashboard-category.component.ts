@@ -5,7 +5,7 @@ import {TooltipPosition} from '@angular/material/tooltip';
 import {Subject} from 'rxjs';
 
 import {ActivatedRoute, Router} from '@angular/router';
-import {ManagerDashboardService} from '../../manager-dashboard/manager-dashboard.service';
+import {ManagerDashboardService} from '../dashboard-overview/manager-dashboard.service';
 import {DateRangeDTO} from '../../manager-king-dtos/DateRangeDTO';
 
 @Component({
