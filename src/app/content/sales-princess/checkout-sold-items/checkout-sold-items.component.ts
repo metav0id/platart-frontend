@@ -195,8 +195,6 @@ export class CheckoutSoldItemsComponent implements OnInit {
   }
 
   rebuildListCategories(): void {
-    console.log('rebuildListCategories -> soldItemsToShopsList:');
-    console.log(this.soldItemsToShopsList);
 
     let positionCounter = 0;
     const newCategoryLists: CheckoutCategories[] = [];
@@ -268,8 +266,7 @@ export class CheckoutSoldItemsComponent implements OnInit {
       }
     }
     this.soldItemsCategoryLists = newCategoryLists;
-    console.log('rebuildListCategories -> soldItemsCategoryLists:');
-    console.log(this.soldItemsCategoryLists);
+
     this.table.renderRows();
   }
 
@@ -280,10 +277,10 @@ export class CheckoutSoldItemsComponent implements OnInit {
   }
 
   openDialogCategory(checkoutCategory: CheckoutCategories) {
-    console.log('open category Dialog');
+
     // open the dialogue
     const dialogRef = this.dialog.open(CheckoutSoldItemsDetailsComponent, {
-      width: '400px',
+      width: '250px',
       data: checkoutCategory.items
     });
 
@@ -342,7 +339,7 @@ export class CheckoutSoldItemsComponent implements OnInit {
   }
 
   sendSoldItemList() {
-    console.log('implement sending sold items list');
+
 
     const sendSoldItemsData: SendItemsDTO = {
       sendSoldItemsVerification: false,
@@ -357,10 +354,10 @@ export class CheckoutSoldItemsComponent implements OnInit {
 
     // once confirmed, send delivery order
     dialogRef.afterClosed().subscribe(() => {
-      console.log(sendSoldItemsData);
+
 
       if (sendSoldItemsData.sendSoldItemsVerification === true) {
-        console.log('Send items');
+
         this.checkoutSoldItemsService.sendSpecificShopSoldItemsList(
           this.selectedShopName,
           this.soldItemsToShopsList).subscribe((JsonDto) => {
@@ -395,7 +392,6 @@ export class CheckoutSoldItemsComponent implements OnInit {
   }
 
   verifyAvailability(newItem: ShopsCheckoutSoldItemsDTO) {
-    console.log(newItem);
     const verifyCategory: boolean = newItem.category !== null && newItem.category !== 'chooseCategory';
     const verifyShop: boolean = newItem.shop !== null && newItem.shop !== 'chooseShop';
     const verifyPriceListPerUnit: boolean = newItem.priceListPerUnit !== null && newItem.priceListPerUnit > 0;
@@ -405,7 +401,7 @@ export class CheckoutSoldItemsComponent implements OnInit {
       verifyShop &&
       verifyPriceListPerUnit &&
       verifyPriceSalesPerUnit) {
-      console.log('entered into the if');
+
       this.checkoutSoldItemsService.verifyAvailability(newItem).subscribe((observable) => {
         this.availableItems = observable.quantity;
 
@@ -425,7 +421,7 @@ export class CheckoutSoldItemsComponent implements OnInit {
         }
       });
     } else {
-      console.log('New Item not fully defined');
+
     }
   }
 
