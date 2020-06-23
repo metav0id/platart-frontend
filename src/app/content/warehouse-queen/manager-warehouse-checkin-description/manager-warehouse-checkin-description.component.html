@@ -5,7 +5,7 @@
     <h2>Warehouse Checkin Items by Start and End Range</h2>
     <mat-form-field>
       <mat-label>Start Date</mat-label>
-      <input (dateInput)="startDateSelection($event)" [matDatepicker]="picker1" matInput>
+      <input (dateInput)="startDateSelection($event)" [matDatepicker]="picker1" matInput [max]="tomorrow">
       <mat-datepicker-toggle [for]="picker1" matSuffix></mat-datepicker-toggle>
       <mat-datepicker #picker1 touchUi></mat-datepicker>
     </mat-form-field>
