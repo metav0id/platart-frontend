@@ -34,10 +34,16 @@ export class SalesDescriptionComponent implements OnInit {
 
   @ViewChild(MatSort, {static: true}) sort: MatSort;
 
+  tomorrow = new Date();
+
   constructor(
           public dialog: MatDialog,
           private managerSalesDescriptionService: SalesDescriptionService,
           private auth: AuthService) {
+    this.tomorrow.setDate(this.tomorrow.getDate());
+    this.tomorrow.setHours(23);
+    this.tomorrow.setMinutes(59);
+    this.tomorrow.setSeconds(59);
   }
 
   startDate = '';
