@@ -49,6 +49,7 @@ import {MatExpansionModule} from '@angular/material/expansion';
 import {LandingPageWarehouseComponent} from './content/landing-page/landing-page-warehouse.component';
 
 
+
 @NgModule({
   declarations: [
     AppComponent,

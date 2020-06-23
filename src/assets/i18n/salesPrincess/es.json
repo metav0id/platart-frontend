@@ -47,6 +47,7 @@
   "shop-sales-in-time-frame": "Ventas relizadas por fecha",
   "shopStock": "Stock en sucursal ",
   "start-date": "Fecha inicial",
+  "timestamp": "Hora y fecha de entrada",
   "warehouse-instructions": "Instrucciones adicionales",
   "DISCOUNT_METHOD_REVENUE": "precio especial"
 }
