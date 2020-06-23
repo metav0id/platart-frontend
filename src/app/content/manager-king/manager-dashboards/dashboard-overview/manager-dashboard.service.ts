@@ -1,11 +1,11 @@
 import {Injectable} from '@angular/core';
-import {MonthToDateReportingDto} from '../manager-king-dtos/MonthToDateReportingDto';
-import {DailyReportingDto} from '../manager-king-dtos/DailyReportingDto';
+import {MonthToDateReportingDto} from '../../manager-king-dtos/MonthToDateReportingDto';
+import {DailyReportingDto} from '../../manager-king-dtos/DailyReportingDto';
 import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
-import {BarDataDto} from '../manager-king-dtos/BarDataDto';
-import {environment} from '../../../../environments/environment';
-import {DateRangeDTO} from '../manager-king-dtos/DateRangeDTO';
+import {BarDataDto} from '../../manager-king-dtos/BarDataDto';
+import {environment} from '../../../../../environments/environment';
+import {DateRangeDTO} from '../../manager-king-dtos/DateRangeDTO';
 import {delay} from 'rxjs/operators';
 
 @Injectable({
@@ -63,7 +63,7 @@ export class ManagerDashboardService {
 
   getColors(itemCount: number) {
     const colours = ['#8B0000', '#B22222', '#CD5C5C', '#F08080', '#FA8072', '#FFA07A', '#E9967A'];
-    let colourset: string[];
+    const colourset: string[] = [];
     for (let i = 0; i < itemCount; i++) {
       colourset[i] = colours[i];
     }

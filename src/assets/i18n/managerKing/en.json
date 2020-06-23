@@ -3,12 +3,18 @@
   "dailyTurnoverByShop": "Daily turnover by shop",
   "discountRate": "Discount-Rate",
   "inventoryOfShop": "Inventory of shop",
-  "managerDashboard": "Manager Dashboard",
+  "managerDashboard": "Dashboard Overview",
+  "categoryDashboard": "Dashboard Categories",
   "percentage": "Percentage",
   "salesMargin": "Sales margin",
   "selectShop": "Select shop",
   "turnover": "Turnover",
   "yesterdaysAverageDiscount": "Yesterday's Average Discount",
   "yesterdaysSalesMargin": "Yesterdays' sales margin",
-  "yesterdaysTurnover": "Yesterdays' turnover"
+  "yesterdaysTurnover": "Yesterdays' turnover",
+  "currentMonth": "Current month",
+  "sales": "sales",
+  "avgSalesMargin": "average sales margin",
+  "avgDiscountRate": "average discount rate"
+
 }

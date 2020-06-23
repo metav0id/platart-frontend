@@ -1,14 +1,14 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {ManagerDashboardService} from '../../manager-dashboard.service';
+import {ManagerDashboardService} from '../../dashboard-overview/manager-dashboard.service';
 import {DateRangeDTO} from '../../../manager-king-dtos/DateRangeDTO';
 import {FormControl} from '@angular/forms';
 
 @Component({
-  selector: 'app-hbar-char-card',
-  templateUrl: './hbar-char-card.component.html',
-  styleUrls: ['./hbar-char-card.component.css']
+  selector: 'app-shop-performance-card',
+  templateUrl: './shop-performance-card.component.html',
+  styleUrls: ['./shop-performance-card.component.css']
 })
-export class HbarCharCardComponent implements OnInit {
+export class ShopPerformanceCardComponent implements OnInit {
 
   @Input() label: string;
   @Input() total: string;
