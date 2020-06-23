@@ -36,6 +36,8 @@
   "itemsSoldToday": "Items sold today",
   "listPrice": "List price",
   "listPricePerUnit": "List PPU",
+  "messageSuccessSaving": "Successfully saved.",
+  "messageErrorSaving": "Error while saving. Please try again.",
   "newDeliveryShop": "New delivery to shop",
   "newDeliveryWarehouse": "New delivery to warehouse",
   "newItemCategory": "New category",

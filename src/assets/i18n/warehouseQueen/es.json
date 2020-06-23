@@ -36,6 +36,8 @@
   "itemsSoldToday": "items vendidos hoy",
   "listPrice": "precio marcado",
   "listPricePerUnit": "precio marcado unidad",
+  "messageSuccessSaving": "Salvado con éxito.",
+  "messageErrorSaving": "Error al guardar. Por favor, inténtelo de nuevo.",
   "newDeliveryShop": "Nueva entrega a sucursal",
   "newDeliveryWarehouse": "Llegada a bodega",
   "newItemCategory": "Nueva categoría ",
