@@ -23,6 +23,7 @@ import {MatExpansionModule} from "@angular/material/expansion";
 import {MatCardModule} from "@angular/material/card";
 import { CommentDialogComponent } from './new-delivery-to-shop/comment-dialog/comment-dialog.component';
 import {MatDialogModule} from "@angular/material/dialog";
+import {MatSortModule} from '@angular/material/sort';
 
 
 
@@ -52,7 +53,8 @@ import {MatDialogModule} from "@angular/material/dialog";
         MatTooltipModule,
         MatExpansionModule,
         MatCardModule,
-        MatDialogModule
+        MatDialogModule,
+        MatSortModule
     ]
 })
 export class WarehouseQueenModule { }

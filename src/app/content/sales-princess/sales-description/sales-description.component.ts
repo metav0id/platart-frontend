@@ -23,6 +23,7 @@ import {SalesDescriptionDetailsComponent} from './sales-description-details/sale
 export class SalesDescriptionComponent implements OnInit {
   public listShops1: string[] = new Array();
   public deliveryShop = '';
+  public shopsList: string[] = [];
 
   positionOptions: TooltipPosition[] = ['after', 'before', 'above', 'below', 'left', 'right'];
   position = new FormControl(this.positionOptions[0]);
@@ -47,7 +48,7 @@ export class SalesDescriptionComponent implements OnInit {
   public formControl = new FormControl('', Validators.required);
 
   ngOnInit(): void {
-    this.listShops1 = this.auth.getStoresList();
+    this.shopsList = this.auth.getStoresList();
   }
 
   startDateSelection($event: MatDatepickerInputEvent<Date>) {
@@ -76,7 +77,6 @@ export class SalesDescriptionComponent implements OnInit {
     if (this.startDate != '' && this.endDate != '' && this.deliveryShop != '') {
       this.managerSalesDescriptionService.getSoldItemsList(this.deliveryShop, this.startDate, this.endDate)
         .subscribe((observable) => {
-
           this.dataSource = new MatTableDataSource(observable);
           this.dataSource.sort = this.sort;
         });

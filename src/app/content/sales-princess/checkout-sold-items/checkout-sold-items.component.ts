@@ -21,9 +21,9 @@ import {
   MAT_MOMENT_DATE_ADAPTER_OPTIONS,
 } from '@angular/material-moment-adapter';
 import {DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE} from '@angular/material/core';
-import {WarehouseItemCategoryDTO} from './checkout-sold-items-DTOs/WarehouseItemCategoryDTO';
 import {SendItemsDTO} from './checkout-sold-items-DTOs/SendItemsDTO';
 import {MatAccordion} from '@angular/material/expansion';
+import { WarehouseItemCategoryDTO } from '../../services/warehouse-item-category-DTO';
 
 @Component({
   selector: 'app-checkout-sold-items',
@@ -45,11 +45,17 @@ export class CheckoutSoldItemsComponent implements OnInit {
   positionOptions: TooltipPosition[] = ['after', 'before', 'above', 'below', 'left', 'right'];
   position = new FormControl(this.positionOptions[0]);
 
+  tomorrow = new Date();
+
   constructor(/*private _snackBar: MatSnackBar,*/
               private checkoutSoldItemsService: CheckoutSoldItemsService,
               private transloco: TranslocoService,
               public dialog: MatDialog,
               private auth: AuthService) {
+    this.tomorrow.setDate(this.tomorrow.getDate());
+    this.tomorrow.setHours(23);
+    this.tomorrow.setMinutes(59);
+    this.tomorrow.setSeconds(59);
   }
 
   public selectedShopName = '';
@@ -76,7 +82,7 @@ export class CheckoutSoldItemsComponent implements OnInit {
   // Fields for input-form - Drop-Down-Selection
   /** Shop selection */
   public shopControll = new FormControl('', Validators.required);
-  public shopsList: Shop[] = [];
+  public shopsList: string[] = [];
 
   /** Category selection */
   public categoryControl = new FormControl('', Validators.required);
@@ -105,7 +111,6 @@ export class CheckoutSoldItemsComponent implements OnInit {
     this.initNewOrderElement();
 
     // drop-down-lists
-    this.checkoutSoldItemsService.getListShops().subscribe(JSON => this.shopsList = JSON);
     this.fetchCategories();
   }
 
@@ -149,11 +154,12 @@ export class CheckoutSoldItemsComponent implements OnInit {
 
       let revenueCalculation = 0;
       let discountPercentCalculation = 0;
-      if (this.discountType === this.DISCOUNT_METHOD_REVENUE) {
+
+      if (this.discountNessesary === this.DISCOUNT_METHOD_REVENUE) {
         revenueCalculation = this.newCheckoutSoldItem.revenuePerUnit;
         discountPercentCalculation = 100 - (this.newCheckoutSoldItem.revenuePerUnit * 100 / this.newCheckoutSoldItem.priceListPerUnit);
-      } else if (this.discountType === this.DISCOUNT_METHOD_NO_DISCOUNT) {
-        revenueCalculation = this.newCheckoutSoldItem.priceListPerUnit;
+      } else if (this.discountNessesary === this.DISCOUNT_METHOD_NO_DISCOUNT) {
+        revenueCalculation = this.newCheckoutSoldItem.priceSalesPerUnit;
         discountPercentCalculation = this.newCheckoutSoldItem.discountPercent;
       }
 
@@ -180,6 +186,12 @@ export class CheckoutSoldItemsComponent implements OnInit {
 
       this.soldItemsToShopsList.push(newSoldItemForTable);
       this.rebuildListCategories();
+
+      Swal.fire({
+        icon: 'success',
+        title: 'Entry created',
+        text: 'Item was added to checkout-items list.'
+      });
 
     } else {
       Swal.fire({
@@ -266,7 +278,6 @@ export class CheckoutSoldItemsComponent implements OnInit {
       }
     }
     this.soldItemsCategoryLists = newCategoryLists;
-
     this.table.renderRows();
   }
 
@@ -277,10 +288,9 @@ export class CheckoutSoldItemsComponent implements OnInit {
   }
 
   openDialogCategory(checkoutCategory: CheckoutCategories) {
-
     // open the dialogue
     const dialogRef = this.dialog.open(CheckoutSoldItemsDetailsComponent, {
-      width: '250px',
+      width: '400px',
       data: checkoutCategory.items
     });
 
@@ -339,8 +349,6 @@ export class CheckoutSoldItemsComponent implements OnInit {
   }
 
   sendSoldItemList() {
-
-
     const sendSoldItemsData: SendItemsDTO = {
       sendSoldItemsVerification: false,
       sendSoldItemsList: this.soldItemsToShopsList
@@ -348,16 +356,13 @@ export class CheckoutSoldItemsComponent implements OnInit {
 
     // open dialoge window
     const dialogRef = this.dialog.open(CheckoutSoldItemsSendVerificationComponent, {
-      width: '250px',
+      width: '400px',
       data: sendSoldItemsData
     });
 
     // once confirmed, send delivery order
     dialogRef.afterClosed().subscribe(() => {
-
-
       if (sendSoldItemsData.sendSoldItemsVerification === true) {
-
         this.checkoutSoldItemsService.sendSpecificShopSoldItemsList(
           this.selectedShopName,
           this.soldItemsToShopsList).subscribe((JsonDto) => {
@@ -401,7 +406,6 @@ export class CheckoutSoldItemsComponent implements OnInit {
       verifyShop &&
       verifyPriceListPerUnit &&
       verifyPriceSalesPerUnit) {
-
       this.checkoutSoldItemsService.verifyAvailability(newItem).subscribe((observable) => {
         this.availableItems = observable.quantity;
 
@@ -421,7 +425,11 @@ export class CheckoutSoldItemsComponent implements OnInit {
         }
       });
     } else {
-
+      Swal.fire({
+        icon: 'error',
+        title: 'Information missing',
+        text: 'To verify availability fill the fields: date, category, list-price and sales-price.'
+      });
     }
   }
 

@@ -5,6 +5,7 @@ import {StockInWarehouseService} from './stock-in-warehouse.service';
 import {TRANSLOCO_SCOPE} from '@ngneat/transloco';
 import {MatTable, MatTableDataSource} from '@angular/material/table';
 import {WarehouseItem} from './stock-in-warehouse-DTOs/WarehouseItem';
+import { MatSort } from '@angular/material/sort';
 
 @Component({
   selector: 'app-stock-in-warehouse',
@@ -29,8 +30,7 @@ export class StockInWarehouseComponent implements OnInit {
     quantity: -1
   };
 
-  @ViewChild('myWarehouseItemsTable') table: MatTable<any>;
-
+  @ViewChild(MatSort, {static: true}) sort: MatSort;
   constructor(private http: HttpClient, private stockInWarehouseService: StockInWarehouseService) {
   }
 
@@ -54,7 +54,7 @@ export class StockInWarehouseComponent implements OnInit {
           this.warehouseData.push(newWarehouseItem);
         }
         this.dataSource = new MatTableDataSource(this.warehouseData);
-        this.table.renderRows();
+        this.dataSource.sort = this.sort;
       });
   }
 

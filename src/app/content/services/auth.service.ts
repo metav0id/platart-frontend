@@ -11,7 +11,7 @@ import {Observable} from 'rxjs';
 })
 
 export class AuthService {
-   shopsOfUser: string[];
+  shopsOfUser: string[];
 
   constructor(public afs: AngularFirestore,
               public afAuth: AngularFireAuth,

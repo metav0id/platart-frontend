@@ -1,53 +1,52 @@
-<div class="demo-card-wide mdl-card mdl-shadow--2dp cont-bg4">
-  <div class="mdl-card__title">
-
-    <h1 mat-dialog-title>{{data[0].category}} | List-price {{data[0].priceListPerUnit}}$</h1>
-    <h2 mat-dialog-title></h2>
-
-  </div>
-
-  <!--  CONTENT-->
-  <body class="cont-bg2 ">
-  <form class="form ">
-    <div class="container-fluid cont-bg2">
-
-      <div mat-dialog-content>
-        <div *ngFor="let item of data">
-
-          <div>
-            <mat-card class="example-card">
-              <mat-card-header>
-                <mat-card-title>Sell-price: {{item.priceSalesPerUnit}}</mat-card-title>
-                <mat-card-subtitle>Quantity sold: {{item.quantity}}</mat-card-subtitle>
-                <mat-card-subtitle><b>Revenue: {{item.revenuePerUnit}}</b></mat-card-subtitle>
-              </mat-card-header>
-              <mat-card-content>
-                <p>Date: {{item.itemLastSold}}</p>
-                <p>Shop: {{item.shop}}</p>
-                <p>Discount: {{item.discountPercent}} %</p>
-                <p>Comment: {{item.comment}}</p>
-              </mat-card-content>
-              <mat-card-actions>
-                <button (click)="deleteItemList(item)" mat-button>
-                  <mat-icon>delete</mat-icon>
-                </button>
-              </mat-card-actions>
-            </mat-card>
-          </div>
-          <div class="space"></div>
-        </div>
-      </div>
+<ng-template let-t transloco>
+  <div class="demo-card-wide mdl-card mdl-shadow--2dp cont-bg4">
+    <div class="mdl-card__title">
+      <h1 mat-dialog-title>{{data[0].category}}</h1>
       <div class="space"></div>
+      <h2 mat-dialog-title>{{ t('translate.listPricePerUnit') }}: {{data[0].priceListPerUnit}}$</h2>
     </div>
-  </form>
-  </body>
-  <!--  CONTENT-->
-  <div class="mdl-card__actions mdl-card--border cont-bg4">
-    <div>
-      <button [mat-dialog-close]="data[0].position" cdkFocusInitial class="btn btn-primary" mat-raised-button
-              role="button">Ok
-      </button>
-    </div>
-  </div>
 
-</div>
+    <!--  CONTENT-->
+    <body class="cont-bg2 ">
+    <form class="form ">
+      <div class="container-fluid cont-bg2">
+
+        <div mat-dialog-content>
+          <div *ngFor="let item of data">
+
+            <div>
+              <mat-card class="example-card">
+                <mat-card-header>
+                  <mat-card-title>{{ t('translate.salesPricePerUnit') }}: {{item.priceSalesPerUnit}}</mat-card-title>
+                  <mat-card-subtitle>{{ t('translate.quantity') }}: {{item.quantity}}</mat-card-subtitle>
+                  <mat-card-subtitle><b>{{ t('translate.revenue') }}Revenue: {{item.revenuePerUnit}}</b></mat-card-subtitle>
+                  <mat-card-subtitle>{{ t('translate.date-sold') }}: {{item.itemLastSold.substring(0, 10)}}</mat-card-subtitle>
+                  <mat-card-subtitle>{{ t('translate.shop') }}: {{item.shop}}</mat-card-subtitle>
+                  <mat-card-subtitle>{{ t('translate.discount-in-percent') }}: {{item.discountPercent}} %</mat-card-subtitle>
+                  <mat-card-subtitle>{{ t('translate.comment') }}: {{item.comment}}</mat-card-subtitle>
+                </mat-card-header>
+                <mat-card-actions>
+                  <button (click)="deleteItemList(item)" mat-button>
+                    <mat-icon>delete</mat-icon>
+                  </button>
+                </mat-card-actions>
+              </mat-card>
+            </div>
+            <div class="space"></div>
+          </div>
+        </div>
+        <div class="space"></div>
+      </div>
+    </form>
+    </body>
+    <!--  CONTENT-->
+    <div class="mdl-card__actions mdl-card--border cont-bg4">
+      <div>
+        <button [mat-dialog-close]="data[0].position" cdkFocusInitial class="btn btn-primary" mat-raised-button
+                role="button">Ok
+        </button>
+      </div>
+    </div>
+
+  </div>
+</ng-template>
