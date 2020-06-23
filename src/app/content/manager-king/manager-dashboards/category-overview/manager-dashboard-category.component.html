@@ -2,7 +2,7 @@
   <mat-divider></mat-divider>
   <div fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="20px" class="stats-card">
     <mat-card fxFlex="100">
-      <h1 align="center">Category Dashboard</h1>
+      <h1 align="center">{{ t('translate.categoryDashboard') }}</h1>
     </mat-card>
   </div>
   <mat-divider></mat-divider>
@@ -10,13 +10,13 @@
   <mat-card fxFlex="1000">
 
     <mat-form-field>
-      <mat-label>Start Date</mat-label>
+      <mat-label>{{ t('translate.startDate') }}</mat-label>
       <input  matInput [matDatepicker]="pickerStart" [formControl]="startDate" [max]="maxDate" (dateInput)="startDateSelection($event)" >
       <mat-datepicker-toggle matSuffix [for]="pickerStart"></mat-datepicker-toggle>
       <mat-datepicker #pickerStart touchUi></mat-datepicker>
     </mat-form-field>
     <mat-form-field>
-      <mat-label>End Date</mat-label>
+      <mat-label>{{ t('translate.endDate') }}</mat-label>
       <input matInput [matDatepicker]="pickerEnd" [min]="pickerStart" [formControl]="endDate" [max]="maxDate" (dateInput)="endDateSelection($event)" >
       <mat-datepicker-toggle matSuffix [for]="pickerEnd"></mat-datepicker-toggle>
       <mat-datepicker #pickerEnd touchUi></mat-datepicker>
@@ -33,13 +33,13 @@
 <div>
   <mat-card fxFlex="1000">
     <div class="text">
-      <h4>Label </h4>
+      <h4>{{ t('translate.salesRankedCategory') }}</h4>
 
       <span>
     <mat-icon color="primary">trending_up</mat-icon>
   </span>
 
-      <span>Items sold (pcs)</span>
+      <span>{{ t('translate.itemsSold') }}</span>
 
     </div>
     <div class="widget">

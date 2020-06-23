@@ -2,11 +2,13 @@ import {Component, Input, OnInit} from '@angular/core';
 import {ManagerDashboardService} from '../../dashboard-overview/manager-dashboard.service';
 import {DateRangeDTO} from '../../../manager-king-dtos/DateRangeDTO';
 import {FormControl} from '@angular/forms';
+import {TRANSLOCO_SCOPE, TranslocoService} from '@ngneat/transloco';
 
 @Component({
   selector: 'app-shop-performance-card',
   templateUrl: './shop-performance-card.component.html',
-  styleUrls: ['./shop-performance-card.component.css']
+  styleUrls: ['./shop-performance-card.component.css'],
+  providers: [{provide: TRANSLOCO_SCOPE, useValue: {scope: 'managerKing', alias: 'translate'}}]
 })
 export class ShopPerformanceCardComponent implements OnInit {
 
@@ -20,7 +22,7 @@ export class ShopPerformanceCardComponent implements OnInit {
   minDate: Date;
   hbarData;
 
-  constructor(private managerDashboardService: ManagerDashboardService) {
+  constructor(private managerDashboardService: ManagerDashboardService, private translocoService: TranslocoService) {
     this.endDate = new FormControl(new Date());
     this.tempDate = new Date();
     this.tempDate.setDate(this.tempDate.getDate() - 14);
@@ -50,7 +52,8 @@ export class ShopPerformanceCardComponent implements OnInit {
   showLabels = false;
   timeline = true;
   colorScheme = {
-    domain: ['#FFA07A', '#E9967A', '#FA8072', '#F08080', '#CD5C5C', '#B22222', '#8B0000']
+    // domain: ['#FFA07A', '#E9967A', '#FA8072', '#F08080', '#CD5C5C', '#B22222', '#8B0000']
+    domain: this.managerDashboardService.getColors()
   };
 
   createChartDates(): DateRangeDTO {

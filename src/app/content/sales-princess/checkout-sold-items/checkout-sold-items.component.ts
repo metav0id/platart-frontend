@@ -107,7 +107,7 @@ export class CheckoutSoldItemsComponent implements OnInit {
   availableItems = 0;
 
   ngOnInit(): void {
-    this.listShops1 = this.auth.getStoresList();
+    this.shopsList = this.auth.getStoresList();
     this.initNewOrderElement();
 
     // drop-down-lists

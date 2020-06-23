@@ -1,3 +1,4 @@
+<ng-template transloco let-t>
 <div class="text">
   <h4>{{ label }} </h4>
 
@@ -5,7 +6,7 @@
     <mat-icon color="primary">trending_up</mat-icon>
 </span>
 
-  <span>Totals (USD)</span>
+  <span>{{ t('translate.totals') }} (USD)</span>
 
 </div>
 <div class="widget">
@@ -27,3 +28,4 @@
 
   </div>
 </div>
+</ng-template>

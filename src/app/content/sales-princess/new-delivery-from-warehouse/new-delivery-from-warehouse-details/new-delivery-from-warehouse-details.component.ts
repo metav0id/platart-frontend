@@ -2,11 +2,19 @@ import {Component, Inject, OnInit} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
 import {AbstractControl, FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {TableItem} from '../table-item';
+import {
+  TRANSLOCO_SCOPE,
+  TranslocoService
+} from "@ngneat/transloco";
 
 @Component({
   selector: 'app-new-delivery-from-warehouse-details',
   templateUrl: './new-delivery-from-warehouse-details.component.html',
-  styleUrls: ['./new-delivery-from-warehouse-details.component.css']
+  styleUrls: ['./new-delivery-from-warehouse-details.component.css'],
+  providers: [{
+    provide: TRANSLOCO_SCOPE,
+    useValue: {scope: 'salesPrincess', alias: 'translate'}
+  }]
 })
 export class NewDeliveryFromWarehouseDetailsComponent implements OnInit {
   public myForm: FormGroup;
@@ -23,6 +31,7 @@ export class NewDeliveryFromWarehouseDetailsComponent implements OnInit {
   }
 
   constructor(
+    private transloco: TranslocoService,
     public dialogRef: MatDialogRef<NewDeliveryFromWarehouseDetailsComponent>,
     @Inject(MAT_DIALOG_DATA) public data: TableItem,
     private formBuilder: FormBuilder) {

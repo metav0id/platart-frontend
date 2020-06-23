@@ -37,7 +37,8 @@ export class ManagerDashboardCategoryComponent implements OnInit {
   positionOptions: TooltipPosition[] = ['after', 'before', 'above', 'below', 'left', 'right'];
   position = new FormControl(this.positionOptions[0]);
 
-  constructor(private managerDashboardService: ManagerDashboardService, private route: ActivatedRoute, private router: Router) {
+  constructor(private managerDashboardService: ManagerDashboardService, private translocoService: TranslocoService,
+              private route: ActivatedRoute, private router: Router) {
     this.endDate = new FormControl(new Date());
     this.tempDate = new Date();
     this.tempDate.setDate(this.tempDate.getDate() - 14);
@@ -65,7 +66,7 @@ export class ManagerDashboardCategoryComponent implements OnInit {
   showLabels = false;
   timeline = true;
   colorScheme = {
-    domain: ['#FFA07A', '#E9967A', '#FA8072', '#F08080', '#CD5C5C', '#B22222', '#8B0000']
+    domain: this.managerDashboardService.getColors()
   };
 
 

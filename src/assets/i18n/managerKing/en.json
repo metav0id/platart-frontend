@@ -12,9 +12,14 @@
   "yesterdaysAverageDiscount": "Yesterday's Average Discount",
   "yesterdaysSalesMargin": "Yesterdays' sales margin",
   "yesterdaysTurnover": "Yesterdays' turnover",
-  "currentMonth": "Current month",
+  "currentMonth": "current month",
   "sales": "sales",
   "avgSalesMargin": "average sales margin",
-  "avgDiscountRate": "average discount rate"
-
+  "avgDiscountRate": "average discount rate",
+  "totals": "totals",
+  "startDate": "start date",
+  "endDate": "end date",
+  "itemsSold": "items sold (pcs)",
+  "lastMonth": "last month",
+  "salesRankedCategory": "sales ranked by category of item"
 }

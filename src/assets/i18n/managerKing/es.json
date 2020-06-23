@@ -14,5 +14,11 @@
   "currentMonth": "Current month (es)",
   "sales": "sales (es)",
   "avgSalesMargin": "average sales margin (es)",
-  "avgDiscountRate": "average discount rate (es)"
+  "avgDiscountRate": "average discount rate (es)",
+  "totals": "totals (es)",
+  "startDate": "start date (es)",
+  "endDate": "end date (es)",
+  "itemsSold": "items sold (pcs) (es)",
+  "lastMonth": "last month (es)",
+  "salesRankedCategory": "sales ranked by category of item (es)"
 }
