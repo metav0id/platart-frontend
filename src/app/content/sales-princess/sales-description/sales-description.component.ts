@@ -10,15 +10,23 @@ import Swal from 'sweetalert2';
 import {AuthService} from '../../services/auth.service';
 import {MatDialog} from '@angular/material/dialog';
 import {SalesDescriptionDetailsComponent} from './sales-description-details/sales-description-details.component';
+import {DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE} from '@angular/material/core';
+import {MAT_MOMENT_DATE_ADAPTER_OPTIONS, MAT_MOMENT_DATE_FORMATS, MomentDateAdapter} from '@angular/material-moment-adapter';
 
 @Component({
   selector: 'app-manager-sales-description',
   templateUrl: './sales-description.component.html',
   styleUrls: ['./sales-description.component.css'],
-  providers: [{
-    provide: TRANSLOCO_SCOPE,
-    useValue: {scope: 'salesPrincess', alias: 'translate'}
-  }]
+  providers: [
+    {provide: TRANSLOCO_SCOPE, useValue: {scope: 'salesPrincess', alias: 'translate'}},
+    {provide: MAT_DATE_LOCALE, useValue: 'es-ES'},
+    {
+      provide: DateAdapter,
+      useClass: MomentDateAdapter,
+      deps: [MAT_DATE_LOCALE, MAT_MOMENT_DATE_ADAPTER_OPTIONS]
+    },
+    {provide: MAT_DATE_FORMATS, useValue: MAT_MOMENT_DATE_FORMATS},
+  ],
 })
 export class SalesDescriptionComponent implements OnInit {
   public listShops1: string[] = new Array();
