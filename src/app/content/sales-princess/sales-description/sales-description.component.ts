@@ -21,7 +21,6 @@ import {SalesDescriptionDetailsComponent} from './sales-description-details/sale
   }]
 })
 export class SalesDescriptionComponent implements OnInit {
-  public listShops1: string[] = new Array();
   public deliveryShop = '';
   public shopsList: string[] = [];
 
@@ -48,7 +47,6 @@ export class SalesDescriptionComponent implements OnInit {
 
   startDate = '';
   endDate = '';
-  // Date input
   eventsTime: string[] = [];
 
   public formControl = new FormControl('', Validators.required);
@@ -79,14 +77,16 @@ export class SalesDescriptionComponent implements OnInit {
   }
 
   getSoldItemsList(): void {
-    // tslint:disable-next-line:triple-equals
     if (this.startDate != '' && this.endDate != '' && this.deliveryShop != '') {
+      Swal.showLoading();
       this.managerSalesDescriptionService.getSoldItemsList(this.deliveryShop, this.startDate, this.endDate)
         .subscribe((observable) => {
           this.dataSource = new MatTableDataSource(observable);
           this.dataSource.sort = this.sort;
+          Swal.close();
         });
     } else {
+      Swal.close();
       Swal.fire({
         icon: 'error',
         title: 'Missing Information',
@@ -99,9 +99,6 @@ export class SalesDescriptionComponent implements OnInit {
     const dialogRef = this.dialog.open(SalesDescriptionDetailsComponent, {
       width: '250px',
       data: element
-    });
-
-    dialogRef.afterClosed().subscribe((DataObservable) => {
     });
   }
 }
