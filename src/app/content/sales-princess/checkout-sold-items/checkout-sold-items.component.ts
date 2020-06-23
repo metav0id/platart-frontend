@@ -21,9 +21,9 @@ import {
   MAT_MOMENT_DATE_ADAPTER_OPTIONS,
 } from '@angular/material-moment-adapter';
 import {DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE} from '@angular/material/core';
-import {WarehouseItemCategoryDTO} from './checkout-sold-items-DTOs/WarehouseItemCategoryDTO';
 import {SendItemsDTO} from './checkout-sold-items-DTOs/SendItemsDTO';
 import {MatAccordion} from '@angular/material/expansion';
+import { WarehouseItemCategoryDTO } from '../../services/warehouse-item-category-DTO';
 
 @Component({
   selector: 'app-checkout-sold-items',
@@ -82,7 +82,7 @@ export class CheckoutSoldItemsComponent implements OnInit {
   // Fields for input-form - Drop-Down-Selection
   /** Shop selection */
   public shopControll = new FormControl('', Validators.required);
-  public shopsList: Shop[] = [];
+  public shopsList: string[] = [];
 
   /** Category selection */
   public categoryControl = new FormControl('', Validators.required);
@@ -107,11 +107,10 @@ export class CheckoutSoldItemsComponent implements OnInit {
   availableItems = 0;
 
   ngOnInit(): void {
-    this.listShops1 = this.auth.getStoresList();
+    this.shopsList = this.auth.getStoresList();
     this.initNewOrderElement();
 
     // drop-down-lists
-    this.checkoutSoldItemsService.getListShops().subscribe(JSON => this.shopsList = JSON);
     this.fetchCategories();
   }
 
