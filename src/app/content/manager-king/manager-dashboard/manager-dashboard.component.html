@@ -10,7 +10,7 @@
   <div fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="20px" class="stats-card">
     <mat-card fxFlex="30">
       <app-arch-gauge-card gaugeLabel="{{ t('translate.turnover') }}" unit="USD" gaugeType="arch"
-                           gaugeValue="{{dataYesterday.salesTo}}"
+                           gaugeValue="{{this.dataYesterday.salesTo}}"
                            gaugeMin="0" gaugeMax="2000" gaugeAppendText="$"
                            label="{{ t('translate.yesterdaysTurnover') }}"></app-arch-gauge-card>
     </mat-card>
@@ -30,12 +30,12 @@
   </div>
   <mat-divider></mat-divider>
 
-  <div fxLayout="column" fxLayoutAlign="left" fxLayoutGap="20px" class="stats-card">
-    <mat-card fxFlex="100">
+  <div fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="20px" class="stats-card">
+  <mat-card fxFlex="100">
       <table class="table">
         <thead>
         <tr>
-          <th scope="col">May</th>
+          <th scope="col">Current month</th>
           <th scope="col">Sales (No)</th>
           <th scope="col">Sales (USD)</th>
           <th scope="col">Sales Margin (USD)</th>
@@ -45,8 +45,8 @@
         </tr>
         </thead>
         <tbody>
-        <tr *ngFor="let entry of data">
-          <th scope="row">{{entry.date.toDateString()}}</th>
+        <tr *ngFor="let entry of actualsData">
+          <th scope="row">{{entry.date}}</th>
           <td>{{entry.salesNo}}</td>
           <td>{{entry.salesTo}}</td>
           <td>{{entry.salesMg}}</td>
@@ -58,7 +58,7 @@
         </tr>
 
         <tr>
-          <th scope="row">May totals</th>
+          <th scope="row">Current month mtd</th>
           <td>{{dataCurrentMonth.salesNo}}</td>
           <td>{{dataCurrentMonth.salesTo}}</td>
           <td>{{dataCurrentMonth.salesMg}}</td>
@@ -69,7 +69,7 @@
           </td>
         </tr>
         <tr>
-          <th scope="row">April mtd</th>
+          <th scope="row">Last month mtd</th>
           <td>{{dataLastMonth.salesNo}}</td>
           <td>{{dataLastMonth.salesTo}}</td>
           <td>{{dataLastMonth.salesMg}}</td>
@@ -81,8 +81,10 @@
         </tr>
         </tbody>
       </table>
-    </mat-card>
+  </mat-card>
   </div>
+
+
 
   <mat-divider></mat-divider>
 
@@ -93,5 +95,7 @@
     <mat-card fxFlex="50">
       <app-vbar-chart-card label="{{ t('translate.aggregatedTurnoverByLast7Days') }}"></app-vbar-chart-card>
     </mat-card>
+
+
   </div>
 </ng-template>
