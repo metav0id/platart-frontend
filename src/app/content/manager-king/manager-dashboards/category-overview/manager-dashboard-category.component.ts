@@ -7,11 +7,13 @@ import {Subject} from 'rxjs';
 import {ActivatedRoute, Router} from '@angular/router';
 import {ManagerDashboardService} from '../dashboard-overview/manager-dashboard.service';
 import {DateRangeDTO} from '../../manager-king-dtos/DateRangeDTO';
+import {TRANSLOCO_SCOPE, TranslocoService} from '@ngneat/transloco';
 
 @Component({
   selector: 'app-manager-dashboard-category',
   templateUrl: './manager-dashboard-category.component.html',
-  styleUrls: ['./manager-dashboard-category.component.css']
+  styleUrls: ['./manager-dashboard-category.component.css'],
+  providers: [{provide: TRANSLOCO_SCOPE, useValue: {scope: 'managerKing', alias: 'translate'}}]
 })
 export class ManagerDashboardCategoryComponent implements OnInit {
 
@@ -24,7 +26,8 @@ export class ManagerDashboardCategoryComponent implements OnInit {
   positionOptions: TooltipPosition[] = ['after', 'before', 'above', 'below', 'left', 'right'];
   position = new FormControl(this.positionOptions[0]);
 
-  constructor(private managerDashboardService: ManagerDashboardService, private route: ActivatedRoute, private router: Router) {
+  constructor(private managerDashboardService: ManagerDashboardService, private translocoService: TranslocoService,
+              private route: ActivatedRoute, private router: Router) {
     this.endDate = new FormControl(new Date());
     this.tempDate = new Date();
     this.tempDate.setDate(this.tempDate.getDate() - 14);
