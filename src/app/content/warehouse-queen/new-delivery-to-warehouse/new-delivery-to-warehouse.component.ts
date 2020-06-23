@@ -75,7 +75,6 @@ export class NewDeliveryToWarehouseComponent implements OnInit {
   onSubmit(userData) {
     if (this.myForm.valid) {
       this.listNewItemsFromSuppliers.push(userData);
-      console.log('Form input valid: ' + userData);
       this.table.renderRows();
     } else {
       console.log('Error entering formular');
@@ -104,28 +103,6 @@ export class NewDeliveryToWarehouseComponent implements OnInit {
       return `${this.isAllSelected() ? 'select' : 'deselect'} all`;
     }
     return `${this.selection.isSelected(row) ? 'deselect' : 'select'} row ${row.position + 1}`;
-  }
-
-  /** Add a new item to table */
-  addNewItemToList(): void {
-    const newItem: PeriodicElement = {
-      position: this.counter++,
-      category: this.newItemFromSupplier.category,
-      priceListPerUnit: this.newItemFromSupplier.priceListPerUnit,
-      priceSupplierPerUnit: this.newItemFromSupplier.priceSupplierPerUnit,
-      quantity: this.newItemFromSupplier.quantity,
-      supplierName: this.newItemFromSupplier.supplierName
-    };
-    const isCategoryNotEmpty = !this.categoryControl.hasError('required');
-    const isPricePerUnitNotEmpty = newItem.priceListPerUnit > 0 && newItem.priceSupplierPerUnit > 0;
-    const isQuantityNotEmpty = newItem.quantity > 0;
-    const isSupplierNotEmpty = newItem.supplierName !== '';
-    if (isCategoryNotEmpty && isPricePerUnitNotEmpty && isQuantityNotEmpty && isSupplierNotEmpty) {
-      this.listNewItemsFromSuppliers.push(newItem);
-      this.table.renderRows();
-    } else {
-
-    }
   }
 
   /** Delete all selected items */
