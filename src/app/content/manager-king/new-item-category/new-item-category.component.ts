@@ -53,13 +53,15 @@ export class NewItemCategoryComponent implements OnInit {
     } else {
       this.newitemcategoryService.getAllDeactivatedCategories().subscribe(obj => this.handleData(obj));
     }
+    Swal.close();
   }
 
   private handleData(obj) {
     obj.forEach(entry => entry.isChecked = false);
     this.listCategories = obj;
     this.table.renderRows();
-    Swal.close();
+
+
   }
 
   selectItem(element: WarehouseItemCategoryDTO): void {
@@ -72,10 +74,14 @@ export class NewItemCategoryComponent implements OnInit {
         Swal.showLoading();
         if (entry.activated) {
           this.newitemcategoryService.deactivateCategory(entry).subscribe(() => this.getCategories());
+
         } else {
           this.newitemcategoryService.activateCategory(entry).subscribe(() => this.getCategories());
+
         }
+        Swal.close();
       }
+
     });
   }
 

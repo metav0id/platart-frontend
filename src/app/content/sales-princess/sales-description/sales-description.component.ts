@@ -21,6 +21,7 @@ import {SalesDescriptionDetailsComponent} from './sales-description-details/sale
   }]
 })
 export class SalesDescriptionComponent implements OnInit {
+  public listShops1: string[] = new Array();
   public deliveryShop = '';
   public shopsList: string[] = [];
 

@@ -57,15 +57,21 @@
             <div class="space"></div>
             <div class="container cont-bg4  justify-content-center ">
               <div class="space"></div>
-              <div class="d-flex justify-content-around">
-                <div class="d-flex justify-content-around">
+              <div class=" container d-flex justify-content-around">
+                <div class=" row">
+                  <div class ="col ">
+                    <mat-form-field appearance="fill">
                   <mat-select [(ngModel)]="selectedOption" (selectionChange)="getCategories()">
                     <mat-option [value]="optionsSelection[1]">Activated categories</mat-option>
                     <mat-option [value]="optionsSelection[2]">Deactivated categories</mat-option>
                     <mat-option [value]="optionsSelection[0]">All</mat-option>
                   </mat-select>
-                  <button matTooltip="Deactivates selected categories from the list" (click)="toogleCategoryStatus()">{{t('translate.changeStatus') }}
+                    </mat-form-field>
+                  </div>
+                  <div class="col">
+                  <button mat-raised-button matTooltip="Deactivates selected categories from the list" (click)="toogleCategoryStatus()">{{t('translate.changeStatus') }}
                   </button>
+                  </div>
                 </div>
                 <div class="space"></div>
               </div>
