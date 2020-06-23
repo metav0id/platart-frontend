@@ -6,17 +6,27 @@ import {observable} from 'rxjs';
 import {FormControl, Validators} from '@angular/forms';
 import {Shop} from '../../commonDTOs/shop';
 import {TRANSLOCO_SCOPE, TranslocoService} from '@ngneat/transloco';
-import {TooltipPosition} from "@angular/material/tooltip";
-import {AuthService} from "../../services/auth.service";
+import {TooltipPosition} from '@angular/material/tooltip';
+import {AuthService} from '../../services/auth.service';
+import {DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE} from '@angular/material/core';
+import {MAT_MOMENT_DATE_ADAPTER_OPTIONS, MAT_MOMENT_DATE_FORMATS, MomentDateAdapter} from '@angular/material-moment-adapter';
 
 @Component({
   selector: 'app-view-shop-inventory',
   templateUrl: './view-shop-inventory.component.html',
   styleUrls: ['./view-shop-inventory.component.css'],
-  providers: [{provide: TRANSLOCO_SCOPE, useValue: {scope: 'salesPrincess', alias: 'translate'}}]
+  providers: [
+    {provide: TRANSLOCO_SCOPE, useValue: {scope: 'salesPrincess', alias: 'translate'}},
+    {provide: MAT_DATE_LOCALE, useValue: 'es-ES'},
+    {
+      provide: DateAdapter,
+      useClass: MomentDateAdapter,
+      deps: [MAT_DATE_LOCALE, MAT_MOMENT_DATE_ADAPTER_OPTIONS]
+    },
+    {provide: MAT_DATE_FORMATS, useValue: MAT_MOMENT_DATE_FORMATS},
+  ],
 })
 export class ViewShopInventoryComponent implements OnInit {
-  /** tooltip features**/
   positionOptions: TooltipPosition[] = ['after', 'before', 'above', 'below', 'left', 'right'];
   position = new FormControl(this.positionOptions[0]);
 

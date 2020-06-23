@@ -7,7 +7,7 @@ import {ShopDTO} from '../../shop-dto';
 import {PeriodicElement} from './manager-shops-info-DTOs/PeriodicElement';
 import {MatTableModule, MatTableDataSource, MatTable} from '@angular/material/table';
 import {MatSort} from '@angular/material/sort';
-import {AuthService} from "../../../services/auth.service";
+import {AuthService} from '../../../services/auth.service';
 
 @Component({
   selector: 'app-manager-shops-info',
@@ -33,7 +33,6 @@ export class ManagerShopsInfoComponent implements OnInit {
   public selectedShopToDisplay = '';
 
   @ViewChild(MatSort, {static: true}) sort: MatSort;
-
   constructor(private managerShopsInfoService: ManagerShopsInfoService,
               private auth: AuthService) {
   }

@@ -30,6 +30,7 @@ import {MatTooltipModule} from '@angular/material/tooltip';
 import {ManagerDashboardCategoryComponent} from './manager-dashboards/category-overview/manager-dashboard-category.component';
 import {ShopPerformanceCardComponent} from './manager-dashboards/widgets/shop-performance-chart-card/shop-performance-card.component';
 import {WeeklyPerformanceCardComponent} from './manager-dashboards/widgets/weekly-performance-chart-card/weekly-performance-card.component';
+import {MatSortModule} from '@angular/material/sort';
 
 @NgModule({
   declarations: [
@@ -46,29 +47,30 @@ import {WeeklyPerformanceCardComponent} from './manager-dashboards/widgets/weekl
     ComerceFormComponent,
     ManagerDashboardCategoryComponent
   ],
-  imports: [
-    CommonModule,
-    ManagerKingRoutingModule,
-    FlexModule,
-    MatCardModule,
-    MatDividerModule,
-    FlexLayoutModule,
-    MatIconModule,
-    NgxGaugeModule,
-    NgxChartsModule,
-    MatSelectModule,
-    ReactiveFormsModule,
-    MatTableModule,
-    TranslocoRootModule,
-    MatTableModule,
-    MatInputModule,
-    MatRadioModule,
-    FormsModule,
-    MatButtonModule,
-    MatDatepickerModule,
-    MatDialogModule,
-    MatTooltipModule,
-  ]
+    imports: [
+        CommonModule,
+        ManagerKingRoutingModule,
+        FlexModule,
+        MatCardModule,
+        MatDividerModule,
+        FlexLayoutModule,
+        MatIconModule,
+        NgxGaugeModule,
+        NgxChartsModule,
+        MatSelectModule,
+        ReactiveFormsModule,
+        MatTableModule,
+        TranslocoRootModule,
+        MatTableModule,
+        MatInputModule,
+        MatRadioModule,
+        FormsModule,
+        MatButtonModule,
+        MatDatepickerModule,
+        MatDialogModule,
+        MatTooltipModule,
+        MatSortModule,
+    ]
 })
 export class ManagerKingModule {
 }
