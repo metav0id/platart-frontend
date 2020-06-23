@@ -1,13 +1,13 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {MatTable} from '@angular/material/table';
-import {SelectionModel} from '@angular/cdk/collections';
-import {FormControl, Validators} from '@angular/forms';
-import {PeriodicElement} from './periodic-element';
+import {AbstractControl, FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {NewDeliveryToWarehouseService} from './new-delivery-to-warehouse.service';
 import {TRANSLOCO_SCOPE} from '@ngneat/transloco';
 import {TooltipPosition} from '@angular/material/tooltip';
 import {CategoryService} from '../../services/category.service';
 import {WarehouseItemCategoryDTO} from '../../services/warehouse-item-category-DTO';
+import {WarehouseCheckInNewItemDTO} from './warehouse-check-in-new-item-DTO';
+import Swal from "sweetalert2";
 
 @Component({
   selector: 'app-new-delivery-to-warehouse',
@@ -22,100 +22,81 @@ export class NewDeliveryToWarehouseComponent implements OnInit {
   position = new FormControl(this.positionOptions[0]);
 
   public displayedColumns: string[] = ['select', 'category', 'priceListPerUnit', 'quantity', 'priceSupplierPerUnit', 'supplierName'];
-  public listNewItemsFromSuppliers: PeriodicElement[] = [];
-  public newItemFromSupplier: PeriodicElement = {
-    position: 0,
-    category: '',
-    priceListPerUnit: 0,
-    priceSupplierPerUnit: 0,
-    quantity: 0,
-    supplierName: ''
-  };
-
-  /** Is used to enable selection in table */
-  public selection = new SelectionModel<PeriodicElement>(true, []);
-
-  /** Is used to increase position attribute of list elements constantly */
-  private counter = 1;
+  public listNewItemsFromSuppliers: WarehouseCheckInNewItemDTO[] = [];
 
   /** Category selection with form control for empty selection */
-  public categoryControl = new FormControl('', Validators.required);
   public categoryItems: WarehouseItemCategoryDTO[] = [];
+  public myForm: FormGroup;
 
   @ViewChild('myCheckinProductsTable') table: MatTable<any>;
 
+  static invalidNumberValidator(control: AbstractControl): { [key: string]: boolean } | null {
+    if (control.value < 0) {
+      return {invalidNumber: true};
+    }
+    return null;
+  }
+
   constructor(private newDeliveryToWarehouseService: NewDeliveryToWarehouseService,
-              private categoryService: CategoryService) {
+              private categoryService: CategoryService,
+              private formBuilder: FormBuilder) {
   }
 
   ngOnInit(): void {
     this.categoryService.getAllActivatedCategories().subscribe(JsonDto => this.categoryItems = JsonDto);
+    this.createForm();
   }
 
-
-  /** Whether the number of selected elements matches the total number of rows. */
-  isAllSelected() {
-    const numSelected = this.selection.selected.length;
-    const numRows = this.listNewItemsFromSuppliers.length;
-    return numSelected === numRows;
+  createForm() {
+    this.myForm = this.formBuilder.group({
+      category: ['', [Validators.required]],
+      quantity: [0, [Validators.required, NewDeliveryToWarehouseComponent.invalidNumberValidator]],
+      priceListPerUnit: [0, [Validators.required, NewDeliveryToWarehouseComponent.invalidNumberValidator]],
+      priceSupplierPerUnit: [0, [Validators.required, NewDeliveryToWarehouseComponent.invalidNumberValidator]],
+      supplierName: ['', [Validators.required]]
+    });
   }
 
-  /** Selects all rows if they are not all selected; otherwise clear selection. */
-  masterToggle() {
-    if (this.isAllSelected()) {
-      this.selection.clear();
-    } else {
-      this.listNewItemsFromSuppliers.forEach(row => this.selection.select(row));
-    }
-  }
-
-  /** The label for the checkbox on the passed row */
-  checkboxLabel(row?: PeriodicElement): string {
-    if (!row) {
-      return `${this.isAllSelected() ? 'select' : 'deselect'} all`;
-    }
-    return `${this.selection.isSelected(row) ? 'deselect' : 'select'} row ${row.position + 1}`;
-  }
-
-  /** Add a new item to table */
-  addNewItemToList(): void {
-    const newItem: PeriodicElement = {
-      position: this.counter++,
-      category: this.newItemFromSupplier.category,
-      priceListPerUnit: this.newItemFromSupplier.priceListPerUnit,
-      priceSupplierPerUnit: this.newItemFromSupplier.priceSupplierPerUnit,
-      quantity: this.newItemFromSupplier.quantity,
-      supplierName: this.newItemFromSupplier.supplierName
-    };
-    const isCategoryNotEmpty = !this.categoryControl.hasError('required');
-    const isPricePerUnitNotEmpty = newItem.priceListPerUnit > 0 && newItem.priceSupplierPerUnit > 0;
-    const isQuantityNotEmpty = newItem.quantity > 0;
-    const isSupplierNotEmpty = newItem.supplierName !== '';
-    if (isCategoryNotEmpty && isPricePerUnitNotEmpty && isQuantityNotEmpty && isSupplierNotEmpty) {
-      this.listNewItemsFromSuppliers.push(newItem);
+  onSubmit(userData: WarehouseCheckInNewItemDTO) {
+    if (this.myForm.valid) {
+      userData.isChecked = false;
+      this.listNewItemsFromSuppliers.push(userData);
       this.table.renderRows();
-    } else {
-
     }
-  }
-
-  /** Delete all selected items */
-  deleteItem(): void {
-    for (const selectedItem of this.selection.selected) {
-
-      const removeIndex = this.listNewItemsFromSuppliers.map((item) => {
-        return item.position;
-      }).indexOf(selectedItem.position);
-
-      this.listNewItemsFromSuppliers.splice(removeIndex, 1);
-    }
-    this.table.renderRows();
-    this.selection.clear();
   }
 
   saveList(): void {
-    this.newDeliveryToWarehouseService.saveList(this.listNewItemsFromSuppliers);
-    this.listNewItemsFromSuppliers = [];
+    Swal.showLoading();
+    this.newDeliveryToWarehouseService.saveList(this.listNewItemsFromSuppliers).subscribe(result => {
+      if (result) {
+        this.listNewItemsFromSuppliers = [];
+        this.table.renderRows();
+        Swal.close();
+        Swal.fire(
+          'Success',
+          'List saved', //messageSuccessSaving
+          'success'
+        );
+      } else {
+        Swal.fire({
+          icon: 'error',
+          title: 'Error',
+          text: 'List could not be saved. Please try again.' //messageErrorSaving
+        });
+      }
+    });
+
+  }
+
+  selectItem(element: WarehouseCheckInNewItemDTO): void {
+    element.isChecked = !element.isChecked;
+  }
+
+  deleteItem() {
+    this.listNewItemsFromSuppliers.filter(obj => obj.isChecked).forEach(obj => {
+      const index = this.listNewItemsFromSuppliers.indexOf(obj);
+      this.listNewItemsFromSuppliers.splice(index, 1);
+    });
     this.table.renderRows();
   }
 }
