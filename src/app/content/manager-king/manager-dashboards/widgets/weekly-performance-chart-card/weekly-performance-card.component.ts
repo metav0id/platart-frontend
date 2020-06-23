@@ -31,7 +31,7 @@ export class WeeklyPerformanceCardComponent implements OnInit {
   timeline = true;
   showLabels = false;
   colorScheme = {
-    domain: ['#8B0000', '#B22222', '#CD5C5C', '#F08080', '#FA8072', '#FFA07A', '#E9967A']
+    domain: this.managerDashboardService.getColors()
   };
 
 

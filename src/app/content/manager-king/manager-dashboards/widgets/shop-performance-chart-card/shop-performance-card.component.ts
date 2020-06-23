@@ -52,7 +52,8 @@ export class ShopPerformanceCardComponent implements OnInit {
   showLabels = false;
   timeline = true;
   colorScheme = {
-    domain: ['#FFA07A', '#E9967A', '#FA8072', '#F08080', '#CD5C5C', '#B22222', '#8B0000']
+    // domain: ['#FFA07A', '#E9967A', '#FA8072', '#F08080', '#CD5C5C', '#B22222', '#8B0000']
+    domain: this.managerDashboardService.getColors()
   };
 
   createChartDates(): DateRangeDTO {
