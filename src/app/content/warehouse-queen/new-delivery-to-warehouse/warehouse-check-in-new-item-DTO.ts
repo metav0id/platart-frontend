@@ -4,5 +4,5 @@ export interface WarehouseCheckInNewItemDTO {
   priceListPerUnit: number;
   priceSupplierPerUnit: number;
   supplierName: string;
-
+  isChecked?: boolean;
 }

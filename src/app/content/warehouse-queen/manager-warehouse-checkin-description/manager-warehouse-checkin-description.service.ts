@@ -4,7 +4,7 @@ import {environment} from '../../../../environments/environment';
 import {HttpClient} from '@angular/common/http';
 import {DateRangeDTO} from './manager-warehouse-checkin-description-DTOs/DateRangeDTO';
 import {ShopsAllSoldItemsDTO} from './manager-warehouse-checkin-description-DTOs/ShopsAllSoldItemsDTO';
-import {WarehouseCheckInNewItemDTO} from '../../warehouse-queen/new-delivery-to-warehouse/warehouse-check-in-new-item-DTO';
+import {WarehouseCheckInNewItemDTO} from '../new-delivery-to-warehouse/warehouse-check-in-new-item-DTO';
 import {ManagerWarehouseCheckinListingDTO} from './manager-warehouse-checkin-description-DTOs/ManagerWarehouseCheckinListingDTO';
 
 @Injectable({

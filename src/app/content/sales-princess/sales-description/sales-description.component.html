@@ -15,13 +15,13 @@
       </div>
       <mat-form-field>
         <mat-label>{{ t('translate.start-date') }}</mat-label>
-        <input (dateInput)="startDateSelection($event)" [matDatepicker]="picker1" matInput>
+        <input (dateInput)="startDateSelection($event)" [matDatepicker]="picker1" matInput [max]="tomorrow">
         <mat-datepicker-toggle [for]="picker1" matSuffix></mat-datepicker-toggle>
         <mat-datepicker #picker1 touchUi></mat-datepicker>
       </mat-form-field>
       <mat-form-field>
         <mat-label>{{ t('translate.end-date') }}</mat-label>
-        <input (dateInput)="endDateSelection($event)" [matDatepicker]="picker2" matInput>
+        <input (dateInput)="endDateSelection($event)" [matDatepicker]="picker2" matInput [max]="tomorrow">
         <mat-datepicker-toggle [for]="picker2" matSuffix></mat-datepicker-toggle>
         <mat-datepicker #picker2 touchUi></mat-datepicker>
       </mat-form-field>

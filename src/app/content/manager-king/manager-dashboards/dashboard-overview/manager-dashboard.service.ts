@@ -53,20 +53,16 @@ export class ManagerDashboardService {
     return this.http.post<DailyReportingDto[]>(environment.getDailyDataForPeriod, range).pipe(delay(1000));
   }
 
+  // get data for category ranking-dashboard
+
   fetchCategoryData(range: DateRangeDTO): Observable<BarDataDto[]> {
     return this.http.post<BarDataDto[]>(environment.getCategoryDataURL, range).pipe(delay(1000));
   }
 
-  // todo: Correct implementation to select proper colour-set for bar-charts. Not yet working as intended
-
-
-
-  getColors(itemCount: number) {
-    const colours = ['#8B0000', '#B22222', '#CD5C5C', '#F08080', '#FA8072', '#FFA07A', '#E9967A'];
-    const colourset: string[] = [];
-    for (let i = 0; i < itemCount; i++) {
-      colourset[i] = colours[i];
-    }
+  getColors() {
+    const colourset: string[] = ['#ffebe6', '#ffd6cc', '#ffc2b3', '#ffad99', '#ff9980', '#ff8566', '#ff704d',
+      '#ff5c33', '#ff471a', '#ff5c33', '#ff3300', '#e62e00', '#cc2900', '#b32400', '#991f00', '#801a00',
+      '#661400', '#4d0f00', '#330a00'];
     return colourset.reverse();
   }
 }
