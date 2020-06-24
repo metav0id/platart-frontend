@@ -1,67 +1,82 @@
 <ng-template transloco let-t>
   <mat-divider></mat-divider>
-  <div fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="20px" class="stats-card">
-    <mat-card fxFlex="100">
-      <h1 align="center">{{ t('translate.categoryDashboard') }}</h1>
-    </mat-card>
-  </div>
-  <mat-divider></mat-divider>
-  <div>
-  <mat-card fxFlex="1000">
 
-    <mat-form-field>
-      <mat-label>{{ t('translate.startDate') }}</mat-label>
-      <input  matInput [matDatepicker]="pickerStart" [formControl]="startDate" [max]="maxDate" (dateInput)="startDateSelection($event)" >
-      <mat-datepicker-toggle matSuffix [for]="pickerStart"></mat-datepicker-toggle>
-      <mat-datepicker #pickerStart touchUi></mat-datepicker>
-    </mat-form-field>
-    <mat-form-field>
-      <mat-label>{{ t('translate.endDate') }}</mat-label>
-      <input matInput [matDatepicker]="pickerEnd" [min]="pickerStart" [formControl]="endDate" [max]="maxDate" (dateInput)="endDateSelection($event)" >
-      <mat-datepicker-toggle matSuffix [for]="pickerEnd"></mat-datepicker-toggle>
-      <mat-datepicker #pickerEnd touchUi></mat-datepicker>
-    </mat-form-field>
-    <button (click)="refreshCategoryGraph()" matTooltip="{{ t('translate.refreshGraph') }}"
-            [matTooltipPosition]="position.value" mat-mini-fab>
-      <mat-icon>autorenew</mat-icon>
-    </button>
+<div class="space"></div>
+  <div class="container-fluid d-flex justify-content-center">
+  <div class="demo-card-wide mdl-card mdl-shadow--2dp">
+      <div class="mdl-card__title -align-center">
+        <h2 class="mdl-card__title-text">{{ t('translate.categoryDashboard') }}</h2>
+     </div>
+  <div class="cont-bg4">
+      <div class="mdl-card__supporting-text">
+      <div fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="20px" class="stats-card">
+        <mat-card fxFlex="100">
+          <!--      <h1 align="center">{{ t('translate.categoryDashboard') }}</h1>-->
+        </mat-card>
+      </div>
+          <mat-divider></mat-divider>
+    <div class="cont-bg4">
+      <mat-card fxFlex="1000">
+
+        <div class="cont-bg4">
+        <mat-form-field>
+          <mat-label>{{ t('translate.startDate') }}</mat-label>
+          <input  matInput [matDatepicker]="pickerStart" [formControl]="startDate" [max]="maxDate" (dateInput)="startDateSelection($event)" >
+          <mat-datepicker-toggle matSuffix [for]="pickerStart"></mat-datepicker-toggle>
+          <mat-datepicker #pickerStart touchUi></mat-datepicker>
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>{{ t('translate.endDate') }}</mat-label>
+          <input matInput [matDatepicker]="pickerEnd" [min]="pickerStart" [formControl]="endDate" [max]="maxDate" (dateInput)="endDateSelection($event)" >
+          <mat-datepicker-toggle matSuffix [for]="pickerEnd"></mat-datepicker-toggle>
+          <mat-datepicker #pickerEnd touchUi></mat-datepicker>
+        </mat-form-field>
+        <button (click)="refreshCategoryGraph()" matTooltip="Refresh graph"
+                [matTooltipPosition]="position.value" mat-mini-fab>
+          <mat-icon>autorenew</mat-icon>
+        </button>
 
 
+</div>
+      </mat-card>
+    </div>
+    </div>
+    <div>
+      <mat-card fxFlex="1000">
+        <div class="text">
+          <h4>{{ t('translate.salesRankedCategory') }}</h4>
 
-</mat-card>
-  </div>
-<div>
-  <mat-card fxFlex="1000">
-    <div class="text">
-      <h4>{{ t('translate.salesRankedCategory') }}</h4>
-
-      <span>
+          <span>
     <mat-icon color="primary">trending_up</mat-icon>
   </span>
 
-      <span>{{ t('translate.itemsSold') }}</span>
+          <span>{{ t('translate.itemsSold') }}</span>
 
+        </div>
+        <div class="widget">
+          <div class="chart-wrapper">
+            <ngx-charts-bar-horizontal
+
+              [scheme]="colorScheme"
+              [results]="barData"
+              [gradient]="gradient"
+              [xAxis]="showXAxis"
+              [yAxis]="showYAxis"
+              [legend]="showLegend"
+              [showXAxisLabel]="showXAxisLabel"
+              [showYAxisLabel]="showYAxisLabel"
+              [xAxisLabel]="xAxisLabel"
+              [yAxisLabel]="yAxisLabel">
+
+
+            </ngx-charts-bar-horizontal>
+
+          </div>
+        </div>
+      </mat-card>
     </div>
-    <div class="widget">
-      <div class="chart-wrapper">
-        <ngx-charts-bar-horizontal
-
-          [scheme]="colorScheme"
-          [results]="barData"
-          [gradient]="gradient"
-          [xAxis]="showXAxis"
-          [yAxis]="showYAxis"
-          [legend]="showLegend"
-          [showXAxisLabel]="showXAxisLabel"
-          [showYAxisLabel]="showYAxisLabel"
-          [xAxisLabel]="xAxisLabel"
-          [yAxisLabel]="yAxisLabel">
-
-
-        </ngx-charts-bar-horizontal>
-
-      </div>
-    </div>
-  </mat-card>
+  </div>
+  </div>
 </div>
+  <div class="space"></div>
 </ng-template>
