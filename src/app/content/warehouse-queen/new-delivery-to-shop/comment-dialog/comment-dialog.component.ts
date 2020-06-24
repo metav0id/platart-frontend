@@ -1,6 +1,7 @@
 import {Component, Inject, OnInit} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
 import {TRANSLOCO_SCOPE} from '@ngneat/transloco';
+import {NewOrderItemDTO} from '../new-delivery-to-shop-DTOs/NewOrderItemDTO';
 
 @Component({
   selector: 'app-comment-dialog',
@@ -11,7 +12,7 @@ import {TRANSLOCO_SCOPE} from '@ngneat/transloco';
 export class CommentDialogComponent implements OnInit {
 
   constructor(private dialogRef: MatDialogRef<CommentDialogComponent>,
-              @Inject(MAT_DIALOG_DATA) public data: string) { }
+              @Inject(MAT_DIALOG_DATA) public data: NewOrderItemDTO) { }
 
   ngOnInit(): void {
   }

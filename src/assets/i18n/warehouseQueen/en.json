@@ -64,5 +64,6 @@
   "stockInWarehouse": "Stock in warehouse",
   "supplier": "Supplier",
   "update": "Update",
-  "value": "value"
+  "value": "value",
+  "details": "Details"
 }

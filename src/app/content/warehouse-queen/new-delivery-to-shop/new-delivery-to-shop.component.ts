@@ -223,13 +223,6 @@ export class NewDeliveryToShopComponent implements OnInit {
   //   this.table.renderRows();
   // }
   //
-  removeCurrentItem(currentIndex: number) {
-    for (let i = 0; i < this.listNewItemsToShops.length; i++) {
-      if (this.listNewItemsToShops[i].id === currentIndex) {
-        this.listNewItemsToShops.splice(i, 1);
-      }
-    }
-  }
 
   sendCurrentOrder() {
     let persistanceResponseList: WarehouseNewDeliveryPersistanceResponseDTO;
@@ -249,7 +242,7 @@ export class NewDeliveryToShopComponent implements OnInit {
   openDialogComment(element: NewOrderItemDTO) {
     this.dialog.open(CommentDialogComponent, {
       width: '400px',
-      data: element.comment
+      data: element
     });
   }
 

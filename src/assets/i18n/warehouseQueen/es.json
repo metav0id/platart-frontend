@@ -64,5 +64,6 @@
   "stockInWarehouse": "Stock en bodega",
   "supplier": "Proveedor",
   "update": "Actualizar",
-  "value": "valor"
+  "value": "valor",
+  "details": "detalles"
 }
