@@ -121,10 +121,10 @@
               <div class="container cont-bg4  justify-content-center ">
                 <div class="space"></div>
                 <div class="d-flex justify-content-around">
-                  <button matTooltip="Deletes the table"
-                          [matTooltipPosition]="position.value" mat-raised-button
-                          (click)="clearCurrentOrder()">{{ t('translate.clearCurrentOrder') }}
-                  </button>
+<!--                  <button matTooltip="Deletes the table"-->
+<!--                          [matTooltipPosition]="position.value" mat-raised-button-->
+<!--                          (click)="clearCurrentOrder()">{{ t('translate.clearCurrentOrder') }}-->
+<!--                  </button>-->
                   <button matTooltip="Send the current order to the shop"
                           [matTooltipPosition]="position.value" mat-raised-button
                           (click)="sendCurrentOrder()">{{ t('translate.sendOrder') }}
@@ -150,13 +150,9 @@
                        class="mat-elevation-z8">
 
                   <ng-container matColumnDef="select">
-                    <th mat-header-cell *matHeaderCellDef>
-                      <mat-checkbox>
-                      </mat-checkbox>
-                    </th>
-                    <td mat-cell *matCellDef="let row">
-                      <mat-checkbox>
-                      </mat-checkbox>
+                    <th mat-header-cell *matHeaderCellDef></th>
+                    <td mat-cell *matCellDef="let element">
+                      <mat-checkbox (click)="selectItem(element)"></mat-checkbox>
                     </td>
                     <td mat-footer-cell *matFooterCellDef> -</td>
                   </ng-container>
@@ -172,7 +168,8 @@
                   <ng-container matColumnDef="quantity">
                     <th mat-header-cell *matHeaderCellDef> {{ t('translate.quantity') }}</th>
                     <td mat-cell *matCellDef="let element"> {{element.quantity}}#</td>
-                    <td mat-footer-cell *matFooterCellDef> {{getTotalItems()}}#</td>
+<!--                    <td mat-footer-cell *matFooterCellDef> {{getTotalItems()}}#</td>-->
+                    <td mat-footer-cell *matFooterCellDef></td>
                   </ng-container>
 
                   <!-- priceSalesPerUnit Column -->
@@ -193,7 +190,8 @@
                   <ng-container matColumnDef="priceListPerUnit">
                     <th mat-header-cell *matHeaderCellDef> {{ t('translate.listPrice') }}</th>
                     <td mat-cell *matCellDef="let element"> {{element.priceListPerUnit}}$</td>
-                    <td mat-footer-cell *matFooterCellDef> {{getTotalValue()}}$</td>
+<!--                    <td mat-footer-cell *matFooterCellDef> {{getTotalValue()}}$</td>-->
+                    <td mat-footer-cell *matFooterCellDef></td>
                   </ng-container>
 
                   <!-- Comment Column -->
@@ -209,7 +207,7 @@
                   <ng-container matColumnDef="updateItem">
                     <th mat-header-cell *matHeaderCellDef> {{ t('translate.action') }}</th>
                     <td mat-cell *matCellDef="let element">
-                      <button (click)="updateButton(element)">{{ t('translate.correctItem') }}</button>
+<!--                      <button (click)="updateButton(element)">{{ t('translate.correctItem') }}</button>-->
                     </td>
                     <td mat-footer-cell *matFooterCellDef> -</td>
                   </ng-container>

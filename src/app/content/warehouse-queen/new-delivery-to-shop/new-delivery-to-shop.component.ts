@@ -1,6 +1,5 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {FormControl, Validators} from '@angular/forms';
-import {SelectionModel} from '@angular/cdk/collections';
 import {MatTable} from '@angular/material/table';
 import {NewOrderItemDTO} from './new-delivery-to-shop-DTOs/NewOrderItemDTO';
 import {NewDeliveryToShopService} from './new-delivery-to-shop.service';
@@ -13,7 +12,6 @@ import {MatDialog} from '@angular/material/dialog';
 import {CommentDialogComponent} from './comment-dialog/comment-dialog.component';
 import {CategoryService} from '../../services/category.service';
 import {AuthService} from '../../services/auth.service';
-import {PeriodicElement} from './new-delivery-to-shop-DTOs/periodicElements';
 import Swal from "sweetalert2";
 
 @Component({
@@ -28,7 +26,7 @@ export class NewDeliveryToShopComponent implements OnInit {
 
   displayedColumns: string[] = ['select', 'category', 'priceListPerUnit', 'quantity',
     'discountPercent', 'priceSalesPerUnit', 'comment', 'updateItem'];
-  public listNewItemsToShops: PeriodicElement[] = [];
+  public listNewItemsToShops: NewOrderItemDTO[] = [];
   public categoryItems: WarehouseItemCategoryDTO[] = [];
 
   public discountMethod: string;
@@ -42,8 +40,8 @@ export class NewDeliveryToShopComponent implements OnInit {
   private totalCost: number;
   private totalItems: number;
 
-  newOrderElement: PeriodicElement = {
-    position: 0,
+  newOrderElement: NewOrderItemDTO = {
+    id: 0,
     category: this.INITIALIZE_CATEGORY,
     quantity: 0,
     priceSalesPerUnit: 0,
@@ -53,7 +51,6 @@ export class NewDeliveryToShopComponent implements OnInit {
     comment: ''
   };
 
-  selection = new SelectionModel<PeriodicElement>(true, []);
   /** Category selection */
   public categoryControl = new FormControl('', Validators.required);
 
@@ -78,22 +75,8 @@ export class NewDeliveryToShopComponent implements OnInit {
   fetchNewOrderData(): void {
     this.newDeliveryToShopService.getAllNewOrderItems().subscribe(
       JsonDto => {
-        this.listNewItemsToShops = [];
-        let counter = 0;
-        for (const tempNewOrderItemDTO of JsonDto) {
-          const newPeriodicElement: PeriodicElement = {
-            position: counter,
-            category: tempNewOrderItemDTO.category,
-            discountPercent: tempNewOrderItemDTO.discountPercent,
-            priceSalesPerUnit: tempNewOrderItemDTO.priceSalesPerUnit,
-            priceListPerUnit: tempNewOrderItemDTO.priceListPerUnit,
-            quantity: tempNewOrderItemDTO.quantity,
-            deliveryShop: tempNewOrderItemDTO.deliveryShop,
-            comment: tempNewOrderItemDTO.comment
-          };
-          counter++;
-          this.listNewItemsToShops.push(newPeriodicElement);
-        }
+        JsonDto.forEach(obj => obj.isChecked = false);
+        this.listNewItemsToShops = JsonDto;
         this.table.renderRows();
       });
   }
@@ -115,8 +98,8 @@ export class NewDeliveryToShopComponent implements OnInit {
           this.newOrderElement.quantity > 0 &&
           this.newOrderElement.deliveryShop !== this.INITIALIZE_SHOP) {
 
-          const newItem: PeriodicElement = {
-            position: this.listNewItemsToShops.length + 1,
+          const newItem: NewOrderItemDTO = {
+            id: 0,
             category: this.newOrderElement.category,
             quantity: this.newOrderElement.quantity,
             priceSalesPerUnit: this.newOrderElement.priceSalesPerUnit,
@@ -134,7 +117,7 @@ export class NewDeliveryToShopComponent implements OnInit {
             newItem.priceSalesPerUnit = Math.round(newItem.priceListPerUnit * (1 - newItem.discountPercent / 100) * 100) / 100;
           }
           this.listNewItemsToShops.push(newItem);
-          this.saveCurrentOrder();
+          this.saveCurrentOrder(this.listNewItemsToShops);
         }
       }
     });
@@ -196,68 +179,62 @@ export class NewDeliveryToShopComponent implements OnInit {
     return this.totalItems;
   }
 
-  saveCurrentOrder() {
-    const tempNewOrderItemDTOList: NewOrderItemDTO[] = this.mapPeriodicElementListToDTO();
-    this.newDeliveryToShopService.setAllNewOrderItems(tempNewOrderItemDTOList).subscribe(result => {
+  saveCurrentOrder(listNewItemsToShops: NewOrderItemDTO[]) {
+    this.newDeliveryToShopService.setAllNewOrderItems(listNewItemsToShops).subscribe(result => {
+      this.listNewItemsToShops = result;
       Swal.close();
       this.table.renderRows();
     });
   }
 
-  mapPeriodicElementListToDTO(): NewOrderItemDTO[] {
-    const tempNewOrderItemDTOList: NewOrderItemDTO[] = [];
-    for (const tempPeriodicElement of this.listNewItemsToShops) {
-      const newOrderItemDTO: NewOrderItemDTO = {
-        id: tempPeriodicElement.position,
-        category: tempPeriodicElement.category,
-        discountPercent: tempPeriodicElement.discountPercent,
-        priceSalesPerUnit: tempPeriodicElement.priceSalesPerUnit,
-        priceListPerUnit: tempPeriodicElement.priceListPerUnit,
-        quantity: tempPeriodicElement.quantity,
-        deliveryShop: tempPeriodicElement.deliveryShop,
-        comment: tempPeriodicElement.comment
-      };
-      tempNewOrderItemDTOList.push(newOrderItemDTO);
-    }
-    return tempNewOrderItemDTOList;
-  }
-
   clearCurrentOrder() {
-    for (const elem of this.selection.selected) {
-      const currentIndex: number = elem.position;
-      this.removeCurrentItem(currentIndex);
-    }
-
-    this.table.renderRows();
+    Swal.showLoading();
+    const table: number[] = [];
+    this.listNewItemsToShops.filter(obj => obj.isChecked).forEach(obj => table.push(obj.id));
+    this.newDeliveryToShopService.removeItems(table).subscribe(result => {
+      this.fetchNewOrderData();
+      this.table.renderRows();
+      if (result) {
+        Swal.fire(
+          'Success',
+          'Deleted successfully', //messageSuccessSaving
+          'success'
+        );
+      } else {
+        Swal.fire({
+          icon: 'error',
+          title: 'Error',
+          text: 'Could not deleted. Please try again.' //messageErrorSaving
+        });
+      }
+    });
   }
 
-  updateButton(periodicElement: PeriodicElement) {
-    this.newOrderElement.position = periodicElement.position;
-    this.newOrderElement.category = periodicElement.category;
-    this.newOrderElement.quantity = periodicElement.quantity;
-    this.newOrderElement.priceSalesPerUnit = periodicElement.priceSalesPerUnit;
-    this.newOrderElement.discountPercent = periodicElement.discountPercent;
-    this.newOrderElement.priceListPerUnit = periodicElement.priceListPerUnit;
-    this.newOrderElement.deliveryShop = periodicElement.deliveryShop;
-
-    this.removeCurrentItem(periodicElement.position);
-    this.table.renderRows();
-  }
-
+  // updateButton(periodicElement: PeriodicElement) {
+  //   this.newOrderElement.position = periodicElement.position;
+  //   this.newOrderElement.category = periodicElement.category;
+  //   this.newOrderElement.quantity = periodicElement.quantity;
+  //   this.newOrderElement.priceSalesPerUnit = periodicElement.priceSalesPerUnit;
+  //   this.newOrderElement.discountPercent = periodicElement.discountPercent;
+  //   this.newOrderElement.priceListPerUnit = periodicElement.priceListPerUnit;
+  //   this.newOrderElement.deliveryShop = periodicElement.deliveryShop;
+  //
+  //   this.removeCurrentItem(periodicElement.position);
+  //   this.table.renderRows();
+  // }
+  //
   removeCurrentItem(currentIndex: number) {
     for (let i = 0; i < this.listNewItemsToShops.length; i++) {
-      if (this.listNewItemsToShops[i].position === currentIndex) {
+      if (this.listNewItemsToShops[i].id === currentIndex) {
         this.listNewItemsToShops.splice(i, 1);
       }
     }
   }
 
   sendCurrentOrder() {
-    const tempNewOrderItemDTOList: NewOrderItemDTO[] = this.mapPeriodicElementListToDTO();
-
     let persistanceResponseList: WarehouseNewDeliveryPersistanceResponseDTO;
     Swal.showLoading();
-    this.newDeliveryToShopService.sendFinalizedOrder(tempNewOrderItemDTOList).subscribe(observer => {
+    this.newDeliveryToShopService.sendFinalizedOrder(this.listNewItemsToShops).subscribe(observer => {
       persistanceResponseList = observer;
       this.fetchNewOrderData();
       Swal.close();
@@ -269,10 +246,15 @@ export class NewDeliveryToShopComponent implements OnInit {
     });
   }
 
-  openDialogComment(element: PeriodicElement) {
+  openDialogComment(element: NewOrderItemDTO) {
     this.dialog.open(CommentDialogComponent, {
       width: '400px',
       data: element.comment
     });
+  }
+
+  selectItem(element: NewOrderItemDTO): void {
+    element.isChecked = !element.isChecked;
+    console.log(element.isChecked);
   }
 }
