@@ -1,9 +1,8 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
-import {WarehouseGetAllItemsDTO} from './stock-in-warehouse-DTOs/WarehouseGetAllItemsDTO';
 import {HttpClient} from '@angular/common/http';
 import {StockInWarehouseService} from './stock-in-warehouse.service';
 import {TRANSLOCO_SCOPE} from '@ngneat/transloco';
-import {MatTable, MatTableDataSource} from '@angular/material/table';
+import {MatTableDataSource} from '@angular/material/table';
 import {WarehouseItem} from './stock-in-warehouse-DTOs/WarehouseItem';
 import { MatSort } from '@angular/material/sort';
 

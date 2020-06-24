@@ -44,83 +44,82 @@
                       </mat-form-field>
                     </div>
 
-                <div class="newOrderInputFieldsDeliveryFinalPricePerUnit">
-                  <mat-form-field hintLabel="{{ t('translate.max10Char') }}" appearance="fill">
-                    <mat-label>{{ t('translate.listPricePerUnit') }}</mat-label>
-                    <input matInput #input [(ngModel)]="newOrderElement.priceListPerUnit" maxlength="10"
-                           placeholder="List Price">
-                    <mat-hint align="end">{{input.value?.length || 0}}/10</mat-hint>
-                  </mat-form-field>
-                </div>
+                    <div class="newOrderInputFieldsDeliveryFinalPricePerUnit">
+                      <mat-form-field hintLabel="{{ t('translate.max10Char') }}" appearance="fill">
+                        <mat-label>{{ t('translate.listPricePerUnit') }}</mat-label>
+                        <input matInput #input [(ngModel)]="newOrderElement.priceListPerUnit" maxlength="10"
+                               placeholder="List Price">
+                        <mat-hint align="end">{{input.value?.length || 0}}/10</mat-hint>
+                      </mat-form-field>
+                    </div>
 
-                <div class="availabilityAmount space">
-                  <button matTooltip="{{ t('translate.checkHowManyItems') }}"
-                          [matTooltipPosition]="position.value" mat-raised-button
-                          (click)="verifyAvailability()">{{ t('translate.checkAvailability') }}
-                  </button>
-                  <a>{{availableItems}} {{ t('translate.items') }}</a>
-                </div>
-                <div class="space"></div>
+                    <div class="availabilityAmount space">
+                      <button matTooltip="{{ t('translate.checkHowManyItems') }}"
+                              [matTooltipPosition]="position.value" mat-raised-button
+                              (click)="verifyAvailability()">{{ t('translate.checkAvailability') }}
+                      </button>
+                      <a>{{availableItems}} {{ t('translate.items') }}</a>
+                    </div>
+                    <div class="space"></div>
 
-                <div class="newOrderInputFieldsDeliveryQuantity">
-                  <mat-form-field hintLabel="{{ t('translate.max10Char') }}" appearance="fill">
-                    <mat-label>{{ t('translate.enterQuantity') }}</mat-label>
-                    <input matInput #input [(ngModel)]="newOrderElement.quantity" maxlength="10"
-                           placeholder="Ex. deliveryQuantity">
-                    <mat-hint align="end">{{input.value?.length || 0}}/10</mat-hint>
-                  </mat-form-field>
-                </div>
+                    <div class="newOrderInputFieldsDeliveryQuantity">
+                      <mat-form-field hintLabel="{{ t('translate.max10Char') }}" appearance="fill">
+                        <mat-label>{{ t('translate.enterQuantity') }}</mat-label>
+                        <input matInput #input [(ngModel)]="newOrderElement.quantity" maxlength="10"
+                               placeholder="Ex. deliveryQuantity">
+                        <mat-hint align="end">{{input.value?.length || 0}}/10</mat-hint>
+                      </mat-form-field>
+                    </div>
 
-                <div class="discountSelectionRadioButton">
-                  <label id="example-radio-group-label">{{ t('translate.discountType') }}:</label>
+                    <div class="discountSelectionRadioButton">
+                      <label id="example-radio-group-label">{{ t('translate.discountType') }}:</label>
+                      <div class="space"></div>
+                      <mat-radio-group
+                        aria-labelledby="example-radio-group-label"
+                        class="example-radio-group"
+                        [(ngModel)]="discountMethod">
+                        <mat-radio-button class="example-radio-button" *ngFor="let discount of discountMethodList"
+                                          [value]="discount">
+                          {{discount}}
+                        </mat-radio-button>
+                      </mat-radio-group>
+                    </div>
+
+                    <div *ngIf="discountMethod== DISCOUNT_METHOD_DISPLAY_PRICE"
+                         class="newOrderInputFieldsDeliveryDisplayPricePerUnit">
+                      <mat-form-field hintLabel="{{ t('translate.max10Char') }}" appearance="fill">
+                        <mat-label>{{ t('translate.salesPricePerUnit') }}</mat-label>
+                        <input matInput #input [(ngModel)]="newOrderElement.priceSalesPerUnit" maxlength="10"
+                               placeholder="Ex. deliveryDisplayPricePerUnit">
+                        <mat-hint align="end">{{input.value?.length || 0}}/10</mat-hint>
+                      </mat-form-field>
+                    </div>
+
+                    <div *ngIf="discountMethod==DISCOUNT_METHOD_PERCENT"
+                         class="newOrderInputFieldsDeliveryDeliveryDiscount">
+                      <mat-form-field hintLabel="{{ t('translate.max10Char') }}" appearance="fill">
+                        <mat-label>{{ t('translate.discountInPercent') }}</mat-label>
+                        <input matInput #input [(ngModel)]="newOrderElement.discountPercent" maxlength="10"
+                               placeholder="Ex. deliveryDiscount">
+                        <mat-hint align="end">{{input.value?.length || 0}}/10</mat-hint>
+                      </mat-form-field>
+                    </div>
+
+                    <mat-form-field appearance="fill">
+                      <mat-label>{{ t('translate.comment') }}</mat-label>
+                      <textarea matInput [(ngModel)]="newOrderElement.comment">{{ t('translate.comment') }}</textarea>
+                    </mat-form-field>
+
+                    <div>
+                      <button matTooltip="{{ t('translate.addOrderToTable') }}"
+                              [matTooltipPosition]="position.value" mat-raised-button
+                              (click)="setNewItemOrder()">{{ t('translate.addNewOrderItem') }}
+                      </button>
+                    </div>
+                  </div>
                   <div class="space"></div>
-                  <mat-radio-group
-                    aria-labelledby="example-radio-group-label"
-                    class="example-radio-group"
-                    [(ngModel)]="discountMethod">
-                    <mat-radio-button class="example-radio-button" *ngFor="let discount of discountMethodList"
-                                      [value]="discount">
-                      {{discount}}
-                    </mat-radio-button>
-                  </mat-radio-group>
-                </div>
-
-                <div *ngIf="discountMethod== DISCOUNT_METHOD_DISPLAY_PRICE"
-                     class="newOrderInputFieldsDeliveryDisplayPricePerUnit">
-                  <mat-form-field hintLabel="{{ t('translate.max10Char') }}" appearance="fill">
-                    <mat-label>{{ t('translate.salesPricePerUnit') }}</mat-label>
-                    <input matInput #input [(ngModel)]="newOrderElement.priceSalesPerUnit" maxlength="10"
-                           placeholder="Ex. deliveryDisplayPricePerUnit">
-                    <mat-hint align="end">{{input.value?.length || 0}}/10</mat-hint>
-                  </mat-form-field>
-                </div>
-
-                <div *ngIf="discountMethod==DISCOUNT_METHOD_PERCENT"
-                     class="newOrderInputFieldsDeliveryDeliveryDiscount">
-                  <mat-form-field hintLabel="{{ t('translate.max10Char') }}" appearance="fill">
-                    <mat-label>{{ t('translate.discountInPercent') }}</mat-label>
-                    <input matInput #input [(ngModel)]="newOrderElement.discountPercent" maxlength="10"
-                           placeholder="Ex. deliveryDiscount">
-                    <mat-hint align="end">{{input.value?.length || 0}}/10</mat-hint>
-                  </mat-form-field>
-                </div>
-
-                <mat-form-field appearance="fill">
-                  <mat-label>{{ t('translate.comment') }}</mat-label>
-                  <textarea matInput [(ngModel)]="newOrderElement.comment">{{ t('translate.comment') }}</textarea>
-                </mat-form-field>
-
-                <div>
-                  <button matTooltip="{{ t('translate.addOrderToTable') }}"
-                          [matTooltipPosition]="position.value" mat-raised-button
-                          (click)="setNewItemOrder()">{{ t('translate.addNewOrderItem') }}
-                  </button>
                 </div>
               </div>
-              <div class="space"></div>
-            </div>
-          </div>
-
             </mat-expansion-panel>
           </mat-accordion>
         </div>

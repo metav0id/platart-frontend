@@ -13,7 +13,7 @@ import {TRANSLOCO_SCOPE, TranslocoService} from '@ngneat/transloco';
   styleUrls: ['./manager-warehouse-checkin-description.component.css'],
   providers: [{
     provide: TRANSLOCO_SCOPE,
-    useValue: {scope: 'salesPrincess', alias: 'translate'}
+    useValue: {scope: 'warehouseQueen', alias: 'translate'}
   }]
 })
 export class ManagerWarehouseCheckinDescriptionComponent implements OnInit {

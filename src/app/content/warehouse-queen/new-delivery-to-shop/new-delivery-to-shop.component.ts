@@ -78,7 +78,7 @@ export class NewDeliveryToShopComponent implements OnInit {
       JsonDto => {
         JsonDto.forEach(obj => obj.isChecked = false);
         this.listNewItemsToShops = JsonDto;
-        this.table.renderRows();
+        // this.table.renderRows();
         Swal.close();
       });
   }
@@ -186,7 +186,7 @@ export class NewDeliveryToShopComponent implements OnInit {
       Swal.close();
       Swal.fire(
         'Success',
-        'Successfully added item to list.', //messageSuccessSaving
+        'Successfully added item to list.',
         'success'
       );
       this.fetchNewOrderData();
@@ -202,14 +202,14 @@ export class NewDeliveryToShopComponent implements OnInit {
       if (result) {
         Swal.fire(
           'Success',
-          'Deleted successfully', //messageSuccessSaving
+          'Deleted successfully',
           'success'
         );
       } else {
         Swal.fire({
           icon: 'error',
           title: 'Error',
-          text: 'Could not deleted. Please try again.' //messageErrorSaving
+          text: 'Could not deleted. Please try again.'
         });
       }
     });
@@ -228,7 +228,7 @@ export class NewDeliveryToShopComponent implements OnInit {
       Swal.close();
       Swal.fire(
         'Edit',
-        'Deleted successfully', //messageSuccessSaving
+        'Deleted successfully',
         'success'
       );
       this.fetchNewOrderData();
@@ -245,7 +245,7 @@ export class NewDeliveryToShopComponent implements OnInit {
       Swal.close();
       Swal.fire(
         'Success',
-        'List saved', //messageSuccessSaving
+        'List saved',
         'success'
       );
     });
