@@ -184,6 +184,11 @@ export class NewDeliveryToShopComponent implements OnInit {
   saveCurrentOrder(listNewItemsToShops: NewOrderItemDTO[]) {
     this.newDeliveryToShopService.setAllNewOrderItems(listNewItemsToShops).subscribe(result => {
       Swal.close();
+      Swal.fire(
+        'Success',
+        'Successfully added item to list.', //messageSuccessSaving
+        'success'
+      );
       this.fetchNewOrderData();
     });
   }
