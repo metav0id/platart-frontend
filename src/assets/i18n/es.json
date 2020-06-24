@@ -1,12 +1,12 @@
 {
-  "administration": "administración",
-  "warehouse": "almacén",
+  "administration": "Administración",
+  "warehouse": "Almacén",
   "Stock-in-warehouse": "Stock en almacén",
-  "New-delivery-to-shop": "Entrega en comercio",
-  "New-delivery-to-warehouse": "entrega en almacén",
+  "New-delivery-to-shop": "Entrega en sucursal",
+  "New-delivery-to-warehouse": "Entrega en almacén",
   "Add-new-category-to-warehouse": "Anadir categoría nueva al almacén",
   "Manager": "Manager",
-  "Manage-Shops-Information": "Manage información de comercios",
+  "Manage-Shops-Information": "Administre información de comercios",
   "Sales": "Sales",
   "After": "After"
 }
