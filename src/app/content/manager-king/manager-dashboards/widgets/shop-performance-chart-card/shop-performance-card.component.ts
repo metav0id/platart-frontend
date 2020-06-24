@@ -1,7 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {ManagerDashboardService} from '../../dashboard-overview/manager-dashboard.service';
 import {DateRangeDTO} from '../../../manager-king-dtos/DateRangeDTO';
-import {FormControl} from '@angular/forms';
 import {TRANSLOCO_SCOPE, TranslocoService} from '@ngneat/transloco';
 
 @Component({
@@ -15,32 +14,15 @@ export class ShopPerformanceCardComponent implements OnInit {
   @Input() label: string;
   @Input() total: string;
   @Input() percentage: string;
-  startDate;
-  endDate;
-  tempDate;
-  maxDate: Date;
-  minDate: Date;
-  hbarData;
 
   constructor(private managerDashboardService: ManagerDashboardService, private translocoService: TranslocoService) {
-    this.endDate = new FormControl(new Date());
-    this.tempDate = new Date();
-    this.tempDate.setDate(this.tempDate.getDate() - 14);
-    this.startDate = new FormControl(this.tempDate);
-    this.maxDate = new Date();
-    this.minDate = this.maxDate;
-
-    const range: DateRangeDTO = {
-      endDate: new Date().toISOString(),
-      startDate: this.tempDate.toISOString()
-    };
-    this.managerDashboardService.fetchHBarData(this.createChartDates())
-      .subscribe((hbarData) => {this.hbarData = hbarData; });
+    this.managerDashboardService.fetchShopPerformanceData(this.createChartDates())
+      .subscribe((barData) => {this.barData = barData; });
   }
 
-  // ngx-charts:
+  // ngx-charts attributes:
 
-  data = this.hbarData;
+  barData = [];
   showXAxis = true;
   showYAxis = true;
   gradient = true;
@@ -49,10 +31,7 @@ export class ShopPerformanceCardComponent implements OnInit {
   xAxisLabel = '';
   showYAxisLabel = false;
   yAxisLabel = '';
-  showLabels = false;
-  timeline = true;
   colorScheme = {
-    // domain: ['#FFA07A', '#E9967A', '#FA8072', '#F08080', '#CD5C5C', '#B22222', '#8B0000']
     domain: this.managerDashboardService.getColors()
   };
 

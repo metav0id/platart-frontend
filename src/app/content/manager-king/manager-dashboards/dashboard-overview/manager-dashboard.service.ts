@@ -18,14 +18,13 @@ export class ManagerDashboardService {
 
   // get data for vertical bar-chart: Last week's aggregated turnover
 
-
-  fetchVBarData(range: DateRangeDTO): Observable<BarDataDto[]> {
+  fetchTurnoverOverviewData(range: DateRangeDTO): Observable<BarDataDto[]> {
     return this.http.post<BarDataDto[]>(environment.getTurnoverByDate, range).pipe(delay(1000));
   }
 
   // get data for horizontal bar-chart: Last day's turnover by shops
 
-  fetchHBarData(range: DateRangeDTO): Observable<BarDataDto[]> {
+  fetchShopPerformanceData(range: DateRangeDTO): Observable<BarDataDto[]> {
     return this.http.post<BarDataDto[]>(environment.getTurnoverByShopURL, range).pipe(delay(1000));
   }
 
@@ -58,6 +57,8 @@ export class ManagerDashboardService {
   fetchCategoryData(range: DateRangeDTO): Observable<BarDataDto[]> {
     return this.http.post<BarDataDto[]>(environment.getCategoryDataURL, range).pipe(delay(1000));
   }
+
+  // get predefined colour-palette for charts
 
   getColors() {
     const colourset: string[] = ['#ffebe6', '#ffd6cc', '#ffc2b3', '#ffad99', '#ff9980', '#ff8566', '#ff704d',

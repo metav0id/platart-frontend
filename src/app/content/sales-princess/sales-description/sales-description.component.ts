@@ -59,7 +59,7 @@ export class SalesDescriptionComponent implements OnInit {
 
   endDateSelection($event: MatDatepickerInputEvent<Date>) {
     const newDate: Date = $event.value;
-    this.endDate = newDate.toISOString();
+    this.startDate = newDate.toISOString();
     this.eventsTime.push(newDate.toISOString());
   }
 

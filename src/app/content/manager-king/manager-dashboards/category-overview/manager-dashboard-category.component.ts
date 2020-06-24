@@ -1,9 +1,7 @@
-import {Component, DoCheck, OnChanges, OnInit, SimpleChange, SimpleChanges} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {FormControl} from '@angular/forms';
-import {MatDatepicker, MatDatepickerInputEvent} from '@angular/material/datepicker';
+import {MatDatepickerInputEvent} from '@angular/material/datepicker';
 import {TooltipPosition} from '@angular/material/tooltip';
-import {Subject} from 'rxjs';
-
 import {ActivatedRoute, Router} from '@angular/router';
 import {ManagerDashboardService} from '../dashboard-overview/manager-dashboard.service';
 import {DateRangeDTO} from '../../manager-king-dtos/DateRangeDTO';
@@ -19,31 +17,15 @@ export class ManagerDashboardCategoryComponent implements OnInit {
 
   startDate;
   endDate;
-  tempDate;
-  maxDate: Date;
-  minDate: Date;
-  hbarData;
+  maxDate;
+  minDate;
+  range: DateRangeDTO;
   positionOptions: TooltipPosition[] = ['after', 'before', 'above', 'below', 'left', 'right'];
   position = new FormControl(this.positionOptions[0]);
 
-  constructor(private managerDashboardService: ManagerDashboardService, private translocoService: TranslocoService,
-              private route: ActivatedRoute, private router: Router) {
-    this.endDate = new FormControl(new Date());
-    this.tempDate = new Date();
-    this.tempDate.setDate(this.tempDate.getDate() - 14);
-    this.startDate = new FormControl(this.tempDate);
-    this.maxDate = new Date();
-    this.minDate = this.maxDate;
+  // ngx-charts-attributes
 
-    const range: DateRangeDTO = {
-      endDate: new Date().toISOString(),
-      startDate: this.tempDate.toISOString()
-    };
-    this.managerDashboardService.fetchCategoryData(range)
-      .subscribe((hbarData) => {this.hbarData = hbarData; });
-  }
-
-
+  barData = [];
   showXAxis = true;
   showYAxis = true;
   gradient = true;
@@ -59,42 +41,46 @@ export class ManagerDashboardCategoryComponent implements OnInit {
   };
 
 
-  ngOnInit(): void {
-    // const range: DateRangeDTO = {
-    //   startDate: this.startDate.toISOString(),
-    //   endDate: this.endDate.toISOString()
-    // };
-    //
-    // this.managerDashboardService.fetchCategoryData(range)
-    //   .subscribe((hbarData) => {this.hbarData = hbarData; });
+  constructor(private managerDashboardService: ManagerDashboardService, private translocoService: TranslocoService,
+              private route: ActivatedRoute, private router: Router) {
+    const tempYear = new Date().getFullYear();
+    const tempMonth = new Date().getMonth();
+    const tempDay = new Date().getDate();
+    this.startDate = new FormControl(new Date(tempYear, tempMonth, tempDay - 15, 23, 59, 59));
+    this.endDate = new FormControl(new Date(tempYear, tempMonth, tempDay - 1, 23, 59, 59));
+    this.maxDate = new Date();
+    this.minDate = this.maxDate;
+    this.range = this.createDefaultChartDates();
+    this.managerDashboardService.fetchCategoryData(this.range)
+      .subscribe((barData) => {this.barData = barData; });
   }
 
-  refreshCategoryGraph(pickerStart: MatDatepicker<any>, pickerEnd: MatDatepicker<any>) {
-    this.startDate = pickerStart;
-    this.endDate = pickerEnd;
-    const range: DateRangeDTO = {
-      startDate: this.startDate.toISOString(),
-      endDate: this.endDate.toISOString()
-  };
-    this.managerDashboardService.fetchCategoryData(range)
-      .subscribe((hbarData) => {this.hbarData = hbarData; });
-    // if (this.startDate < this.endDate) {
-    //   this.router.navigate(['reload']);
-    //   this.ngOnInit();
-    // }
+  ngOnInit(): void {
+    }
+
+  refreshCategoryGraph() {
+    this.managerDashboardService.fetchCategoryData(this.range)
+      .subscribe((barData) => {this.barData = barData; });
   }
 
   startDateSelection($event: MatDatepickerInputEvent<Date>) {
-    const newDate: Date = $event.value;
-
+    this.range.startDate = $event.value.toISOString();
   }
 
   endDateSelection($event: MatDatepickerInputEvent<Date>) {
-    const newDate: Date = $event.value;
+    this.range.endDate = $event.value.toISOString();
   }
 
-
-
-
-
+  createDefaultChartDates(): DateRangeDTO {
+    const intermediateDate = new Date();
+    const tempYear = intermediateDate.getFullYear();
+    const tempMonth = intermediateDate.getMonth();
+    const tempDay = intermediateDate.getDate();
+    const tempStartDate = new Date(tempYear, tempMonth, tempDay - 15, 0, 0, 0);
+    const tempEndDate = new Date(tempYear, tempMonth, tempDay - 1, 23, 59, 59);
+    return {
+      startDate: tempStartDate.toISOString(),
+      endDate: tempEndDate.toISOString()
+    };
+  }
 }

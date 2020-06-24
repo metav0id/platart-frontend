@@ -21,8 +21,8 @@
       <mat-datepicker-toggle matSuffix [for]="pickerEnd"></mat-datepicker-toggle>
       <mat-datepicker #pickerEnd touchUi></mat-datepicker>
     </mat-form-field>
-    <button matTooltip="Refresh graph"
-            [matTooltipPosition]="position.value" mat-mini-fab (click)="refreshCategoryGraph(pickerStart, pickerEnd)">
+    <button (click)="refreshCategoryGraph()" matTooltip="Refresh graph"
+            [matTooltipPosition]="position.value" mat-mini-fab>
       <mat-icon>autorenew</mat-icon>
     </button>
 
@@ -47,7 +47,7 @@
         <ngx-charts-bar-horizontal
 
           [scheme]="colorScheme"
-          [results]="hbarData"
+          [results]="barData"
           [gradient]="gradient"
           [xAxis]="showXAxis"
           [yAxis]="showYAxis"
