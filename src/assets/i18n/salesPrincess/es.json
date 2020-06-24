@@ -36,7 +36,7 @@
   "revenueType": "Tipo de venta",
   "salesNumber": "Cantidad de items vendidos",
   "salesPrice": "Precio final",
-  "salesPricePerUnit": "Precio final ud.",
+  "salesPricePerUnit": "Precio final por unidad",
   "salesType": "Tipo de venta",
   "save": "Guardar",
   "selectShop": "Seleccionar sucursal",
@@ -49,5 +49,5 @@
   "start-date": "Fecha inicial",
   "timestamp": "Hora y fecha de entrada",
   "warehouse-instructions": "Instrucciones adicionales",
-  "DISCOUNT_METHOD_REVENUE": "precio especial"
+  "DISCOUNT_METHOD_REVENUE": "Precio especial"
 }

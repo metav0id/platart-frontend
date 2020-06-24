@@ -24,7 +24,7 @@ import {TranslocoRootModule} from '../../transloco-root.module';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import {SalesDescriptionComponent} from '../sales-princess/sales-description/sales-description.component';
 // tslint:disable-next-line:max-line-length
-import {ManagerWarehouseCheckinDescriptionComponent} from './manager-warehouse-checkin-description/manager-warehouse-checkin-description.component';
+import {ManagerWarehouseCheckinDescriptionComponent} from '../warehouse-queen/manager-warehouse-checkin-description/manager-warehouse-checkin-description.component';
 import {ComerceFormComponent} from './manager-map/comerce-form/comerce-form.component';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import {ManagerDashboardCategoryComponent} from './manager-dashboards/category-overview/manager-dashboard-category.component';

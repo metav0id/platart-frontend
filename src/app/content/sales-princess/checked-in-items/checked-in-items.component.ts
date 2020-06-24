@@ -8,6 +8,7 @@ import {MatDialog} from '@angular/material/dialog';
 import {CheckedInItemsDetailsComponent} from './checked-in-items-details/checked-in-items-details.component';
 import {MatDatepickerInputEvent} from '@angular/material/datepicker';
 import {AuthService} from '../../services/auth.service';
+import Swal from "sweetalert2";
 
 @Component({
   selector: 'app-checked-in-items',
@@ -30,8 +31,14 @@ export class CheckedInItemsComponent implements OnInit {
   displayedColumns: string[] = ['date', 'category', 'priceListPerUnit', 'popup'];
   dataSource = new MatTableDataSource();
 
+  tomorrow = new Date();
+
   constructor(public dialog: MatDialog,
               private checkedInItemsService: CheckedInItemsService, private auth: AuthService) {
+    this.tomorrow.setDate(this.tomorrow.getDate());
+    this.tomorrow.setHours(23);
+    this.tomorrow.setMinutes(59);
+    this.tomorrow.setSeconds(59);
   }
 
   @ViewChild(MatSort, {static: true}) sort: MatSort;
@@ -47,9 +54,11 @@ export class CheckedInItemsComponent implements OnInit {
 
   getCheckedInItemsListSpecificShop(): void {
     if (this.deliveryShop != null && this.startDate !== '' && this.endDate !== '') {
+      Swal.showLoading();
       // tslint:disable-next-line:max-line-length
       this.checkedInItemsService.getCheckedInItemsListSpecificShopDate(this.deliveryShop, this.startDate, this.endDate).subscribe((observable) => {
         this.dataSource = new MatTableDataSource(observable);
+        Swal.close();
       });
       this.dataSource.sort = this.sort;
     }

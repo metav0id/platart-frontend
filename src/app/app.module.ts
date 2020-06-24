@@ -47,6 +47,8 @@ import {environment} from 'src/environments/environment';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import {MatExpansionModule} from '@angular/material/expansion';
 import {LandingPageWarehouseComponent} from './content/landing-page/landing-page-warehouse.component';
+import { LightboxModule } from 'ngx-lightbox';
+import { ElementComponent } from './content/landing-page/element/element.component';
 
 
 
@@ -61,7 +63,8 @@ import {LandingPageWarehouseComponent} from './content/landing-page/landing-page
     FormComponent,
     MarkerFormComponent,
     LoginComponent,
-    LandingPageWarehouseComponent
+    LandingPageWarehouseComponent,
+    ElementComponent
 
   ],
   imports: [
@@ -100,7 +103,9 @@ import {LandingPageWarehouseComponent} from './content/landing-page/landing-page
     AngularFireAuthModule, // auth
     AngularFireStorageModule, // storage
     MatTooltipModule,
-    MatExpansionModule
+    MatExpansionModule,
+    LightboxModule
+
   ],
   providers: [],
 

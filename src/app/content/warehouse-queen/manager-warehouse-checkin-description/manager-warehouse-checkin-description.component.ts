@@ -19,9 +19,15 @@ export class ManagerWarehouseCheckinDescriptionComponent implements OnInit {
   displayedColumns: string[] = ['category', 'quantity', 'priceListPerUnit', 'priceSupplierPerUnit', 'supplierName', 'createDateTime'];
   dataSource = new MatTableDataSource();
 
+  tomorrow = new Date();
+
   @ViewChild(MatSort, {static: true}) sort: MatSort;
 
   constructor(private managerWarehouseCheckinDescriptionService: ManagerWarehouseCheckinDescriptionService) {
+    this.tomorrow.setDate(this.tomorrow.getDate());
+    this.tomorrow.setHours(23);
+    this.tomorrow.setMinutes(59);
+    this.tomorrow.setSeconds(59);
   }
 
   startDate = '';
