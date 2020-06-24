@@ -39,7 +39,7 @@
       <h3>{{ t('translate.selectedShop') }}: {{deliveryShop}}</h3>
       <div class="space"></div>
       <mat-form-field>
-        <mat-label>Filter</mat-label>
+        <mat-label>{{ t('translate.filter') }}</mat-label>
         <input (keyup)="applyFilter($event)" matInput placeholder="Ex. cadena">
       </mat-form-field>
       <div class="table-responsive">

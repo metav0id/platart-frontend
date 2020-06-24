@@ -49,5 +49,22 @@
   "start-date": "Fecha inicial",
   "timestamp": "Hora y fecha de entrada",
   "warehouse-instructions": "Instrucciones adicionales",
-  "DISCOUNT_METHOD_REVENUE": "Precio especial"
+  "DISCOUNT_METHOD_REVENUE": "Precio especial",
+  "refresh": "refresh (es)",
+  "checkItemStock": "Check if the item is available in stock (es)",
+  "addSaleList": "Add sale to list (es)",
+  "saveList": "save list (es)",
+  "detailView": "detail view (es)",
+  "pleaseChooseCategory": "Please choose a category (es)",
+  "chooseDeliveryDate": "Choose delivery date (es)",
+  "enterQuantity": "Enter quantity",
+  "enterNumberGreater": "please enter number > 0",
+  "enterListPrice": "Enter list price",
+  "enterSalesPrice": "Enter sales price",
+  "comments": "comments",
+  "yourComment": "your comment",
+  "pleaseComment": "please enter your comment",
+  "cancel": "cancel",
+  "filter": "filter",
+  "getListDelivery": "get list of delivered items"
 }
