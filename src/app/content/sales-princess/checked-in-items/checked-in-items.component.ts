@@ -67,7 +67,7 @@ export class CheckedInItemsComponent implements OnInit {
   openDialogCheckInDetails(element: any) {
 
     const dialogRef = this.dialog.open(CheckedInItemsDetailsComponent, {
-      width: '400em',
+      width: '300px',
       data: element
     });
 

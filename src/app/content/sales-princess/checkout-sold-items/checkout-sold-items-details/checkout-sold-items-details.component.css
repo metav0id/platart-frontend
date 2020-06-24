@@ -1,6 +1,7 @@
 .cont-bg4{
   background-color: #f5f5f5;
 
+
 }
 
 .demo-card-wide.mdl-card {
@@ -19,4 +20,8 @@
 
 .center {
   text-align: center;
+}
+.margin{
+  margin: 0px;
+  padding: 0px;
 }

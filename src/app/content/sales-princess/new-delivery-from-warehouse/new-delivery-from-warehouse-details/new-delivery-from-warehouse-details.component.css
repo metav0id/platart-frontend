@@ -112,23 +112,27 @@ h3 {
 }
 
 
+
 .demo-card-wide.mdl-card {
-  padding: 0px;
-
+  color: #fff;
+  width: 250px;
 }
-
 .demo-card-wide > .mdl-card__title {
   color: #fff;
-
-
-  /*background: url('../assets/demos/welcome_card.jpg') center / cover;*/
+  width: auto;
 }
 
 .demo-card-wide > .mdl-card__menu {
-  color: #fff;
 }
 
+.space {
+  height: 20px;
+}
 
-.pad{
+.center {
+  text-align: center;
+}
+.margin{
+  margin: 0px;
   padding: 0px;
 }
