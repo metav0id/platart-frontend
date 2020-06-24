@@ -8,13 +8,15 @@ import {
   DialogData,
 
 } from "../map/map.component";
+import {TRANSLOCO_SCOPE, TranslocoService} from '@ngneat/transloco';
 
 
 
 @Component({
   selector: 'app-form',
   templateUrl: './form.component.html',
-  styleUrls: ['./form.component.css']
+  styleUrls: ['./form.component.css'],
+  providers: [{provide: TRANSLOCO_SCOPE, useValue: {scope: 'managerKing', alias: 'translate'}}]
 })
 export class FormComponent implements OnInit {
 
@@ -22,7 +24,7 @@ export class FormComponent implements OnInit {
   comerce: Comerce = new Comerce();
 
 
-  constructor(private comerceService: ComerceService, private router: Router,
+  constructor(private translocoService: TranslocoService, private comerceService: ComerceService, private router: Router,
               public dialogRef: MatDialogRef<FormComponent>, @Inject(MAT_DIALOG_DATA) public data: DialogData) {
   }
 

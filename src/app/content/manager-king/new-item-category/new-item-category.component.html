@@ -27,7 +27,7 @@
                           </mat-form-field>
                         </div>
                         <div>
-                          <button type="submit" matTooltip="Adds new category to the list"
+                          <button type="submit" matTooltip="{{ t('translate.addsNewCategory') }}"
                                   [matTooltipPosition]="position.value" mat-raised-button>{{
                             t('translate.createNewCategory') }}
                           </button>
@@ -69,7 +69,7 @@
                     </mat-form-field>
                   </div>
                   <div class="col">
-                  <button mat-raised-button matTooltip="Deactivates selected categories from the list" (click)="toogleCategoryStatus()">{{t('translate.changeStatus') }}
+                  <button mat-raised-button matTooltip="{{ t('translate.deactivatesCategories') }}" (click)="toogleCategoryStatus()">{{t('translate.changeStatus') }}
                   </button>
                   </div>
                 </div>
