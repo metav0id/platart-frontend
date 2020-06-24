@@ -10,7 +10,7 @@ import {
 } from "@angular/forms";
 import {MarkerFormComponent} from "../components/marker-form.component";
 
-import {TRANSLOCO_SCOPE} from "@ngneat/transloco";
+import {TRANSLOCO_SCOPE, TranslocoService} from '@ngneat/transloco';
 import {MatTableModule} from '@angular/material/table';
 export interface DialogData {
   markerToEdit: Marcador;
@@ -25,7 +25,7 @@ import {ComerceFormComponent} from "../comerce-form/comerce-form.component";
   selector: 'app-map',
   templateUrl: './map.component.html',
   styleUrls: ['./map.component.css'],
-  providers: [{provide: TRANSLOCO_SCOPE, useValue: {scope: 'map', alias: 'translate'}}]
+  providers: [{provide: TRANSLOCO_SCOPE, useValue: {scope: 'managerKing', alias: 'translate'}}]
 })
 export class MapComponent implements OnInit {
   displayedColumns: string[] = ['name', 'address', 'category'];
@@ -54,7 +54,7 @@ export class MapComponent implements OnInit {
     this.mapService.readAllMarkers().subscribe(response => this.dataSource = response);
   }
 
-  constructor(private mapService: MapService, public dialog: MatDialog) {
+  constructor(private translocoService: TranslocoService, private mapService: MapService, public dialog: MatDialog) {
   }
 
   /**This method is the guide to follow when wanting to open a dialog window**/

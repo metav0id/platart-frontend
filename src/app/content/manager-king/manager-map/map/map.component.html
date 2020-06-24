@@ -2,24 +2,24 @@
   <div class="space"></div>
   <div class="container justify-content-center ">
 <mat-card>
-  <mat-card-title>These are your registered comerces: </mat-card-title>
+  <mat-card-title>{{ t('translate.yourRegisteredComerces') }}: </mat-card-title>
   <div class="table-responsive">
   <mat-table [dataSource]="dataSource" class="mat-elevation-z8">
     <!-- Position Column -->
     <ng-container matColumnDef="name">
-      <mat-header-cell *matHeaderCellDef> Name </mat-header-cell>
+      <mat-header-cell *matHeaderCellDef> {{ t('translate.name') }} </mat-header-cell>
       <mat-cell *matCellDef="let element"> {{element.name}} </mat-cell>
     </ng-container>
 
     <!-- Name Column -->
     <ng-container matColumnDef="address">
-      <mat-header-cell *matHeaderCellDef> Address </mat-header-cell>
+      <mat-header-cell *matHeaderCellDef> {{ t('translate.address') }} </mat-header-cell>
       <mat-cell *matCellDef="let element"> {{element.address}} </mat-cell>
     </ng-container>
 
     <!-- Weight Column -->
     <ng-container matColumnDef="category">
-      <mat-header-cell *matHeaderCellDef> Category </mat-header-cell>
+      <mat-header-cell *matHeaderCellDef> {{ t('translate.category') }} </mat-header-cell>
       <mat-cell *matCellDef="let element"> {{element.category}} </mat-cell>
     </ng-container>
 
@@ -55,16 +55,16 @@
 
               <div *ngIf="marcador.name!=null">
 
-                <button matTooltip="Edit the information form this marker"
+                <button matTooltip="{{ t('translate.editInfoFromMarker') }}"
                         [matTooltipPosition]="position.value" mat-raised-button (click)="loadMarkerToModify(marcador)"
-                        mat-raised-button color="warn"> Edit marker
+                        mat-raised-button color="warn"> {{ t('translate.editMarker') }}
                 </button>
-                <button matTooltip="Delete the entire comerce from the database"
+                <button matTooltip="{{ t('translate.deleteComerceFromDb') }}"
                         [matTooltipPosition]="position.value" (click)="borrarComercio(i,marcador)" mat-raised-button
-                        color="primary"> Borrar comercio
+                        color="primary"> {{ t('translate.delete') }}
                 </button>
               </div>
-              <button matTooltip="Deletes the marker but keeps comerce"
+              <button matTooltip="{{ t('translate.deleteMarkerKeepComerce') }}"
                       [matTooltipPosition]="position.value" (click)="borrarMarcador(i,marcador)" mat-raised-button
                       color="primary"> {{ t('translate.delete') }}
               </button>

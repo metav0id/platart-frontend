@@ -1,66 +1,65 @@
-<h1 mat-dialog-title>Detail View</h1>
+<ng-template transloco let-t>
+<h1 mat-dialog-title>{{ t('translate.detailView') }}</h1>
 <div >
   <mat-dialog-content>
   <form [formGroup]="myForm" (ngSubmit)="onSubmit(myForm.value)" novalidate>
     <!--  Input Category-->
     <mat-form-field appearance="fill">
-      <mat-label>Category:</mat-label>
+      <mat-label>{{ t('translate.category') }}:</mat-label>
       <mat-select formControlName="category" [(value)]="newItem.category" required>
         <mat-option>--</mat-option>
         <mat-option *ngFor="let entry of categoryItems" [value]="entry.category">{{entry.category}}</mat-option>
       </mat-select>
-      <mat-error *ngIf="myForm.controls['category'].hasError('required')">Please choose a category</mat-error>
+      <mat-error *ngIf="myForm.controls['category'].hasError('required')">{{ t('translate.pleaseChooseCategory') }}</mat-error>
     </mat-form-field>
 
     <mat-form-field appearance="fill">
-      <mat-label>Choose delivery date</mat-label>
+      <mat-label>{{ t('translate.chooseDeliveryDate') }}</mat-label>
       <input matInput [matDatepicker]="picker" formControlName="timestamp" [value]="newItem.timestamp">
       <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
       <mat-datepicker touchUi #picker></mat-datepicker>
-      <mat-error *ngIf="myForm.controls['timestamp'].hasError('required')">Please choose a delivery date</mat-error>
+      <mat-error *ngIf="myForm.controls['timestamp'].hasError('required')">{{ t('translate.chooseDeliveryDate') }}</mat-error>
     </mat-form-field>
 
     <!--  Input Quantity-->
     <mat-form-field hintLabel="Max 10 characters" appearance="fill">
-      <mat-label>Enter Quantity</mat-label>
+      <mat-label>{{ t('translate.enterQuantity') }}</mat-label>
       <input matInput #input maxlength="10" placeholder="Quantity" formControlName="quantity"
              [value]="newItem.quantity">
-      <mat-error *ngIf="myForm.controls['quantity'].hasError('required')">Please insert quantity</mat-error>
-      <mat-error *ngIf="myForm.controls['quantity'].hasError('invalidNumber')">Please insert number greater than 0
+      <mat-error *ngIf="myForm.controls['quantity'].hasError('required')">{{ t('translate.enterQuantity') }}</mat-error>
+      <mat-error *ngIf="myForm.controls['quantity'].hasError('invalidNumber')">{{ t('translate.enterNumberGreater') }}
       </mat-error>
     </mat-form-field>
 
     <!--  Input List Price-->
     <mat-form-field hintLabel="Max 10 characters" appearance="fill">
-      <mat-label>Enter List Price</mat-label>
+      <mat-label>{{ t('translate.enterListPrice') }}</mat-label>
       <input matInput #input maxlength="10" placeholder="List Price per Unit" formControlName="priceListPerUnit"
              [value]="newItem.priceListPerUnit">
       <mat-hint align="end">{{input.value?.length || 0}}/10</mat-hint>
-      <mat-error *ngIf="myForm.controls['priceListPerUnit'].hasError('required')">Please insert List Price per Unit
+      <mat-error *ngIf="myForm.controls['priceListPerUnit'].hasError('required')">{{ t('translate.enterListPrice') }}
       </mat-error>
-      <mat-error *ngIf="myForm.controls['priceListPerUnit'].hasError('invalidNumber')">Please insert number greater than
-        0
+      <mat-error *ngIf="myForm.controls['priceListPerUnit'].hasError('invalidNumber')">{{ t('translate.enterNumberGreater') }}
       </mat-error>
     </mat-form-field>
 
     <!--  Input Sales Price-->
     <mat-form-field hintLabel="Max 10 characters" appearance="fill">
-      <mat-label>Enter Sales Price</mat-label>
+      <mat-label>{{ t('translate.enterSalesPrice') }}</mat-label>
       <input matInput #input maxlength="10" placeholder="Sales price Per Unit" formControlName="priceSalesPerUnit"
              [value]="newItem.priceSalesPerUnit">
       <mat-hint align="end">{{input.value?.length || 0}}/10</mat-hint>
-      <mat-error *ngIf="myForm.controls['priceSalesPerUnit'].hasError('required')">Please insert Sales Price per Unit
+      <mat-error *ngIf="myForm.controls['priceSalesPerUnit'].hasError('required')">{{ t('translate.enterSalesPrice') }}
       </mat-error>
-      <mat-error *ngIf="myForm.controls['priceSalesPerUnit'].hasError('invalidNumber')">Please insert number greater
-        than 0
+      <mat-error *ngIf="myForm.controls['priceSalesPerUnit'].hasError('invalidNumber')">{{ t('translate.enterNumberGreater') }}
       </mat-error>
     </mat-form-field>
 
     <!--  Input Comment-->
     <mat-form-field appearance="fill">
-      <mat-label>Comments</mat-label>
-      <textarea matInput formControlName="comment">Your comment</textarea>
-      <mat-error *ngIf="myForm.controls['comment'].hasError('required')">Please insert comment</mat-error>
+      <mat-label>{{ t('translate.comments') }}</mat-label>
+      <textarea matInput formControlName="comment">{{ t('translate.yourComment') }}</textarea>
+      <mat-error *ngIf="myForm.controls['comment'].hasError('required')">{{ t('translate.pleaseComment') }}</mat-error>
     </mat-form-field>
     <button mat-mini-fab mat-dialog-close>
       <mat-icon>cancel</mat-icon>
@@ -72,3 +71,4 @@
   </mat-dialog-content>
 </div>
 
+</ng-template>

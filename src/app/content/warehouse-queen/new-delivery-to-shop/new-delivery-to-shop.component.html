@@ -32,7 +32,7 @@
                 </div>
 
                 <div class="newOrderInputFieldsDeliveryFinalPricePerUnit">
-                  <mat-form-field hintLabel="Max 10 characters" appearance="fill">
+                  <mat-form-field hintLabel="{{ t('translate.max10Char') }}" appearance="fill">
                     <mat-label>{{ t('translate.listPricePerUnit') }}</mat-label>
                     <input matInput #input [(ngModel)]="newOrderElement.priceListPerUnit" maxlength="10"
                            placeholder="List Price">
@@ -41,7 +41,7 @@
                 </div>
 
                 <div class="availabilityAmount space">
-                  <button matTooltip="Check how many items are available in stock"
+                  <button matTooltip="{{ t('translate.checkHowManyItems') }}"
                           [matTooltipPosition]="position.value" mat-raised-button
                           (click)="verifyAvailability()">{{ t('translate.checkAvailability') }}
                   </button>
@@ -50,7 +50,7 @@
                 <div class="space"></div>
 
                 <div class="newOrderInputFieldsDeliveryQuantity">
-                  <mat-form-field hintLabel="Max 10 characters" appearance="fill">
+                  <mat-form-field hintLabel="{{ t('translate.max10Char') }}" appearance="fill">
                     <mat-label>{{ t('translate.enterQuantity') }}</mat-label>
                     <input matInput #input [(ngModel)]="newOrderElement.quantity" maxlength="10"
                            placeholder="Ex. deliveryQuantity">
@@ -74,7 +74,7 @@
 
                 <div *ngIf="discountMethod== DISCOUNT_METHOD_DISPLAY_PRICE"
                      class="newOrderInputFieldsDeliveryDisplayPricePerUnit">
-                  <mat-form-field hintLabel="Max 10 characters" appearance="fill">
+                  <mat-form-field hintLabel="{{ t('translate.max10Char') }}" appearance="fill">
                     <mat-label>{{ t('translate.salesPricePerUnit') }}</mat-label>
                     <input matInput #input [(ngModel)]="newOrderElement.priceSalesPerUnit" maxlength="10"
                            placeholder="Ex. deliveryDisplayPricePerUnit">
@@ -84,7 +84,7 @@
 
                 <div *ngIf="discountMethod==DISCOUNT_METHOD_PERCENT"
                      class="newOrderInputFieldsDeliveryDeliveryDiscount">
-                  <mat-form-field hintLabel="Max 10 characters" appearance="fill">
+                  <mat-form-field hintLabel="{{ t('translate.max10Char') }}" appearance="fill">
                     <mat-label>{{ t('translate.discountInPercent') }}</mat-label>
                     <input matInput #input [(ngModel)]="newOrderElement.discountPercent" maxlength="10"
                            placeholder="Ex. deliveryDiscount">
@@ -98,7 +98,7 @@
                 </mat-form-field>
 
                 <div>
-                  <button matTooltip="Add the order to the table"
+                  <button matTooltip="{{ t('translate.addOrderToTable') }}"
                           [matTooltipPosition]="position.value" mat-raised-button
                           (click)="setNewItemOrder()">{{ t('translate.addNewOrderItem') }}
                   </button>
@@ -125,7 +125,7 @@
                           [matTooltipPosition]="position.value" mat-raised-button
                           (click)="clearCurrentOrder()">{{ t('translate.clearCurrentOrder') }}
                   </button>
-                  <button matTooltip="Send the current order to the shop"
+                  <button matTooltip="{{ t('translate.sendsOrderShop') }}"
                           [matTooltipPosition]="position.value" mat-raised-button
                           (click)="sendCurrentOrder()">{{ t('translate.sendOrder') }}
                   </button>

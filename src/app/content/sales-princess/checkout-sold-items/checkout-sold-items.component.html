@@ -6,7 +6,7 @@
       <div class="container-fluid d-flex justify-content-center ">
         <div class="demo-card-wide mdl-card mdl-shadow--2dp">
 
-          <div class="mdl-card__title">
+          <div >
             <h2 class="mdl-card__title-text">{{ t('translate.itemsSoldToday') }} in: {{selectedShopName}}</h2>
           </div>
           <div class="container-fluid d-flex justify-content-center cont-bg4">
@@ -23,7 +23,7 @@
               </mat-form-field>
             </div>
             <button (click)="getSpecificShopList()"
-                    mat-mini-fab matTooltip="Refresh list">
+                    mat-mini-fab matTooltip="{{ t('translate.refresh') }}">
               <mat-icon>autorenew</mat-icon>
             </button>
           </div>
@@ -50,7 +50,7 @@
                   <!--      FORMULAR-->
                   <div>
                     <div class="newOrderInputFieldsDate">
-                      <mat-form-field>
+                      <mat-form-field appearance="fill">
                         <mat-label>{{ t('translate.chooseDate') }}</mat-label>
                         <input (dateInput)="dateSelection($event)" [matDatepicker]="picker" [max]="tomorrow" matInput>
                         <mat-datepicker-toggle [for]="picker" matSuffix></mat-datepicker-toggle>
@@ -93,7 +93,7 @@
                     <div class="availabilityAmount space">
                       <button (click)="verifyAvailability(newCheckoutSoldItem)"
                               [matTooltipPosition]="position.value" mat-raised-button
-                              matTooltip="Check if the item is available in stock">{{ t('translate.checkAvailability') }}</button>
+                              matTooltip="{{ t('translate.checkItemStock') }}">{{ t('translate.checkAvailability') }}</button>
                       <a>{{availableItems}} items</a>
                     </div>
                     <div class="space"></div>
@@ -160,7 +160,7 @@
                     <div class="space"></div>
                     <div>
                       <button (click)="addSoldItem()"
-                              [matTooltipPosition]="position.value" mat-raised-button matTooltip="Add sell to the list">
+                              [matTooltipPosition]="position.value" mat-raised-button matTooltip="{{ t('translate.addSaleList') }}">
                         <mat-icon>library_add</mat-icon>
                       </button>
                     </div>
@@ -233,7 +233,7 @@
                 </div>
               </div>
               <button (click)="sendSoldItemList()"
-                      [matTooltipPosition]="position.value" mat-raised-button matTooltip="Save list">
+                      [matTooltipPosition]="position.value" mat-raised-button matTooltip="{{ t('translate.saveList') }}">
                 <mat-icon>send</mat-icon>
               </button>
             </mat-expansion-panel>

@@ -64,5 +64,17 @@
   "stockInWarehouse": "Stock in warehouse",
   "supplier": "Supplier",
   "update": "Update",
-  "value": "value"
+  "value": "value",
+  "checkinItemsRange": "Warehouse Checkin Items by Start and End Range",
+  "startDate": "start date",
+  "endDate": "end date",
+  "refreshList": "Refresh list of sold items",
+  "filter": "filter",
+  "checkinDate": "checkin date",
+  "max10Char": "Max 10 characters",
+  "checkHowManyItems": "Check how many items are available in stock",
+  "addOrderToTable": "Add order to table",
+  "savesOrderLocally": "Saves order locally",
+  "deletesTable": "Deletes the table",
+  "sendsOrderShop": "Sends current order to shop"
 }

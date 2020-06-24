@@ -17,9 +17,9 @@ export class WeeklyPerformanceCardComponent implements OnInit {
   @Input() total: string;
   @Input() percentage: string;
 
-  // ngx-charts:
-  vbarData = [];
+  // ngx-charts attributes:
 
+  barData = [];
   showXAxis = true;
   showYAxis = true;
   gradient = true;
@@ -28,17 +28,13 @@ export class WeeklyPerformanceCardComponent implements OnInit {
   xAxisLabel = '';
   showYAxisLabel = false;
   yAxisLabel = '';
-  timeline = true;
-  showLabels = false;
   colorScheme = {
     domain: this.managerDashboardService.getColors()
   };
 
-
-
   constructor(private managerDashboardService: ManagerDashboardService, private translocoService: TranslocoService) {
-    this.managerDashboardService.fetchVBarData(this.createChartDates())
-      .subscribe((vbarData) => {this.vbarData = vbarData; });
+    this.managerDashboardService.fetchTurnoverOverviewData(this.createChartDates())
+      .subscribe((barData) => {this.barData = barData; });
   }
 
   createChartDates(): DateRangeDTO {
@@ -55,8 +51,6 @@ export class WeeklyPerformanceCardComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    // this.managerDashboardService.fetchVBarData(this.createChartDates())
-    //   .subscribe((vbarData) => {this.vbarData = vbarData; });
   }
 
 }

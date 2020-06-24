@@ -5,11 +5,16 @@ import {MatTableDataSource} from '@angular/material/table';
 import {MatSort} from '@angular/material/sort';
 import {ManagerWarehouseCheckinDescriptionService} from './manager-warehouse-checkin-description.service';
 import {MatDatepickerInputEvent} from '@angular/material/datepicker';
+import {TRANSLOCO_SCOPE, TranslocoService} from '@ngneat/transloco';
 
 @Component({
   selector: 'app-manager-warehouse-checkin-description',
   templateUrl: './manager-warehouse-checkin-description.component.html',
-  styleUrls: ['./manager-warehouse-checkin-description.component.css']
+  styleUrls: ['./manager-warehouse-checkin-description.component.css'],
+  providers: [{
+    provide: TRANSLOCO_SCOPE,
+    useValue: {scope: 'salesPrincess', alias: 'translate'}
+  }]
 })
 export class ManagerWarehouseCheckinDescriptionComponent implements OnInit {
 
@@ -23,7 +28,7 @@ export class ManagerWarehouseCheckinDescriptionComponent implements OnInit {
 
   @ViewChild(MatSort, {static: true}) sort: MatSort;
 
-  constructor(private managerWarehouseCheckinDescriptionService: ManagerWarehouseCheckinDescriptionService) {
+  constructor(private translocoService: TranslocoService, private managerWarehouseCheckinDescriptionService: ManagerWarehouseCheckinDescriptionService) {
     this.tomorrow.setDate(this.tomorrow.getDate());
     this.tomorrow.setHours(23);
     this.tomorrow.setMinutes(59);

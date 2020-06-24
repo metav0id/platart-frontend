@@ -1,6 +1,7 @@
+<ng-template transloco let-t>
 <div class="demo-card-wide mdl-card mdl-shadow--2dp">
   <div class="mdl-card__title">
-    <h2 class="mdl-card__title-text">Enter the new information</h2>
+    <h2 class="mdl-card__title-text">{{ t('translate.enterNewInfo') }}</h2>
   </div>
   <!--  CONTENT-->
   <body class="cont-bg2 ">
@@ -12,22 +13,22 @@
         <mat-card class="cont-bg4 ">
           <mat-card-header>
             <mat-card-title>
-              Edit information from selected commerce
+              {{ t('translate.editInfoFromSelected') }}
             </mat-card-title>
           </mat-card-header>
           <div class="form-container">
             <div>
               <mat-form-field appearance="legacy">
-                <mat-label>Name</mat-label>
+                <mat-label>{{ t('translate.name') }}</mat-label>
                 <input matInput type="text" class="form-control" [(ngModel)]="marcador.name" name="name">
               </mat-form-field>
             </div>
             <div>
               <mat-form-field appearance="legacy">
-                <mat-label>Category</mat-label>
+                <mat-label>{{ t('translate.category') }}</mat-label>
                 <mat-select [formControl]="colorControl" [(value)]="marcador.category">
-                  <mat-option value="warehouse" class="form-control">warehouse</mat-option>
-                  <mat-option value="store" class="form-control">store</mat-option>
+                  <mat-option value="warehouse" class="form-control">{{ t('translate.warehouse') }}</mat-option>
+                  <mat-option value="store" class="form-control">{{ t('translate.store') }}</mat-option>
                 </mat-select>
 
                 <!--                      <input matInput  type="text" class="form-control"[(ngModel)]="comerce.category" name= "category" >-->
@@ -35,7 +36,7 @@
             </div>
             <div>
               <mat-form-field appearance="legacy">
-                <mat-label>Address</mat-label>
+                <mat-label>{{ t('translate.address') }}</mat-label>
 
                 <input matInput type="text" class="form-control" [(ngModel)]="marcador.address" name="address">
               </mat-form-field>
@@ -52,13 +53,13 @@
   <!--  CONTENT-->
   <div class="mdl-card__actions mdl-card--border">
     <div>
-      <button mat-raised-button [mat-dialog-close]="" class="btn btn-primary" role="button" (click)="save()">Save
-        changes
+      <button mat-raised-button [mat-dialog-close]="" class="btn btn-primary" role="button" (click)="save()">{{ t('translate.saveChanges') }}
       </button>
 
-      <button mat-raised-button class="btn btn-primary" role="button" (click)="onNoClick()">No, Thanks</button>
+      <button mat-raised-button class="btn btn-primary" role="button" (click)="onNoClick()">{{ t('translate.noThanks') }}</button>
     </div>
   </div>
 
 </div>
+</ng-template>
 

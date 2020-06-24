@@ -87,7 +87,7 @@
                   }}:</h4>
 
                 <div class="newQuantity">
-                  <mat-form-field hintLabel="Max 10 characters" appearance="fill">
+                  <mat-form-field hintLabel="{{ t('translate.max10Char') }}" appearance="fill">
                     <mat-label>{{ t('translate.newQuantity') }}</mat-label>
                     <input matInput #input [(ngModel)]="updateWarehouseItem.quantity" maxlength="10"
                            placeholder="Ex. deliveryQuantity">
@@ -96,7 +96,7 @@
                 </div>
 
                 <div class="updateResponsiblePerson">
-                  <mat-form-field hintLabel="Max 10 characters" appearance="fill">
+                  <mat-form-field hintLabel="{{ t('translate.max10Char') }}" appearance="fill">
                     <mat-label>{{ t('translate.employee') }}:</mat-label>
                     <input matInput #input [(ngModel)]="updateResponsiblePerson" maxlength="10"
                            placeholder="Ex. deliveryQuantity">
@@ -123,3 +123,6 @@
     </div>
   </div>
 </ng-template>
+
+
+

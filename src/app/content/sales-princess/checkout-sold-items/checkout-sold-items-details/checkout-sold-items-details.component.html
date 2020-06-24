@@ -9,12 +9,12 @@
     <!--  CONTENT-->
     <body class="cont-bg2 ">
     <form class="form ">
-      <div class="container-fluid cont-bg2">
+      <div class="container-fluid cont-bg2 margin">
 
         <div mat-dialog-content>
           <div *ngFor="let item of data">
 
-            <div>
+            <div class="margin">
               <mat-card class="example-card">
                 <mat-card-header>
                   <mat-card-title>{{ t('translate.salesPricePerUnit') }}: {{item.priceSalesPerUnit}}</mat-card-title>

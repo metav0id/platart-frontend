@@ -21,20 +21,22 @@ import {
   ActivatedRoute,
   Router
 } from "@angular/router";
+import {TRANSLOCO_SCOPE, TranslocoService} from '@ngneat/transloco';
 
 
 
 @Component({
   selector: 'app-marker-form',
   templateUrl: './marker-form.component.html',
-  styleUrls: ['./marker-form.component.css']
+  styleUrls: ['./marker-form.component.css'],
+  providers: [{provide: TRANSLOCO_SCOPE, useValue: {scope: 'managerKing', alias: 'translate'}}]
 })
 export class MarkerFormComponent implements OnInit {
 
   allMarkers: Marcador[];
 
-  constructor(
-    public dialogRef: MatDialogRef<MarkerFormComponent>,
+  constructor(private translocoService: TranslocoService,
+              public dialogRef: MatDialogRef<MarkerFormComponent>,
     @Inject(MAT_DIALOG_DATA) public data: DialogData, private mapService: MapService, private activatedRoute: ActivatedRoute, private router: Router) {
   }
 

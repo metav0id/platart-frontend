@@ -3,23 +3,25 @@ import {
   Inject,
   OnInit
 } from '@angular/core';
-import {FormControl} from "@angular/forms";
-import {Comerce} from "../comerce/comerce";
-import {ComerceService} from "../comerce/comerce.service";
-import {Router} from "@angular/router";
+import {FormControl} from '@angular/forms';
+import {Comerce} from '../comerce/comerce';
+import {ComerceService} from '../comerce/comerce.service';
+import {Router} from '@angular/router';
 import {
   MAT_DIALOG_DATA,
   MatDialogRef
-} from "@angular/material/dialog";
-import {DialogData} from "../map/map.component";
-import {FormComponent} from "../comerce/form.component";
-import {MapService} from "../map/map.service";
-import {Marcador} from "../components/marker.class";
+} from '@angular/material/dialog';
+import {DialogData} from '../map/map.component';
+import {FormComponent} from '../comerce/form.component';
+import {MapService} from '../map/map.service';
+import {Marcador} from '../components/marker.class';
+import {TRANSLOCO_SCOPE, TranslocoService} from '@ngneat/transloco';
 
 @Component({
   selector: 'app-comerce-form',
   templateUrl: './comerce-form.component.html',
-  styleUrls: ['./comerce-form.component.css']
+  styleUrls: ['./comerce-form.component.css'],
+  providers: [{provide: TRANSLOCO_SCOPE, useValue: {scope: 'managerKing', alias: 'translate'}}]
 })
 export class ComerceFormComponent implements OnInit {
 
@@ -27,7 +29,7 @@ export class ComerceFormComponent implements OnInit {
   marcador: Marcador = new Marcador(this.data['lat'], this.data['lng']);
 
 
-  constructor(private comerceService: ComerceService, private router: Router, private mapService: MapService,
+  constructor(private translocoService: TranslocoService, private comerceService: ComerceService, private router: Router, private mapService: MapService,
               public dialogRef: MatDialogRef<FormComponent>, @Inject(MAT_DIALOG_DATA) public data: DialogData) {
   }
 

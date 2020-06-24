@@ -1,20 +1,17 @@
 <ng-template transloco let-t>
 <div class="text">
   <h4>{{ label }} </h4>
-
   <span>
     <mat-icon color="primary">trending_up</mat-icon>
 </span>
-
   <span>{{ t('translate.totals') }} (USD)</span>
-
 </div>
 <div class="widget">
   <div class="chart-wrapper">
     <ngx-charts-bar-vertical
 
       [scheme]="colorScheme"
-      [results]="vbarData"
+      [results]="barData"
       [gradient]="gradient"
       [xAxis]="showXAxis"
       [yAxis]="showYAxis"
