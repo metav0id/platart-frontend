@@ -1,21 +1,22 @@
+<ng-template let-t transloco>
 <div class="space"></div>
 
 <div class="container-fluid d-flex justify-content-center">
   <div class="demo-card-wide mdl-card mdl-shadow--2dp justi ">
-    <h2>Warehouse Checkin Items by Start and End Range</h2>
+    <h2>{{ t('translate.checkinItemsRange') }}Warehouse Checkin Items by Start and End Range</h2>
     <mat-form-field>
-      <mat-label>Start Date</mat-label>
+      <mat-label>{{ t('translate.startDate') }}</mat-label>
       <input (dateInput)="startDateSelection($event)" [matDatepicker]="picker1" matInput [max]="tomorrow">
       <mat-datepicker-toggle [for]="picker1" matSuffix></mat-datepicker-toggle>
       <mat-datepicker #picker1 touchUi></mat-datepicker>
     </mat-form-field>
     <mat-form-field>
-      <mat-label>End Date</mat-label>
+      <mat-label>{{ t('translate.endDate') }}</mat-label>
       <input (dateInput)="endDateSelection($event)" [matDatepicker]="picker2" matInput [max]="tomorrow">
       <mat-datepicker-toggle [for]="picker2" matSuffix></mat-datepicker-toggle>
       <mat-datepicker #picker2 touchUi></mat-datepicker>
     </mat-form-field>
-    <button matTooltip="Refresh list of sold items"
+    <button matTooltip="{{ t('translate.refreshList') }}"
             [matTooltipPosition]="position.value" mat-mini-fab (click)="getSoldItemsList()">
       <mat-icon>autorenew</mat-icon>
     </button>
@@ -27,7 +28,7 @@
 <div class="container-fluid d-flex justify-content-center">
   <div class="demo-card-wide mdl-card mdl-shadow--2dp justi ">
     <mat-form-field>
-      <mat-label>Filter</mat-label>
+      <mat-label>{{ t('translate.filter') }}</mat-label>
       <input (keyup)="applyFilter($event)" matInput placeholder="Ex. cadena">
     </mat-form-field>
 
@@ -35,37 +36,37 @@
 
       <!-- Name Column -->
       <ng-container matColumnDef="category">
-        <th *matHeaderCellDef mat-header-cell mat-sort-header>Category</th>
+        <th *matHeaderCellDef mat-header-cell mat-sort-header>{{ t('translate.category') }}</th>
         <td *matCellDef="let element" mat-cell> {{element.category}}</td>
       </ng-container>
 
       <!-- Symbol Column -->
       <ng-container matColumnDef="quantity">
-        <th *matHeaderCellDef mat-header-cell mat-sort-header>Quantity</th>
+        <th *matHeaderCellDef mat-header-cell mat-sort-header>{{ t('translate.quantity') }}</th>
         <td *matCellDef="let element" mat-cell> {{element.quantity}}</td>
       </ng-container>
 
       <!-- Symbol Column -->
       <ng-container matColumnDef="priceListPerUnit">
-        <th *matHeaderCellDef mat-header-cell mat-sort-header>List Price</th>
+        <th *matHeaderCellDef mat-header-cell mat-sort-header>{{ t('translate.listPrice') }}</th>
         <td *matCellDef="let element" mat-cell> {{element.priceListPerUnit}}</td>
       </ng-container>
 
       <!-- Symbol Column -->
       <ng-container matColumnDef="priceSupplierPerUnit">
-        <th *matHeaderCellDef mat-header-cell mat-sort-header>Suppliert Price</th>
+        <th *matHeaderCellDef mat-header-cell mat-sort-header>{{ t('translate.purchasingPrice') }}</th>
         <td *matCellDef="let element" mat-cell> {{element.priceSupplierPerUnit}}</td>
       </ng-container>
 
       <!-- Symbol Column -->
       <ng-container matColumnDef="supplierName">
-        <th *matHeaderCellDef mat-header-cell mat-sort-header>Supplier Name</th>
+        <th *matHeaderCellDef mat-header-cell mat-sort-header>{{ t('translate.supplier') }}</th>
         <td *matCellDef="let element" mat-cell> {{element.supplierName}}</td>
       </ng-container>
 
       <!-- Symbol Column -->
       <ng-container matColumnDef="createDateTime">
-        <th *matHeaderCellDef mat-header-cell mat-sort-header>Date Checkin</th>
+        <th *matHeaderCellDef mat-header-cell mat-sort-header>{{ t('translate.checkinDate') }}</th>
         <td *matCellDef="let element" mat-cell> {{element.createDateTime}}</td>
       </ng-container>
 
@@ -74,3 +75,4 @@
     </table>
   </div>
 </div>
+</ng-template>
