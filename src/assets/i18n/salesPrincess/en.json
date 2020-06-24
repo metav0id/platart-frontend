@@ -66,5 +66,14 @@
   "pleaseComment": "please enter your comment",
   "cancel": "cancel",
   "filter": "filter",
-  "getListDelivery": "get list of delivered items"
+  "getListDelivery": "get list of delivered items",
+  "checkinDate": "checkin date",
+  "max10Char": "Max 10 characters",
+  "checkHowManyItems": "Check how many items are available in stock",
+  "addOrderToTable": "Add order to table",
+  "savesOrderLocally": "Saves order locally",
+  "deletesTable": "Deletes the table",
+  "sendsOrderShop": "Sends current order to shop",
+  "new-delivery-item-to-shop-title": "Insert item",
+  "new-delivery-item-to-shop-description": "Input your values for item"
 }

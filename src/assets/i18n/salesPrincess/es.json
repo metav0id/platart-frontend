@@ -66,5 +66,13 @@
   "pleaseComment": "Fovor de introducir un comentario",
   "cancel": "Cancelar",
   "filter": "Filtrar",
-  "getListDelivery": "Recibir lista de articulos entregados"
+  "getListDelivery": "Recibir lista de articulos entregados",
+  "max10Char": "Max 10 caracteres",
+  "checkHowManyItems": "Check how many items are available in stock",
+  "addOrderToTable": "Agregar orden a la tabla",
+  "savesOrderLocally": "Guardar orden localmente",
+  "deletesTable": "Borrar Tabla",
+  "sendsOrderShop": "Mandar orden actual a la sucursal",
+  "new-delivery-item-to-shop-title": "Agregar item",
+  "new-delivery-item-to-shop-description": "Ingresar información item nuevo"
 }
