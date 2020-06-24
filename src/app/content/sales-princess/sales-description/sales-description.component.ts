@@ -36,9 +36,9 @@ export class SalesDescriptionComponent implements OnInit {
   tomorrow = new Date();
 
   constructor(
-          public dialog: MatDialog,
-          private managerSalesDescriptionService: SalesDescriptionService,
-          private auth: AuthService) {
+    public dialog: MatDialog,
+    private managerSalesDescriptionService: SalesDescriptionService,
+    private auth: AuthService) {
     this.tomorrow.setDate(this.tomorrow.getDate());
     this.tomorrow.setHours(23);
     this.tomorrow.setMinutes(59);
@@ -63,7 +63,7 @@ export class SalesDescriptionComponent implements OnInit {
 
   endDateSelection($event: MatDatepickerInputEvent<Date>) {
     const newDate: Date = $event.value;
-    this.endDate = newDate.toISOString();
+    this.startDate = newDate.toISOString();
     this.eventsTime.push(newDate.toISOString());
   }
 

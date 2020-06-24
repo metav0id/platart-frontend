@@ -4,8 +4,6 @@ import {TRANSLOCO_SCOPE, TranslocoService} from '@ngneat/transloco';
 import {DateRangeDTO} from '../../manager-king-dtos/DateRangeDTO';
 import {MonthToDateReportingDto} from '../../manager-king-dtos/MonthToDateReportingDto';
 import {DailyReportingDto} from '../../manager-king-dtos/DailyReportingDto';
-import {log} from 'util';
-import {MatTable, MatTableDataSource} from '@angular/material/table';
 
 @Component({
   selector: 'app-manager-dashboard',
@@ -14,8 +12,6 @@ import {MatTable, MatTableDataSource} from '@angular/material/table';
   providers: [{provide: TRANSLOCO_SCOPE, useValue: {scope: 'managerKing', alias: 'translate'}}]
 })
 export class ManagerDashboardComponent implements OnInit {
-
-  // todo: Make view responsive (table already working as intended)
 
   dataLastMonth: MonthToDateReportingDto = this.initializeMTDDTO();
   dataCurrentMonth: MonthToDateReportingDto = this.initializeMTDDTO();
@@ -98,8 +94,6 @@ export class ManagerDashboardComponent implements OnInit {
     }];
   }
 
-
   ngOnInit(): void {
-
   }
 }
