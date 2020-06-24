@@ -166,19 +166,19 @@ export class NewDeliveryToShopComponent implements OnInit {
   }
 
   getTotalValue(): number {
-    this.totalCost = 0;
+    let totalCost = 0;
     for (const orderElem of this.listNewItemsToShops) {
-      this.totalCost += orderElem.quantity * orderElem.priceListPerUnit;
+      totalCost += orderElem.quantity * orderElem.priceListPerUnit;
     }
-    return this.totalCost;
+    return totalCost;
   }
 
   getTotalItems(): number {
-    this.totalItems = 0;
+    let totalItems = 0;
     for (const orderElem of this.listNewItemsToShops) {
-      this.totalItems += Number(orderElem.quantity);
+      totalItems += Number(orderElem.quantity);
     }
-    return this.totalItems;
+    return totalItems;
   }
 
   saveCurrentOrder(listNewItemsToShops: NewOrderItemDTO[]) {
