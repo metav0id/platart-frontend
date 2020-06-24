@@ -129,9 +129,9 @@ export class NewDeliveryToShopComponent implements OnInit {
           if (this.discountMethod === undefined) {
             newItem.priceSalesPerUnit = newItem.priceListPerUnit;
           } else if (this.discountMethod === this.DISCOUNT_METHOD_DISPLAY_PRICE) {
-            newItem.discountPercent = Math.round((1 - (newItem.priceSalesPerUnit / newItem.priceListPerUnit)) * 100);
+            newItem.discountPercent = Math.round((1 - (newItem.priceSalesPerUnit / newItem.priceListPerUnit)) * 10000) / 100;
           } else if (this.discountMethod === this.DISCOUNT_METHOD_PERCENT) {
-            newItem.priceSalesPerUnit = Math.round(newItem.priceListPerUnit * (1 - newItem.discountPercent / 100));
+            newItem.priceSalesPerUnit = Math.round(newItem.priceListPerUnit * (1 - newItem.discountPercent / 100) * 100) / 100;
           }
           this.listNewItemsToShops.push(newItem);
           this.saveCurrentOrder();
