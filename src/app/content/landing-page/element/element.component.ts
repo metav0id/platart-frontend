@@ -151,6 +151,91 @@ export class ElementComponent implements OnInit {
       description: 'Image 27'
     }
   ];
+  imagesWarehouse = [
+    {
+      src: "assets/images/sw1.jpg",
+      thumb: "assets/images/sw1.jpg",
+      description: "Image 1"
+    },
+    {
+      src: "assets/images/sw2.jpg",
+      thumb: "assets/images/sw2.jpg",
+      description: "Image 2"
+    },
+    {
+      src: "assets/images/ndts1.jpg",
+      thumb: "assets/images/ndts1.jpg",
+      description: "Image 3"
+    },
+    {
+      src: "assets/images/ndts2.jpg",
+      thumb: "assets/images/ndts2.jpg",
+      description: "Image 4"
+    },
+    {
+      src: "assets/images/ndts3.jpg",
+      thumb: "assets/images/ndts3.jpg",
+      description: 'Image 5'
+    },
+    {
+      src: "assets/images/ndtw1.jpg",
+      thumb: "assets/images/ndtw1.jpg",
+      description: 'Image 6'
+    },
+    {
+      src: "assets/images/ndtw2.jpg",
+      thumb: "assets/images/ndtw2.jpg",
+      description: 'Image 7'
+    }
+  ];
+  imagesSales = [
+
+    {
+      src: "assets/images/csoi1.jpg",
+      thumb: "assets/images/csoi1.jpg",
+      description: 'Image 19'
+    },
+    {
+      src: "assets/images/csoi2.jpg",
+      thumb: "assets/images/csoi2.jpg",
+      description: 'Image 20'
+    },
+    {
+      src: "assets/images/csoi3.jpg",
+      thumb: "assets/images/csoi3.jpg",
+      description: 'Image 21'
+    },
+    {
+      src: "assets/images/csoi4.jpg",
+      thumb: "assets/images/csoi4.jpg",
+      description: 'Image 22'
+    },
+    {
+      src: "assets/images/ndfw1.jpg",
+      thumb: "assets/images/ndfw1.jpg",
+      description: 'Image 23'
+    },
+    {
+      src: "assets/images/ndfw2.jpg",
+      thumb: "assets/images/ndfw2.jpg",
+      description: 'Image 24'
+    },
+    {
+      src: "assets/images/si1.jpg",
+      thumb: "assets/images/si1.jpg",
+      description: 'Image 25'
+    },
+    {
+      src: "assets/images/cii.jpg",
+      thumb: "assets/images/cii.jpg",
+      description: 'Image 26'
+    },
+    {
+      src: "assets/images/ss1.jpg",
+      thumb: "assets/images/ss1.jpg",
+      description: 'Image 27'
+    }
+  ];
 
   constructor() { }
 
