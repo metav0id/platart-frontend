@@ -31,13 +31,10 @@ export class NewDeliveryToShopService {
       quantity: quantityInput,
       priceListPerUnit: pricePerQuantityInput
     };
-
     return this.http.post<VerifyAmountItemsOnStockDTO>(environment.verifyAmountItemsOnStock, requestTest);
   }
 
   sendFinalizedOrder(sendOrderItemDTOList: NewOrderItemDTO[]): Observable<WarehouseNewDeliveryPersistanceResponseDTO> {
-    console.log('Order was send');
-    console.log(sendOrderItemDTOList);
     return new Observable((observer) => {
       let persistanceResponseList: WarehouseNewDeliveryPersistanceResponseDTO;
       this.http.post<WarehouseNewDeliveryPersistanceResponseDTO>(environment.saveDeliveryOrder, sendOrderItemDTOList).subscribe(JsonDto => {
@@ -47,4 +44,7 @@ export class NewDeliveryToShopService {
     });
   }
 
+  removeItems(table: number[]): Observable<boolean> {
+    return this.http.post<boolean>(environment.deleteItemsNewDeliveryToShop, table);
+  }
 }

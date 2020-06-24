@@ -7,4 +7,5 @@ export interface NewOrderItemDTO {
   priceListPerUnit: number;
   deliveryShop: string;
   comment: string;
+  isChecked?: boolean;
 }

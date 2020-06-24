@@ -77,4 +77,8 @@
   "savesOrderLocally": "Saves order locally",
   "deletesTable": "Deletes the table",
   "sendsOrderShop": "Sends current order to shop"
+  "value": "value",
+  "details": "Details",
+  "new-delivery-item-to-shop-title": "Add item",
+  "new-delivery-item-to-shop-description": "Insert your values for new an item"
 }
