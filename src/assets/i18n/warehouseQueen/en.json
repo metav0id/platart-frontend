@@ -65,5 +65,7 @@
   "supplier": "Supplier",
   "update": "Update",
   "value": "value",
-  "details": "Details"
+  "details": "Details",
+  "new-delivery-item-to-shop-title": "Add item",
+  "new-delivery-item-to-shop-description": "Insert your values for new an item"
 }

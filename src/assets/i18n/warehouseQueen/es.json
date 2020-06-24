@@ -65,5 +65,7 @@
   "supplier": "Proveedor",
   "update": "Actualizar",
   "value": "valor",
-  "details": "detalles"
+  "details": "detalles",
+  "new-delivery-item-to-shop-title": "Agregar item",
+  "new-delivery-item-to-shop-description": "Ingresar información item nuevo"
 }
