@@ -210,19 +210,25 @@ export class NewDeliveryToShopComponent implements OnInit {
     });
   }
 
-  // updateButton(periodicElement: PeriodicElement) {
-  //   this.newOrderElement.position = periodicElement.position;
-  //   this.newOrderElement.category = periodicElement.category;
-  //   this.newOrderElement.quantity = periodicElement.quantity;
-  //   this.newOrderElement.priceSalesPerUnit = periodicElement.priceSalesPerUnit;
-  //   this.newOrderElement.discountPercent = periodicElement.discountPercent;
-  //   this.newOrderElement.priceListPerUnit = periodicElement.priceListPerUnit;
-  //   this.newOrderElement.deliveryShop = periodicElement.deliveryShop;
-  //
-  //   this.removeCurrentItem(periodicElement.position);
-  //   this.table.renderRows();
-  // }
-  //
+  updateButton(item: NewOrderItemDTO) {
+    this.newOrderElement.category = item.category;
+    this.newOrderElement.quantity = item.quantity;
+    this.newOrderElement.priceSalesPerUnit = item.priceSalesPerUnit;
+    this.newOrderElement.discountPercent = item.discountPercent;
+    this.newOrderElement.priceListPerUnit = item.priceListPerUnit;
+    this.newOrderElement.deliveryShop = item.deliveryShop;
+    Swal.showLoading();
+    this.newDeliveryToShopService.removeItems([item.id]).subscribe(obj => {
+      Swal.close();
+      Swal.fire(
+        'Edit',
+        'Deleted successfully', //messageSuccessSaving
+        'success'
+      );
+      this.fetchNewOrderData();
+    });
+  }
+
 
   sendCurrentOrder() {
     let persistanceResponseList: WarehouseNewDeliveryPersistanceResponseDTO;
@@ -248,6 +254,5 @@ export class NewDeliveryToShopComponent implements OnInit {
 
   selectItem(element: NewOrderItemDTO): void {
     element.isChecked = !element.isChecked;
-    console.log(element.isChecked);
   }
 }
