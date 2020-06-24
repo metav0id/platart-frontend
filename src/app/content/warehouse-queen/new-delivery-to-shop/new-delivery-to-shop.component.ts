@@ -14,6 +14,7 @@ import {CommentDialogComponent} from './comment-dialog/comment-dialog.component'
 import {CategoryService} from '../../services/category.service';
 import {AuthService} from '../../services/auth.service';
 import {PeriodicElement} from './new-delivery-to-shop-DTOs/periodicElements';
+import Swal from "sweetalert2";
 
 @Component({
   selector: 'app-new-delivery-order',
@@ -104,11 +105,11 @@ export class NewDeliveryToShopComponent implements OnInit {
   }
 
   setNewItemOrder() {
+    Swal.showLoading();
     this.verifyAvailabilityObservale().subscribe(obs => {
       this.availableItems = obs;
 
       if (this.availableItems >= this.newOrderElement.quantity) {
-
         if (this.newOrderElement.priceListPerUnit > 0 &&
           this.newOrderElement.category !== this.INITIALIZE_CATEGORY &&
           this.newOrderElement.quantity > 0 &&
@@ -132,13 +133,51 @@ export class NewDeliveryToShopComponent implements OnInit {
           } else if (this.discountMethod === this.DISCOUNT_METHOD_PERCENT) {
             newItem.priceSalesPerUnit = Math.round(newItem.priceListPerUnit * (1 - newItem.discountPercent / 100));
           }
-
           this.listNewItemsToShops.push(newItem);
-          this.table.renderRows();
+          this.saveCurrentOrder();
         }
       }
     });
-    this.verifyAvailability();
+  }
+
+  verifyAvailabilityObservale(): Observable<number> {
+    return new Observable((observer) => {
+      let localAvailableItems = 0;
+
+      this.newDeliveryToShopService.verifyAmountItemsOnStock(
+        this.newOrderElement.category,
+        this.newOrderElement.quantity,
+        this.newOrderElement.priceListPerUnit)
+        .subscribe(JsonDto => {
+          localAvailableItems = JsonDto.quantity;
+
+          for (const orderElem of this.listNewItemsToShops) {
+            if (orderElem.category === this.newOrderElement.category &&
+              orderElem.priceListPerUnit === this.newOrderElement.priceListPerUnit) {
+              localAvailableItems -= orderElem.quantity;
+            }
+          }
+          observer.next(localAvailableItems);
+        });
+    });
+  }
+
+  verifyAvailability() {
+    // update the amount of items on stock
+    this.newDeliveryToShopService.verifyAmountItemsOnStock(
+      this.newOrderElement.category,
+      this.newOrderElement.quantity,
+      this.newOrderElement.priceListPerUnit)
+      .subscribe(JsonDto => {
+        this.availableItems = JsonDto.quantity;
+
+        for (const orderElem of this.listNewItemsToShops) {
+          if (orderElem.category === this.newOrderElement.category &&
+            orderElem.priceListPerUnit === this.newOrderElement.priceListPerUnit) {
+            this.availableItems -= orderElem.quantity;
+          }
+        }
+      });
   }
 
   getTotalValue(): number {
@@ -159,8 +198,10 @@ export class NewDeliveryToShopComponent implements OnInit {
 
   saveCurrentOrder() {
     const tempNewOrderItemDTOList: NewOrderItemDTO[] = this.mapPeriodicElementListToDTO();
-    this.newDeliveryToShopService.setAllNewOrderItems(tempNewOrderItemDTOList);
-    this.table.renderRows();
+    this.newDeliveryToShopService.setAllNewOrderItems(tempNewOrderItemDTOList).subscribe(result => {
+      Swal.close();
+      this.table.renderRows();
+    });
   }
 
   mapPeriodicElementListToDTO(): NewOrderItemDTO[] {
@@ -211,55 +252,20 @@ export class NewDeliveryToShopComponent implements OnInit {
     }
   }
 
-  verifyAvailability() {
-    // update the amount of items on stock
-    this.newDeliveryToShopService.verifyAmountItemsOnStock(
-      this.newOrderElement.category,
-      this.newOrderElement.quantity,
-      this.newOrderElement.priceListPerUnit)
-      .subscribe(JsonDto => {
-        this.availableItems = JsonDto.quantity;
-
-        for (const orderElem of this.listNewItemsToShops) {
-          if (orderElem.category === this.newOrderElement.category &&
-            orderElem.priceListPerUnit === this.newOrderElement.priceListPerUnit) {
-            this.availableItems -= orderElem.quantity;
-          }
-        }
-      });
-  }
-
-  verifyAvailabilityObservale(): Observable<number> {
-
-    return new Observable((observer) => {
-      let localAvailableItems = 0;
-
-      this.newDeliveryToShopService.verifyAmountItemsOnStock(
-        this.newOrderElement.category,
-        this.newOrderElement.quantity,
-        this.newOrderElement.priceListPerUnit)
-        .subscribe(JsonDto => {
-          localAvailableItems = JsonDto.quantity;
-
-          for (const orderElem of this.listNewItemsToShops) {
-            if (orderElem.category === this.newOrderElement.category &&
-              orderElem.priceListPerUnit === this.newOrderElement.priceListPerUnit) {
-              localAvailableItems -= orderElem.quantity;
-            }
-          }
-          observer.next(localAvailableItems);
-        });
-    });
-  }
-
   sendCurrentOrder() {
     const tempNewOrderItemDTOList: NewOrderItemDTO[] = this.mapPeriodicElementListToDTO();
 
     let persistanceResponseList: WarehouseNewDeliveryPersistanceResponseDTO;
-
+    Swal.showLoading();
     this.newDeliveryToShopService.sendFinalizedOrder(tempNewOrderItemDTOList).subscribe(observer => {
       persistanceResponseList = observer;
       this.fetchNewOrderData();
+      Swal.close();
+      Swal.fire(
+        'Success',
+        'List saved', //messageSuccessSaving
+        'success'
+      );
     });
   }
 
@@ -268,30 +274,5 @@ export class NewDeliveryToShopComponent implements OnInit {
       width: '400px',
       data: element.comment
     });
-  }
-
-
-  /** Whether the number of selected elements matches the total number of rows. */
-  isAllSelected() {
-    const numSelected = this.selection.selected.length;
-    const numRows = this.listNewItemsToShops.length;
-    return numSelected === numRows;
-  }
-
-  /** Selects all rows if they are not all selected; otherwise clear selection. */
-  masterToggle() {
-    if (this.isAllSelected()) {
-      this.selection.clear();
-    } else {
-      this.listNewItemsToShops.forEach(row => this.selection.select(row));
-    }
-  }
-
-  /** The label for the checkbox on the passed row */
-  checkboxLabel(row?: PeriodicElement): string {
-    if (!row) {
-      return `${this.isAllSelected() ? 'select' : 'deselect'} all`;
-    }
-    return `${this.selection.isSelected(row) ? 'deselect' : 'select'} row ${row.position + 1}`;
   }
 }

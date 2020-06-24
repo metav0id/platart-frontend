@@ -5,7 +5,6 @@ import {NewOrderItemDTO} from './new-delivery-to-shop-DTOs/NewOrderItemDTO';
 import {VerifyAmountItemsOnStockDTO} from './new-delivery-to-shop-DTOs/VerifyAmountItemsOnStockDTO';
 import {WarehouseNewDeliveryPersistanceResponseDTO} from './new-delivery-to-shop-DTOs/WarehouseNewDeliveryPersistanceResponseDTO';
 import {environment} from '../../../../environments/environment';
-import {ShopDTO} from './new-delivery-to-shop-DTOs/shop-dto';
 
 
 @Injectable({
@@ -20,14 +19,13 @@ export class NewDeliveryToShopService {
     return this.http.post<NewOrderItemDTO[]>(environment.getAllNewOrderItems, null);
   }
 
-  setAllNewOrderItems(newOrderItemDTOList: NewOrderItemDTO[]): void {
-    this.http.post<NewOrderItemDTO[]>(environment.setAllNewOrderItems, newOrderItemDTOList).subscribe();
+  setAllNewOrderItems(newOrderItemDTOList: NewOrderItemDTO[]): Observable<NewOrderItemDTO[]> {
+    return this.http.post<NewOrderItemDTO[]>(environment.setAllNewOrderItems, newOrderItemDTOList);
   }
 
   verifyAmountItemsOnStock(categoryInput: string,
                            quantityInput: number,
                            pricePerQuantityInput: number): Observable<VerifyAmountItemsOnStockDTO> {
-    console.log('verifyAmountItemsOnStock');
     const requestTest: VerifyAmountItemsOnStockDTO = {
       category: categoryInput,
       quantity: quantityInput,
