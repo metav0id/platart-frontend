@@ -2,7 +2,7 @@ import {Component, OnInit, ViewChild} from '@angular/core';
 import {MatTable} from '@angular/material/table';
 import {AbstractControl, FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {NewDeliveryToWarehouseService} from './new-delivery-to-warehouse.service';
-import {TRANSLOCO_SCOPE} from '@ngneat/transloco';
+import {TRANSLOCO_SCOPE, TranslocoService} from '@ngneat/transloco';
 import {TooltipPosition} from '@angular/material/tooltip';
 import {CategoryService} from '../../services/category.service';
 import {WarehouseItemCategoryDTO} from '../../services/warehouse-item-category-DTO';
@@ -37,7 +37,7 @@ export class NewDeliveryToWarehouseComponent implements OnInit {
     return null;
   }
 
-  constructor(private newDeliveryToWarehouseService: NewDeliveryToWarehouseService,
+  constructor(private translocoService: TranslocoService, private newDeliveryToWarehouseService: NewDeliveryToWarehouseService,
               private categoryService: CategoryService,
               private formBuilder: FormBuilder) {
   }
