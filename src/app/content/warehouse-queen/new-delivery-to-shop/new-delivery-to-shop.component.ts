@@ -217,6 +217,7 @@ export class NewDeliveryToShopComponent implements OnInit {
     this.newOrderElement.discountPercent = item.discountPercent;
     this.newOrderElement.priceListPerUnit = item.priceListPerUnit;
     this.newOrderElement.deliveryShop = item.deliveryShop;
+    this.newOrderElement.comment = item.comment;
     Swal.showLoading();
     this.newDeliveryToShopService.removeItems([item.id]).subscribe(obj => {
       Swal.close();
