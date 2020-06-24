@@ -45,6 +45,6 @@ export class NewDeliveryToShopService {
   }
 
   removeItems(table: number[]): Observable<boolean> {
-    return this.http.post<boolean>(environment.saveDeliveryOrder, table);
+    return this.http.post<boolean>(environment.deleteItemsNewDeliveryToShop, table);
   }
 }

@@ -73,11 +73,13 @@ export class NewDeliveryToShopComponent implements OnInit {
   }
 
   fetchNewOrderData(): void {
+    Swal.showLoading();
     this.newDeliveryToShopService.getAllNewOrderItems().subscribe(
       JsonDto => {
         JsonDto.forEach(obj => obj.isChecked = false);
         this.listNewItemsToShops = JsonDto;
         this.table.renderRows();
+        Swal.close();
       });
   }
 
@@ -181,9 +183,8 @@ export class NewDeliveryToShopComponent implements OnInit {
 
   saveCurrentOrder(listNewItemsToShops: NewOrderItemDTO[]) {
     this.newDeliveryToShopService.setAllNewOrderItems(listNewItemsToShops).subscribe(result => {
-      this.listNewItemsToShops = result;
       Swal.close();
-      this.table.renderRows();
+      this.fetchNewOrderData();
     });
   }
 
@@ -193,7 +194,6 @@ export class NewDeliveryToShopComponent implements OnInit {
     this.listNewItemsToShops.filter(obj => obj.isChecked).forEach(obj => table.push(obj.id));
     this.newDeliveryToShopService.removeItems(table).subscribe(result => {
       this.fetchNewOrderData();
-      this.table.renderRows();
       if (result) {
         Swal.fire(
           'Success',
