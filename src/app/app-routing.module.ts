@@ -9,7 +9,7 @@ import {LandingPageWarehouseComponent} from "./content/landing-page/landing-page
 const routes: Routes = [
   { path: 'login'   , component: LoginComponent },
   { path: 'landingPage' , component: LandingPageWarehouseComponent, canActivate: [AuthGuard]},
-  { path: '**', redirectTo: 'landingPage' },
+  { path: '**', redirectTo: 'login' },
 ];
 
 @NgModule({
