@@ -29,7 +29,7 @@ export class ViewShopInventoryComponent implements OnInit {
   public shopControl = new FormControl('', Validators.required);
 
   /** List of available shops */
-  public listShops: string[] = [];
+  public listShops: String[] = [];
   public selectedShopToFilterOnList = '';
   public selectedShopToDisplay = '';
 
@@ -37,7 +37,8 @@ export class ViewShopInventoryComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.listShops = this.auth.getStoresList();
+    // this.shopsList = this.auth.getStoresList();
+    this.listShops = this.auth.shops;
   }
 
   // fetch inventory data

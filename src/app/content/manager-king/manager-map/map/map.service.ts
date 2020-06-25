@@ -9,6 +9,7 @@ import {Marcador} from "../components/marker.class";
 import {Comerce} from "../comerce/comerce";
 import {environment} from "../../../../../environments/environment";
 import {UserIn} from "../../register/userIn";
+import {UserFirebase} from "../../../services/user-firebase";
 
 @Injectable({
   providedIn: 'root'
@@ -42,6 +43,10 @@ export class MapService {
   public readAllUsers(): Observable<UserIn[]> {
     // this returns the list provided from the backend link.
     return this.httpClient.get<UserIn[]>(environment.getAllUsers);
+  }
+  public readAllComercesOfUser(uid:UserIn): Observable<UserIn> {
+    // this returns the list provided from the backend link.
+    return this.httpClient.post<UserIn>(environment.findUser,uid,{headers: this.httpHeader});
   }
   createUser(userIn: UserIn): Observable<UserIn> {
     return this.httpClient.post<UserIn>(environment.saveUser, userIn, {headers: this.httpHeader});

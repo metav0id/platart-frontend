@@ -19,6 +19,7 @@ export const environment = {
   getAllMarkersNoCoords: 'http://localhost:8081/marker/getallmarkersNoCoords',
   saveMarker: 'http://localhost:8081/marker/savemarker',
   saveUser: 'http://localhost:8081/user/saveuser',
+  findUser: 'http://localhost:8081/user/finduser',
   findCommerce: 'http://localhost:8081/comerce/find',
   findMarker: 'http://localhost:8081/marker/find',
   editMarker: 'http://localhost:8081/marker/edit',

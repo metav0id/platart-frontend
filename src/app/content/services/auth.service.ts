@@ -17,18 +17,22 @@ import {MapService} from "../manager-king/manager-map/map/map.service";
 
 export class AuthService {
   shopsOfUser: string[];
-  userin: UserIn;
+  shops:String[] = new Array();
+  users: UserIn[] = new Array();
+  userin: UserIn = new UserIn();
+  userin2: UserIn = new UserIn();
 
   constructor(public afs: AngularFirestore,
               public afAuth: AngularFireAuth,
-              public router: Router) {
+              public router: Router,
+              public mapservice: MapService) {
     this.afAuth.authState.subscribe(user => {
       if (user) {
         this.getUserData(user.uid).subscribe(firestoreObj => {
           localStorage.setItem('user', JSON.stringify(user));
           localStorage.setItem('role', firestoreObj.role);
           localStorage.setItem('shops', JSON.stringify(firestoreObj.shops));
-          this.getAllUsers()
+          this.getAllUsers(user);
         });
       } else {
         localStorage.setItem('user', null);
@@ -69,7 +73,6 @@ export class AuthService {
   signUp(userInput: UserFirebase) {
     console.log(userInput)
     return this.afAuth.createUserWithEmailAndPassword(userInput.email, userInput.password).then(result => {
-      console.log("holis")
       this.setUserData(result.user, userInput.role, userInput.shops);
     });
   }
@@ -82,22 +85,22 @@ export class AuthService {
       email: user.email,
       displayName: user.displayName,
       emailVerified: user.emailVerified,
-      role: role,
+      role:role,
       shops: shops
     };
     console.log(userData)
-    // this.registerUserDB(user);
+    this.registerUserDB(userData);
     userRef.set(userData);
   }
-  registerUserDB(user: UserFirebase){
-   this.userin.uid = user.uid;
-   this.userin.shops = user.shops;
-   console.log(this.userin);
 
-    // this.mapservice.createUser(this.userin).subscribe();
+  registerUserDB(user: UserFirebase) {
+    console.log(user)
+    this.userin.uid = user.uid;
+    this.userin.shops = user.shops[0];
+    console.log(this.userin);
+    this.mapservice.createUser(this.userin).subscribe();
 
-    }
-
+  }
 
   getUserData(uid): Observable<any> {
     const userRef = this.afs.collection('users').doc(uid);
@@ -107,14 +110,13 @@ export class AuthService {
     }));
   }
 
-  getAllUsers(){
-    const userRef = this.afs.collection('users');
-    let setSf = userRef.get();
-    // return new Observable(observer => userRef.get().subscribe(doc => {
-    //   const data = doc.data();
-    //   observer.next(data);
-    // }));
-    console.log(setSf)
+  getAllUsers(user: UserFirebase) {
+    this.userin2.uid = user.uid;
+    return this.mapservice.readAllComercesOfUser(this.userin2).subscribe(response => {
+        this.shops.push(response.shops);
+        console.log(this.shops)
+      }
+    );
   }
 
   isLoggedIn(): boolean {
@@ -152,5 +154,4 @@ export class AuthService {
     });
 
   }
-
 }
