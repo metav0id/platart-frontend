@@ -17,7 +17,8 @@ import {MapService} from "../manager-king/manager-map/map/map.service";
 
 export class AuthService {
   shopsOfUser: string[];
-  shops:String[] = new Array();
+  shops:Comerce[] = new Array();
+  comerces:String[] = new Array();
   users: UserIn[] = new Array();
   userin: UserIn = new UserIn();
   userin2: UserIn = new UserIn();
@@ -96,7 +97,7 @@ export class AuthService {
   registerUserDB(user: UserFirebase) {
     console.log(user)
     this.userin.uid = user.uid;
-    this.userin.shops = user.shops[0];
+    this.userin.shops = user.shops;
     console.log(this.userin);
     this.mapservice.createUser(this.userin).subscribe();
 
@@ -113,8 +114,9 @@ export class AuthService {
   getAllUsers(user: UserFirebase) {
     this.userin2.uid = user.uid;
     return this.mapservice.readAllComercesOfUser(this.userin2).subscribe(response => {
-        this.shops.push(response.shops);
-        console.log(this.shops)
+      console.log(response)
+        this.comerces = response;
+        console.log(this.comerces)
       }
     );
   }

@@ -44,13 +44,12 @@ export class MapService {
     // this returns the list provided from the backend link.
     return this.httpClient.get<UserIn[]>(environment.getAllUsers);
   }
-  public readAllComercesOfUser(uid:UserIn): Observable<UserIn> {
+  public readAllComercesOfUser(uid:UserIn): Observable<String[]> {
     // this returns the list provided from the backend link.
-    return this.httpClient.post<UserIn>(environment.findUser,uid,{headers: this.httpHeader});
+    return this.httpClient.post<String[]>(environment.findUser,uid,{headers: this.httpHeader});
   }
   createUser(userIn: UserIn): Observable<UserIn> {
     return this.httpClient.post<UserIn>(environment.saveUser, userIn, {headers: this.httpHeader});
-
   }
 
   public readAllMarkersNoCoords(): Observable<Marcador[]> {

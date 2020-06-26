@@ -47,7 +47,7 @@ export class NewDeliveryFromWarehouseComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.listShops = this.auth.shops;
+    this.listShops = this.auth.comerces;
     // this.listShops = this.auth.getStoresList();
   }
 

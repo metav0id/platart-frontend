@@ -37,8 +37,8 @@ export class ViewShopInventoryComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    // this.shopsList = this.auth.getStoresList();
-    this.listShops = this.auth.shops;
+    // this.listShops = this.auth.getStoresList();
+    this.listShops = this.auth.comerces;
   }
 
   // fetch inventory data
