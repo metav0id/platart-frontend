@@ -61,10 +61,10 @@
       <textarea matInput formControlName="comment">{{ t('translate.yourComment') }}</textarea>
       <mat-error *ngIf="myForm.controls['comment'].hasError('required')">{{ t('translate.pleaseComment') }}</mat-error>
     </mat-form-field>
-    <button mat-mini-fab mat-dialog-close>
+    <button  class="bg" mat-mini-fab mat-dialog-close>
       <mat-icon>cancel</mat-icon>
     </button>
-    <button mat-mini-fab mat-raised-button type="submit">
+    <button  class="bg" mat-mini-fab mat-raised-button type="submit">
       <mat-icon>save</mat-icon>
     </button>
   </form>

@@ -6,6 +6,7 @@ export const environment = {
   production: false,
   firebaseConfig: {
     apiKey: 'AIzaSyAYu4hMLTk28gkQPNcNEH3nYC6EqC3ZBZM',
+    // apiKey: 'AIzaSyDJhdco0XHCyzznyep0zEoTl_QQ8YCJ8_M',
     authDomain: 'platart-warehouse-user-mngt.firebaseapp.com',
     databaseURL: 'https://platart-warehouse-user-mngt.firebaseio.com',
     projectId: 'platart-warehouse-user-mngt',
