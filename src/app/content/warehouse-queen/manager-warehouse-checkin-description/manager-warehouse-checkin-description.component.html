@@ -16,7 +16,7 @@
       <mat-datepicker-toggle [for]="picker2" matSuffix></mat-datepicker-toggle>
       <mat-datepicker #picker2 touchUi></mat-datepicker>
     </mat-form-field>
-    <button matTooltip="{{ t('translate.refreshList') }}"
+    <button class="bg" matTooltip="{{ t('translate.refreshList') }}"
             [matTooltipPosition]="position.value" mat-mini-fab (click)="getSoldItemsList()">
       <mat-icon>autorenew</mat-icon>
     </button>

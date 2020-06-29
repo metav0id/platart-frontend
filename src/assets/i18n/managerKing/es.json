@@ -46,5 +46,6 @@
   "selectLocation": "Selecciónar ubicación",
   "createCommerce": "Crear sucursal",
   "goTo": "Ir a sucursal",
-  "delete": "Eliminar sucursales"
+  "delete": "Eliminar sucursales",
+  "categoryDashboard": "Tablero de categorías"
 }
