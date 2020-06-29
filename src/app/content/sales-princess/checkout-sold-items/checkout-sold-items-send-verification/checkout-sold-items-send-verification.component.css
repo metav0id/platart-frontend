@@ -1,0 +1,19 @@
+button {
+  margin: 7px;
+  /*transition-duration: 0.4s;*/
+  /*display: inline-block;*/
+  /*font-size: 15px;*/
+  /*cursor: pointer;*/
+  /*text-align: center;*/
+  /*text-decoration: none;*/
+  /*outline: none;*/
+  color: #fff;
+  background-color: #212e3e;
+  /*border: none;*/
+  /*border-radius: 15px;*/
+  /*box-shadow: 0 5px #999;*/
+}
+
+.bg {
+  background-color: #212e3e
+}
