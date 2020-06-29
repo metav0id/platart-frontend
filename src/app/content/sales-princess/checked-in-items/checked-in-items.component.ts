@@ -44,8 +44,8 @@ export class CheckedInItemsComponent implements OnInit {
   @ViewChild(MatSort, {static: true}) sort: MatSort;
 
   ngOnInit(): void {
-    this.shopsList = this.auth.comerces;
-    // this.shopsList = this.auth.getStoresList();
+    // this.shopsList = this.auth.comerces;
+    this.shopsList = this.auth.getStoresList();
   }
 
   applyFilter(event: Event) {

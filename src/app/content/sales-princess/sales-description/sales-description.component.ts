@@ -52,8 +52,8 @@ export class SalesDescriptionComponent implements OnInit {
   public formControl = new FormControl('', Validators.required);
 
   ngOnInit(): void {
-    this.shopsList = this.auth.comerces;
-    // this.shopsList = this.auth.getStoresList();
+    // this.shopsList = this.auth.comerces;
+    this.shopsList = this.auth.getStoresList();
   }
 
   startDateSelection($event: MatDatepickerInputEvent<Date>) {
