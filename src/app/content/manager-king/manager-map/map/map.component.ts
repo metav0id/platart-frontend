@@ -1,21 +1,12 @@
 import {Component, OnInit} from '@angular/core';
 import {Marcador} from "../components/marker.class";
-
 import {MapService} from "./map.service";
 import {MatDialog} from "@angular/material/dialog";
 import {FormComponent} from "../comerce/form.component";
-import {
-  FormControl,
-  Validators
-} from "@angular/forms";
+import {FormControl, Validators} from "@angular/forms";
 import {MarkerFormComponent} from "../components/marker-form.component";
-
 import {TRANSLOCO_SCOPE, TranslocoService} from '@ngneat/transloco';
-import {MatTableModule} from '@angular/material/table';
-export interface DialogData {
-  markerToEdit: Marcador;
-  markerToGetCoords: Marcador;
-}
+export interface DialogData {markerToEdit: Marcador;markerToGetCoords: Marcador;}
 
 import {TooltipPosition} from '@angular/material/tooltip';
 import {Comerce} from "../comerce/comerce";

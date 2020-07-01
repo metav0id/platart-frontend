@@ -1,7 +1,6 @@
 import {Component, Inject, OnInit} from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
-import {ShopsCheckoutSoldItemsDTO} from '../checkout-sold-items-DTOs/ShopsCheckoutSoldItemsDTO';
 import {SendItemsDTO} from "../checkout-sold-items-DTOs/SendItemsDTO";
 
 

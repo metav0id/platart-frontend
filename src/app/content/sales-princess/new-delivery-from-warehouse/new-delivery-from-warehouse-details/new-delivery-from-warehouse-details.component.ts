@@ -2,10 +2,7 @@ import {Component, Inject, OnInit} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
 import {AbstractControl, FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {TableItem} from '../table-item';
-import {
-  TRANSLOCO_SCOPE,
-  TranslocoService
-} from "@ngneat/transloco";
+import {TRANSLOCO_SCOPE, TranslocoService} from "@ngneat/transloco";
 
 @Component({
   selector: 'app-new-delivery-from-warehouse-details',

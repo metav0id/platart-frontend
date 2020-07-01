@@ -4,10 +4,7 @@ import {ComerceService} from "./comerce.service";
 import {Router, ActivatedRoute} from "@angular/router";
 import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
 import {FormControl,} from "@angular/forms";
-import {
-  DialogData,
-
-} from "../map/map.component";
+import {DialogData,} from "../map/map.component";
 import {TRANSLOCO_SCOPE, TranslocoService} from '@ngneat/transloco';
 
 

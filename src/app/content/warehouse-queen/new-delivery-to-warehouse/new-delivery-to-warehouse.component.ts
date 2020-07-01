@@ -73,15 +73,15 @@ export class NewDeliveryToWarehouseComponent implements OnInit {
         this.table.renderRows();
         Swal.close();
         Swal.fire(
-          'Success',
-          'List saved', //messageSuccessSaving
+          'Éxito',
+          'Lista guardada', //messageSuccessSaving
           'success'
         );
       } else {
         Swal.fire({
           icon: 'error',
           title: 'Error',
-          text: 'List could not be saved. Please try again.' //messageErrorSaving
+          text: 'Lista no pudo ser guardada. Favor de intentar de nuevo.' //messageErrorSaving
         });
       }
     });

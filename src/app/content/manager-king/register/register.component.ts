@@ -1,10 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {
-  FormBuilder,
-  FormControl,
-  FormGroup,
-  Validators
-} from '@angular/forms';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {AuthService} from '../../services/auth.service';
 import Swal from 'sweetalert2';
 import {Router} from '@angular/router';
@@ -77,8 +72,8 @@ export class RegisterComponent implements OnInit {
       this.auth.signUp(this.user).then(resp => {
         Swal.close();
         Swal.fire(
-          'Success',
-          'User successfully registered.',
+          'Éxito',
+          'Usuario registrado con éxito.',
           'success'
         );
         this.auth.signOut();
@@ -86,7 +81,7 @@ export class RegisterComponent implements OnInit {
       }).catch(error => Swal.fire({
           icon: 'error',
           title: 'Error',
-          text: 'An error occured. Please try again later.'
+          text: 'Ha ocurrido un error. Favor de intentar de nuevo.'
         })
       );
     }

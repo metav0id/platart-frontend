@@ -90,8 +90,8 @@ export class SalesDescriptionComponent implements OnInit {
       Swal.close();
       Swal.fire({
         icon: 'error',
-        title: 'Missing Information',
-        text: 'Please make sure the shop is selected as well as the start- and end-dates.'
+        title: 'Falta de información',
+        text: 'Favor de cerciorarse que la sucursal este elgida así como fecha inicial y final.'
       });
     }
   }

@@ -185,8 +185,8 @@ export class NewDeliveryToShopComponent implements OnInit {
     this.newDeliveryToShopService.setAllNewOrderItems(listNewItemsToShops).subscribe(result => {
       Swal.close();
       Swal.fire(
-        'Success',
-        'Successfully added item to list.',
+        'Éxito',
+        'Articulo agregado a la lista con éxito.',
         'success'
       );
       this.fetchNewOrderData();
@@ -202,14 +202,14 @@ export class NewDeliveryToShopComponent implements OnInit {
       if (result) {
         Swal.fire(
           'Success',
-          'Deleted successfully',
+          'Articulo removido de la lista con éxito',
           'success'
         );
       } else {
         Swal.fire({
           icon: 'error',
           title: 'Error',
-          text: 'Could not deleted. Please try again.'
+          text: 'Articulo no pudo ser removido. Intente de nuevo.'
         });
       }
     });
@@ -228,7 +228,7 @@ export class NewDeliveryToShopComponent implements OnInit {
       Swal.close();
       Swal.fire(
         'Edit',
-        'Deleted successfully',
+        'Artículo eleminado con éxito',
         'success'
       );
       this.fetchNewOrderData();
@@ -244,8 +244,8 @@ export class NewDeliveryToShopComponent implements OnInit {
       this.fetchNewOrderData();
       Swal.close();
       Swal.fire(
-        'Success',
-        'List saved',
+        'Éxito',
+        'Lista guardada',
         'success'
       );
     });
