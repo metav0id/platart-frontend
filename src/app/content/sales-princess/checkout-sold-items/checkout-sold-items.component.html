@@ -7,7 +7,7 @@
         <div class="demo-card-wide mdl-card mdl-shadow--2dp">
 
           <div >
-            <h2 class="mdl-card__title-text">{{ t('translate.itemsSoldToday') }} in: {{selectedShopName}}</h2>
+            <h2 class="mdl-card__title-text">{{ t('translate.itemsSoldToday') }} : {{selectedShopName}}</h2>
           </div>
           <div class="container-fluid d-flex justify-content-center cont-bg4">
             <div class="newOrderInputFieldsShop">
@@ -117,10 +117,10 @@
                           [(ngModel)]="discountNessesary"
                           aria-labelledby="example-radio-group-label"
                           class="example-radio-group">
-                          <mat-radio-button *ngFor="let discountType of discountList" [value]="discountType.name"
-                                            class="example-radio-button">
-                            {{discountType.name}}
-                          </mat-radio-button>
+
+                          <mat-radio-button [value]="discountList[0].name">{{ t('translate.DISCOUNT_METHOD_REVENUE') }}</mat-radio-button>
+                          <mat-radio-button [value]="discountList[1].name">{{t('translate.DISCOUNT_METHOD_NO_DISCOUNT')}}</mat-radio-button>
+
                         </mat-radio-group>
                       </div>
                       <div *ngIf="discountNessesary  ==DISCOUNT_METHOD_REVENUE"
@@ -142,10 +142,11 @@
                           [(ngModel)]="commentNessesary"
                           aria-labelledby="example-radio-group-label"
                           class="example-radio-group">
-                          <mat-radio-button *ngFor="let comment of commentNecessaryList" [value]="comment"
-                                            class="example-radio-button">
-                            {{comment}}
-                          </mat-radio-button>
+
+                          <mat-radio-button [value]="commentNecessaryList[0]">{{ t('translate.COMMENT_YES_NECESSARY') }}</mat-radio-button>
+                          <mat-radio-button [value]="commentNecessaryList[1]">{{t('translate.COMMENT_NO_NECESSARY')}}</mat-radio-button>
+
+
                         </mat-radio-group>
                       </div>
                       <div *ngIf="commentNessesary==='Comment'" class="itemCheckoutSoldItemComment">

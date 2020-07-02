@@ -1,7 +1,12 @@
 import {Component, Inject, OnInit} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
 import {DeliveryItemFromWarehouseDTO} from '../DeliveryItemFromWarehouseDTO';
-import {AbstractControl, FormBuilder, FormGroup,} from '@angular/forms';
+import {
+  AbstractControl,
+  FormBuilder,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
 import {WarehouseItemCategoryDTO} from "../../../services/warehouse-item-category-DTO";
 import {CategoryService} from "../../../services/category.service";
 
