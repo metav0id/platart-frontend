@@ -19,7 +19,7 @@ import {ComerceFormComponent} from "../comerce-form/comerce-form.component";
   providers: [{provide: TRANSLOCO_SCOPE, useValue: {scope: 'managerKing', alias: 'translate'}}]
 })
 export class MapComponent implements OnInit {
-  displayedColumns: string[] = ['name', 'address', 'category'];
+  displayedColumns: string[] = ['name', 'address', 'category','edit','delete'];
   dataSource: Marcador[] = new Array();
   /** tooltip features**/
   positionOptions: TooltipPosition[] = ['after', 'before', 'above', 'below', 'left', 'right'];
@@ -108,6 +108,10 @@ export class MapComponent implements OnInit {
   borrarComercio(i: number, marker: Marcador) {
     this.mapService.delete(marker);
     this.marcadores.splice(i, 1);
+  }
+  borrarComercio1(marker: Marcador) {
+    this.mapService.delete(marker);
+    // this.marcadores.splice(i, 1);
   }
 
   /**This methods deletes the marker from the map only.**/

@@ -3,6 +3,9 @@ agm-map {
   width: 90%;
 
 }
+.pad{
+  padding: 0px;
+}
 
 mat-card-title {
 
@@ -19,6 +22,7 @@ mat-card {
   color: #212e3e;
   margin-right: 100px;
   margin-left: 100px;
+  padding: 3px;
 
 
 }
@@ -35,7 +39,7 @@ mat-card[_ngcontent-acc-c179] {
 }
 
 table {
-  width: 100em;
+  width: 100%;
   margin-left: auto;
   margin-right: auto;
 }
@@ -56,31 +60,12 @@ table {
 
 button {
   margin: 7px;
-  /*transition-duration: 0.4s;*/
-  /*display: inline-block;*/
-  /*font-size: 15px;*/
-  /*cursor: pointer;*/
-  /*text-align: center;*/
-  /*text-decoration: none;*/
-  /*outline: none;*/
   color: #fff;
   background-color: #212e3e;
-  /*border: none;*/
-  /*border-radius: 15px;*/
-  /*box-shadow: 0 5px #999;*/
+
 }
 
-/*button:hover {*/
-/*  background-color:#f1d4cf ; !* Green #4caf50 *!*/
-/*  color: white;*/
-/*  box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);*/
-/*}*/
 
-/*.button:active {*/
-/*  background-color: #3e8e41;*/
-/*  box-shadow: 0 5px #666;*/
-/*  transform: translateY(4px);*/
-/*}*/
 
 th {
   font-family: Raleway /* Replace with your custom font */, sans-serif !important;
