@@ -50,6 +50,9 @@
   "timestamp": "Time and date of entry",
   "warehouse-instructions": "Warehouse instructions",
   "DISCOUNT_METHOD_REVENUE": "special price",
+  "DISCOUNT_METHOD_NO_DISCOUNT": "No special discount",
+  "COMMENT_YES_NECESSARY":"Comment" ,
+  "COMMENT_NO_NECESSARY": "No Comment",
   "refresh": "refresh",
   "checkItemStock": "Check if the item is available in stock",
   "addSaleList": "Add sale to list",
@@ -66,5 +69,14 @@
   "pleaseComment": "please enter your comment",
   "cancel": "cancel",
   "filter": "filter",
-  "getListDelivery": "get list of delivered items"
+  "getListDelivery": "get list of delivered items",
+  "checkinDate": "checkin date",
+  "max10Char": "Max 10 characters",
+  "checkHowManyItems": "Check how many items are available in stock",
+  "addOrderToTable": "Add order to table",
+  "savesOrderLocally": "Saves order locally",
+  "deletesTable": "Deletes the table",
+  "sendsOrderShop": "Sends current order to shop",
+  "new-delivery-item-to-shop-title": "Insert item",
+  "new-delivery-item-to-shop-description": "Input your values for item"
 }

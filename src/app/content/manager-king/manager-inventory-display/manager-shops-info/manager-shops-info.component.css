@@ -4,6 +4,9 @@
   flex-direction: column;
   justify-content: center;
 }
+.bg {
+  background-color: #212e3e
+}
 
 table {
   width: 100%;

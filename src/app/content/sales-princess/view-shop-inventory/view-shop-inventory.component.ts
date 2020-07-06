@@ -2,9 +2,7 @@ import {Component, OnInit, ViewChild} from '@angular/core';
 import {ShopInventoryItem} from './view-shop-inventory-DTOs/ShopInventoryItem';
 import {MatTable, MatTableDataSource} from '@angular/material/table';
 import {ViewShopInventoryService} from './view-shop-inventory.service';
-import {observable} from 'rxjs';
 import {FormControl, Validators} from '@angular/forms';
-import {Shop} from '../../commonDTOs/shop';
 import {TRANSLOCO_SCOPE, TranslocoService} from '@ngneat/transloco';
 import {TooltipPosition} from "@angular/material/tooltip";
 import {AuthService} from "../../services/auth.service";
@@ -29,7 +27,7 @@ export class ViewShopInventoryComponent implements OnInit {
   public shopControl = new FormControl('', Validators.required);
 
   /** List of available shops */
-  public listShops: string[] = [];
+  public listShops: String[] = [];
   public selectedShopToFilterOnList = '';
   public selectedShopToDisplay = '';
 
@@ -38,6 +36,7 @@ export class ViewShopInventoryComponent implements OnInit {
 
   ngOnInit(): void {
     this.listShops = this.auth.getStoresList();
+    // this.listShops = this.auth.comerces;
   }
 
   // fetch inventory data

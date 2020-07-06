@@ -31,7 +31,7 @@
           <mat-datepicker-toggle matSuffix [for]="pickerEnd"></mat-datepicker-toggle>
           <mat-datepicker #pickerEnd touchUi></mat-datepicker>
         </mat-form-field>
-        <button (click)="refreshCategoryGraph()" matTooltip="Refresh graph"
+        <button class="bg" (click)="refreshCategoryGraph()" matTooltip="Refresh graph"
                 [matTooltipPosition]="position.value" mat-mini-fab>
           <mat-icon>autorenew</mat-icon>
         </button>

@@ -15,13 +15,22 @@ import {DialogData} from '../map/map.component';
 import {FormComponent} from '../comerce/form.component';
 import {MapService} from '../map/map.service';
 import {Marcador} from '../components/marker.class';
-import {TRANSLOCO_SCOPE, TranslocoService} from '@ngneat/transloco';
+import {
+  TRANSLOCO_SCOPE,
+  TranslocoService
+} from '@ngneat/transloco';
 
 @Component({
   selector: 'app-comerce-form',
   templateUrl: './comerce-form.component.html',
   styleUrls: ['./comerce-form.component.css'],
-  providers: [{provide: TRANSLOCO_SCOPE, useValue: {scope: 'managerKing', alias: 'translate'}}]
+  providers: [{
+    provide: TRANSLOCO_SCOPE,
+    useValue: {
+      scope: 'managerKing',
+      alias: 'translate'
+    }
+  }]
 })
 export class ComerceFormComponent implements OnInit {
 
@@ -43,10 +52,6 @@ export class ComerceFormComponent implements OnInit {
 
   }
 
-
-  getMarcador(comerce: Comerce): void {
-    this.comerceService.getComerce(comerce).subscribe(response => comerce = response)
-  }
 
   /**This method saves the edited field in the asigned marker
    * **/

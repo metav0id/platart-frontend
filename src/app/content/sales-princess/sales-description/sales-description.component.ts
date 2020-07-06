@@ -22,7 +22,7 @@ import {SalesDescriptionDetailsComponent} from './sales-description-details/sale
 })
 export class SalesDescriptionComponent implements OnInit {
   public deliveryShop = '';
-  public shopsList: string[] = [];
+  public shopsList: String[] = [];
 
   positionOptions: TooltipPosition[] = ['after', 'before', 'above', 'below', 'left', 'right'];
   position = new FormControl(this.positionOptions[0]);
@@ -52,6 +52,7 @@ export class SalesDescriptionComponent implements OnInit {
   public formControl = new FormControl('', Validators.required);
 
   ngOnInit(): void {
+    // this.shopsList = this.auth.comerces;
     this.shopsList = this.auth.getStoresList();
   }
 
@@ -89,8 +90,8 @@ export class SalesDescriptionComponent implements OnInit {
       Swal.close();
       Swal.fire({
         icon: 'error',
-        title: 'Missing Information',
-        text: 'Please make sure the shop is selected as well as the start- and end-dates.'
+        title: 'Falta de información',
+        text: 'Favor de cerciorarse que la sucursal este elgida así como fecha inicial y final.'
       });
     }
   }

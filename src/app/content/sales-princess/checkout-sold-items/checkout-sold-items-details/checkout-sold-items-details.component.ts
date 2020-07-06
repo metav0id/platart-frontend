@@ -52,8 +52,8 @@ export class CheckoutSoldItemsDetailsComponent implements OnInit {
 
       Swal.fire({
         icon: 'success',
-        title: 'Item deleted',
-        text: 'The clicked-on item was removed from the list of checkout-items.'
+        title: 'Artículo eliminado',
+        text: 'El artículo seleccionado ha sido removido de la lista de artículos para enviar.'
       });
     } else {
       this.onSubmit();

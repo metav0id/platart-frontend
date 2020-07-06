@@ -38,7 +38,7 @@ export class LoginComponent implements OnInit {
     Swal.fire({
       allowOutsideClick: false,
       icon: 'info',
-      text: 'Wait a moment...'
+      text: 'Espere un momento...'
     });
     Swal.showLoading();
     this.auth.signIn(this.user.email, this.user.password).subscribe(resp => {
@@ -46,8 +46,8 @@ export class LoginComponent implements OnInit {
         this.router.navigate(['login']);
       }, (error => Swal.fire({
         icon: 'error',
-        title: 'Login Error',
-        text: 'Login data are not correct, please try again.'
+        title: 'Error al iniciar sesión',
+        text: 'Datos ingresados incorrectos, favor de intentar de nuevo.'
       }))
     );
   }

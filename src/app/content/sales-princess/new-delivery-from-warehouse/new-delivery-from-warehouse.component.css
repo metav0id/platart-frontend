@@ -26,6 +26,11 @@ table {
 
 }
 
+.bg {
+  background-color: #212e3e
+}
+
+
 button {
   margin: 7px;
   /*transition-duration: 0.4s;*/

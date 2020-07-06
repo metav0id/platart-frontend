@@ -82,7 +82,7 @@ export class CheckoutSoldItemsComponent implements OnInit {
   // Fields for input-form - Drop-Down-Selection
   /** Shop selection */
   public shopControll = new FormControl('', Validators.required);
-  public shopsList: string[] = [];
+  public shopsList: String[] = [];
 
   /** Category selection */
   public categoryControl = new FormControl('', Validators.required);
@@ -107,6 +107,7 @@ export class CheckoutSoldItemsComponent implements OnInit {
   availableItems = 0;
 
   ngOnInit(): void {
+    // this.shopsList  = this.auth.comerces;
     this.shopsList = this.auth.getStoresList();
     this.initNewOrderElement();
 

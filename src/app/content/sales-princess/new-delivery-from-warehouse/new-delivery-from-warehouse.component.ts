@@ -34,7 +34,7 @@ export class NewDeliveryFromWarehouseComponent implements OnInit {
   public shopControl = new FormControl('', Validators.required);
 
   /** List of available shops */
-  public listShops: string[] = [];
+  public listShops: String[] = [];
 
   public selectedShopToFilterOnList = '';
 
@@ -47,6 +47,7 @@ export class NewDeliveryFromWarehouseComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    // this.listShops = this.auth.comerces;
     this.listShops = this.auth.getStoresList();
   }
 

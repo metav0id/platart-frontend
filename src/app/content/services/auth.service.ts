@@ -4,6 +4,11 @@ import {AngularFireAuth} from '@angular/fire/auth';
 import {Router} from '@angular/router';
 import {UserFirebase} from './user-firebase';
 import {Observable} from 'rxjs';
+import {WarehouseItemCategoryDTO} from "./warehouse-item-category-DTO";
+import {environment} from "../../../environments/environment";
+import {UserIn} from "../manager-king/register/userIn";
+import {Comerce} from "../manager-king/manager-map/comerce/comerce";
+import {MapService} from "../manager-king/manager-map/map/map.service";
 
 
 @Injectable({
@@ -12,16 +17,23 @@ import {Observable} from 'rxjs';
 
 export class AuthService {
   shopsOfUser: string[];
+  shops:Comerce[] = new Array();
+  comerces:String[] = new Array();
+  users: UserIn[] = new Array();
+  userin: UserIn = new UserIn();
+  userin2: UserIn = new UserIn();
 
   constructor(public afs: AngularFirestore,
               public afAuth: AngularFireAuth,
-              public router: Router) {
+              public router: Router,
+              public mapservice: MapService) {
     this.afAuth.authState.subscribe(user => {
       if (user) {
         this.getUserData(user.uid).subscribe(firestoreObj => {
           localStorage.setItem('user', JSON.stringify(user));
           localStorage.setItem('role', firestoreObj.role);
           localStorage.setItem('shops', JSON.stringify(firestoreObj.shops));
+          this.getAllUsers(user);
         });
       } else {
         localStorage.setItem('user', null);
@@ -60,22 +72,35 @@ export class AuthService {
   }
 
   signUp(userInput: UserFirebase) {
+    console.log(userInput)
     return this.afAuth.createUserWithEmailAndPassword(userInput.email, userInput.password).then(result => {
       this.setUserData(result.user, userInput.role, userInput.shops);
     });
   }
 
   setUserData(user, role, shops) {
+    console.log(user,role,shops)
     const userRef = this.afs.collection('users').doc(user.uid);
     const userData: UserFirebase = {
       uid: user.uid,
       email: user.email,
       displayName: user.displayName,
       emailVerified: user.emailVerified,
-      role,
+      role:role,
       shops: shops
     };
+    console.log(userData)
+    this.registerUserDB(userData);
     userRef.set(userData);
+  }
+
+  registerUserDB(user: UserFirebase) {
+    console.log(user)
+    this.userin.uid = user.uid;
+    this.userin.shops = user.shops;
+    console.log(this.userin);
+    this.mapservice.createUser(this.userin).subscribe();
+
   }
 
   getUserData(uid): Observable<any> {
@@ -84,6 +109,16 @@ export class AuthService {
       const data = doc.data();
       observer.next(data);
     }));
+  }
+
+  getAllUsers(user: UserFirebase) {
+    this.userin2.uid = user.uid;
+    return this.mapservice.readAllComercesOfUser(this.userin2).subscribe(response => {
+      console.log(response)
+        this.comerces = response;
+        console.log(this.comerces)
+      }
+    );
   }
 
   isLoggedIn(): boolean {
@@ -121,5 +156,4 @@ export class AuthService {
     });
 
   }
-
 }

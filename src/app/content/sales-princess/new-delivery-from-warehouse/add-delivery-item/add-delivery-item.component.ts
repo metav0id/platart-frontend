@@ -5,7 +5,7 @@ import {
   AbstractControl,
   FormBuilder,
   FormGroup,
-  Validators
+  Validators,
 } from '@angular/forms';
 import {WarehouseItemCategoryDTO} from "../../../services/warehouse-item-category-DTO";
 import {CategoryService} from "../../../services/category.service";

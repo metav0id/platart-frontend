@@ -1,10 +1,17 @@
 <ng-template transloco let-t>
   <div class="space"></div>
-  <div class="container justify-content-center ">
+  <div class="container-fluid d-flex justify-content-center pad">
 <mat-card>
   <mat-card-title>{{ t('translate.yourRegisteredComerces') }}: </mat-card-title>
+  <a>
+    <button mat-raised-button matTooltip="Register a warehouse or store for your business"
+            [matTooltipPosition]="position.value"
+            (click)="openDialog()">{{ t('translate.createCommerce') }}
+    </button>
+
+  </a>
   <div class="table-responsive">
-  <mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+  <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
     <!-- Position Column -->
     <ng-container matColumnDef="name">
       <mat-header-cell *matHeaderCellDef> {{ t('translate.name') }} </mat-header-cell>
@@ -23,61 +30,84 @@
       <mat-cell *matCellDef="let element"> {{element.category}} </mat-cell>
     </ng-container>
 
+    <!-- EDIT Column -->
+    <ng-container matColumnDef="edit">
+      <mat-header-cell *matHeaderCellDef> {{ t('translate.edit') }} </mat-header-cell>
+      <mat-cell *matCellDef="let element">
+        <button matTooltip="{{ t('translate.editInfoFromMarker') }}"
+            [matTooltipPosition]="position.value"  (click)="loadMarkerToModify(element)"
+            mat-raised-button color="warn"> {{ t('translate.editMarker') }}</button>
+      </mat-cell>
+    </ng-container>
+
+    <!-- delete Column -->
+    <ng-container matColumnDef="delete">
+      <mat-header-cell *matHeaderCellDef> {{ t('translate.delete') }} </mat-header-cell>
+      <mat-cell *matCellDef="let element">
+        <button matTooltip="{{ t('translate.deleteComerceFromDb') }}"
+          [matTooltipPosition]="position.value" (click)="borrarComercio1(element)" mat-raised-button
+          color="primary"> {{ t('translate.delete') }}
+      </button>
+      </mat-cell>
+    </ng-container>
+
     <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
     <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
-  </mat-table>
+  </table>
   </div>
+  <div class="space"></div>
 </mat-card>
   <div class="space"></div>
-  <mat-card>
-    <mat-card-title>{{ t('translate.selectLocation') }}:</mat-card-title>
 
-    <div class="space"></div>
-    <a>
-      <button mat-raised-button matTooltip="Register a warehouse or store for your business"
-              [matTooltipPosition]="position.value"
-              (click)="openDialog()">{{ t('translate.createCommerce') }}
-      </button>
+<!--  <mat-card>-->
+<!--    <mat-card-title>{{ t('translate.selectLocation') }}:</mat-card-title>-->
 
-    </a>
-    <div class="space"></div>
-    <mat-card-content>
-      <agm-map (mapClick)="agregarMarcador($event)" [latitude]="lat" [longitude]="lng" [zoom]="15">
+<!--    <div class="space"></div>-->
+<!--    <a>-->
+<!--      <button mat-raised-button matTooltip="Register a warehouse or store for your business"-->
+<!--              [matTooltipPosition]="position.value"-->
+<!--              (click)="openDialog()">{{ t('translate.createCommerce') }}-->
+<!--      </button>-->
 
-        <agm-marker *ngFor="let marcador of marcadores; let i = index" [latitude]="marcador.lat"
-                    [longitude]="marcador.lng">
-          <agm-info-window>
+<!--    </a>-->
+<!--    <div class="space"></div>-->
+<!--    <mat-card-content>-->
+<!--      <agm-map (mapClick)="agregarMarcador($event)" [latitude]="lat" [longitude]="lng" [zoom]="15">-->
 
-            <strong>{{marcador.name}}</strong>
-            <p>{{marcador.address}}</p>
+<!--        <agm-marker *ngFor="let marcador of marcadores; let i = index" [latitude]="marcador.lat"-->
+<!--                    [longitude]="marcador.lng">-->
+<!--          <agm-info-window>-->
 
-            <div>
+<!--            <strong>{{marcador.name}}</strong>-->
+<!--            <p>{{marcador.address}}</p>-->
 
-              <div *ngIf="marcador.name!=null">
+<!--            <div>-->
 
-                <button matTooltip="{{ t('translate.editInfoFromMarker') }}"
-                        [matTooltipPosition]="position.value" mat-raised-button (click)="loadMarkerToModify(marcador)"
-                        mat-raised-button color="warn"> {{ t('translate.editMarker') }}
-                </button>
-                <button matTooltip="{{ t('translate.deleteComerceFromDb') }}"
-                        [matTooltipPosition]="position.value" (click)="borrarComercio(i,marcador)" mat-raised-button
-                        color="primary"> {{ t('translate.delete') }}
-                </button>
-              </div>
-              <button matTooltip="{{ t('translate.deleteMarkerKeepComerce') }}"
-                      [matTooltipPosition]="position.value" (click)="borrarMarcador(i,marcador)" mat-raised-button
-                      color="primary"> {{ t('translate.delete') }}
-              </button>
+<!--              <div *ngIf="marcador.name!=null">-->
+
+<!--                <button matTooltip="{{ t('translate.editInfoFromMarker') }}"-->
+<!--                        [matTooltipPosition]="position.value" mat-raised-button (click)="loadMarkerToModify(marcador)"-->
+<!--                        mat-raised-button color="warn"> {{ t('translate.editMarker') }}-->
+<!--                </button>-->
+<!--                <button matTooltip="{{ t('translate.deleteComerceFromDb') }}"-->
+<!--                        [matTooltipPosition]="position.value" (click)="borrarComercio(i,marcador)" mat-raised-button-->
+<!--                        color="primary"> {{ t('translate.delete') }}-->
+<!--                </button>-->
+<!--              </div>-->
+<!--              <button matTooltip="{{ t('translate.deleteMarkerKeepComerce') }}"-->
+<!--                      [matTooltipPosition]="position.value" (click)="borrarMarcador(i,marcador)" mat-raised-button-->
+<!--                      color="primary"> {{ t('translate.delete') }}-->
+<!--              </button>-->
 
 
-            </div>
-          </agm-info-window>
-        </agm-marker>
+<!--            </div>-->
+<!--          </agm-info-window>-->
+<!--        </agm-marker>-->
 
-      </agm-map>
+<!--      </agm-map>-->
 
-    </mat-card-content>
+<!--    </mat-card-content>-->
 
-  </mat-card>
+<!--  </mat-card>-->
   </div>
 </ng-template>

@@ -28,6 +28,10 @@ table {
   align-items: center;
 
 }
+.bg {
+  background-color: #212e3e
+}
+
 
 button {
   margin: 7px;

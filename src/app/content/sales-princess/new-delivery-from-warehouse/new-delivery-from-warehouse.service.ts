@@ -4,7 +4,6 @@ import {HttpClient} from '@angular/common/http';
 import {environment} from '../../../../environments/environment';
 import {map} from 'rxjs/operators';
 import {ShopCheckInNewItemsDTO} from './shop-check-in-new-items-dto';
-import {ShopDTO} from './shop-dto';
 import {TableItem} from './table-item';
 
 @Injectable({

@@ -25,7 +25,7 @@ export class CheckedInItemsComponent implements OnInit {
   public formControl = new FormControl('', Validators.required);
 
   public deliveryShop: string;
-  public shopsList: string[] = [];
+  public shopsList: String[] = [];
 
 
   displayedColumns: string[] = ['date', 'category', 'priceListPerUnit', 'popup'];
@@ -44,6 +44,7 @@ export class CheckedInItemsComponent implements OnInit {
   @ViewChild(MatSort, {static: true}) sort: MatSort;
 
   ngOnInit(): void {
+    // this.shopsList = this.auth.comerces;
     this.shopsList = this.auth.getStoresList();
   }
 

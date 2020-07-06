@@ -1,29 +1,10 @@
-import {
-  Component,
-  Inject,
-  Input,
-  OnInit
-} from '@angular/core';
-import {
-  MAT_DIALOG_DATA,
-  MatDialogRef
-} from "@angular/material/dialog";
+import {Component, Inject, OnInit} from '@angular/core';
+import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
 import {MapService} from "../map/map.service";
 import {Marcador} from "./marker.class";
-import {
-  FormControl,
-  Validators
-} from "@angular/forms";
-import {
-  DialogData,
-} from "../map/map.component";
-import {
-  ActivatedRoute,
-  Router
-} from "@angular/router";
+import {DialogData,} from "../map/map.component";
+import {ActivatedRoute, Router} from "@angular/router";
 import {TRANSLOCO_SCOPE, TranslocoService} from '@ngneat/transloco';
-
-
 
 @Component({
   selector: 'app-marker-form',

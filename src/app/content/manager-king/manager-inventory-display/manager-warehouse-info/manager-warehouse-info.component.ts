@@ -1,11 +1,8 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {TRANSLOCO_SCOPE} from '@ngneat/transloco';
-import {ShopInventoryItem} from '../../../sales-princess/view-shop-inventory/view-shop-inventory-DTOs/ShopInventoryItem';
 import {FormControl, Validators} from '@angular/forms';
 import {ManagerWarehouseInfoService} from './manager-warehouse-info.service';
-import {ShopDTO} from '../../shop-dto';
-import {PeriodicElement} from './manager-warehouse-info-DTOs/PeriodicElement';
-import {MatTableModule, MatTableDataSource, MatTable} from '@angular/material/table';
+import { MatTableDataSource} from '@angular/material/table';
 import {MatSort} from '@angular/material/sort';
 
 @Component({

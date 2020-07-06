@@ -1,21 +1,12 @@
 import {Component, OnInit} from '@angular/core';
 import {Marcador} from "../components/marker.class";
-
 import {MapService} from "./map.service";
 import {MatDialog} from "@angular/material/dialog";
 import {FormComponent} from "../comerce/form.component";
-import {
-  FormControl,
-  Validators
-} from "@angular/forms";
+import {FormControl, Validators} from "@angular/forms";
 import {MarkerFormComponent} from "../components/marker-form.component";
-
 import {TRANSLOCO_SCOPE, TranslocoService} from '@ngneat/transloco';
-import {MatTableModule} from '@angular/material/table';
-export interface DialogData {
-  markerToEdit: Marcador;
-  markerToGetCoords: Marcador;
-}
+export interface DialogData {markerToEdit: Marcador;markerToGetCoords: Marcador;}
 
 import {TooltipPosition} from '@angular/material/tooltip';
 import {Comerce} from "../comerce/comerce";
@@ -28,7 +19,7 @@ import {ComerceFormComponent} from "../comerce-form/comerce-form.component";
   providers: [{provide: TRANSLOCO_SCOPE, useValue: {scope: 'managerKing', alias: 'translate'}}]
 })
 export class MapComponent implements OnInit {
-  displayedColumns: string[] = ['name', 'address', 'category'];
+  displayedColumns: string[] = ['name', 'address', 'category','edit','delete'];
   dataSource: Marcador[] = new Array();
   /** tooltip features**/
   positionOptions: TooltipPosition[] = ['after', 'before', 'above', 'below', 'left', 'right'];
@@ -117,6 +108,10 @@ export class MapComponent implements OnInit {
   borrarComercio(i: number, marker: Marcador) {
     this.mapService.delete(marker);
     this.marcadores.splice(i, 1);
+  }
+  borrarComercio1(marker: Marcador) {
+    this.mapService.delete(marker);
+    // this.marcadores.splice(i, 1);
   }
 
   /**This methods deletes the marker from the map only.**/

@@ -11,7 +11,7 @@
         aria-labelledby="example-radio-group-label"
         class="example-radio-group"
         [(ngModel)]="selectedShopRange">
-        <mat-radio-button class="example-radio-button" *ngFor="let season of shopRange" [value]="season">
+        <mat-radio-button  class="example-radio-button " *ngFor="let season of shopRange" [value]="season">
           {{season}}
         </mat-radio-button>
       </mat-radio-group>
@@ -25,13 +25,13 @@
             <mat-option *ngFor="let entry of listShops" [value]="entry">{{ entry }}</mat-option>
           </mat-select>
         </mat-form-field>
-        <button mat-mini-fab (click)="getInventoryItemsList(selectedShopToFilterOnList)">
+        <button  class="bg" mat-mini-fab (click)="getInventoryItemsList(selectedShopToFilterOnList)">
           <mat-icon>autorenew</mat-icon>
         </button>
       </div>
 
       <div *ngIf="selectedShopRange == 'All Shops'">
-        <button mat-mini-fab (click)="getAllInventoryItemList()">
+        <button class="bg" mat-mini-fab (click)="getAllInventoryItemList()">
           <mat-icon>autorenew</mat-icon>
         </button>
       </div>
