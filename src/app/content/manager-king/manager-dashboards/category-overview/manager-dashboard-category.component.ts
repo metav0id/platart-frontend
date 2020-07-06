@@ -6,6 +6,11 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {ManagerDashboardService} from '../dashboard-overview/manager-dashboard.service';
 import {DateRangeDTO} from '../../manager-king-dtos/DateRangeDTO';
 import {TRANSLOCO_SCOPE, TranslocoService} from '@ngneat/transloco';
+import {domtoimage} from 'dom-to-image';
+import * as jsPDF from 'jspdf';
+import html2canvas from 'html2canvas';
+import { saveAs } from 'file-saver';
+import {PdfsaverService} from '../../../services/pdfsaver.service';
 
 @Component({
   selector: 'app-manager-dashboard-category',
@@ -42,7 +47,7 @@ export class ManagerDashboardCategoryComponent implements OnInit {
 
 
   constructor(private managerDashboardService: ManagerDashboardService, private translocoService: TranslocoService,
-              private route: ActivatedRoute, private router: Router) {
+              private route: ActivatedRoute, private router: Router, private pdfsaverService: PdfsaverService) {
     const tempYear = new Date().getFullYear();
     const tempMonth = new Date().getMonth();
     const tempDay = new Date().getDate();
@@ -52,15 +57,19 @@ export class ManagerDashboardCategoryComponent implements OnInit {
     this.minDate = this.maxDate;
     this.range = this.createDefaultChartDates();
     this.managerDashboardService.fetchCategoryData(this.range)
-      .subscribe((barData) => {this.barData = barData; });
+      .subscribe((barData) => {
+        this.barData = barData;
+      });
   }
 
   ngOnInit(): void {
-    }
+  }
 
   refreshCategoryGraph() {
     this.managerDashboardService.fetchCategoryData(this.range)
-      .subscribe((barData) => {this.barData = barData; });
+      .subscribe((barData) => {
+        this.barData = barData;
+      });
   }
 
   startDateSelection($event: MatDatepickerInputEvent<Date>) {
@@ -82,5 +91,10 @@ export class ManagerDashboardCategoryComponent implements OnInit {
       startDate: tempStartDate.toISOString(),
       endDate: tempEndDate.toISOString()
     };
+  }
+
+  exportAsPDF(page: string) {
+    const data = document.getElementById('printable');
+    this.pdfsaverService.saveScreenToPDF(data, page);
   }
 }

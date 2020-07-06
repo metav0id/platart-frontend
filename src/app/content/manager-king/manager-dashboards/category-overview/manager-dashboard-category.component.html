@@ -3,7 +3,7 @@
 
 <div class="space"></div>
   <div class="container-fluid d-flex justify-content-center">
-  <div class="demo-card-wide mdl-card mdl-shadow--2dp">
+  <div id="printable" class="demo-card-wide mdl-card mdl-shadow--2dp">
       <div class="mdl-card__title -align-center">
         <h2 class="mdl-card__title-text">{{ t('translate.categoryDashboard') }}</h2>
      </div>
@@ -79,4 +79,10 @@
   </div>
 </div>
   <div class="space"></div>
+  <div>
+  <button (click)="exportAsPDF('category-dash')" matTooltip="Download page as pdf"
+          [matTooltipPosition]="position.value" mat-mini-fab>
+    <mat-icon>print</mat-icon>
+  </button>
+  </div>
 </ng-template>

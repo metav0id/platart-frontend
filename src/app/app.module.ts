@@ -50,8 +50,6 @@ import {LandingPageWarehouseComponent} from './content/landing-page/landing-page
 import { LightboxModule } from 'ngx-lightbox';
 import { ElementComponent } from './content/landing-page/element/element.component';
 
-
-
 @NgModule({
   declarations: [
     AppComponent,
