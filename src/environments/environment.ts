@@ -15,7 +15,7 @@ export const environment = {
     appId: '1:144533891918:web:494591651874627f7bcc1f'
   },
   saveCommerce: 'http://localhost:8081/comerce/savecomerce',
-  getAllUsers: 'http://161.35.4.253:8081/user/getallusers',
+  getAllUsers: 'http://localhost:8081/user/getallusers',
   getAllMarkers: 'http://localhost:8081/marker/getallmarkers',
   getAllMarkersNoCoords: 'http://localhost:8081/marker/getallmarkersNoCoords',
   saveMarker: 'http://localhost:8081/marker/savemarker',
