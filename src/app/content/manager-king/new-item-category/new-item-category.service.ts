@@ -26,7 +26,6 @@ export class NewitemcategoryService {
 
   saveNewCategory(newItemCategory: string): Observable<boolean> {
     const warehouseItemCategoryDTO: WarehouseItemCategoryDTO = {category: newItemCategory, activated: true};
-    console.log("Post Service pre REST");
     return this.http.post<boolean>(environment.saveNewCategory, warehouseItemCategoryDTO);
   }
 

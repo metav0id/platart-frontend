@@ -94,7 +94,6 @@ export class NewItemCategoryComponent implements OnInit {
       });
       Swal.showLoading();
       this.newitemcategoryService.saveNewCategory(data.category).subscribe(result => {
-        console.log('Post TS subscribe REST');
         Swal.close();
         if (result) {
           Swal.fire(
